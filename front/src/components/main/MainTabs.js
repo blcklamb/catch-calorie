@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import MainFoodTab from './MainFoodTab';
 import MainExerciseTab from './MainExerciseTab';
 
-function MainTabPanel(props) {
+const MainTabPanel = (props) => {
 	const { children, value, index, ...other } = props;
 
 	return (
@@ -34,14 +34,14 @@ MainTabPanel.propTypes = {
 	value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
+const a11yProps = (index) => {
 	return {
 		id: `simple-tab-${index}`,
 		'aria-controls': `simple-tabpanel-${index}`,
 	};
 }
 
-function MainTabs() {
+const MainTabs = () => {
 	const [value, setValue] = React.useState(0);
 
 	const handleChange = (event, newValue) => {
@@ -52,9 +52,8 @@ function MainTabs() {
 		<Box sx={{ width: '100%' }}>
 			<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 				<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-					<Tab label="Item One" {...a11yProps(0)} />
-					<Tab label="Item Two" {...a11yProps(1)} />
-					<Tab label="Item Three" {...a11yProps(2)} />
+					<Tab label="음식" {...a11yProps(0)} />
+					<Tab label="운동" {...a11yProps(1)} />
 				</Tabs>
 			</Box>
 			<MainTabPanel value={value} index={0}>
