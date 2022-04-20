@@ -1,7 +1,11 @@
+import MainTabs from './MainTabs'
+
 function Main() {
 	return (
 		<div>
-            main page
+            <div>안녕하세요 땡땡땡님!</div>
+
+			<MainTabs/>
         </div>
 	);
 }
