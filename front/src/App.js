@@ -1,5 +1,9 @@
 function App() {
-  return <h1>무지개발자 프론트 개발 시작! 😄</h1>;
+	return (
+		<div>
+			<h1>'아'</h1>
+		</div>
+	);
 }
 
 export default App;
