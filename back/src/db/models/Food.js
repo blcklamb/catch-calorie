@@ -5,20 +5,22 @@ class Food {
         return FoodModel.create(newFood);
     }
 
-    static findById({ _id }) {
-        return FoodModel.findById({ _id });
+    static findById({ id }) {
+        return FoodModel.findById(id);
     }
 
     static findAll({ search }) {
-        return FoodModel.find({ name: { $regex: new RegExp(`${search}`, "i") } });
+        return FoodModel.find({ name: { $regex: new RegExp(`${search}`, "i") } })
+            .sort({ views: -1, name: 1 })
+            .limit(10);
     }
 
-    static updateOne({ _id }, { toUpdate }) {
-        return FoodModel.findOneAndUpdate(_id, toUpdate, { new: true });
+    static update({ id }, { toUpdate }) {
+        return FoodModel.findOneAndUpdate(id, toUpdate, { new: true });
     }
 
-    static delete({ _id }) {
-        return FoodModel.deleteById({ _id });
+    static delete({ id }) {
+        return FoodModel.deleteById(id);
     }
 }
 

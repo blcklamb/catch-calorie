@@ -11,8 +11,7 @@ const FoodInput = () => {
         const fetch = async () => {
             const res = await axios.get(`http://localhost:5002/foods?search=${search}`);
             const data = await res.data;
-            setFoods(data.slice(0, 10));
-            console.log(foods);
+            setFoods(data);
         };
         fetch();
     }, [search]);

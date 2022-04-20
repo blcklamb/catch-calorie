@@ -5,7 +5,6 @@ const foodRouter = Router();
 
 foodRouter.post("/foods/create", async (req, res, next) => {
     try {
-        const user_id = req.currentUserId;
         const { category, name, kcal_per100g } = req.body;
 
         // 로그인 된 유저의 모든 food를 불러온 후 겹치는 제목이 있을경우 에러 발생.
@@ -75,26 +74,18 @@ foodRouter.get("/foods", async function (req, res, next) {
 //     }
 // });
 
-// foodRouter.delete("/foods/:id", login_required, async (req, res, next) => {
-//     try {
-//         const { id } = req.params;
-//         const { currentUserId } = req;
+foodRouter.post("/api/foods/:id", async (req, res, next) => {
+    try {
+        const { id } = req.params;
 
-//         const food = await foodService.getfood({ id });
-//         // req.currentUserId의 값과 food.user_id의 값을 비교해 관리자 인증
-//         if (currentUserId !== food.user_id) {
-//             throw new Error("접근할 권한이 없습니다.");
-//         }
+        const food = await foodService.addFoodViews({ id });
+        console.log(food);
+        // user = await UserModel.findOneAndUpdate({ id }, { $push: { likes: user_id } }, { new: true });
 
-//         const deletedfood = await foodService.deletefood({ id });
-//         if (deletedfood.errorMessage) {
-//             throw new Error(deletedfood.errorMessage);
-//         }
-
-//         return res.status(200).json({ result: "success" });
-//     } catch (error) {
-//         next(error);
-//     }
-// });
+        return res.status(200).json({ result: "success", likes: food.views });
+    } catch (error) {
+        next(error);
+    }
+});
 
 export { foodRouter };
