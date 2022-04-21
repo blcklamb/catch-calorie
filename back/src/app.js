@@ -3,6 +3,7 @@ import cors from "cors";
 
 // import { userRouter } from "./routers/userRouter";
 import { foodRouter } from "./routers/foodRouter";
+import { userAuthRouter } from "./routers/userRouter.js";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 
 const app = express();
@@ -19,14 +20,14 @@ app.use(express.urlencoded({ extended: false }));
 // 기본 페이지
 // 브라우저에서 로그아웃 시 연결되게 하여 쿠키에 저장된 refresh token 삭제
 app.get("/", (req, res) => {
-    res.send("안녕하세요, 데이터 분석 프로젝트 API 입니다.");
+    res.send("안녕하세요, 13팀 데이터 분석 프로젝트 API 입니다.");
 });
 
 // // router, service 구현 (userRouter는 맨 위에 있어야 함.)
-// app.use(userRouter);
+app.use(userAuthRouter);
 app.use(foodRouter);
 
 // // 순서 중요 (router 에서 next() 시 아래의 에러 핸들링  middleware로 전달됨)
-// app.use(errorMiddleware);
+app.use(errorMiddleware);
 
 export { app };
