@@ -71,13 +71,6 @@ function RegisterForm() {
 		e.preventDefault();
 
 		try {
-			let isMale = true;
-			if (gender === 'male') {
-				isMale = true;
-			} else {
-				isMale = false;
-			}
-
 			console.log(
 				`%c이메일: ${email}, 비번: ${password}, 닉넴: ${name}, 성별: ${gender}, 키: ${height}, 몸무게: ${weight} 아이콘 ${icon}`,
 				'color: #94D82D;',
@@ -87,9 +80,9 @@ function RegisterForm() {
 				email,
 				password,
 				name,
-				isMale,
-				height,
-				weight,
+				isMale: gender,
+				height: Number(height),
+				weight: Number(weight),
 				icon,
 			});
 
@@ -108,7 +101,7 @@ function RegisterForm() {
 				<form onSubmit={handleSubmit}>
 					<Box
 						sx={{
-							'& > :not(style)': { m: 1, width: '28ch' },
+							'& > :not(style)': { m: 1, width: '36ch' },
 						}}
 						noValidate
 						autoComplete="off"
@@ -120,7 +113,7 @@ function RegisterForm() {
 							id="outlined-required"
 							label="Email Address"
 							autoComplete="email"
-							helperText={!isEmailValid && <span>이메일 형식이 올바르지 않습니다.</span>}
+							helperText={!isEmailValid && <span>The email format is not valid.</span>}
 							value={email}
 							onChange={e => {
 								setEmail(e.target.value);
@@ -137,7 +130,7 @@ function RegisterForm() {
 							type="password"
 							autoComplete="current-password"
 							value={password}
-							helperText={!isPasswordValid && <span> 비밀번호는 4글자 이상입니다. </span>}
+							helperText={!isPasswordValid && <span> Password is more than 4 characters. </span>}
 							onChange={e => {
 								setPassword(e.target.value);
 								// setCheckLogin(true);
@@ -151,7 +144,7 @@ function RegisterForm() {
 							type="password"
 							autoComplete="current-password"
 							value={confirmPassword}
-							helperText={!isPasswordSame && <span> 비밀번호가 일치하지 않습니다. </span>}
+							helperText={!isPasswordSame && <span> Passwords do not match. </span>}
 							onChange={e => {
 								setConfirmPassword(e.target.value);
 								// setCheckLogin(true);
@@ -164,7 +157,9 @@ function RegisterForm() {
 							// error={!checkLogin}
 							label="Nick Name"
 							// autoComplete="email"
-							helperText={!isNameValid && <span>별명은 2글자 이상으로 설정해 주세요.</span>}
+							helperText={
+								!isNameValid && <span>Please set the nickname at least 2 characters.</span>
+							}
 							value={name}
 							onChange={e => {
 								setName(e.target.value);
@@ -190,7 +185,9 @@ function RegisterForm() {
 							// error={!checkLogin}
 							label="Height"
 							// autoComplete="email"
-							helperText={!isHeightValid && <span>숫자로 입력해주세요.</span>}
+							helperText={
+								!isHeightValid && <span>Please enter a number only.(The unit is feet.)</span>
+							}
 							value={height}
 							onChange={e => {
 								setHeight(e.target.value);
@@ -205,7 +202,9 @@ function RegisterForm() {
 							// error={!checkLogin}
 							label="Weight"
 							// autoComplete="email"
-							helperText={!isWeightValid && <span>숫자로 입력해주세요.</span>}
+							helperText={
+								!isWeightValid && <span>Please enter a number only.(The unit is pounds.)</span>
+							}
 							value={weight}
 							onChange={e => {
 								setWeight(e.target.value);
@@ -229,13 +228,13 @@ function RegisterForm() {
 						</RadioGroup>
 						<Stack spacing={1} direction="row">
 							<Button variant="contained" type="submit" disabled={!isFormValid}>
-								가입하기
+								Sign-up
 							</Button>
 							<Button variant="contained" onClick={() => navigate('/login')}>
-								로그인
+								Sign-in
 							</Button>
 							<Button variant="outlined" onClick={() => navigate('/')}>
-								시작페이지
+								Start Page
 							</Button>
 						</Stack>
 					</Box>

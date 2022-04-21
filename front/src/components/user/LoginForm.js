@@ -77,7 +77,7 @@ function LoginForm() {
 				<form action="/" onSubmit={handleSubmit}>
 					<Box
 						sx={{
-							'& > :not(style)': { m: 1, width: '28ch' },
+							'& > :not(style)': { m: 1, width: '34ch' },
 						}}
 						noValidate
 						autoComplete="off"
@@ -91,8 +91,8 @@ function LoginForm() {
 							label="Email Address"
 							autoComplete="email"
 							helperText={
-								(!isEmailValid && <span>이메일 형식이 올바르지 않습니다.</span>) ||
-								(!checkLogin && <span>잘못된 이메일입니다.</span>)
+								(!isEmailValid && <span>The email format is not valid.</span>) ||
+								(!checkLogin && <span>Invalid email.</span>)
 							}
 							value={email}
 							onChange={e => {
@@ -111,8 +111,8 @@ function LoginForm() {
 							autoComplete="current-password"
 							value={password}
 							helperText={
-								(!isPasswordValid && <span> 비밀번호는 4글자 이상입니다. </span>) ||
-								(!checkLogin && <span>잘못된 비밀번호입니다.</span>)
+								(!isPasswordValid && <span> Password is more than 4 characters. </span>) ||
+								(!checkLogin && <span>Invalid password.</span>)
 							}
 							onChange={e => {
 								setPassword(e.target.value);
@@ -121,13 +121,13 @@ function LoginForm() {
 						/>
 						<Stack spacing={1} direction="row">
 							<Button variant="contained" type="submit" disabled={!isFormValid}>
-								로그인
+								Sign-in
 							</Button>
 							<Button variant="contained" onClick={() => navigate('/register')}>
-								회원가입
+								Sign-up
 							</Button>
 							<Button variant="outlined" onClick={() => navigate('/')}>
-								시작페이지
+								Start Page
 							</Button>
 						</Stack>
 					</Box>
