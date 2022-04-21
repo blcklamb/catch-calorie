@@ -71,6 +71,13 @@ function RegisterForm() {
 		e.preventDefault();
 
 		try {
+			let isMale = true;
+			if (gender === 'male') {
+				isMale = true;
+			} else {
+				isMale = false;
+			}
+
 			console.log(
 				`%c이메일: ${email}, 비번: ${password}, 닉넴: ${name}, 성별: ${gender}, 키: ${height}, 몸무게: ${weight} 아이콘 ${icon}`,
 				'color: #94D82D;',
@@ -80,6 +87,10 @@ function RegisterForm() {
 				email,
 				password,
 				name,
+				isMale,
+				height,
+				weight,
+				icon,
 			});
 
 			// 로그인 페이지로 이동함.
