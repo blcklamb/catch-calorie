@@ -10,8 +10,8 @@ class Food {
     }
 
     static findAll({ search }) {
-        return FoodModel.find({ name: { $regex: new RegExp(`${search}`, "i") } })
-            .sort({ views: -1, name: 1 })
+        return FoodModel.find({ name: { $regex: new RegExp(`^${search}`, "i") } })
+            .sort({ views: -1 })
             .limit(10);
     }
 
