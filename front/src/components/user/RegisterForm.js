@@ -53,15 +53,28 @@ function RegisterForm() {
 	const isPasswordSame = password === confirmPassword;
 	// 이름이 2글자 이상인지 여부를 확인함.
 	const isNameValid = name.length >= 2;
+	// 공백이나 숫자인지 여부를 확인함.
+	const isHeightValid = Number(height) > 0 && height.length > 0;
+	// 공백이나 숫자인지 여부를 확인함.
+	const isWeightValid = Number(weight) > 0 && weight.length > 0;
 
-	// 위 4개 조건이 모두 동시에 만족되는지 여부를 확인함.
-	const isFormValid = isEmailValid && isPasswordValid && isPasswordSame && isNameValid;
+	// 조건이 모두 동시에 만족되는지 여부를 확인함.
+	const isFormValid =
+		isEmailValid &&
+		isPasswordValid &&
+		isPasswordSame &&
+		isNameValid &&
+		isHeightValid &&
+		isWeightValid;
 
 	const handleSubmit = async e => {
 		e.preventDefault();
 
 		try {
-			// console.log(email, password, name);
+			console.log(
+				`%c이메일: ${email}, 비번: ${password}, 닉넴: ${name}, 성별: ${gender}, 키: ${height}, 몸무게: ${weight} 아이콘 ${icon}`,
+				'color: #94D82D;',
+			);
 			// "user/register" 엔드포인트로 post요청함.
 			await Api.post('user/register', {
 				email,
@@ -81,7 +94,7 @@ function RegisterForm() {
 			<Container
 				style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 50 }}
 			>
-				<FormControl action="/" onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit}>
 					<Box
 						sx={{
 							'& > :not(style)': { m: 1, width: '28ch' },
@@ -92,15 +105,11 @@ function RegisterForm() {
 						<TextField
 							autoFocus
 							required
-							// {!checkLogin && error}
 							// error={!checkLogin}
 							id="outlined-required"
 							label="Email Address"
 							autoComplete="email"
-							// helperText={
-							// 	(!isEmailValid && <span>이메일 형식이 올바르지 않습니다.</span>) ||
-							// 	(!checkLogin && <span>잘못된 이메일입니다.</span>)
-							// }
+							helperText={!isEmailValid && <span>이메일 형식이 올바르지 않습니다.</span>}
 							value={email}
 							onChange={e => {
 								setEmail(e.target.value);
@@ -108,7 +117,6 @@ function RegisterForm() {
 							}}
 							// defaultValue="Hello World"
 						/>
-						{!isEmailValid && <p>이메일 형식이 올바르지 않습니다.</p>}
 						<br></br>
 						<TextField
 							required
@@ -118,16 +126,12 @@ function RegisterForm() {
 							type="password"
 							autoComplete="current-password"
 							value={password}
-							// helperText={
-							// 	(!isPasswordValid && <span> 비밀번호는 4글자 이상입니다. </span>) ||
-							// 	(!checkLogin && <span>잘못된 비밀번호입니다.</span>)
-							// }
+							helperText={!isPasswordValid && <span> 비밀번호는 4글자 이상입니다. </span>}
 							onChange={e => {
 								setPassword(e.target.value);
 								// setCheckLogin(true);
 							}}
 						/>
-						{!isPasswordValid && <p>비밀번호는 4글자 이상으로 설정해 주세요.</p>}
 						<br></br>
 						<TextField
 							required
@@ -136,16 +140,12 @@ function RegisterForm() {
 							type="password"
 							autoComplete="current-password"
 							value={confirmPassword}
-							// helperText={
-							// 	(!isPasswordValid && <span> 비밀번호는 4글자 이상입니다. </span>) ||
-							// 	(!checkLogin && <span>잘못된 비밀번호입니다.</span>)
-							// }
+							helperText={!isPasswordSame && <span> 비밀번호가 일치하지 않습니다. </span>}
 							onChange={e => {
 								setConfirmPassword(e.target.value);
 								// setCheckLogin(true);
 							}}
 						/>
-						{!isPasswordSame && <p>비밀번호가 일치하지 않습니다.</p>}
 						<br></br>
 						<TextField
 							required
@@ -153,10 +153,7 @@ function RegisterForm() {
 							// error={!checkLogin}
 							label="Nick Name"
 							// autoComplete="email"
-							// helperText={
-							// 	(!isEmailValid && <span>이메일 형식이 올바르지 않습니다.</span>) ||
-							// 	(!checkLogin && <span>잘못된 이메일입니다.</span>)
-							// }
+							helperText={!isNameValid && <span>별명은 2글자 이상으로 설정해 주세요.</span>}
 							value={name}
 							onChange={e => {
 								setName(e.target.value);
@@ -164,7 +161,6 @@ function RegisterForm() {
 							}}
 							// defaultValue="Hello World"
 						/>
-						{!isNameValid && <p>별명은 2글자 이상으로 설정해 주세요.</p>}
 						<br></br>
 						<FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
 						<RadioGroup
@@ -183,10 +179,7 @@ function RegisterForm() {
 							// error={!checkLogin}
 							label="Height"
 							// autoComplete="email"
-							// helperText={
-							// 	(!isEmailValid && <span>이메일 형식이 올바르지 않습니다.</span>) ||
-							// 	(!checkLogin && <span>잘못된 이메일입니다.</span>)
-							// }
+							helperText={!isHeightValid && <span>숫자로 입력해주세요.</span>}
 							value={height}
 							onChange={e => {
 								setHeight(e.target.value);
@@ -201,10 +194,7 @@ function RegisterForm() {
 							// error={!checkLogin}
 							label="Weight"
 							// autoComplete="email"
-							// helperText={
-							// 	(!isEmailValid && <span>이메일 형식이 올바르지 않습니다.</span>) ||
-							// 	(!checkLogin && <span>잘못된 이메일입니다.</span>)
-							// }
+							helperText={!isWeightValid && <span>숫자로 입력해주세요.</span>}
 							value={weight}
 							onChange={e => {
 								setWeight(e.target.value);
@@ -238,7 +228,7 @@ function RegisterForm() {
 							</Button>
 						</Stack>
 					</Box>
-				</FormControl>
+				</form>
 			</Container>
 
 			{/* <div>
