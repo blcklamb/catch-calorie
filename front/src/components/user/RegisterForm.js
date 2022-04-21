@@ -16,6 +16,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
+//styled Compo
+import { ValidationTextField, ColorButton, ColorButtonB } from './LoginForm';
+
 function RegisterForm() {
 	const navigate = useNavigate();
 
@@ -106,7 +109,7 @@ function RegisterForm() {
 						noValidate
 						autoComplete="off"
 					>
-						<TextField
+						<ValidationTextField
 							autoFocus
 							required
 							// error={!checkLogin}
@@ -122,7 +125,7 @@ function RegisterForm() {
 							// defaultValue="Hello World"
 						/>
 						<br></br>
-						<TextField
+						<ValidationTextField
 							required
 							// error={!checkLogin}
 							id="outlined-password-input"
@@ -137,7 +140,7 @@ function RegisterForm() {
 							}}
 						/>
 						<br></br>
-						<TextField
+						<ValidationTextField
 							required
 							// error={!checkLogin}
 							label="Confirm Password"
@@ -151,7 +154,7 @@ function RegisterForm() {
 							}}
 						/>
 						<br></br>
-						<TextField
+						<ValidationTextField
 							required
 							// {!checkLogin && error}
 							// error={!checkLogin}
@@ -176,10 +179,10 @@ function RegisterForm() {
 							value={gender}
 							onChange={e => setGender(e.target.value)}
 						>
-							<FormControlLabel value="male" control={<Radio />} label="Male" />
-							<FormControlLabel value="female" control={<Radio />} label="Female" />
+							<FormControlLabel value="male" control={<Radio color="success" />} label="Male" />
+							<FormControlLabel value="female" control={<Radio color="success" />} label="Female" />
 						</RadioGroup>
-						<TextField
+						<ValidationTextField
 							required
 							// {!checkLogin && error}
 							// error={!checkLogin}
@@ -196,7 +199,7 @@ function RegisterForm() {
 							// defaultValue="Hello World"
 						/>
 						<br></br>
-						<TextField
+						<ValidationTextField
 							required
 							// {!checkLogin && error}
 							// error={!checkLogin}
@@ -221,21 +224,29 @@ function RegisterForm() {
 							value={icon}
 							onChange={e => setIcon(e.target.value)}
 						>
-							<FormControlLabel value="runner" control={<Radio />} label="runner" />
-							<FormControlLabel value="walker" control={<Radio />} label="walker" />
-							<FormControlLabel value="gymFreak" control={<Radio />} label="gymFreak" />
-							<FormControlLabel value="beginner" control={<Radio />} label="beginner" />
+							<FormControlLabel value="runner" control={<Radio color="success" />} label="runner" />
+							<FormControlLabel value="walker" control={<Radio color="success" />} label="walker" />
+							<FormControlLabel
+								value="gymFreak"
+								control={<Radio color="success" />}
+								label="gymFreak"
+							/>
+							<FormControlLabel
+								value="beginner"
+								control={<Radio color="success" />}
+								label="beginner"
+							/>
 						</RadioGroup>
 						<Stack spacing={1} direction="row">
-							<Button variant="contained" type="submit" disabled={!isFormValid}>
+							<ColorButton variant="contained" type="submit" disabled={!isFormValid}>
 								Sign-up
-							</Button>
-							<Button variant="contained" onClick={() => navigate('/login')}>
+							</ColorButton>
+							<ColorButton variant="contained" onClick={() => navigate('/login')}>
 								Sign-in
-							</Button>
-							<Button variant="outlined" onClick={() => navigate('/')}>
+							</ColorButton>
+							<ColorButtonB variant="outlined" onClick={() => navigate('/')}>
 								Start Page
-							</Button>
+							</ColorButtonB>
 						</Stack>
 					</Box>
 				</form>

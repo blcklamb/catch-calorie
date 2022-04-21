@@ -8,6 +8,7 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
+import { alpha, styled } from '@mui/material/styles';
 
 import * as Api from '../../api';
 import { DispatchContext } from '../../App';
@@ -82,7 +83,7 @@ function LoginForm() {
 						noValidate
 						autoComplete="off"
 					>
-						<TextField
+						<ValidationTextField
 							autoFocus
 							required
 							// {!checkLogin && error}
@@ -102,7 +103,7 @@ function LoginForm() {
 							// defaultValue="Hello World"
 						/>
 						<br></br>
-						<TextField
+						<ValidationTextField
 							required
 							error={!checkLogin}
 							id="outlined-password-input"
@@ -120,15 +121,15 @@ function LoginForm() {
 							}}
 						/>
 						<Stack spacing={1} direction="row">
-							<Button variant="contained" type="submit" disabled={!isFormValid}>
+							<ColorButton variant="contained" type="submit" disabled={!isFormValid}>
 								Sign-in
-							</Button>
-							<Button variant="contained" onClick={() => navigate('/register')}>
+							</ColorButton>
+							<ColorButton variant="contained" onClick={() => navigate('/register')}>
 								Sign-up
-							</Button>
-							<Button variant="outlined" onClick={() => navigate('/')}>
+							</ColorButton>
+							<ColorButtonB variant="outlined" onClick={() => navigate('/')}>
 								Start Page
-							</Button>
+							</ColorButtonB>
 						</Stack>
 					</Box>
 				</form>
@@ -216,5 +217,55 @@ function LoginForm() {
 		// </Container>
 	);
 }
+
+export const ValidationTextField = styled(TextField)({
+	'& input:valid + fieldset': {
+		borderColor: '#94D82D',
+		borderWidth: 2,
+	},
+	'& input:invalid + fieldset': {
+		borderColor: '#699C1D',
+		borderWidth: 2,
+	},
+	// '& input:valid:focus + fieldset': {
+	// 	borderColor: '#699C1D',
+	// 	borderLeftWidth: 6,
+	// 	padding: '4px !important', // override inline-style
+	// },
+	'& .MuiOutlinedInput-root': {
+		'& fieldset': {
+			borderColor: 'red',
+		},
+		'&:hover fieldset': {
+			borderColor: '#9CFD08',
+		},
+		'&.Mui-focused fieldset': {
+			borderColor: 'green',
+		},
+	},
+});
+
+export const ColorButton = styled(Button)(({ theme }) => ({
+	color: theme.palette.getContrastText('#94D82D'),
+
+	boxShadow: '0px 2px 2px #86C725',
+	backgroundColor: '#94D82D',
+	color: '#F03E3E',
+	'&:hover': {
+		backgroundColor: '#94D82D',
+		boxShadow: '0px 2px 3px #699C1D',
+	},
+}));
+
+export const ColorButtonB = styled(Button)(({ theme }) => ({
+	color: theme.palette.getContrastText('#94D82D'),
+	borderColor: '#94D82D',
+	color: '#F03E3E',
+	'&:hover': {
+		// boxShadow: '0px 2px 3px #699C1D',
+		backgroundColor: '#FCFFF8',
+		borderColor: '#699C1D',
+	},
+}));
 
 export default LoginForm;
