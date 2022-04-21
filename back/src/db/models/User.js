@@ -12,6 +12,10 @@ class User {
     static findById({ user_id }) {
         return UserModel.findOne({ user_id });
     }
+
+    static findAll() {
+        return UserModel.find({})
+    }
 }
 
 export { User };
