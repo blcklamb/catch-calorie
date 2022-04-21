@@ -26,7 +26,7 @@ const MainTabPanel = (props) => {
 			)}
 		</div>
 	);
-}
+};
 
 MainTabPanel.propTypes = {
 	children: PropTypes.node,
@@ -39,16 +39,16 @@ const a11yProps = (index) => {
 		id: `simple-tab-${index}`,
 		'aria-controls': `simple-tabpanel-${index}`,
 	};
-}
+};
 
-const MainTabs = () => {
+const MainTabs = ({ foodSelected, setFoodSelected, exerciseSelected, setExerciseSelected }) => {
 	const [value, setValue] = React.useState(0);
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
 	};
 
-	return ( 
+	return (
 		<Box sx={{ width: '100%' }}>
 			<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 				<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
@@ -57,13 +57,16 @@ const MainTabs = () => {
 				</Tabs>
 			</Box>
 			<MainTabPanel value={value} index={0}>
-				<MainFoodTab />
+				<MainFoodTab foodSelected={foodSelected} setFoodSelected={setFoodSelected} />
 			</MainTabPanel>
 			<MainTabPanel value={value} index={1}>
-				<MainExerciseTab />
+				<MainExerciseTab
+					exerciseSelected={exerciseSelected}
+					setExerciseSelected={setExerciseSelected}
+				/>
 			</MainTabPanel>
 		</Box>
 	);
-}
+};
 
-export default MainTabs
+export default MainTabs;
