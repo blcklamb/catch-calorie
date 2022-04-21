@@ -9,7 +9,6 @@
     },
     "author": "",
     "license": "MIT",
-    "type": "module",
     "dependencies": {
         "@sindresorhus/is": "^4.6.0",
         "bcrypt": "^5.0.1",
