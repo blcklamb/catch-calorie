@@ -2,6 +2,12 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { Container, Col, Row, Form, Button } from "react-bootstrap";
 
+// Mui
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+
 import * as Api from '../../api';
 import { DispatchContext } from '../../App';
 
@@ -13,6 +19,8 @@ function LoginForm() {
 	const [email, setEmail] = useState('');
 	//useState로 password 상태를 생성함.
 	const [password, setPassword] = useState('');
+	// input 상태관리
+	const [checkLogin, setCheckLogin] = useState(true);
 
 	//이메일이 abc@example.com 형태인지 regex를 이용해 확인함.
 	const validateEmail = email => {
@@ -56,12 +64,65 @@ function LoginForm() {
 			navigate('/Portfolio', { replace: true });
 		} catch (err) {
 			console.log('로그인에 실패하였습니다.\n', err);
+			setCheckLogin(false);
 		}
 	};
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit}>
+			<form action="/" onSubmit={handleSubmit}>
+				<Box
+					sx={{
+						'& > :not(style)': { m: 1, width: '25ch' },
+					}}
+					noValidate
+					autoComplete="off"
+				>
+					<TextField
+						autoFocus
+						required
+						// {!checkLogin && error}
+						error={!checkLogin}
+						id="outlined-required"
+						label="Email Address"
+						autoComplete="email"
+						helperText={
+							(!isEmailValid && <span>이메일 형식이 올바르지 않습니다.</span>) ||
+							(!checkLogin && <span>잘못된 이메일입니다.</span>)
+						}
+						value={email}
+						onChange={e => {
+							setEmail(e.target.value);
+							setCheckLogin(true);
+						}}
+						// defaultValue="Hello World"
+					/>
+
+					<TextField
+						required
+						error={!checkLogin}
+						id="outlined-password-input"
+						label="Password"
+						type="password"
+						autoComplete="current-password"
+						value={password}
+						helperText={
+							(!isPasswordValid && <span> 비밀번호는 4글자 이상입니다. </span>) ||
+							(!checkLogin && <span>잘못된 비밀번호입니다.</span>)
+						}
+						onChange={e => {
+							setPassword(e.target.value);
+							setCheckLogin(true);
+						}}
+					/>
+					<Stack spacing={2} direction="row">
+						<Button variant="contained" type="submit" disabled={!isFormValid}>
+							로그인
+						</Button>
+					</Stack>
+				</Box>
+			</form>
+			{/* <form onSubmit={handleSubmit}>
 				<div>
 					<label>이메일 주소</label>
 					<input
@@ -88,7 +149,7 @@ function LoginForm() {
 					로그인
 				</button>
 				<button onClick={() => navigate('/register')}>회원가입하기</button>
-			</form>
+			</form> */}
 		</div>
 
 		// <Container>
