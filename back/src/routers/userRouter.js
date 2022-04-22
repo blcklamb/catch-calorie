@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
 import { userAuthService } from "../services/userService";
-import is from "@sindresorhus/is";
 
 const userAuthRouter = Router();
 
@@ -71,7 +70,7 @@ userAuthRouter.get("/user/:id", login_required, async function (req, res, next) 
         const currentUserInfo = await userAuthService.getUserById({ id });
 
         if (currentUserInfo.errorMessage) {
-            throw new Error(currentUser.errorMessage);
+            throw new Error(currentUserInfo.errorMessage);
         }
 
         return res.status(200).send(currentUserInfo);
