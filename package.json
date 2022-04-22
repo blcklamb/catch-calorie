@@ -1,29 +1,20 @@
 {
-    "name": "catch-calorie-13team",
+    "name": "catch-calorie",
     "version": "1.0.0",
-    "description": "Elice AI Track 4th 2nd project 13team",
+    "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon --exec babel-node index.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "back": "npm start --prefix back",
+        "front": "npm start --prefix front",
+        "start": "concurrently \"npm run back\" \"npm run front\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://kdt-gitlab.elice.io/ai_track/class_04/data_project/team13/catch-calorie.git"
     },
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@sindresorhus/is": "^4.6.0",
-        "bcrypt": "^5.0.1",
-        "cors": "^2.8.5",
-        "dotenv": "^16.0.0",
-        "express": "^4.17.3",
-        "is": "^3.3.0",
-        "jsonwebtoken": "^8.5.1",
-        "mongoose": "^6.3.0",
-        "uuid": "^8.3.2"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.17.9",
-        "@babel/node": "^7.16.8",
-        "@babel/preset-env": "^7.16.11",
-        "nodemon": "^2.0.15"
+        "concurrently": "^7.1.0"
     }
 }
