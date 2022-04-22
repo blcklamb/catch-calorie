@@ -154,13 +154,26 @@ const foodList = [
 // export default ComboBox;
 
 // const options = ['Option 1', 'Option 2'];
-function MainFoodTab({ foodSelected, setFoodSelected, IsFoodSelected, setIsFoodSelected }) {
+function MainFoodTab({
+	foodSelected,
+	setFoodSelected,
+	IsFoodSelected,
+	setIsFoodSelected,
+	totalFood,
+	setTotalFood,
+}) {
+	const [value, setValue] = React.useState();
+
 	// inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
 	const [inputValue, setInputValue] = React.useState('');
 
-	// const handleOnClick = () => {
-	// 	console.log(foodSelected);
-	// };
+	const handleOnClick = () => {
+		// console.log(foodSelected);
+		setTotalFood(foodSelected.reduce((acc, cur) => acc + cur.kcal, totalFood));
+		// setTotalFood(800);
+		console.log(totalFood)
+		setFoodSelected([])
+	};
 
 	return (
 		<div>
@@ -169,6 +182,34 @@ function MainFoodTab({ foodSelected, setFoodSelected, IsFoodSelected, setIsFoodS
 			<br /> */}
 			<div style={{ display: 'flex' }}>
 				<Autocomplete
+					// multiple
+					disablePortal
+					id="controllable-states-demo"
+					// value={foodSelected[0]?.label}
+					value={value}
+					options={foodList}
+					sx={{ width: 300 }}
+					renderInput={(params) => (
+						<TextField
+							{...params}
+							// variant="standard"
+							label="Multiple values"
+							placeholder="Favorites"
+						/>
+					)}
+					//
+					onChange={(event, newValue) => {
+						// setFoodSelected([...foodSelected, newValue]);
+						setFoodSelected([newValue]);
+						// setValue(newValue);
+					}}
+					inputValue={inputValue}
+					onInputChange={(event, newInputValue) => {
+						setInputValue(newInputValue);
+					}}
+					// getOptionLabel={(option) => [option.label, `${option.kcal}`]}
+				/>
+				{/* <Autocomplete
 					multiple
 					id="controllable-states-demo"
 					value={foodSelected[0]?.label}
@@ -192,7 +233,7 @@ function MainFoodTab({ foodSelected, setFoodSelected, IsFoodSelected, setIsFoodS
 							placeholder="Favorites"
 						/>
 					)}
-				/>
+				/> */}
 				<Box
 					component="form"
 					sx={{
@@ -210,7 +251,8 @@ function MainFoodTab({ foodSelected, setFoodSelected, IsFoodSelected, setIsFoodS
 					/>
 				</Box>
 			</div>
-			<Button variant="contained" onClick={setIsFoodSelected(true)}>
+			{/* <Button variant="contained" onClick={setIsFoodSelected(true)}> */}
+			<Button variant="contained" onClick={handleOnClick}>
 				확인
 			</Button>
 			{console.log(foodSelected)}
