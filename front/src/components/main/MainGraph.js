@@ -8,11 +8,11 @@ function MainGraph({
 	setFoodSelected,
 	IsFoodSelected,
 	setIsFoodSelected,
+	totalFood,
+	setTotalFood,
 	exerciseSelected,
 	setExerciseSelected,
 }) {
-	// const [totalFood, setTotalFood] = useState(0);
-
 	const labels = ['오늘의 칼로리'];
 
 	const options = {
@@ -50,21 +50,10 @@ function MainGraph({
 		},
 	};
 
-    // 여기서 작업 멈춤!!!!!!!!!!!!!!!!!!!! 아마 동기/비동기 때문에 적용이 안되는 듯
-	// useEffect(() => {
-	// 	// setTotalFood(foodSelected.reduce((acc, cur) => acc + cur.kcal, 0));
-	// 	if (IsFoodSelected) {
-	// 		setTotalFood(foodSelected.reduce((acc, cur) => acc + cur.kcal, 0));
-	// 	}
-	// }, [IsFoodSelected]);
-	// // IsFoodSelected && console.log('dfs')
-
-	// // if (IsFoodSelected) {
-	// // 	const totalFood = foodSelected.reduce((acc, cur) => acc + cur.kcal, 0);
-	// // }
-	const totalFood = foodSelected.reduce((acc, cur) => acc + cur.kcal, 0);
+	// const totalFood = foodSelected.reduce((acc, cur) => acc + cur.kcal, 0);
 
 	const totalKcal = () => {
+		console.log(totalFood)
 		if (!exerciseSelected?.kcal) {
 			return [totalFood];
 		} else if (!foodSelected?.kcal) {
@@ -85,8 +74,8 @@ function MainGraph({
 				borderWidth: 1,
 			},
 			{
-				label: '최대 칼로리',
-				data: [3000],
+				label: '남은 칼로리',
+				data: [3000-totalKcal()-foodSelected.reduce((acc, cur) => acc + cur.kcal, 0)],
 				backgroundColor: ['rgba(201, 203, 207, 0.2)'],
 				borderColor: ['rgb(201, 203, 207)'],
 				borderWidth: 1,
@@ -110,7 +99,7 @@ function MainGraph({
 	];
 	const addData = () => {
 		foodSelected.map((food, idx) => {
-			console.log(food, idx);
+			// console.log(food, idx);
 			const newDataset = {
 				label: food.label,
 				backgroundColor: backgroundColor[idx],
@@ -132,8 +121,12 @@ function MainGraph({
 				<br />
 				{foodSelected.map((food) => food.kcal)}
 				<br />
-				총합
+				미리보기 합
 				{foodSelected.reduce((acc, cur) => acc + cur.kcal, 0)}
+				<br />
+				총합
+				{/* {foodSelected.reduce((acc, cur) => acc + cur.kcal, 0)} */}
+				{totalFood}
 			</div>
 			<div>
 				{exerciseSelected.label}
