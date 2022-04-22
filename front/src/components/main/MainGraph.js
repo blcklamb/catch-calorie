@@ -53,7 +53,7 @@ function MainGraph({
 	// const totalFood = foodSelected.reduce((acc, cur) => acc + cur.kcal, 0);
 
 	const totalKcal = () => {
-		console.log(totalFood)
+		console.log(totalFood);
 		if (!exerciseSelected?.kcal) {
 			return [totalFood];
 		} else if (!foodSelected?.kcal) {
@@ -61,6 +61,14 @@ function MainGraph({
 		} else {
 			return [totalFood - exerciseSelected?.kcal];
 		}
+	};
+
+	const maxKcal = () => {
+		// 엑스(clear) 눌러서 처리됐을 경우 처리, 추후 함수로 분리
+		if (foodSelected[0] === null) {
+			setFoodSelected([]);
+		}
+		return [3000 - totalKcal() - foodSelected.reduce((acc, cur) => acc + cur?.kcal, 0)];
 	};
 
 	const data = {
@@ -75,7 +83,7 @@ function MainGraph({
 			},
 			{
 				label: '남은 칼로리',
-				data: [3000-totalKcal()-foodSelected.reduce((acc, cur) => acc + cur.kcal, 0)],
+				data: maxKcal(),
 				backgroundColor: ['rgba(201, 203, 207, 0.2)'],
 				borderColor: ['rgb(201, 203, 207)'],
 				borderWidth: 1,
@@ -101,11 +109,11 @@ function MainGraph({
 		foodSelected.map((food, idx) => {
 			// console.log(food, idx);
 			const newDataset = {
-				label: food.label,
+				label: food?.label,
 				backgroundColor: backgroundColor[idx],
 				borderColor: borderColor[idx],
 				borderWidth: 1,
-				data: [food.kcal],
+				data: [food?.kcal],
 			};
 
 			data.datasets.splice(1, 0, newDataset);
@@ -117,12 +125,11 @@ function MainGraph({
 	return (
 		<div>
 			<div>
-				{foodSelected.map((food) => food.label)}
+				{foodSelected.map((food) => food?.label)}
 				<br />
-				{foodSelected.map((food) => food.kcal)}
+				{foodSelected.map((food) => food?.kcal)}
 				<br />
-				미리보기 합
-				{foodSelected.reduce((acc, cur) => acc + cur.kcal, 0)}
+				미리보기 합{foodSelected.reduce((acc, cur) => acc + cur?.kcal, 0)}
 				<br />
 				총합
 				{/* {foodSelected.reduce((acc, cur) => acc + cur.kcal, 0)} */}
