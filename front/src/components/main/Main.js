@@ -8,18 +8,23 @@ import MainGraph from './MainGraph';
 const Main = () => {
 	const [foodSelected, setFoodSelected] = useState([]);
 	const [IsFoodSelected, setIsFoodSelected] = useState(false);
+	const [totalFood, setTotalFood] = useState(0);
 	const [exerciseSelected, setExerciseSelected] = useState('');
 
 	return (
 		<div>
 			<div>안녕하세요 땡땡땡님!</div>
 
-			<div style={{ display: 'inline-flex' }}>
+			<div style={{ display: 'inline-flex' }}> 
 				<MainTabs
 					foodSelected={foodSelected}
 					setFoodSelected={setFoodSelected}
 					IsFoodSelected={IsFoodSelected}
 					setIsFoodSelected={setIsFoodSelected}
+
+					totalFood={totalFood}
+					setTotalFood={setTotalFood}
+
 					exerciseSelected={exerciseSelected}
 					setExerciseSelected={setExerciseSelected}
 				/>
@@ -28,6 +33,8 @@ const Main = () => {
 					setFoodSelected={setFoodSelected}
 					IsFoodSelected={IsFoodSelected}
 					setIsFoodSelected={setIsFoodSelected}
+					totalFood={totalFood}
+					setTotalFood={setTotalFood}
 					exerciseSelected={exerciseSelected}
 					setExerciseSelected={setExerciseSelected}
 				/>
