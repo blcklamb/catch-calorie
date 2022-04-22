@@ -57,13 +57,14 @@ function LoginForm() {
 			// sessionStorage에 "userToken"이라는 키로 JWT 토큰을 저장함.
 			sessionStorage.setItem('userToken', jwtToken);
 			// dispatch 함수를 이용해 로그인 성공 상태로 만듦.
+			// console.log(user);
 			dispatch({
 				type: 'LOGIN_SUCCESS',
 				payload: user,
 			});
 
 			// 기본 페이지로 이동함.
-			navigate('/Portfolio', { replace: true });
+			navigate('/users/:userId', { replace: true });
 		} catch (err) {
 			console.log('로그인에 실패하였습니다.\n', err);
 			setCheckLogin(false);

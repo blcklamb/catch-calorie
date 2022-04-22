@@ -22,6 +22,7 @@ function Portfolio() {
 		const res = await Api.get('user', ownerId);
 		// 사용자 정보는 response의 data임.
 		const ownerData = res.data;
+		console.log(res.data);
 		// portfolioOwner을 해당 사용자 정보로 세팅함.
 		setPortfolioOwner(ownerData);
 		// fetchPorfolioOwner 과정이 끝났으므로, isFetchCompleted를 true로 바꿈.
@@ -42,7 +43,7 @@ function Portfolio() {
 			fetchPorfolioOwner(ownerId);
 		} else {
 			// 이외의 경우, 즉 URL이 "/" 라면, 전역 상태의 user.id를 유저 id로 설정함.
-			const ownerId = userState.user.id;
+			const ownerId = userState.user._id;
 			// 해당 유저 id로 fetchPorfolioOwner 함수를 실행함.
 			fetchPorfolioOwner(ownerId);
 		}
@@ -56,8 +57,8 @@ function Portfolio() {
 		<>
 			<h1>메인 페이지</h1>
 			<TempMain
-				portfolioOwnerId={portfolioOwner.id}
-				isEditable={portfolioOwner.id === userState.user?.id}
+				portfolioOwnerId={portfolioOwner._id}
+				isEditable={portfolioOwner._id === userState.user?._id}
 			></TempMain>
 		</>
 		// <Container fluid>
