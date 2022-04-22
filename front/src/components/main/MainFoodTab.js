@@ -171,8 +171,8 @@ function MainFoodTab({
 		// console.log(foodSelected);
 		setTotalFood(foodSelected.reduce((acc, cur) => acc + cur.kcal, totalFood));
 		// setTotalFood(800);
-		console.log(totalFood)
-		setFoodSelected([])
+		console.log(totalFood);
+		setFoodSelected([]);
 	};
 
 	return (
@@ -183,7 +183,8 @@ function MainFoodTab({
 			<div style={{ display: 'flex' }}>
 				<Autocomplete
 					// multiple
-					disablePortal
+					// disablePortal
+					// disableCloseOnSelect
 					id="controllable-states-demo"
 					// value={foodSelected[0]?.label}
 					value={value}
@@ -193,11 +194,12 @@ function MainFoodTab({
 						<TextField
 							{...params}
 							// variant="standard"
-							label="Multiple values"
-							placeholder="Favorites"
+							label="음식(kcal/100g)"
+							placeholder="음식을 선택하세요"
 						/>
 					)}
 					//
+					getOptionLabel={(option) => [option.label, `(${option.kcal})`]}
 					onChange={(event, newValue) => {
 						// setFoodSelected([...foodSelected, newValue]);
 						setFoodSelected([newValue]);
@@ -207,8 +209,22 @@ function MainFoodTab({
 					onInputChange={(event, newInputValue) => {
 						setInputValue(newInputValue);
 					}}
-					// getOptionLabel={(option) => [option.label, `${option.kcal}`]}
+					noOptionsText={
+						<div>
+							<p>존재하지 않는 음식입니다</p>
+							<Button
+								variant="contained"
+								color="primary"
+								type="button"
+								// startIcon={< AddIc fontSize="small" />}
+								onClick={() => alert('추가')}
+							>
+								추가
+							</Button>
+						</div>
+					}
 				/>
+				{/* 다중선택 */}
 				{/* <Autocomplete
 					multiple
 					id="controllable-states-demo"
@@ -244,9 +260,9 @@ function MainFoodTab({
 				>
 					<TextField
 						id="outlined-basic"
-						// label="그램"
+						label="그램"
 						variant="outlined"
-						disabled="true"
+						disabled
 						value={100}
 					/>
 				</Box>
