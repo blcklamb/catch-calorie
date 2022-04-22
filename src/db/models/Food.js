@@ -5,8 +5,8 @@ class Food {
         return FoodModel.create(newFood);
     }
 
-    static findById({ id }) {
-        return FoodModel.findById(id);
+    static findByName({ name }) {
+        return FoodModel.findOne({ name });
     }
 
     static findAll({ search }) {
