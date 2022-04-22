@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { login_required } from "../middlewares/login_required.js";
-import { userAuthService } from "../services/userService.js";
+import { login_required } from "../middlewares/login_required";
+import { userAuthService } from "../services/userService";
 import is from "@sindresorhus/is";
 
 const userAuthRouter = Router();

@@ -1,6 +1,5 @@
-import { User } from "../db/index.js";
+import { User } from "../db/index";
 import bcrypt from "bcrypt";
-import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 
 class userAuthService {
