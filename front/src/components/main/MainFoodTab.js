@@ -193,7 +193,7 @@ function MainFoodTab({ foodSelected, setFoodSelected, IsFoodSelected, setIsFoodS
 						/>
 					)}
 				/>
-				{/* <Box
+				<Box
 					component="form"
 					sx={{
 						'& > :not(style)': { m: 1, width: '25ch' },
@@ -208,7 +208,7 @@ function MainFoodTab({ foodSelected, setFoodSelected, IsFoodSelected, setIsFoodS
 						disabled="true"
 						value={100}
 					/>
-				</Box> */}
+				</Box>
 			</div>
 			<Button variant="contained" onClick={setIsFoodSelected(true)}>
 				확인
