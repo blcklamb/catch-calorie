@@ -41,7 +41,14 @@ const a11yProps = (index) => {
 	};
 };
 
-const MainTabs = ({ foodSelected, setFoodSelected, exerciseSelected, setExerciseSelected }) => {
+const MainTabs = ({
+	foodSelected,
+	setFoodSelected,
+	IsFoodSelected,
+	setIsFoodSelected,
+	exerciseSelected,
+	setExerciseSelected,
+}) => {
 	const [value, setValue] = React.useState(0);
 
 	const handleChange = (event, newValue) => {
@@ -57,7 +64,12 @@ const MainTabs = ({ foodSelected, setFoodSelected, exerciseSelected, setExercise
 				</Tabs>
 			</Box>
 			<MainTabPanel value={value} index={0}>
-				<MainFoodTab foodSelected={foodSelected} setFoodSelected={setFoodSelected} />
+				<MainFoodTab
+					foodSelected={foodSelected}
+					setFoodSelected={setFoodSelected}
+					IsFoodSelected={IsFoodSelected}
+					setIsFoodSelected={setIsFoodSelected}
+				/>
 			</MainTabPanel>
 			<MainTabPanel value={value} index={1}>
 				<MainExerciseTab
