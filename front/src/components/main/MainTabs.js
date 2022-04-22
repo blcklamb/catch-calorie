@@ -46,6 +46,8 @@ const MainTabs = ({
 	setFoodSelected,
 	IsFoodSelected,
 	setIsFoodSelected,
+	totalFood,
+	setTotalFood,
 	exerciseSelected,
 	setExerciseSelected,
 }) => {
@@ -69,6 +71,8 @@ const MainTabs = ({
 					setFoodSelected={setFoodSelected}
 					IsFoodSelected={IsFoodSelected}
 					setIsFoodSelected={setIsFoodSelected}
+					totalFood={totalFood}
+					setTotalFood={setTotalFood}
 				/>
 			</MainTabPanel>
 			<MainTabPanel value={value} index={1}>
