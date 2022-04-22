@@ -9,80 +9,80 @@ import MainFoodTab from './MainFoodTab';
 import MainExerciseTab from './MainExerciseTab';
 
 const MainTabPanel = (props) => {
-	const { children, value, index, ...other } = props;
+  const { children, value, index, ...other } = props;
 
-	return (
-		<div
-			role="tabpanel"
-			hidden={value !== index}
-			id={`simple-tabpanel-${index}`}
-			aria-labelledby={`simple-tab-${index}`}
-			{...other}
-		>
-			{value === index && (
-				<Box sx={{ p: 3 }}>
-					<Typography>{children}</Typography>
-				</Box>
-			)}
-		</div>
-	);
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
 };
 
 MainTabPanel.propTypes = {
-	children: PropTypes.node,
-	index: PropTypes.number.isRequired,
-	value: PropTypes.number.isRequired,
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
 const a11yProps = (index) => {
-	return {
-		id: `simple-tab-${index}`,
-		'aria-controls': `simple-tabpanel-${index}`,
-	};
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
 };
 
 const MainTabs = ({
-	foodSelected,
-	setFoodSelected,
-	IsFoodSelected,
-	setIsFoodSelected,
-	totalFood,
-	setTotalFood,
-	exerciseSelected,
-	setExerciseSelected,
+  foodSelected,
+  setFoodSelected,
+  totalFood,
+  setTotalFood,
+  exerciseSelected,
+  setExerciseSelected,
+  totalExercise,
+  setTotalExercise,
 }) => {
-	const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(0);
 
-	const handleChange = (event, newValue) => {
-		setValue(newValue);
-	};
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
-	return (
-		<Box sx={{ width: '100%' }}>
-			<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-				<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-					<Tab label="음식" {...a11yProps(0)} />
-					<Tab label="운동" {...a11yProps(1)} />
-				</Tabs>
-			</Box>
-			<MainTabPanel value={value} index={0}>
-				<MainFoodTab
-					foodSelected={foodSelected}
-					setFoodSelected={setFoodSelected}
-					IsFoodSelected={IsFoodSelected}
-					setIsFoodSelected={setIsFoodSelected}
-					totalFood={totalFood}
-					setTotalFood={setTotalFood}
-				/>
-			</MainTabPanel>
-			<MainTabPanel value={value} index={1}>
-				<MainExerciseTab
-					exerciseSelected={exerciseSelected}
-					setExerciseSelected={setExerciseSelected}
-				/>
-			</MainTabPanel>
-		</Box>
-	);
+  return (
+    <Box sx={{ width: '100%' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tab label="음식" {...a11yProps(0)} />
+          <Tab label="운동" {...a11yProps(1)} />
+        </Tabs>
+      </Box>
+      <MainTabPanel value={value} index={0}>
+        <MainFoodTab
+          foodSelected={foodSelected}
+          setFoodSelected={setFoodSelected}
+          totalFood={totalFood}
+          setTotalFood={setTotalFood}
+        />
+      </MainTabPanel>
+      <MainTabPanel value={value} index={1}>
+        <MainExerciseTab
+          exerciseSelected={exerciseSelected}
+          setExerciseSelected={setExerciseSelected}
+          totalExercise={totalExercise}
+          setTotalExercise={setTotalExercise}
+        />
+      </MainTabPanel>
+    </Box>
+  );
 };
 
 export default MainTabs;

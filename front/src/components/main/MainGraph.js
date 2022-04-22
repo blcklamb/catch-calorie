@@ -70,7 +70,7 @@ function MainGraph({
   //     }
   //   };
 
-  const totalKcal = (totalFood - totalExercise)
+  const totalKcal = totalFood - totalExercise;
 
   const maxKcal = () => {
     console.log(exerciseSelected);
@@ -82,9 +82,7 @@ function MainGraph({
     if (totalFood - totalExercise < 0) {
       return [3000];
     }
-    return [
-      3000 - totalKcal - foodSelected.reduce((acc, cur) => acc + cur?.kcal, 0),
-    ];
+    return [3000 - totalKcal - foodSelected.reduce((acc, cur) => acc + cur?.kcal, 0)];
   };
 
   const data = {

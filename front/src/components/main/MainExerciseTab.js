@@ -70,7 +70,7 @@ function MainExerciseTab({
         getOptionLabel={(option) => [option.label, `(${option.kcal})`]}
         onChange={(event, newValue) => {
           setExerciseSelected([newValue]);
-		  console.log(exerciseSelected?.label)
+          console.log(exerciseSelected?.label);
         }}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
