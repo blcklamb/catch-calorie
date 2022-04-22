@@ -83,7 +83,7 @@ function RegisterForm() {
 				email,
 				password,
 				name,
-				isMale: gender,
+				gender,
 				height: Number(height),
 				weight: Number(weight),
 				icon,
