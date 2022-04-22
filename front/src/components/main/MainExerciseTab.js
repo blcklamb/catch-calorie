@@ -12,22 +12,27 @@ const exerciseList = [
 	{
 		value: 'hamburger',
 		label: '걷기',
+		kcal: 200
 	},
 	{
 		value: 'cake',
 		label: '달리기',
+		kcal: 300
 	},
 	{
 		value: 'ham',
 		label: '달리면서 걷기',
+		kcal: 560
 	},
 	{
 		value: 'startham',
 		label: '축구',
+		kcal: 400
 	},
 	{
 		value: 'chicken',
 		label: '야구',
+		kcal: 800
 	},
 ];
 
@@ -48,7 +53,7 @@ function MainExerciseTab({ exerciseSelected, setExerciseSelected }) {
 			<Autocomplete
 				value={exerciseSelected}
 				onChange={(event, newValue) => {
-					setExerciseSelected(newValue.label);
+					setExerciseSelected(newValue);
 				}}
 				inputValue={inputValue}
 				onInputChange={(event, newInputValue) => {
