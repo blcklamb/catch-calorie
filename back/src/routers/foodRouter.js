@@ -1,4 +1,5 @@
 import { Router } from "express";
+import rateLimit from "express-rate-limit";
 import { foodService } from "../services/foodService";
 
 const foodRouter = Router();
@@ -38,7 +39,7 @@ foodRouter.post("/foods/create", async (req, res, next) => {
 //     }
 // });
 
-foodRouter.get("/foods", async function (req, res, next) {
+foodRouter.get("/foods", rateLimit({ windowMs: 1000, max: 5 }), async (req, res, next) => {
     try {
         const { search } = req.query;
 
