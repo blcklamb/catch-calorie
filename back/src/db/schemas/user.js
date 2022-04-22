@@ -1,5 +1,4 @@
-import pkg from 'mongoose'
-const { Schema, model } = pkg;
+import { Schema, model } from "mongoose";
 
 const UserSchema = new Schema(
     {
@@ -19,8 +18,8 @@ const UserSchema = new Schema(
             required: true,
             trim: true,
         },
-        isMale: {
-            type: Boolean,
+        gender: {
+            type: String,
             required: true,
         },
         height: {

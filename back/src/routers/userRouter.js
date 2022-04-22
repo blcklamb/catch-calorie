@@ -1,16 +1,15 @@
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required.js";
 import { userAuthService } from "../services/userService.js";
-import pkg from "@sindresorhus/is";
-const { is } = pkg;
+import is from "@sindresorhus/is";
 
 const userAuthRouter = Router();
 
 userAuthRouter.post("/user/register", async function (req, res, next) {
     try {
-        if (is.emptyObject(req.body)) {
-            throw new Error("header의 Content-Type을 application/json으로 설정해주세요.");
-        }
+        // if (is.emptyObject(req.body)) {
+        //     throw new Error("header의 Content-Type을 application/json으로 설정해주세요.");
+        // }
         const { email, password, name, gender, height, weight, icon } = req.body;
 
         const newUser = await userAuthService.addUser({
