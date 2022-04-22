@@ -68,7 +68,6 @@ userAuthRouter.get("/user/:id", login_required, async function (req, res, next) 
     try {
         const { id } = req.params;
         const currentUserInfo = await userAuthService.getUserById({ id });
-
         if (currentUserInfo.errorMessage) {
             throw new Error(currentUserInfo.errorMessage);
         }
