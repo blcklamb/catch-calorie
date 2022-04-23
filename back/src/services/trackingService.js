@@ -1,47 +1,66 @@
-import { Tracking, Food } from "../db";
+import { Tracking, Food, Exercise, User } from "../db";
+import { v4 as uuid } from "uuid";
+import { ExerciseModel } from "../db/schemas/exercise"; // git merge 이후 삭제되어야 함.
 
 class trackingService {
-    static async addFoodTracking({ data }) {
-        let newTracking = [];
+    static async addFoodTracking({ user_id, date, food, gram }) {
+        const calorie = await Food.findByName({ name: food })
+            .then((data) => data.kcal_per100g) //kcal_per_100g
+            .then((cal_per_100g) => cal_per_100g / 100) //kcal_per_g
+            .then((cal_per_1g) => cal_per_1g * gram);
 
-        data.map(async (data) => {
-            const calorie = await Food.findByName({ name: data.name }).then((data) => data.kcal_per100g);
-            newTracking.push({ name: data.name, calorie: Math.round((calorie / 100) * data.gram) });
-            console.log(newTracking);
-        });
-        await console.log(newTracking);
-        return Tracking.createFoodTracking({ newTracking });
+        const toUpdate = { $push: { food_record: { id: uuid(), food, gram, calorie } }, $inc: { acc_cal: calorie } };
+
+        switch (!(await Tracking.findByUserAndDate({ user_id, date }))) {
+            case true:
+                await Tracking.createTracking({ user_id, date });
+            default:
+                return Tracking.updateTracking({ user_id, date }, { toUpdate });
+        }
     }
 
-    static async getTracking({ id }) {
-        const tracking = await Tracking.findById({ id });
-        if (!tracking) return { errorMessage: "음식를 찾을 수 없습니다." };
+    static async addExerTracking({ user_id, date, exer, hour }) {
+        const weight = (await User.findById({ user_id }).weight) || 60;
 
-        return tracking;
+        const calorie = await ExerciseModel.findOne({ name: exer })
+            .then((data) => data.kcal_per_kg) // kcal_per_kg
+            .then((kcal_per_1kg) => kcal_per_1kg * weight) // kcal_per_user
+            .then((kcal_per_user) => Math.round(kcal_per_user * hour));
+
+        const toUpdate = { $push: { exer_record: { id: uuid(), exer, hour, calorie } }, $inc: { acc_cal: -calorie } };
+
+        switch (!(await Tracking.findByUserAndDate({ user_id, date }))) {
+            case true:
+                await Tracking.createTracking({ user_id, date });
+            default:
+                return Tracking.updateTracking({ user_id, date }, { toUpdate });
+        }
     }
 
-    static getTrackingAll({ user_id }) {
+    static getTrackingByUserAndDate({ user_id, date }) {
+        return Tracking.findByUserAndDate({ user_id, date });
+    }
+
+    static getTrackingByUser({ user_id }) {
         return Tracking.findAll({ user_id });
     }
 
-    static async setTracking({ id }, { toUpdate }) {
-        const tracking = await this.getTracking({ _id });
-        if (!tracking) return { errorMessage: "음식를 찾을 수 없습니다." };
+    static async deleteFoodTracking({ id }) {
+        const data = await Tracking.findByRecordId({ id }, { record: "food" });
+        const { user_id, date, food_record } = data;
+        const food = food_record.find((food) => food.id === id);
 
-        const setTracking = await Tracking.update({ id }, { toUpdate });
-        return setTracking;
+        const toUpdate = { $pull: { food_record: food }, $inc: { acc_cal: -food.calorie } };
+
+        return Tracking.updateTracking({ user_id, date }, { toUpdate });
     }
 
-    static async deleteTracking({ id }) {
+    static async deleteExerTracking({ id }) {
         const tracking = await this.getTracking({ id });
         if (!tracking) return { errorMessage: "음식를 찾을 수 없습니다." };
 
         const deleteTracking = await Tracking.delete({ id });
         return deleteTracking;
-    }
-
-    static addTrackingViews({ id }) {
-        return Tracking.update({ id }, { toUpdate: { $inc: { views: 1 } } }, { new: true });
     }
 }
 

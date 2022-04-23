@@ -15,8 +15,14 @@ const ExerSchema = new Schema({
         type: Number,
         required: true,
     },
+    views: {
+        type: Number,
+        required: true,
+        default: 0,
+    },
 });
 
-const ExerModel = model("Exercise", ExerSchema);
+const ExerciseModel = model("Exercise", ExerSchema);
 
-export { ExerModel };
+export { ExerciseModel };
+
