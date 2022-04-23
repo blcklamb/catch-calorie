@@ -46,7 +46,7 @@ class userAuthService {
         const loginUser = {
             token,
             id: user._id,
-            email,
+            email: user.email,
             name: user.name,
             gender: user.gender,
             height: user.height,
