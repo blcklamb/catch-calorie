@@ -22,7 +22,6 @@ const ExerSchema = new Schema({
     },
 });
 
-const ExerciseModel = model("Exercise", ExerSchema);
+const ExerModel = model("Exercise", ExerSchema);
 
-export { ExerciseModel };
-
+export { ExerModel };
