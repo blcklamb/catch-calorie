@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { login_required } from "../middlewares/login_required.js";
-import { trackingService } from "../services/trackingService.js";
+import { login_required } from "../middlewares/login_required";
+import { trackingService } from "../services/trackingService";
 
 const trackingRouter = Router();
 
