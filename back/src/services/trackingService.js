@@ -9,8 +9,8 @@ class trackingService {
 
         const calorie = await Food.findByName({ name: food })
             .then((data) => data.kcal_per100g) //cal_per_100g
-            .then((kcal_per_100g) => kcal_per_100g / 100) //cal_per_g
-            .then((kcal_per_1g) => kcal_per_1g * gram);
+            .then((cal_per_100g) => cal_per_100g / 100) //cal_per_g
+            .then((cal_per_1g) => cal_per_1g * gram);
 
         const toUpdate = { $push: { food_record: object }, $inc: { acc_cal: calorie } };
 
