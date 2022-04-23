@@ -7,6 +7,11 @@ const TrackingSchema = new Schema(
             ref: "User",
             required: true,
         },
+        date: {
+            type: String,
+            required: true,
+            immutable: true,
+        },
         food_record: {
             type: Array,
             required: true,

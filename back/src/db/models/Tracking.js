@@ -1,13 +1,13 @@
 import { TrackingModel } from "../schemas/tracking";
 
 class Tracking {
-    static createTracking({ user_id }) {
-        return TrackingModel.create({ user_id });
+    static createTracking({ user_id, date }) {
+        return TrackingModel.create({ user_id, date });
     }
 
     static findByUserAndDate({ user_id, date }) {
         // $lt: date
-        return TrackingModel.findOne({ user_id, createdAt: { $gte: date } });
+        return TrackingModel.findOne({ user_id, date });
     }
 
     static findAll({ user_id }) {
