@@ -8,8 +8,8 @@ class trackingService {
         object[food] = gram;
 
         const calorie = await Food.findByName({ name: food })
-            .then((data) => data.kcal_per100g)
-            .then((kcal_per_100g) => kcal_per_100g / 100)
+            .then((data) => data.kcal_per100g) //cal_per_100g
+            .then((kcal_per_100g) => kcal_per_100g / 100) //cal_per_g
             .then((kcal_per_1g) => kcal_per_1g * gram);
 
         const toUpdate = { $push: { food_record: object }, $inc: { acc_cal: calorie } };
@@ -48,7 +48,15 @@ class trackingService {
         return Tracking.findAll({ user_id });
     }
 
-    static async deleteTracking({ id }) {
+    static async deleteFoodTracking({ id }) {
+        const tracking = await this.getTracking({ id });
+        if (!tracking) return { errorMessage: "음식를 찾을 수 없습니다." };
+
+        const deleteTracking = await Tracking.delete({ id });
+        return deleteTracking;
+    }
+
+    static async deleteExerTracking({ id }) {
         const tracking = await this.getTracking({ id });
         if (!tracking) return { errorMessage: "음식를 찾을 수 없습니다." };
 

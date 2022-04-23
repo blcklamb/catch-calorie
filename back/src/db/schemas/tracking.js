@@ -9,9 +9,13 @@ const TrackingSchema = new Schema(
         },
         food_record: {
             type: Array,
+            required: true,
+            default: [],
         },
         exer_record: {
             type: Array,
+            required: true,
+            default: [],
         },
         acc_cal: {
             type: Number,
