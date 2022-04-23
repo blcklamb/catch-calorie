@@ -1,20 +1,29 @@
 import { TrackingModel } from "../schemas/tracking";
 
 class Tracking {
-    static createFoodTracking({ newTracking }) {
-        return TrackingModel.create(newTracking);
+    static create({ user_id, date }) {
+        return TrackingModel.create({ user_id, date });
     }
 
-    static findById({ id }) {
-        return TrackingModel.findById(id);
+    static findByRecordId({ id }, { record }) {
+        switch (record) {
+            case "food":
+                return TrackingModel.findOne({ food_record: { $elemMatch: { id } } });
+            case "exer":
+                return TrackingModel.findOne({ exer_record: { $elemMatch: { id } } });
+        }
+    }
+
+    static findByUserAndDate({ user_id, date }) {
+        return TrackingModel.findOne({ user_id, date });
     }
 
     static findAll({ user_id }) {
-        return TrackingModel.findOne({ _id: user_id }).sort({ createdAt: 1 });
+        return TrackingModel.find({ user_id }).sort({ createdAt: 1 });
     }
 
-    static update({ id }, { toUpdate }) {
-        return TrackingModel.findOneAndUpdate(id, toUpdate, { new: true });
+    static update({ user_id, date }, { toUpdate }) {
+        return TrackingModel.findOneAndUpdate({ user_id, date }, toUpdate, { new: true });
     }
 
     static delete({ id }) {

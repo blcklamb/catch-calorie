@@ -1,6 +1,5 @@
-import { User } from "../db/index.js";
+import { User } from "../db";
 import bcrypt from "bcrypt";
-import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 
 class userAuthService {
@@ -24,7 +23,6 @@ class userAuthService {
         };
 
         const createdNewUser = await User.create({ newUser });
-
         return createdNewUser;
     }
 
@@ -35,6 +33,7 @@ class userAuthService {
             const errorMessage = "가입 내역이 없는 이메일입니다. 다시 한 번 확인해 주세요.";
             return { errorMessage };
         }
+
         const isCorrectPassword = await bcrypt.compare(password, user.password);
         if (!isCorrectPassword) {
             const errorMessage = "비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.";
@@ -44,21 +43,21 @@ class userAuthService {
         //로그인 성공 시 JWT 웹 토큰 생성
         const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
         const token = jwt.sign({ user_id: user._id }, secretKey, { expiresIn: "2h" });
-
         const loginUser = {
             token,
-            email,
-            name,
-            gender,
-            height,
-            weight,
-            icon,
+            id: user._id,
+            email: user.email,
+            name: user.name,
+            gender: user.gender,
+            height: user.height,
+            weight: user.weight,
+            icon: user.icon,
             errorMessage: null,
         };
         return loginUser;
     }
 
-    static async getUsers() {
+    static getUsers() {
         return User.findAll();
     }
 

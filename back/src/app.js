@@ -1,14 +1,15 @@
 import express from "express";
 import cors from "cors";
 
-import { userAuthRouter } from "./routers/userRouter.js";
+import { userAuthRouter } from "./routers/userRouter";
 import { foodRouter } from "./routers/foodRouter";
+// import { exerRouter } from "./routers/exerRouter";
 import { trackingRouter } from "./routers/trackingRouter";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 
 const app = express();
 
-// CORS 에러 방지, credential 인증 추가
+// CORS 에러 방지
 app.use(cors());
 
 // express 기본 제공 middleware
