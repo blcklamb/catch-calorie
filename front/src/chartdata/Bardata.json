@@ -1,0 +1,32 @@
+[
+	{
+		"statement": "it's good",
+
+		"disagree": 7,
+		"stronglyDisagree": 10
+	},
+	{
+		"statement": "it's sweet",
+
+		"disagree": 30,
+		"stronglyDisagree": 9
+	},
+	{
+		"statement": "it's spicy",
+
+		"disagree": 20,
+		"stronglyDisagree": 26
+	},
+	{
+		"statement": "worth eating",
+
+		"disagree": 11,
+		"stronglyDisagree": 15
+	},
+	{
+		"statement": "worth buying",
+
+		"disagree": 5,
+		"stronglyDisagree": 21
+	}
+]
