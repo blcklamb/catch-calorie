@@ -14,7 +14,7 @@ function MainGraph({
   totalExercise,
   setTotalExercise,
 }) {
-  const labels = ['오늘의 칼로리'];
+  const labels = ["Today's calories"];
 
   const options = {
     // legend: {
@@ -36,7 +36,7 @@ function MainGraph({
     // maintainAspectRatio: false,
     plugins: {
       title: {
-        display: true,
+        display: false,
         text: '오늘의 칼로리',
       },
     },
@@ -89,15 +89,14 @@ function MainGraph({
     labels: labels,
     datasets: [
       {
-        label: '현재 칼로리',
-        // data: totalKcal(),
+        label: 'Current Calories',
         data: [totalKcal],
         backgroundColor: ['rgba(255, 99, 132, 0.2)'],
         borderColor: ['rgb(255, 99, 132)'],
         borderWidth: 1,
       },
       {
-        label: '남은 칼로리',
+        label: 'Calories Remaining',
         data: maxKcal(),
         backgroundColor: ['rgba(201, 203, 207, 0.2)'],
         borderColor: ['rgb(201, 203, 207)'],
@@ -153,7 +152,7 @@ function MainGraph({
 
   return (
     <div>
-      <div>
+      {/* <div>
         {foodSelected.map((food) => food?.label)}
         <br />
         {foodSelected.map((food) => food?.kcal)}
@@ -168,7 +167,7 @@ function MainGraph({
         <br />
         {exerciseSelected.map((exercise) => exercise?.kcal)}
         <br />
-      </div>
+      </div> */}
       <div style={{ width: 400 }}>
         <Bar data={data} options={options} height={300} />
       </div>

@@ -1,14 +1,5 @@
-// const MainFoodTab = () => {
-// 	return (
-// 		<div>
-//             <div>안녕하세요 음식!</div>
-//         </div>
-// 	);
-// }
-
-// export default MainFoodTab;
-
 import React, { useState, useMemo, useCallback } from 'react';
+import styled from 'styled-components';
 
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
@@ -17,43 +8,61 @@ import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-import { getRegExp } from 'korean-regexp';
-import { debounce } from 'lodash';
-
 import Autocomplete from '@mui/material/Autocomplete';
+
+import MainButton from './style/MainButton'
+import MainInput from './style/MainInput'
 
 const foodList = [
   {
     value: 'hamburger',
-    label: '햄버거',
+    label: 'hamburger',
     kcal: 100,
   },
   {
     value: 'cake',
-    label: '케이크',
+    label: 'cake',
     kcal: 300,
   },
   {
     value: 'ham',
-    label: '햄',
+    label: 'ham',
     kcal: 400,
   },
   {
-    value: 'startham',
-    label: '양념 치킨',
+    value: 'strawberry-cake',
+    label: 'strawberry-cake',
     kcal: 450,
   },
   {
     value: 'chicken',
-    label: '치킨',
+    label: 'chicken',
     kcal: 800,
   },
   {
     value: 'fried-chicken',
-    label: '후라이드 치킨',
+    label: 'fried-chicken',
     kcal: 520,
   },
 ];
+
+// const MainButton = styled(Button)({
+// 	// background: 'linear-gradient(45deg, #da534e 30%, #FF8E53 90%)',
+// 	backgroundColor: '#F03E3E', 
+// 	border: 0,
+// 	borderRadius: 20,
+// 	// boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+// 	color: 'white',
+// 	height: 48,
+// 	padding: '0 30px',
+// 	// background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+// 	// border: 0,
+// 	// borderRadius: 3,
+// 	// boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+// 	// color: 'white',
+// 	// height: 48,
+// 	// padding: '0 30px',
+//   });
 
 function MainFoodTab({ foodSelected, setFoodSelected, totalFood, setTotalFood }) {
   const [value, setValue] = React.useState();
@@ -83,11 +92,11 @@ function MainFoodTab({ foodSelected, setFoodSelected, totalFood, setTotalFood })
           options={foodList}
           sx={{ width: 300 }}
           renderInput={(params) => (
-            <TextField
+            <MainInput
               {...params}
               // variant="standard"
-              label="음식(kcal/100g)"
-              placeholder="음식을 선택하세요"
+              label="Food(kcal/100g)"
+              placeholder="Please select food"
             />
           )}
           //
@@ -103,15 +112,15 @@ function MainFoodTab({ foodSelected, setFoodSelected, totalFood, setTotalFood })
           }}
           noOptionsText={
             <div>
-              <p>존재하지 않는 음식입니다</p>
+              <p>No option</p>
               <Button
                 variant="contained"
                 color="primary"
                 type="button"
                 // startIcon={< AddIc fontSize="small" />}
-                onClick={() => alert('추가')}
+                // onClick={() => alert('기능 추후 보강')}
               >
-                추가
+                Add food
               </Button>
             </div>
           }
@@ -150,13 +159,13 @@ function MainFoodTab({ foodSelected, setFoodSelected, totalFood, setTotalFood })
           noValidate
           autoComplete="off"
         >
-          <TextField id="outlined-basic" label="그램" variant="outlined" disabled value={100} />
+          <MainInput id="outlined-basic" label="g" variant="outlined" disabled value={100} />
         </Box>
       </div>
       {/* <Button variant="contained" onClick={setIsFoodSelected(true)}> */}
-      <Button variant="contained" onClick={handleOnClick}>
-        확인
-      </Button>
+      <MainButton variant="contained" onClick={handleOnClick}>
+        check
+      </MainButton>
       {console.log(foodSelected)}
     </div>
   );

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 import Button from '@mui/material/Button';
 
 import MainTabs from './MainTabs';
 import MainGraph from './MainGraph';
+import MainButton from './style/MainButton';
 
 const Main = () => {
   const [foodSelected, setFoodSelected] = useState([]);
@@ -11,11 +13,36 @@ const Main = () => {
   const [exerciseSelected, setExerciseSelected] = useState([]);
   const [totalExercise, setTotalExercise] = useState(0);
 
-  return (
-    <div>
-      <div>안녕하세요 땡땡땡님!</div>
+  const Container = styled.div`
+    margin: 70px 80px;
+  `;
 
-      <div style={{ display: 'inline-flex' }}>
+  const MainHello = styled.div`
+    font-size: 35px;
+    font-weight: bold;
+  `;
+
+  //   const MainTabs = styled.div`
+
+  //   `
+
+  const MainContents = styled.div`
+    display: inline-flex;
+    margin: 80px 0px;
+  `;
+
+  //   const styledMainTabs = styled(MainTabs)`
+  //     display: inline-flex;
+  //     margin: 80px 0px;
+  //   `;
+
+  const user = 'Elice';
+
+  return (
+    <div style={{ margin: '70px 80px' }}>
+      <MainHello>Hello {user}!</MainHello>
+
+      <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
         <MainTabs
           foodSelected={foodSelected}
           setFoodSelected={setFoodSelected}
@@ -38,9 +65,13 @@ const Main = () => {
         />
       </div>
       <div>
-        <Button variant="contained">수정 및 삭제</Button>
+        <MainButton variant="contained" style={{ marginBottom: '20px', width: '60%' }}>
+          Modifying and deleting
+        </MainButton>
         <br />
-        <Button variant="contained">상세보기</Button>
+        <MainButton variant="contained" style={{ width: '60%' }}>
+          View Details
+        </MainButton>
       </div>
     </div>
   );

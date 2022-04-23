@@ -8,30 +8,35 @@ import Button from '@mui/material/Button';
 
 import Autocomplete from '@mui/material/Autocomplete';
 
+import MainInput from './style/MainInput'
+import MainButton from './style/MainButton'
+
+
+
 const exerciseList = [
   {
-    value: 'hamburger',
-    label: '걷기',
+    value: 'walking',
+    label: 'walking',
     kcal: 200,
   },
   {
-    value: 'cake',
-    label: '달리기',
+    value: 'running',
+    label: 'running',
     kcal: 300,
   },
   {
-    value: 'ham',
-    label: '달리면서 걷기',
+    value: 'walking-and-running',
+    label: 'walking and running',
     kcal: 560,
   },
   {
-    value: 'startham',
-    label: '축구',
+    value: 'soccer',
+    label: 'soccer',
     kcal: 400,
   },
   {
-    value: 'chicken',
-    label: '야구',
+    value: 'baseball',
+    label: 'baseball',
     kcal: 800,
   },
 ];
@@ -65,7 +70,7 @@ function MainExerciseTab({
         options={exerciseList}
         sx={{ width: 300 }}
         renderInput={(params) => (
-          <TextField {...params} label="운동" placeholder="운동을 선택하세요" />
+          <MainInput {...params} label="Exercise(kcal)" placeholder="Please select food" />
         )}
         getOptionLabel={(option) => [option.label, `(${option.kcal})`]}
         onChange={(event, newValue) => {
@@ -78,22 +83,22 @@ function MainExerciseTab({
         }}
         noOptionsText={
           <div>
-            <p>존재하지 않는 운동입니다</p>
+            <p>No options</p>
             <Button
               variant="contained"
               color="primary"
               type="button"
               // startIcon={< AddIc fontSize="small" />}
-              onClick={() => alert('추가')}
+              // onClick={() => alert('기능 추후 보강')}
             >
-              추가
+              Add exercise
             </Button>
           </div>
         }
       />
-      <Button variant="contained" onClick={handleOnClick}>
-        확인
-      </Button>
+      <MainButton variant="contained" onClick={handleOnClick}>
+        check
+      </MainButton>
     </div>
   );
 }
