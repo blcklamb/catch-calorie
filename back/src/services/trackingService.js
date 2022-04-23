@@ -44,23 +44,8 @@ class trackingService {
         }
     }
 
-    static async getTracking({ id }) {
-        const tracking = await Tracking.findById({ id });
-        if (!tracking) return { errorMessage: "음식를 찾을 수 없습니다." };
-
-        return tracking;
-    }
-
-    static getTrackingAll({ user_id }) {
+    static getTrackingByUser({ user_id }) {
         return Tracking.findAll({ user_id });
-    }
-
-    static async setTracking({ id }, { toUpdate }) {
-        const tracking = await this.getTracking({ _id });
-        if (!tracking) return { errorMessage: "음식를 찾을 수 없습니다." };
-
-        const setTracking = await Tracking.update({ id }, { toUpdate });
-        return setTracking;
     }
 
     static async deleteTracking({ id }) {
@@ -69,10 +54,6 @@ class trackingService {
 
         const deleteTracking = await Tracking.delete({ id });
         return deleteTracking;
-    }
-
-    static addTrackingViews({ id }) {
-        return Tracking.update({ id }, { toUpdate: { $inc: { views: 1 } } }, { new: true });
     }
 }
 

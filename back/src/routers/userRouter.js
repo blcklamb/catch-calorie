@@ -6,7 +6,7 @@ const { is } = pkg;
 
 const userAuthRouter = Router();
 
-userAuthRouter.post("/user/register", async function (req, res, next) {
+userAuthRouter.post("/user/register", async (req, res, next) => {
     try {
         if (is.emptyObject(req.body)) {
             throw new Error("header의 Content-Type을 application/json으로 설정해주세요.");
@@ -34,7 +34,7 @@ userAuthRouter.post("/user/register", async function (req, res, next) {
     }
 });
 
-userAuthRouter.post("/user/login", async function (req, res, next) {
+userAuthRouter.post("/user/login", async (req, res, next) => {
     try {
         const email = req.body.email;
         const password = req.body.password;
@@ -51,7 +51,7 @@ userAuthRouter.post("/user/login", async function (req, res, next) {
     }
 });
 
-userAuthRouter.get("/user/current", login_required, async function (req, res, next) {
+userAuthRouter.get("/user/current", login_required, async (req, res, next) => {
     try {
         const user_id = req.currentUserId;
         const currentUserInfo = await userAuthService.getUserById({ user_id });
@@ -66,7 +66,7 @@ userAuthRouter.get("/user/current", login_required, async function (req, res, ne
     }
 });
 
-userAuthRouter.get("/user/:id", login_required, async function (req, res, next) {
+userAuthRouter.get("/user/:id", login_required, async (req, res, next) => {
     try {
         const { id } = req.params;
         const currentUserInfo = await userAuthService.getUserById({ id });
@@ -81,7 +81,7 @@ userAuthRouter.get("/user/:id", login_required, async function (req, res, next) 
     }
 });
 
-userAuthRouter.get("/userlist", login_required, async function (req, res, next) {
+userAuthRouter.get("/userlist", login_required, async (req, res, next) => {
     try {
         const users = await userAuthService.getUsers();
         return res.status(200).json(users);
