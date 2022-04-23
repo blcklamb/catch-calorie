@@ -8,7 +8,6 @@ class foodService {
     static async getFood({ id }) {
         const food = await Food.findById({ id });
         if (!food) return { errorMessage: "음식를 찾을 수 없습니다." };
-
         return food;
     }
 
