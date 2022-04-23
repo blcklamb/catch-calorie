@@ -5,6 +5,15 @@ class Tracking {
         return TrackingModel.create({ user_id, date });
     }
 
+    static findByRecordId({ id }, { record }) {
+        switch (record) {
+            case "food":
+                return TrackingModel.findOne({ food_record: { $elemMatch: { id } } });
+            case "exer":
+                return TrackingModel.findOne({ exer_record: { $elemMatch: { id } } });
+        }
+    }
+
     static findByUserAndDate({ user_id, date }) {
         return TrackingModel.findOne({ user_id, date });
     }

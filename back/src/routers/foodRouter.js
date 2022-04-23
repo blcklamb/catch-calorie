@@ -41,11 +41,9 @@ foodRouter.post("/api/foods/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
 
-        const food = await foodService.addFoodViews({ id });
-        console.log(food);
-        // user = await UserModel.findOneAndUpdate({ id }, { $push: { likes: user_id } }, { new: true });
+        await foodService.addFoodViews({ id });
 
-        return res.status(200).json({ result: "success", likes: food.views });
+        return res.sendStatus(200);
     } catch (error) {
         next(error);
     }
