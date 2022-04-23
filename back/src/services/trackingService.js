@@ -1,6 +1,6 @@
-import { v4 as uuid } from "uuid";
 import { Tracking, Food, Exercise, User } from "../db";
-import { ExerciseModel } from "../db/schemas/exercise";
+import { v4 as uuid } from "uuid";
+import { ExerciseModel } from "../db/schemas/exercise"; // git merge 이후 삭제되어야 함.
 
 class trackingService {
     static async addFoodTracking({ user_id, date, food, gram }) {

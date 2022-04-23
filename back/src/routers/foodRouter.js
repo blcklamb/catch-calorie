@@ -1,6 +1,5 @@
-import { Router } from "express";
 import rateLimit from "express-rate-limit";
-
+import { Router } from "express";
 import { foodService } from "../services/foodService";
 
 const foodRouter = Router();

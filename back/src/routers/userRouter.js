@@ -1,8 +1,7 @@
+import is from "@sindresorhus/is";
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required.js";
 import { userAuthService } from "../services/userService.js";
-import pkg from "@sindresorhus/is";
-const { is } = pkg;
 
 const userAuthRouter = Router();
 
