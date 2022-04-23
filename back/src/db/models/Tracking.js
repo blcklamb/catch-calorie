@@ -6,7 +6,6 @@ class Tracking {
     }
 
     static findByUserAndDate({ user_id, date }) {
-        // $lt: date
         return TrackingModel.findOne({ user_id, date });
     }
 
