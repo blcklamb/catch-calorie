@@ -1,6 +1,6 @@
 import { Tracking, Food, Exercise, User } from "../db";
 import { v4 as uuid } from "uuid";
-import { ExerciseModel } from "../db/schemas/exercise"; // git merge 이후 삭제되어야 함.
+import { ExerModel } from "../db/schemas/exercise"; // git merge 이후 삭제되어야 함.
 
 class trackingService {
     static async addFoodTracking({ user_id, date, food, gram }) {
@@ -9,7 +9,10 @@ class trackingService {
             .then((cal_per_100g) => cal_per_100g / 100) //kcal_per_g
             .then((cal_per_1g) => cal_per_1g * gram);
 
-        const toUpdate = { $push: { food_record: { id: uuid(), food, gram, calorie } }, $inc: { acc_cal: calorie } };
+        const toUpdate = {
+            $push: { food_record: { id: uuid(), food, gram, calorie } },
+            $inc: { acc_cal: calorie },
+        };
 
         switch (!(await Tracking.findByUserAndDate({ user_id, date }))) {
             case true:
@@ -22,12 +25,15 @@ class trackingService {
     static async addExerTracking({ user_id, date, exer, hour }) {
         const weight = (await User.findById({ user_id }).weight) || 60;
 
-        const calorie = await ExerciseModel.findOne({ name: exer })
+        const calorie = await ExerModel.findOne({ name: exer })
             .then((data) => data.kcal_per_kg) // kcal_per_kg
             .then((kcal_per_1kg) => kcal_per_1kg * weight) // kcal_per_user
             .then((kcal_per_user) => Math.round(kcal_per_user * hour));
 
-        const toUpdate = { $push: { exer_record: { id: uuid(), exer, hour, calorie } }, $inc: { acc_cal: -calorie } };
+        const toUpdate = {
+            $push: { exer_record: { id: uuid(), exer, hour, calorie } },
+            $inc: { acc_cal: -calorie },
+        };
 
         switch (!(await Tracking.findByUserAndDate({ user_id, date }))) {
             case true:
@@ -50,7 +56,10 @@ class trackingService {
         const { user_id, date, food_record } = data;
         const food = food_record.find((food) => food.id === id);
 
-        const toUpdate = { $pull: { food_record: food }, $inc: { acc_cal: -food.calorie } };
+        const toUpdate = {
+            $pull: { food_record: food },
+            $inc: { acc_cal: -food.calorie },
+        };
 
         return Tracking.update({ user_id, date }, { toUpdate });
     }
@@ -60,7 +69,10 @@ class trackingService {
         const { user_id, date, exer_record } = data;
         const exer = exer_record.find((exer) => exer.id === id);
 
-        const toUpdate = { $pull: { exer_record: exer }, $inc: { acc_cal: -exer.calorie } };
+        const toUpdate = {
+            $pull: { exer_record: exer },
+            $inc: { acc_cal: exer.calorie },
+        };
 
         return Tracking.update({ user_id, date }, { toUpdate });
     }
