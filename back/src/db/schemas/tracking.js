@@ -8,10 +8,10 @@ const TrackingSchema = new Schema(
             required: true,
         },
         food_record: {
-            type: Object,
+            type: Array,
         },
         exer_record: {
-            type: Object,
+            type: Array,
         },
         acc_cal: {
             type: Number,

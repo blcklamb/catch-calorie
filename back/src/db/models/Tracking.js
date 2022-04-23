@@ -1,20 +1,21 @@
 import { TrackingModel } from "../schemas/tracking";
 
 class Tracking {
-    static createFoodTracking({ newTracking }) {
-        return TrackingModel.create(newTracking);
+    static createTracking({ user_id }) {
+        return TrackingModel.create({ user_id });
     }
 
-    static findById({ id }) {
-        return TrackingModel.findById(id);
+    static findByUserAndDate({ user_id, date }) {
+        // $lt: date
+        return TrackingModel.findOne({ user_id, createdAt: { $gte: date } });
     }
 
     static findAll({ user_id }) {
-        return TrackingModel.findOne({ _id: user_id }).sort({ createdAt: 1 });
+        return TrackingModel.find({ user_id }).sort({ createdAt: 1 });
     }
 
-    static update({ id }, { toUpdate }) {
-        return TrackingModel.findOneAndUpdate(id, toUpdate, { new: true });
+    static updateTracking({ user_id, date }, { toUpdate }) {
+        return TrackingModel.findOneAndUpdate({ user_id, date }, toUpdate, { new: true });
     }
 
     static delete({ id }) {

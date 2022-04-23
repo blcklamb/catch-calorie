@@ -7,8 +7,21 @@ const trackingRouter = Router();
 trackingRouter.post("/tracking/food", async (req, res, next) => {
     try {
         const { data } = req.body;
+        // const { currentUserId } = req;
 
-        const newTracking = await trackingService.addFoodTracking({ data });
+        const newTracking = await trackingService.addFoodTracking({ user_id: "6260310b4d722e533e70e419", data });
+
+        return res.status(201).json(newTracking);
+    } catch (error) {
+        next(error);
+    }
+});
+
+trackingRouter.post("/tracking/exer", async (req, res, next) => {
+    try {
+        const { data } = req.body;
+
+        const newTracking = await trackingService.addExerTracking({ user_id: "6260310b4d722e533e70e419", data });
 
         if (newTracking.errorMessage) {
             throw new Error(newTracking.errorMessage);
@@ -19,23 +32,6 @@ trackingRouter.post("/tracking/food", async (req, res, next) => {
         next(error);
     }
 });
-
-// trackingRouter.post("/user/login", async function (req, res, next) {
-//     try {
-//         const email = req.body.email;
-//         const password = req.body.password;
-
-//         const user = await trackingService.getUser({ email, password });
-
-//         if (user.errorMessage) {
-//             throw new Error(user.errorMessage);
-//         }
-
-//         return res.status(200).send(user);
-//     } catch (error) {
-//         next(error);
-//     }
-// });
 
 // trackingRouter.get("/user/current", login_required, async function (req, res, next) {
 //     try {
