@@ -7,11 +7,20 @@ const TrackingSchema = new Schema(
             ref: "User",
             required: true,
         },
+        date: {
+            type: String,
+            required: true,
+            immutable: true,
+        },
         food_record: {
-            type: Object,
+            type: Array,
+            required: true,
+            default: [],
         },
         exer_record: {
-            type: Object,
+            type: Array,
+            required: true,
+            default: [],
         },
         acc_cal: {
             type: Number,

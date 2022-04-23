@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 
+
 const ExerSchema = new Schema({
     name: {
         type: String,
@@ -7,16 +8,23 @@ const ExerSchema = new Schema({
         unique: true,
         trim: true,
     },
-    kcal_per_lb: {
-        type: Number,
-        required: true,
-    },
     kcal_per_kg: {
         type: Number,
         required: true,
     },
+    kcal_per_lb: {
+        type: Number,
+        required: true,
+    },
+
+    views: {
+        type: Number,
+        required: true,
+        default: 0,
+    },
 });
 
-const ExerModel = model("Exercise", ExerSchema);
+const ExerciseModel = model("Exercise", ExerSchema);
 
-export { ExerModel };
+export { ExerciseModel };
+
