@@ -5,30 +5,20 @@ class foodService {
         return Food.create({ newFood: { category, name, kcal_per100g } });
     }
 
-    static async getFood({ id }) {
-        const food = await Food.findById({ id });
-        if (!food) return { errorMessage: "음식를 찾을 수 없습니다." };
-        return food;
+    static getFood({ id }) {
+        return Food.findById({ id });
     }
 
     static getFoodAll({ search }) {
         return Food.findAll({ search });
     }
 
-    static async setfood({ id }, { toUpdate }) {
-        const food = await this.getFood({ _id });
-        if (!food) return { errorMessage: "음식를 찾을 수 없습니다." };
-
-        const setfood = await Food.update({ id }, { toUpdate });
-        return setfood;
+    static setfood({ id }, { toUpdate }) {
+        return Food.update({ id }, { toUpdate });
     }
 
-    static async deleteFood({ id }) {
-        const food = await this.getFood({ id });
-        if (!food) return { errorMessage: "음식를 찾을 수 없습니다." };
-
-        const deleteFood = await Food.delete({ id });
-        return deleteFood;
+    static deleteFood({ id }) {
+        return Food.delete({ id });
     }
 
     static addFoodViews({ id }) {

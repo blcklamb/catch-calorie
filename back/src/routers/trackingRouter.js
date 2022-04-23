@@ -1,8 +1,22 @@
 import { Router } from "express";
-import { login_required } from "../middlewares/login_required.js";
-import { trackingService } from "../services/trackingService.js";
+import { login_required } from "../middlewares/login_required";
+import { trackingService } from "../services/trackingService";
 
 const trackingRouter = Router();
+
+trackingRouter.get("/tracking/:user_id", async (req, res, next) => {
+    try {
+        // const { currentUserId } = req;
+        const { user_id } = req.params;
+        const date = new Date().toISOString().split("T")[0];
+
+        const tracking = await trackingService.getTrackingByUserAndDate({ user_id, date });
+
+        return res.status(200).send(tracking);
+    } catch (error) {
+        next(error);
+    }
+});
 
 trackingRouter.post("/tracking/food", async (req, res, next) => {
     try {
@@ -20,6 +34,7 @@ trackingRouter.post("/tracking/food", async (req, res, next) => {
 
 trackingRouter.post("/tracking/exer", async (req, res, next) => {
     try {
+        // const { currentUserId } = req;
         const { exer, hour } = req.body;
         const date = new Date().toISOString().split("T")[0];
 
@@ -47,15 +62,13 @@ trackingRouter.delete("/tracking/food", async (req, res, next) => {
     }
 });
 
-trackingRouter.get("/tracking/:user_id", async (req, res, next) => {
+trackingRouter.delete("/tracking/exer", async (req, res, next) => {
     try {
-        // const { currentUserId } = req;
-        const { user_id } = req.params;
-        const date = new Date().toISOString().split("T")[0];
+        const { id } = req.body;
 
-        const tracking = await trackingService.getTrackingByUserAndDate({ user_id, date });
+        const deletedTracking = await trackingService.deleteExerTracking({ id });
 
-        return res.status(200).send(tracking);
+        return res.status(201).json(deletedTracking);
     } catch (error) {
         next(error);
     }
