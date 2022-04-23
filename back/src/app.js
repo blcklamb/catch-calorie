@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 
-import { userAuthRouter } from "./routers/userRouter.js";
+import { userAuthRouter } from "./routers/userRouter";
 import { foodRouter } from "./routers/foodRouter";
 import { trackingRouter } from "./routers/trackingRouter";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
