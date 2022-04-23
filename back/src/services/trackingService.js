@@ -4,13 +4,15 @@ import { ExerciseModel } from "../db/schemas/exercise";
 class trackingService {
     static async addFoodTracking({ user_id, data }) {
         const { food, gram } = data;
+        const object = {};
+        object[food] = gram;
 
         const calorie = await Food.findByName({ name: food })
             .then((data) => data.kcal_per100g)
             .then((kcal_per_100g) => kcal_per_100g / 100)
             .then((kcal_per_1g) => kcal_per_1g * gram);
 
-        const toUpdate = { $push: { food_record: { food: gram } }, $inc: { acc_cal: calorie } };
+        const toUpdate = { $push: { food_record: object }, $inc: { acc_cal: calorie } };
 
         switch (!(await Tracking.findByUserAndDate({ user_id, date: "2022-04-22T21:51:49.638+00:00" }))) {
             case true:
@@ -23,6 +25,8 @@ class trackingService {
 
     static async addExerTracking({ user_id, data }) {
         const { exer, hour } = data;
+        const object = {};
+        object[exer] = hour;
 
         const calorie = await ExerciseModel.findOne({ name: exer })
             .then((data) => data.kcal_per_kg) // kcal_per_kg
@@ -30,7 +34,7 @@ class trackingService {
             .then((cal_per_1kg) => cal_per_1kg / 10) // cal_per_100g
             .then((cal_per_100g) => cal_per_100g * hour);
 
-        const toUpdate = { $push: { exer_record: { data } }, $inc: { acc_cal: -calorie } };
+        const toUpdate = { $push: { exer_record: object }, $inc: { acc_cal: -calorie } };
 
         switch (!(await Tracking.findByUserAndDate({ user_id, date: "2022-04-22T21:51:49.638+00:00" }))) {
             case true:
