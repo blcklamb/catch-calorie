@@ -56,7 +56,13 @@ class trackingService {
     }
 
     static async deleteExerTracking({ id }) {
-        return Tracking.delete({ id });
+        const data = await Tracking.findByRecordId({ id }, { record: "exer" });
+        const { user_id, date, exer_record } = data;
+        const exer = exer_record.find((exer) => exer.id === id);
+
+        const toUpdate = { $pull: { exer_record: exer }, $inc: { acc_cal: -exer.calorie } };
+
+        return Tracking.updateTracking({ user_id, date }, { toUpdate });
     }
 }
 

@@ -47,6 +47,18 @@ trackingRouter.delete("/tracking/food", async (req, res, next) => {
     }
 });
 
+trackingRouter.delete("/tracking/exer", async (req, res, next) => {
+    try {
+        const { id } = req.body;
+
+        const deletedTracking = await trackingService.deleteExerTracking({ id });
+
+        return res.status(201).json(deletedTracking);
+    } catch (error) {
+        next(error);
+    }
+});
+
 trackingRouter.get("/tracking/:user_id", async (req, res, next) => {
     try {
         // const { currentUserId } = req;
