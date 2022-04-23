@@ -56,11 +56,7 @@ class trackingService {
     }
 
     static async deleteExerTracking({ id }) {
-        const tracking = await this.getTracking({ id });
-        if (!tracking) return { errorMessage: "음식를 찾을 수 없습니다." };
-
-        const deleteTracking = await Tracking.delete({ id });
-        return deleteTracking;
+        return Tracking.delete({ id });
     }
 }
 
