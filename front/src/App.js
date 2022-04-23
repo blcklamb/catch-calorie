@@ -1,8 +1,14 @@
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './components/start/Home';
+
 function App() {
 	return (
-		<div>
-			<h1>'아'</h1>
-		</div>
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<Home />} />
+			</Routes>
+		</BrowserRouter>
 	);
 }
 
