@@ -1,4 +1,4 @@
-import { UserModel } from "../schemas/user.js";
+import { UserModel } from "../schemas/user";
 
 class User {
     static create({ newUser }) {
@@ -11,6 +11,10 @@ class User {
 
     static findById({ user_id }) {
         return UserModel.findOne({ user_id });
+    }
+
+    static findAll() {
+        return UserModel.find({})
     }
 }
 
