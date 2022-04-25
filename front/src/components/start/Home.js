@@ -1,14 +1,19 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
+import Lottie from 'react-lottie';
 
 import Header from '../Header';
 import Footer from '../Footer';
 
-import BarChart from '../DefaultBarChart.js';
-import LineChart from '../DefaultLineChart.js';
+import DefaultLineChart from '../DefaultLineChart.js';
+import { DefaultBarChart } from '../DefaultBarChart.js';
+
+import Walking from '../../lottie/walking.json';
 
 import { useNavigate } from 'react-router-dom';
 import { UserStateContext } from '../../App';
+
+const COLORS = ['#5bc691', '#FFBB28', '#C66868', '#FF8042'];
 
 const FirstPage = styled.section`
   height: 100vh;
@@ -50,27 +55,30 @@ const SecondPage = styled.section`
 `;
 
 const SecondPageLeft = styled.div`
-  background-color: white;
-  border: 1px solid #f0f1f3;
-  border-radius: 8px;
+  /* background-color: white; */
+  /* border: 1px solid #f0f1f3;
+  border-radius: 8px; */
   width: 400px;
   height: 407px;
   box-sizing: border-box;
-  padding: 28px 35px 0;
+  padding: 28px 35px;
 
-  font-size: 2rem;
+  font-size: 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const SecondPageRight = styled.div`
-  border-radius: 8px;
   width: 750px;
   height: 407px;
   box-sizing: border-box;
   padding: 28px 24px 0;
 
-  border-radius: 0px;
+  border-radius: 14px;
   background: #ecf8d9;
-  box-shadow: inset 6px 6px 12px #cdd8bd, inset -6px -6px 12px #fffff5;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   font-size: 2rem;
   border: none;
 `;
@@ -84,6 +92,19 @@ const ThirdPage = styled.section`
   justify-content: space-around;
 `;
 
+const ThirdPageLeft = styled.div`
+  width: 750px;
+  height: 407px;
+  box-sizing: border-box;
+  padding: 28px 24px 0;
+
+  border-radius: 14px;
+  background: #ecf8d9;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  font-size: 2rem;
+  border: none;
+`;
+
 const ThirdPageRight = styled.div`
   background-color: white;
   border: 1px solid #f0f1f3;
@@ -91,22 +112,14 @@ const ThirdPageRight = styled.div`
   width: 400px;
   height: 407px;
   box-sizing: border-box;
-  padding: 28px 35px 0;
+  padding: 28px 35px;
 
-  font-size: 2rem;
-`;
+  font-size: 1.5rem;
 
-const ThirdPageLeft = styled.div`
-  border-radius: 8px;
-  width: 750px;
-  height: 407px;
-  box-sizing: border-box;
-  padding: 28px 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  border-radius: 0px;
-  background: #ecf8d9;
-  box-shadow: inset 6px 6px 12px #cdd8bd, inset -6px -6px 12px #fffff5;
-  font-size: 2rem;
   border: none;
 `;
 
@@ -123,7 +136,13 @@ const FourthPageCopy = styled.div`
   font-size: 4rem;
   color: #f03e3e;
   font-style: bold;
-  padding: 300px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  padding-top: 50px;
 `;
 
 const FourthPageBtn = styled.button`
@@ -144,6 +163,15 @@ const FourthPageBtn = styled.button`
 function Home() {
   const navigate = useNavigate();
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: Walking,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
+
   return (
     <>
       <Header />
@@ -152,20 +180,33 @@ function Home() {
         <FirstPageBtn onClick={() => navigate('/login', { replace: true })}>START</FirstPageBtn>
       </FirstPage>
       <SecondPage>
-        <SecondPageLeft>비만일 수록 칼로리 모니터링을 하지 않는 사람들이 많다.</SecondPageLeft>
+        <SecondPageLeft>
+          The more obese people are, the more people do not monitor calories.
+        </SecondPageLeft>
         <SecondPageRight>
-          <BarChart />
+          <DefaultBarChart
+            data={[
+              { name: 'Underweight', SCC: '250' },
+              { name: 'Normal', SCC: '280' },
+              { name: 'Overweight', SCC: '580' },
+              { name: 'Obesity', SCC: '980' },
+            ]}
+            colors={COLORS}
+          ></DefaultBarChart>
         </SecondPageRight>
       </SecondPage>
       <ThirdPage>
         <ThirdPageLeft>
-          <LineChart />
+          <DefaultLineChart />
         </ThirdPageLeft>
-        <ThirdPageRight>신체활동을 적게 하는 사람일수록 비만도가 높다.</ThirdPageRight>
+        <ThirdPageRight>People who do less physical activity have a high BMI index </ThirdPageRight>
       </ThirdPage>
       <FourthPage>
-        <FourthPageCopy>Catch Calories에서 칼로리 트래킹하세요</FourthPageCopy>
-        <FourthPageBtn onClick={() => navigate('/login', { replace: true })}>START</FourthPageBtn>
+        <FourthPageCopy>
+          Track your calories with Catch Calories
+          <Lottie options={defaultOptions} height={470} width={470} />
+          <FourthPageBtn onClick={() => navigate('/login', { replace: true })}>START</FourthPageBtn>
+        </FourthPageCopy>
       </FourthPage>
       <Footer />
     </>
