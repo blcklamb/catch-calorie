@@ -5,7 +5,7 @@ import { userAuthService } from "../services/userService";
 
 const userAuthRouter = Router();
 
-userAuthRouter.post("/user/register", async (req, res, next) => {
+userAuthRouter.post("/users/register", async (req, res, next) => {
     try {
         // if (is.emptyObject(req.body)) {
         //     throw new Error("header의 Content-Type을 application/json으로 설정해주세요.");
@@ -79,6 +79,24 @@ userAuthRouter.get("/user/:id", login_required, async (req, res, next) => {
     }
 });
 
+// 회원 탈퇴하기 
+userAuthRouter.delete("/users/:id", login_required, async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const deletedUser = await userAuthService.deleteUser({ id });
+  
+      if (deletedUser.errorMessage) {
+        throw new Error(updatedUser.errorMessage);
+      }
+  
+      res.status(200).json(deletedUser);
+    } catch (error) {
+      next(error);
+    }
+  });
+
+
+// 전체 유저 목록 가져오기
 userAuthRouter.get("/userlist", login_required, async (req, res, next) => {
     try {
         const users = await userAuthService.getUsers();
@@ -89,7 +107,6 @@ userAuthRouter.get("/userlist", login_required, async (req, res, next) => {
 });
 
 // jwt 토큰 기능 확인함. 삭제해도 되는 라우터임
-
 userAuthRouter.get("/afterlogin", login_required, function (req, res, next) {
     res.status(200).send(`안녕하세요 ${req.currentUserId}님, jwt 웹 토큰 기능 정상 작동 중입니다.`);
 });
