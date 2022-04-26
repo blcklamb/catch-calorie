@@ -12,6 +12,8 @@ import { alpha, styled } from '@mui/material/styles';
 
 import * as Api from '../../api';
 import { DispatchContext } from '../../App';
+import Header from '../Header';
+import Footer from '../Footer';
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -72,96 +74,101 @@ function LoginForm() {
   };
 
   return (
-    <Container
-      style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 50 }}
-    >
-      <div>
-        <form action="/" onSubmit={handleSubmit}>
-          <Box
-            sx={{
-              '& > :not(style)': { m: 1, width: '34ch' },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <ValidationTextField
-              autoFocus
-              required
-              // {!checkLogin && error}
-              error={!checkLogin}
-              id="outlined-required"
-              label="Email Address"
-              autoComplete="email"
-              helperText={
-                (!isEmailValid && <span>The email format is not valid.</span>) ||
-                (!checkLogin && <span>Invalid email.</span>)
-              }
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setCheckLogin(true);
+    <div>
+      <Header></Header>
+      <Container
+        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 50 }}
+      >
+        <div>
+          <form action="/" onSubmit={handleSubmit} style={{ marginTop: 100, marginBottom: 100 }}>
+            <h1 style={{ margin: 10 }}>Login</h1>
+            <Box
+              sx={{
+                '& > :not(style)': { m: 1, width: '34ch' },
               }}
-              // defaultValue="Hello World"
-            />
-            <br></br>
-            <ValidationTextField
-              required
-              error={!checkLogin}
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-              value={password}
-              helperText={
-                (!isPasswordValid && <span> Password is more than 4 characters. </span>) ||
-                (!checkLogin && <span>Invalid password.</span>)
-              }
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setCheckLogin(true);
-              }}
-            />
-            <Stack spacing={1} direction="row">
-              <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
-                Sign-in
-              </ColorButton>
-              <ColorButton variant="contained" onClick={() => navigate('/register')}>
-                Sign-up
-              </ColorButton>
-              <ColorButtonB variant="outlined" onClick={() => navigate('/')}>
-                Start Page
-              </ColorButtonB>
-            </Stack>
-          </Box>
-        </form>
-        {/* <form onSubmit={handleSubmit}>
-          <div>
-            <label>이메일 주소</label>
-            <input
-              type="email"
-              autoComplete="on"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
-          </div>
-          {!isEmailValid && <p>이메일 형식이 올바르지 않습니다.</p>}
-          <div>
-            <label>비밀번호</label>
-            <input
-              type="password"
-              autoComplete="on"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
-          </div>
-          {!isPasswordValid && <p> 비밀번호는 4글자 이상입니다. </p>}
-          <button type="submit" disabled={!isFormValid}>
-            로그인
-          </button>
-          <button onClick={() => navigate('/register')}>회원가입하기</button>
-        </form> */}
-      </div>
-    </Container>
+              noValidate
+              autoComplete="off"
+            >
+              <ValidationTextField
+                autoFocus
+                required
+                // {!checkLogin && error}
+                error={!checkLogin}
+                id="outlined-required"
+                label="Email Address"
+                autoComplete="email"
+                helperText={
+                  (!isEmailValid && <span>The email format is not valid.</span>) ||
+                  (!checkLogin && <span>Invalid email.</span>)
+                }
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setCheckLogin(true);
+                }}
+                // defaultValue="Hello World"
+              />
+              <br></br>
+              <ValidationTextField
+                required
+                error={!checkLogin}
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+                value={password}
+                helperText={
+                  (!isPasswordValid && <span> Password is more than 4 characters. </span>) ||
+                  (!checkLogin && <span>Invalid password.</span>)
+                }
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setCheckLogin(true);
+                }}
+              />
+              <Stack spacing={1} direction="row">
+                <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
+                  Sign-in
+                </ColorButton>
+                <ColorButton variant="contained" onClick={() => navigate('/register')}>
+                  Sign-up
+                </ColorButton>
+                <ColorButtonB variant="outlined" onClick={() => navigate('/')}>
+                  Start Page
+                </ColorButtonB>
+              </Stack>
+            </Box>
+          </form>
+          {/* <form onSubmit={handleSubmit}>
+            <div>
+              <label>이메일 주소</label>
+              <input
+                type="email"
+                autoComplete="on"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+            </div>
+            {!isEmailValid && <p>이메일 형식이 올바르지 않습니다.</p>}
+            <div>
+              <label>비밀번호</label>
+              <input
+                type="password"
+                autoComplete="on"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </div>
+            {!isPasswordValid && <p> 비밀번호는 4글자 이상입니다. </p>}
+            <button type="submit" disabled={!isFormValid}>
+              로그인
+            </button>
+            <button onClick={() => navigate('/register')}>회원가입하기</button>
+          </form> */}
+        </div>
+      </Container>
+      <Footer></Footer>
+    </div>
 
     // <Container>
     //   <Row className="justify-content-md-center mt-5">
