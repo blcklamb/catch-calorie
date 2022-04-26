@@ -11,7 +11,8 @@ function MainGraph({
   exerciseSelected,
   setExerciseSelected,
   totalExercise,
-  setTotalExercise,
+  gram,
+  setGram,
 }) {
   const labels = ["Today's calories"];
 
@@ -52,6 +53,8 @@ function MainGraph({
 
   const totalKcal = totalFood - totalExercise;
 
+  const previewKcal = (Number(gram) / 100) * foodSelected[0]?.kcal_per100g
+
   const maxKcal = () => {
     // console.log(exerciseSelected);
     // console.log(totalExercise);
@@ -62,7 +65,7 @@ function MainGraph({
     if (totalFood - totalExercise < 0) {
       return [3000];
     }
-    return [3000 - totalKcal - foodSelected.reduce((acc, cur) => acc + cur?.kcal_per100g, 0)];
+    return [3000 - totalKcal - foodSelected.reduce((acc, cur) => acc + (Number(gram) / 100) * cur?.kcal_per100g, 0)];
   };
 
   const data = {
@@ -109,7 +112,7 @@ function MainGraph({
         backgroundColor: backgroundColor[idx],
         borderColor: borderColor[idx],
         borderWidth: 1,
-        data: [food?.kcal_per100g],
+        data: [previewKcal],
       };
 
       data.datasets.splice(1, 0, newDataset);
