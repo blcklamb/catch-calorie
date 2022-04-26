@@ -1,6 +1,7 @@
 import rateLimit from "express-rate-limit";
 import { Router } from "express";
 import { exerService } from "../services/exerService";
+import { login_required } from "../middlewares/login_required";
 
 const exerRouter = Router();
 
@@ -33,7 +34,7 @@ exerRouter.post("/api/exer/:id", async (req, res, next) => {
 });
 
 // 운동 새로 등록할 때
-exerRouter.post("/exercise/register", async (req, res, next) => {
+exerRouter.post("/exercise/register", login_required, async (req, res, next) => {
     try {
         const { name, weight, unit } = req.body;
 
