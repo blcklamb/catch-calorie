@@ -18,12 +18,10 @@ class trackingService {
             $inc: { acc_cal: calorie },
         };
 
-        switch (!(await Tracking.findByUserAndDate({ user_id, date }))) {
-            case true:
-                await Tracking.create({ user_id, date });
-            default:
-                return Tracking.update({ user_id, date }, { toUpdate });
-        }
+        const isTrackingExist = await Tracking.findByUserAndDate({ user_id, date });
+        if (!isTrackingExist) await Tracking.create({ user_id, date });
+
+        return Tracking.update({ user_id, date }, { toUpdate });
     }
 
     static async addExerTracking({ user_id, date, exer, hour }) {
@@ -39,12 +37,10 @@ class trackingService {
             $inc: { acc_cal: -calorie },
         };
 
-        switch (!(await Tracking.findByUserAndDate({ user_id, date }))) {
-            case true:
-                await Tracking.create({ user_id, date });
-            default:
-                return Tracking.update({ user_id, date }, { toUpdate });
-        }
+        const isTrackingExist = await Tracking.findByUserAndDate({ user_id, date });
+        if (!isTrackingExist) await Tracking.create({ user_id, date });
+
+        return Tracking.update({ user_id, date }, { toUpdate });
     }
 
     static getTrackingByUserAndDate({ user_id, date }) {
