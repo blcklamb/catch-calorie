@@ -19,11 +19,12 @@ const Main = () => {
   const [totalFood, setTotalFood] = useState(0);
   const [exerciseSelected, setExerciseSelected] = useState([]);
   const [totalExercise, setTotalExercise] = useState(0);
+  const [gram, setGram] = useState([]);
 
   const [user, setUser] = useState('');
 
-  const [test, setTest] = useState('')
-  const [testUser, setTestUser] = useState('')
+  const [test, setTest] = useState('');
+  const [testUser, setTestUser] = useState('');
 
   const navigate = useNavigate();
   const dispatch = useContext(DispatchContext);
@@ -34,7 +35,7 @@ const Main = () => {
     Api.get(`userlist`).then((res) => setTestUser(res.data));
   }, []);
 
-  console.log(test)
+  console.log(test);
 
   const logout = () => {
     // sessionStorage 에 저장했던 JWT 토큰을 삭제함.
@@ -55,8 +56,11 @@ const Main = () => {
       <Header />
       <div style={{ margin: '100px 80px' }}>
         <MainHello>Hello {user.name}!</MainHello>
+        {console.log(test)}
 
-        <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
+        {/* display: 'inline-flex', */}
+        {/* <div style={{ margin: '80px 0px' }}>  */}
+        <div style={{ display: 'inline-flex', margin: '80px 0px' }}> 
           <MainTabs
             foodSelected={foodSelected}
             setFoodSelected={setFoodSelected}
@@ -66,6 +70,8 @@ const Main = () => {
             setExerciseSelected={setExerciseSelected}
             totalExercise={totalExercise}
             setTotalExercise={setTotalExercise}
+            gram={gram}
+            setGram={setGram}
           />
           <MainGraph
             foodSelected={foodSelected}
@@ -76,22 +82,13 @@ const Main = () => {
             setExerciseSelected={setExerciseSelected}
             totalExercise={totalExercise}
             setTotalExercise={setTotalExercise}
+            gram={gram}
+            setGram={setGram}
           />
         </div>
-        <TrackingList />
-        {/* <div>
-          <MainButton variant="contained" style={{ marginBottom: '20px', width: '60%' }}>
-            Modifying and deleting
-          </MainButton>
-          <br />
-          <MainButton variant="contained" style={{ marginBottom: '20px', width: '60%' }}>
-            View Details
-          </MainButton>
-          <br />
-          <MainButton variant="contained" style={{ width: '60%' }} onClick={logout}>
-            Log-out
-          </MainButton>
-        </div> */}
+        <div>
+          <TrackingList />
+        </div>
       </div>
       <Footer />
     </>
