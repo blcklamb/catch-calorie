@@ -7,7 +7,7 @@ import * as Api from '../api';
 // import User from './user/User';
 import Main from './main/Main';
 import { useRecoilState } from 'recoil';
-import { userState } from '../atoms';
+import { tokenState, userState } from '../atoms';
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -18,6 +18,7 @@ function Portfolio() {
   // 아래 코드를 보면, isFetchCompleted가 false이면 "loading..."만 반환되어서, 화면에 이 로딩 문구만 뜨게 됨.
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
   // const userState = useContext(UserStateContext);
+  const [token, setToken] = useRecoilState(tokenState);
   const [user, setUser] = useRecoilState(userState);
 
   const fetchPorfolioOwner = async (ownerId) => {
@@ -34,6 +35,7 @@ function Portfolio() {
 
   useEffect(() => {
     // 전역 상태의 user가 null이라면 로그인이 안 된 상태이므로, 로그인 페이지로 돌림.
+    console.log(token);
     console.log(user);
     // if (!userState.user) {
     //   navigate('/login', { replace: true });
@@ -49,7 +51,7 @@ function Portfolio() {
       const ownerId = params.userId;
       // 해당 유저 id로 fetchPorfolioOwner 함수를 실행함.
       fetchPorfolioOwner(ownerId);
-    } else if (user) {
+    } else if (token) {
       // 이외의 경우, 즉 URL이 "/" 라면, 전역 상태의 user.id를 유저 id로 설정함.
       let ownerId = '';
       if (user.id) {

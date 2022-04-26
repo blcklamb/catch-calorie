@@ -12,7 +12,7 @@ import Home from './components/start/Home';
 import RegisterForm from './components/user/RegisterForm';
 import Portfolio from './components/Portfolio';
 import { useRecoilState } from 'recoil';
-import { userState } from './atoms';
+import { tokenState, userState } from './atoms';
 
 // export const UserStateContext = createContext(null);
 // export const DispatchContext = createContext(null);
@@ -24,8 +24,8 @@ function App() {
   // });
 
   // 리코일 적용
+  // const [token, setToken] = useRecoilState(tokenState);
   const [user, setUser] = useRecoilState(userState);
-  console.log(user);
 
   // 아래의 fetchCurrentUser 함수가 실행된 다음에 컴포넌트가 구현되도록 함.
   // 아래 코드를 보면 isFetchCompleted 가 true여야 컴포넌트가 구현됨.

@@ -16,11 +16,12 @@ import Header from '../Header';
 import Footer from '../Footer';
 
 import { useRecoilState } from 'recoil';
-import { userState } from '../../atoms';
+import { tokenState, userState } from '../../atoms';
 
 function LoginForm() {
   const navigate = useNavigate();
   // const dispatch = useContext(DispatchContext);
+  const [token, setToken] = useRecoilState(tokenState);
   const [user, setUser] = useRecoilState(userState);
 
   //useState로 email 상태를 생성함.
@@ -69,6 +70,7 @@ function LoginForm() {
       //   payload: user,
       // });
       console.log(user);
+      setToken(user.token);
       setUser(user);
 
       // 기본 페이지로 이동함.

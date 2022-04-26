@@ -12,9 +12,10 @@ import { DispatchContext } from '../../App';
 
 import * as Api from '../../api';
 import { useRecoilState } from 'recoil';
-import { userState } from '../../atoms';
+import { tokenState, userState } from '../../atoms';
 
 const Main = () => {
+  const [token, setToken] = useRecoilState(tokenState);
   const [recoilUser, setRecoilUser] = useRecoilState(userState);
 
   const [foodSelected, setFoodSelected] = useState([]);
@@ -44,6 +45,7 @@ const Main = () => {
     // dispatch 함수를 이용해 로그아웃함.
     // dispatch({ type: 'LOGOUT' });
     setRecoilUser(null);
+
     // 기본 페이지로 돌아감.
     navigate('/login');
   };
@@ -57,7 +59,7 @@ const Main = () => {
     <>
       <Header />
       <div style={{ margin: '100px 80px' }}>
-        <MainHello>Hello {user.name}!</MainHello>
+        {/* <MainHello>Hello {user.name}!</MainHello> */}
 
         <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
           <MainTabs
