@@ -11,13 +11,17 @@ import Container from '@mui/material/Container';
 import { alpha, styled } from '@mui/material/styles';
 
 import * as Api from '../../api';
-import { DispatchContext } from '../../App';
+// import { DispatchContext } from '../../App';
 import Header from '../Header';
 import Footer from '../Footer';
 
+import { useRecoilState } from 'recoil';
+import { userState } from '../../atoms';
+
 function LoginForm() {
   const navigate = useNavigate();
-  const dispatch = useContext(DispatchContext);
+  // const dispatch = useContext(DispatchContext);
+  const [user, setUser] = useRecoilState(userState);
 
   //useState로 email 상태를 생성함.
   const [email, setEmail] = useState('');
@@ -60,10 +64,12 @@ function LoginForm() {
       sessionStorage.setItem('userToken', jwtToken);
       // dispatch 함수를 이용해 로그인 성공 상태로 만듦.
       // console.log(user);
-      dispatch({
-        type: 'LOGIN_SUCCESS',
-        payload: user,
-      });
+      // dispatch({
+      //   type: 'LOGIN_SUCCESS',
+      //   payload: user,
+      // });
+      console.log(user);
+      setUser(user);
 
       // 기본 페이지로 이동함.
       navigate('/target', { replace: true });

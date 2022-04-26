@@ -11,8 +11,12 @@ import MainButton from './style/MainButton';
 import { DispatchContext } from '../../App';
 
 import * as Api from '../../api';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../atoms';
 
 const Main = () => {
+  const [recoilUser, setRecoilUser] = useRecoilState(userState);
+
   const [foodSelected, setFoodSelected] = useState([]);
   const [totalFood, setTotalFood] = useState(0);
   const [exerciseSelected, setExerciseSelected] = useState([]);
@@ -20,11 +24,11 @@ const Main = () => {
 
   const [user, setUser] = useState('');
 
-  const [test, setTest] = useState('')
-  const [testUser, setTestUser] = useState('')
+  const [test, setTest] = useState('');
+  const [testUser, setTestUser] = useState('');
 
   const navigate = useNavigate();
-  const dispatch = useContext(DispatchContext);
+  // const dispatch = useContext(DispatchContext);
 
   useEffect(() => {
     Api.get(`user/login`).then((res) => setTest(res.data));
@@ -32,13 +36,14 @@ const Main = () => {
     Api.get(`userlist`).then((res) => setTestUser(res.data));
   }, []);
 
-  console.log(test)
+  console.log(test);
 
   const logout = () => {
     // sessionStorage 에 저장했던 JWT 토큰을 삭제함.
     sessionStorage.removeItem('userToken');
     // dispatch 함수를 이용해 로그아웃함.
-    dispatch({ type: 'LOGOUT' });
+    // dispatch({ type: 'LOGOUT' });
+    setRecoilUser(null);
     // 기본 페이지로 돌아감.
     navigate('/login');
   };

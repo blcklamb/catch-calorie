@@ -11,16 +11,21 @@ import Home from './components/start/Home';
 // import Network from './components/user/Network';
 import RegisterForm from './components/user/RegisterForm';
 import Portfolio from './components/Portfolio';
-import TempStart from './components/user/TempStart';
+import { useRecoilState } from 'recoil';
+import { userState } from './atoms';
 
-export const UserStateContext = createContext(null);
-export const DispatchContext = createContext(null);
+// export const UserStateContext = createContext(null);
+// export const DispatchContext = createContext(null);
 
 function App() {
   // useReducer 훅을 통해 userState 상태와 dispatch함수를 생성함.
-  const [userState, dispatch] = useReducer(loginReducer, {
-    user: null,
-  });
+  // const [userState, dispatch] = useReducer(loginReducer, {
+  //   user: null,
+  // });
+
+  // 리코일 적용
+  const [user, setUser] = useRecoilState(userState);
+  console.log(user);
 
   // 아래의 fetchCurrentUser 함수가 실행된 다음에 컴포넌트가 구현되도록 함.
   // 아래 코드를 보면 isFetchCompleted 가 true여야 컴포넌트가 구현됨.
@@ -33,10 +38,11 @@ function App() {
       const currentUser = res.data;
       console.log(currentUser);
       // dispatch 함수를 통해 로그인 성공 상태로 만듦.
-      dispatch({
-        type: 'LOGIN_SUCCESS',
-        payload: currentUser,
-      });
+      // dispatch({
+      //   type: 'LOGIN_SUCCESS',
+      //   payload: currentUser,
+      // });
+      setUser(currentUser);
 
       console.log('%c sessionStorage에 토큰 있음.', 'color: #d93d1a;');
     } catch {
@@ -56,21 +62,21 @@ function App() {
   }
 
   return (
-    <DispatchContext.Provider value={dispatch}>
-      <UserStateContext.Provider value={userState}>
-        <Router>
-          {/* <Header /> */}
-          <Routes>
-            <Route path="/" exact element={<Home />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/register" element={<RegisterForm />} />
-            <Route path="/target" element={<Portfolio />} />
-            {/* <Route path="/network" element={<Network />} /> */}
-            <Route path="*" element={<Portfolio />} />
-          </Routes>
-        </Router>
-      </UserStateContext.Provider>
-    </DispatchContext.Provider>
+    // <DispatchContext.Provider value={dispatch}>
+    // <UserStateContext.Provider value={userState}>
+    <Router>
+      {/* <Header /> */}
+      <Routes>
+        <Route path="/" exact element={<Home />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/target" element={<Portfolio />} />
+        {/* <Route path="/network" element={<Network />} /> */}
+        <Route path="*" element={<Portfolio />} />
+      </Routes>
+    </Router>
+    // </UserStateContext.Provider>
+    // </DispatchContext.Provider>
   );
 }
 

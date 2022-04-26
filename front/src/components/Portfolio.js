@@ -5,8 +5,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { UserStateContext } from '../App';
 import * as Api from '../api';
 // import User from './user/User';
-import TempMain from './user/TempMain';
 import Main from './main/Main';
+import { useRecoilState } from 'recoil';
+import { userState } from '../atoms';
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -16,7 +17,8 @@ function Portfolio() {
   // fetchPorfolioOwner 함수가 완료된 이후에만 (isFetchCompleted가 true여야) 컴포넌트가 구현되도록 함.
   // 아래 코드를 보면, isFetchCompleted가 false이면 "loading..."만 반환되어서, 화면에 이 로딩 문구만 뜨게 됨.
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
-  const userState = useContext(UserStateContext);
+  // const userState = useContext(UserStateContext);
+  const [user, setUser] = useRecoilState(userState);
 
   const fetchPorfolioOwner = async (ownerId) => {
     // 유저 id를 가지고 "/users/유저id" 엔드포인트로 요청해 사용자 정보를 불러옴.
@@ -32,29 +34,35 @@ function Portfolio() {
 
   useEffect(() => {
     // 전역 상태의 user가 null이라면 로그인이 안 된 상태이므로, 로그인 페이지로 돌림.
-    if (!userState.user) {
-      navigate('/login', { replace: true });
-      return;
-    }
+    console.log(user);
+    // if (!userState.user) {
+    //   navigate('/login', { replace: true });
+    //   return;
+    // }
+    // console.log(user);
+    // if (!user.token) {
+    //   navigate('/login', { replace: true });
+    // }
 
     if (params.userId) {
       // 만약 현재 URL이 "/users/:userId" 라면, 이 userId를 유저 id로 설정함.
       const ownerId = params.userId;
       // 해당 유저 id로 fetchPorfolioOwner 함수를 실행함.
       fetchPorfolioOwner(ownerId);
-    } else {
+    } else if (user) {
       // 이외의 경우, 즉 URL이 "/" 라면, 전역 상태의 user.id를 유저 id로 설정함.
-      console.log(userState);
       let ownerId = '';
-      if (userState.user.id) {
-        ownerId = userState.user.id;
+      if (user.id) {
+        ownerId = user.id;
       } else {
-        ownerId = userState.user._id;
+        ownerId = user._id;
       }
       // 해당 유저 id로 fetchPorfolioOwner 함수를 실행함.
       fetchPorfolioOwner(ownerId);
+    } else {
+      navigate('/login', { replace: true });
     }
-  }, [params, userState, navigate]);
+  }, [params, user, navigate]);
 
   if (!isFetchCompleted) {
     return 'ddloading...';
@@ -65,7 +73,7 @@ function Portfolio() {
       {/* <h1>메인 페이지</h1> */}
       <Main
         portfolioOwnerId={portfolioOwner._id}
-        isEditable={portfolioOwner._id === userState.user?._id}
+        isEditable={portfolioOwner._id === user.user?._id}
       ></Main>
     </>
     // <Container fluid>
