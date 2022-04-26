@@ -7,6 +7,8 @@ import Footer from '../Footer';
 
 import MainTabs from './MainTabs';
 import MainGraph from './MainGraph';
+import TrackingList from '../TrackingList';
+
 import MainButton from './style/MainButton';
 import { DispatchContext } from '../../App';
 
@@ -76,7 +78,8 @@ const Main = () => {
             setTotalExercise={setTotalExercise}
           />
         </div>
-        <div>
+        <TrackingList />
+        {/* <div>
           <MainButton variant="contained" style={{ marginBottom: '20px', width: '60%' }}>
             Modifying and deleting
           </MainButton>
@@ -88,7 +91,7 @@ const Main = () => {
           <MainButton variant="contained" style={{ width: '60%' }} onClick={logout}>
             Log-out
           </MainButton>
-        </div>
+        </div> */}
       </div>
       <Footer />
     </>
