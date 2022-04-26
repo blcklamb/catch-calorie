@@ -1,7 +1,7 @@
 import { Exercise } from "../db";
 
 
-class ExerService {
+class exerService {
     static addExer({ name, kcal_per_lb, kcal_per_kg }) {
         return Exercise.create({ newExercise: { name, kcal_per_lb, kcal_per_kg }});
     }
@@ -29,4 +29,4 @@ class ExerService {
     }
 }
 
-export { ExerService };
+export { exerService };
