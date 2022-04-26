@@ -12,13 +12,13 @@ class trackingService {
     }
 
     static async addFoodTracking({ user_id, date, name, gram }) {
-        const calorie = await Food.findByName({ name: food })
+        const calorie = await Food.findByName({ name })
             .then((data) => data.kcal_per100g) //kcal_per_100g
             .then((cal_per_100g) => cal_per_100g / 100) //kcal_per_g
             .then((cal_per_1g) => cal_per_1g * gram);
 
         const toUpdate = {
-            $push: { food_record: { id: uuid(), food, name, calorie } },
+            $push: { food_record: { id: uuid(), name, gram, calorie } },
             $inc: { acc_cal: calorie },
         };
 
@@ -51,6 +51,26 @@ class trackingService {
 
     static getTrackingByUser({ user_id }) {
         return Tracking.findAll({ user_id });
+    }
+
+    static async setFoodTracking({ id }, { gram }) {
+        const data = await Tracking.findByRecordId({ id }, { record: "food" });
+        const { user_id, date, food_record } = data;
+        const { name } = food_record.find((food) => food.id === id);
+
+        await this.deleteFoodTracking({ id });
+
+        return this.addFoodTracking({ user_id, date, name, gram });
+    }
+
+    static async setExerTracking({ id }, { minute }) {
+        const data = await Tracking.findByRecordId({ id }, { record: "exer" });
+        const { user_id, date, exer_record } = data;
+        const { name } = exer_record.find((exer) => exer.id === id);
+
+        await this.deleteExerTracking({ id });
+
+        return this.addExerTracking({ user_id, date, name, minute });
     }
 
     static async deleteFoodTracking({ id }) {
