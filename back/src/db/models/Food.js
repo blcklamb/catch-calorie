@@ -9,10 +9,8 @@ class Food {
         return FoodModel.findOne({ name });
     }
 
-    static findAll({ search }) {
-        return FoodModel.find({ name: { $regex: new RegExp(`^${search}`, "i") } })
-            .sort({ views: -1 })
-            .limit(10);
+    static findAll() {
+        return FoodModel.find().sort({ views: -1 });
     }
 
     static update({ id }, { toUpdate }) {

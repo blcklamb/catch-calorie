@@ -3,6 +3,10 @@ import { v4 as uuid } from "uuid";
 import { ExerModel } from "../db/schemas/exercise"; // git merge 이후 삭제되어야 함.
 
 class trackingService {
+    static addTracking({ user_id, date }) {
+        return Tracking.create({ user_id, date });
+    }
+
     static async addFoodTracking({ user_id, date, food, gram }) {
         const calorie = await Food.findByName({ name: food })
             .then((data) => data.kcal_per100g) //kcal_per_100g
@@ -14,12 +18,10 @@ class trackingService {
             $inc: { acc_cal: calorie },
         };
 
-        switch (!(await Tracking.findByUserAndDate({ user_id, date }))) {
-            case true:
-                await Tracking.create({ user_id, date });
-            default:
-                return Tracking.update({ user_id, date }, { toUpdate });
-        }
+        const isTrackingExist = await Tracking.findByUserAndDate({ user_id, date });
+        if (!isTrackingExist) await Tracking.create({ user_id, date });
+
+        return Tracking.update({ user_id, date }, { toUpdate });
     }
 
     static async addExerTracking({ user_id, date, exer, hour }) {
@@ -35,12 +37,10 @@ class trackingService {
             $inc: { acc_cal: -calorie },
         };
 
-        switch (!(await Tracking.findByUserAndDate({ user_id, date }))) {
-            case true:
-                await Tracking.create({ user_id, date });
-            default:
-                return Tracking.update({ user_id, date }, { toUpdate });
-        }
+        const isTrackingExist = await Tracking.findByUserAndDate({ user_id, date });
+        if (!isTrackingExist) await Tracking.create({ user_id, date });
+
+        return Tracking.update({ user_id, date }, { toUpdate });
     }
 
     static getTrackingByUserAndDate({ user_id, date }) {

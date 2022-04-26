@@ -5,12 +5,12 @@ class foodService {
         return Food.create({ newFood: { category, name, kcal_per100g } });
     }
 
-    static getFood({ id }) {
-        return Food.findById({ id });
+    static getFoodByName({ name }) {
+        return Food.findByName({ name });
     }
 
-    static getFoodAll({ search }) {
-        return Food.findAll({ search });
+    static getFoodAll() {
+        return Food.findAll();
     }
 
     static setfood({ id }, { toUpdate }) {
