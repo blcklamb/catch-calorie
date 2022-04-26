@@ -3,6 +3,10 @@ import { v4 as uuid } from "uuid";
 import { ExerModel } from "../db/schemas/exercise"; // git merge 이후 삭제되어야 함.
 
 class trackingService {
+    static addTracking({ user_id, date }) {
+        return Tracking.create({ user_id, date });
+    }
+
     static async addFoodTracking({ user_id, date, food, gram }) {
         const calorie = await Food.findByName({ name: food })
             .then((data) => data.kcal_per100g) //kcal_per_100g
