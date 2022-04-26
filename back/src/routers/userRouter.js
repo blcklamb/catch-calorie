@@ -5,7 +5,7 @@ import { userAuthService } from "../services/userService";
 
 const userAuthRouter = Router();
 
-userAuthRouter.post("/user/register", async (req, res, next) => {
+userAuthRouter.post("/users/register", async (req, res, next) => {
     try {
         // if (is.emptyObject(req.body)) {
         //     throw new Error("header의 Content-Type을 application/json으로 설정해주세요.");
@@ -33,7 +33,7 @@ userAuthRouter.post("/user/register", async (req, res, next) => {
     }
 });
 
-userAuthRouter.post("/user/login", async (req, res, next) => {
+userAuthRouter.post("/users/login", async (req, res, next) => {
     try {
         const email = req.body.email;
         const password = req.body.password;
@@ -44,28 +44,13 @@ userAuthRouter.post("/user/login", async (req, res, next) => {
             throw new Error(user.errorMessage);
         }
 
-        return res.status(200).send(user);
+        return res.status(201).send(user);
     } catch (error) {
         next(error);
     }
 });
 
-userAuthRouter.get("/user/current", login_required, async (req, res, next) => {
-    try {
-        const user_id = req.currentUserId;
-        const currentUserInfo = await userAuthService.getUserById({ user_id });
-
-        if (currentUserInfo.errorMessage) {
-            throw new Error(currentUserInfo.errorMessage);
-        }
-
-        return res.status(200).send(currentUserInfo);
-    } catch (error) {
-        next(error);
-    }
-});
-
-userAuthRouter.get("/user/:id", login_required, async (req, res, next) => {
+userAuthRouter.get("/users/:id", login_required, async (req, res, next) => {
     try {
         const { id } = req.params;
         const currentUserInfo = await userAuthService.getUserById({ id });
@@ -79,7 +64,7 @@ userAuthRouter.get("/user/:id", login_required, async (req, res, next) => {
     }
 });
 
-userAuthRouter.get("/userlist", login_required, async (req, res, next) => {
+userAuthRouter.get("/users", login_required, async (req, res, next) => {
     try {
         const users = await userAuthService.getUsers();
         return res.status(200).json(users);
