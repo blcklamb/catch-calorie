@@ -12,11 +12,7 @@ import MainFoodForm from './MainFoodForm';
 
 import * as Api from '../../api';
 
-function MainFoodTab({ foodSelected, setFoodSelected, totalFood, setTotalFood }) {
-  const [value, setValue] = React.useState();
-  // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
-  const [inputValue, setInputValue] = React.useState([]);
-
+function MainFoodTab({ foodSelected, setFoodSelected, totalFood, setTotalFood, gram, setGram }) {
   const [foodApiList, setFoodApiList] = useState('');
   const [foodFormList, setFoodFormList] = useState([0]);
 
@@ -24,7 +20,7 @@ function MainFoodTab({ foodSelected, setFoodSelected, totalFood, setTotalFood })
     Api.get(`foods`).then((res) => setFoodApiList(res.data));
   }, []);
 
-  const onAddFoodForm = () => {
+  const handleAddFoodForm = () => {
     let countArr = [...foodFormList];
     let counter = countArr.slice(-1)[0];
     counter += 1;
@@ -33,7 +29,7 @@ function MainFoodTab({ foodSelected, setFoodSelected, totalFood, setTotalFood })
     setFoodFormList(countArr);
   };
 
-  const handleOnClickCheck = () => {
+  const handleCheck = () => {
     setTotalFood(foodSelected.reduce((acc, cur) => acc + cur.kcal_per100g, totalFood));
     setFoodSelected([]);
 
@@ -44,21 +40,26 @@ function MainFoodTab({ foodSelected, setFoodSelected, totalFood, setTotalFood })
 
   return (
     <div>
+      {console.log(foodFormList)}
+      {console.log(foodSelected)}
       {foodFormList &&
         foodFormList.map((item, i) => (
           <MainFoodForm
             key={i}
+            idx={i}
             foodSelected={foodSelected}
             setFoodSelected={setFoodSelected}
             totalFood={totalFood}
             setTotalFood={setTotalFood}
             foodFormList={foodFormList}
+            gram={gram}
+            setGram={setGram}
           />
         ))}
-      <MainButton variant="contained" onClick={onAddFoodForm}>
+      <MainButton variant="contained" onClick={handleAddFoodForm}>
         +
       </MainButton>
-      <MainButton variant="contained" onClick={handleOnClickCheck}>
+      <MainButton variant="contained" onClick={handleCheck}>
         check
       </MainButton>
     </div>
