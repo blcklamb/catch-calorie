@@ -12,7 +12,16 @@ import MainInput from './style/MainInput';
 
 import * as Api from '../../api';
 
-function MainFoodForm({ foodSelected, setFoodSelected, totalFood, setTotalFood, foodFormList }) {
+function MainFoodForm({
+  idx,
+  foodSelected,
+  setFoodSelected,
+  totalFood,
+  setTotalFood,
+  foodFormList,
+  gram,
+  setGram,
+}) {
   const [value, setValue] = React.useState();
   // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
   const [inputValue, setInputValue] = React.useState([]);
@@ -23,45 +32,27 @@ function MainFoodForm({ foodSelected, setFoodSelected, totalFood, setTotalFood, 
     Api.get(`foods`).then((res) => setFoodApiList(res.data));
   }, []);
 
-  const handleOnClickAdd = () => {
-    alert('dsdfsdf');
-  };
-
-  const handleOnClickCheck = () => {
-    setTotalFood(foodSelected.reduce((acc, cur) => acc + cur.kcal_per100g, totalFood));
-    setFoodSelected([]);
-
-    console.log(foodSelected[0]?._id);
-    // Api.post(`tracking/food/${foodSelected[0]?._id}`) // .then((res) => setFoodApiList(res.data));
-    Api.post(`tracking/food`, foodSelected[0]?._id); // .then((res) => setFoodApiList(res.data));
+  const onChange = (e) => {
+    setGram([...gram.slice(0, idx), e.target.value, ...gram.slice(idx + 1)]);
   };
 
   return (
-    <div>
+    <>
       <div style={{ display: 'flex' }}>
         <Autocomplete
           // multiple
-          // disablePortal
-          // disableCloseOnSelect
           id="controllable-states-demo"
           // value={foodSelected[0]?.label}
           value={value}
           options={foodApiList}
           sx={{ width: 300 }}
           renderInput={(params) => (
-            <MainInput
-              {...params}
-              // variant="standard"
-              label="Food(kcal/100g)"
-              placeholder="Please select food"
-            />
+            <MainInput {...params} label="Food(kcal/100g)" placeholder="Please select food" />
           )}
           //
           getOptionLabel={(option) => option.name || ''} // , option.kcal_per100g
           onChange={(event, newValue) => {
-            // setFoodSelected([...foodSelected, newValue]);
-            setFoodSelected([newValue]);
-            // setValue(newValue);
+            setFoodSelected([...foodSelected, newValue]);
           }}
           inputValue={inputValue}
           onInputChange={(event, newInputValue) => {
@@ -74,7 +65,6 @@ function MainFoodForm({ foodSelected, setFoodSelected, totalFood, setTotalFood, 
                 variant="contained"
                 color="primary"
                 type="button"
-                // startIcon={< AddIc fontSize="small" />}
                 // onClick={() => alert('기능 추후 보강')}
               >
                 Add food
@@ -82,7 +72,7 @@ function MainFoodForm({ foodSelected, setFoodSelected, totalFood, setTotalFood, 
             </div>
           }
         />
-        <Box
+        <div
           component="form"
           sx={{
             '& > :not(style)': { m: 1, width: '25ch' },
@@ -90,10 +80,20 @@ function MainFoodForm({ foodSelected, setFoodSelected, totalFood, setTotalFood, 
           noValidate
           autoComplete="off"
         >
-          <MainInput id="outlined-basic" label="g" variant="outlined" disabled value={100} />
-        </Box>
+          <MainInput id="outlined-basic" label="g" variant="outlined" onChange={onChange} />
+        </div>
+        <div>
+          {console.log(idx, foodSelected[idx])}
+          {console.log(idx, gram)}
+          {/* {console.log(foodSelected[0].kcal_per100g)} */}
+          {foodSelected[idx]?.kcal_per100g} 칼로리
+          <br />
+          {gram[idx]} 그램
+          <br />총 {(Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per100g}
+          {/* {console.log(this.props)} */}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
