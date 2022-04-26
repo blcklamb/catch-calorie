@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
-import { red } from '@mui/material/colors';
 
 function MainGraph({
   foodSelected,
@@ -51,30 +50,11 @@ function MainGraph({
     },
   };
 
-  //   const totalKcal = () => {
-  //     console.log(totalExercise);
-  //     console.log(exerciseSelected);
-  //     if (!exerciseSelected[0]?.kcal) {
-  //       // 운동 없을 경우
-  //       console.log('운동 없음');
-  //       return [totalFood];
-  //     } else if (!foodSelected[0]?.kcal) {
-  //       // 음식 없을 경우
-  //       console.log('음식 없음');
-  //         return [0 - totalExercise];
-  //     //   return [totalExercise];
-  //     } else {
-  // 		console.log('둘 다 있음')
-  //         return [totalFood - totalExercise]; // 음식, 운동 있을 경우
-  //     //   return [totalExercise];
-  //     }
-  //   };
-
   const totalKcal = totalFood - totalExercise;
 
   const maxKcal = () => {
-    console.log(exerciseSelected);
-    console.log(totalExercise);
+    // console.log(exerciseSelected);
+    // console.log(totalExercise);
     // 엑스(clear) 눌러서 처리됐을 경우 처리, 추후 함수로 분리
     if (foodSelected[0] === null) {
       setFoodSelected([]);
@@ -82,7 +62,7 @@ function MainGraph({
     if (totalFood - totalExercise < 0) {
       return [3000];
     }
-    return [3000 - totalKcal - foodSelected.reduce((acc, cur) => acc + cur?.kcal, 0)];
+    return [3000 - totalKcal - foodSelected.reduce((acc, cur) => acc + cur?.kcal_per100g, 0)];
   };
 
   const data = {
@@ -125,11 +105,11 @@ function MainGraph({
     foodSelected.map((food, idx) => {
       // console.log(food, idx);
       const newDataset = {
-        label: food?.label,
+        label: food?.name,
         backgroundColor: backgroundColor[idx],
         borderColor: borderColor[idx],
         borderWidth: 1,
-        data: [food?.kcal],
+        data: [food?.kcal_per100g],
       };
 
       data.datasets.splice(1, 0, newDataset);

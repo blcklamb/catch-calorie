@@ -1,17 +1,10 @@
 import React, { useState, useMemo, useCallback } from 'react';
 
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-
 import Autocomplete from '@mui/material/Autocomplete';
 
-import MainInput from './style/MainInput'
-import MainButton from './style/MainButton'
-
-
+import MainInput from './style/MainInput';
+import MainButton from './style/MainButton';
 
 const exerciseList = [
   {
@@ -41,7 +34,6 @@ const exerciseList = [
   },
 ];
 
-// const options = ['Option 1', 'Option 2'];
 function MainExerciseTab({
   exerciseSelected,
   setExerciseSelected,
@@ -49,21 +41,17 @@ function MainExerciseTab({
   setTotalExercise,
 }) {
   const [value, setValue] = React.useState();
-
   // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
   const [inputValue, setInputValue] = React.useState('');
 
   const handleOnClick = () => {
     setTotalExercise(exerciseSelected.reduce((acc, cur) => acc + cur.kcal, totalExercise));
-    console.log(exerciseSelected);
+    // console.log(exerciseSelected);
     setExerciseSelected([]);
   };
 
   return (
     <div>
-      {/* <div>{`value: ${value !== null ? `'${value}'` : 'null'}`}</div>
-			<div>{`inputValue: '${inputValue}'`}</div>
-			<br /> */}
       <Autocomplete
         id="controllable"
         value={value}
@@ -75,7 +63,7 @@ function MainExerciseTab({
         getOptionLabel={(option) => [option.label, `(${option.kcal})`]}
         onChange={(event, newValue) => {
           setExerciseSelected([newValue]);
-          console.log(exerciseSelected?.label);
+          // console.log(exerciseSelected?.label);
         }}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
