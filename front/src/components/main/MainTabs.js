@@ -97,6 +97,8 @@ const MainTabs = ({
   setExerciseSelected,
   totalExercise,
   setTotalExercise,
+  gram,
+  setGram,
 }) => {
   const [value, setValue] = React.useState(0);
 
@@ -118,6 +120,8 @@ const MainTabs = ({
           setFoodSelected={setFoodSelected}
           totalFood={totalFood}
           setTotalFood={setTotalFood}
+          gram={gram}
+          setGram={setGram}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
