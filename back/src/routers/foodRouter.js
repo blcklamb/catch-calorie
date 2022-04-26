@@ -4,7 +4,7 @@ import { foodService } from "../services/foodService";
 
 const foodRouter = Router();
 
-foodRouter.post("/foods/create", async (req, res, next) => {
+foodRouter.post("/foods/register", async (req, res, next) => {
     try {
         const { category, name, kcal_per100g } = req.body;
 
