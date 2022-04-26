@@ -62,7 +62,7 @@ function Portfolio() {
 
   return (
     <>
-      <h1>메인 페이지</h1>
+      {/* <h1>메인 페이지</h1> */}
       <Main
         portfolioOwnerId={portfolioOwner._id}
         isEditable={portfolioOwner._id === userState.user?._id}

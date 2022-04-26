@@ -11,6 +11,7 @@ const Container = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	z-index: 3000;
+	top: 0;
 `;
 
 const Logo = styled.h3`
