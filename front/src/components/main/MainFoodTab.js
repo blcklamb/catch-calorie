@@ -8,44 +8,9 @@ import Autocomplete from '@mui/material/Autocomplete';
 import MainButton from './style/MainButton';
 import MainInput from './style/MainInput';
 
+import MainFoodForm from './MainFoodForm';
+
 import * as Api from '../../api';
-
-
-
-const foodList = [
-  {
-    value: 'hamburger',
-    label: 'hamburger',
-    kcal: 100,
-  },
-  {
-    value: 'cake',
-    label: 'cake',
-    kcal: 300,
-  },
-  {
-    value: 'ham',
-    label: 'ham',
-    kcal: 400,
-  },
-  {
-    value: 'strawberry-cake',
-    label: 'strawberry-cake',
-    kcal: 450,
-  },
-  {
-    value: 'chicken',
-    label: 'chicken',
-    kcal: 800,
-  },
-  {
-    value: 'fried-chicken',
-    label: 'fried-chicken',
-    kcal: 520,
-  },
-];
-
-
 
 function MainFoodTab({ foodSelected, setFoodSelected, totalFood, setTotalFood }) {
   const [value, setValue] = React.useState();
@@ -53,115 +18,49 @@ function MainFoodTab({ foodSelected, setFoodSelected, totalFood, setTotalFood })
   const [inputValue, setInputValue] = React.useState([]);
 
   const [foodApiList, setFoodApiList] = useState('');
-  const [test, setTest] = useState('')
-  const id = "626031a57d50b4f7accfe8aa" // 음식
-  const name = "Applesauce"
-  // const id = "626031a57d50b4f7accfe8aa" // 사용자
-  
+  const [foodFormList, setFoodFormList] = useState([0]);
 
   useEffect(() => {
     Api.get(`foods`).then((res) => setFoodApiList(res.data));
-    // Api.post(`api/foods/${id}`) //.then((res) => setTest(res.data));
-    Api.post(`api/foods/${id}`) //.then((res) => setTest(res.data));
   }, []);
 
-  console.log(foodApiList?.name);
-  console.log(test);
-  const handleOnClick = () => {
+  const onAddFoodForm = () => {
+    let countArr = [...foodFormList];
+    let counter = countArr.slice(-1)[0];
+    counter += 1;
+    countArr.push(counter); // index 사용 X
+    // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용
+    setFoodFormList(countArr);
+  };
+
+  const handleOnClickCheck = () => {
     setTotalFood(foodSelected.reduce((acc, cur) => acc + cur.kcal_per100g, totalFood));
-    // console.log(totalFood);
     setFoodSelected([]);
+
+    console.log(foodSelected[0]?._id);
+    // Api.post(`tracking/food/${foodSelected[0]?._id}`) // .then((res) => setFoodApiList(res.data));
+    Api.post(`tracking/food`, foodSelected[0]?._id); // .then((res) => setFoodApiList(res.data));
   };
 
   return (
     <div>
-      {console.log(foodApiList)}
-      <div style={{ display: 'flex' }}>
-        <Autocomplete
-          // multiple
-          // disablePortal
-          // disableCloseOnSelect
-          id="controllable-states-demo"
-          // value={foodSelected[0]?.label}
-          value={value}
-          options={foodApiList}
-          sx={{ width: 300 }}
-          renderInput={(params) => (
-            <MainInput
-              {...params}
-              // variant="standard"
-              label="Food(kcal/100g)"
-              placeholder="Please select food"
-            />
-          )}
-          //
-          getOptionLabel={(option) => option.name || ""} // , option.kcal_per100g
-          
-          onChange={(event, newValue) => {
-            // setFoodSelected([...foodSelected, newValue]);
-            setFoodSelected([newValue]);
-            // setValue(newValue);
-          }}
-          inputValue={inputValue}
-          onInputChange={(event, newInputValue) => {
-            setInputValue(newInputValue);
-          }}
-          noOptionsText={
-            <div>
-              <p>No option</p>
-              <Button
-                variant="contained"
-                color="primary"
-                type="button"
-                // startIcon={< AddIc fontSize="small" />}
-                // onClick={() => alert('기능 추후 보강')}
-              >
-                Add food
-              </Button>
-            </div>
-          }
-        />
-        {/* 다중선택 */}
-        {/* <Autocomplete
-					multiple
-					id="controllable-states-demo"
-					value={foodSelected[0]?.label}
-					options={foodList}
-					sx={{ width: 300 }}
-					onChange={(event, newValue) => {
-						setFoodSelected(newValue);
-					}}
-					inputValue={inputValue}
-					onInputChange={(event, newInputValue) => {
-						setInputValue(newInputValue);
-					}}
-					// renderInput={(params) => <TextField {...params} label="음식" />}
-
-					getOptionLabel={(option) => [option.label, `${option.kcal}`]}
-					renderInput={(params) => (
-						<TextField
-							{...params}
-							variant="standard"
-							label="Multiple values"
-							placeholder="Favorites"
-						/>
-					)}
-				/> */}
-        <Box
-          component="form"
-          sx={{
-            '& > :not(style)': { m: 1, width: '25ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <MainInput id="outlined-basic" label="g" variant="outlined" disabled value={100} />
-        </Box>
-      </div>
-      <MainButton variant="contained" onClick={handleOnClick}>
+      {foodFormList &&
+        foodFormList.map((item, i) => (
+          <MainFoodForm
+            key={i}
+            foodSelected={foodSelected}
+            setFoodSelected={setFoodSelected}
+            totalFood={totalFood}
+            setTotalFood={setTotalFood}
+            foodFormList={foodFormList}
+          />
+        ))}
+      <MainButton variant="contained" onClick={onAddFoodForm}>
+        +
+      </MainButton>
+      <MainButton variant="contained" onClick={handleOnClickCheck}>
         check
       </MainButton>
-      {/* {console.log(foodSelected)} */}
     </div>
   );
 }
