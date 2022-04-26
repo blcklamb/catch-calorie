@@ -70,7 +70,7 @@ function App() {
         <Route path="/" exact element={<Home />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
-        <Route path="/target" element={<Portfolio />} />
+        <Route path="/tracking" element={<Portfolio />} />
         {/* <Route path="/network" element={<Network />} /> */}
         <Route path="*" element={<Portfolio />} />
       </Routes>

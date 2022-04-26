@@ -74,7 +74,7 @@ function LoginForm() {
       setUser(user);
 
       // 기본 페이지로 이동함.
-      navigate('/target', { replace: true });
+      navigate('/tracking', { replace: true });
     } catch (err) {
       console.log('로그인에 실패하였습니다.\n', err);
       setCheckLogin(false);
