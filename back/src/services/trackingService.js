@@ -3,8 +3,12 @@ import { v4 as uuid } from "uuid";
 import { ExerModel } from "../db/schemas/exercise"; // git merge 이후 삭제되어야 함.
 
 class trackingService {
-    static addTracking({ user_id, date }) {
-        return Tracking.create({ user_id, date });
+    static async addTracking({ user_id, date }) {
+        const user = await User.findById({ user_id });
+        const bmi = user.weight / (user.height / 100) ** 2;
+        const rec_cal = user.height ** 2 * bmi;
+
+        return Tracking.create({ user_id, date, rec_cal });
     }
 
     static async addFoodTracking({ user_id, date, food, gram }) {
@@ -19,7 +23,7 @@ class trackingService {
         };
 
         const isTrackingExist = await Tracking.findByUserAndDate({ user_id, date });
-        if (!isTrackingExist) await Tracking.create({ user_id, date });
+        if (!isTrackingExist) await this.addTracking({ user_id, date });
 
         return Tracking.update({ user_id, date }, { toUpdate });
     }
@@ -38,7 +42,7 @@ class trackingService {
         };
 
         const isTrackingExist = await Tracking.findByUserAndDate({ user_id, date });
-        if (!isTrackingExist) await Tracking.create({ user_id, date });
+        if (!isTrackingExist) await this.addTracking({ user_id, date });
 
         return Tracking.update({ user_id, date }, { toUpdate });
     }

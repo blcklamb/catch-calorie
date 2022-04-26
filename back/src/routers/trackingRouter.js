@@ -27,7 +27,7 @@ trackingRouter.post("/tracking/food", async (req, res, next) => {
         const { food, gram } = req.body;
         const date = moment().format("YYYY-MM-DD");
 
-        const newTracking = await trackingService.addFoodTracking({ user_id: "6260310b4d722e533e70e419", date, food, gram });
+        const newTracking = await trackingService.addFoodTracking({ user_id: "626751e37f0a6752662edaf6", date, food, gram });
 
         return res.status(201).json(newTracking);
     } catch (error) {
@@ -41,11 +41,7 @@ trackingRouter.post("/tracking/exer", async (req, res, next) => {
         const { exer, hour } = req.body;
         const date = moment().format("YYYY-MM-DD");
 
-        const newTracking = await trackingService.addExerTracking({ user_id: "6260310b4d722e533e70e419", date, exer, hour });
-
-        if (newTracking.errorMessage) {
-            throw new Error(newTracking.errorMessage);
-        }
+        const newTracking = await trackingService.addExerTracking({ user_id: "626751e37f0a6752662edaf6", date, exer, hour });
 
         return res.status(201).json(newTracking);
     } catch (error) {

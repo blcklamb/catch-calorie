@@ -1,8 +1,8 @@
 import { TrackingModel } from "../schemas/tracking";
 
 class Tracking {
-    static create({ user_id, date }) {
-        return TrackingModel.create({ user_id, date });
+    static create({ user_id, date, rec_cal }) {
+        return TrackingModel.create({ user_id, date, rec_cal });
     }
 
     static findByRecordId({ id }, { record }) {
