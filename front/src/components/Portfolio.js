@@ -45,14 +45,19 @@ function Portfolio() {
     } else {
       // 이외의 경우, 즉 URL이 "/" 라면, 전역 상태의 user.id를 유저 id로 설정함.
       console.log(userState);
-      const ownerId = userState.user.id;
+      let ownerId = '';
+      if (userState.user.id) {
+        ownerId = userState.user.id;
+      } else {
+        ownerId = userState.user._id;
+      }
       // 해당 유저 id로 fetchPorfolioOwner 함수를 실행함.
       fetchPorfolioOwner(ownerId);
     }
   }, [params, userState, navigate]);
 
   if (!isFetchCompleted) {
-    return 'loading...';
+    return 'ddloading...';
   }
 
   return (
