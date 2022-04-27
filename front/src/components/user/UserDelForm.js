@@ -7,7 +7,7 @@ import { TextField } from '@mui/material';
 import MainButton from '../main/style/MainButton';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { userState } from '../../atoms';
-import { Api } from '../../api';
+import * as Api from '../../api';
 
 const style = {
   position: 'absolute',
