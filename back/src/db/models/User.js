@@ -10,7 +10,8 @@ class User {
     }
 
     static findById({ id }) {
-        return UserModel.findById(id);
+        // return UserModel.findById(id); req.parms에서 받는 id는 string으로 findById에서 사용하는 ObjectId와 다름.
+        return UserModel.find({ _id: id })
     }
 
     static findAll() {
