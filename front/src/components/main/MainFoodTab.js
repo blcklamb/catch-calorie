@@ -12,7 +12,14 @@ import MainFoodForm from './MainFoodForm';
 
 import * as Api from '../../api';
 
-function MainFoodTab({ foodSelected, setFoodSelected, totalFood, setTotalFood, gram, setGram }) {
+function MainFoodTab({
+  foodSelected,
+  setFoodSelected,
+  totalFood,
+  setTotalFood,
+  kcalPerGram,
+  setKcalPerGram,
+}) {
   const [foodApiList, setFoodApiList] = useState('');
   const [foodFormList, setFoodFormList] = useState([0]);
 
@@ -33,15 +40,11 @@ function MainFoodTab({ foodSelected, setFoodSelected, totalFood, setTotalFood, g
     setTotalFood(foodSelected.reduce((acc, cur) => acc + cur.kcal_per100g, totalFood));
     setFoodSelected([]);
 
-    console.log(foodSelected[0]?._id);
-    // Api.post(`tracking/food/${foodSelected[0]?._id}`) // .then((res) => setFoodApiList(res.data));
     Api.post(`tracking/food`, foodSelected[0]?._id); // .then((res) => setFoodApiList(res.data));
   };
 
   return (
     <div>
-      {console.log(foodFormList)}
-      {console.log(foodSelected)}
       {foodFormList &&
         foodFormList.map((item, i) => (
           <MainFoodForm
@@ -52,8 +55,8 @@ function MainFoodTab({ foodSelected, setFoodSelected, totalFood, setTotalFood, g
             totalFood={totalFood}
             setTotalFood={setTotalFood}
             foodFormList={foodFormList}
-            gram={gram}
-            setGram={setGram}
+            kcalPerGram={kcalPerGram}
+            setKcalPerGram={setKcalPerGram}
           />
         ))}
       <MainButton variant="contained" onClick={handleAddFoodForm}>
