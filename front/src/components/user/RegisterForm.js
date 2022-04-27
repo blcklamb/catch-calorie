@@ -116,7 +116,7 @@ function RegisterForm() {
           <h1 style={{ margin: 10 }}>Register</h1>
           <Box
             sx={{
-              '& > :not(style)': { m: 1, width: '36ch' },
+              '& > :not(style)': { m: 1, width: '600px' },
             }}
             noValidate
             autoComplete="off"
@@ -229,46 +229,63 @@ function RegisterForm() {
             />
             <br></br>
           </Box>
-          <FormLabel id="demo-row-radio-buttons-group-label">Icon</FormLabel>
-          <RadioGroup
-            row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
-            value={icon}
-            onChange={(e) => setIcon(e.target.value)}
+          <Box
+            sx={{
+              '& > :not(style)': { m: 1, width: '600px' },
+            }}
+            noValidate
+            autoComplete="off"
           >
-            <FormControlLabel
-              value="all-rounder"
-              control={<Radio color="success" />}
-              label={<img src="/all.png" alt="all" style={{ width: 100 }}></img>}
-            />
-            <FormControlLabel
-              value="weight"
-              control={<Radio color="success" />}
-              label={<img src="/weight.png" alt="all" style={{ width: 100 }}></img>}
-            />
-            <FormControlLabel
-              value="yoga"
-              control={<Radio color="success" />}
-              label={<img src="/yoga.png" alt="all" style={{ width: 100 }}></img>}
-            />
-            <FormControlLabel
-              value="runner"
-              control={<Radio color="success" />}
-              label={<img src="/runner.png" alt="all" style={{ width: 100 }}></img>}
-            />
-          </RadioGroup>
-          <Stack spacing={1} direction="row">
-            <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
-              Sign-up
-            </ColorButton>
-            <ColorButton variant="contained" onClick={() => navigate('/login')}>
-              Sign-in
-            </ColorButton>
-            <ColorButtonB variant="outlined" onClick={() => navigate('/')}>
-              Start Page
-            </ColorButtonB>
-          </Stack>
+            <FormLabel id="demo-row-radio-buttons-group-label">Badges</FormLabel>
+            <RadioGroup
+              row
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
+              value={icon}
+              onChange={(e) => setIcon(e.target.value)}
+              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            >
+              <FormControlLabel
+                value="all-rounder"
+                labelPlacement="bottom"
+                control={<Radio color="success" />}
+                label={<img src="/all.png" alt="all" style={{ width: 100 }}></img>}
+              />
+              <FormControlLabel
+                value="weight"
+                labelPlacement="bottom"
+                control={<Radio color="success" />}
+                label={<img src="/weight.png" alt="all" style={{ width: 100 }}></img>}
+              />
+              <FormControlLabel
+                value="yoga"
+                labelPlacement="bottom"
+                control={<Radio color="success" />}
+                label={<img src="/yoga.png" alt="all" style={{ width: 100 }}></img>}
+              />
+              <FormControlLabel
+                value="runner"
+                labelPlacement="bottom"
+                control={<Radio color="success" />}
+                label={<img src="/runner.png" alt="all" style={{ width: 100 }}></img>}
+              />
+            </RadioGroup>
+            <Stack
+              spacing={1}
+              direction="row"
+              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            >
+              <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
+                Sign-up
+              </ColorButton>
+              <ColorButton variant="contained" onClick={() => navigate('/login')}>
+                Sign-in
+              </ColorButton>
+              <ColorButtonB variant="outlined" onClick={() => navigate('/')}>
+                Start Page
+              </ColorButtonB>
+            </Stack>
+          </Box>
         </form>
       </Container>
       <Footer></Footer>

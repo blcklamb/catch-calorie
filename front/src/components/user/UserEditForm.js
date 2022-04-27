@@ -81,11 +81,25 @@ const UserEditForm = () => {
           marginTop: 50,
         }}
       >
-        <form onSubmit={handleSubmit} style={{ marginTop: 100, marginBottom: 100 }}>
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            marginTop: 100,
+            marginBottom: 100,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexFlow: 'column',
+          }}
+        >
           <h1 style={{ margin: 10 }}>Edit</h1>
           <Box
             sx={{
-              '& > :not(style)': { m: 1, width: '36ch' },
+              '& > :not(style)': { m: 1, width: '600px' },
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexFlow: 'column',
             }}
             noValidate
             autoComplete="off"
@@ -186,31 +200,36 @@ const UserEditForm = () => {
             noValidate
             autoComplete="off"
           >
-            <FormLabel id="demo-row-radio-buttons-group-label">Icon</FormLabel>
+            <FormLabel id="demo-row-radio-buttons-group-label">Badges</FormLabel>
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
               value={editUser.icon}
               onChange={(e) => setEditUser((prev) => ({ ...prev, icon: e.target.value }))}
+              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
             >
               <FormControlLabel
                 value="all-rounder"
+                labelPlacement="bottom"
                 control={<Radio color="success" />}
                 label={<img src="/all.png" alt="all" style={{ width: 100 }}></img>}
               />
               <FormControlLabel
                 value="weight"
+                labelPlacement="bottom"
                 control={<Radio color="success" />}
                 label={<img src="/weight.png" alt="all" style={{ width: 100 }}></img>}
               />
               <FormControlLabel
                 value="yoga"
+                labelPlacement="bottom"
                 control={<Radio color="success" />}
                 label={<img src="/yoga.png" alt="all" style={{ width: 100 }}></img>}
               />
               <FormControlLabel
                 value="runner"
+                labelPlacement="bottom"
                 control={<Radio color="success" />}
                 label={<img src="/runner.png" alt="all" style={{ width: 100 }}></img>}
               />
@@ -219,7 +238,7 @@ const UserEditForm = () => {
           <br></br>
           <Box
             sx={{
-              '& > :not(style)': { m: 1, width: '36ch' },
+              '& > :not(style)': { m: 1, width: '600px' },
             }}
             noValidate
             autoComplete="off"
@@ -235,7 +254,11 @@ const UserEditForm = () => {
           <br></br>
           <br></br>
 
-          <Stack spacing={1} direction="row">
+          <Stack
+            spacing={1}
+            direction="row"
+            sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          >
             <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
               Submit
             </ColorButton>

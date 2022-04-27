@@ -134,7 +134,11 @@ function LoginForm() {
                   setCheckLogin(true);
                 }}
               />
-              <Stack spacing={1} direction="row">
+              <Stack
+                spacing={1}
+                direction="row"
+                sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+              >
                 <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
                   Sign-in
                 </ColorButton>
@@ -240,6 +244,14 @@ export const ValidationTextField = styled(TextField)({
     borderWidth: 2,
   },
   '& input:invalid + fieldset': {
+    borderColor: '#699C1D',
+    borderWidth: 2,
+  },
+  '& input:disabled + fieldset': {
+    borderColor: '#699C1D',
+    borderWidth: 2,
+  },
+  '& input ': {
     borderColor: '#699C1D',
     borderWidth: 2,
   },
