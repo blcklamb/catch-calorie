@@ -128,6 +128,13 @@ class userAuthService {
             const newValue = toUpdate.icon;
             user = await User.update({ user_id, fieldToUpdate, newValue });
         }
+
+        if(toUpdate.status) {
+            const fieldToUpdate = "icon";
+            const newValue = toUpdate.status;
+            user = await User.update({ user_id, fieldToUpdate, newValue });
+        }
+
     
         return user;
       }
