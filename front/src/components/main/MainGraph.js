@@ -55,14 +55,23 @@ function MainGraph({
 
   const totalKcal = totalFood - totalExercise;
 
-  const maxKcal = () => {
+  const remainingKcal = () => {
+    console.log(totalFood)
+    console.log(kcalPerGram)
     // 엑스(clear) 눌러서 처리됐을 경우 처리, 추후 함수로 분리
-    if (foodSelected[0] === null) {
+    if (foodSelected[0] === null) { // 음식이 없을 경우 
+      console.log('첫')
       setFoodSelected([]);
     }
-    if (totalFood - totalExercise < 0) {
+    if (totalFood - totalExercise < 0) { 
+      console.log('둘')
       return [3000];
     }
+    if (isNaN(kcalPerGram[0])) { 
+      console.log('셋')
+      return [3000 - totalKcal];
+    }
+    console.log('넷')
     return [3000 - totalKcal - kcalPerGram.reduce((acc, cur) => acc + cur, 0)];
   };
 
@@ -78,7 +87,7 @@ function MainGraph({
       },
       {
         label: 'Calories Remaining',
-        data: maxKcal(),
+        data: remainingKcal(),
         backgroundColor: ['rgba(201, 203, 207, 0.2)'],
         borderColor: ['rgb(201, 203, 207)'],
         borderWidth: 1,
