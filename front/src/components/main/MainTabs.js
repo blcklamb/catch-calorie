@@ -100,6 +100,8 @@ const MainTabs = ({
   setTotalExercise,
   kcalPerGram,
   setKcalPerGram,
+  kcalPerHour,
+  setKcalPerHour,
 }) => {
   const [value, setValue] = React.useState(0);
 
@@ -131,6 +133,8 @@ const MainTabs = ({
           setExerciseSelected={setExerciseSelected}
           totalExercise={totalExercise}
           setTotalExercise={setTotalExercise}
+          kcalPerHour={kcalPerHour}
+          setKcalPerHour={setKcalPerHour}
         />
       </TabPanel>
     </MainTabsSection>

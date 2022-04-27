@@ -20,6 +20,8 @@ function MainExerciseForm({
   setHour,
   minute,
   setMinute,
+  kcalPerHour,
+  setKcalPerHour,
 }) {
   const [value, setValue] = React.useState();
   // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
@@ -45,12 +47,21 @@ function MainExerciseForm({
   };
 
   useEffect(() => {
+    console.log(exerciseSelected);
     setTime([
       ...time.slice(0, idx),
       Number(hour[idx]) * 60 + Number(minute[idx]),
       ...time.slice(idx + 1),
     ]);
   }, [hour, minute]);
+
+  // useEffect(() => {
+  //   setKcalPerHour([
+  //     ...kcalPerHour.slice(0, idx),
+  //     (Number(time[idx]) / 60) * exerciseSelected[idx]?.kcal_per_kg,
+  //     ...kcalPerHour.slice(idx + 1),
+  //   ]);
+  // }, time);
 
   // useEffect(() => {
   //   if (gram && gram.length) {
@@ -120,8 +131,8 @@ function MainExerciseForm({
       {console.log(hour)}
       {console.log(minute)}
       {console.log(time)}
+      {console.log(kcalPerHour)}
       <div>
-        {idx}
         인풋밸류 {inputValue}
         <br />
         {hour[idx]} 시간

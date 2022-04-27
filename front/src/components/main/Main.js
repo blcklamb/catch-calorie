@@ -20,6 +20,7 @@ const Main = () => {
   const [exerciseSelected, setExerciseSelected] = useState([]);
   const [totalExercise, setTotalExercise] = useState(0);
   const [kcalPerGram, setKcalPerGram] = useState([]);
+  const [kcalPerHour, setKcalPerHour] = useState([]);
 
   const [user, setUser] = useState('');
 
@@ -66,8 +67,8 @@ const Main = () => {
         <MainHello>Hello {user.name}!</MainHello>
         {/* {console.log(test)} */}
 
-        {/* <div style={{ margin: '80px 0px' }}> */}
-        <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
+        <div style={{ margin: '80px 0px' }}>
+        {/* <div style={{ display: 'inline-flex', margin: '80px 0px' }}> */}
           <MainTabs
             foodSelected={foodSelected}
             setFoodSelected={setFoodSelected}
@@ -79,6 +80,8 @@ const Main = () => {
             setTotalExercise={setTotalExercise}
             kcalPerGram={kcalPerGram}
             setKcalPerGram={setKcalPerGram}
+            kcalPerHour={kcalPerHour}
+            setKcalPerHour={setKcalPerHour}
           />
           <MainGraph
             foodSelected={foodSelected}
@@ -91,6 +94,8 @@ const Main = () => {
             setTotalExercise={setTotalExercise}
             kcalPerGram={kcalPerGram}
             setKcalPerGram={setKcalPerGram}
+            kcalPerHour={kcalPerHour}
+            setKcalPerHour={setKcalPerHour}
           />
         </div>
         <div>

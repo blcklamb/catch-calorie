@@ -12,7 +12,7 @@ function MainGraph({
   setExerciseSelected,
   totalExercise,
   kcalPerGram,
-  setKcalPerGram,
+  setKcalPerGram,kcalPerHour, setKcalPerHour, 
 }) {
   const labels = ["Today's calories"];
 
@@ -56,22 +56,22 @@ function MainGraph({
   const totalKcal = totalFood - totalExercise;
 
   const remainingKcal = () => {
-    console.log(totalFood)
-    console.log(kcalPerGram)
+    // console.log(totalFood)
+    // console.log(kcalPerGram)
     // 엑스(clear) 눌러서 처리됐을 경우 처리, 추후 함수로 분리
     if (foodSelected[0] === null) { // 음식이 없을 경우 
-      console.log('첫')
+      // console.log('첫')
       setFoodSelected([]);
     }
     if (totalFood - totalExercise < 0) { 
-      console.log('둘')
+      // console.log('둘')
       return [3000];
     }
     if (isNaN(kcalPerGram[0])) { 
-      console.log('셋')
+      // console.log('셋')
       return [3000 - totalKcal];
     }
-    console.log('넷')
+    // console.log('넷')
     return [3000 - totalKcal - kcalPerGram.reduce((acc, cur) => acc + cur, 0)];
   };
 
@@ -125,7 +125,7 @@ function MainGraph({
     });
     exerciseSelected.map((exercise, idx) => {
       const newDataset = {
-        label: exercise?.label,
+        label: exercise?.name,
         backgroundColor: backgroundColor[idx],
         borderColor: borderColor[idx],
         borderWidth: 1,
@@ -156,6 +156,7 @@ function MainGraph({
         {exerciseSelected.map((exercise) => exercise?.kcal)}
         <br />
       </div> */}
+      {console.log(exerciseSelected)}
       <div style={{ width: 400 }}>
         <Bar data={data} options={options} height={300} />
       </div>
