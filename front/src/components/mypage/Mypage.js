@@ -1,12 +1,42 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import DefaultCelenderChart from './jandi/DefaultCelenderChart.js';
+import Header from '../Header.js';
+import Footer from '../Footer.js';
+import Jandi from './Jandi.js';
+import Badges from './Badges.js';
+
+const JandiPage = styled.section`
+  height: 100vh;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+`;
+
+const BadgesPage = styled.section`
+  height: 100vh;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+`;
 
 function Mypage() {
   return (
     <>
-      잔디 테스트
-      <DefaultCelenderChart />
+      <Header />
+      <BadgesPage>
+        <Badges />
+      </BadgesPage>
+      <JandiPage>
+        <Jandi />
+      </JandiPage>
+
+      <Footer />
     </>
   );
 }

@@ -3,11 +3,11 @@ import { ResponsiveCalendar } from '@nivo/calendar';
 import Celenderdata from './data.json';
 
 const DefaultCelenderChart = ({ data }) => (
-  <div className="" style={{ height: 500 }}>
+  <div className="" style={{ height: 300 }}>
     <ResponsiveCalendar
-      data={Celenderdata}
-      from="2015-03-01"
-      to="2016-07-12"
+      data={data}
+      from="2022-01-01"
+      to="2022-12-31"
       emptyColor="#eeeeee"
       colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
       margin={{
