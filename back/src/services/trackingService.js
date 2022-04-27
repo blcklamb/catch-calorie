@@ -29,8 +29,7 @@ class trackingService {
     }
 
     static async addExerTracking({ user_id, date, name, minute }) {
-        const weight = (await User.findById({ user_id }).weight) || 60;
-
+        const weight = await User.findById({ user_id }).weight;
         const { kcal_per_kg } = await ExerModel.findOne({ name });
         const calorie = ((kcal_per_kg * weight) / 60) * minute;
 
