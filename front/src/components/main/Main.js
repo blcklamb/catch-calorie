@@ -65,7 +65,7 @@ const Main = () => {
       <Header />
       <div style={{ margin: '100px 80px' }}>
         <MainHello>Hello {recoilUser.name}!</MainHello>
-        <MainHello>Hello {userInfo[0].name}!</MainHello>
+        <MainHello>Hello {userInfo.name}!</MainHello>
 
         <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
           <MainTabs

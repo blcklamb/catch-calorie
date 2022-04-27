@@ -27,7 +27,7 @@ import Footer from '../Footer';
 
 const UserEditForm = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  const [editUser, setEditUser] = useState(userInfo[0]);
+  const [editUser, setEditUser] = useState(userInfo);
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
@@ -55,6 +55,7 @@ const UserEditForm = () => {
         height: Number(editUser.height),
         weight: Number(editUser.weight),
         icon: editUser.icon,
+        status: editUser.status,
       });
 
       console.log('회원 정보 수정 후 PUT 응답으로 수정된 회원 정보를 가져옵니다.', res.data);

@@ -14,7 +14,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 600,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -34,6 +34,8 @@ export default function BasicModal() {
   const handleDel = async (e) => {
     e.preventDefault();
 
+    if (delMessage != '계정을 삭제하겠습니다.') {
+    }
     try {
       const res = await Api.delete('users', user.id);
       console.log(res);
@@ -63,9 +65,9 @@ export default function BasicModal() {
           <Typography id="modal-modal-description" variant="h6" sx={{ mt: 2 }}>
             If so, you should follow to write down this sentence below.
           </Typography>
-          <Typography sx={{ mt: 2 }}>"계정을 삭제하겠습니다."</Typography>
+          <Typography sx={{ mt: 2 }}>계정을 삭제하겠습니다.</Typography>
           <TextField
-            sx={{ mt: 2 }}
+            sx={{ mt: 2, width: 500 }}
             placeholder="계정을 삭제하겠습니다."
             onChange={(e) => setDelMessage(e.target.value)}
           ></TextField>
