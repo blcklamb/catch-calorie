@@ -68,6 +68,7 @@ userAuthRouter.get("/user/current", login_required, async (req, res, next) => {
 userAuthRouter.get("/user/:id", login_required, async (req, res, next) => {
     try {
         const { id } = req.params;
+
         const currentUserInfo = await userAuthService.getUserById({ id });
         if (currentUserInfo.errorMessage) {
             throw new Error(currentUserInfo.errorMessage);
@@ -82,16 +83,11 @@ userAuthRouter.get("/user/:id", login_required, async (req, res, next) => {
 userAuthRouter.get("/userlist", login_required, async (req, res, next) => {
     try {
         const users = await userAuthService.getUsers();
+
         return res.status(200).json(users);
     } catch (error) {
         next(error);
     }
-});
-
-// jwt 토큰 기능 확인함. 삭제해도 되는 라우터임
-
-userAuthRouter.get("/afterlogin", login_required, function (req, res, next) {
-    res.status(200).send(`안녕하세요 ${req.currentUserId}님, jwt 웹 토큰 기능 정상 작동 중입니다.`);
 });
 
 export { userAuthRouter };

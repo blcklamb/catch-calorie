@@ -14,7 +14,7 @@ class User {
     }
 
     static findAll() {
-        return UserModel.find({});
+        return UserModel.find();
     }
 }
 
