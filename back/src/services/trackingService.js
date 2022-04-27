@@ -50,7 +50,7 @@ class trackingService {
     }
 
     static getTrackingByUser({ user_id }) {
-        return Tracking.findAll({ user_id });
+        return Tracking.findByUser({ user_id });
     }
 
     static async setFoodTracking({ id }, { gram }) {

@@ -14,12 +14,16 @@ class Tracking {
         }
     }
 
+    static findById({ id }) {
+        return TrackingModel.findById(id);
+    }
+
     static findByUserAndDate({ user_id, date }) {
         return TrackingModel.findOne({ user_id, date });
     }
 
-    static findAll({ user_id }) {
-        return TrackingModel.find({ user_id }).sort({ createdAt: 1 });
+    static findByUser({ user_id }) {
+        return TrackingModel.find({ user_id }).sort({ date: 1 });
     }
 
     static update({ user_id, date }, { toUpdate }) {
