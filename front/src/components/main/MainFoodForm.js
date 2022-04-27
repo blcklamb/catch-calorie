@@ -19,14 +19,15 @@ function MainFoodForm({
   totalFood,
   setTotalFood,
   foodFormList,
-  gram,
-  setGram,
+  kcalPerGram,
+  setKcalPerGram,
 }) {
   const [value, setValue] = React.useState();
   // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
   const [inputValue, setInputValue] = React.useState([]);
 
   const [foodApiList, setFoodApiList] = useState('');
+  const [gram, setGram] = useState([]);
 
   useEffect(() => {
     Api.get(`foods`).then((res) => setFoodApiList(res.data));
@@ -35,6 +36,15 @@ function MainFoodForm({
   const onChange = (e) => {
     setGram([...gram.slice(0, idx), e.target.value, ...gram.slice(idx + 1)]);
   };
+
+  useEffect(() => {
+    setKcalPerGram([
+      ...kcalPerGram.slice(0, idx),
+      (Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per100g,
+      // 123,
+      ...kcalPerGram.slice(idx + 1),
+    ]);
+  }, [gram]);
 
   return (
     <>
@@ -83,14 +93,10 @@ function MainFoodForm({
           <MainInput id="outlined-basic" label="g" variant="outlined" onChange={onChange} />
         </div>
         <div>
-          {console.log(idx, foodSelected[idx])}
-          {console.log(idx, gram)}
-          {/* {console.log(foodSelected[0].kcal_per100g)} */}
           {foodSelected[idx]?.kcal_per100g} 칼로리
           <br />
           {gram[idx]} 그램
           <br />총 {(Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per100g}
-          {/* {console.log(this.props)} */}
         </div>
       </div>
     </>
