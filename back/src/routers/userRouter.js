@@ -80,18 +80,18 @@ userAuthRouter.get("/users", login_required, async (req, res, next) => {
 // 회원 탈퇴하기 
 userAuthRouter.delete("/users/:id", login_required, async (req, res, next) => {
     try {
-      const id = req.params.id;
-      const deletedUser = await userAuthService.deleteUser({ id });
-  
-      res.status(200).json(deletedUser);
-    } catch (error) {
-      next(error);
-    }
-  });
+        const id = req.params.id;
+        const deletedUser = await userAuthService.deleteUser({ id });
 
-  // 회원 정보 수정하기
-  userAuthRouter.put("/users/:id", login_required, async function (req, res, next) {
-      try {
+        res.status(200).json(deletedUser);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// 회원 정보 수정하기
+userAuthRouter.put("/users/:id", login_required, async function (req, res, next) {
+    try {
         // URI로부터 사용자 id를 추출함.
         const user_id = req.params.id;
 
@@ -100,25 +100,25 @@ userAuthRouter.delete("/users/:id", login_required, async (req, res, next) => {
         const password = req.body.password ?? null;
         const name = req.body.name ?? null;
         const gender = req.body.gender ?? null;
-        const height = req.body.height?? null;
-        const weight = req.body.weight?? null;
-        const icon =  req.body.icon ?? null;
+        const height = req.body.height ?? null;
+        const weight = req.body.weight ?? null;
+        const icon = req.body.icon ?? null;
 
         const toUpdate = { name, email, password, gender, height, weight, icon };
-  
+
         // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
         const updatedUser = await userAuthService.setUser({ user_id, toUpdate });
-  
+
         if (updatedUser.errorMessage) {
-          throw new Error(updatedUser.errorMessage);
+            throw new Error(updatedUser.errorMessage);
         }
-  
+
         res.status(200).json(updatedUser);
-      } catch (error) {
+    } catch (error) {
         next(error);
-      }
     }
-  );
+}
+);
 
 // jwt 토큰 기능 확인함. 삭제해도 되는 라우터임
 userAuthRouter.get("/afterlogin", login_required, function (req, res, next) {
