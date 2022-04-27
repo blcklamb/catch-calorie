@@ -1,11 +1,13 @@
 import express from "express";
 import cors from "cors";
+import schedule from "node-schedule";
 
 import { userAuthRouter } from "./routers/userRouter";
 import { foodRouter } from "./routers/foodRouter";
 import { exerRouter } from "./routers/exerRouter";
 import { trackingRouter } from "./routers/trackingRouter";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
+import heatmap_scheduler from "./middlewares/heatmap_scheduler";
 
 const app = express();
 
@@ -18,11 +20,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+//
+schedule.scheduleJob("0 0 0 * * *", heatmap_scheduler);
+
 // 기본 페이지
 // 브라우저에서 로그아웃 시 연결되게 하여 쿠키에 저장된 refresh token 삭제
-app.get("/", (req, res) => {
-    res.send("안녕하세요, 13팀 데이터 분석 프로젝트 API 입니다.");
-});
+app.get("/", (req, res) => res.send("안녕하세요, 13팀 데이터 분석 프로젝트 API 입니다."));
 
 // // router, service 구현 (userRouter는 맨 위에 있어야 함.)
 app.use(userAuthRouter);

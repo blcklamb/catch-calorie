@@ -37,8 +37,7 @@ userAuthRouter.post("/users/register", async (req, res, next) => {
 // 로그인
 userAuthRouter.post("/users/login", async (req, res, next) => {
     try {
-        const email = req.body.email;
-        const password = req.body.password;
+        const { email, password } = req.body;
 
         const user = await userAuthService.getUser({ email, password });
 
@@ -56,6 +55,7 @@ userAuthRouter.post("/users/login", async (req, res, next) => {
 userAuthRouter.get("/users/:id", login_required, async (req, res, next) => {
     try {
         const { id } = req.params;
+
         const currentUserInfo = await userAuthService.getUserById({ id });
         if (currentUserInfo.errorMessage) {
             throw new Error(currentUserInfo.errorMessage);
@@ -71,31 +71,36 @@ userAuthRouter.get("/users/:id", login_required, async (req, res, next) => {
 userAuthRouter.get("/users", login_required, async (req, res, next) => {
     try {
         const users = await userAuthService.getUsers();
+
         return res.status(200).json(users);
     } catch (error) {
         next(error);
     }
 });
 
-// 회원 탈퇴하기 
+// 회원 탈퇴하기
 userAuthRouter.delete("/users/:id", login_required, async (req, res, next) => {
     try {
-        const id = req.params.id;
+        const { id } = req.params;
+
         const deletedUser = await userAuthService.deleteUser({ id });
 
-        res.status(200).json(deletedUser);
+        return res.status(200).json(deletedUser);
     } catch (error) {
         next(error);
     }
 });
 
 // 회원 정보 수정하기
-userAuthRouter.put("/users/:id", login_required, async function (req, res, next) {
+userAuthRouter.put("/users/:user_id", login_required, async function (req, res, next) {
     try {
         // URI로부터 사용자 id를 추출함.
-        const user_id = req.params.id;
+        const { user_id } = req.params;
 
         // body data 로부터 업데이트할 사용자 정보를 추출함.
+        // password는 따로 페이지를 만들어야하지 않을까요 ?
+        // object destructuring 사용하지 않으신 이유가 따로 있을까요 ?
+        // const { email, name, gender, height, weight, icon, status } = req.body;
         const email = req.body.email ?? null;
         const password = req.body.password ?? null;
         const name = req.body.name ?? null;
@@ -103,8 +108,9 @@ userAuthRouter.put("/users/:id", login_required, async function (req, res, next)
         const height = req.body.height ?? null;
         const weight = req.body.weight ?? null;
         const icon = req.body.icon ?? null;
+        const status = req.body.status ?? null;
 
-        const toUpdate = { name, email, password, gender, height, weight, icon };
+        const toUpdate = { email, password, name, gender, height, weight, icon, status };
 
         // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
         const updatedUser = await userAuthService.setUser({ user_id, toUpdate });
@@ -113,16 +119,10 @@ userAuthRouter.put("/users/:id", login_required, async function (req, res, next)
             throw new Error(updatedUser.errorMessage);
         }
 
-        res.status(200).json(updatedUser);
+        return res.status(200).json(updatedUser);
     } catch (error) {
         next(error);
     }
-}
-);
-
-// jwt 토큰 기능 확인함. 삭제해도 되는 라우터임
-userAuthRouter.get("/afterlogin", login_required, function (req, res, next) {
-    res.status(200).send(`안녕하세요 ${req.currentUserId}님, jwt 웹 토큰 기능 정상 작동 중입니다.`);
 });
 
 export { userAuthRouter };
