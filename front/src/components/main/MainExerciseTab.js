@@ -13,6 +13,8 @@ function MainExerciseTab({
   setExerciseSelected,
   totalExercise,
   setTotalExercise,
+  kcalPerHour,
+  setKcalPerHour,
 }) {
   const [value, setValue] = React.useState();
   // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
@@ -41,7 +43,7 @@ function MainExerciseTab({
 
   return (
     <div>
-      {exerciseForms &&
+      {/* {exerciseForms &&
         exerciseForms.map((item, i) => (
           <MainExerciseForm
             key={i}
@@ -56,8 +58,10 @@ function MainExerciseTab({
             setHour={setHour}
             minute={minute}
             setMinute={setMinute}
+            kcalPerHour={kcalPerHour}
+            setKcalPerHour={setKcalPerHour}
           />
-        ))}
+        ))} */}
       {/* <Autocomplete
         id="controllable"
         value={value}
