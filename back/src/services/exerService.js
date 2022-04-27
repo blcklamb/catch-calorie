@@ -7,7 +7,8 @@ class exerService {
     }
     
     static async getExerByName({ name }) {
-        const exer = await Exercise.findByName({ name })
+        console.log(name)
+        const exer = Exercise.findByName({ name })
         if (!exer) {
             const errorMessage = "Service: Cannot find this exercise. Search another name"
             return { errorMessage };
