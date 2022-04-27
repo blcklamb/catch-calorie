@@ -36,7 +36,7 @@ function MainFoodTab({
     setFoodFormList(countArr);
   };
 
-  const handleCheck = () => {
+  const handleTracking = () => {
     setTotalFood(kcalPerGram.reduce((acc, cur) => acc + cur, totalFood));
     setFoodSelected([]);
     setKcalPerGram([]);
@@ -63,8 +63,8 @@ function MainFoodTab({
       <MainButton variant="contained" onClick={handleAddFoodForm}>
         +
       </MainButton>
-      <MainButton variant="contained" onClick={handleCheck}>
-        check
+      <MainButton variant="contained" onClick={handleTracking}>
+        tracking
       </MainButton>
     </div>
   );
