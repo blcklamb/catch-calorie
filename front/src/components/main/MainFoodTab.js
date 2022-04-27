@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Autocomplete from '@mui/material/Autocomplete';
-
 import MainButton from './style/MainButton';
-import MainInput from './style/MainInput';
-
 import MainFoodForm from './MainFoodForm';
 
 import * as Api from '../../api';
@@ -20,20 +14,16 @@ function MainFoodTab({
   kcalPerGram,
   setKcalPerGram,
 }) {
-  const [foodApiList, setFoodApiList] = useState('');
-  const [foodFormList, setFoodFormList] = useState([0]);
-
-  useEffect(() => {
-    Api.get(`foods`).then((res) => setFoodApiList(res.data));
-  }, []);
+  const [foodForms, setFoodForms] = useState([0]);
+  const [gram, setGram] = useState([])
 
   const handleAddFoodForm = () => {
-    let countArr = [...foodFormList];
+    let countArr = [...foodForms];
     let counter = countArr.slice(-1)[0];
     counter += 1;
     countArr.push(counter); // index 사용 X
     // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용
-    setFoodFormList(countArr);
+    setFoodForms(countArr);
   };
 
   const handleTracking = () => {
@@ -41,21 +31,35 @@ function MainFoodTab({
     setFoodSelected([]);
     setKcalPerGram([]);
 
+    // console.log(foodSelected)
+    // console.log(kcalPerGram)
+
+    // // 백 구현이 되지 않았으므로 일단 중지
+    // foodSelected.map((food, i) => {
+    //   console.log(food.name)
+    //   console.log(food.name)
+    //   const name = food.name
+    //   const gram = kcalPerGram[i] // gram -> kcal
+      
+    //   Api.post(`tracking/food`, {
+    //     name, gram // gram -> kcal
+    //   })
+    // })
+
     // Api.post(`tracking/food`, foodSelected[0]?._id); // .then((res) => setFoodApiList(res.data));
   };
 
   return (
     <div>
-      {foodFormList &&
-        foodFormList.map((item, i) => (
+      {foodForms &&
+        foodForms.map((item, i) => (
           <MainFoodForm
             key={i}
             idx={i}
             foodSelected={foodSelected}
             setFoodSelected={setFoodSelected}
-            totalFood={totalFood}
-            setTotalFood={setTotalFood}
-            foodFormList={foodFormList}
+            gram={gram}
+            setGram={setGram}
             kcalPerGram={kcalPerGram}
             setKcalPerGram={setKcalPerGram}
           />
