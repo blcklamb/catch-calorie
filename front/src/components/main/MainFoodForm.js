@@ -38,12 +38,21 @@ function MainFoodForm({
   };
 
   useEffect(() => {
-    setKcalPerGram([
-      ...kcalPerGram.slice(0, idx),
-      (Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per100g,
-      // 123,
-      ...kcalPerGram.slice(idx + 1),
-    ]);
+    if (gram && gram.length) {
+      // 빈 gram이 없다면 kcalPerGram 계산하여 배열 삽입
+      setKcalPerGram([
+        ...kcalPerGram.slice(0, idx),
+        (Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per100g,
+        ...kcalPerGram.slice(idx + 1),
+      ]);
+    } else {
+      // 빈 gram이 있다면 해당 kcalPerGram에 0 삽입
+      setKcalPerGram([
+        ...kcalPerGram.slice(0, idx),
+        0, 
+        ...kcalPerGram.slice(idx + 1),
+      ]);
+    }
   }, [gram]);
 
   return (
@@ -93,6 +102,10 @@ function MainFoodForm({
           <MainInput id="outlined-basic" label="g" variant="outlined" onChange={onChange} />
         </div>
         <div>
+          밸류 {value} 
+          <br />
+          인풋밸류 {inputValue}
+          <br />
           {foodSelected[idx]?.kcal_per100g} 칼로리
           <br />
           {gram[idx]} 그램
