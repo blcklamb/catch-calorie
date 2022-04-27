@@ -34,6 +34,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
   color: 'white',
   backgroundColor: '#8CB352',
   width: '50%',
+  maxWidth: '800px',
   '&.Mui-selected': {
     color: '#fff',
     backgroundColor: '#4C7115',
@@ -44,7 +45,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
 }));
 
 const MainTabsSection = styled(Box)`
-  width: 700px;
+  width: 900px;
   margin-right: 120px;
 `;
 
