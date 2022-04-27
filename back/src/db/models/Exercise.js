@@ -9,8 +9,16 @@ class Exercise {
         return ExerModel.findOne({ name });
     }
 
-    static findAll({ search }) {
-        return ExerModel.find({ name: { search }})
+    static findAll() {
+        return ExerModel.find().sort({ views: -1 })
+    }
+
+    static update({ _id }, { toUpdate }) {
+        return ExerModel.findOneAndUpdate( { _id }, toUpdate, { new: true });
+    }
+
+    static delete({ id }) {
+        return ExerModel.deleteById( id );
     }
 }
 

@@ -7,11 +7,11 @@ const ExerSchema = new Schema({
         unique: true,
         trim: true,
     },
-    kcal_per_lb: {
+    kcal_per_kg: {
         type: Number,
         required: true,
     },
-    kcal_per_kg: {
+    kcal_per_lb: {
         type: Number,
         required: true,
     },
