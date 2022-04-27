@@ -36,22 +36,16 @@ exerRouter.post("/exercises", login_required, async (req, res, next) => {
     try {
         const { name, weight, unit } = req.body;
 
-        const exercise = await exerService.getExerByName({ name });
+        const exercise = await exerService.getExerByName({ name })
         
         if (exercise) throw new Error("Router: 이미 등록되어 있는 운동입니다.");
-
-        if (unit=='kilogram') {
-            kcal_per_kg = weight;
-            kcal_per_lb = weight*2.20462
-        } else if (unit=='pound') {
-            kcal_per_kg = weight*0.453592;
-            kcal_per_lb = weight;
-        }
-
+            
+        const { kcal_per_lb, kcal_per_kg } = await exerService.convertUnit({weight, unit})
+        
         const newExercise = await exerService.addExer({ 
             name, 
-            kcal_per_lb,
             kcal_per_kg,
+            kcal_per_lb,
             views: 1
         });
         if (newExercise.errorMessage) throw new Error(newExercise.errorMessage);
