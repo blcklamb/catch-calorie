@@ -59,6 +59,8 @@ function Portfolio() {
         ownerId = user.id;
       } else if (user._id) {
         ownerId = user._id;
+      } else {
+        console.error('아이디를 가져오지 못했습니다.');
       }
       // 해당 유저 id로 fetchPorfolioOwner 함수를 실행함.
       fetchPorfolioOwner(ownerId);

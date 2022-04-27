@@ -63,7 +63,7 @@ const UserEditForm = () => {
 
       console.log('회원 정보 수정 후 PUT 응답으로 수정된 회원 정보를 가져옵니다.', res.data);
       setUserInfo(res.data);
-      // navigate('/tracking');
+      navigate('/tracking');
     } catch (err) {
       console.log(`req 요청이 제대로 가지 않았군요 ${err}`);
     }
@@ -179,48 +179,59 @@ const UserEditForm = () => {
             />
             <br></br>
           </Box>
-          <FormLabel id="demo-row-radio-buttons-group-label">Icon</FormLabel>
-          <RadioGroup
-            row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
-            value={editUser.icon}
-            onChange={(e) => setEditUser((prev) => ({ ...prev, icon: e.target.value }))}
+          <Box
+            sx={{
+              '& > :not(style)': { m: 1, width: '600px' },
+            }}
+            noValidate
+            autoComplete="off"
           >
-            <FormControlLabel
-              value="all-rounder"
-              control={<Radio color="success" />}
-              label={<img src="/all.png" alt="all" style={{ width: 100 }}></img>}
-            />
-            <FormControlLabel
-              value="weight"
-              control={<Radio color="success" />}
-              label={<img src="/weight.png" alt="all" style={{ width: 100 }}></img>}
-            />
-            <FormControlLabel
-              value="yoga"
-              control={<Radio color="success" />}
-              label={<img src="/yoga.png" alt="all" style={{ width: 100 }}></img>}
-            />
-            <FormControlLabel
-              value="runner"
-              control={<Radio color="success" />}
-              label={<img src="/runner.png" alt="all" style={{ width: 100 }}></img>}
-            />
-          </RadioGroup>
+            <FormLabel id="demo-row-radio-buttons-group-label">Icon</FormLabel>
+            <RadioGroup
+              row
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
+              value={editUser.icon}
+              onChange={(e) => setEditUser((prev) => ({ ...prev, icon: e.target.value }))}
+            >
+              <FormControlLabel
+                value="all-rounder"
+                control={<Radio color="success" />}
+                label={<img src="/all.png" alt="all" style={{ width: 100 }}></img>}
+              />
+              <FormControlLabel
+                value="weight"
+                control={<Radio color="success" />}
+                label={<img src="/weight.png" alt="all" style={{ width: 100 }}></img>}
+              />
+              <FormControlLabel
+                value="yoga"
+                control={<Radio color="success" />}
+                label={<img src="/yoga.png" alt="all" style={{ width: 100 }}></img>}
+              />
+              <FormControlLabel
+                value="runner"
+                control={<Radio color="success" />}
+                label={<img src="/runner.png" alt="all" style={{ width: 100 }}></img>}
+              />
+            </RadioGroup>
+          </Box>
           <br></br>
-          <ValidationTextField
-            // required
-            // error={!isWeightValid}
-            // label="Weight"
-            // helperText={
-            //   !isWeightValid && <span>Please enter a number only.(The unit is pounds.)</span>
-            // }
-            value="상태메세지 들어갈 곳"
-            // onChange={(e) => {
-            //   setEditUser((prev) => ({ ...prev, weight: e.target.value }));
-            // }}
-          />
+          <Box
+            sx={{
+              '& > :not(style)': { m: 1, width: '36ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <ValidationTextField
+              label="Status"
+              value={editUser.status}
+              onChange={(e) => {
+                setEditUser((prev) => ({ ...prev, status: e.target.value }));
+              }}
+            />
+          </Box>
           <br></br>
           <br></br>
 
@@ -228,8 +239,9 @@ const UserEditForm = () => {
             <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
               Submit
             </ColorButton>
-            <ColorButton variant="contained">Sign-in</ColorButton>
-            <ColorButtonB variant="outlined">Start Page</ColorButtonB>
+            <ColorButtonB variant="outlined" onClick={() => navigate('/tracking')}>
+              back
+            </ColorButtonB>
           </Stack>
         </form>
       </Container>
