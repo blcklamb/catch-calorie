@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //
-schedule.scheduleJob("* * * * * *", heatmap_scheduler);
+schedule.scheduleJob("0 0 0 * * *", heatmap_scheduler);
 
 // 기본 페이지
 // 브라우저에서 로그아웃 시 연결되게 하여 쿠키에 저장된 refresh token 삭제
