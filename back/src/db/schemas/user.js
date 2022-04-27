@@ -36,6 +36,11 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
+    status: {
+        type: String,
+        required: false,
+        default: "설명이 아직 없습니다. 추가해 주세요.",
+    }
 });
 
 const UserModel = model("User", UserSchema);

@@ -4,7 +4,7 @@ import schedule from "node-schedule";
 
 import { userAuthRouter } from "./routers/userRouter";
 import { foodRouter } from "./routers/foodRouter";
-// import { exerRouter } from "./routers/exerRouter";
+import { exerRouter } from "./routers/exerRouter";
 import { trackingRouter } from "./routers/trackingRouter";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 import heatmap_scheduler from "./middlewares/heatmap_scheduler";
@@ -30,6 +30,7 @@ app.get("/", (req, res) => res.send("안녕하세요, 13팀 데이터 분석 프
 // // router, service 구현 (userRouter는 맨 위에 있어야 함.)
 app.use(userAuthRouter);
 app.use(foodRouter);
+app.use(exerRouter);
 app.use(trackingRouter);
 
 // // 순서 중요 (router 에서 next() 시 아래의 에러 핸들링  middleware로 전달됨)
