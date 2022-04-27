@@ -6,7 +6,7 @@ class Award {
     }
 
     static findById({ user_id }) {
-        return AwardModel.findById(user_id);
+        return AwardModel.findOne({ user_id });
     }
 
     static update({ user_id }, { toUpdate }) {

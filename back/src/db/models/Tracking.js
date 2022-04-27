@@ -6,11 +6,10 @@ class Tracking {
     }
 
     static findByRecordId({ id }, { record }) {
-        switch (record) {
-            case "food":
-                return TrackingModel.findOne({ food_record: { $elemMatch: { id } } });
-            case "exer":
-                return TrackingModel.findOne({ exer_record: { $elemMatch: { id } } });
+        if (record === "food") {
+            return TrackingModel.findOne({ food_record: { $elemMatch: { id } } });
+        } else if (record === "exer") {
+            return TrackingModel.findOne({ exer_record: { $elemMatch: { id } } });
         }
     }
 
