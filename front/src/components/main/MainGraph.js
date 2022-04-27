@@ -11,8 +11,8 @@ function MainGraph({
   exerciseSelected,
   setExerciseSelected,
   totalExercise,
-  gram,
-  setGram,
+  kcalPerGram,
+  setKcalPerGram,
 }) {
   const labels = ["Today's calories"];
 
@@ -51,13 +51,11 @@ function MainGraph({
     },
   };
 
+  // const totalGram = gram.reduce((acc, cur) => Number(acc) + Number(cur), 0);
+
   const totalKcal = totalFood - totalExercise;
 
-  const previewKcal = (Number(gram) / 100) * foodSelected[0]?.kcal_per100g
-
   const maxKcal = () => {
-    // console.log(exerciseSelected);
-    // console.log(totalExercise);
     // 엑스(clear) 눌러서 처리됐을 경우 처리, 추후 함수로 분리
     if (foodSelected[0] === null) {
       setFoodSelected([]);
@@ -65,7 +63,7 @@ function MainGraph({
     if (totalFood - totalExercise < 0) {
       return [3000];
     }
-    return [3000 - totalKcal - foodSelected.reduce((acc, cur) => acc + (Number(gram) / 100) * cur?.kcal_per100g, 0)];
+    return [3000 - totalKcal - kcalPerGram.reduce((acc, cur) => acc + cur, 0)];
   };
 
   const data = {
@@ -106,19 +104,17 @@ function MainGraph({
 
   const addData = () => {
     foodSelected.map((food, idx) => {
-      // console.log(food, idx);
       const newDataset = {
         label: food?.name,
         backgroundColor: backgroundColor[idx],
         borderColor: borderColor[idx],
         borderWidth: 1,
-        data: [previewKcal],
+        data: [kcalPerGram[idx]],
       };
 
       data.datasets.splice(1, 0, newDataset);
     });
     exerciseSelected.map((exercise, idx) => {
-      // console.log(food, idx);
       const newDataset = {
         label: exercise?.label,
         backgroundColor: backgroundColor[idx],
