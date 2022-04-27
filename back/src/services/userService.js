@@ -67,8 +67,9 @@ class userAuthService {
     }
 
     // 로그인한 사용자 정보 가져오기
-    static async getUserById({ user_id }) {
-        const user = await User.findById({ user_id });
+    static async getUserById({ id }) {
+        console.log({id})
+        const user = await User.findById( { id } );
         if (!user) {
             const errorMessage = "가입 내역이 없는 사용자입니다. 다시 한 번 확인해 주세요.";
             return { errorMessage };
