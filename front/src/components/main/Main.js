@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Header from '../Header';
@@ -27,15 +27,23 @@ const Main = () => {
   const [testUser, setTestUser] = useState('');
 
   const navigate = useNavigate();
+  const params = useParams();
   const dispatch = useContext(DispatchContext);
 
-  useEffect(() => {
-    Api.get(`user/login`).then((res) => setTest(res.data));
-    Api.get(`user/current`).then((res) => setUser(res.data));
-    Api.get(`userlist`).then((res) => setTestUser(res.data));
-  }, []);
+  // useEffect(() => {
+  //   Api.get(`user/login`).then((res) => setTest(res.data));
+  //   Api.get(`user/current`).then((res) => setUser(res.data));
+  //   Api.get(`userlist`).then((res) => setTestUser(res.data));
+  // }, []);
 
-  console.log(test);
+  useEffect(() => {
+    // console.log(params)
+    Api.get(`users/${params.userId}`).then((res) => {
+      setUser(res.data)
+    })
+  }, [params])
+
+  // console.log(test);
 
   const logout = () => {
     // sessionStorage 에 저장했던 JWT 토큰을 삭제함.
@@ -56,10 +64,10 @@ const Main = () => {
       <Header />
       <div style={{ margin: '100px 80px' }}>
         <MainHello>Hello {user.name}!</MainHello>
-        {console.log(test)}
+        {/* {console.log(test)} */}
 
-        <div style={{ margin: '80px 0px' }}>
-          {/* <div style={{ display: 'inline-flex', margin: '80px 0px' }}>  */}
+        {/* <div style={{ margin: '80px 0px' }}> */}
+        <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
           <MainTabs
             foodSelected={foodSelected}
             setFoodSelected={setFoodSelected}
@@ -86,7 +94,7 @@ const Main = () => {
           />
         </div>
         <div>
-          <TrackingList />
+          <TrackingList user={user}/>
         </div>
       </div>
       <Footer />
