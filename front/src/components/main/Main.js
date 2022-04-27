@@ -13,6 +13,8 @@ import { DispatchContext } from '../../App';
 import * as Api from '../../api';
 import { useRecoilState } from 'recoil';
 import { tokenState, userInfoState, userState } from '../../atoms';
+import ServerModal from '../user/UserDelForm';
+import BasicModal from '../user/UserDelForm';
 
 const Main = () => {
   const [token, setToken] = useRecoilState(tokenState);
@@ -63,7 +65,7 @@ const Main = () => {
       <Header />
       <div style={{ margin: '100px 80px' }}>
         <MainHello>Hello {recoilUser.name}!</MainHello>
-        <MainHello>Hello {userInfo.name}!</MainHello>
+        <MainHello>Hello {userInfo[0].name}!</MainHello>
 
         <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
           <MainTabs
@@ -106,11 +108,20 @@ const Main = () => {
           <br />
           <MainButton
             variant="contained"
-            style={{ width: '60%' }}
+            style={{ marginBottom: '20px', width: '60%' }}
             onClick={() => navigate('/users')}
           >
             edit
           </MainButton>
+          <br />
+          {/* <MainButton
+            variant="contained"
+            style={{ width: '60%' }}
+            onClick={() => navigate('/users/delete')}
+          >
+            Delete my account
+          </MainButton> */}
+          <BasicModal></BasicModal>
         </div>
       </div>
       <Footer />

@@ -27,13 +27,10 @@ import Footer from '../Footer';
 
 const UserEditForm = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  const [editUser, setEditUser] = useState(userInfo);
+  const [editUser, setEditUser] = useState(userInfo[0]);
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
-  const isPasswordValid = editUser.password.length >= 4;
-  // 비밀번호와 확인용 비밀번호가 일치하는지 여부를 확인함.
-  const isPasswordSame = editUser.password === confirmPassword;
   // 이름이 2글자 이상인지 여부를 확인함.
   const isNameValid = editUser.name.length >= 2;
   // 공백이나 숫자인지 여부를 확인함.
@@ -42,8 +39,7 @@ const UserEditForm = () => {
   const isWeightValid = String(editUser.weight).length > 0 && Number(editUser.weight) > 0;
 
   // 조건이 모두 동시에 만족되는지 여부를 확인함.
-  const isFormValid =
-    isPasswordValid && isPasswordSame && isNameValid && isHeightValid && isWeightValid;
+  const isFormValid = isNameValid && isHeightValid && isWeightValid;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,7 +59,8 @@ const UserEditForm = () => {
 
       console.log('회원 정보 수정 후 PUT 응답으로 수정된 회원 정보를 가져옵니다.', res.data);
       setUserInfo(res.data);
-      navigate('/tracking');
+      // navigate('/tracking');
+      console.log('req 요청 갔고 응답 받았습니다..');
     } catch (err) {
       console.log(`req 요청이 제대로 가지 않았군요 ${err}`);
     }
@@ -104,41 +101,6 @@ const UserEditForm = () => {
             noValidate
             autoComplete="off"
           >
-            <ValidationTextField
-              disabled
-              // error={!checkLogin}
-              id="outlined-required"
-              label="Email Address"
-              autoComplete="email"
-              helperText={<span>You are not able to change your email.</span>}
-              value={editUser.email}
-            />
-            <br></br>
-            <ValidationTextField
-              required
-              error={!isPasswordValid}
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-              helperText={!isPasswordValid && <span> Password is more than 4 characters. </span>}
-              onChange={(e) => {
-                setEditUser((prev) => ({ ...prev, password: e.target.value }));
-              }}
-            />
-            <br></br>
-            <ValidationTextField
-              required
-              error={!isPasswordSame}
-              label="Confirm Password"
-              type="password"
-              autoComplete="current-password"
-              // value={confirmPassword}
-              helperText={!isPasswordSame && <span> Passwords do not match. </span>}
-              onChange={(e) => {
-                setConfirmPassword(e.target.value);
-              }}
-            />
             <br></br>
             <ValidationTextField
               required

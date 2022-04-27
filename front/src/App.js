@@ -14,7 +14,7 @@ import Portfolio from './components/Portfolio';
 import { useRecoilState } from 'recoil';
 import { tokenState, userState } from './atoms';
 import UserEditForm from './components/user/UserEditForm';
-
+import UserDelForm from './components/user/UserDelForm';
 // export const UserStateContext = createContext(null);
 // export const DispatchContext = createContext(null);
 
@@ -75,6 +75,7 @@ function App() {
         {/* <Route path="/network" element={<Network />} /> */}
         <Route path="*" element={<Portfolio />} />
         <Route path="/users" element={<UserEditForm />} />
+        <Route path="/users/delete" element={<UserDelForm />} />
       </Routes>
     </Router>
     // </UserStateContext.Provider>
