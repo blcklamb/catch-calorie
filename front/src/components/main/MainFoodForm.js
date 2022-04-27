@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
 
-import MainButton from './style/MainButton';
 import MainInput from './style/MainInput';
 
 // import MainFoodForm from './MainFoodForm';
@@ -16,9 +14,8 @@ function MainFoodForm({
   idx,
   foodSelected,
   setFoodSelected,
-  totalFood,
-  setTotalFood,
-  foodFormList,
+  gram,
+  setGram,
   kcalPerGram,
   setKcalPerGram,
 }) {
@@ -27,7 +24,7 @@ function MainFoodForm({
   const [inputValue, setInputValue] = React.useState([]);
 
   const [foodApiList, setFoodApiList] = useState('');
-  const [gram, setGram] = useState([]);
+  // const [gram, setGram] = useState([]);
 
   useEffect(() => {
     Api.get(`foods`).then((res) => setFoodApiList(res.data));
@@ -47,16 +44,13 @@ function MainFoodForm({
       ]);
     } else {
       // 빈 gram이 있다면 해당 kcalPerGram에 0 삽입
-      setKcalPerGram([
-        ...kcalPerGram.slice(0, idx),
-        0, 
-        ...kcalPerGram.slice(idx + 1),
-      ]);
+      setKcalPerGram([...kcalPerGram.slice(0, idx), 0, ...kcalPerGram.slice(idx + 1)]);
     }
   }, [gram]);
 
   return (
     <>
+    {console.log(foodApiList)}
       <div style={{ display: 'flex' }}>
         <Autocomplete
           // multiple
@@ -99,10 +93,11 @@ function MainFoodForm({
           noValidate
           autoComplete="off"
         >
-          <MainInput id="outlined-basic" label="g" variant="outlined" onChange={onChange} />
+          <MainInput id="outlined-basic" label="g" variant="outlined" onBlur={onChange} />
         </div>
         <div>
-          밸류 {value} 
+          {console.log(kcalPerGram)}
+          밸류 {value}
           <br />
           인풋밸류 {inputValue}
           <br />
