@@ -8,15 +8,18 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import { alpha, styled } from '@mui/material/styles';
 
 import * as Api from '../../api';
 // import { DispatchContext } from '../../App';
 import Header from '../Header';
 import Footer from '../Footer';
 
+// import recoil
 import { useRecoilState } from 'recoil';
 import { tokenState, userState } from '../../atoms';
+
+// import styled compo
+import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -181,119 +184,7 @@ function LoginForm() {
       </Container>
       <Footer></Footer>
     </div>
-
-    // <Container>
-    //   <Row className="justify-content-md-center mt-5">
-    //     <Col lg={8}>
-    //       <Form onSubmit={handleSubmit}>
-    //         <Form.Group controlId="loginEmail">
-    //           <Form.Label>이메일 주소</Form.Label>
-    //           <Form.Control
-    //             type="email"
-    //             autoComplete="on"
-    //             value={email}
-    //             onChange={(e) => setEmail(e.target.value)}
-    //           />
-    //           {!isEmailValid && (
-    //             <Form.Text className="text-success">
-    //               이메일 형식이 올바르지 않습니다.
-    //             </Form.Text>
-    //           )}
-    //         </Form.Group>
-
-    //         <Form.Group controlId="loginPassword" className="mt-3">
-    //           <Form.Label>비밀번호</Form.Label>
-    //           <Form.Control
-    //             type="password"
-    //             autoComplete="on"
-    //             value={password}
-    //             onChange={(e) => setPassword(e.target.value)}
-    //           />
-    //           {!isPasswordValid && (
-    //             <Form.Text className="text-success">
-    //               비밀번호는 4글자 이상입니다.
-    //             </Form.Text>
-    //           )}
-    //         </Form.Group>
-
-    //         <Form.Group as={Row} className="mt-3 text-center">
-    //           <Col sm={{ span: 20 }}>
-    //             <Button variant="primary" type="submit" disabled={!isFormValid}>
-    //               로그인
-    //             </Button>
-    //           </Col>
-    //         </Form.Group>
-
-    //         <Form.Group as={Row} className="mt-3 text-center">
-    //           <Col sm={{ span: 20 }}>
-    //             <Button variant="light" onClick={() => navigate("/register")}>
-    //               회원가입하기
-    //             </Button>
-    //           </Col>
-    //         </Form.Group>
-    //       </Form>
-    //     </Col>
-    //   </Row>
-    // </Container>
   );
 }
-
-export const ValidationTextField = styled(TextField)({
-  '& input:valid + fieldset': {
-    borderColor: '#94D82D',
-    borderWidth: 2,
-  },
-  '& input:invalid + fieldset': {
-    borderColor: '#699C1D',
-    borderWidth: 2,
-  },
-  '& input:disabled + fieldset': {
-    borderColor: '#699C1D',
-    borderWidth: 2,
-  },
-  '& input ': {
-    borderColor: '#699C1D',
-    borderWidth: 2,
-  },
-  // '& input:valid:focus + fieldset': {
-  // 	borderColor: '#699C1D',
-  // 	borderLeftWidth: 6,
-  // 	padding: '4px !important', // override inline-style
-  // },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: 'red',
-    },
-    '&:hover fieldset': {
-      borderColor: '#9CFD08',
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: 'green',
-    },
-  },
-});
-
-export const ColorButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText('#94D82D'),
-
-  boxShadow: '0px 2px 2px #86C725',
-  backgroundColor: '#94D82D',
-  color: '#F03E3E',
-  '&:hover': {
-    backgroundColor: '#94D82D',
-    boxShadow: '0px 2px 3px #699C1D',
-  },
-}));
-
-export const ColorButtonB = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText('#94D82D'),
-  borderColor: '#94D82D',
-  color: '#F03E3E',
-  '&:hover': {
-    // boxShadow: '0px 2px 3px #699C1D',
-    backgroundColor: '#FCFFF8',
-    borderColor: '#699C1D',
-  },
-}));
 
 export default LoginForm;

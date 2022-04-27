@@ -19,7 +19,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
 //styled Compo
-import { ValidationTextField, ColorButton, ColorButtonB } from './LoginForm';
+import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
 
 //Compo
 import Header from '../Header';
