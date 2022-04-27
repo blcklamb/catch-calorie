@@ -26,7 +26,7 @@ class exerService {
     }
 
     static addExerViews({ id }) {
-        return Exercise.update({ id }, { toUpdate: { $inc: { views: 1} }}, {new: true});
+        return Exercise.update({ _id:id }, { toUpdate: { $inc: { views: 1} }}, {new: true});
     }
 }
 

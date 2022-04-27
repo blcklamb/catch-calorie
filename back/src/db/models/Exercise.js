@@ -13,12 +13,12 @@ class Exercise {
         return ExerModel.find().sort({ views: -1 })
     }
 
-    static update({ id }, { toUpdate }) {
-        return ExerModel.findOneAndUpdate(id, toUpdate, { new: true });
+    static update({ _id }, { toUpdate }) {
+        return ExerModel.findOneAndUpdate( { _id }, toUpdate, { new: true });
     }
 
     static delete({ id }) {
-        return ExerModel.deleteById(id);
+        return ExerModel.deleteById( id );
     }
 }
 
