@@ -12,6 +12,10 @@ const TrackingSchema = new Schema(
             required: true,
             immutable: true,
         },
+        rec_cal: {
+            type: Number,
+            required: true,
+        },
         food_record: {
             type: Array,
             required: true,
