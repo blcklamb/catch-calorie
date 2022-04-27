@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 // import { Container, Col, Row } from 'react-bootstrap';
 
-import { UserStateContext } from '../App';
+// import { UserStateContext } from '../App';
 import * as Api from '../api';
 // import User from './user/User';
 import Main from './main/Main';
@@ -23,7 +23,7 @@ function Portfolio() {
 
   const fetchPorfolioOwner = async (ownerId) => {
     // 유저 id를 가지고 "/users/유저id" 엔드포인트로 요청해 사용자 정보를 불러옴.
-    const res = await Api.get('user', ownerId);
+    const res = await Api.get('users', ownerId);
     // 사용자 정보는 response의 data임.
     const ownerData = res.data;
     console.log(res.data);
@@ -56,7 +56,7 @@ function Portfolio() {
       let ownerId = '';
       if (user.id) {
         ownerId = user.id;
-      } else {
+      } else if (user._id) {
         ownerId = user._id;
       }
       // 해당 유저 id로 fetchPorfolioOwner 함수를 실행함.
