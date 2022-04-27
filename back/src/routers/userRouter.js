@@ -109,17 +109,17 @@ userAuthRouter.delete("/users/:id", login_required, async (req, res, next) => {
   
         // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
         const updatedUser = await userAuthService.setUser({ user_id, toUpdate });
-  
+
         if (updatedUser.errorMessage) {
-          throw new Error(updatedUser.errorMessage);
+            throw new Error(updatedUser.errorMessage);
         }
-  
+
         res.status(200).json(updatedUser);
     } catch (error) {
         next(error);
-      }
     }
-  );
+}
+);
 
 // jwt 토큰 기능 확인함. 삭제해도 되는 라우터임
 userAuthRouter.get("/afterlogin", login_required, function (req, res, next) {
