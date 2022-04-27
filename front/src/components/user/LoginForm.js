@@ -91,7 +91,18 @@ function LoginForm() {
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 50 }}
       >
         <div>
-          <form action="/" onSubmit={handleSubmit} style={{ marginTop: 100, marginBottom: 100 }}>
+          <form
+            action="/"
+            onSubmit={handleSubmit}
+            style={{
+              marginTop: 100,
+              marginBottom: 100,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexFlow: 'column',
+            }}
+          >
             <h1 style={{ margin: 10 }}>Login</h1>
             <Box
               sx={{

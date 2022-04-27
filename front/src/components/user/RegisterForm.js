@@ -112,7 +112,17 @@ function RegisterForm() {
           marginTop: 50,
         }}
       >
-        <form onSubmit={handleSubmit} style={{ marginTop: 100, marginBottom: 100 }}>
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            marginTop: 100,
+            marginBottom: 100,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexFlow: 'column',
+          }}
+        >
           <h1 style={{ margin: 10 }}>Register</h1>
           <Box
             sx={{
