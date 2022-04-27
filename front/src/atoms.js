@@ -3,7 +3,7 @@ import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
 
-// 유저 정보가 담겨있는 아톰
+// 유저 로그인시 받는 데이터 전체
 export const userState = atom({
   key: 'userState',
   default: { user: null },
@@ -14,5 +14,12 @@ export const userState = atom({
 export const tokenState = atom({
   key: 'tokenState',
   default: { token: null },
+  effects_UNSTABLE: [persistAtom],
+});
+
+// 유저 정보
+export const userInfoState = atom({
+  key: 'userInfoState',
+  default: undefined,
   effects_UNSTABLE: [persistAtom],
 });

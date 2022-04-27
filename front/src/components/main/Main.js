@@ -92,8 +92,20 @@ const Main = () => {
             View Details
           </MainButton>
           <br />
-          <MainButton variant="contained" style={{ width: '60%' }} onClick={logout}>
+          <MainButton
+            variant="contained"
+            style={{ marginBottom: '20px', width: '60%' }}
+            onClick={logout}
+          >
             Log-out
+          </MainButton>
+          <br />
+          <MainButton
+            variant="contained"
+            style={{ width: '60%' }}
+            onClick={() => navigate('/users')}
+          >
+            edit
           </MainButton>
         </div>
       </div>

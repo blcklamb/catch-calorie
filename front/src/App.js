@@ -13,6 +13,7 @@ import RegisterForm from './components/user/RegisterForm';
 import Portfolio from './components/Portfolio';
 import { useRecoilState } from 'recoil';
 import { tokenState, userState } from './atoms';
+import UserEditForm from './components/user/UserEditForm';
 
 // export const UserStateContext = createContext(null);
 // export const DispatchContext = createContext(null);
@@ -73,6 +74,7 @@ function App() {
         <Route path="/tracking" element={<Portfolio />} />
         {/* <Route path="/network" element={<Network />} /> */}
         <Route path="*" element={<Portfolio />} />
+        <Route path="/users" element={<UserEditForm />} />
       </Routes>
     </Router>
     // </UserStateContext.Provider>
