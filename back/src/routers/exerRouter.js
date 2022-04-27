@@ -9,7 +9,7 @@ const exerRouter = Router();
 exerRouter.get("/exercises", rateLimit({windowMs: 1000, max: 5}), async (req, res, next) => {
     try {
         const exercises = await exerService.getExerAll();
-        if (exercises.errorMessage) throw new Error(exercise.errorMessage);
+        if (exercises.errorMessage) throw new Error(exercises.errorMessage);
         
         return res.status(200).json(exercises);
     } catch (error) {

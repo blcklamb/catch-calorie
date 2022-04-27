@@ -2,12 +2,11 @@ import { Exercise } from "../db";
 
 
 class exerService {
-    static addExer({ name, kcal_per_lb, kcal_per_kg }) {
-        return Exercise.create({ newExercise: { name, kcal_per_lb, kcal_per_kg }});
+    static addExer({ name, kcal_per_kg, kcal_per_lb }) {
+        return Exercise.create({ newExercise: { name, kcal_per_kg, kcal_per_lb }});
     }
     
     static async getExerByName({ name }) {
-        console.log(name)
         const exer = Exercise.findByName({ name })
         if (!exer) {
             const errorMessage = "Service: Cannot find this exercise. Search another name"
@@ -43,7 +42,7 @@ class exerService {
             kcal_per_lb = weight;
         } 
         Math.round(1.222 * 10)
-        return { kcal_per_lb, kcal_per_kg }
+        return {  kcal_per_kg, kcal_per_lb,}
     }
 }
 
