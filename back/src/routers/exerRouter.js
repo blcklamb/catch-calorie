@@ -21,7 +21,7 @@ exerRouter.get("/exercises", rateLimit({windowMs: 1000, max: 5}), async (req, re
 
 
 // 검색
-exerRouter.post("/api/exer/:id", async (req, res, next) => {
+exerRouter.post("/exercises/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
 
@@ -34,7 +34,7 @@ exerRouter.post("/api/exer/:id", async (req, res, next) => {
 });
 
 // 운동 새로 등록할 때
-exerRouter.post("/exercise/register", login_required, async (req, res, next) => {
+exerRouter.post("/exercises", login_required, async (req, res, next) => {
     try {
         const { name, weight, unit } = req.body;
 
