@@ -21,7 +21,7 @@ trackingRouter.get("/tracking/:user_id", async (req, res, next) => {
     }
 });
 
-trackingRouter.post("/tracking/food/register", async (req, res, next) => {
+trackingRouter.post("/tracking/food", async (req, res, next) => {
     try {
         // const { currentUserId } = req;
         const { food, gram } = req.body;
@@ -35,7 +35,7 @@ trackingRouter.post("/tracking/food/register", async (req, res, next) => {
     }
 });
 
-trackingRouter.post("/tracking/exer/register", async (req, res, next) => {
+trackingRouter.post("/tracking/exer", async (req, res, next) => {
     try {
         // const { currentUserId } = req;
         const { exer, hour } = req.body;
