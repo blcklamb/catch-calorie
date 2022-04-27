@@ -22,7 +22,7 @@ class foodService {
     }
 
     static addFoodViews({ id }) {
-        return Food.update({ _id: id }, { toUpdate: { $inc: { views: 1 } } }, { new: true });
+        return Food.update({ id }, { toUpdate: { $inc: { views: 1 } } }, { new: true });
     }
 }
 
