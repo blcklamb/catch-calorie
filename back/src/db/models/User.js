@@ -18,10 +18,6 @@ class User {
         return UserModel.find();
     }
 
-    static delete({ id }) {
-        return UserModel.remove({ id });
-    }
-
     static async update({ user_id, fieldToUpdate, newValue }) {
         const filter = { id: user_id };
         const update = { [fieldToUpdate]: newValue };
@@ -29,6 +25,10 @@ class User {
 
         const updatedUser = await UserModel.findOneAndUpdate(filter, update, option);
         return updatedUser;
+    }
+
+    static delete({ id }) {
+        return UserModel.remove({ id });
     }
 }
 

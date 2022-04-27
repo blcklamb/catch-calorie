@@ -20,7 +20,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-//
+// 매일 00시 00분 00초마다 heatmap DB 업데이트
 schedule.scheduleJob("0 0 0 * * *", heatmap_scheduler);
 
 // 기본 페이지

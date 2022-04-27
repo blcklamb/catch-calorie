@@ -19,13 +19,13 @@ trackingRouter.get("/tracking/:user_id", async (req, res, next) => {
     }
 });
 
-trackingRouter.post("/tracking/food", async (req, res, next) => {
+trackingRouter.post("/tracking/food", login_required, async (req, res, next) => {
     try {
-        // const { currentUserId } = req;
+        const user_id = req.currentUserId;
         const { name, gram } = req.body;
         const date = dayjs().format("YYYY-MM-DD");
 
-        const newTracking = await trackingService.addFoodTracking({ user_id: "626751e37f0a6752662edaf6", date, name, gram });
+        const newTracking = await trackingService.addFoodTracking({ user_id, date, name, gram });
 
         return res.status(201).json(newTracking);
     } catch (error) {
@@ -33,13 +33,13 @@ trackingRouter.post("/tracking/food", async (req, res, next) => {
     }
 });
 
-trackingRouter.post("/tracking/exer", async (req, res, next) => {
+trackingRouter.post("/tracking/exer", login_required, async (req, res, next) => {
     try {
-        // const { currentUserId } = req;
+        const user_id = req.currentUserId;
         const { name, minute } = req.body;
         const date = dayjs().format("YYYY-MM-DD");
 
-        const newTracking = await trackingService.addExerTracking({ user_id: "626751e37f0a6752662edaf6", date, name, minute });
+        const newTracking = await trackingService.addExerTracking({ user_id, date, name, minute });
 
         return res.status(201).json(newTracking);
     } catch (error) {
@@ -47,7 +47,7 @@ trackingRouter.post("/tracking/exer", async (req, res, next) => {
     }
 });
 
-trackingRouter.put("/tracking/food", async (req, res, next) => {
+trackingRouter.put("/tracking/food", login_required, async (req, res, next) => {
     try {
         const { id, gram } = req.body;
 
@@ -59,7 +59,7 @@ trackingRouter.put("/tracking/food", async (req, res, next) => {
     }
 });
 
-trackingRouter.put("/tracking/exer", async (req, res, next) => {
+trackingRouter.put("/tracking/exer", login_required, async (req, res, next) => {
     try {
         const { id, minute } = req.body;
 
@@ -71,7 +71,7 @@ trackingRouter.put("/tracking/exer", async (req, res, next) => {
     }
 });
 
-trackingRouter.delete("/tracking/food", async (req, res, next) => {
+trackingRouter.delete("/tracking/food", login_required, async (req, res, next) => {
     try {
         const { id } = req.body;
 
@@ -83,7 +83,7 @@ trackingRouter.delete("/tracking/food", async (req, res, next) => {
     }
 });
 
-trackingRouter.delete("/tracking/exer", async (req, res, next) => {
+trackingRouter.delete("/tracking/exer", login_required, async (req, res, next) => {
     try {
         const { id } = req.body;
 

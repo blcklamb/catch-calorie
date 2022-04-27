@@ -13,8 +13,8 @@ class Food {
         return FoodModel.find().sort({ views: -1 });
     }
 
-    static update({ _id }, { toUpdate }) {
-        return FoodModel.findOneAndUpdate({ _id }, toUpdate, { new: true });
+    static update({ id }, { toUpdate }) {
+        return FoodModel.findByIdAndUpdate(id, toUpdate, { new: true });
     }
 
     static delete({ id }) {
