@@ -37,10 +37,11 @@ function MainFoodTab({
   };
 
   const handleCheck = () => {
-    setTotalFood(foodSelected.reduce((acc, cur) => acc + cur.kcal_per100g, totalFood));
+    setTotalFood(kcalPerGram.reduce((acc, cur) => acc + cur, totalFood));
     setFoodSelected([]);
+    setKcalPerGram([]);
 
-    Api.post(`tracking/food`, foodSelected[0]?._id); // .then((res) => setFoodApiList(res.data));
+    // Api.post(`tracking/food`, foodSelected[0]?._id); // .then((res) => setFoodApiList(res.data));
   };
 
   return (
