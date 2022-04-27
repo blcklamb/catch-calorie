@@ -5,9 +5,10 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { TextField } from '@mui/material';
 import MainButton from '../main/style/MainButton';
-import { useRecoilValue, useRecoilState } from 'recoil';
-import { userState } from '../../atoms';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { tokenState, userInfoState, userState } from '../../atoms';
 import * as Api from '../../api';
+import { useNavigate } from 'react-router';
 
 const style = {
   position: 'absolute',
@@ -27,18 +28,31 @@ export default function BasicModal() {
   const handleClose = () => setOpen(false);
 
   const [user, setUser] = useRecoilState(userState);
-  // const [delUser, setDelUser] = React.useState('user');
+  const setToken = useSetRecoilState(tokenState);
+  const setUserInfo = useSetRecoilState(userInfoState);
+
+  const navigate = useNavigate();
+
   const [delMessage, setDelMessage] = React.useState('');
-  console.log(delMessage);
+  // console.log(delMessage);
 
   const handleDel = async (e) => {
     e.preventDefault();
 
-    if (delMessage != '계정을 삭제하겠습니다.') {
+    if (delMessage !== 'I will delete the account.') {
+      alert('Please fill it out properly!');
+      return;
     }
     try {
       const res = await Api.delete('users', user.id);
       console.log(res);
+      setDelMessage('');
+      setUser(null);
+      setToken(null);
+      setUserInfo(null);
+      setOpen(false);
+      alert('Your account has been deleted successfully.');
+      navigate('/');
     } catch (err) {
       console.log('삭제에 실패했군요 휴먼', err);
     }
@@ -60,15 +74,15 @@ export default function BasicModal() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h5" component="h2">
-            Do you really want to delete your account?
+            ⚠️&nbsp;&nbsp;&nbsp;Do you really want to delete your account?&nbsp;&nbsp;⚠️
           </Typography>
           <Typography id="modal-modal-description" variant="h6" sx={{ mt: 2 }}>
             If so, you should follow to write down this sentence below.
           </Typography>
-          <Typography sx={{ mt: 2 }}>계정을 삭제하겠습니다.</Typography>
+          <Typography sx={{ mt: 2, color: '#F03E3E' }}>I will delete the account.</Typography>
           <TextField
             sx={{ mt: 2, width: 500 }}
-            placeholder="계정을 삭제하겠습니다."
+            placeholder="I will delete the account."
             onChange={(e) => setDelMessage(e.target.value)}
           ></TextField>
           <br></br>

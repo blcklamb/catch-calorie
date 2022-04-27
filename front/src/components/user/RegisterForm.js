@@ -41,7 +41,7 @@ function RegisterForm() {
   //useState로 weight 상태를 생성함.
   const [weight, setWeight] = useState('');
   //useState로 icon 상태를 생성함.
-  const [icon, setIcon] = useState('runner');
+  const [icon, setIcon] = useState('all-rounder');
 
   //이메일이 abc@example.com 형태인지 regex를 이용해 확인함.
   const validateEmail = (email) => {
