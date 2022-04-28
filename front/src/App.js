@@ -78,7 +78,7 @@ function App() {
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/tracking" element={<Portfolio />} />
         {/* <Route path="/network" element={<Network />} /> */}
-
+        {/* <Route path="/network/:user_id" element={<Network />} /> */}
         <Route path="/users" element={<UserEditForm />} />
         <Route path="/users/delete" element={<UserDelForm />} />
         <Route path="/mypage" element={<Mypage />} />
