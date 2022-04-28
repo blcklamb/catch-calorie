@@ -6,13 +6,11 @@ import Jandi from './Jandi.js';
 import Badges from './Badges.js';
 
 const JandiPage = styled.section`
-  height: 100vh;
+  height: 60vh;
   width: 100%;
   background-color: white;
   display: flex;
-  align-items: center;
   justify-content: center;
-  position: relative;
 `;
 
 const BadgesPage = styled.section`

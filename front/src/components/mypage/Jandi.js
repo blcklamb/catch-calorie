@@ -10,18 +10,17 @@ const JandiContainer = styled.div`
   height: 387px;
   border-radius: 15px;
   background-color: #94d82d;
-  bottom: 10px;
+  bottom: 0px;
 `;
 
 const JandiText = styled.div`
   width: 1203px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  height: 50px;
   font-size: 1.5rem;
   font-weight: bold;
   color: #f03e3e;
+  position: relative;
+  left: 30px;
 `;
 const Jandi = () => {
   //   const [data, setData] = useState([]);
