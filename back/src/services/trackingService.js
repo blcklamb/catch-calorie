@@ -6,7 +6,7 @@ class trackingService {
     static async addTracking({ user_id, date }) {
         const user = await User.findById({ user_id });
         const bmi = user.weight / (user.height / 100) ** 2;
-        const rec_cal = ((user.height / 100) ** 2 * bmi * 35).toFixed(2);
+        const rec_cal = Math.floor((user.height / 100) ** 2 * bmi * 35);
 
         return Tracking.create({ user_id, date, rec_cal });
     }
