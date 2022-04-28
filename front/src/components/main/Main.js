@@ -64,11 +64,10 @@ const Main = () => {
     <>
       <Header />
       <div style={{ margin: '100px 80px' }}>
-        <MainHello>Hello {user.name}!</MainHello>
-        {/* {console.log(test)} */}
+        <MainHello>Hello {user?.name}!</MainHello>
 
-        <div style={{ margin: '80px 0px' }}>
-        {/* <div style={{ display: 'inline-flex', margin: '80px 0px' }}> */}
+        {/* <div style={{ margin: '80px 0px' }}> */}
+        <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
           <MainTabs
             foodSelected={foodSelected}
             setFoodSelected={setFoodSelected}
