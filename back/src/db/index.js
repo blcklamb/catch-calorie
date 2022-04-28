@@ -16,7 +16,10 @@ db.once("open", async () => {
     const changeStream = trackings.watch();
 
     changeStream.on("change", async (change) => {
-        const terms = (trackings) => {};
+        const terms = (trackings) => {
+            if (Math.floor(trackings.length / 5) > 6) {
+            }
+        };
 
         switch (change.operationType) {
             case "insert":
@@ -26,7 +29,7 @@ db.once("open", async () => {
                 const id = change.documentKey._id;
                 const { user_id } = await Tracking.findById({ id });
                 const trackings = await Tracking.findByUser({ user_id });
-                console.log(trackings);
+                // console.log(trackings);
                 terms(trackings);
         }
     });
