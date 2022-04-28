@@ -5,16 +5,16 @@ class Tracking {
         return TrackingModel.create({ user_id, date, rec_cal });
     }
 
-    static findByRecordId({ id }, { record }) {
+    static findById({ id }) {
+        return TrackingModel.findById(id);
+    }
+
+    static findByRecordId({ id, record }) {
         if (record === "food") {
             return TrackingModel.findOne({ food_record: { $elemMatch: { id } } });
         } else if (record === "exer") {
             return TrackingModel.findOne({ exer_record: { $elemMatch: { id } } });
         }
-    }
-
-    static findById({ id }) {
-        return TrackingModel.findById(id);
     }
 
     static findByUserAndDate({ user_id, date }) {
@@ -25,7 +25,7 @@ class Tracking {
         return TrackingModel.find({ user_id }).sort({ date: 1 });
     }
 
-    static update({ user_id, date }, { toUpdate }) {
+    static update({ user_id, date, toUpdate }) {
         return TrackingModel.findOneAndUpdate({ user_id, date }, toUpdate, { new: true });
     }
 

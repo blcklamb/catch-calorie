@@ -13,7 +13,7 @@ class Food {
         return FoodModel.find().sort({ views: -1 });
     }
 
-    static update({ id }, { toUpdate }) {
+    static update({ id, toUpdate }) {
         return FoodModel.findByIdAndUpdate(id, toUpdate, { new: true });
     }
 

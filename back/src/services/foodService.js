@@ -13,8 +13,8 @@ class foodService {
         return Food.findAll();
     }
 
-    static setfood({ id }, { toUpdate }) {
-        return Food.update({ id }, { toUpdate });
+    static setfood({ id, toUpdate }) {
+        return Food.update({ id, toUpdate });
     }
 
     static deleteFood({ id }) {

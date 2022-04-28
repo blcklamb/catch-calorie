@@ -18,7 +18,7 @@ class exerService {
     }
 
     static addExerViews({ id }) {
-        return Exercise.update({ id }, { toUpdate: { $inc: { views: 1 } } }, { new: true });
+        return Exercise.update({ id }, { toUpdate: { $inc: { views: 1 } } });
     }
 
     static async convertUnit({ kcal, unit }) {
