@@ -23,11 +23,6 @@ const AwardSchema = new Schema({
     candy_lover: Number,
     gourmand: Number,
     visitor: Number,
-    // achieved_award: {
-    //     type: Array,
-    //     required: true,
-    //     default: [],
-    // },
 });
 
 const AwardModel = model("Award", AwardSchema);
