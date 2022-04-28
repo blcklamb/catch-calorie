@@ -13,8 +13,16 @@ import MainButton from './style/MainButton';
 import { DispatchContext } from '../../App';
 
 import * as Api from '../../api';
+import { useRecoilState } from 'recoil';
+import { tokenState, userInfoState, userState } from '../../atoms';
+import ServerModal from '../user/UserDelForm';
+import BasicModal from '../user/UserDelForm';
 
 const Main = () => {
+  const [token, setToken] = useRecoilState(tokenState);
+  const [recoilUser, setRecoilUser] = useRecoilState(userState);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+
   const [foodSelected, setFoodSelected] = useState([]);
   const [totalFood, setTotalFood] = useState(0);
   const [exerciseSelected, setExerciseSelected] = useState([]);
@@ -28,8 +36,9 @@ const Main = () => {
   const [testUser, setTestUser] = useState('');
 
   const navigate = useNavigate();
-  const params = useParams();
-  const dispatch = useContext(DispatchContext);
+  // const params = useParams();
+  // const dispatch = useContext(DispatchContext);
+  // // const dispatch = useContext(DispatchContext);
 
   // useEffect(() => {
   //   Api.get(`user/login`).then((res) => setTest(res.data));
@@ -37,20 +46,22 @@ const Main = () => {
   //   Api.get(`userlist`).then((res) => setTestUser(res.data));
   // }, []);
 
-  useEffect(() => {
-    // console.log(params)
-    Api.get(`users/${params.userId}`).then((res) => {
-      setUser(res.data)
-    })
-  }, [params])
-
-  // console.log(test);
+  // useEffect(() => {
+  //   // console.log(params)
+  //   Api.get(`users/${params.userId}`).then((res) => {
+  //     setUser(res.data)
+  //   })
+  // }, [params])
 
   const logout = () => {
     // sessionStorage 에 저장했던 JWT 토큰을 삭제함.
     sessionStorage.removeItem('userToken');
     // dispatch 함수를 이용해 로그아웃함.
-    dispatch({ type: 'LOGOUT' });
+    // dispatch({ type: 'LOGOUT' });
+    setRecoilUser(null);
+    setUserInfo(null);
+    setToken(null);
+
     // 기본 페이지로 돌아감.
     navigate('/login');
   };
@@ -64,7 +75,9 @@ const Main = () => {
     <>
       <Header />
       <div style={{ margin: '100px 80px' }}>
-        <MainHello>Hello {user?.name}!</MainHello>
+        {/* <MainHello>Hello {user?.name}!</MainHello>
+        <MainHello>Hello {recoilUser.name}!</MainHello>
+        <MainHello>Hello {userInfo.name}!</MainHello> */}
 
         {/* <div style={{ margin: '80px 0px' }}> */}
         <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
@@ -98,7 +111,39 @@ const Main = () => {
           />
         </div>
         <div>
-          <TrackingList user={user}/>
+          <TrackingList user={user} />
+          <MainButton variant="contained" style={{ marginBottom: '20px', width: '60%' }}>
+            Modifying and deleting
+          </MainButton>
+          <br />
+          <MainButton variant="contained" style={{ marginBottom: '20px', width: '60%' }}>
+            View Details
+          </MainButton>
+          <br />
+          <MainButton
+            variant="contained"
+            style={{ marginBottom: '20px', width: '60%' }}
+            onClick={logout}
+          >
+            Log-out
+          </MainButton>
+          <br />
+          <MainButton
+            variant="contained"
+            style={{ marginBottom: '20px', width: '60%' }}
+            onClick={() => navigate('/users')}
+          >
+            edit
+          </MainButton>
+          <br />
+          {/* <MainButton
+            variant="contained"
+            style={{ width: '60%' }}
+            onClick={() => navigate('/users/delete')}
+          >
+            Delete my account
+          </MainButton> */}
+          <BasicModal></BasicModal>
         </div>
       </div>
       <Footer />
