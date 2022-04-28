@@ -10,22 +10,16 @@ class User {
     }
 
     static findById({ id }) {
-        // return UserModel.findById(id); req.parms에서 받는 id는 string으로 findById에서 사용하는 ObjectId와 다름.
-        
-        return UserModel.findOne({ _id: id })
+        return UserModel.findById(id)
     }
 
     static findAll() {
         return UserModel.find();
     }
 
-    static async update({ user_id, fieldToUpdate, newValue }) {
-        const filter = { _id: user_id };
-        const update = { [fieldToUpdate]: newValue };
-        const option = { returnOriginal: false };
+    static async update({ user_id, toUpdate }) {
 
-        const updatedUser = await UserModel.findOneAndUpdate(filter, update, option);
-        return updatedUser;
+        return UserModel.findByIdAndUpdate(user_id, toUpdate, {new:true});
     }
 
     static delete({ id }) {
