@@ -4,7 +4,7 @@ import { ExerModel } from "../db/schemas/exercise"; // git merge 이후 삭제�
 
 class trackingService {
     static async addTracking({ user_id, date }) {
-        const user = await User.findById({ user_id });
+        const user = await User.findById({ id: user_id });
         const bmi = user.weight / (user.height / 100) ** 2;
         const rec_cal = Math.floor((user.height / 100) ** 2 * bmi * 35);
 
@@ -29,7 +29,7 @@ class trackingService {
     }
 
     static async addExerTracking({ user_id, date, name, minute }) {
-        const { weight } = await User.findById({ user_id });
+        const { weight } = await User.findById({ id: user_id });
         const { kcal_per_kg } = await ExerModel.findOne({ name });
         const calorie = ((kcal_per_kg * weight) / 60) * minute;
 

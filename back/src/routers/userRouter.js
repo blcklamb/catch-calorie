@@ -8,9 +8,10 @@ const userAuthRouter = Router();
 // 회원가입
 userAuthRouter.post("/users/register", async (req, res, next) => {
     try {
-        // if (is.emptyObject(req.body)) {
-        //     throw new Error("header의 Content-Type을 application/json으로 설정해주세요.");
-        // }
+        if (is.emptyObject(req.body)) {
+            throw new Error("header의 Content-Type을 application/json으로 설정해주세요.");
+        }
+
         const { email, password, name, gender, height, weight, icon } = req.body;
 
         const newUser = await userAuthService.addUser({
@@ -20,7 +21,6 @@ userAuthRouter.post("/users/register", async (req, res, next) => {
             gender,
             height,
             weight,
-            //이미지 처리는 후에 진행할 예정
             icon,
         });
 
@@ -92,29 +92,21 @@ userAuthRouter.delete("/users/:id", login_required, async (req, res, next) => {
 });
 
 // 회원 정보 수정하기
-userAuthRouter.put("/users/:user_id", login_required, async function (req, res, next) {
+userAuthRouter.put("/users/:id", login_required, async (req, res, next) => {
     try {
         // URI로부터 사용자 id를 추출함.
-        const { user_id } = req.params;
+        const { id } = req.params;
 
-        // body data 로부터 업데이트할 사용자 정보를 추출함.
-        // password는 따로 페이지를 만들어야하지 않을까요 ?
-        // object destructuring 사용하지 않으신 이유가 따로 있을까요 ?
-        // const { email, name, gender, height, weight, icon, status } = req.body;
-        const email = req.body.email ?? null;
-        const password = req.body.password ?? null;
-        const name = req.body.name ?? null;
-        const gender = req.body.gender ?? null;
-        const height = req.body.height ?? null;
-        const weight = req.body.weight ?? null;
-        const icon = req.body.icon ?? null;
-        const status = req.body.status ?? null;
+        const { name, height, weight, icon, status } = req.body;
 
-        const toUpdate = { email, password, name, gender, height, weight, icon, status };
+        if (name === null || height === null || weight === null || icon == null || status == null) {
+            throw new Error("빈 내역이 있습니다 확인해주세요");
+        }
+
+        const toUpdate = { name, height, weight, icon, status };
 
         // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
-        const updatedUser = await userAuthService.setUser({ user_id, toUpdate });
-
+        const updatedUser = await userAuthService.setUser({ id, toUpdate });
         if (updatedUser.errorMessage) {
             throw new Error(updatedUser.errorMessage);
         }
