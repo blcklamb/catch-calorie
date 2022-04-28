@@ -14,7 +14,6 @@ class exerService {
     static async getExerAll() {
         const exers = await Exercise.findAll();
         if (!exers) return { errorMessage: "Service: Cannot find all exercises." };
-
         return exers;
     }
 
