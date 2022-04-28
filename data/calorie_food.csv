@@ -153,7 +153,7 @@ PotatoProducts,Red Gold Potatoes,89,19.62
 PotatoProducts,Red Potatoes,89,19.62
 PotatoProducts,Roast Potatoes,149,32.85
 PotatoProducts,Rosemary Potatoes,93,20.5
-PotatoProducts,Rösti,138,30.42
+PotatoProducts,Rosti,138,30.42
 PotatoProducts,Russet Potatoes,97,21.38
 PotatoProducts,Russian Banana Potatoes,67,14.77
 PotatoProducts,Sweet Potato,92,20.28
@@ -199,7 +199,7 @@ Vegetables,Kohlrabi,27,5.95
 Vegetables,Kumara,86,18.96
 Vegetables,Leek,61,13.45
 Vegetables,Lettuce,15,3.31
-Vegetables,Mushrooms,dyrj,4.85
+Vegetables,Mushrooms,22,4.85
 Vegetables,Mustard Greens,27,5.95
 Vegetables,Nori,35,7.72
 Vegetables,Okra,33,7.28
@@ -223,13 +223,13 @@ Vegetables,Turnips,28,6.17
 Vegetables,Wasabi,109,24.03
 Vegetables,Winter Squash,34,7.5
 Vegetables,Zucchini,17,3.75
-FastFood,Arby?s Grand Turkey Club,210,46.3
-FastFood,Arby?s Reuben,208,45.86
-FastFood,Arby?s Roast Beef Classic,234,51.59
-FastFood,Arby?s Roast Beef Max,234,51.59
+FastFood,Arby's Grand Turkey Club,210,46.3
+FastFood,Arby's Reuben,208,45.86
+FastFood,Arby's Roast Beef Classic,234,51.59
+FastFood,Arby's Roast Beef Max,234,51.59
 FastFood,BBQ Rib,212,46.74
 FastFood,Bean Burrito,200,44.09
-FastFood,Big N??Tasty,223,49.16
+FastFood,Big N' Tasty,223,49.16
 FastFood,Bratwurst,333,73.41
 FastFood,Burger King Angry Whopper,255,56.22
 FastFood,Burger King Double Whopper,239,52.69
@@ -264,16 +264,16 @@ FastFood,Hamburger,254,56
 FastFood,Hot Dog,269,59.3
 FastFood,Italian BMT,183,40.34
 FastFood,Lasagna,132,29.1
-FastFood,McDonald?s Big Mac,256,56.44
-FastFood,McDonald?s Cheeseburger,263,57.98
-FastFood,McDonald?s Chicken Nuggets,297,65.48
-FastFood,McDonald?s Double Cheeseburger,282,62.17
-FastFood,McDonald?s Filet-o-Fish,275,60.63
-FastFood,McDonald?s McChicken,251,55.34
-FastFood,McDonald?s McDouble,252,55.56
-FastFood,McDonald?s McMuffi Egg,225,49.6
-FastFood,McDonald?s McRib,265,58.42
-FastFood,McDonald?s Mighty Wings,308,67.9
+FastFood,McDonald's Big Mac,256,56.44
+FastFood,McDonald's Cheeseburger,263,57.98
+FastFood,McDonald's Chicken Nuggets,297,65.48
+FastFood,McDonald's Double Cheeseburger,282,62.17
+FastFood,McDonald's Filet-o-Fish,275,60.63
+FastFood,McDonald's McChicken,251,55.34
+FastFood,McDonald's McDouble,252,55.56
+FastFood,McDonald's McMuffi Egg,225,49.6
+FastFood,McDonald's McRib,265,58.42
+FastFood,McDonald's Mighty Wings,308,67.9
 FastFood,McRib,265,58.42
 FastFood,Meatball Sandwich,161,35.49
 FastFood,Nachos with Cheese,306,67.46
@@ -287,10 +287,10 @@ FastFood,Turkey,104,22.93
 FastFood,Veggie Burger,181,39.9
 FastFood,Veggie Delight,138,30.42
 FastFood,Veggie Patty,390,85.98
-FastFood,Wendy?s Baconator,304,67.02
-FastFood,Wendy?s Jr. Bacon Cheeseburger,261,57.54
-FastFood,Wendy?s Jr. Cheeseburger,225,49.6
-FastFood,Wendy?s Son of Baconator,321,70.77
+FastFood,Wendy's Baconator,304,67.02
+FastFood,Wendy's Jr. Bacon Cheeseburger,261,57.54
+FastFood,Wendy's Jr. Cheeseburger,225,49.6
+FastFood,Wendy's Son of Baconator,321,70.77
 FastFood,Whopper,231,50.93
 FastFood,Zinger,256,56.44
 FastFood,Zinger Burger,256,56.44
@@ -331,7 +331,7 @@ Pizza,Sicilian Pizza,241,53.13
 Pizza,Spinach Feta Pizza,242,53.35
 Pizza,Spinach Pizza,234,51.59
 Pizza,Stuffed Crust Pizza,255,56.22
-Pizza,Tarte Flambée,253,55.78
+Pizza,Tarte Flambee,253,55.78
 Pizza,Thin Crust Pizza,261,57.54
 Pizza,Tuna Pizza,254,56
 Pizza,Vegetable Pizza,256,56.44
@@ -443,7 +443,7 @@ Milk&DairyProducts,Whole Milk,61,13.45
 Milk&DairyProducts,Yogurt,61,13.45
 SlicedCheese,American Cheese,148,32.63
 SlicedCheese,Applewood,410,90.39
-SlicedCheese,Bergkäse,418,92.15
+SlicedCheese,Bergkase,418,92.15
 SlicedCheese,Butter Cheese,388,85.54
 SlicedCheese,Cheddar,403,88.85
 SlicedCheese,Cheese Platter,357,78.7
@@ -679,8 +679,8 @@ Pork,Meatloaf,89,19.62
 Pork,Parma Ham,261,57.54
 Pork,Pig Ear,166,36.6
 Pork,Pig Fat,638,140.65
-Pork,Pig?s Tail,396,87.3
-Pork,Pig?s Trotter,243,53.57
+Pork,Pig's Tail,396,87.3
+Pork,Pig's Trotter,243,53.57
 Pork,Pork Bacon,407,89.73
 Pork,Pork Belly,518,114.2
 Pork,Pork Blade Steak,232,51.15
@@ -931,7 +931,7 @@ Candy&Sweets,Candy Floss,400,88.18
 Candy&Sweets,Caramel Popcorn,376,82.89
 Candy&Sweets,Caramel squares,367,80.91
 Candy&Sweets,Celebrations,490,108.03
-Candy&Sweets,Cheez-It?s,533,117.51
+Candy&Sweets,Cheez-It,533,117.51
 Candy&Sweets,Chocolate,529,116.62
 Candy&Sweets,Chocolate Bar,533,117.51
 Candy&Sweets,Chocolate Chips,493,108.69
@@ -958,7 +958,7 @@ Candy&Sweets,LifeSavers,500,110.23
 Candy&Sweets,Lindt Chocolate,548,120.81
 Candy&Sweets,Liquorice,375,82.67
 Candy&Sweets,Lollipop,392,86.42
-Candy&Sweets,M&M?s,479,105.6
+Candy&Sweets,M&M's,479,105.6
 Candy&Sweets,Maltesers,498,109.79
 Candy&Sweets,Mars Bar,448,98.77
 Candy&Sweets,Marshmallows,318,70.11
@@ -980,7 +980,7 @@ Candy&Sweets,Reeses Peanut Butter Cups,536,118.17
 Candy&Sweets,Rice Pudding,134,29.54
 Candy&Sweets,Roasted Almonds,452,99.65
 Candy&Sweets,Rolo,474,104.5
-Candy&Sweets,S?mores,500,110.23
+Candy&Sweets,S'mores,500,110.23
 Candy&Sweets,Semolina,340,74.96
 Candy&Sweets,Skittles,405,89.29
 Candy&Sweets,Smarties,357,78.7
@@ -996,7 +996,7 @@ Candy&Sweets,Twix,495,109.13
 Candy&Sweets,Waffles,272,59.97
 Candy&Sweets,Whoopie Pie,400,88.18
 IceCream,Baskin-Robbins,239,52.69
-IceCream,Ben and Jerry?s,228,50.27
+IceCream,Ben and Jerry's,228,50.27
 IceCream,Butter Pecan Ice Cream,248,54.67
 IceCream,Carvel,212,46.74
 IceCream,Chocolate Chip Ice Cream,215,47.4
@@ -1011,7 +1011,7 @@ IceCream,Dippin Dots,224,49.38
 IceCream,Double Rainbow,257,56.66
 IceCream,Drumsticks,255,56.22
 IceCream,French Vanilla Ice Cream,201,44.31
-IceCream,Friendly?s,212,46.74
+IceCream,Friendly's,212,46.74
 IceCream,Healthy Choice,125,27.56
 IceCream,Hot Fudge Sundae,186,41.01
 IceCream,Ice Cream Sandwich,237,52.25
@@ -1029,7 +1029,7 @@ IceCream,McFlurry Oreo,186,41.01
 IceCream,Mini Milk,120,26.46
 IceCream,Mint Chocolate Chip Ice Cream,239,52.69
 IceCream,Rocky Road Ice Cream,257,56.66
-IceCream,Schwan?s,246,54.23
+IceCream,Schwan's,246,54.23
 IceCream,Smarties McFlurry,198,43.65
 IceCream,Snickers Ice Cream,360,79.37
 IceCream,Soft Serve,222,48.94
@@ -1137,7 +1137,7 @@ AlcoholicDrinks&Beverages,Wine,83,18.3
 Beer,Ale,35,7.72
 Beer,Altbier,43,9.48
 Beer,Bass,45,9.92
-Beer,Beck?s,39,8.6
+Beer,Beck's,39,8.6
 Beer,Beer,43,9.48
 Beer,Blue Moon,48,10.58
 Beer,Bock Beer,50,11.02
@@ -1399,7 +1399,7 @@ CerealProducts,Wheat Starch,351,77.38
 CerealProducts,Whole Grain Wheat,339,74.74
 CerealProducts,Wholegrain Oat,375,82.67
 "Oatmeal,Muesli&Cereals",Bran Flakes,356,78.48
-"Oatmeal,Muesli&Cereals",Cap?n Crunch,404,89.07
+"Oatmeal,Muesli&Cereals",Cap'n Crunch,404,89.07
 "Oatmeal,Muesli&Cereals",Cheerios,347,76.5
 "Oatmeal,Muesli&Cereals",Chex,387,85.32
 "Oatmeal,Muesli&Cereals",Chocolate Cheerios,367,80.91
@@ -2120,7 +2120,7 @@ Herbs&Spices,Yam,118,26.01
 "Pastries,Breads&Rolls",Scone,362,79.81
 "Pastries,Breads&Rolls",Shortcrust Pastry,544,119.93
 "Pastries,Breads&Rolls",Soda Bread,290,63.93
-"Pastries,Breads&Rolls",Soufflé,204,44.97
+"Pastries,Breads&Rolls",Souffle,204,44.97
 "Pastries,Breads&Rolls",Sourdough Bread,289,63.71
 "Pastries,Breads&Rolls",Spanakopita,246,54.23
 "Pastries,Breads&Rolls",Spice Cake,332,73.19
@@ -2208,7 +2208,7 @@ Spreads,Marmite,225,49.6
 Spreads,Marshmallow Fluff,666,146.83
 Spreads,Nutella,544,119.93
 Spreads,Olive Spread,550,121.25
-Spreads,"Pâté (720), Pate",319,70.33
+Spreads,Pate de Pates,319,70.33
 Spreads,Peanut Butter,589,129.85
 Spreads,Peter Pan Peanut Butter,609,134.26
 Spreads,Philadelphia Cream Cheese,342,75.4
