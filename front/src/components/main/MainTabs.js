@@ -6,7 +6,6 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
-// import styled from 'styled-components';
 
 import MainFoodTab from './MainFoodTab';
 import MainExerciseTab from './MainExerciseTab';
@@ -15,16 +14,16 @@ const StyledTabs = styled((props) => (
   <Tabs {...props} TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }} />
 ))({
   width: '100%',
-    '& .MuiTabs-indicator': {
-      display: 'none',
-      // justifyContent: 'center',
-      // backgroundColor: 'transparent',
-    },
-    // '& .MuiTabs-indicatorSpan': {
-    //   maxWidth: 40,
-    //   width: '100%',
-    //   backgroundColor: '#635ee7',
-    // },
+  '& .MuiTabs-indicator': {
+    display: 'none',
+    // justifyContent: 'center',
+    // backgroundColor: 'transparent',
+  },
+  // '& .MuiTabs-indicatorSpan': {
+  //   maxWidth: 40,
+  //   width: '100%',
+  //   backgroundColor: '#635ee7',
+  // },
 });
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
@@ -35,6 +34,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
   color: 'white',
   backgroundColor: '#8CB352',
   width: '50%',
+  maxWidth: '800px',
   '&.Mui-selected': {
     color: '#fff',
     backgroundColor: '#4C7115',
@@ -44,33 +44,8 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
   },
 }));
 
-// const StyledTab = styled.Tab`
-//   textTransform: 'none',
-//   fontWeight: theme.typography.fontWeightRegular,
-//   fontSize: theme.typography.pxToRem(15),
-//   marginRight: theme.spacing(1),
-//   color: 'white',
-//   backgroundColor: '#8CB352',
-//   '&.Mui-selected': {
-//     color: '#fff',
-// 	backgroundColor: '#4C7115',
-//   },
-//   '&.Mui-focusVisible': {
-//     backgroundColor: 'rgba(100, 95, 228, 0.32)',
-//   },
-// `
-
-// +++++++++++++++++++++++++++++++++++++++++++++++++
-
-// const MainTabsSection = styled.div`
-//   width: 100%;
-//   margin-right: 200px;
-// `;
-
-// ++++++++++++++++++++++++++++
-
 const MainTabsSection = styled(Box)`
-  width: 700px;
+  width: 900px;
   margin-right: 120px;
 `;
 
@@ -123,6 +98,10 @@ const MainTabs = ({
   setExerciseSelected,
   totalExercise,
   setTotalExercise,
+  kcalPerGram,
+  setKcalPerGram,
+  kcalPerHour,
+  setKcalPerHour,
 }) => {
   const [value, setValue] = React.useState(0);
 
@@ -138,24 +117,26 @@ const MainTabs = ({
           <StyledTab label="Exercise" {...a11yProps(1)} />
         </StyledTabs>
       </div>
-      {/* <div> */}
-        <TabPanel value={value} index={0}>
-          <MainFoodTab
-            foodSelected={foodSelected}
-            setFoodSelected={setFoodSelected}
-            totalFood={totalFood}
-            setTotalFood={setTotalFood}
-          />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <MainExerciseTab
-            exerciseSelected={exerciseSelected}
-            setExerciseSelected={setExerciseSelected}
-            totalExercise={totalExercise}
-            setTotalExercise={setTotalExercise}
-          />
-        </TabPanel>
-      {/* </div> */}
+      <TabPanel value={value} index={0}>
+        <MainFoodTab
+          foodSelected={foodSelected}
+          setFoodSelected={setFoodSelected}
+          totalFood={totalFood}
+          setTotalFood={setTotalFood}
+          kcalPerGram={kcalPerGram}
+          setKcalPerGram={setKcalPerGram}
+        />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <MainExerciseTab
+          exerciseSelected={exerciseSelected}
+          setExerciseSelected={setExerciseSelected}
+          totalExercise={totalExercise}
+          setTotalExercise={setTotalExercise}
+          kcalPerHour={kcalPerHour}
+          setKcalPerHour={setKcalPerHour}
+        />
+      </TabPanel>
     </MainTabsSection>
   );
 };
