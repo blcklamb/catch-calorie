@@ -21,21 +21,27 @@ import { useNavigate, useParams } from 'react-router-dom';
 function UserCard({ currentUserInfo, eachUserId }) {
   const user = useRecoilValue(userInfoState);
   const [isEditable, setIsEditable] = useState(true);
+  const iconImg = undefined;
 
   // console.log(eachUserId);
   const navigate = useNavigate();
   const params = useParams();
   console.log(params);
+
   // 유저가 누구인지에 따라 편집버튼 보이게 할지 말지
   useEffect(() => {
     console.log('userCard', eachUserId, currentUserInfo);
-    //eachUserId 가 있을 경우 실행
+    //eachUserId나 currentUserInfo나 params에 유저 정보가 들어 있을 경우 실행
     if (eachUserId || currentUserInfo || params) {
       if (eachUserId?._id === user._id) {
+        // network에서 유저를 뿌릴 때
+
         setIsEditable(true);
       } else if (currentUserInfo?._id === user._id) {
+        // mypage 보기를 통해 들어올 때
         setIsEditable(true);
       } else if (params?.user_id === user._id) {
+        // network에서 들어올 때
         setIsEditable(true);
       } else {
         setIsEditable(false);
@@ -57,7 +63,7 @@ function UserCard({ currentUserInfo, eachUserId }) {
               </Typography>
             </div>
             <div>
-              <img src="/runner.png" alt="badge" style={{ width: 100 }}></img>
+              <img src={'/' + eachUserId.icon + '.png'} alt="badge" style={{ width: 100 }}></img>
             </div>
             <div>
               <Typography variant="h4">{eachUserId.name}</Typography>
