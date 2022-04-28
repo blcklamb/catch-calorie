@@ -51,6 +51,10 @@ class userAuthService {
         };
     }
 
+    static getUserByEmail({ email }) {
+        return User.findOne({ email });
+    }
+
     // 전체 유저 목록 가져오기
     static getUsers() {
         return User.findAll();
@@ -60,7 +64,6 @@ class userAuthService {
     static async getUserById({ id }) {
         const user = await User.findById({ id });
         if (!user) return { errorMessage: "가입 내역이 없는 사용자입니다. 다시 한 번 확인해 주세요." };
-
         return user;
     }
 

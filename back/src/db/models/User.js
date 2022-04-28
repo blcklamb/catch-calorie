@@ -9,8 +9,8 @@ class User {
         return UserModel.findOne({ email });
     }
 
-    static findById({ id }) {
-        return UserModel.findById(id);
+    static findById({ user_id }) {
+        return UserModel.findById(user_id);
     }
 
     static findAll() {

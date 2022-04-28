@@ -125,4 +125,61 @@ userAuthRouter.put("/users/:user_id", login_required, async function (req, res, 
     }
 });
 
+userAuthRouter.get("/users/login/github", async (req, res) => {
+    try {
+        const { code } = req.query;
+
+        const base = "https://github.com/login/oauth/access_token";
+        const params = new URLSearchParams({
+            client_id: process.env.GITHUB_ID,
+            client_secret: process.env.GITHUB_SECRET,
+            code,
+        }).toString();
+        const url = `${base}?${params}`;
+
+        const token = await fetch(url, {
+            method: "POST",
+            headers: { Accept: "application/json" },
+        }).then((res) => res.json());
+
+        const { access_token } = token;
+        const api = "https://api.github.com";
+        const data = await fetch(`${api}/user`, {
+            headers: {
+                Authorization: `token ${access_token}`,
+            },
+        }).then((res) => res.json());
+
+        const emailData = await fetch(`${api}/user/emails`, {
+            headers: {
+                Authorization: `token ${access_token}`,
+            },
+        }).then((res) => res.json());
+        const { email } = emailData.find((email) => email.primary === true && email.verified === true);
+
+        // user 정보  처리
+        let user = await userAuthService.getUserByEmail({ email });
+        if (!user) {
+            user = await userAuthService.addUser({
+                name: data.name || data.login,
+                email,
+                description: data.bio || "Hello World!",
+            });
+        }
+
+        const { _id, name, description, oauth } = user;
+
+        return res.status(200).json({
+            token: jwt.sign({ user_id: _id }, process.env.JWT_SECRET_KEY || "secret-key"),
+            _id,
+            email,
+            name,
+            description,
+            oauth,
+        });
+    } catch (error) {
+        next(error);
+    }
+});
+
 export { userAuthRouter };

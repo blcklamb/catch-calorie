@@ -8,11 +8,21 @@ const AwardSchema = new Schema({
         ref: "User",
         required: true,
     },
-    achieved_award: {
-        type: Array,
-        required: true,
-        default: [],
-    },
+    athlete: Number,
+    runner: Number,
+    climber: Number,
+    swimmer: Number,
+    gym_rat: Number,
+    smasher: Number,
+    triathlelte: Number,
+    protainer: Number,
+    fruits_lover: Number,
+    vegetables_lover: Number,
+    yogurt_lover: Number,
+    meat_lover: Number,
+    candy_lover: Number,
+    gourmand: Number,
+    visitor: Number,
 });
 
 const AwardModel = model("Award", AwardSchema);

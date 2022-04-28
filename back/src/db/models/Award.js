@@ -5,12 +5,12 @@ class Award {
         return AwardModel.create({ user_id });
     }
 
-    static findById({ user_id }) {
+    static findByUser({ user_id }) {
         return AwardModel.findOne({ user_id });
     }
 
-    static update({ user_id }, { toUpdate }) {
-        return AwardModel.findOneAndUpdate({ user_id }, { toUpdate });
+    static update({ user_id }, toUpdate) {
+        return AwardModel.findOneAndUpdate({ user_id }, toUpdate, { new: true });
     }
 }
 
