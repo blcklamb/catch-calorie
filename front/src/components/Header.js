@@ -4,17 +4,6 @@ import avocado from '../image/avocado.gif';
 // import { UserStateContext } from '../App';
 
 const Container = styled.div`
-<<<<<<< HEAD
-	position: fixed;
-	height: 100px;
-	width: 100vw;
-	background-color: #9fdc42;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	z-index: 3000;
-	top: 0;
-=======
   position: fixed;
   height: 100px;
   width: 100vw;
@@ -23,11 +12,11 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   z-index: 3000;
->>>>>>> develop-front-start
+  top: 0;
 `;
 
 const Logo = styled.h3`
-  font-size: 2.9rem;
+  font-size: 2.9rem;g
   color: #f03e3e;
   font-style: bold;
   margin: 15px 30px -5px;
