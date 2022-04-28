@@ -116,6 +116,17 @@ export const UserBodyInfo = styled2.div`
   margin: 20px;
 `;
 
+export const UserBtnInfo = styled2.div`
+  width: 400px;
+  height: 100px;
+  border-radius: 15px;
+  // background-color: #94d82d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+`;
+
 export const UserBadgeImgInfo = styled2.div`
   width: 400px;
   height: 300px;

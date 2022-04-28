@@ -7,6 +7,7 @@ import {
   UserContainer,
   UserCardFrame,
   UserBodyInfo,
+  UserBtnInfo,
   UserBadgeImgInfo,
   ColorButton,
 } from '../styledCompo/uesrStyle';
@@ -14,10 +15,13 @@ import {
 //Mui
 import { Button } from '@mui/material';
 import { Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function User({ currentUserInfo, isEditable }) {
   const user = useRecoilValue(userInfoState);
   const [curUser, setCurUser] = useState(currentUserInfo);
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -25,19 +29,23 @@ function User({ currentUserInfo, isEditable }) {
         <UserContainer>
           <UserCardFrame>
             <UserBodyInfo>
-              <Typography variant="h2">200/100</Typography>
+              <Typography variant="h6">height/weight</Typography>
+              <br></br>
+              <Typography variant="h3">200/100</Typography>
             </UserBodyInfo>
             <UserBadgeImgInfo>
               <img src="/runner.png" alt="badge" style={{ width: 300 }}></img>
             </UserBadgeImgInfo>
-            <UserBodyInfo>
+            <UserBtnInfo>
               {isEditable && (
                 <div>
-                  <ColorButton sx={{ width: 120, height: 60 }}> Edit info</ColorButton>
+                  <ColorButton sx={{ width: 120, height: 60 }} onClick={() => navigate('/users')}>
+                    Edit info
+                  </ColorButton>
                   <ColorButton sx={{ width: 120, height: 60 }}> Change PW</ColorButton>
                 </div>
               )}
-            </UserBodyInfo>
+            </UserBtnInfo>
           </UserCardFrame>
           <UserCardFrame></UserCardFrame>
         </UserContainer>
