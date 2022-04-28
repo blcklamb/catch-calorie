@@ -15,20 +15,9 @@ import {
 import { Button } from '@mui/material';
 import { Typography } from '@mui/material';
 
-function User({ currentUserInfo }) {
+function User({ currentUserInfo, isEditable }) {
   const user = useRecoilValue(userInfoState);
   const [curUser, setCurUser] = useState(currentUserInfo);
-  const [isEditable, setIsEditable] = useState(false);
-
-  useEffect(() => {
-    console.log(currentUserInfo);
-    console.log(user);
-    if (curUser?._id === user._id) {
-      setIsEditable(true);
-    } else {
-      return;
-    }
-  }, [curUser, user]);
 
   return (
     <>
@@ -42,10 +31,12 @@ function User({ currentUserInfo }) {
               <img src="/runner.png" alt="badge" style={{ width: 300 }}></img>
             </UserBadgeImgInfo>
             <UserBodyInfo>
-              <div>
-                <ColorButton sx={{ width: 120, height: 60 }}> Edit info</ColorButton>
-                <ColorButton sx={{ width: 120, height: 60 }}> Change PW</ColorButton>
-              </div>
+              {isEditable && (
+                <div>
+                  <ColorButton sx={{ width: 120, height: 60 }}> Edit info</ColorButton>
+                  <ColorButton sx={{ width: 120, height: 60 }}> Change PW</ColorButton>
+                </div>
+              )}
             </UserBodyInfo>
           </UserCardFrame>
           <UserCardFrame></UserCardFrame>
