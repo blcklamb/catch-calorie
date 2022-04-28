@@ -74,58 +74,46 @@ class userAuthService {
     // 회원 정보 수정하기
     static async setUser({ user_id, toUpdate }) {
         // 우선 해당 id 의 유저가 db에 존재하는지 여부 확인
-        let user = await User.findById({ user_id });
+        let user = await User.findById({ id: user_id });
 
         // db에서 찾지 못한 경우, 에러 메시지 반환
         if (!user) return { errorMessage: "가입 내역이 없습니다. 다시 한 번 확인해 주세요." };
 
-        // if (toUpdate.email) {
-        //     const fieldToUpdate = "email";
-        //     const newValue = toUpdate.email;
+        user = await User.update({user_id, toUpdate})
+        
+        // if (toUpdate.name) {
+        //     const fieldToUpdate = "name";
+        //     const newValue = toUpdate.name;
         //     user = await User.update({ user_id, fieldToUpdate, newValue });
         // }
 
-        // if (toUpdate.password) {
-        //     const fieldToUpdate = "password";
-        //     const newValue = toUpdate.password;
-        //     const hashedPassword = await bcrypt.hash(newValue, 10);
-        //     user = await User.update({ user_id, fieldToUpdate, hashedPassword });
+        // if (toUpdate.height) {
+        //     const fieldToUpdate = "height";
+        //     const newValue = toUpdate.height;
+        //     user = await User.update({ user_id, fieldToUpdate, newValue });
         // }
 
-        if (toUpdate.name) {
-            const fieldToUpdate = "name";
-            const newValue = toUpdate.name;
-            user = await User.update({ user_id, fieldToUpdate, newValue });
-        }
+        // if (toUpdate.weight) {
+        //     const fieldToUpdate = "weight";
+        //     const newValue = toUpdate.weight;
+        //     user = await User.update({ user_id, fieldToUpdate, newValue });
+        // }
 
-        if (toUpdate.height) {
-            const fieldToUpdate = "height";
-            const newValue = toUpdate.height;
-            user = await User.update({ user_id, fieldToUpdate, newValue });
-        }
+        // if (toUpdate.icon) {
+        //     const fieldToUpdate = "icon";
+        //     const newValue = toUpdate.icon;
+        //     user = await User.update({ user_id, fieldToUpdate, newValue });
+        // }
 
-        if (toUpdate.weight) {
-            const fieldToUpdate = "weight";
-            const newValue = toUpdate.height;
-            user = await User.update({ user_id, fieldToUpdate, newValue });
-        }
-
-        if (toUpdate.icon) {
-            const fieldToUpdate = "icon";
-            const newValue = toUpdate.icon;
-            user = await User.update({ user_id, fieldToUpdate, newValue });
-        }
-
-        if (toUpdate.status) {
-            const fieldToUpdate = "status";
-            const newValue = toUpdate.status;
-            user = await User.update({ user_id, fieldToUpdate, newValue });
-        }
+        // if (toUpdate.status) {
+        //     const fieldToUpdate = "status";
+        //     const newValue = toUpdate.status;
+        //     user = await User.update({ user_id, fieldToUpdate, newValue });
+        //}
 
         return user;
     }
 
-    // static async setPassword({ user_id, old })
 }
 
 export { userAuthService };
