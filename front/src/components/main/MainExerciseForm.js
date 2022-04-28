@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -23,6 +24,7 @@ function MainExerciseForm({
   kcalPerHour,
   setKcalPerHour,
 }) {
+  const navigate = useNavigate();
   const [value, setValue] = React.useState();
   // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
   const [inputValue, setInputValue] = React.useState('');
@@ -135,8 +137,9 @@ function MainExerciseForm({
               variant="contained"
               color="primary"
               type="button"
-              // startIcon={< AddIc fontSize="small" />}
-              // onClick={() => alert('기능 추후 보강')}
+              onClick={() => {
+                navigate('/tracking/addExercise', { replace: false });
+              }}
             >
               Add exercise
             </Button>
