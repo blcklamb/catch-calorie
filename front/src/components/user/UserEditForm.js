@@ -28,7 +28,6 @@ import Footer from '../Footer';
 const UserEditForm = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [editUser, setEditUser] = useState(userInfo);
-  const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
   // 이름이 2글자 이상인지 여부를 확인함.
