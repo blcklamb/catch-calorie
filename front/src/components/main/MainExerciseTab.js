@@ -36,14 +36,14 @@ function MainExerciseTab({
   };
 
   const handleTracking = () => {
-    setTotalExercise(exerciseSelected.reduce((acc, cur) => acc + cur.kcal, totalExercise));
+    setTotalExercise(kcalPerHour.reduce((acc, cur) => acc + cur, totalExercise));
     // console.log(exerciseSelected);
     setExerciseSelected([]);
   };
 
   return (
     <div>
-      {/* {exerciseForms &&
+      {exerciseForms &&
         exerciseForms.map((item, i) => (
           <MainExerciseForm
             key={i}
@@ -61,7 +61,7 @@ function MainExerciseTab({
             kcalPerHour={kcalPerHour}
             setKcalPerHour={setKcalPerHour}
           />
-        ))} */}
+        ))}
       {/* <Autocomplete
         id="controllable"
         value={value}
