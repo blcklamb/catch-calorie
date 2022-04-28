@@ -78,6 +78,7 @@ export const BadgesContainer = styled2.div`
   align-items: center;
   justify-content: center;
   position: relative;
+  flex-flow: column;
 `;
 
 export const UserContainer = styled2.div`
@@ -107,13 +108,25 @@ export const UserCardFrame = styled2.div`
 
 export const UserBodyInfo = styled2.div`
   width: 400px;
-  height: 100px;
+  height: 50px;
   border-radius: 15px;
   // background-color: #94d82d;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px;
+  flex-flow: column;
+  margin-top: 20px;
+`;
+
+export const UserAKAInfo = styled2.div`
+  width: 400px;
+  height: 50px;
+  border-radius: 15px;
+  // background-color: #94d82d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
 `;
 
 export const UserBtnInfo = styled2.div`
@@ -135,4 +148,16 @@ export const UserBadgeImgInfo = styled2.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const CardText = styled2.div`
+  width: 1203px;
+  height: 50px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f03e3e;
+  position: relative;
+  top: 50px;
+  left: 70px;
+  z-index:30;
 `;
