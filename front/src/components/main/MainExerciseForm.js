@@ -35,10 +35,14 @@ function MainExerciseForm({
 
   useEffect(() => {
     Api.get(`exercises`).then((res) => setExerciseList(res.data));
+
+    setHour([...hour.slice(0, idx), 0, ...hour.slice(idx + 1)]);
+    setMinute([...minute.slice(0, idx), 0, ...minute.slice(idx + 1)]);
   }, []);
 
   const onChangeHour = (e) => {
     // console.log(idx, e.target.value);
+
     setHour([...hour.slice(0, idx), e.target.value, ...hour.slice(idx + 1)]);
   };
   const onChangeMinute = (e) => {
@@ -48,20 +52,43 @@ function MainExerciseForm({
 
   useEffect(() => {
     console.log(exerciseSelected);
-    setTime([
-      ...time.slice(0, idx),
-      Number(hour[idx]) * 60 + Number(minute[idx]),
-      ...time.slice(idx + 1),
-    ]);
+    if (!(hour[idx] && hour[idx].length)) {
+      // hour이 비었다면
+      console.log('시 안 했음');
+      setTime([
+        ...time.slice(0, idx),
+        Number(hour[idx]) * 60 + Number(minute[idx]),
+        ...time.slice(idx + 1),
+      ]);
+    } else if (!(minute[idx] && minute[idx].length)) {
+      // minute이 비었다면
+      console.log('분 안 했음');
+      setTime([
+        ...time.slice(0, idx),
+        Number(hour[idx]) * 60 + Number(minute[idx]),
+        ...time.slice(idx + 1),
+      ]);
+    } else {
+      console.log('다 있음');
+      setTime([
+        ...time.slice(0, idx),
+        Number(hour[idx]) * 60 + Number(minute[idx]),
+        ...time.slice(idx + 1),
+      ]);
+    }
   }, [hour, minute]);
 
-  // useEffect(() => {
-  //   setKcalPerHour([
-  //     ...kcalPerHour.slice(0, idx),
-  //     (Number(time[idx]) / 60) * exerciseSelected[idx]?.kcal_per_kg,
-  //     ...kcalPerHour.slice(idx + 1),
-  //   ]);
-  // }, time);
+  useEffect(() => {
+    if (time[idx] === 0) {
+      setKcalPerHour([...kcalPerHour.slice(0, idx), 0, ...kcalPerHour.slice(idx + 1)]);
+    } else {
+      setKcalPerHour([
+        ...kcalPerHour.slice(0, idx),
+        (Number(time[idx]) / 60) * exerciseSelected[idx]?.kcal_per_kg,
+        ...kcalPerHour.slice(idx + 1),
+      ]);
+    }
+  }, time);
 
   // useEffect(() => {
   //   if (gram && gram.length) {
@@ -135,10 +162,13 @@ function MainExerciseForm({
       <div>
         인풋밸류 {inputValue}
         <br />
+        시간 당 {exerciseSelected[idx]?.kcal_per_kg}
+        <br />
         {hour[idx]} 시간
         <br />
         {minute[idx]} 분
         <br />총 {time[idx]} 분
+        <br />총 {kcalPerHour[idx]} 칼로리
       </div>
     </div>
   );
