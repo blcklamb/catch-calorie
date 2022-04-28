@@ -12,7 +12,9 @@ function MainGraph({
   setExerciseSelected,
   totalExercise,
   kcalPerGram,
-  setKcalPerGram,kcalPerHour, setKcalPerHour, 
+  setKcalPerGram,
+  kcalPerHour,
+  setKcalPerHour,
 }) {
   const labels = ["Today's calories"];
 
@@ -59,15 +61,16 @@ function MainGraph({
     // console.log(totalFood)
     // console.log(kcalPerGram)
     // 엑스(clear) 눌러서 처리됐을 경우 처리, 추후 함수로 분리
-    if (foodSelected[0] === null) { // 음식이 없을 경우 
+    if (foodSelected[0] === null) {
+      // 음식이 없을 경우
       // console.log('첫')
       setFoodSelected([]);
     }
-    if (totalFood - totalExercise < 0) { 
+    if (totalFood - totalExercise < 0) {
       // console.log('둘')
       return [3000];
     }
-    if (isNaN(kcalPerGram[0])) { 
+    if (isNaN(kcalPerGram[0])) {
       // console.log('셋')
       return [3000 - totalKcal];
     }
@@ -129,7 +132,8 @@ function MainGraph({
         backgroundColor: backgroundColor[idx],
         borderColor: borderColor[idx],
         borderWidth: 1,
-        data: [-exercise?.kcal],
+        data: [-kcalPerHour[idx]]
+        // data: [-exercise?.kcal],
       };
 
       data.datasets.splice(1, 0, newDataset);
