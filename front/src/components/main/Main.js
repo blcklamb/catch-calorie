@@ -10,12 +10,11 @@ import MainGraph from './MainGraph';
 import TrackingList from '../TrackingList';
 
 import MainButton from './style/MainButton';
-import { DispatchContext } from '../../App';
+// import { DispatchContext } from '../../App';
 
 import * as Api from '../../api';
 import { useRecoilState } from 'recoil';
 import { tokenState, userInfoState, userState } from '../../atoms';
-import ServerModal from '../user/UserDelForm';
 import BasicModal from '../user/UserDelForm';
 
 const Main = () => {
@@ -75,9 +74,8 @@ const Main = () => {
     <>
       <Header />
       <div style={{ margin: '100px 80px' }}>
-        {/* <MainHello>Hello {user?.name}!</MainHello>
-        <MainHello>Hello {recoilUser.name}!</MainHello>
-        <MainHello>Hello {userInfo.name}!</MainHello> */}
+        {/* <MainHello>Hello {user?.name}!</MainHello> */}
+        <MainHello>Hello {userInfo.name}!</MainHello>
 
         {/* <div style={{ margin: '80px 0px' }}> */}
         <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
@@ -123,26 +121,26 @@ const Main = () => {
           <MainButton
             variant="contained"
             style={{ marginBottom: '20px', width: '60%' }}
-            onClick={logout}
-          >
-            Log-out
-          </MainButton>
-          <br />
-          <MainButton
-            variant="contained"
-            style={{ marginBottom: '20px', width: '60%' }}
             onClick={() => navigate('/users')}
           >
             edit
           </MainButton>
           <br />
-          {/* <MainButton
+          <MainButton
             variant="contained"
-            style={{ width: '60%' }}
-            onClick={() => navigate('/users/delete')}
+            style={{ marginBottom: '20px', width: '60%' }}
+            onClick={() => navigate('/mypage')}
           >
-            Delete my account
-          </MainButton> */}
+            My page
+          </MainButton>
+          <br />
+          <MainButton
+            variant="contained"
+            style={{ marginBottom: '20px', width: '60%' }}
+            onClick={logout}
+          >
+            Log-out
+          </MainButton>
           <BasicModal></BasicModal>
         </div>
       </div>
