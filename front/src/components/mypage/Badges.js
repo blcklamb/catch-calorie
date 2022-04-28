@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Yoga from './yoga.png';
 
 const BadgesContainer = styled.div`
   width: 1203px;
@@ -26,11 +27,17 @@ const BadgesWrap = styled.div`
   position: absolute;
 `;
 
-const Badgesbox = styled.div`
+const Badgesbox = styled.img`
   width: 180px;
   height: 180px;
+  border-radius: 18px;
   background: #ecf8d9;
-  border-radius: 15px;
+  box-shadow: inset 8px 8px 16px #c88383, inset -8px -8px 16px #faa3a3;
+  border: none;
+
+  :hover {
+    box-shadow: 5px 5px 18px #668d2a, -5px -5px 18px #d8ff5a;
+  }
 `;
 
 const BadgesText = styled.div`
@@ -55,7 +62,7 @@ const Badges = () => {
       <BadgesText>Badges</BadgesText>
       <BadgesContainer>
         <BadgesWrap>
-          <Badgesbox />
+          <Badgesbox src={Yoga} />
           <Badgesbox />
           <Badgesbox />
           <Badgesbox />

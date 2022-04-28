@@ -1,6 +1,6 @@
 // yarn add @nivo/core @nivo/calendar
 import { ResponsiveCalendar } from '@nivo/calendar';
-import Celenderdata from './data.json';
+// import data from './data.json';
 
 const DefaultCelenderChart = ({ data }) => (
   <div className="" style={{ height: 300 }}>

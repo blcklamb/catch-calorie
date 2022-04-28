@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import DefaultCelenderChart from './jandi/DefaultCelenderChart.js';
 import data from './jandi/data.json';
 import * as Api from '../../api';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userInfoState } from '../../atoms';
 
 const JandiContainer = styled.div`
   position: relative;
@@ -22,11 +24,14 @@ const JandiText = styled.div`
   position: relative;
   left: 30px;
 `;
+
 const Jandi = () => {
-  //   const [data, setData] = useState([]);
+  //   const user = useRecoilValue(userInfoState);
+  //   const [data, setData] = useState('');
+
   //   useEffect(() => {
-  //     Api.get('/jandi').then((res) => {
-  //       setData(res.data);
+  //     Api.get('heatmap', user._id).then((res) => {
+  //       setData(res.user);
   //     });
   //   }, []);
   return (

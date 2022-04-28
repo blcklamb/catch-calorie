@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import avocado from '../image/avocado.gif';
 // import { UserStateContext } from '../App';
+import { useRecoilState } from 'recoil';
+import { userInfoState } from '../atoms';
 
 const Container = styled.div`
   position: fixed;
@@ -16,7 +18,7 @@ const Container = styled.div`
 `;
 
 const Logo = styled.h3`
-  font-size: 2.9rem;g
+  font-size: 2.9rem;
   color: #f03e3e;
   font-style: bold;
   margin: 15px 30px -5px;
@@ -45,17 +47,21 @@ const Avocado = styled.img`
   margin: 15px;
 `;
 
-function Header(isLogined) {
+function Header() {
+  const [user, setUser] = useRecoilState(userInfoState);
+
   return (
     <>
       <Container>
         <Logo>Catch Carlories</Logo>
         <LogoCopy>health tracker</LogoCopy>
-        {/* {isLogined && (
-        )} */}
-        <Avocadobox>
-          <Avocado src={avocado} />
-        </Avocadobox>
+        {user ? (
+          <></>
+        ) : (
+          <Avocadobox>
+            <Avocado src={avocado} />
+          </Avocadobox>
+        )}
       </Container>
     </>
   );
