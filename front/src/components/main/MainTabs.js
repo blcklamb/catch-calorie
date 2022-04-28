@@ -34,6 +34,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
   color: 'white',
   backgroundColor: '#8CB352',
   width: '50%',
+  maxWidth: '800px',
   '&.Mui-selected': {
     color: '#fff',
     backgroundColor: '#4C7115',
@@ -44,7 +45,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
 }));
 
 const MainTabsSection = styled(Box)`
-  width: 700px;
+  width: 900px;
   margin-right: 120px;
 `;
 
@@ -97,6 +98,10 @@ const MainTabs = ({
   setExerciseSelected,
   totalExercise,
   setTotalExercise,
+  kcalPerGram,
+  setKcalPerGram,
+  kcalPerHour,
+  setKcalPerHour,
 }) => {
   const [value, setValue] = React.useState(0);
 
@@ -118,6 +123,8 @@ const MainTabs = ({
           setFoodSelected={setFoodSelected}
           totalFood={totalFood}
           setTotalFood={setTotalFood}
+          kcalPerGram={kcalPerGram}
+          setKcalPerGram={setKcalPerGram}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -126,6 +133,8 @@ const MainTabs = ({
           setExerciseSelected={setExerciseSelected}
           totalExercise={totalExercise}
           setTotalExercise={setTotalExercise}
+          kcalPerHour={kcalPerHour}
+          setKcalPerHour={setKcalPerHour}
         />
       </TabPanel>
     </MainTabsSection>
