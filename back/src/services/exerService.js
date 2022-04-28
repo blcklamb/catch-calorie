@@ -28,18 +28,18 @@ class exerService {
         return Exercise.update({ id }, { toUpdate: { $inc: { views: 1} }}, {new: true});
     }
 
-    static async convertUnit({ weight, unit }) {
-        console.log('service', weight, unit)
-        let kcal_per_lb = weight;
-        let kcal_per_kg = weight;
+    static async convertUnit({ kcal, unit }) {
+        console.log('service', kcal, unit)
+        let kcal_per_lb = kcal;
+        let kcal_per_kg = kcal;
         if (unit==='kilogram') {
             
-            kcal_per_kg = weight;
-            kcal_per_lb = Math.round(weight*2.20462*10)/10;
+            kcal_per_kg = kcal;
+            kcal_per_lb = Math.round(kcal*2.20462*10)/10;
         } else if (unit==='pound') {
             
-            kcal_per_kg = Math.round(weight*0.453592*10)/10;
-            kcal_per_lb = weight;
+            kcal_per_kg = Math.round(kcal*0.453592*10)/10;
+            kcal_per_lb = kcal;
         } 
         return {  kcal_per_kg, kcal_per_lb,}
     }
