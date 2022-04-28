@@ -11,6 +11,8 @@ import Home from './components/start/Home';
 // import Network from './components/user/Network';
 import RegisterForm from './components/user/RegisterForm';
 import Portfolio from './components/Portfolio';
+import MainFoodAdd from './components/main/MainFoodAdd'
+import MainExerciseAdd from './components/main/MainExerciseAdd'
 import TempStart from './components/user/TempStart';
 
 import Mypage from './components/mypage/Mypage'; // mypage 작업용
@@ -77,6 +79,8 @@ function App() {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/tracking" element={<Portfolio />} />
+        <Route path="/tracking/addFood" element={<MainFoodAdd />} />
+        <Route path="/tracking/addExercise" element={<MainExerciseAdd />} />
         {/* <Route path="/network" element={<Network />} /> */}
 
         <Route path="/users" element={<UserEditForm />} />

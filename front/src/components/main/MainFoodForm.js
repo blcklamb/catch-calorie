@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
 
 import Button from '@mui/material/Button';
@@ -6,9 +8,11 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 import MainInput from './style/MainInput';
 
-// import MainFoodForm from './MainFoodForm';
+import MainAdd from './MainFoodAdd';
 
 import * as Api from '../../api';
+
+import TextField from '@mui/material/TextField';
 
 function MainFoodForm({
   idx,
@@ -23,12 +27,16 @@ function MainFoodForm({
   kcalPerGram,
   setKcalPerGram,
 }) {
+  const navigate = useNavigate();
+
   const [value, setValue] = React.useState();
   // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
   const [inputValue, setInputValue] = React.useState([]);
 
   const [foodApiList, setFoodApiList] = useState('');
   // const [gram, setGram] = useState([]);
+
+  const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
     // 인덱스 수 대로 배열 속 생성
@@ -80,18 +88,18 @@ function MainFoodForm({
     <>
       {/* {console.log(foodApiList)} */}
       <div style={{ display: 'flex' }}>
+        {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
+
         <Autocomplete
-          // multiple
           id="controllable-states-demo"
           // value={foodSelected[0]?.label}
           value={value}
           options={foodApiList}
           sx={{ width: 300 }}
           renderInput={(params) => (
-            <MainInput {...params} label="Food(kcal/100g)" placeholder="Please select food" />
+            <MainInput {...params} label="Food" placeholder="Please select food" />
           )}
-          //
-          getOptionLabel={(option) => option.name || ''} // , option.kcal_per100g
+          getOptionLabel={(option) => option.name || ''}
           onChange={(event, newValue) => {
             // setFoodSelected([...foodSelected, newValue]);
             setFoodSelected([
@@ -111,10 +119,19 @@ function MainFoodForm({
                 variant="contained"
                 color="primary"
                 type="button"
-                // onClick={() => alert('기능 추후 보강')}
+                onClick={() => {
+                  navigate('/tracking/addFood', { replace: false });
+                }}
               >
                 Add food
               </Button>
+              <TextField
+                id="outlined-basic"
+                label="Outlined"
+                variant="outlined"
+                // onFocus={() => alert('dsf')}
+                // onBlur={alert('dsf')}
+              />
             </div>
           }
         />
