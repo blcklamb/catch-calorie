@@ -40,7 +40,7 @@ function Mypage() {
       const userId = params.user_id;
 
       async function getUserInfo(userId) {
-        const res = await Api.get('user', userId);
+        const res = await Api.get('users', userId);
         const temp = res.data;
         setCurrentUserInfo(temp);
       }

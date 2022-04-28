@@ -12,8 +12,6 @@ import Network from './components/network/Network';
 
 import Mypage from './components/mypage/Mypage'; // mypage 작업용
 
-import { useRecoilState } from 'recoil';
-import { tokenState, userState } from './atoms';
 import UserEditForm from './components/user/UserEditForm';
 import UserDelForm from './components/user/UserDelForm';
 
