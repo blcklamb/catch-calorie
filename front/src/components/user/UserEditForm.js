@@ -60,7 +60,7 @@ const UserEditForm = () => {
 
       console.log('회원 정보 수정 후 PUT 응답으로 수정된 회원 정보를 가져옵니다.', res.data);
       setUserInfo(res.data);
-      // navigate('/tracking');
+      navigate('/tracking');
       console.log('req 요청 갔고 응답 받았습니다..');
     } catch (err) {
       console.log(`req 요청이 제대로 가지 않았군요 ${err}`);
