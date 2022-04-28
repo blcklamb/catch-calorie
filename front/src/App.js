@@ -13,6 +13,8 @@ import RegisterForm from './components/user/RegisterForm';
 import Portfolio from './components/Portfolio';
 import TempStart from './components/user/TempStart';
 
+import Mypage from './components/mypage/Mypage'; // mypage 작업용
+
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
 
@@ -67,6 +69,8 @@ function App() {
             <Route path="/target" element={<Portfolio />} />
             {/* <Route path="/network" element={<Network />} /> */}
             <Route path="*" element={<Portfolio />} />
+            ```mypage 작업용```
+            <Route path="/mypage" element={<Mypage />} />
           </Routes>
         </Router>
       </UserStateContext.Provider>
