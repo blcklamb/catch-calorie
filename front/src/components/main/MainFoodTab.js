@@ -17,6 +17,7 @@ function MainFoodTab({ foodSelected, setFoodSelected, kcalPerGram, setKcalPerGra
     countArr.push(counter); // index 사용 X
     // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용
     setFoodForms(countArr);
+    setFoodSelected(foodForms.map((f, i) => 0));
   };
 
   // console.log(foodSelected);
@@ -46,8 +47,8 @@ function MainFoodTab({ foodSelected, setFoodSelected, kcalPerGram, setKcalPerGra
 
   return (
     <div>
-      {/* {console.log(foodSelected)}
-      {console.log(gram)}
+      {/* {console.log(foodSelected)} */}
+      {/* {console.log(gram)}
       {console.log(kcalPerGram)} */}
       {/* {console.log(foodForms)} */}
       {foodForms &&

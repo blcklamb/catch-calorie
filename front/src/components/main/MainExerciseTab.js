@@ -26,6 +26,7 @@ function MainExerciseTab({
     countArr.push(counter); // index 사용 X
     // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용
     setExerciseForms(countArr);
+    setExerciseSelected(exerciseForms.map((f, i) => 0));
   };
 
   const handleTracking = () => {
@@ -51,7 +52,6 @@ function MainExerciseTab({
 
   return (
     <div>
-      {console.log(exerciseSelected)}
       {exerciseForms &&
         exerciseForms.map((item) => (
           <MainExerciseForm

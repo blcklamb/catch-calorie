@@ -47,19 +47,20 @@ function MainExerciseForm({
   const onChangeHour = (e) => {
     setHour([...hour.slice(0, idx), e.target.value, ...hour.slice(idx + 1)]);
   };
+
   const onChangeMinute = (e) => {
     setMinute([...minute.slice(0, idx), e.target.value, ...minute.slice(idx + 1)]);
   };
 
   useEffect(() => {
-    if (!(hour[idx] === 0 )) {
+    if (hour[idx] === 0) {
       // hour이 비었다면
       setTime([
         ...time.slice(0, idx),
         Number(hour[idx]) * 60 + Number(minute[idx]),
         ...time.slice(idx + 1),
       ]);
-    } else if (!(minute[idx] === 0 )) {
+    } else if (minute[idx] === 0) {
       // minute이 비었다면
       setTime([
         ...time.slice(0, idx),
@@ -73,10 +74,10 @@ function MainExerciseForm({
         ...time.slice(idx + 1),
       ]);
     }
-  }, [time[idx]]);
+  }, [hour[idx], minute[idx]]);
 
   useEffect(() => {
-    if (time[idx] === 0) {
+    if (Number(time[idx]) === 0) {
       setKcalPerHour([...kcalPerHour.slice(0, idx), 0, ...kcalPerHour.slice(idx + 1)]);
     } else {
       setKcalPerHour([
@@ -85,7 +86,7 @@ function MainExerciseForm({
         ...kcalPerHour.slice(idx + 1),
       ]);
     }
-  }, time);
+  }, [time[idx]]);
 
   return (
     <div style={{ display: 'flex' }}>
@@ -139,7 +140,7 @@ function MainExerciseForm({
         />
       </div>
       <div>
-        인풋밸류 {inputValue}
+        {/* 인풋밸류 {inputValue}
         <br />
         시간 당 {exerciseSelected[idx]?.kcal_per_kg}
         <br />
@@ -147,7 +148,8 @@ function MainExerciseForm({
         <br />
         {minute[idx]} 분
         <br />총 {time[idx]} 분
-        <br />총 {kcalPerHour[idx]} 칼로리
+        <br /> */}
+        {kcalPerHour[idx]} kcal/hour
       </div>
     </div>
   );
