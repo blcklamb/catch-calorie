@@ -110,7 +110,7 @@ const Main = () => {
         </div>
         <div>
           <TrackingLists user={user} />
-          <MainButton
+          {/* <MainButton
             variant="contained"
             style={{ marginBottom: '20px', width: '60%' }}
             onClick={() => navigate('/users')}
@@ -133,7 +133,7 @@ const Main = () => {
           >
             Log-out
           </MainButton>
-          <BasicModal></BasicModal>
+          <BasicModal></BasicModal> */}
         </div>
       </div>
       <Footer />
