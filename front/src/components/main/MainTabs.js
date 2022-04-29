@@ -75,7 +75,6 @@ MainTabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-// !!!!!!!!!!!!!!!
 const TabPanel = styled(MainTabPanel)({
   height: 300,
   backgroundColor: '#ECF8D9',
@@ -92,12 +91,8 @@ const a11yProps = (index) => {
 const MainTabs = ({
   foodSelected,
   setFoodSelected,
-  totalFood,
-  setTotalFood,
   exerciseSelected,
   setExerciseSelected,
-  totalExercise,
-  setTotalExercise,
   kcalPerGram,
   setKcalPerGram,
   kcalPerHour,
@@ -127,8 +122,6 @@ const MainTabs = ({
       <MainTabsSection>
         <div>
           <StyledTabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            {/* <StyledTab label="Food" {...a11yProps(0)} />
-          <StyledTab label="Exercise" {...a11yProps(1)} /> */}
             {['Food', 'Exercise'].map((label, index) => (
               <StyledTab key={label} label={label} {...a11yProps(index)} />
             ))}
@@ -138,8 +131,6 @@ const MainTabs = ({
           <MainFoodTab
             foodSelected={foodSelected}
             setFoodSelected={setFoodSelected}
-            totalFood={totalFood}
-            setTotalFood={setTotalFood}
             kcalPerGram={kcalPerGram}
             setKcalPerGram={setKcalPerGram}
             clearForm={clearForm}
@@ -149,10 +140,9 @@ const MainTabs = ({
           <MainExerciseTab
             exerciseSelected={exerciseSelected}
             setExerciseSelected={setExerciseSelected}
-            totalExercise={totalExercise}
-            setTotalExercise={setTotalExercise}
             kcalPerHour={kcalPerHour}
             setKcalPerHour={setKcalPerHour}
+            clearForm={clearForm}
           />
         </TabPanel>
       </MainTabsSection>
