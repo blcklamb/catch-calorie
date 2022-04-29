@@ -1,7 +1,7 @@
 import { User, Tracking, Award } from "../db";
 
 
-// beginner-운동 5회 이상
+// athlete-운동 5회, 10회, 15회, 20회, 25회, 30회 이상
 const athlete = async (req, res, next) => {
     const user_id = req.currentUserId;
     const exerciseCount = await Tracking.findByUser({ user_id })
@@ -31,17 +31,14 @@ const athlete = async (req, res, next) => {
     next()
 }
 
+// runner-'Running' 5회, 10회, 15회 이상
 const runner = async (req, res, next) => {
     const user_id = req.currentUserId;
     const runningCount = await Tracking.findByUser({ user_id })
         .then((data) => {
-            let sum = 0
-            let dataList = data.map(daily_rec => daily_rec.exer_record)
-                .map(daily_rec=>daily_rec
-                .filter(cond01 =>cond01.name==='Running'))
-                .flat()
-            sum = dataList.length
-            return sum
+            let dataList = data.map(daily_rec => daily_rec.exer_record).flat()
+                .filter(item =>item.name==='Running')
+            return dataList.length
         })
     console.log('runningCount', runningCount)
     if ( 4 <= runningCount && runningCount < 9 ) {
@@ -54,4 +51,25 @@ const runner = async (req, res, next) => {
     next()
 }
 
-export { athlete, runner };
+// gym_rat-'Weight' 5회, 10회, 15회 이상
+const gym_rat = async (req, res, next) => {
+    const user_id = req.currentUserId;
+    const weightCount = await Tracking.findByUser({ user_id })
+        .then((data) => {
+            let dataList = data.map(daily_rec => daily_rec.exer_record).flat()
+                .filter(rec => rec.name.includes("Weight"))
+            return dataList.length
+        })
+    console.log('weightCount', weightCount)
+    if ( 4 <= weightCount && weightCount < 9 ) {
+        console.log('gym_rat 1 complete UR yo_ho')
+    } else if ( 9 <= weightCount && weightCount < 14 ) {
+        console.log('gym_rat 2 complete UR heave_ho')
+    } else if ( 14 <= weightCount ) {
+        console.log('gym_rat 3 complete UR alley_oop')
+    } 
+    next()
+}
+
+
+export { athlete, runner, gym_rat };
