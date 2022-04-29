@@ -100,7 +100,11 @@ function MainExerciseForm({
         )}
         getOptionLabel={(option) => option.name || ''}
         onChange={(event, newValue) => {
-          setExerciseSelected([...exerciseSelected, newValue]);
+          setExerciseSelected([
+            ...exerciseSelected.slice(0, idx),
+            newValue,
+            ...exerciseSelected.slice(idx + 1),
+          ]);
         }}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
