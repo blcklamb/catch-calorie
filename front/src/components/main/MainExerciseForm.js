@@ -159,8 +159,8 @@ function MainExerciseForm({
         autoComplete="off"
         style={{ display: 'inline-flex' }}
       >
-        <MainInput id="outlined-basic" label="hour" variant="outlined" onBlur={onChangeHour} />
-        <MainInput id="outlined-basic" label="minute" variant="outlined" onBlur={onChangeMinute} />
+        <MainInput id="outlined-basic" label="hour" variant="outlined" onChange={onChangeHour} />
+        <MainInput id="outlined-basic" label="minute" variant="outlined" onChange={onChangeMinute} />
       </div>
       {console.log(hour)}
       {console.log(minute)}

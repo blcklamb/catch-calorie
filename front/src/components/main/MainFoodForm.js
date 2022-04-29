@@ -144,7 +144,7 @@ function MainFoodForm({
           noValidate
           autoComplete="off"
         >
-          <MainInput id="outlined-basic" label="g" variant="outlined" onBlur={onChange} />
+          <MainInput id="outlined-basic" label="g" variant="outlined" onChange={onChange} />
         </div>
         <div>
           {/* {console.log(gram)} */}
