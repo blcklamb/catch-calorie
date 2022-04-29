@@ -9,22 +9,24 @@ import { useRecoilValue } from 'recoil';
 import { useParams } from 'react-router-dom';
 import { userInfoState } from '../../atoms.js';
 
-const JandiPage = styled.section`
-  height: 60vh;
-  width: 100%;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-`;
-
 const BadgesPage = styled.section`
-  height: 50vh;
+  height: 50%;
   width: 100%;
   background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  padding-bottom: 30px;
+`;
+
+const JandiPage = styled.section`
+  height: 60%;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 100px;
 `;
 
 function Mypage() {

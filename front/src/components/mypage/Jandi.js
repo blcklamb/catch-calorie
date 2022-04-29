@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import DefaultCelenderChart from './jandi/DefaultCelenderChart.js';
-import data from './jandi/data.json';
+import jandiData from './jandi/data.json';
 import * as Api from '../../api';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userInfoState } from '../../atoms';
@@ -26,19 +26,34 @@ const JandiText = styled.div`
 `;
 
 const Jandi = () => {
-  //   const user = useRecoilValue(userInfoState);
-  //   const [data, setData] = useState('');
+  const user = useRecoilValue(userInfoState);
+  const [data, setData] = useState('');
+  console.log('jandi', user);
 
-  //   useEffect(() => {
-  //     Api.get('heatmap', user._id).then((res) => {
-  //       setData(res.user);
-  //     });
-  //   }, []);
+  const [emptyData, setEmptyData] = useState(false);
+
+  useEffect(() => {
+    Api.get('heatmap', user._id).then((res) => {
+      console.log(res.data.record);
+
+      if (res.data.record === undefined) {
+        setEmptyData(false);
+      } else {
+        setData(res.data.record);
+        setEmptyData(true);
+      }
+    });
+  }, []);
+
   return (
     <div>
       <JandiText>HeatMap</JandiText>
       <JandiContainer>
-        <DefaultCelenderChart data={data} />
+        {emptyData ? (
+          <DefaultCelenderChart data={data} />
+        ) : (
+          <DefaultCelenderChart data={jandiData} />
+        )}
       </JandiContainer>
     </div>
   );
