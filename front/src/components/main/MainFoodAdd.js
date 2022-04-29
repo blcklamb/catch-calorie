@@ -12,12 +12,22 @@ import MainButton from './style/MainButton';
 import Header from '../Header';
 import Footer from '../Footer';
 
+import { useNavigate } from 'react-router-dom';
+
+import { useRecoilValue } from 'recoil';
+import { userInfoState } from '../../atoms';
+
 import * as Api from '../../api';
 
 function MainFoodAdd({}) {
   const [value, setValue] = React.useState([]);
   // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
   const [inputValue, setInputValue] = React.useState([]);
+
+  const navigate = useNavigate();
+
+  const [exerciseList, setExerciseList] = useState('');
+  const user = useRecoilValue(userInfoState);
 
   const [category, setCategory] = useState();
   const [name, setName] = useState();
@@ -37,6 +47,7 @@ function MainFoodAdd({}) {
         kcal_per100g: kcalPer100g,
       });
       alert('Food has been added');
+      navigate(`/tracking/${user._id}`, { replace: false });
     } catch (err) {
       alert('Food that already exists');
     }

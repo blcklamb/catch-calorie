@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
 
 import Button from '@mui/material/Button';
@@ -18,30 +20,35 @@ import MainButton from './style/MainButton';
 import Header from '../Header';
 import Footer from '../Footer';
 
+import { useRecoilValue } from 'recoil';
+import { userInfoState } from '../../atoms';
+
 import * as Api from '../../api';
 
 function MainExerciseAdd({}) {
   const [value, setValue] = React.useState([]);
   // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
   const [inputValue, setInputValue] = React.useState([]);
+  const navigate = useNavigate();
 
   const [name, setName] = useState();
   const [kcal, setKcal] = useState();
   const [unit, setUnit] = useState('kilogram');
 
   const [exerciseList, setExerciseList] = useState('');
+  const user = useRecoilValue(userInfoState);
 
-
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     try {
       await Api.post(`exercises`, {
         name: name,
         kcal: kcal,
         unit: unit,
       });
-      alert('Exercise has been added')
+      alert('Exercise has been added');
+      navigate(`/tracking/${user._id}`, { replace: false });
     } catch (err) {
-      alert('Exercise that already exists')
+      alert('Exercise that already exists');
     }
   };
 
