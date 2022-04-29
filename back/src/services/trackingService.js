@@ -13,9 +13,9 @@ class trackingService {
 
     static async addFoodTracking({ user_id, date, name, gram }) {
         const calorie = await Food.findByName({ name })
-            .then((data) => data.kcal_per_100g) //kcal_per_100g
+            .then((data) =>  data.kcal_per_100g) //kcal_per_100g
             .then((cal_per_100g) => cal_per_100g / 100) //kcal_per_g
-            .then((cal_per_1g) => cal_per_1g * gram);
+            .then((cal_per_1g) => cal_per_1g * gram);           
 
         const toUpdate = {
             $push: { food_record: { id: uuid(), name, gram, calorie } },

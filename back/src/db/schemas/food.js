@@ -12,7 +12,7 @@ const FoodSchema = new Schema({
         unique: true,
         trim: true,
     },
-    kcal_per100g: {
+    kcal_per_100g: {
         type: Number,
         required: true,
     },
