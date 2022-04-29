@@ -1,6 +1,7 @@
 import { Router } from "express";
 import dayjs from "dayjs";
 import { login_required } from "../middlewares/login_required";
+import { athlete, runner } from "../middlewares/condition_check";
 import { trackingService } from "../services/trackingService";
 
 const trackingRouter = Router();
@@ -33,7 +34,7 @@ trackingRouter.post("/tracking/food", login_required, async (req, res, next) => 
     }
 });
 
-trackingRouter.post("/tracking/exer", login_required, async (req, res, next) => {
+trackingRouter.post("/tracking/exer", login_required, athlete, runner,  async (req, res, next) => {
     try {
         const user_id = req.currentUserId;
         const { name, minute } = req.body;
