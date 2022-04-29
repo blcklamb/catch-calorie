@@ -1,3 +1,4 @@
+// 만들다가 필요없다는 것을 깨달아서 아쉬운 코드....
 import { User, Tracking, Award } from "../db";
 
 
@@ -41,14 +42,19 @@ const runner = async (req, res, next) => {
             return dataList.length
         })
     console.log('runningCount', runningCount)
-    if ( 4 <= runningCount && runningCount < 9 ) {
-        console.log('runner 1 complete UR warm_up')
-    } else if ( 9 <= runningCount && runningCount < 14 ) {
-        console.log('runner 2 complete UR streaker')
-    } else if ( 14 <= runningCount ) {
-        console.log('runner 3 complete UR chaser')
-    } 
-    next()
+    const { name } = req.body;
+    if (name==='Running') {
+        if ( 4 <= runningCount && runningCount < 9 ) {
+            console.log('runner 1 complete UR warm_up')
+        } else if ( 9 <= runningCount && runningCount < 14 ) {
+            console.log('runner 2 complete UR streaker')
+        } else if ( 14 <= runningCount ) {
+            console.log('runner 3 complete UR chaser')
+        }
+        next()
+    } else {
+        next()
+    }
 }
 
 // gym_rat-'Weight' 5회, 10회, 15회 이상
@@ -61,15 +67,48 @@ const gym_rat = async (req, res, next) => {
             return dataList.length
         })
     console.log('weightCount', weightCount)
-    if ( 4 <= weightCount && weightCount < 9 ) {
-        console.log('gym_rat 1 complete UR yo_ho')
-    } else if ( 9 <= weightCount && weightCount < 14 ) {
-        console.log('gym_rat 2 complete UR heave_ho')
-    } else if ( 14 <= weightCount ) {
-        console.log('gym_rat 3 complete UR alley_oop')
-    } 
-    next()
+    const { name } = req.body;
+    if (name.includes("Weight")) {
+        if ( 4 <= weightCount && weightCount < 9 ) {
+            console.log('gym_rat 1 complete UR yo_ho')
+        } else if ( 9 <= weightCount && weightCount < 14 ) {
+            console.log('gym_rat 2 complete UR heave_ho')
+        } else if ( 14 <= weightCount ) {
+            console.log('gym_rat 3 complete UR alley_oop')
+        } 
+    } else {
+        next()
+    }
 }
 
+const vegetables_lover = async (req, res, next) => {
+    const user_id = req.currentUserId;
+    const vegeCount = await Tracking.findByUser({ user_id })
+        .then((data) => {
+            console.log(data)
+            let dataList = data.map(daily_rec => daily_rec.food_record).flat()
+                .filter(rec => rec.category==='Vegetables')
+            return dataList.length
+        })
+    console.log('vegeCount', vegeCount)
+    const { name } = req.body;
+    if (name.includes("vege")) {
+        if ( 4 <= vegeCount && vegeCount < 9 ) {
+            console.log('vegetables_lover 1 complete UR rabbit')
+        } else if ( 9 <= vegeCount && vegeCount < 14 ) {
+            console.log('vegetables_lover 2 complete UR deer')
+        } else if ( 14 <= vegeCount ) {
+            console.log('vegetables_lover 3 complete UR panda')
+        } 
+    } else {
+        next()
+    }
+}
 
-export { athlete, runner, gym_rat };
+// 37번째 줄 climbing
+// 47번째 줄 weight 로 찾기
+// 52번째 줄 badminton 오타
+// 57번째 줄 cycling
+// 66번째 줄 protein
+
+export { athlete, runner, gym_rat, vegetables_lover };
