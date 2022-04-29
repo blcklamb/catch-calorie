@@ -26,7 +26,7 @@ function MainExerciseAdd({}) {
   const [inputValue, setInputValue] = React.useState([]);
 
   const [name, setName] = useState();
-  const [weight, setWeight] = useState();
+  const [kcal, setKcal] = useState();
   const [unit, setUnit] = useState('kilogram');
 
   const [exerciseList, setExerciseList] = useState('');
@@ -36,7 +36,7 @@ function MainExerciseAdd({}) {
     try {
       await Api.post(`exercises`, {
         name: name,
-        weight: weight,
+        kcal: kcal,
         unit: unit,
       });
       alert('Exercise has been added')
@@ -75,13 +75,13 @@ function MainExerciseAdd({}) {
               inputValue={name}
               onBlur={(e) => setName(e.target.value)}
             />
-            <h2>Please enter a weight</h2>
+            <h2>Please enter a kcal</h2>
             <TextField
               id="outlined-basic"
-              label="weight"
+              label="kcal"
               variant="outlined"
-              inputValue={weight}
-              onBlur={(e) => setWeight(e.target.value)}
+              inputValue={kcal}
+              onBlur={(e) => setKcal(e.target.value)}
             />
             <h2>Please select a unit</h2>
 

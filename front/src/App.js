@@ -23,7 +23,7 @@ function App() {
         <Route path="/" exact element={<Home />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
-        <Route path="/tracking" element={<Portfolio />} />
+        <Route path="/tracking/:user_id" element={<Portfolio />} />
         <Route path="/tracking/addFood" element={<MainFoodAdd />} />
         <Route path="/tracking/addExercise" element={<MainExerciseAdd />} />
         <Route path="/network" element={<Network />} />

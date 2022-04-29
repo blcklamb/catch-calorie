@@ -5,6 +5,8 @@ import avocado from '../image/avocado.gif';
 import { useRecoilState } from 'recoil';
 import { userInfoState } from '../atoms';
 
+import HeaderHamburger from './HeaderHamburger';
+
 const Container = styled.div`
   position: fixed;
   height: 100px;
@@ -47,6 +49,8 @@ const Avocado = styled.img`
   margin: 15px;
 `;
 
+
+
 function Header() {
   const [user, setUser] = useRecoilState(userInfoState);
 
@@ -56,7 +60,10 @@ function Header() {
         <Logo>Catch Carlories</Logo>
         <LogoCopy>health tracker</LogoCopy>
         {user ? (
-          <></>
+          // <></>
+          <>
+            <HeaderHamburger />
+          </>
         ) : (
           <Avocadobox>
             <Avocado src={avocado} />

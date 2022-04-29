@@ -8,6 +8,9 @@ import MainButton from './style/MainButton';
 
 import MainExerciseForm from './MainExerciseForm';
 
+import * as Api from '../../api';
+
+
 function MainExerciseTab({
   exerciseSelected,
   setExerciseSelected,
@@ -36,9 +39,32 @@ function MainExerciseTab({
   };
 
   const handleTracking = () => {
+    exerciseSelected.map((exercise, i) => {
+      // const name = food.name;
+      const t = Number(time[i]);
+      
+      try {
+        Api.post(`tracking/exer`, {
+         name: exercise.name, 
+         minute: t 
+       });
+
+      } catch (err) {
+        console.log('전송 실패', err)
+      }
+
+      Api.post(`exercises/${exercise._id}`);
+    });
+
     setTotalExercise(kcalPerHour.reduce((acc, cur) => acc + cur, totalExercise));
     // console.log(exerciseSelected);
-    setExerciseSelected([]);
+    // setExerciseSelected([]);
+
+    setExerciseSelected(exerciseSelected.map((f, i) => 0));
+    setTime(time.map((t, i) => 0));
+    setHour(hour.map((h, i) => 0));
+    setMinute(minute.map((m, i) => 0));
+
   };
 
   return (

@@ -32,11 +32,12 @@ const Badgesbox = styled.img`
   height: 180px;
   border-radius: 18px;
   background: #ecf8d9;
-  box-shadow: inset 8px 8px 16px #c88383, inset -8px -8px 16px #faa3a3;
+  box-shadow: 5px 5px 18px #668d2a, -5px -5px 18px #d8ff5a;
+
   border: none;
 
   :hover {
-    box-shadow: 5px 5px 18px #668d2a, -5px -5px 18px #d8ff5a;
+    box-shadow: inset 8px 8px 16px #c88383, inset -8px -8px 16px #faa3a3;
   }
 `;
 

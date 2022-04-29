@@ -7,7 +7,7 @@ import Footer from '../Footer';
 
 import MainTabs from './MainTabs';
 import MainGraph from './MainGraph';
-import TrackingList from '../TrackingList';
+import TrackingLists from '../trackingList/TrackingLists';
 
 import MainButton from './style/MainButton';
 // import { DispatchContext } from '../../App';
@@ -141,7 +141,7 @@ const Main = () => {
           >
             Log-out
           </MainButton>
-          <BasicModal></BasicModal>
+          <BasicModal></BasicModal> */}
         </div>
       </div>
       <Footer />
