@@ -109,8 +109,16 @@ const Main = () => {
           />
         </div>
         <div>
-          <TrackingLists user={user} />
-          {/* <MainButton
+          <TrackingList user={user} />
+          <MainButton
+            variant="contained"
+            style={{ marginBottom: '20px', width: '60%' }}
+            onClick={() => navigate('/network')}
+          >
+            network
+          </MainButton>
+          <br />
+          <MainButton
             variant="contained"
             style={{ marginBottom: '20px', width: '60%' }}
             onClick={() => navigate('/users')}
