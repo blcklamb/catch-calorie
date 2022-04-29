@@ -71,9 +71,9 @@ trackingRouter.put("/tracking/exer", login_required, async (req, res, next) => {
     }
 });
 
-trackingRouter.delete("/tracking/food", login_required, async (req, res, next) => {
+trackingRouter.delete("/tracking/food/:id", login_required, async (req, res, next) => {
     try {
-        const { id } = req.body;
+        const { id } = req.params;
 
         const deletedTracking = await trackingService.deleteFoodTracking({ id });
 
@@ -83,9 +83,9 @@ trackingRouter.delete("/tracking/food", login_required, async (req, res, next) =
     }
 });
 
-trackingRouter.delete("/tracking/exer", login_required, async (req, res, next) => {
+trackingRouter.delete("/tracking/exer/:id", login_required, async (req, res, next) => {
     try {
-        const { id } = req.body;
+        const { id } = req.params;
 
         const deletedTracking = await trackingService.deleteExerTracking({ id });
 
