@@ -109,7 +109,7 @@ const Main = () => {
           />
         </div>
         <div>
-          <TrackingList user={user} />
+          <TrackingLists user={user} />
           <MainButton
             variant="contained"
             style={{ marginBottom: '20px', width: '60%' }}
