@@ -81,6 +81,22 @@ class userAuthService {
         user.errorMessage = "회원탈퇴했습니다.";
         return user;
     }
+
+    // 회원 비밀번호 수정하기
+    static async setPassword({ id, old_pw, new_pw }){
+        const user = await User.findById({ id });
+        const pass = await bcrypt.compare(old_pw, user.password);
+        
+        if(!pass){
+            throw new Error("비밀번호를 정확하게 입력해주세요.");
+        }
+        
+        const hashedPassword = await bcrypt.hash(new_pw, 10);
+        const toUpdate = { password: hashedPassword };
+
+        return  User.update({id, toUpdate});
+
+    }
 }
 
 export { userAuthService };
