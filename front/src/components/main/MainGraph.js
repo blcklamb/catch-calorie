@@ -3,6 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 
+import { useRecoilValue } from 'recoil';
+import { userInfoState } from '../../atoms';
+
+import * as Api from '../../api';
+
 function MainGraph({
   foodSelected,
   setFoodSelected,
@@ -16,6 +21,9 @@ function MainGraph({
   kcalPerHour,
   setKcalPerHour,
 }) {
+  const user = useRecoilValue(userInfoState);
+  const [todayTracking, setTodayTracking] = useState();
+
   const labels = ["Today's calories"];
 
   const options = {
@@ -83,7 +91,8 @@ function MainGraph({
     datasets: [
       {
         label: 'Current Calories',
-        data: [totalKcal],
+        // data: [totalKcal],
+        data: [todayTracking?.acc_cal],
         backgroundColor: ['rgba(255, 99, 132, 0.2)'],
         borderColor: ['rgb(255, 99, 132)'],
         borderWidth: 1,
@@ -114,6 +123,32 @@ function MainGraph({
     'rgba(153, 102, 255)',
   ];
 
+  // useEffect(() => {
+  //   foodSelected.map((food, idx) => {
+  //     const newDataset = {
+  //       label: food?.name,
+  //       backgroundColor: backgroundColor[idx],
+  //       borderColor: borderColor[idx],
+  //       borderWidth: 1,
+  //       data: [kcalPerGram[idx]],
+  //     };
+
+  //     data.datasets.splice(1, 0, newDataset);
+  //   });
+  //   exerciseSelected.map((exercise, idx) => {
+  //     const newDataset = {
+  //       label: exercise?.name,
+  //       backgroundColor: backgroundColor[idx],
+  //       borderColor: borderColor[idx],
+  //       borderWidth: 1,
+  //       data: [-kcalPerHour[idx]],
+  //       // data: [-exercise?.kcal],
+  //     };
+
+  //     data.datasets.splice(1, 0, newDataset);
+  //   });
+  // }, [foodSelected, exerciseSelected]);
+
   const addData = () => {
     foodSelected.map((food, idx) => {
       const newDataset = {
@@ -124,7 +159,11 @@ function MainGraph({
         data: [kcalPerGram[idx]],
       };
 
-      data.datasets.splice(1, 0, newDataset);
+      if (food === 0) {
+        console.log('영이다');
+      } else {
+        data.datasets.splice(1, 0, newDataset);
+      }
     });
     exerciseSelected.map((exercise, idx) => {
       const newDataset = {
@@ -132,7 +171,7 @@ function MainGraph({
         backgroundColor: backgroundColor[idx],
         borderColor: borderColor[idx],
         borderWidth: 1,
-        data: [-kcalPerHour[idx]]
+        data: [-kcalPerHour[idx]],
         // data: [-exercise?.kcal],
       };
 
@@ -142,8 +181,16 @@ function MainGraph({
 
   addData();
 
+  useEffect(() => {
+    Api.get(`tracking/${user._id}`).then((res) => {
+      // console.log(res.data);
+      setTodayTracking(res.data);
+    });
+  }, [totalFood, totalExercise]);
+
   return (
     <div>
+      {/* {console.log(foodSelected)} */}
       {/* <div>
         {foodSelected.map((food) => food?.label)}
         <br />
