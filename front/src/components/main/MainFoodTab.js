@@ -1,172 +1,102 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import MainButton from './style/MainButton';
+import MainFoodForm from './MainFoodForm';
 
-import Autocomplete from '@mui/material/Autocomplete';
+import * as Api from '../../api';
 
-import MainButton from './style/MainButton'
-import MainInput from './style/MainInput'
-
-const foodList = [
-  {
-    value: 'hamburger',
-    label: 'hamburger',
-    kcal: 100,
-  },
-  {
-    value: 'cake',
-    label: 'cake',
-    kcal: 300,
-  },
-  {
-    value: 'ham',
-    label: 'ham',
-    kcal: 400,
-  },
-  {
-    value: 'strawberry-cake',
-    label: 'strawberry-cake',
-    kcal: 450,
-  },
-  {
-    value: 'chicken',
-    label: 'chicken',
-    kcal: 800,
-  },
-  {
-    value: 'fried-chicken',
-    label: 'fried-chicken',
-    kcal: 520,
-  },
-];
-
-// const MainButton = styled(Button)({
-// 	// background: 'linear-gradient(45deg, #da534e 30%, #FF8E53 90%)',
-// 	backgroundColor: '#F03E3E', 
-// 	border: 0,
-// 	borderRadius: 20,
-// 	// boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-// 	color: 'white',
-// 	height: 48,
-// 	padding: '0 30px',
-// 	// background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-// 	// border: 0,
-// 	// borderRadius: 3,
-// 	// boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-// 	// color: 'white',
-// 	// height: 48,
-// 	// padding: '0 30px',
-//   });
-
-function MainFoodTab({ foodSelected, setFoodSelected, totalFood, setTotalFood }) {
-  const [value, setValue] = React.useState();
-
+function MainFoodTab({
+  foodSelected,
+  setFoodSelected,
+  totalFood,
+  setTotalFood,
+  kcalPerGram,
+  setKcalPerGram,
+}) {
+  const [value, setValue] = React.useState([]);
   // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
-  const [inputValue, setInputValue] = React.useState('');
+  const [inputValue, setInputValue] = React.useState([]);
 
-  const handleOnClick = () => {
-    setTotalFood(foodSelected.reduce((acc, cur) => acc + cur.kcal, totalFood));
-    console.log(totalFood);
-    setFoodSelected([]);
+  const [foodForms, setFoodForms] = useState([0]);
+  const [gram, setGram] = useState([]);
+
+  const handleAddFoodForm = () => {
+    let countArr = [...foodForms];
+    let counter = countArr.slice(-1)[0];
+    counter += 1;
+    countArr.push(counter); // index 사용 X
+    // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용
+    setFoodForms(countArr);
   };
+
+  console.log(foodSelected);
+  const handleTracking = () => {
+    foodSelected.map((food, i) => {
+      // const name = food.name;
+      const g = Number(gram[i]);
+      
+      try {
+        Api.post(`tracking/food`, {
+         name: food.name, 
+         gram: g
+       });
+
+      } catch (err) {
+        console.log('전송 실패', err)
+      }
+
+      Api.post(`foods/${food._id}`);
+    });
+
+    setTotalFood(kcalPerGram.reduce((acc, cur) => acc + cur, totalFood));
+    // setFoodSelected([]);
+    // setGram([]);
+    // setKcalPerGram([]);
+    setFoodSelected(foodSelected.map((f, i) => 0));
+    setGram(gram.map((g, i) => 0));
+    setKcalPerGram(kcalPerGram.map((g, i) => 0));
+
+    // console.log(kcalPerGram)
+  };
+
+  // useEffect(() => {
+  //   kcalPerGram.map((kcal, idx) => {
+  //     if(isNaN(kcal)) {
+  //       setKcalPerGram([...kcalPerGram.slice(0, idx), 0, ...kcalPerGram.slice(idx + 1)])
+  //     }
+  //   })
+  // }, [gram])
 
   return (
     <div>
-      {/* <div>{`value: ${value !== null ? `'${value}'` : 'null'}`}</div>
-			<div>{`inputValue: '${inputValue}'`}</div>
-			<br /> */}
-      <div style={{ display: 'flex' }}>
-        <Autocomplete
-          // multiple
-          // disablePortal
-          // disableCloseOnSelect
-          id="controllable-states-demo"
-          // value={foodSelected[0]?.label}
-          value={value}
-          options={foodList}
-          sx={{ width: 300 }}
-          renderInput={(params) => (
-            <MainInput
-              {...params}
-              // variant="standard"
-              label="Food(kcal/100g)"
-              placeholder="Please select food"
-            />
-          )}
-          //
-          getOptionLabel={(option) => [option.label, `(${option.kcal})`]}
-          onChange={(event, newValue) => {
-            // setFoodSelected([...foodSelected, newValue]);
-            setFoodSelected([newValue]);
-            // setValue(newValue);
-          }}
-          inputValue={inputValue}
-          onInputChange={(event, newInputValue) => {
-            setInputValue(newInputValue);
-          }}
-          noOptionsText={
-            <div>
-              <p>No option</p>
-              <Button
-                variant="contained"
-                color="primary"
-                type="button"
-                // startIcon={< AddIc fontSize="small" />}
-                // onClick={() => alert('기능 추후 보강')}
-              >
-                Add food
-              </Button>
-            </div>
-          }
-        />
-        {/* 다중선택 */}
-        {/* <Autocomplete
-					multiple
-					id="controllable-states-demo"
-					value={foodSelected[0]?.label}
-					options={foodList}
-					sx={{ width: 300 }}
-					onChange={(event, newValue) => {
-						setFoodSelected(newValue);
-					}}
-					inputValue={inputValue}
-					onInputChange={(event, newInputValue) => {
-						setInputValue(newInputValue);
-					}}
-					// renderInput={(params) => <TextField {...params} label="음식" />}
-
-					getOptionLabel={(option) => [option.label, `${option.kcal}`]}
-					renderInput={(params) => (
-						<TextField
-							{...params}
-							variant="standard"
-							label="Multiple values"
-							placeholder="Favorites"
-						/>
-					)}
-				/> */}
-        <Box
-          component="form"
-          sx={{
-            '& > :not(style)': { m: 1, width: '25ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <MainInput id="outlined-basic" label="g" variant="outlined" disabled value={100} />
-        </Box>
-      </div>
-      {/* <Button variant="contained" onClick={setIsFoodSelected(true)}> */}
-      <MainButton variant="contained" onClick={handleOnClick}>
-        check
-      </MainButton>
       {console.log(foodSelected)}
+      {console.log(gram)}
+      {console.log(kcalPerGram)}
+      {/* {console.log(kcalPerGram)} */}
+      {foodForms &&
+        foodForms.map((item, i) => (
+          <MainFoodForm
+            key={i}
+            idx={i}
+            value={value}
+            setValue={setValue}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            foodSelected={foodSelected}
+            setFoodSelected={setFoodSelected}
+            gram={gram}
+            setGram={setGram}
+            kcalPerGram={kcalPerGram}
+            setKcalPerGram={setKcalPerGram}
+          />
+        ))}
+      <MainButton variant="contained" onClick={handleAddFoodForm}>
+        +
+      </MainButton>
+      <MainButton variant="contained" onClick={handleTracking}>
+        tracking
+      </MainButton>
     </div>
   );
 }
