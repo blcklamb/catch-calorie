@@ -17,7 +17,8 @@ function MainFoodTab({ foodSelected, setFoodSelected, kcalPerGram, setKcalPerGra
     countArr.push(counter); // index 사용 X
     // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용
     setFoodForms(countArr);
-    setFoodSelected(foodForms.map((f, i) => 0));
+    // 이거 왜 했었지...? 무슨 에러 때문에 한 것 같은데 버튼 클릭 시 그래프 초기화 때문에 주석 처리
+    // setFoodSelected(foodForms.map((f, i) => 0));
   };
 
   // console.log(foodSelected);
@@ -47,10 +48,11 @@ function MainFoodTab({ foodSelected, setFoodSelected, kcalPerGram, setKcalPerGra
 
   return (
     <div>
-      {/* {console.log(foodSelected)} */}
+      {/* {console.log(foodForms)}
+      {console.log(foodSelected)} */}
       {/* {console.log(gram)}
       {console.log(kcalPerGram)} */}
-      {/* {console.log(foodForms)} */}
+      
       {foodForms &&
         foodForms.map((item) => (
           <MainFoodForm

@@ -26,7 +26,8 @@ function MainExerciseTab({
     countArr.push(counter); // index 사용 X
     // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용
     setExerciseForms(countArr);
-    setExerciseSelected(exerciseForms.map((f, i) => 0));
+    // 이거 왜 했었지...? 무슨 에러 때문에 한 것 같은데 버튼 클릭 시 그래프 초기화 때문에 주석 처리
+    // setExerciseSelected(exerciseForms.map((f, i) => 0));
   };
 
   const handleTracking = () => {
@@ -52,6 +53,8 @@ function MainExerciseTab({
 
   return (
     <div>
+      {/* {console.log(exerciseForms)}
+      {console.log(exerciseSelected)} */}
       {exerciseForms &&
         exerciseForms.map((item) => (
           <MainExerciseForm
