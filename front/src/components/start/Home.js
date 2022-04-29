@@ -13,6 +13,9 @@ import Walking from '../../lottie/walking.json';
 import { useNavigate } from 'react-router-dom';
 import { UserStateContext } from '../../App';
 
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userState } from '../../atoms';
+
 const COLORS = ['#5bc691', '#FFBB28', '#C66868', '#FF8042'];
 
 const FirstPage = styled.section`
@@ -162,6 +165,10 @@ const FourthPageBtn = styled.button`
 
 function Home() {
   const navigate = useNavigate();
+
+  const user = useRecoilValue(userState);
+
+  console.log(user);
 
   const defaultOptions = {
     loop: true,
