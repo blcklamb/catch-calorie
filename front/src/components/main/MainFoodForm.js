@@ -108,7 +108,7 @@ function MainFoodForm({
         <div>
           {/* {console.log(gram)} */}
           {/* {console.log(foodSelected[idx])} */}
-          {idx}
+          {/* {idx}
           <br />
           밸류 {value}
           <br />
@@ -117,8 +117,8 @@ function MainFoodForm({
           {foodSelected[idx]?.kcal_per_100g} 칼로리
           <br />
           {gram[idx]} 그램
-          <br />총 {(Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per_100g}
-          <br />총 {kcalPerGram[idx]}
+          <br />총 {(Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per_100g} */}
+          <br />{kcalPerGram[idx]} Kcal/g
         </div>
       </div>
     </>
