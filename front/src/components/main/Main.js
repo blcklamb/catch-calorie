@@ -7,7 +7,7 @@ import Footer from '../Footer';
 
 import MainTabs from './MainTabs';
 import MainGraph from './MainGraph';
-import TrackingList from '../TrackingList';
+import TrackingLists from '../trackingList/TrackingLists';
 
 import MainButton from './style/MainButton';
 // import { DispatchContext } from '../../App';
@@ -109,15 +109,7 @@ const Main = () => {
           />
         </div>
         <div>
-          <TrackingList user={user} />
-          <MainButton variant="contained" style={{ marginBottom: '20px', width: '60%' }}>
-            Modifying and deleting
-          </MainButton>
-          <br />
-          <MainButton variant="contained" style={{ marginBottom: '20px', width: '60%' }}>
-            View Details
-          </MainButton>
-          <br />
+          <TrackingLists user={user} />
           <MainButton
             variant="contained"
             style={{ marginBottom: '20px', width: '60%' }}
