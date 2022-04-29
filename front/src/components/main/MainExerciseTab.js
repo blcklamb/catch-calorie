@@ -44,7 +44,7 @@ function MainExerciseTab({
       const t = Number(time[i]);
       
       try {
-        Api.post(`tracking/food`, {
+        Api.post(`tracking/exer`, {
          name: exercise.name, 
          minute: t 
        });
