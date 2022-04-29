@@ -141,7 +141,7 @@ const Main = () => {
           >
             Log-out
           </MainButton>
-          <BasicModal></BasicModal> */}
+          <BasicModal></BasicModal> */
         </div>
       </div>
       <Footer />

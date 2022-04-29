@@ -4,6 +4,7 @@ import avocado from '../image/avocado.gif';
 // import { UserStateContext } from '../App';
 import { useRecoilState } from 'recoil';
 import { userInfoState } from '../atoms';
+import { Link } from 'react-router-dom';
 
 import HeaderHamburger from './HeaderHamburger';
 
@@ -20,10 +21,13 @@ const Container = styled.div`
 `;
 
 const Logo = styled.h3`
+  width: 50vw;
   font-size: 2.9rem;
   color: #f03e3e;
   font-style: bold;
   margin: 15px 30px -5px;
+  display: inline-block;
+  z-index: 3500;
 `;
 
 const LogoCopy = styled.div`
@@ -49,18 +53,19 @@ const Avocado = styled.img`
   margin: 15px;
 `;
 
-
-
 function Header() {
   const [user, setUser] = useRecoilState(userInfoState);
 
   return (
     <>
       <Container>
-        <Logo>Catch Carlories</Logo>
+        <Logo>
+          <Link to="/" style={{ textDecoration: 'none', color: '#f03e3e', cursor: 'pointer' }}>
+            Catch Carlories
+          </Link>
+        </Logo>
         <LogoCopy>health tracker</LogoCopy>
         {user ? (
-          // <></>
           <>
             <HeaderHamburger />
           </>

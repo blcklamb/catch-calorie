@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import * as Api from '../../api';
 import styled from 'styled-components';
 import Yoga from './yoga.png';
+
+import Tooltip from '../Tooltip';
+
+import { useRecoilValue } from 'recoil';
+import { userInfoState } from '../../atoms';
 
 const BadgesContainer = styled.div`
   width: 1203px;
@@ -27,20 +33,6 @@ const BadgesWrap = styled.div`
   position: absolute;
 `;
 
-const Badgesbox = styled.img`
-  width: 180px;
-  height: 180px;
-  border-radius: 18px;
-  background: #ecf8d9;
-  box-shadow: 5px 5px 18px #668d2a, -5px -5px 18px #d8ff5a;
-
-  border: none;
-
-  :hover {
-    box-shadow: inset 8px 8px 16px #c88383, inset -8px -8px 16px #faa3a3;
-  }
-`;
-
 const BadgesText = styled.div`
   width: 1203px;
   height: 50px;
@@ -52,34 +44,44 @@ const BadgesText = styled.div`
 `;
 
 const Badges = () => {
+  const user = useRecoilValue(userInfoState);
   const [badges, setBadges] = useState([]);
+  console.log('뱃지', badges);
 
-  //   useEffect(() => {
-  //     Api.get('badges').then((res) => setBadges(res.badges));
-  //   }, []);
+  useEffect(() => {
+    Api.get('users', user._id).then((res) => setBadges(res.data.icon));
+  }, [user]);
 
   return (
     <div>
       <BadgesText>Badges</BadgesText>
+
       <BadgesContainer>
         <BadgesWrap>
-          <Badgesbox src={Yoga} />
-          <Badgesbox />
-          <Badgesbox />
-          <Badgesbox />
-          <Badgesbox />
-          <Badgesbox />
-          <Badgesbox />
-          <Badgesbox />
-          <Badgesbox />
-          <Badgesbox />
-          <Badgesbox />
-          <Badgesbox />
+          <Tooltip />
+          <Tooltip />
+          <Tooltip />
+          <Tooltip />
+          <Tooltip />
+          <Tooltip />
+          <Tooltip />
+          <Tooltip />
+          <Tooltip />
+          <Tooltip />
+          <Tooltip />
+          <Tooltip />
         </BadgesWrap>
 
         {/* {badges.map((user) => (
           <Badgesbox key={badges} />
         ))} */}
+
+        {/* <Grid container spacing={4}>
+          {userList.map((eachUserId, index) => (
+            <Grid item xs={3} key={index}>
+              <UserCard eachUserId={eachUserId}></UserCard>
+            </Grid>
+          ))} */}
       </BadgesContainer>
     </div>
   );
