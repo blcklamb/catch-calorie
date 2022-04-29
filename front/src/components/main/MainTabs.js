@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -103,44 +103,60 @@ const MainTabs = ({
   kcalPerHour,
   setKcalPerHour,
 }) => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const [isRerender, setIsRerender] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  useEffect(() => {
+    if (isRerender) {
+      setTimeout(() => {
+        setIsRerender(false);
+      }, 1);
+    }
+  }, [isRerender]);
+
+  const clearForm = () => {
+    setIsRerender(true);
+  };
+
   return (
-    <MainTabsSection>
-      <div>
-        <StyledTabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          {/* <StyledTab label="Food" {...a11yProps(0)} />
+    !isRerender && (
+      <MainTabsSection>
+        <div>
+          <StyledTabs value={value} onChange={handleChange} aria-label="basic tabs example">
+            {/* <StyledTab label="Food" {...a11yProps(0)} />
           <StyledTab label="Exercise" {...a11yProps(1)} /> */}
-          {['Food', 'Exercise'].map((label, index) => (
-            <StyledTab key={label} label={label} {...a11yProps(index)} />
-          ))}
-        </StyledTabs>
-      </div>
-      <TabPanel value={value} index={0}>
-        <MainFoodTab
-          foodSelected={foodSelected}
-          setFoodSelected={setFoodSelected}
-          totalFood={totalFood}
-          setTotalFood={setTotalFood}
-          kcalPerGram={kcalPerGram}
-          setKcalPerGram={setKcalPerGram}
-        />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <MainExerciseTab
-          exerciseSelected={exerciseSelected}
-          setExerciseSelected={setExerciseSelected}
-          totalExercise={totalExercise}
-          setTotalExercise={setTotalExercise}
-          kcalPerHour={kcalPerHour}
-          setKcalPerHour={setKcalPerHour}
-        />
-      </TabPanel>
-    </MainTabsSection>
+            {['Food', 'Exercise'].map((label, index) => (
+              <StyledTab key={label} label={label} {...a11yProps(index)} />
+            ))}
+          </StyledTabs>
+        </div>
+        <TabPanel value={value} index={0}>
+          <MainFoodTab
+            foodSelected={foodSelected}
+            setFoodSelected={setFoodSelected}
+            totalFood={totalFood}
+            setTotalFood={setTotalFood}
+            kcalPerGram={kcalPerGram}
+            setKcalPerGram={setKcalPerGram}
+            clearForm={clearForm}
+          />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <MainExerciseTab
+            exerciseSelected={exerciseSelected}
+            setExerciseSelected={setExerciseSelected}
+            totalExercise={totalExercise}
+            setTotalExercise={setTotalExercise}
+            kcalPerHour={kcalPerHour}
+            setKcalPerHour={setKcalPerHour}
+          />
+        </TabPanel>
+      </MainTabsSection>
+    )
   );
 };
 

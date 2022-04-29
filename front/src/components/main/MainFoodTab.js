@@ -13,6 +13,7 @@ function MainFoodTab({
   setTotalFood,
   kcalPerGram,
   setKcalPerGram,
+  clearForm,
 }) {
   const [value, setValue] = React.useState([]);
   // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
@@ -35,15 +36,14 @@ function MainFoodTab({
     foodSelected.map((food, i) => {
       // const name = food.name;
       const g = Number(gram[i]);
-      
+
       try {
         Api.post(`tracking/food`, {
-         name: food.name, 
-         gram: g
-       });
-
+          name: food.name,
+          gram: g,
+        });
       } catch (err) {
-        console.log('전송 실패', err)
+        console.log('전송 실패', err);
       }
 
       Api.post(`foods/${food._id}`);
@@ -57,6 +57,7 @@ function MainFoodTab({
     setGram(gram.map((g, i) => 0));
     setKcalPerGram(kcalPerGram.map((g, i) => 0));
 
+    clearForm();
     // console.log(kcalPerGram)
   };
 
@@ -73,7 +74,7 @@ function MainFoodTab({
       {/* {console.log(foodSelected)}
       {console.log(gram)}
       {console.log(kcalPerGram)} */}
-      {/* {console.log(kcalPerGram)} */}
+      {/* {console.log(foodForms)} */}
       {foodForms &&
         foodForms.map((item, i) => (
           <MainFoodForm
