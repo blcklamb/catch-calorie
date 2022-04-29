@@ -8,19 +8,7 @@ import { userInfoState } from '../../atoms';
 
 import * as Api from '../../api';
 
-function MainGraph({
-  foodSelected,
-  setFoodSelected,
-  totalFood,
-  setTotalFood,
-  exerciseSelected,
-  setExerciseSelected,
-  totalExercise,
-  kcalPerGram,
-  setKcalPerGram,
-  kcalPerHour,
-  setKcalPerHour,
-}) {
+function MainGraph({ foodSelected, setFoodSelected, exerciseSelected, kcalPerGram, kcalPerHour }) {
   const user = useRecoilValue(userInfoState);
   const [todayTracking, setTodayTracking] = useState();
 
@@ -61,29 +49,20 @@ function MainGraph({
     },
   };
 
-  // const totalGram = gram.reduce((acc, cur) => Number(acc) + Number(cur), 0);
-
-  const totalKcal = totalFood - totalExercise;
-
   const remainingKcal = () => {
-    // console.log(totalFood)
-    // console.log(kcalPerGram)
     // 엑스(clear) 눌러서 처리됐을 경우 처리, 추후 함수로 분리
     if (foodSelected[0] === null) {
       // 음식이 없을 경우
-      // console.log('첫')
       setFoodSelected([]);
     }
-    if (totalFood - totalExercise < 0) {
-      // console.log('둘')
+    if (todayTracking?.acc_cal < 0) {
       return [3000];
     }
     if (isNaN(kcalPerGram[0])) {
-      // console.log('셋')
-      return [3000 - totalKcal];
+      // 선택된 항목이 없을 경우
+      return [3000 - todayTracking];
     }
-    // console.log('넷')
-    return [3000 - totalKcal - kcalPerGram.reduce((acc, cur) => acc + cur, 0)];
+    return [3000 - todayTracking - kcalPerGram.reduce((acc, cur) => acc + cur, 0)];
   };
 
   const data = {
@@ -91,8 +70,7 @@ function MainGraph({
     datasets: [
       {
         label: 'Current Calories',
-        // data: [totalKcal],
-        data: [todayTracking?.acc_cal],
+        data: [todayTracking],
         backgroundColor: ['rgba(255, 99, 132, 0.2)'],
         borderColor: ['rgb(255, 99, 132)'],
         borderWidth: 1,
@@ -123,32 +101,6 @@ function MainGraph({
     'rgba(153, 102, 255)',
   ];
 
-  // useEffect(() => {
-  //   foodSelected.map((food, idx) => {
-  //     const newDataset = {
-  //       label: food?.name,
-  //       backgroundColor: backgroundColor[idx],
-  //       borderColor: borderColor[idx],
-  //       borderWidth: 1,
-  //       data: [kcalPerGram[idx]],
-  //     };
-
-  //     data.datasets.splice(1, 0, newDataset);
-  //   });
-  //   exerciseSelected.map((exercise, idx) => {
-  //     const newDataset = {
-  //       label: exercise?.name,
-  //       backgroundColor: backgroundColor[idx],
-  //       borderColor: borderColor[idx],
-  //       borderWidth: 1,
-  //       data: [-kcalPerHour[idx]],
-  //       // data: [-exercise?.kcal],
-  //     };
-
-  //     data.datasets.splice(1, 0, newDataset);
-  //   });
-  // }, [foodSelected, exerciseSelected]);
-
   const addData = () => {
     foodSelected.map((food, idx) => {
       const newDataset = {
@@ -159,9 +111,7 @@ function MainGraph({
         data: [kcalPerGram[idx]],
       };
 
-      if (food === 0) {
-        console.log('영이다');
-      } else {
+      if (food !== 0) {
         data.datasets.splice(1, 0, newDataset);
       }
     });
@@ -172,10 +122,10 @@ function MainGraph({
         borderColor: borderColor[idx],
         borderWidth: 1,
         data: [-kcalPerHour[idx]],
-        // data: [-exercise?.kcal],
       };
-
-      data.datasets.splice(1, 0, newDataset);
+      if (exercise !== 0) {
+        data.datasets.splice(1, 0, newDataset);
+      }
     });
   };
 
@@ -183,31 +133,12 @@ function MainGraph({
 
   useEffect(() => {
     Api.get(`tracking/${user._id}`).then((res) => {
-      // console.log(res.data);
-      setTodayTracking(res.data);
+      setTodayTracking(res.data?.acc_cal);
     });
-  }, [totalFood, totalExercise]);
+  }, [todayTracking]);
 
   return (
     <div>
-      {/* {console.log(foodSelected)} */}
-      {/* <div>
-        {foodSelected.map((food) => food?.label)}
-        <br />
-        {foodSelected.map((food) => food?.kcal)}
-        <br />
-        미리보기 합{foodSelected.reduce((acc, cur) => acc + cur?.kcal, 0)}
-        <br />
-        총합
-        {totalFood}
-      </div>
-      <div>
-        {exerciseSelected.map((exercise) => exercise?.label)}
-        <br />
-        {exerciseSelected.map((exercise) => exercise?.kcal)}
-        <br />
-      </div> */}
-      {/* {console.log(exerciseSelected)} */}
       <div style={{ width: 400 }}>
         <Bar data={data} options={options} height={300} />
       </div>
