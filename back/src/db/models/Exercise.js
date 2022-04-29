@@ -1,4 +1,4 @@
-import { ExerModel } from "../schemas/exercise"
+import { ExerModel } from "../schemas/exercise";
 
 class Exercise {
     static create({ newExercise }) {
@@ -9,8 +9,16 @@ class Exercise {
         return ExerModel.findOne({ name });
     }
 
-    static findAll({ search }) {
-        return ExerModel.find({ name: { search }})
+    static findAll() {
+        return ExerModel.find().sort({ views: -1 });
+    }
+
+    static update({ id }, { toUpdate }) {
+        return ExerModel.findByIdAndUpdate(id, toUpdate, { new: true });
+    }
+
+    static delete({ id }) {
+        return ExerModel.deleteById(id);
     }
 }
 

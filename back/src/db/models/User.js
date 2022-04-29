@@ -9,12 +9,20 @@ class User {
         return UserModel.findOne({ email });
     }
 
-    static findById({ user_id }) {
-        return UserModel.findOne({ user_id });
+    static findById({ id }) {
+        return UserModel.findById(id);
     }
 
     static findAll() {
-        return UserModel.find({})
+        return UserModel.find();
+    }
+
+    static update({ id, toUpdate }) {
+        return UserModel.findByIdAndUpdate(id, toUpdate, { new: true });
+    }
+
+    static delete({ id }) {
+        return UserModel.remove({ id });
     }
 }
 
