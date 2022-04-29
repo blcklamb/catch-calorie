@@ -41,7 +41,7 @@ function MainFoodForm({
   };
 
   useEffect(() => {
-    if (Number(gram[idx]) === 0) {
+    if (Number(gram[idx]) === 0 || !foodSelected[idx]?.kcal_per_100g) {
       setKcalPerGram([...kcalPerGram.slice(0, idx), 0, ...kcalPerGram.slice(idx + 1)]);
       // console.log('하나', idx);
       // console.log(kcalPerGram);
@@ -54,7 +54,7 @@ function MainFoodForm({
         ...kcalPerGram.slice(idx + 1),
       ]);
     }
-  }, [gram[idx]]);
+  }, [gram[idx], foodSelected[idx]]);
 
   return (
     <>
@@ -107,8 +107,8 @@ function MainFoodForm({
         </div>
         <div>
           {/* {console.log(gram)} */}
-          {/* {console.log(foodSelected[idx])} */}
-          {/* {idx}
+          {/* {console.log(foodSelected[idx]?.kcal_per_100g)}
+          {idx}
           <br />
           밸류 {value}
           <br />
@@ -117,8 +117,9 @@ function MainFoodForm({
           {foodSelected[idx]?.kcal_per_100g} 칼로리
           <br />
           {gram[idx]} 그램
-          <br />총 {(Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per_100g} */}
-          <br />{kcalPerGram[idx]} Kcal/g
+          <br />총 {(Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per_100g}
+          <br /> */}
+          {kcalPerGram[idx]} Kcal/g
         </div>
       </div>
     </>

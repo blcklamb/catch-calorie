@@ -77,7 +77,7 @@ function MainExerciseForm({
   }, [hour[idx], minute[idx]]);
 
   useEffect(() => {
-    if (Number(time[idx]) === 0) {
+    if (Number(time[idx]) === 0 || !exerciseSelected[idx]?.kcal_per_kg) {
       setKcalPerHour([...kcalPerHour.slice(0, idx), 0, ...kcalPerHour.slice(idx + 1)]);
     } else {
       setKcalPerHour([
@@ -86,7 +86,7 @@ function MainExerciseForm({
         ...kcalPerHour.slice(idx + 1),
       ]);
     }
-  }, [time[idx]]);
+  }, [time[idx], exerciseSelected[idx]]);
 
   return (
     <div style={{ display: 'flex' }}>
