@@ -58,7 +58,7 @@ const Jandi = () => {
         }
       });
     }
-  }, []);
+  }, [user, params]);
 
   // Api.get('heatmap', user._id).then((res) => {
   //   console.log(res.data.record);
