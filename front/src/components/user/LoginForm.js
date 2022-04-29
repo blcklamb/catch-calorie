@@ -13,7 +13,7 @@ import * as Api from '../../api';
 // import { DispatchContext } from '../../App';
 import Header from '../Header';
 import Footer from '../Footer';
-
+import { validateEmail } from '../../utils';
 // import recoil
 import { useRecoilState } from 'recoil';
 import { tokenState, userState } from '../../atoms';
@@ -33,15 +33,6 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   // input 상태관리
   const [checkLogin, setCheckLogin] = useState(true);
-
-  //이메일이 abc@example.com 형태인지 regex를 이용해 확인함.
-  const validateEmail = (email) => {
-    return email
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      );
-  };
 
   //위 validateEmail 함수를 통해 이메일 형태 적합 여부를 확인함.
   const isEmailValid = validateEmail(email);
