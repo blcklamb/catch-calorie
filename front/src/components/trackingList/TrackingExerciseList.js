@@ -26,9 +26,7 @@ function TrackingExerciseList({ exercise }) {
   };
 
   const handleDelete = (e) => {
-    Api.delete('tracking/exer', {
-      id: exercise.id,
-    });
+    Api.delete(`tracking/exer/${exercise.id}`);
   };
 
   return (
