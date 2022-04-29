@@ -16,8 +16,8 @@ function MainExerciseTab({
   const [exerciseForms, setExerciseForms] = useState([0]);
 
   const [time, setTime] = useState([]);
-  // const [hour, setHour] = useState([]);
-  // const [minute, setMinute] = useState([]);
+  const [hour, setHour] = useState([]);
+  const [minute, setMinute] = useState([]);
 
   const handleAddExerciseForm = () => {
     let countArr = [...exerciseForms];
@@ -61,10 +61,10 @@ function MainExerciseTab({
             setExerciseSelected={setExerciseSelected}
             time={time}
             setTime={setTime}
-            // hour={hour}
-            // setHour={setHour}
-            // minute={minute}
-            // setMinute={setMinute}
+            hour={hour}
+            setHour={setHour}
+            minute={minute}
+            setMinute={setMinute}
             kcalPerHour={kcalPerHour}
             setKcalPerHour={setKcalPerHour}
           />

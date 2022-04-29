@@ -30,9 +30,8 @@ function MainFoodForm({
   const [foodApiList, setFoodApiList] = useState('');
 
   useEffect(() => {
-    
     Api.get(`foods`).then((res) => setFoodApiList(res.data));
-    
+
     // 인덱스 수 대로 배열 속 생성
     setGram([...gram.slice(0, idx), 0, ...gram.slice(idx + 1)]);
   }, []);
@@ -43,8 +42,6 @@ function MainFoodForm({
 
   useEffect(() => {
     if (Number(gram[idx]) === 0) {
-      console.log(gram);
-      console.log(idx, gram[idx]);
       setKcalPerGram([...kcalPerGram.slice(0, idx), 0, ...kcalPerGram.slice(idx + 1)]);
       // console.log('하나', idx);
       // console.log(kcalPerGram);
@@ -57,7 +54,7 @@ function MainFoodForm({
         ...kcalPerGram.slice(idx + 1),
       ]);
     }
-  }, [idx, gram]);
+  }, [gram[idx]]);
 
   return (
     <>
