@@ -76,7 +76,7 @@ MainTabPanel.propTypes = {
 };
 
 const TabPanel = styled(MainTabPanel)({
-  height: 300,
+  height: 'auto',
   backgroundColor: '#ECF8D9',
   padding: '40px 30px',
 });
