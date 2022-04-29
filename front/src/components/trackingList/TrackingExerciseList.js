@@ -9,8 +9,8 @@ import * as Api from '../../api';
 function TrackingExerciseList({ exercise }) {
   const [isEditing, setIsEditing] = useState(false);
   const [trackingList, setTrackingList] = useState('');
-  const [hour, setHour] = useState();
-  const [minute, setMinute] = useState();
+  const [hour, setHour] = useState(parseInt(exercise.minute / 60));
+  const [minute, setMinute] = useState(exercise.minute % 60);
   // const [minute, setMinute] = useState(exercise.minute);
 
   const handleCheck = async (e) => {
@@ -39,7 +39,7 @@ function TrackingExerciseList({ exercise }) {
               id="outlined-name"
               label="hour"
               value={hour}
-              defaultValue={parseInt(exercise.minute / 60)}
+              // defaultValue={parseInt(exercise.minute / 60)}
               onChange={(e) => setHour(e.target.value)}
               style={{ marginRight: '30px' }}
             />
@@ -47,7 +47,7 @@ function TrackingExerciseList({ exercise }) {
               id="outlined-name"
               label="minute"
               value={minute}
-              defaultValue={exercise.minute % 60}
+              // defaultValue={exercise.minute % 60}
               onChange={(e) => setMinute(e.target.value)}
               style={{ marginRight: '30px' }}
             />
