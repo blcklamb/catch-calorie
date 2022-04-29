@@ -1,7 +1,7 @@
 // 만들다가 필요없다는 것을 깨달아서 아쉬운 코드....
 import { User, Tracking, Award } from "../db";
 
-// athlete-운동 5회, 10회, 15회, 20회, 25회, 30회 이상
+// athlete: 운동 5회, 10회, 15회, 20회, 25회, 30회 이상
 const athlete = async (req, res, next) => {
     const user_id = req.currentUserId;
     const exerciseCount = await Tracking.findByUser({ user_id }).then((data) => {
@@ -30,7 +30,7 @@ const athlete = async (req, res, next) => {
     next();
 };
 
-// runner-'Running' 5회, 10회, 15회 이상
+// runner: 'Running' 5회, 10회, 15회 이상
 const runner = async (req, res, next) => {
     const user_id = req.currentUserId;
     const runningCount = await Tracking.findByUser({ user_id }).then((data) => {
@@ -56,7 +56,7 @@ const runner = async (req, res, next) => {
     }
 };
 
-// gym_rat-'Weight' 5회, 10회, 15회 이상
+// gym_rat: 'Weight' 5회, 10회, 15회 이상
 const gym_rat = async (req, res, next) => {
     const user_id = req.currentUserId;
     const weightCount = await Tracking.findByUser({ user_id }).then((data) => {
