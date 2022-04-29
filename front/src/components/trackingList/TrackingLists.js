@@ -175,12 +175,11 @@ function TrackingLists({ user }) {
   // console.log(params.user_id);
 
   useEffect(() => {
-    //   Api.get(`tracking/${params.user_id}`).then((res) => {
-    //     // console.log(res.data);
-    //     setTrackingList(res.data);
-    //   });
-    //   // Api.get(`tracking/${user._id}`).then((res) => setTrackingList(res.data));
-    setTrackingList(list);
+    Api.get(`tracking/${params.user_id}`).then((res) => {
+      console.log(res.data);
+      setTrackingList(res.data);
+    });
+    // setTrackingList(list);
   }, []);
 
   const handleModify = () => {};
@@ -191,7 +190,7 @@ function TrackingLists({ user }) {
       {/* {console.log(trackingList)} */}
       <div>
         <h1>Food</h1>
-        {trackingList &&
+        {trackingList.food_record?.length ? (
           trackingList.food_record.map((food) => {
             return (
               <TrackingFoodList food={food} />
@@ -206,15 +205,18 @@ function TrackingLists({ user }) {
               //   </Button>
               // </div>
             );
-          })}
+          })
+        ) : (
+          <div>No Food Tracking</div>
+        )}
       </div>
       <div>
         <h1>Exercise</h1>
-        {trackingList &&
+        {trackingList.exer_record?.length ? (
           trackingList.exer_record.map((exercise) => {
-            return ( 
+            return (
               // console.log('dsf')
-              <TrackingExerciseList exercise={exercise}/>
+              <TrackingExerciseList exercise={exercise} />
               // <div>
               //   {exercise.name}
               //   {exercise.calorie}
@@ -226,7 +228,10 @@ function TrackingLists({ user }) {
               //   </Button>
               // </div>
             );
-          })}
+          })
+        ) : (
+          <div>No Exercise Tracking</div>
+        )}
       </div>
     </>
   );
