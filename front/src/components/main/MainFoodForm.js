@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 import styled from 'styled-components';
 
 import Button from '@mui/material/Button';
@@ -33,6 +34,7 @@ function MainFoodForm({
   // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
   const [inputValue, setInputValue] = React.useState([]);
 
+
   const [foodApiList, setFoodApiList] = useState('');
   // const [gram, setGram] = useState([]);
 
@@ -54,14 +56,14 @@ function MainFoodForm({
   useEffect(() => {
     if (Number(gram[idx]) === 0) {
       setKcalPerGram([...kcalPerGram.slice(0, idx), 0, ...kcalPerGram.slice(idx + 1)]);
-      console.log('하나', idx);
-      console.log(kcalPerGram);
+      // console.log('하나', idx);
+      // console.log(kcalPerGram);
     } else {
-      console.log('둘');
-      console.log(idx, gram[idx], foodSelected[idx]?.kcal_per100g);
+      // console.log('둘');
+      // console.log(idx, gram[idx], foodSelected[idx]?.kcal_per100g);
       setKcalPerGram([
         ...kcalPerGram.slice(0, idx),
-        (Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per100g,
+        (Number(gram[idx]) / 100) * foodSelected[idx]?.kcals_per100g,
         ...kcalPerGram.slice(idx + 1),
       ]);
     }
@@ -86,7 +88,6 @@ function MainFoodForm({
 
   return (
     <>
-      {/* {console.log(foodApiList)} */}
       <div style={{ display: 'flex' }}>
         {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
 
@@ -146,16 +147,16 @@ function MainFoodForm({
           <MainInput id="outlined-basic" label="g" variant="outlined" onBlur={onChange} />
         </div>
         <div>
-          {/* {console.log(gram)}
-          {console.log(kcalPerGram)} */}
+          {/* {console.log(gram)} */}
+          {/* {console.log(foodSelected[idx])} */}
           밸류 {value}
           <br />
           인풋밸류 {inputValue}
           <br />
-          {foodSelected[idx]?.kcal_per100g} 칼로리
+          {foodSelected[idx]?.kcals_per100g} 칼로리
           <br />
           {gram[idx]} 그램
-          <br />총 {(Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per100g}
+          <br />총 {(Number(gram[idx]) / 100) * foodSelected[idx]?.kcals_per100g}
           <br />총 {kcalPerGram[idx]}
         </div>
       </div>

@@ -113,8 +113,11 @@ const MainTabs = ({
     <MainTabsSection>
       <div>
         <StyledTabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <StyledTab label="Food" {...a11yProps(0)} />
-          <StyledTab label="Exercise" {...a11yProps(1)} />
+          {/* <StyledTab label="Food" {...a11yProps(0)} />
+          <StyledTab label="Exercise" {...a11yProps(1)} /> */}
+          {['Food', 'Exercise'].map((label, index) => (
+            <StyledTab key={label} label={label} {...a11yProps(index)} />
+          ))}
         </StyledTabs>
       </div>
       <TabPanel value={value} index={0}>

@@ -30,7 +30,7 @@ function MainFoodTab({
     setFoodForms(countArr);
   };
 
-  console.log(foodSelected);
+  // console.log(foodSelected);
   const handleTracking = () => {
     foodSelected.map((food, i) => {
       // const name = food.name;
@@ -70,9 +70,9 @@ function MainFoodTab({
 
   return (
     <div>
-      {console.log(foodSelected)}
+      {/* {console.log(foodSelected)}
       {console.log(gram)}
-      {console.log(kcalPerGram)}
+      {console.log(kcalPerGram)} */}
       {/* {console.log(kcalPerGram)} */}
       {foodForms &&
         foodForms.map((item, i) => (
