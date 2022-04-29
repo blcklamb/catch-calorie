@@ -24,9 +24,7 @@ function TrackingFoodList({ food }) {
   };
 
   const handleDelete = (e) => {
-    Api.delete('tracking/food', {
-      id: food.id,
-    });
+    Api.delete(`tracking/food/${food.id}`);
   };
 
   return (
