@@ -13,7 +13,7 @@ class Food {
         return FoodModel.find().sort({ views: -1 });
     }
 
-    static findByNameReturnCategory({ name }) {
+    static findCategoryByName({ name }) {
         return this.findByName({ name }).then((data) => data.category);
     }
 

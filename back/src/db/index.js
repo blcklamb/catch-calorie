@@ -22,6 +22,7 @@ db.once("open", async () => {
         const terms = async ({ user_id, trackings }) => {
             const foods = trackings.map((tracking) => tracking.food_record).flat();
             const exers = trackings.map((tracking) => tracking.exer_record).flat();
+            const categorys = await Promise.all(foods.map((food) => Food.findCategoryByName({ name: food.name })));
 
             // ------------ EXERCISE COUNTING ------------
 
@@ -31,7 +32,7 @@ db.once("open", async () => {
             else await Award.update({ user_id }, { athlete });
 
             // runner: 런닝 5n회 이상 (I, II, III)
-            const runner = Math.floor(exers.filter((exer) => exer.name === "Running").length / 5);
+            const runner = Math.floor(exers.filter((exer) => /running/i.test(exer.name)).length / 5);
             if (runner >= 3) await Award.update({ user_id }, { runner: 3 });
             else await Award.update({ user_id }, { runner });
 
@@ -41,7 +42,7 @@ db.once("open", async () => {
             else await Award.update({ user_id }, { climber });
 
             // swimmer: 수영 5n회 이상 (I, II, III)
-            const swimmer = Math.floor(exers.filter((exer) => exer.name === "Swimming").length / 5);
+            const swimmer = Math.floor(exers.filter((exer) => /swimming/i.test(exer.name)).length / 5);
             if (swimmer >= 3) await Award.update({ user_id }, { swimmer: 3 });
             else await Award.update({ user_id }, { swimmer });
 
@@ -51,14 +52,14 @@ db.once("open", async () => {
             else await Award.update({ user_id }, { gym_rat });
 
             // smasher: 배드민턴 5n회 이상 (I, II, III)
-            const smasher = Math.floor(exers.filter((exer) => exer.name === "Badminton").length / 5);
+            const smasher = Math.floor(exers.filter((exer) => /badminton/i.test(exer.name)).length / 5);
             if (smasher >= 3) await Award.update({ user_id }, { smasher: 3 });
             else await Award.update({ user_id }, { smasher });
 
             // triathlelte: 사이클, 러닝, 수영 각 1회 이상 (I)
             const cycle = exers.filter((exer) => /cycling/i.test(exer.name)).length > 0;
-            const run = exers.filter((exer) => exer.name === "Running").length > 0;
-            const swim = exers.filter((exer) => exer.name === "Swimming").length > 0;
+            const run = exers.filter((exer) => /running/i.test(exer.name)).length > 0;
+            const swim = exers.filter((exer) => /swimming/i.test(exer.name)).length > 0;
             const triathlelte = cycle && run && swim;
             if (triathlelte) await Award.update({ user_id }, { triathlelte: 1 });
 
@@ -70,38 +71,27 @@ db.once("open", async () => {
             else await Award.update({ user_id }, { protainer });
 
             // fruits_lover: 과일 섭취 5n회 이상 (I, II, III)
-            const mappedFoods = await Promise.all(foods);
-            const fruits_lover = Math.floor(
-                foods.filter((food, index) => {
-                    const eachName = Food.findByName({ name: mappedFoods[index].name });
-                    return eachName.category === "Fruits";
-                }).length / 5,
-            );
+            const fruits_lover = Math.floor(categorys.filter((category) => /fruit/i.test(category)).length / 5);
             if (fruits_lover >= 3) await Award.update({ user_id }, { fruits_lover: 3 });
             else await Award.update({ user_id }, { fruits_lover });
 
             // vegetables_lover: 채소 섭취 5n회 이상 (I, II, III)
-            const vegetables_lover = Math.floor(
-                foods.filter(async (food) => {
-                    const eachName = await Food.findByName({ name: food.name });
-                    return eachName.category === "Vegatables";
-                }).length / 5,
-            );
+            const vegetables_lover = Math.floor(categorys.filter((category) => /vegetable/i.test(category)).length / 5);
             if (vegetables_lover >= 3) await Award.update({ user_id }, { vegetables_lover: 3 });
             else await Award.update({ user_id }, { vegetables_lover });
 
             // yogurt_lover: 요거트 섭취 5n회 이상 (I, II, III)
-            const yogurt_lover = Math.floor(foods.filter((food) => Food.findByNameReturnCategory({ name: food.name, spare_category: "Yogurt" })).length / 5);
+            const yogurt_lover = Math.floor(categorys.filter((category) => /yogurt/i.test(category)).length / 5);
             if (yogurt_lover >= 3) await Award.update({ user_id }, { yogurt_lover: 3 });
             else await Award.update({ user_id }, { yogurt_lover });
 
             // meat_lover: 고기 섭취 5n회 이상 (I, II, III)
-            const meat_lover = Math.floor(foods.filter((food) => Food.findByNameReturnCategory({ name: food.name, spare_category: "Meat" })).length / 5);
+            const meat_lover = Math.floor(categorys.filter((category) => /meat/i.test(category)).length / 5);
             if (meat_lover >= 3) await Award.update({ user_id }, { meat_lover: 3 });
             else await Award.update({ user_id }, { meat_lover });
 
             // candy_lover: 사탕 섭취 5n회 이상 (I, II, III)
-            const candy_lover = Math.floor(foods.filter((food) => Food.findByNameReturnCategory({ name: food.name, spare_category: "Candy&Sweets" })).length / 5);
+            const candy_lover = Math.floor(categorys.filter((category) => /candy/i.test(category)).length / 5);
             if (candy_lover >= 3) await Award.update({ user_id }, { candy_lover: 3 });
             else await Award.update({ user_id }, { candy_lover });
 
