@@ -26,8 +26,6 @@ class userAuthService {
     // 로그인 회원 정보 가져오기
     static async getUser({ email, password }) {
         const user = await User.findOne({ email });
-
-        // 가입 내역이 없는 경우
         if (!user) return { errorMessage: "가입 내역이 없는 이메일입니다. 다시 한 번 확인해 주세요." };
 
         // 비밀번호가 일치하지 않은 경우

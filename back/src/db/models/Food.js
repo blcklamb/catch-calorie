@@ -13,10 +13,8 @@ class Food {
         return FoodModel.find().sort({ views: -1 });
     }
 
-    static async findByNameReturnCategory({name, spare_category}) {
-        const food = await FoodModel.findOne({ name });
-        console.log('name', name, spare_category, 'compare', food.category === spare_category)
-        return food.category === spare_category;
+    static findByNameReturnCategory({ name }) {
+        return this.findByName({ name }).then((data) => data.category);
     }
 
     static update({ id, toUpdate }) {

@@ -1,6 +1,5 @@
 import { Tracking, Food, Exercise, User } from "../db";
 import { v4 as uuid } from "uuid";
-import { ExerModel } from "../db/schemas/exercise"; // git merge 이후 삭제되어야 함.
 
 class trackingService {
     static async addTracking({ user_id, date }) {
@@ -13,9 +12,9 @@ class trackingService {
 
     static async addFoodTracking({ user_id, date, name, gram }) {
         const calorie = await Food.findByName({ name })
-            .then((data) =>  data.kcal_per_100g) //kcal_per_100g
-            .then((cal_per_100g) => cal_per_100g / 100) //kcal_per_g
-            .then((cal_per_1g) => cal_per_1g * gram);           
+            .then((data) => data.kcal_per_100g) // kcal_per_100g
+            .then((kcal_per_100g) => kcal_per_100g / 100) // kcal_per_g
+            .then((kcal_per_1g) => kcal_per_1g * gram);
 
         const toUpdate = {
             $push: { food_record: { id: uuid(), name, gram, calorie } },
@@ -30,7 +29,7 @@ class trackingService {
 
     static async addExerTracking({ user_id, date, name, minute }) {
         const { weight } = await User.findById({ id: user_id });
-        const { kcal_per_kg } = await ExerModel.findOne({ name });
+        const { kcal_per_kg } = await Exercise.findByName({ name });
         const calorie = ((kcal_per_kg * weight) / 60) * minute;
 
         const toUpdate = {
