@@ -47,6 +47,7 @@ const Jandi = () => {
           setData(res.data.record);
           setEmptyData(true);
         }
+        console.log(res.data.record);
       });
     } else {
       Api.get('heatmap', user._id).then((res) => {
