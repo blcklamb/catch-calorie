@@ -15,29 +15,26 @@ function MainExerciseForm({
   idx,
   exerciseSelected,
   setExerciseSelected,
-  totalExercise,
-  setTotalExercise,
   time,
   setTime,
-  hour,
-  setHour,
-  minute,
-  setMinute,
+  // hour,
+  // setHour,
+  // minute,
+  // setMinute,
   kcalPerHour,
   setKcalPerHour,
 }) {
   const navigate = useNavigate();
   const user = useRecoilValue(userInfoState);
 
-  const [value, setValue] = React.useState();
+  const [value, setValue] = useState();
   // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
-  const [inputValue, setInputValue] = React.useState('');
+  const [inputValue, setInputValue] = useState('');
 
   const [exerciseList, setExerciseList] = useState('');
 
-  // const [time, setTime] = useState([]);
-  // const [hour, setHour] = useState([]);
-  // const [minute, setMinute] = useState([]);
+  const [hour, setHour] = useState([]);
+  const [minute, setMinute] = useState([]);
 
   useEffect(() => {
     Api.get(`exercises`).then((res) => setExerciseList(res.data));
@@ -47,20 +44,16 @@ function MainExerciseForm({
   }, []);
 
   const onChangeHour = (e) => {
-    // console.log(idx, e.target.value);
-
     setHour([...hour.slice(0, idx), e.target.value, ...hour.slice(idx + 1)]);
   };
   const onChangeMinute = (e) => {
-    // console.log(idx, e.target.value);
     setMinute([...minute.slice(0, idx), e.target.value, ...minute.slice(idx + 1)]);
   };
 
   useEffect(() => {
-    console.log(exerciseSelected);
+    // console.log(exerciseSelected);
     if (!(hour[idx] && hour[idx].length)) {
       // hour이 비었다면
-      console.log('시 안 했음');
       setTime([
         ...time.slice(0, idx),
         Number(hour[idx]) * 60 + Number(minute[idx]),
@@ -68,14 +61,12 @@ function MainExerciseForm({
       ]);
     } else if (!(minute[idx] && minute[idx].length)) {
       // minute이 비었다면
-      console.log('분 안 했음');
       setTime([
         ...time.slice(0, idx),
         Number(hour[idx]) * 60 + Number(minute[idx]),
         ...time.slice(idx + 1),
       ]);
     } else {
-      console.log('다 있음');
       setTime([
         ...time.slice(0, idx),
         Number(hour[idx]) * 60 + Number(minute[idx]),
@@ -96,24 +87,6 @@ function MainExerciseForm({
     }
   }, time);
 
-  // useEffect(() => {
-  //   if (gram && gram.length) {
-  //     // 빈 gram이 없다면 kcalPerGram 계산하여 배열 삽입
-  //     setKcalPerGram([
-  //       ...kcalPerGram.slice(0, idx),
-  //       (Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per100g,
-  //       ...kcalPerGram.slice(idx + 1),
-  //     ]);
-  //   } else {
-  //     // 빈 gram이 있다면 해당 kcalPerGram에 0 삽입
-  //     setKcalPerGram([
-  //       ...kcalPerGram.slice(0, idx),
-  //       0,
-  //       ...kcalPerGram.slice(idx + 1),
-  //     ]);
-  //   }
-  // }, [gram]);
-
   return (
     <div style={{ display: 'flex' }}>
       <Autocomplete
@@ -126,9 +99,7 @@ function MainExerciseForm({
         )}
         getOptionLabel={(option) => option.name || ''}
         onChange={(event, newValue) => {
-          // setExerciseSelected([newValue]);
           setExerciseSelected([...exerciseSelected, newValue]);
-          // console.log(exerciseSelected?.label);
         }}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {

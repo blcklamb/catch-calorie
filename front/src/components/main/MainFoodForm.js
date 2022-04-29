@@ -8,18 +8,12 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 import MainInput from './style/MainInput';
 
-import MainAdd from './MainFoodAdd';
-
 import * as Api from '../../api';
 
 import TextField from '@mui/material/TextField';
 
 function MainFoodForm({
   idx,
-  // value,
-  // setValue,
-  // inputValue,
-  // setInputValue,
   foodSelected,
   setFoodSelected,
   gram,
@@ -34,16 +28,12 @@ function MainFoodForm({
   const [inputValue, setInputValue] = React.useState([]);
 
   const [foodApiList, setFoodApiList] = useState('');
-  // const [gram, setGram] = useState([]);
-
-  const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
-    // 인덱스 수 대로 배열 속 생성
-    // setGram(gram.map(() => ))
-
+    
     Api.get(`foods`).then((res) => setFoodApiList(res.data));
-
+    
+    // 인덱스 수 대로 배열 속 생성
     setGram([...gram.slice(0, idx), 0, ...gram.slice(idx + 1)]);
   }, []);
 
@@ -67,33 +57,13 @@ function MainFoodForm({
         ...kcalPerGram.slice(idx + 1),
       ]);
     }
-
-    // setKcalPerGram([
-    //   ...kcalPerGram.slice(0, idx),
-    //   (Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per100g,
-    //   ...kcalPerGram.slice(idx + 1),
-    // ]);
-    // if (gram && gram.length) {
-    //   // 빈 gram이 없다면 kcalPerGram 계산하여 배열 삽입
-    //   setKcalPerGram([
-    //     ...kcalPerGram.slice(0, idx),
-    //     (Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per100g,
-    //     ...kcalPerGram.slice(idx + 1),
-    //   ]);
-    // } else {
-    //   // 빈 gram이 있다면 해당 kcalPerGram에 0 삽입
-    //   setKcalPerGram([...kcalPerGram.slice(0, idx), 0, ...kcalPerGram.slice(idx + 1)]);
-    // }
   }, [idx, gram]);
 
   return (
     <>
       <div style={{ display: 'flex' }}>
-        {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
-
         <Autocomplete
           id="controllable-states-demo"
-          // value={foodSelected[0]?.label}
           value={value}
           options={foodApiList}
           sx={{ width: 300 }}
@@ -102,7 +72,6 @@ function MainFoodForm({
           )}
           getOptionLabel={(option) => option.name || ''}
           onChange={(event, newValue) => {
-            // setFoodSelected([...foodSelected, newValue]);
             setFoodSelected([
               ...foodSelected.slice(0, idx),
               newValue,
@@ -126,13 +95,6 @@ function MainFoodForm({
               >
                 Add food
               </Button>
-              <TextField
-                id="outlined-basic"
-                label="Outlined"
-                variant="outlined"
-                // onFocus={() => alert('dsf')}
-                // onBlur={alert('dsf')}
-              />
             </div>
           }
         />

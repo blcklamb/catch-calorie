@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import MainButton from './style/MainButton';
@@ -6,19 +6,7 @@ import MainFoodForm from './MainFoodForm';
 
 import * as Api from '../../api';
 
-function MainFoodTab({
-  foodSelected,
-  setFoodSelected,
-  totalFood,
-  setTotalFood,
-  kcalPerGram,
-  setKcalPerGram,
-  clearForm,
-}) {
-  const [value, setValue] = React.useState([]);
-  // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
-  const [inputValue, setInputValue] = React.useState([]);
-
+function MainFoodTab({ foodSelected, setFoodSelected, kcalPerGram, setKcalPerGram, clearForm }) {
   const [foodForms, setFoodForms] = useState([0]);
   const [gram, setGram] = useState([]);
 
@@ -34,7 +22,6 @@ function MainFoodTab({
   // console.log(foodSelected);
   const handleTracking = () => {
     foodSelected.map((food, i) => {
-      // const name = food.name;
       const g = Number(gram[i]);
 
       try {
@@ -49,25 +36,13 @@ function MainFoodTab({
       Api.post(`foods/${food._id}`);
     });
 
-    setTotalFood(kcalPerGram.reduce((acc, cur) => acc + cur, totalFood));
-    // setFoodSelected([]);
-    // setGram([]);
-    // setKcalPerGram([]);
+    // 그래프 레이블 초기화 위함
     setFoodSelected(foodSelected.map((f, i) => 0));
-    setGram(gram.map((g, i) => 0));
-    setKcalPerGram(kcalPerGram.map((g, i) => 0));
+    // setGram(gram.map((g, i) => 0));
+    // setKcalPerGram(kcalPerGram.map((g, i) => 0));
 
     clearForm();
-    // console.log(kcalPerGram)
   };
-
-  // useEffect(() => {
-  //   kcalPerGram.map((kcal, idx) => {
-  //     if(isNaN(kcal)) {
-  //       setKcalPerGram([...kcalPerGram.slice(0, idx), 0, ...kcalPerGram.slice(idx + 1)])
-  //     }
-  //   })
-  // }, [gram])
 
   return (
     <div>
@@ -76,14 +51,10 @@ function MainFoodTab({
       {console.log(kcalPerGram)} */}
       {/* {console.log(foodForms)} */}
       {foodForms &&
-        foodForms.map((item, i) => (
+        foodForms.map((item) => (
           <MainFoodForm
-            key={i}
-            idx={i}
-            value={value}
-            setValue={setValue}
-            inputValue={inputValue}
-            setInputValue={setInputValue}
+            key={item}
+            idx={item}
             foodSelected={foodSelected}
             setFoodSelected={setFoodSelected}
             gram={gram}
