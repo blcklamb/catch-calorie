@@ -15,58 +15,35 @@ import Header from '../Header';
 import Footer from '../Footer';
 import { validateEmail } from '../../utils';
 // import recoil
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { tokenState, userState } from '../../atoms';
 
 // import styled compo
 import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
 
 function LoginForm() {
-  const navigate = useNavigate();
-  // const dispatch = useContext(DispatchContext);
-  const setToken = useSetRecoilState(tokenState);
-  const setUser = useSetRecoilState(userState);
-
-  //useState로 email 상태를 생성함.
   const [email, setEmail] = useState('');
-  //useState로 password 상태를 생성함.
-  const [password, setPassword] = useState('');
-  // input 상태관리
-  const [checkLogin, setCheckLogin] = useState(true);
-
-  //위 validateEmail 함수를 통해 이메일 형태 적합 여부를 확인함.
   const isEmailValid = validateEmail(email);
-  // 비밀번호가 4글자 이상인지 여부를 확인함.
-  const isPasswordValid = password.length >= 4;
-  //
-  // 이메일과 비밀번호 조건이 동시에 만족되는지 확인함.
-  const isFormValid = isEmailValid && isPasswordValid;
+  const [sentEmail, setSentEmail] = useState(true);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const res = await Api.put('password/init', {
+      email,
+    });
+
+    const temp = res.data;
+    console.log(temp, '이메일이 정상적으로 전송되었습니다.');
+    alert('Temporary password sent successfully.');
+    navigate('/login', { replace: true });
+
+    setEmail('');
     try {
-      // "user/login" 엔드포인트로 post요청함.
-      const res = await Api.post('users/login', {
-        email,
-        password,
-      });
-      // 유저 정보는 response의 data임.
-      const user = res.data;
-      // JWT 토큰은 유저 정보의 token임.
-      const jwtToken = user.token;
-      // sessionStorage에 "userToken"이라는 키로 JWT 토큰을 저장함.
-      sessionStorage.setItem('userToken', jwtToken);
-
-      console.log(user);
-      setToken(user.token);
-      setUser(user);
-
-      // 기본 페이지로 이동함.
-      navigate(`/tracking/${user.id}`, { replace: true });
     } catch (err) {
-      console.log('로그인에 실패하였습니다.\n', err);
-      setCheckLogin(false);
+      setSentEmail(false);
+      alert('이메일이 정상적으로 전송되지 못했습니다.');
     }
   };
 
@@ -89,7 +66,7 @@ function LoginForm() {
               flexFlow: 'column',
             }}
           >
-            <h1 style={{ margin: 10 }}>Login</h1>
+            <h1 style={{ margin: 10 }}>Find Password</h1>
             <Box
               sx={{
                 '& > :not(style)': { m: 1, width: '34ch' },
@@ -101,54 +78,37 @@ function LoginForm() {
                 autoFocus
                 required
                 // {!checkLogin && error}
-                error={!checkLogin}
+                error={!sentEmail}
                 id="outlined-required"
                 label="Email Address"
                 autoComplete="email"
                 helperText={
                   (!isEmailValid && <span>The email format is not valid.</span>) ||
-                  (!checkLogin && <span>Invalid email.</span>)
+                  (!sentEmail && <span>Invalid email.</span>)
                 }
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
-                  setCheckLogin(true);
+                  setSentEmail(true);
                 }}
                 // defaultValue="Hello World"
               />
               <br></br>
-              <ValidationTextField
-                required
-                error={!checkLogin}
-                id="outlined-password-input"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-                value={password}
-                helperText={
-                  (!isPasswordValid && <span> Password is more than 4 characters. </span>) ||
-                  (!checkLogin && <span>Invalid password.</span>)
-                }
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  setCheckLogin(true);
-                }}
-              />
-              <br></br>
-              <Button onClick={() => navigate('/password/init')}>Forget Password?</Button>
               <Stack
                 spacing={1}
                 direction="row"
                 sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
               >
-                <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
-                  Sign-in
+                <ColorButton
+                  variant="contained"
+                  type="submit"
+                  disabled={!isEmailValid}
+                  onClick={handleSubmit}
+                >
+                  Send a temporary PW
                 </ColorButton>
-                <ColorButton variant="contained" onClick={() => navigate('/register')}>
-                  Sign-up
-                </ColorButton>
-                <ColorButtonB variant="outlined" onClick={() => navigate('/')}>
-                  Start Page
+                <ColorButtonB variant="outlined" onClick={() => navigate(-1)}>
+                  back
                 </ColorButtonB>
               </Stack>
             </Box>

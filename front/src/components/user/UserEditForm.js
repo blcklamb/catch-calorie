@@ -224,7 +224,7 @@ const UserEditForm = () => {
             <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
               Submit
             </ColorButton>
-            <ColorButtonB variant="outlined" onClick={() => navigate('/tracking')}>
+            <ColorButtonB variant="outlined" onClick={() => navigate(-1)}>
               back
             </ColorButtonB>
           </Stack>
