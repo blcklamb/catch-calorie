@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import DefaultCelenderChart from './jandi/DefaultCelenderChart.js';
 import jandiData from './jandi/data.json';
 import * as Api from '../../api';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../../atoms';
+import { useParams } from 'react-router-dom';
 
 const JandiContainer = styled.div`
   position: relative;
@@ -27,51 +28,58 @@ const JandiText = styled.div`
 
 const Jandi = () => {
   const user = useRecoilValue(userInfoState);
+  const params = useParams();
+
   const [data, setData] = useState('');
+
   console.log('jandi', user);
 
   const [emptyData, setEmptyData] = useState(false);
 
   useEffect(() => {
-    Api.get('heatmap', user._id).then((res) => {
-      console.log(res.data.record);
+    if (params.user_id) {
+      const userId = params.user_id;
 
-      if (res.data.record === undefined) {
-        setEmptyData(false);
-      } else {
-        setData(res.data.record);
-        setEmptyData(true);
-      }
-    });
-  }, []);
+      Api.get('heatmap', userId).then((res) => {
+        if (res.data.record === undefined) {
+          setEmptyData(false);
+        } else {
+          setData(res.data.record);
+          setEmptyData(true);
+        }
+        console.log(res.data.record);
+      });
+    } else {
+      Api.get('heatmap', user._id).then((res) => {
+        if (res.data.record === undefined) {
+          setEmptyData(false);
+        } else {
+          setData(res.data.record);
+          setEmptyData(true);
+        }
+      });
+    }
+  }, [user, params]);
 
-  // useEffect(() => {
-  //   if (params.user_id) {
-  //     // 네트워크에서 다른 유저를 눌러서 들어온 경우 해당 params를 통해 다른 유저 마이페이지 정보를 가져옴
-  //     const userId = params.user_id;
+  // Api.get('heatmap', user._id).then((res) => {
+  //   console.log(res.data.record);
 
-  //     async function getUserInfo(userId) {
-  //       const res = await Api.get('users', userId);
-  //       const temp = res.data;
-  //       setCurrentUserInfo(temp);
-  //     }
-  //     getUserInfo(userId);
+  //   if (res.data.record === undefined) {
+  //     setEmptyData(false);
   //   } else {
-  //     // 네트워크가 아닌 마이페이 누르기를 통해 들어온 경우 전역에 있는 아이디값을 통해 자신의 마이페이지 정보를 가저옴
-  //     console.log(user);
-  //     setCurrentUserInfo(user);
-  //     // setIsEditable(true);
+  //     setData(res.data.record);
+  //     setEmptyData(true);
   //   }
-  // }, [params, user]);
+  // });
 
   return (
     <div>
       <JandiText>HeatMap</JandiText>
       <JandiContainer>
         {emptyData ? (
-          <DefaultCelenderChart data={data} />
+          <DefaultCelenderChart data={data} /> //진짜 데이터
         ) : (
-          <DefaultCelenderChart data={jandiData} />
+          <DefaultCelenderChart data={jandiData} /> //더미 데이터
         )}
       </JandiContainer>
     </div>

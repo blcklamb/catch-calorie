@@ -25,7 +25,7 @@ const Network = () => {
         <Grid container spacing={4}>
           {userList.map((eachUserId, index) => (
             <Grid item xs={3} key={index}>
-              <UserCard eachUserId={eachUserId}></UserCard>
+              <UserCard currentUserInfo={eachUserId} isNetworkPage={true}></UserCard>
             </Grid>
           ))}
         </Grid>
