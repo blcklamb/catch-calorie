@@ -4,12 +4,17 @@ import styled from 'styled-components';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
+import { useRecoilState } from 'recoil';
+import { trackingUpdateState } from '../../atoms';
+
 import * as Api from '../../api';
 
 function TrackingExerciseList({ exercise, isGetList, setIsGetList }) {
   const [isEditing, setIsEditing] = useState(false);
   const [hour, setHour] = useState(parseInt(exercise.minute / 60));
   const [minute, setMinute] = useState(exercise.minute % 60);
+
+  const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   const handleCheck = async (e) => {
     await Api.put('tracking/exer', {
@@ -19,16 +24,22 @@ function TrackingExerciseList({ exercise, isGetList, setIsGetList }) {
 
     setIsEditing(false);
     setIsGetList(!isGetList);
+    setTrackingUpdate(!trackingUpdate);
   };
 
   const handleModify = (e) => {
     setIsEditing(true);
   };
 
+  const handleCancle = (e) => {
+    setIsEditing(false);
+  };
+
   const handleDelete = (e) => {
     Api.delete(`tracking/exer/${exercise.id}`);
 
     setIsGetList(!isGetList);
+    setTrackingUpdate(!trackingUpdate);
   };
 
   return (
@@ -55,8 +66,8 @@ function TrackingExerciseList({ exercise, isGetList, setIsGetList }) {
             <Button variant="contained" type="submit" onClick={handleCheck}>
               Check
             </Button>
-            <Button variant="contained" type="submit" onClick={handleDelete}>
-              Delete
+            <Button variant="contained" type="submit" onClick={handleCancle}>
+              Cancle
             </Button>
           </div>
         </div>
