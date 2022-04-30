@@ -3,6 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import styled from 'styled-components';
 
+import { useRecoilState } from 'recoil';
+import { trackingUpdateState } from '../../atoms';
+
 import TrackingFoodList from './TrackingFoodList';
 import TrackingExerciseList from './TrackingExerciseList';
 
@@ -12,24 +15,34 @@ function TrackingLists() {
   const params = useParams();
 
   const [trackingList, setTrackingList] = useState('');
-  const [isGetList, setIsGetList] = useState(true);
+
+  const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   useEffect(() => {
     Api.get(`tracking/${params.user_id}`).then((res) => {
       setTrackingList(res.data);
     });
-  }, [isGetList]);
+  }, [trackingUpdate]);
 
   return (
     <>
       <h1>Tracking List</h1>
       <div>
         <h1>Food</h1>
+        <div style={{ display: 'flex' }}>
+          <div style={{ marginRight: '30px' }}>
+            <h2>Food</h2>
+          </div>
+          <div style={{ marginRight: '30px' }}>
+            <h2>Amount Eaten</h2>
+          </div>
+          <div style={{ marginRight: '30px' }}>
+            <h2>Intake Calories</h2>
+          </div>
+        </div>
         {trackingList.food_record?.length ? (
           trackingList.food_record.map((food) => {
-            return (
-              <TrackingFoodList food={food} isGetList={isGetList} setIsGetList={setIsGetList} />
-            );
+            return <TrackingFoodList food={food} />;
           })
         ) : (
           <div>No Food Tracking</div>
@@ -37,15 +50,20 @@ function TrackingLists() {
       </div>
       <div>
         <h1>Exercise</h1>
+        <div style={{ display: 'flex' }}>
+          <div style={{ marginRight: '30px' }}>
+            <h2>Exercise</h2>
+          </div>
+          <div style={{ marginRight: '30px' }}>
+            <h2>Time Exercised</h2>
+          </div>
+          <div style={{ marginRight: '30px' }}>
+            <h2>Consumed Calories</h2>
+          </div>
+        </div>
         {trackingList.exer_record?.length ? (
           trackingList.exer_record.map((exercise) => {
-            return (
-              <TrackingExerciseList
-                exercise={exercise}
-                isGetList={isGetList}
-                setIsGetList={setIsGetList}
-              />
-            );
+            return <TrackingExerciseList exercise={exercise} />;
           })
         ) : (
           <div>No Exercise Tracking</div>
