@@ -5,7 +5,7 @@ import MainButton from './style/MainButton';
 import MainFoodForm from './MainFoodForm';
 
 import { useRecoilState } from 'recoil';
-import { foodSelectedState, gramState, kcalPerGramState } from '../../atoms';
+import { foodSelectedState, gramState, kcalPerGramState, trackingUpdateState } from '../../atoms';
 
 import * as Api from '../../api';
 
@@ -19,6 +19,9 @@ function MainFoodTab({
   const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
   const [gram, setGram] = useRecoilState(gramState);
   const [kcalPerGram, setKcalPerGram] = useRecoilState(kcalPerGramState);
+  const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
+
+
   const [foodForms, setFoodForms] = useState([0]);
   // const [gram, setGram] = useState([]);
 
@@ -54,6 +57,7 @@ function MainFoodTab({
     setFoodSelected(foodSelected.map((f, i) => 0));
     // setGram(gram.map((g, i) => 0));
     // setKcalPerGram(kcalPerGram.map((g, i) => 0));
+    setTrackingUpdate(!trackingUpdate)
 
     clearForm();
   };
