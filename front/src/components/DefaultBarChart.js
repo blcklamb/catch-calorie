@@ -22,6 +22,7 @@ export function DefaultBarChart({ data, colors }) {
         <XAxis dataKey="name" stroke="#000" tick={{ fontSize: '1vw' }} />
         <YAxis stroke="#000" tick={{ fontSize: '1.2vw' }} />
         <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
+
         {/* <Legend
           width={100}
           wrapperStyle={{

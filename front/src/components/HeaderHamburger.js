@@ -151,7 +151,8 @@ function Header(props) {
               }}
             >
               <Toolbar> */}
-      <IconButton style={{ paddingRight: '30px'}}
+      <IconButton
+        style={{ paddingRight: '30px' }}
         color="inherit"
         aria-label="open drawer"
         edge="start"
@@ -168,7 +169,7 @@ function Header(props) {
             </AppBar> */}
       {/* <Box component="nav" sx={{ width: { sm: drawerWidth } }} aria-label="mailbox folders"> */}
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-      <Drawer 
+      <Drawer
         // container={container}
         variant="temporary"
         open={mobileOpen}
