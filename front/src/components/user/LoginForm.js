@@ -155,12 +155,14 @@ function LoginForm() {
                 direction="row"
                 sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
               >
+                {/* GitHub 로그인 기능 추가 */}
                 <ColorButton
                   style={{ color: 'whitesmoke', backgroundColor: '#2B3137' }}
                   onClick={githubLogin}
                 >
                   😺&nbsp;&nbsp;GitHub Login
                 </ColorButton>
+                {/* GitHub 로그인 기능 추가 */}
                 <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
                   Sign-in
                 </ColorButton>
