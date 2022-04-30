@@ -16,9 +16,8 @@ function MainGraph({
   const user = useRecoilValue(userInfoState);
   const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
   const [kcalPerGram, setKcalPerGram] = useRecoilState(kcalPerGramState);
-  
-  const [todayTracking, setTodayTracking] = useState();
 
+  const [todayTracking, setTodayTracking] = useState();
 
   const labels = ["Today's calories"];
 
@@ -104,6 +103,14 @@ function MainGraph({
     'rgba(153, 102, 255)',
   ];
 
+  const getTracking = () => {
+    Api.get(`tracking/${user._id}`).then((res) => {
+      setTodayTracking(res.data?.acc_cal);
+    });
+  };
+
+  getTracking();
+
   const addData = () => {
     foodSelected.map((food, idx) => {
       const newDataset = {
@@ -133,13 +140,6 @@ function MainGraph({
   };
 
   addData();
-
-  useEffect(() => {
-    Api.get(`tracking/${user._id}`).then((res) => {
-      console.log(res.data?.acc_cal)
-      setTodayTracking(res.data?.acc_cal);
-    });
-  }, [todayTracking]);
 
   return (
     <div>
