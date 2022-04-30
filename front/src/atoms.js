@@ -47,8 +47,15 @@ export const kcalPerHourState = atom({
   default: [],
   effects_UNSTABLE: [persistAtom],
 });
+
 export const gramState = atom({
   key: 'gramState',
   default: [],
+  effects_UNSTABLE: [persistAtom],
+}); 
+
+export const trackingUpdateState = atom({
+  key: 'trackingUpdateState',
+  default: false,
   effects_UNSTABLE: [persistAtom],
 });
