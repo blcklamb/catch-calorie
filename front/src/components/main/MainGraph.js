@@ -160,7 +160,7 @@ function MainGraph({
         {exerciseSelected.map((exercise) => exercise?.kcal)}
         <br />
       </div> */}
-      {console.log(exerciseSelected)}
+      {/* {console.log(exerciseSelected)} */}
       <div style={{ width: 400 }}>
         <Bar data={data} options={options} height={300} />
       </div>

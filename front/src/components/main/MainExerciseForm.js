@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { userInfoState } from '../../atoms';
 
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -25,6 +27,8 @@ function MainExerciseForm({
   setKcalPerHour,
 }) {
   const navigate = useNavigate();
+  const user = useRecoilValue(userInfoState);
+
   const [value, setValue] = React.useState();
   // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
   const [inputValue, setInputValue] = React.useState('');
@@ -86,7 +90,7 @@ function MainExerciseForm({
     } else {
       setKcalPerHour([
         ...kcalPerHour.slice(0, idx),
-        (Number(time[idx]) / 60) * exerciseSelected[idx]?.kcal_per_kg,
+        (Number(time[idx]) / 60) * exerciseSelected[idx]?.kcal_per_kg * user.weight,
         ...kcalPerHour.slice(idx + 1),
       ]);
     }

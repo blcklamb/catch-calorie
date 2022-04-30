@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import DefaultCelenderChart from './jandi/DefaultCelenderChart.js';
-import data from './jandi/data.json';
+import jandiData from './jandi/data.json';
 import * as Api from '../../api';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../../atoms';
+import { useParams } from 'react-router-dom';
 
 const JandiContainer = styled.div`
   position: relative;
@@ -26,19 +27,60 @@ const JandiText = styled.div`
 `;
 
 const Jandi = () => {
-  //   const user = useRecoilValue(userInfoState);
-  //   const [data, setData] = useState('');
+  const user = useRecoilValue(userInfoState);
+  const params = useParams();
 
-  //   useEffect(() => {
-  //     Api.get('heatmap', user._id).then((res) => {
-  //       setData(res.user);
-  //     });
-  //   }, []);
+  const [data, setData] = useState('');
+
+  console.log('jandi', user);
+
+  const [emptyData, setEmptyData] = useState(false);
+
+  useEffect(() => {
+    if (params.user_id) {
+      const userId = params.user_id;
+
+      Api.get('heatmap', userId).then((res) => {
+        if (res.data.record === undefined) {
+          setEmptyData(false);
+        } else {
+          setData(res.data.record);
+          setEmptyData(true);
+        }
+        console.log(res.data.record);
+      });
+    } else {
+      Api.get('heatmap', user._id).then((res) => {
+        if (res.data.record === undefined) {
+          setEmptyData(false);
+        } else {
+          setData(res.data.record);
+          setEmptyData(true);
+        }
+      });
+    }
+  }, [user, params]);
+
+  // Api.get('heatmap', user._id).then((res) => {
+  //   console.log(res.data.record);
+
+  //   if (res.data.record === undefined) {
+  //     setEmptyData(false);
+  //   } else {
+  //     setData(res.data.record);
+  //     setEmptyData(true);
+  //   }
+  // });
+
   return (
     <div>
       <JandiText>HeatMap</JandiText>
       <JandiContainer>
-        <DefaultCelenderChart data={data} />
+        {emptyData ? (
+          <DefaultCelenderChart data={data} /> //진짜 데이터
+        ) : (
+          <DefaultCelenderChart data={jandiData} /> //더미 데이터
+        )}
       </JandiContainer>
     </div>
   );

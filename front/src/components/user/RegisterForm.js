@@ -16,6 +16,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { validateEmail } from '../../utils';
 
 //styled Compo
 import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
@@ -43,21 +44,6 @@ function RegisterForm() {
   const [weight, setWeight] = useState('');
   //useState로 icon 상태를 생성함.
   const [icon, setIcon] = useState('runner');
-
-  //이메일이 abc@example.com 형태인지 regex를 이용해 확인함.
-  const validateEmail = (email) => {
-    return email
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      );
-  };
-
-  // ------------ EMAIL AUTHENTICATION ------------
-  const [code, setCode] = useState('');
-  const [resCode, setResCode] = useState('');
-  const reqCode = async () =>
-    setResCode(await Api.get(`users/email/${email}`).then((data) => data.data));
 
   //위 validateEmail 함수를 통해 이메일 형태 적합 여부를 확인함.
   const isEmailValid = validateEmail(email);

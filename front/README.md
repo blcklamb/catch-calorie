@@ -1,7 +1,8 @@
 리드미
 
-<<<<<<< HEAD
 check
-=======
-front 브랜치 자 파졌는지 확인
->>>>>>> origin/develop-front
+front 브랜치 자 파졌는지 확인/
+test
+sdsd
+
+푸푸시시가 되되는는지
