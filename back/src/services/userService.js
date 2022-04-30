@@ -133,7 +133,7 @@ class userAuthService {
             from: process.env.NODEMAIL_EMAIL,
             to: email,
             subject: 'Catch Calorie 임시 비밀번호 발급 안내 메일입니다.',
-            html: temp_pw
+            text: temp_pw
 
         };
 
