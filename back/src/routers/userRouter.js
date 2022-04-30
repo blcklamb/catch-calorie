@@ -2,12 +2,12 @@ import is from "@sindresorhus/is";
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
 import { awardService } from "../services/awardService";
-import { userAuthService } from "../services/userService";
+import { userService } from "../services/userService";
 
-const userAuthRouter = Router();
+const userRouter = Router();
 
 // 회원가입
-userAuthRouter.post("/users/register", async (req, res, next) => {
+userRouter.post("/users/register", async (req, res, next) => {
     try {
         if (is.emptyObject(req.body)) {
             throw new Error("header의 Content-Type을 application/json으로 설정해주세요.");
@@ -15,7 +15,7 @@ userAuthRouter.post("/users/register", async (req, res, next) => {
 
         const { email, password, name, gender, height, weight, icon } = req.body;
 
-        const newUser = await userAuthService.addUser({
+        const newUser = await userService.addUser({
             email,
             password,
             name,
@@ -36,11 +36,11 @@ userAuthRouter.post("/users/register", async (req, res, next) => {
 });
 
 // 로그인
-userAuthRouter.post("/users/login", async (req, res, next) => {
+userRouter.post("/users/login", async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
-        const user = await userAuthService.getUser({ email, password });
+        const user = await userService.getUser({ email, password });
 
         if (user.errorMessage) {
             throw new Error(user.errorMessage);
@@ -53,11 +53,11 @@ userAuthRouter.post("/users/login", async (req, res, next) => {
 });
 
 // 특정 유저 정보 가져오기
-userAuthRouter.get("/users/:id", login_required, async (req, res, next) => {
+userRouter.get("/users/:id", login_required, async (req, res, next) => {
     try {
         const { id } = req.params;
 
-        const currentUserInfo = await userAuthService.getUserById({ id });
+        const currentUserInfo = await userService.getUserById({ id });
         if (currentUserInfo.errorMessage) {
             throw new Error(currentUserInfo.errorMessage);
         }
@@ -69,9 +69,9 @@ userAuthRouter.get("/users/:id", login_required, async (req, res, next) => {
 });
 
 // 전체 유저 목록 가져오기
-userAuthRouter.get("/users", login_required, async (req, res, next) => {
+userRouter.get("/users", login_required, async (req, res, next) => {
     try {
-        const users = await userAuthService.getUsers();
+        const users = await userService.getUsers();
 
         return res.status(200).json(users);
     } catch (error) {
@@ -80,11 +80,11 @@ userAuthRouter.get("/users", login_required, async (req, res, next) => {
 });
 
 // 회원 탈퇴하기
-userAuthRouter.delete("/users/:id", login_required, async (req, res, next) => {
+userRouter.delete("/users/:id", login_required, async (req, res, next) => {
     try {
         const { id } = req.params;
 
-        await userAuthService.deleteUser({ id });
+        await userService.deleteUser({ id });
 
         await awardService.deleteAward({user_id:id})
 
@@ -95,7 +95,7 @@ userAuthRouter.delete("/users/:id", login_required, async (req, res, next) => {
 });
 
 // 회원 정보 수정하기
-userAuthRouter.put("/users/:id", login_required, async (req, res, next) => {
+userRouter.put("/users/:id", login_required, async (req, res, next) => {
     try {
         // URI로부터 사용자 id를 추출함.
         const { id } = req.params;
@@ -109,7 +109,7 @@ userAuthRouter.put("/users/:id", login_required, async (req, res, next) => {
         const toUpdate = { name, height, weight, icon, status };
 
         // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
-        const updatedUser = await userAuthService.setUser({ id, toUpdate });
+        const updatedUser = await userService.setUser({ id, toUpdate });
         if (updatedUser.errorMessage) {
             throw new Error(updatedUser.errorMessage);
         }
@@ -121,12 +121,12 @@ userAuthRouter.put("/users/:id", login_required, async (req, res, next) => {
 });
 
 // 로그인한 회원 비밀번호 수정
-userAuthRouter.put("/password", login_required, async (req, res, next)=>{
+userRouter.put("/password", login_required, async (req, res, next)=>{
     try {
         const id = req.currentUserId;
         const { old_pw, new_pw } = req.body;
 
-        const user = await userAuthService.setPassword({ id, old_pw, new_pw });
+        const user = await userService.setPassword({ id, old_pw, new_pw });
 
         if(!user){
             throw new Error("비밀번호 설정 실패");
@@ -139,10 +139,10 @@ userAuthRouter.put("/password", login_required, async (req, res, next)=>{
 });
 
 // 임시 비밀번호 발급하기
-userAuthRouter.put("/password/init", async(req, res,next)=>{
+userRouter.put("/password/init", async(req, res,next)=>{
     try{
         const { email } = req.body;
-        const user = await userAuthService.sendNewpassword({ email });
+        const user = await userService.sendNewpassword({ email });
         return res.send("Successfully send");
     } catch(error) {
         next(error)
@@ -150,7 +150,7 @@ userAuthRouter.put("/password/init", async(req, res,next)=>{
 });
 
 // 깃헙 로그인
-userAuthRouter.get("/users/login/github", async (req, res) => {
+userRouter.get("/users/login/github", async (req, res) => {
     try {
         const { code } = req.query;
 
@@ -183,9 +183,9 @@ userAuthRouter.get("/users/login/github", async (req, res) => {
         const { email } = emailData.find((email) => email.primary === true && email.verified === true);
 
         // user 정보  처리
-        let user = await userAuthService.getUserByEmail({ email });
+        let user = await userService.getUserByEmail({ email });
         if (!user) {
-            user = await userAuthService.addUser({
+            user = await userService.addUser({
                 name: data.name || data.login,
                 email,
                 description: data.bio || "Hello World!",
@@ -207,4 +207,4 @@ userAuthRouter.get("/users/login/github", async (req, res) => {
     }
 });
 
-export { userAuthRouter };
+export { userRouter };

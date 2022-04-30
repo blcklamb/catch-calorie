@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 
-class userAuthService {
+class userService {
     // 회원 정보 추가
     static async addUser({ email, password, name, gender, height, weight, icon }) {
         const user = await User.findOne({ email });
@@ -156,4 +156,4 @@ class userAuthService {
     
 }
 
-export { userAuthService };
+export { userService };

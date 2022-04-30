@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import schedule from "node-schedule";
 
-import { userAuthRouter } from "./routers/userRouter";
+import { userRouter } from "./routers/userRouter";
 import { foodRouter } from "./routers/foodRouter";
 import { exerRouter } from "./routers/exerRouter";
 import { trackingRouter } from "./routers/trackingRouter";
@@ -30,7 +30,7 @@ schedule.scheduleJob("0 0 0 * * *", heatmap_scheduler);
 app.get("/", (req, res) => res.send("안녕하세요, 13팀 데이터 분석 프로젝트 API 입니다."));
 
 // // router, service 구현 (userRouter는 맨 위에 있어야 함.)
-app.use(userAuthRouter);
+app.use(userRouter);
 app.use(foodRouter);
 app.use(exerRouter);
 app.use(trackingRouter);
