@@ -8,21 +8,66 @@ const AwardSchema = new Schema({
         ref: "User",
         required: true,
     },
-    athlete: Number,
-    runner: Number,
-    climber: Number,
-    swimmer: Number,
-    gym_rat: Number,
-    smasher: Number,
-    triathlelte: Number,
-    protainer: Number,
-    fruits_lover: Number,
-    vegetables_lover: Number,
-    yogurt_lover: Number,
-    meat_lover: Number,
-    candy_lover: Number,
-    gourmand: Number,
-    visitor: Number,
+    athlete: {
+        type: Number,
+        default: 0,
+    },
+    runner: {
+        type: Number,
+        default: 0,
+    },
+    climber: {
+        type: Number,
+        default: 0,
+    },
+    swimmer: {
+        type: Number,
+        default: 0,
+    },
+    gym_rat: {
+        type: Number,
+        default: 0,
+    },
+    smasher: {
+        type: Number,
+        default: 0,
+    },
+    triathlete: {
+        type: Number,
+        default: 0,
+    },
+    proteiner: {
+        type: Number,
+        default: 0,
+    },
+    fruits_lover: {
+        type: Number,
+        default: 0,
+    },
+    vegetables_lover: {
+        type: Number,
+        default: 0,
+    },
+    yogurt_lover: {
+        type: Number,
+        default: 0,
+    },
+    meat_lover: {
+        type: Number,
+        default: 0,
+    },
+    candy_lover: {
+        type: Number,
+        default: 0,
+    },
+    gourmand: {
+        type: Number,
+        default: 0,
+    },
+    visitor: {
+        type: Number,
+        default: 0,
+    },
 });
 
 const AwardModel = model("Award", AwardSchema);
