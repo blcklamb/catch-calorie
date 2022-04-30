@@ -54,6 +54,12 @@ export const gramState = atom({
   effects_UNSTABLE: [persistAtom],
 }); 
 
+export const timeState = atom({
+  key: 'gramState',
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+}); 
+
 export const trackingUpdateState = atom({
   key: 'trackingUpdateState',
   default: false,
