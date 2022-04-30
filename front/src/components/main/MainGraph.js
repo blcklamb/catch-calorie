@@ -50,11 +50,6 @@ function MainGraph({ foodSelected, setFoodSelected, exerciseSelected, kcalPerGra
   };
 
   const remainingKcal = () => {
-    // 엑스(clear) 눌러서 처리됐을 경우 처리, 추후 함수로 분리
-    if (foodSelected[0] === null) {
-      // 음식이 없을 경우
-      setFoodSelected([]);
-    }
     if (todayTracking?.acc_cal < 0) {
       return [3000];
     }
