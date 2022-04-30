@@ -51,7 +51,7 @@ trackingRouter.put("/tracking/food", login_required, async (req, res, next) => {
     try {
         const { id, gram } = req.body;
 
-        const updatedTracking = await trackingService.setFoodTracking({ id }, { gram });
+        const updatedTracking = await trackingService.setFoodTracking({ id, gram });
 
         return res.status(200).send(updatedTracking);
     } catch (error) {
@@ -63,7 +63,7 @@ trackingRouter.put("/tracking/exer", login_required, async (req, res, next) => {
     try {
         const { id, minute } = req.body;
 
-        const updatedTracking = await trackingService.setExerTracking({ id }, { minute });
+        const updatedTracking = await trackingService.setExerTracking({ id, minute });
 
         return res.status(200).send(updatedTracking);
     } catch (error) {
