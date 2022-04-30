@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 // import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 
 import * as Api from '../../api';
+import axios from 'axios';
 
 // Mui
 import Box from '@mui/material/Box';
@@ -16,7 +17,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
-//styled Compo
+// styled Compo
 import { ValidationTextField, ColorButton, ColorButtonB } from './LoginForm';
 
 function RegisterForm() {
@@ -48,6 +49,12 @@ function RegisterForm() {
       );
   };
 
+  // ------------ EMAIL AUTHENTICATION ------------
+  const [code, setCode] = useState('');
+  const [resCode, setResCode] = useState('');
+  const reqCode = async () =>
+    setResCode(await Api.get(`users/email/${email}`).then((data) => data.data));
+
   //위 validateEmail 함수를 통해 이메일 형태 적합 여부를 확인함.
   const isEmailValid = validateEmail(email);
   // 비밀번호가 4글자 이상인지 여부를 확인함.
@@ -61,6 +68,8 @@ function RegisterForm() {
   // 공백이나 숫자인지 여부를 확인함.
   const isWeightValid = Number(weight) > 0 && weight.length > 0;
 
+  const isEmailAuthed = resCode === code;
+
   // 조건이 모두 동시에 만족되는지 여부를 확인함.
   const isFormValid =
     isEmailValid &&
@@ -68,7 +77,8 @@ function RegisterForm() {
     isPasswordSame &&
     isNameValid &&
     isHeightValid &&
-    isWeightValid;
+    isWeightValid &&
+    isEmailAuthed;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,9 +105,6 @@ function RegisterForm() {
       console.log('회원가입에 실패하였습니다.', err);
     }
   };
-
-  // ---------- EMAIL AUTHENTICATION ----------
-  const emailAuth = () => {};
 
   return (
     <>
@@ -127,10 +134,16 @@ function RegisterForm() {
               }}
               // defaultValue="Hello World"
             />
-            <button style={{ width: 55, height: 55 }} onClick={emailAuth}>
+            <button style={{ width: 55, height: 55 }} onClick={reqCode}>
               Email Auth
             </button>
-            <br></br>
+            <input
+              onChange={(e) => {
+                e.preventDefault();
+                setCode(e.target.value);
+              }}
+            />
+            <br />
             <ValidationTextField
               required
               // error={!checkLogin}

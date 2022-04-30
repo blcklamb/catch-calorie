@@ -1,7 +1,9 @@
 import is from "@sindresorhus/is";
+import { v4 as uuid } from "uuid";
 import { Router } from "express";
-import { login_required } from "../middlewares/login_required";
 import { userAuthService } from "../services/userService";
+import { login_required } from "../middlewares/login_required";
+import sendMail from "../middlewares/send_mail";
 
 const userAuthRouter = Router();
 
@@ -112,6 +114,23 @@ userAuthRouter.put("/users/:id", login_required, async (req, res, next) => {
         }
 
         return res.status(200).json(updatedUser);
+    } catch (error) {
+        next(error);
+    }
+});
+
+userAuthRouter.get("/users/email/:email", async (req, res, next) => {
+    try {
+        const { email } = req.params;
+        const code = uuid().split("-")[0];
+
+        await sendMail(
+            email, //
+            "[Catch Calorie] 인증번호가 발급되었습니다",
+            `회원님의 인증번호는 [${code}] 입니다.\n회원가입을 완료해주세요.`,
+        );
+
+        return res.status(200).send(code);
     } catch (error) {
         next(error);
     }
