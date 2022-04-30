@@ -15,7 +15,7 @@ import Header from '../Header';
 import Footer from '../Footer';
 import { validateEmail } from '../../utils';
 // import recoil
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { tokenState, userState } from '../../atoms';
 
 // import styled compo
@@ -24,8 +24,8 @@ import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/u
 function LoginForm() {
   const navigate = useNavigate();
   // const dispatch = useContext(DispatchContext);
-  const [token, setToken] = useRecoilState(tokenState);
-  const [user, setUser] = useRecoilState(userState);
+  const setToken = useSetRecoilState(tokenState);
+  const setUser = useSetRecoilState(userState);
 
   //useState로 email 상태를 생성함.
   const [email, setEmail] = useState('');
@@ -57,12 +57,7 @@ function LoginForm() {
       const jwtToken = user.token;
       // sessionStorage에 "userToken"이라는 키로 JWT 토큰을 저장함.
       sessionStorage.setItem('userToken', jwtToken);
-      // dispatch 함수를 이용해 로그인 성공 상태로 만듦.
-      // console.log(user);
-      // dispatch({
-      //   type: 'LOGIN_SUCCESS',
-      //   payload: user,
-      // });
+
       console.log(user);
       setToken(user.token);
       setUser(user);

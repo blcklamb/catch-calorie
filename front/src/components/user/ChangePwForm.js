@@ -52,6 +52,8 @@ const ChangePwForm = ({ setIsEditPw }) => {
 
       const temp = res.data;
       console.log(temp, '수정 요청이 잘 갔습니다요!');
+      setIsEditPw(false);
+      alert('Your password has been changed successfully');
     } catch (err) {
       console.log('아쉽게도 잘 가지 않았군요 휴먼', err);
     }
@@ -70,6 +72,7 @@ const ChangePwForm = ({ setIsEditPw }) => {
             sx={{ width: 300 }}
             autoFocus
             required
+            type="password"
             label="Current Password"
             name="oldPw"
             value={oldPw}
@@ -80,6 +83,7 @@ const ChangePwForm = ({ setIsEditPw }) => {
           <ValidationTextField
             sx={{ width: 300 }}
             required
+            type="password"
             label="Password to change"
             name="newPw"
             value={newPw}
@@ -90,6 +94,7 @@ const ChangePwForm = ({ setIsEditPw }) => {
           <ValidationTextField
             sx={{ width: 300 }}
             required
+            type="password"
             label="Confirm password to change"
             value={confirmPw}
             onChange={(e) => setConfirmPw(e.target.value)}
