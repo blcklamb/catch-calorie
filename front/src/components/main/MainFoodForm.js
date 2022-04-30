@@ -36,7 +36,11 @@ function MainFoodForm({
     setGram([...gram.slice(0, idx), 0, ...gram.slice(idx + 1)]);
   }, []);
 
-  const onChange = (e) => {
+  const onChangeFood = (e, value) => {
+    setFoodSelected([...foodSelected.slice(0, idx), value, ...foodSelected.slice(idx + 1)]);
+  };
+
+  const onChangeGram = (e) => {
     setGram([...gram.slice(0, idx), e.target.value, ...gram.slice(idx + 1)]);
   };
 
@@ -54,6 +58,10 @@ function MainFoodForm({
         ...kcalPerGram.slice(idx + 1),
       ]);
     }
+
+    if (foodSelected[idx] === null) {
+      setFoodSelected([...foodSelected.slice(0, idx), 0, ...foodSelected.slice(idx + 1)]);
+    }
   }, [gram[idx], foodSelected[idx]]);
 
   return (
@@ -69,11 +77,7 @@ function MainFoodForm({
           )}
           getOptionLabel={(option) => option.name || ''}
           onChange={(event, newValue) => {
-            setFoodSelected([
-              ...foodSelected.slice(0, idx),
-              newValue,
-              ...foodSelected.slice(idx + 1),
-            ]);
+            onChangeFood(event, newValue);
           }}
           inputValue={inputValue}
           onInputChange={(event, newInputValue) => {
@@ -103,10 +107,10 @@ function MainFoodForm({
           noValidate
           autoComplete="off"
         >
-          <MainInput id="outlined-basic" label="g" variant="outlined" onChange={onChange} />
+          <MainInput id="outlined-basic" label="g" variant="outlined" onChange={onChangeGram} />
         </div>
         <div>
-          {/* {console.log(gram)} */}
+          {console.log(foodSelected)}
           {/* {console.log(foodSelected[idx]?.kcal_per_100g)}
           {idx}
           <br />
