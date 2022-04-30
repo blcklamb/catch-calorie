@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import styled from 'styled-components';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
@@ -9,14 +8,12 @@ import { trackingUpdateState } from '../../atoms';
 
 import * as Api from '../../api';
 
-function TrackingExerciseList({
-  exercise,
-}) {
+function TrackingExerciseList({ exercise }) {
+  const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
+
   const [isEditing, setIsEditing] = useState(false);
   const [hour, setHour] = useState(parseInt(exercise.minute / 60));
   const [minute, setMinute] = useState(exercise.minute % 60);
-
-  const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   const onChange = (e) => {
     setHour(e.target.value);
@@ -29,7 +26,6 @@ function TrackingExerciseList({
     });
 
     setIsEditing(false);
-    // setIsGetList(!isGetList);
     setTrackingUpdate(!trackingUpdate);
   };
 
@@ -44,7 +40,6 @@ function TrackingExerciseList({
   const handleDelete = (e) => {
     Api.delete(`tracking/exer/${exercise.id}`);
 
-    // setIsGetList(!isGetList);
     setTrackingUpdate(!trackingUpdate);
   };
 

@@ -10,17 +10,12 @@ import {
   kcalPerGramState,
   trackingUpdateState,
   exerciseSelectedState,
-  timeState,
   kcalPerHourState,
 } from '../../atoms';
 
 import * as Api from '../../api';
 
-function MainGraph({
-  // foodSelected, kcalPerGram,
-  // exerciseSelected,
-  // kcalPerHour,
-}) {
+function MainGraph({}) {
   const user = useRecoilValue(userInfoState);
 
   const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
@@ -73,10 +68,12 @@ function MainGraph({
     if (todayTracking?.acc_cal < 0) {
       return [3000];
     }
+
+    // 선택된 항목이 없을 경우
     if (isNaN(kcalPerGram[0])) {
-      // 선택된 항목이 없을 경우
       return [3000 - todayTracking];
     }
+
     return [3000 - todayTracking - kcalPerGram.reduce((acc, cur) => acc + cur, 0)];
   };
 
@@ -142,6 +139,7 @@ function MainGraph({
         data.datasets.splice(1, 0, newDataset);
       }
     });
+
     exerciseSelected.map((exercise, idx) => {
       const newDataset = {
         label: exercise?.name,
@@ -150,6 +148,7 @@ function MainGraph({
         borderWidth: 1,
         data: [-kcalPerHour[idx]],
       };
+
       if (exercise !== 0) {
         data.datasets.splice(1, 0, newDataset);
       }

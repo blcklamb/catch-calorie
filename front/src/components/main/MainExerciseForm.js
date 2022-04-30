@@ -7,47 +7,28 @@ import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
 
 import MainInput from './style/MainInput';
-import MainButton from './style/MainButton';
 
 import { useRecoilState } from 'recoil';
 import { exerciseSelectedState, timeState, kcalPerHourState } from '../../atoms';
 
-
 import * as Api from '../../api';
 
-function MainExerciseForm({
-  idx,
-  // exerciseSelected,
-  // setExerciseSelected,
-  // time,
-  // setTime,
-  hour,
-  setHour,
-  minute,
-  setMinute,
-  // kcalPerHour,
-  // setKcalPerHour,
-}) {
+function MainExerciseForm({ idx, hour, setHour, minute, setMinute }) {
   const navigate = useNavigate();
+
   const user = useRecoilValue(userInfoState);
-
-  const [value, setValue] = useState();
-  // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
-  const [inputValue, setInputValue] = useState('');
-
-  const [exerciseList, setExerciseList] = useState('');
-
-  // const [hour, setHour] = useState([]);
-  // const [minute, setMinute] = useState([]);
   const [exerciseSelected, setExerciseSelected] = useRecoilState(exerciseSelectedState);
   const [time, setTime] = useRecoilState(timeState);
   const [kcalPerHour, setKcalPerHour] = useRecoilState(kcalPerHourState);
 
+  const [value, setValue] = useState();
+  const [inputValue, setInputValue] = useState(''); // 텍스트 상자에 표시되는 값
+
+  const [exerciseList, setExerciseList] = useState('');
 
   useEffect(() => {
     Api.get(`exercises`).then((res) => setExerciseList(res.data));
 
-    // 인덱스 수 대로 배열 속 생성
     setHour([...hour.slice(0, idx), 0, ...hour.slice(idx + 1)]);
     setMinute([...minute.slice(0, idx), 0, ...minute.slice(idx + 1)]);
   }, []);
@@ -70,14 +51,14 @@ function MainExerciseForm({
 
   useEffect(() => {
     if (hour[idx] === 0) {
-      // hour이 비었다면
+      // hour의 인풋이 빈 경우
       setTime([
         ...time.slice(0, idx),
         Number(hour[idx]) * 60 + Number(minute[idx]),
         ...time.slice(idx + 1),
       ]);
     } else if (minute[idx] === 0) {
-      // minute이 비었다면
+      // minute의 인풋이 빈 경우
       setTime([
         ...time.slice(0, idx),
         Number(hour[idx]) * 60 + Number(minute[idx]),

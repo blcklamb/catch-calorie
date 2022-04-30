@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import styled from 'styled-components';
-
-import Button from '@mui/material/Button';
-import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
-import MainInput from './style/MainInput';
 import MainButton from './style/MainButton';
 
 import Header from '../Header';
@@ -26,17 +19,13 @@ import { userInfoState } from '../../atoms';
 import * as Api from '../../api';
 
 function MainExerciseAdd({}) {
-  const [value, setValue] = React.useState([]);
-  // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
-  const [inputValue, setInputValue] = React.useState([]);
   const navigate = useNavigate();
+
+  const user = useRecoilValue(userInfoState);
 
   const [name, setName] = useState();
   const [kcal, setKcal] = useState();
   const [unit, setUnit] = useState('kilogram');
-
-  const [exerciseList, setExerciseList] = useState('');
-  const user = useRecoilValue(userInfoState);
 
   const handleSubmit = async () => {
     try {
@@ -58,21 +47,6 @@ function MainExerciseAdd({}) {
       <div style={{ margin: '100px 80px' }}>
         <h1>Add Exercise</h1>
         <div style={{ display: 'flex' }}>
-          {/* <div>
-            <h2>Search</h2>
-            <Autocomplete
-              id="controllable-states-demo"
-              value={value}
-              options={exerciseList}
-              sx={{ width: 300 }}
-              renderInput={(params) => (
-                <MainInput {...params} label="Food" placeholder="Please select food" />
-              )}
-              getOptionLabel={(option) => option.name || ''}
-              inputValue={inputValue}
-              noOptionsText={<p>No option</p>}
-            />
-          </div> */}
           <div>
             <h2>Please enter a name</h2>
             <TextField
@@ -106,15 +80,11 @@ function MainExerciseAdd({}) {
             </FormControl>
           </div>
         </div>
-
-        {/* {category}
-      {name}
-      {kcalPer100g} */}
-        {/* {unit} */}
         <MainButton variant="contained" onClick={handleSubmit}>
           Add
         </MainButton>
       </div>
+      <Footer />
     </>
   );
 }

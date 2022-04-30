@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Header from '../Header';
@@ -8,27 +8,19 @@ import Footer from '../Footer';
 import MainTabs from './MainTabs';
 import MainGraph from './MainGraph';
 import TrackingLists from '../trackingList/TrackingLists';
+import UserDelForm from '../user/UserDelForm';
 
 import MainButton from './style/MainButton';
 
-import * as Api from '../../api';
 import { useRecoilState } from 'recoil';
 import { tokenState, userInfoState, userState } from '../../atoms';
-import BasicModal from '../user/UserDelForm';
 
 const Main = () => {
+  const navigate = useNavigate();
+
   const [token, setToken] = useRecoilState(tokenState);
   const [recoilUser, setRecoilUser] = useRecoilState(userState);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-
-  // const [foodSelected, setFoodSelected] = useState([]);
-  // const [exerciseSelected, setExerciseSelected] = useState([]);
-  // const [kcalPerGram, setKcalPerGram] = useState([]);
-  // const [kcalPerHour, setKcalPerHour] = useState([]);
-
-  const [user, setUser] = useState('');
-
-  const navigate = useNavigate();
 
   const logout = () => {
     // sessionStorage 에 저장했던 JWT 토큰을 삭제함.
@@ -52,30 +44,15 @@ const Main = () => {
     <>
       <Header />
       <div style={{ margin: '100px 80px' }}>
-        {/* <MainHello>Hello {user?.name}!</MainHello> */}
         <MainHello>Hello {userInfo.name}!</MainHello>
 
-        <div style={{ margin: '80px 0px' }}>
-        {/* <div style={{ display: 'inline-flex', margin: '80px 0px' }}> */}
-          <MainTabs
-            // foodSelected={foodSelected}
-            // setFoodSelected={setFoodSelected}
-            // exerciseSelected={exerciseSelected}
-            // setExerciseSelected={setExerciseSelected}
-            // kcalPerGram={kcalPerGram}
-            // setKcalPerGram={setKcalPerGram}
-            // kcalPerHour={kcalPerHour}
-            // setKcalPerHour={setKcalPerHour}
-          />
-          <MainGraph
-            // foodSelected={foodSelected}
-            // exerciseSelected={exerciseSelected}
-            // kcalPerGram={kcalPerGram}
-            // kcalPerHour={kcalPerHour}
-          />
+        {/* <div style={{ margin: '80px 0px' }}> */}
+        <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
+          <MainTabs />
+          <MainGraph />
         </div>
         <div>
-          <TrackingLists user={user} />
+          <TrackingLists />
           <MainButton
             variant="contained"
             style={{ marginBottom: '20px', width: '60%' }}
@@ -107,7 +84,7 @@ const Main = () => {
           >
             Log-out
           </MainButton>
-          <BasicModal></BasicModal>
+          <UserDelForm></UserDelForm>
         </div>
       </div>
       <Footer />

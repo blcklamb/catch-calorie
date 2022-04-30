@@ -16,14 +16,7 @@ const StyledTabs = styled((props) => (
   width: '100%',
   '& .MuiTabs-indicator': {
     display: 'none',
-    // justifyContent: 'center',
-    // backgroundColor: 'transparent',
   },
-  // '& .MuiTabs-indicatorSpan': {
-  //   maxWidth: 40,
-  //   width: '100%',
-  //   backgroundColor: '#635ee7',
-  // },
 });
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
@@ -88,16 +81,7 @@ const a11yProps = (index) => {
   };
 };
 
-const MainTabs = ({
-  // foodSelected,
-  // setFoodSelected,
-  // exerciseSelected,
-  // setExerciseSelected,
-  // kcalPerGram,
-  // setKcalPerGram,
-  // kcalPerHour,
-  // setKcalPerHour,
-}) => {
+const MainTabs = ({}) => {
   const [value, setValue] = useState(0);
   const [isRerender, setIsRerender] = useState(false);
 
@@ -128,22 +112,10 @@ const MainTabs = ({
           </StyledTabs>
         </div>
         <TabPanel value={value} index={0}>
-          <MainFoodTab
-            // foodSelected={foodSelected}
-            // setFoodSelected={setFoodSelected}
-            // kcalPerGram={kcalPerGram}
-            // setKcalPerGram={setKcalPerGram}
-            clearForm={clearForm}
-          />
+          <MainFoodTab clearForm={clearForm} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <MainExerciseTab
-            // exerciseSelected={exerciseSelected}
-            // setExerciseSelected={setExerciseSelected}
-            // kcalPerHour={kcalPerHour}
-            // setKcalPerHour={setKcalPerHour}
-            clearForm={clearForm}
-          />
+          <MainExerciseTab clearForm={clearForm} />
         </TabPanel>
       </MainTabsSection>
     )

@@ -1,46 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import styled from 'styled-components';
-
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
 
 import MainInput from './style/MainInput';
 
-import * as Api from '../../api';
-
-import TextField from '@mui/material/TextField';
-
 import { useRecoilState } from 'recoil';
 import { foodSelectedState, gramState, kcalPerGramState } from '../../atoms';
 
-function MainFoodForm({
-  idx,
-  // foodSelected,
-  // setFoodSelected,
-  // gram,
-  // setGram,
-  // kcalPerGram,
-  // setKcalPerGram,
-}) {
+import * as Api from '../../api';
+
+function MainFoodForm({ idx }) {
   const navigate = useNavigate();
 
-  const [value, setValue] = useState();
-  // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
-  const [inputValue, setInputValue] = useState([]);
-  
   const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
   const [gram, setGram] = useRecoilState(gramState);
   const [kcalPerGram, setKcalPerGram] = useRecoilState(kcalPerGramState);
 
-  const [foodApiList, setFoodApiList] = useState('');
-
+  const [value, setValue] = useState();
+  const [inputValue, setInputValue] = useState([]); // 텍스트 상자에 표시되는 값
+  const [foodList, setFoodList] = useState('');
 
   useEffect(() => {
-    Api.get(`foods`).then((res) => setFoodApiList(res.data));
+    Api.get(`foods`).then((res) => setFoodList(res.data));
 
-    // 인덱스 수 대로 배열 속 생성
     setGram([...gram.slice(0, idx), 0, ...gram.slice(idx + 1)]);
   }, []);
 
@@ -55,11 +39,7 @@ function MainFoodForm({
   useEffect(() => {
     if (Number(gram[idx]) === 0 || !foodSelected[idx]?.kcal_per_100g) {
       setKcalPerGram([...kcalPerGram.slice(0, idx), 0, ...kcalPerGram.slice(idx + 1)]);
-      // console.log('하나', idx);
-      // console.log(kcalPerGram);
     } else {
-      // console.log('둘');
-      // console.log(idx, gram[idx], foodSelected[idx]?.kcal_per100g);
       setKcalPerGram([
         ...kcalPerGram.slice(0, idx),
         (Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per_100g,
@@ -78,7 +58,7 @@ function MainFoodForm({
         <Autocomplete
           id="controllable-states-demo"
           value={value}
-          options={foodApiList}
+          options={foodList}
           sx={{ width: 300 }}
           renderInput={(params) => (
             <MainInput {...params} label="Food" placeholder="Please select food" />
@@ -118,7 +98,6 @@ function MainFoodForm({
           <MainInput id="outlined-basic" label="g" variant="outlined" onChange={onChangeGram} />
         </div>
         <div>
-          {console.log(foodSelected)}
           {/* {console.log(foodSelected[idx]?.kcal_per_100g)}
           {idx}
           <br />
