@@ -44,6 +44,14 @@ function MainExerciseForm({
     setMinute([...minute.slice(0, idx), 0, ...minute.slice(idx + 1)]);
   }, []);
 
+  const onChangeExercise = (e, value) => {
+    setExerciseSelected([
+      ...exerciseSelected.slice(0, idx),
+      value,
+      ...exerciseSelected.slice(idx + 1),
+    ]);
+  };
+
   const onChangeHour = (e) => {
     setHour([...hour.slice(0, idx), e.target.value, ...hour.slice(idx + 1)]);
   };
@@ -86,6 +94,14 @@ function MainExerciseForm({
         ...kcalPerHour.slice(idx + 1),
       ]);
     }
+
+    if (exerciseSelected[idx] === null) {
+      setExerciseSelected([
+        ...exerciseSelected.slice(0, idx),
+        0,
+        ...exerciseSelected.slice(idx + 1),
+      ]);
+    }
   }, [time[idx], exerciseSelected[idx]]);
 
   return (
@@ -100,11 +116,7 @@ function MainExerciseForm({
         )}
         getOptionLabel={(option) => option.name || ''}
         onChange={(event, newValue) => {
-          setExerciseSelected([
-            ...exerciseSelected.slice(0, idx),
-            newValue,
-            ...exerciseSelected.slice(idx + 1),
-          ]);
+          onChangeExercise(event, newValue);
         }}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
