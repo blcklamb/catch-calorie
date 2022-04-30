@@ -9,12 +9,18 @@ import { trackingUpdateState } from '../../atoms';
 
 import * as Api from '../../api';
 
-function TrackingFoodList({ food, isGetList, setIsGetList }) {
+function TrackingFoodList({
+  food,
+  // isGetList, setIsGetList
+}) {
   const [isEditing, setIsEditing] = useState(false);
   const [gram, setGram] = useState(food.gram);
 
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
+  const onChange = (e) => {
+    setGram(e.target.value);
+  };
   const handleCheck = async (e) => {
     await Api.put('tracking/food', {
       id: food.id,
@@ -22,8 +28,8 @@ function TrackingFoodList({ food, isGetList, setIsGetList }) {
     });
 
     setIsEditing(false);
-    setIsGetList(!isGetList);
-    setTrackingUpdate(!trackingUpdate)
+    // setIsGetList(!isGetList);
+    setTrackingUpdate(!trackingUpdate);
   };
 
   const handleModify = (e) => {
@@ -37,8 +43,12 @@ function TrackingFoodList({ food, isGetList, setIsGetList }) {
   const handleDelete = async (e) => {
     await Api.delete(`tracking/food/${food.id}`);
 
-    setIsGetList(!isGetList);
-    setTrackingUpdate(!trackingUpdate)
+    // setIsGetList(!isGetList);
+    setTrackingUpdate(!trackingUpdate);
+  };
+
+  const previewKcal = () => {
+    return Math.round((gram * food.calorie) / food.gram);
   };
 
   return (
@@ -51,10 +61,10 @@ function TrackingFoodList({ food, isGetList, setIsGetList }) {
               id="outlined-name"
               label="gram"
               value={gram}
-              onChange={(e) => setGram(e.target.value)}
+              onChange={onChange}
               style={{ marginRight: '30px' }}
             />
-            <div style={{ marginRight: '30px' }}>{food.calorie}kcal</div>
+            <div style={{ marginRight: '30px' }}>previewKcal</div>
           </div>
           <div>
             <Button variant="contained" type="submit" onClick={handleCheck}>
