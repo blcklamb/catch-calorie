@@ -14,7 +14,7 @@ class trackingService {
         const calorie = await Food.findByName({ name })
             .then((data) => data.kcal_per_100g) // kcal_per_100g
             .then((kcal_per_100g) => kcal_per_100g / 100) // kcal_per_g
-            .then((kcal_per_1g) => kcal_per_1g * gram);
+            .then((kcal_per_1g) => Math.floor(kcal_per_1g * gram));
 
         const toUpdate = {
             $push: { food_record: { id: uuid(), name, gram, calorie } },
@@ -30,7 +30,7 @@ class trackingService {
     static async addExerTracking({ user_id, date, name, minute }) {
         const { weight } = await User.findById({ id: user_id });
         const { kcal_per_kg } = await Exercise.findByName({ name });
-        const calorie = ((kcal_per_kg * weight) / 60) * minute;
+        const calorie = Math.floor(((kcal_per_kg * weight) / 60) * minute);
 
         const toUpdate = {
             $push: { exer_record: { id: uuid(), name, minute, calorie } },
