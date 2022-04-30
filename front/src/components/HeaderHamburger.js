@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import styled from 'styled-components';
-import { useRecoilState } from 'recoil';
-import { tokenState, userInfoState, userState } from '../atoms';
+import UserDelForm from './user/UserDelForm';
 
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
@@ -13,6 +11,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
+
+import styled from 'styled-components';
+
+import { useRecoilState } from 'recoil';
+import { tokenState, userInfoState, userState } from '../atoms';
 
 const drawerWidth = 400;
 
@@ -33,8 +36,10 @@ function Header(props) {
   const [recoilUser, setRecoilUser] = useRecoilState(userState);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const container = window !== undefined ? () => window().document.body : undefined;
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -76,14 +81,10 @@ function Header(props) {
         <ListItem button key={'manual'}>
           <ListItemText primary={'Manual'} />
         </ListItem>
-        <ListItem button key={'deleteAccout'}>
-          <ListItemText primary={'Delete Accout'} />
-        </ListItem>
+        <UserDelForm />
       </List>
     </div>
   );
-
-  const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
     <HeaderHamburgerBox>
@@ -108,7 +109,6 @@ function Header(props) {
         }}
         sx={{
           display: { xs: 'block' },
-          // display: { xs: 'block', sm: 'none' },
           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
         }}
         style={{ zIndex: 4000 }}
