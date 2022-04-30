@@ -2,12 +2,12 @@ import { useEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
-import { DispatchContext } from '../../App';
+// import { DispatchContext } from '../../App';
 
 function GithubLogin() {
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch = useContext(DispatchContext);
+  // const dispatch = useContext(DispatchContext);
 
   useEffect(() => {
     const login = async () => {
@@ -21,10 +21,6 @@ function GithubLogin() {
         // sessionStorage에 "userToken"이라는 키로 JWT 토큰을 저장함.
         sessionStorage.setItem('userToken', jwtToken);
         // dispatch 함수를 이용해 로그인 성공 상태로 만듦.
-        dispatch({
-          type: 'LOGIN_SUCCESS',
-          payload: user,
-        });
       } catch (error) {
         console.log(`❌ Error: ${error}`);
       }
@@ -33,7 +29,7 @@ function GithubLogin() {
       navigate(`/`, { replace: true });
     };
     login();
-  }, [location, navigate, dispatch]);
+  }, [location, navigate]);
 
   return <div>Loading...</div>;
 }

@@ -61,7 +61,7 @@ function Header() {
       <Container>
         <Logo>
           <Link to="/" style={{ textDecoration: 'none', color: '#f03e3e', cursor: 'pointer' }}>
-            Catch Carlories
+            Catch Calories
           </Link>
         </Logo>
         <LogoCopy>health tracker</LogoCopy>
