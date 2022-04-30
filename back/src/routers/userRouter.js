@@ -1,6 +1,7 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
+import { awardService } from "../services/awardService";
 import { userAuthService } from "../services/userService";
 
 const userAuthRouter = Router();
@@ -83,9 +84,11 @@ userAuthRouter.delete("/users/:id", login_required, async (req, res, next) => {
     try {
         const { id } = req.params;
 
-        const deletedUser = await userAuthService.deleteUser({ id });
+        await userAuthService.deleteUser({ id });
 
-        return res.status(200).json(deletedUser);
+        await awardService.deleteAward({user_id:id})
+
+        return res.status(200).json({ result: "success" });
     } catch (error) {
         next(error);
     }
