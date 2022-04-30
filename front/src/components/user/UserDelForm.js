@@ -10,6 +10,9 @@ import { tokenState, userInfoState, userState } from '../../atoms';
 import * as Api from '../../api';
 import { useNavigate } from 'react-router';
 
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -22,7 +25,7 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
+export default function UserDelForm() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -60,13 +63,11 @@ export default function BasicModal() {
 
   return (
     <div>
-      <MainButton
-        style={{ marginBottom: '20px', width: '60%', color: '#fff' }}
-        onClick={handleOpen}
-      >
-        Delete my account
-      </MainButton>
+      <ListItem button key={'deleteAccout'} onClick={handleOpen}>
+        <ListItemText>Delete my account</ListItemText>
+      </ListItem>
       <Modal
+        style={{ zIndex: 4000 }}
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
