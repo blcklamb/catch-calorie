@@ -17,7 +17,7 @@ import {
   ValidationTextField,
 } from '../styledCompo/uesrStyle';
 
-const ChangePwForm = () => {
+const ChangePwForm = ({ setIsEditPw }) => {
   //현재 바밀번호와, 바꿀 비밀번호를 저장하는 state
   const [pwInfo, setPwInfo] = useState({
     oldPw: '',
@@ -46,8 +46,8 @@ const ChangePwForm = () => {
   const handleSubmit = async () => {
     try {
       const res = Api.put('password', {
-        old_password: oldPw,
-        new_password: newPw,
+        old_pw: oldPw,
+        new_pw: newPw,
       });
 
       const temp = res.data;
@@ -58,7 +58,7 @@ const ChangePwForm = () => {
   };
 
   return (
-    <div>
+    <>
       <UserCardFrame>
         <UserBodyInfo></UserBodyInfo>
         <UserBodyInfo>
@@ -106,10 +106,12 @@ const ChangePwForm = () => {
           >
             Confirm
           </ColorButton>
-          <ColorButton sx={{ width: 120, height: 60 }}>Cancel</ColorButton>
+          <ColorButton sx={{ width: 120, height: 60 }} onClick={() => setIsEditPw(false)}>
+            Cancel
+          </ColorButton>
         </UserBtnInfo>
       </UserCardFrame>
-    </div>
+    </>
   );
 };
 

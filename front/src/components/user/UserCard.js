@@ -16,6 +16,7 @@ import {
 import { Button, Container } from '@mui/material';
 import { Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
+import ChangePwForm from './ChangePwForm';
 
 //currentUserInfo는 Mypage에서 올 때 받는 props
 //eachUserId는 Network page 에서 올 때 받는 props
@@ -24,6 +25,7 @@ function UserCard({ currentUserInfo, isNetworkPage }) {
   // const [curUser, setCurUser] = useState(undefined);
   // const [isEditable, setIsEditable] = useState(false);
   const isEditable = useMemo(() => currentUserInfo?._id === user?._id, [currentUserInfo, user]);
+  const [isEditPw, setIsEditPw] = useState(false);
   // console.log(eachUserId);
   const navigate = useNavigate();
   // const params = useParams();
@@ -66,37 +68,43 @@ function UserCard({ currentUserInfo, isNetworkPage }) {
           </Button>
         </div>
       ) : (
-        <UserCardFrame>
-          <UserBodyInfo>
-            <Typography variant="h6" style={{ color: '#c4c4c4' }}>
-              height/weight
-            </Typography>
-            <Typography variant="h4">
-              {currentUserInfo?.height}/{currentUserInfo?.weight}
-            </Typography>
-          </UserBodyInfo>
-          <UserBadgeImgInfo>
-            <img
-              src={'/' + currentUserInfo?.icon + '.png'}
-              alt="badge"
-              style={{ width: 300 }}
-            ></img>
-          </UserBadgeImgInfo>
-          <UserAKAInfo>
-            <Typography variant="h4">{currentUserInfo?.name}</Typography>
-            <Typography variant="h6">{currentUserInfo?.status}</Typography>
-          </UserAKAInfo>
-          {isEditable && (
-            <UserBtnInfo>
-              <ColorButton sx={{ width: 120, height: 60 }} onClick={() => navigate('/users')}>
-                Edit info
-              </ColorButton>
-              <ColorButton sx={{ width: 120, height: 60 }} onClick={() => navigate('/password')}>
-                Change PW
-              </ColorButton>
-            </UserBtnInfo>
+        <>
+          {isEditPw ? (
+            <ChangePwForm setIsEditPw={setIsEditPw}></ChangePwForm>
+          ) : (
+            <UserCardFrame>
+              <UserBodyInfo>
+                <Typography variant="h6" style={{ color: '#c4c4c4' }}>
+                  height/weight
+                </Typography>
+                <Typography variant="h4">
+                  {currentUserInfo?.height}/{currentUserInfo?.weight}
+                </Typography>
+              </UserBodyInfo>
+              <UserBadgeImgInfo>
+                <img
+                  src={'/' + currentUserInfo?.icon + '.png'}
+                  alt="badge"
+                  style={{ width: 300 }}
+                ></img>
+              </UserBadgeImgInfo>
+              <UserAKAInfo>
+                <Typography variant="h4">{currentUserInfo?.name}</Typography>
+                <Typography variant="h6">{currentUserInfo?.status}</Typography>
+              </UserAKAInfo>
+              {isEditable && (
+                <UserBtnInfo>
+                  <ColorButton sx={{ width: 120, height: 60 }} onClick={() => navigate('/users')}>
+                    Edit info
+                  </ColorButton>
+                  <ColorButton sx={{ width: 120, height: 60 }} onClick={() => setIsEditPw(true)}>
+                    Change PW
+                  </ColorButton>
+                </UserBtnInfo>
+              )}
+            </UserCardFrame>
           )}
-        </UserCardFrame>
+        </>
       )}
     </>
   );
