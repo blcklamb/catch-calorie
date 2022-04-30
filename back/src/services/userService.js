@@ -1,8 +1,10 @@
 import { User } from "../db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { v4 as uuid } from "uuid";
+import nodemailer from "nodemailer";
 
-class userAuthService {
+class userService {
     // 회원 정보 추가
     static async addUser({ email, password, name, gender, height, weight, icon }) {
         const user = await User.findOne({ email });
@@ -79,6 +81,60 @@ class userAuthService {
         user.errorMessage = "회원탈퇴했습니다.";
         return user;
     }
+
+    // 로그인한 회원 비밀번호 수정하기
+    static async setPassword({ id, old_pw, new_pw }) {
+        const user = await User.findById({ id });
+        const pass = await bcrypt.compare(old_pw, user.password);
+
+        if (!pass) {
+            throw new Error("비밀번호를 정확하게 입력해주세요.");
+        }
+
+        const hashedPassword = await bcrypt.hash(new_pw, 10);
+        const toUpdate = { password: hashedPassword };
+
+        return User.update({ id, toUpdate });
+    }
+
+    // 임시비밀번호 발급
+    static async sendNewpassword({ email }) {
+        const mailOption = {
+            service: "Naver",
+            host: "smtp.namer.com",
+            port: 587,
+            auth: {
+                user: process.env.NODEMAIL_EMAIL,
+                pass: process.env.NODEMAIL_PW,
+            },
+        };
+
+        const temp_pw = uuid().split("-")[0];
+
+        const message = {
+            from: process.env.NODEMAIL_EMAIL,
+            to: email,
+            subject: "Catch Calorie 임시 비밀번호 발급 안내 메일입니다.",
+            text: temp_pw,
+        };
+
+        const transporter = nodemailer.createTransport(mailOption);
+        transporter.sendMail(message, (error, info) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Email sent: " + info.response);
+            }
+        });
+
+        // 임시비밀번호로 비번 변경
+        const user = await User.findOne({ email });
+        const hashedTempPassword = await bcrypt.hash(temp_pw, 10);
+        const toUpdate = { password: hashedTempPassword };
+        const id = user._id;
+
+        return User.update({ id, toUpdate });
+    }
 }
 
-export { userAuthService };
+export { userService };

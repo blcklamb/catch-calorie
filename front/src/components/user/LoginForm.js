@@ -20,6 +20,8 @@ import { tokenState, userState } from '../../atoms';
 
 // import styled compo
 import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
+import githubLogin from './GithubLogin';
+import { DispatchContext } from '../../App';
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -153,6 +155,12 @@ function LoginForm() {
                 direction="row"
                 sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
               >
+                <ColorButton
+                  style={{ color: 'whitesmoke', backgroundColor: '#2B3137' }}
+                  onClick={githubLogin}
+                >
+                  😺&nbsp;&nbsp;GitHub Login
+                </ColorButton>
                 <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
                   Sign-in
                 </ColorButton>
@@ -165,32 +173,6 @@ function LoginForm() {
               </Stack>
             </Box>
           </form>
-          {/* <form onSubmit={handleSubmit}>
-            <div>
-              <label>이메일 주소</label>
-              <input
-                type="email"
-                autoComplete="on"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              />
-            </div>
-            {!isEmailValid && <p>이메일 형식이 올바르지 않습니다.</p>}
-            <div>
-              <label>비밀번호</label>
-              <input
-                type="password"
-                autoComplete="on"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-              />
-            </div>
-            {!isPasswordValid && <p> 비밀번호는 4글자 이상입니다. </p>}
-            <button type="submit" disabled={!isFormValid}>
-              로그인
-            </button>
-            <button onClick={() => navigate('/register')}>회원가입하기</button>
-          </form> */}
         </div>
       </Container>
       <Footer></Footer>

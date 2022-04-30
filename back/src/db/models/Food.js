@@ -13,6 +13,10 @@ class Food {
         return FoodModel.find().sort({ views: -1 });
     }
 
+    static findCategoryByName({ name }) {
+        return this.findByName({ name }).then((data) => data.category);
+    }
+
     static update({ id, toUpdate }) {
         return FoodModel.findByIdAndUpdate(id, toUpdate, { new: true });
     }
