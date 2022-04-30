@@ -135,6 +135,18 @@ userAuthRouter.put("/password", login_required, async (req, res, next)=>{
     }
 });
 
+// 임시 비밀번호 발급하기
+userAuthRouter.put("/password/init", async(req, res,next)=>{
+    try{
+        const { email } = req.body;
+        const user = await userAuthService.sendNewpassword({ email });
+        return res.send("Successfully send");
+    } catch(error) {
+        next(error)
+    }
+});
+
+// 깃헙 로그인
 userAuthRouter.get("/users/login/github", async (req, res) => {
     try {
         const { code } = req.query;

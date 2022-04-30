@@ -1,6 +1,7 @@
 import { User } from "../db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import nodemailer from "nodemailer";
 
 class userAuthService {
     // 회원 정보 추가
@@ -82,7 +83,7 @@ class userAuthService {
         return user;
     }
 
-    // 회원 비밀번호 수정하기
+    // 로그인한 회원 비밀번호 수정하기
     static async setPassword({ id, old_pw, new_pw }){
         const user = await User.findById({ id });
         const pass = await bcrypt.compare(old_pw, user.password);
@@ -97,6 +98,64 @@ class userAuthService {
         return  User.update({id, toUpdate});
 
     }
+
+    // 임시비밀번호 발급
+    static async sendNewpassword({ email }){
+        const nodemailer = require('nodemailer');
+        
+        const mailOption = {
+            service: 'Naver',
+            host: 'smtp.namer.com',
+            port: 587,
+            auth:{
+                user: process.env.NODEMAIL_EMAIL,
+                pass: process.env.NODEMAIL_PW
+            }
+        };
+
+        // 랜덤으로 생성
+        let ranValue1 = ['1','2','3','4','5','6','7','8','9','0'];
+        let ranValue2 = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+        let ranValue3 = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+        let ranValue4 = ['!','@','#','$','%','^','&','*','(',')'];
+    
+        let temp_pw = "";
+    
+        for(let i= 0 ; i < 6; i++) {
+            let ranPick1 = Math.floor(Math.random() * ranValue1.length);
+            let ranPick2 = Math.floor(Math.random() * ranValue2.length);
+            let ranPick3 = Math.floor(Math.random() * ranValue3.length);
+            let ranPick4 = Math.floor(Math.random() * ranValue4.length);
+            temp_pw = temp_pw + ranValue1[ranPick1] + ranValue2[ranPick2] + ranValue3[ranPick3] + ranValue4[ranPick4];
+        };
+
+        const message = {
+            from: process.env.NODEMAIL_EMAIL,
+            to: email,
+            subject: 'Catch Calorie 임시 비밀번호 발급 안내 메일입니다.',
+            html: temp_pw
+
+        };
+
+        const transporter = nodemailer.createTransport(mailOption);
+        transporter.sendMail(message, (error, info)=>{
+            if(error){
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response)
+            }
+        });
+
+        // 임시비밀번호로 비번 변경
+        const user = await User.findOne({ email });
+        const hashedTempPassword = await bcrypt.hash(temp_pw, 10);
+        const toUpdate = { password: hashedTempPassword };
+        const id = user._id;
+
+        return User.update({ id, toUpdate })
+
+    }
+    
 }
 
 export { userAuthService };
