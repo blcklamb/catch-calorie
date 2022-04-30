@@ -4,7 +4,12 @@ import { Chart as ChartJS } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { userInfoState, foodSelectedState, kcalPerGramState } from '../../atoms';
+import {
+  userInfoState,
+  foodSelectedState,
+  kcalPerGramState,
+  trackingUpdateState,
+} from '../../atoms';
 
 import * as Api from '../../api';
 
@@ -16,6 +21,7 @@ function MainGraph({
   const user = useRecoilValue(userInfoState);
   const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
   const [kcalPerGram, setKcalPerGram] = useRecoilState(kcalPerGramState);
+  const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   const [todayTracking, setTodayTracking] = useState();
 
@@ -110,6 +116,10 @@ function MainGraph({
   };
 
   getTracking();
+
+  useEffect(() => {
+    getTracking();
+  }, [trackingUpdate]);
 
   const addData = () => {
     foodSelected.map((food, idx) => {
