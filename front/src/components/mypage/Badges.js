@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as Api from '../../api';
 import styled from 'styled-components';
 import Yoga from './yoga.png';
+import { Container, Grid } from '@mui/material';
 
 import Tooltip from '../Tooltip';
 
@@ -56,7 +57,27 @@ const Badges = () => {
     <div>
       <BadgesText>Badges</BadgesText>
 
-      <BadgesContainer>
+      <Container sx={{ marginTop: 2, bgcolor: '#94d82d', borderRadius: 3 }}>
+        <Grid container spacing={1}>
+          <Grid spacing={3} sx={{ margin: 3 }}>
+            <Tooltip />
+          </Grid>
+          <Grid spacing={3} sx={{ margin: 3 }}>
+            <Tooltip />
+          </Grid>
+          <Grid spacing={3} sx={{ margin: 3 }}>
+            <Tooltip />
+          </Grid>
+          <Grid spacing={3} sx={{ margin: 3 }}>
+            <Tooltip />
+          </Grid>
+          <Grid spacing={3} sx={{ margin: 3 }}>
+            <Tooltip />
+          </Grid>
+        </Grid>
+      </Container>
+
+      {/* <BadgesContainer>
         <BadgesWrap>
           <Tooltip />
           <Tooltip />
@@ -64,25 +85,8 @@ const Badges = () => {
           <Tooltip />
           <Tooltip />
           <Tooltip />
-          <Tooltip />
-          <Tooltip />
-          <Tooltip />
-          <Tooltip />
-          <Tooltip />
-          <Tooltip />
         </BadgesWrap>
-
-        {/* {badges.map((user) => (
-          <Badgesbox key={badges} />
-        ))} */}
-
-        {/* <Grid container spacing={4}>
-          {userList.map((eachUserId, index) => (
-            <Grid item xs={3} key={index}>
-              <UserCard eachUserId={eachUserId}></UserCard>
-            </Grid>
-          ))} */}
-      </BadgesContainer>
+      </BadgesContainer> */}
     </div>
   );
 };
