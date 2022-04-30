@@ -44,7 +44,7 @@ function MainFoodAdd({}) {
       await Api.post(`foods`, {
         category: category,
         name: name,
-        kcal_per100g: kcalPer100g,
+        kcal_per_100g: kcalPer100g,
       });
       alert('Food has been added');
       navigate(`/tracking/${user._id}`, { replace: false });
