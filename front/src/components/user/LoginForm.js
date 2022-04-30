@@ -11,6 +11,7 @@ import Container from '@mui/material/Container';
 import { alpha, styled } from '@mui/material/styles';
 
 import * as Api from '../../api';
+import githubLogin from './GithubLogin';
 import { DispatchContext } from '../../App';
 
 function LoginForm() {
@@ -103,7 +104,7 @@ function LoginForm() {
               }}
               // defaultValue="Hello World"
             />
-            <br></br>
+            <br />
             <ValidationTextField
               required
               error={!checkLogin}
@@ -121,6 +122,13 @@ function LoginForm() {
                 setCheckLogin(true);
               }}
             />
+            <br />
+            <ColorButton
+              style={{ color: 'whitesmoke', backgroundColor: '#2B3137' }}
+              onClick={githubLogin}
+            >
+              😺&nbsp;&nbsp;GitHub Login
+            </ColorButton>
             <Stack spacing={1} direction="row">
               <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
                 Sign-in
