@@ -4,11 +4,23 @@ import styled from 'styled-components';
 import MainButton from './style/MainButton';
 import MainFoodForm from './MainFoodForm';
 
+import { useRecoilState } from 'recoil';
+import { foodSelectedState, gramState, kcalPerGramState } from '../../atoms';
+
 import * as Api from '../../api';
 
-function MainFoodTab({ foodSelected, setFoodSelected, kcalPerGram, setKcalPerGram, clearForm }) {
+function MainFoodTab({
+  // foodSelected,
+  // setFoodSelected,
+  // kcalPerGram,
+  // setKcalPerGram,
+  clearForm,
+}) {
+  const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
+  const [gram, setGram] = useRecoilState(gramState);
+  const [kcalPerGram, setKcalPerGram] = useRecoilState(kcalPerGramState);
   const [foodForms, setFoodForms] = useState([0]);
-  const [gram, setGram] = useState([]);
+  // const [gram, setGram] = useState([]);
 
   const handleAddFoodForm = () => {
     let countArr = [...foodForms];
@@ -52,18 +64,18 @@ function MainFoodTab({ foodSelected, setFoodSelected, kcalPerGram, setKcalPerGra
       {console.log(foodSelected)} */}
       {/* {console.log(gram)}
       {console.log(kcalPerGram)} */}
-      
+
       {foodForms &&
         foodForms.map((item) => (
           <MainFoodForm
             key={item}
             idx={item}
-            foodSelected={foodSelected}
-            setFoodSelected={setFoodSelected}
-            gram={gram}
-            setGram={setGram}
-            kcalPerGram={kcalPerGram}
-            setKcalPerGram={setKcalPerGram}
+            // foodSelected={foodSelected}
+            // setFoodSelected={setFoodSelected}
+            // gram={gram}
+            // setGram={setGram}
+            // kcalPerGram={kcalPerGram}
+            // setKcalPerGram={setKcalPerGram}
           />
         ))}
       <MainButton variant="contained" onClick={handleAddFoodForm}>

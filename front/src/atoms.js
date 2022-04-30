@@ -23,3 +23,32 @@ export const userInfoState = atom({
   default: undefined,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const foodSelectedState = atom({
+  key: 'foodSelectedState',
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const exerciseSelectedState = atom({
+  key: 'exerciseSelectedState',
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const kcalPerGramState = atom({
+  key: 'kcalPerGramState',
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const kcalPerHourState = atom({
+  key: 'kcalPerHourState',
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+});
+export const gramState = atom({
+  key: 'gramState',
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+});

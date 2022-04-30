@@ -12,22 +12,30 @@ import * as Api from '../../api';
 
 import TextField from '@mui/material/TextField';
 
+import { useRecoilState } from 'recoil';
+import { foodSelectedState, gramState, kcalPerGramState } from '../../atoms';
+
 function MainFoodForm({
   idx,
-  foodSelected,
-  setFoodSelected,
-  gram,
-  setGram,
-  kcalPerGram,
-  setKcalPerGram,
+  // foodSelected,
+  // setFoodSelected,
+  // gram,
+  // setGram,
+  // kcalPerGram,
+  // setKcalPerGram,
 }) {
   const navigate = useNavigate();
 
-  const [value, setValue] = React.useState();
+  const [value, setValue] = useState();
   // inputValue/ onInputChangeprops 조합 으로 "입력 값" 상태 . 이 상태는 텍스트 상자에 표시되는 값을 나타냅니다.
-  const [inputValue, setInputValue] = React.useState([]);
+  const [inputValue, setInputValue] = useState([]);
+  
+  const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
+  const [gram, setGram] = useRecoilState(gramState);
+  const [kcalPerGram, setKcalPerGram] = useRecoilState(kcalPerGramState);
 
   const [foodApiList, setFoodApiList] = useState('');
+
 
   useEffect(() => {
     Api.get(`foods`).then((res) => setFoodApiList(res.data));

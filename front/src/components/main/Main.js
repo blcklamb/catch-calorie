@@ -10,7 +10,6 @@ import MainGraph from './MainGraph';
 import TrackingLists from '../trackingList/TrackingLists';
 
 import MainButton from './style/MainButton';
-// import { DispatchContext } from '../../App';
 
 import * as Api from '../../api';
 import { useRecoilState } from 'recoil';
@@ -22,35 +21,14 @@ const Main = () => {
   const [recoilUser, setRecoilUser] = useRecoilState(userState);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
-  const [foodSelected, setFoodSelected] = useState([]);
-  const [totalFood, setTotalFood] = useState(0);
+  // const [foodSelected, setFoodSelected] = useState([]);
   const [exerciseSelected, setExerciseSelected] = useState([]);
-  const [totalExercise, setTotalExercise] = useState(0);
-  const [kcalPerGram, setKcalPerGram] = useState([]);
+  // const [kcalPerGram, setKcalPerGram] = useState([]);
   const [kcalPerHour, setKcalPerHour] = useState([]);
 
   const [user, setUser] = useState('');
 
-  const [test, setTest] = useState('');
-  const [testUser, setTestUser] = useState('');
-
   const navigate = useNavigate();
-  // const params = useParams();
-  // const dispatch = useContext(DispatchContext);
-  // // const dispatch = useContext(DispatchContext);
-
-  // useEffect(() => {
-  //   Api.get(`user/login`).then((res) => setTest(res.data));
-  //   Api.get(`user/current`).then((res) => setUser(res.data));
-  //   Api.get(`userlist`).then((res) => setTestUser(res.data));
-  // }, []);
-
-  // useEffect(() => {
-  //   // console.log(params)
-  //   Api.get(`users/${params.userId}`).then((res) => {
-  //     setUser(res.data)
-  //   })
-  // }, [params])
 
   const logout = () => {
     // sessionStorage 에 저장했던 JWT 토큰을 삭제함.
@@ -80,32 +58,20 @@ const Main = () => {
         {/* <div style={{ margin: '80px 0px' }}> */}
         <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
           <MainTabs
-            foodSelected={foodSelected}
-            setFoodSelected={setFoodSelected}
-            totalFood={totalFood}
-            setTotalFood={setTotalFood}
+            // foodSelected={foodSelected}
+            // setFoodSelected={setFoodSelected}
             exerciseSelected={exerciseSelected}
             setExerciseSelected={setExerciseSelected}
-            totalExercise={totalExercise}
-            setTotalExercise={setTotalExercise}
-            kcalPerGram={kcalPerGram}
-            setKcalPerGram={setKcalPerGram}
+            // kcalPerGram={kcalPerGram}
+            // setKcalPerGram={setKcalPerGram}
             kcalPerHour={kcalPerHour}
             setKcalPerHour={setKcalPerHour}
           />
           <MainGraph
-            foodSelected={foodSelected}
-            setFoodSelected={setFoodSelected}
-            totalFood={totalFood}
-            setTotalFood={setTotalFood}
+            // foodSelected={foodSelected}
             exerciseSelected={exerciseSelected}
-            setExerciseSelected={setExerciseSelected}
-            totalExercise={totalExercise}
-            setTotalExercise={setTotalExercise}
-            kcalPerGram={kcalPerGram}
-            setKcalPerGram={setKcalPerGram}
+            // kcalPerGram={kcalPerGram}
             kcalPerHour={kcalPerHour}
-            setKcalPerHour={setKcalPerHour}
           />
         </div>
         <div>
@@ -141,7 +107,7 @@ const Main = () => {
           >
             Log-out
           </MainButton>
-          <BasicModal></BasicModal> 
+          <BasicModal></BasicModal>
         </div>
       </div>
       <Footer />

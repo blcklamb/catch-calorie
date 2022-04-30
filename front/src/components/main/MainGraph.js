@@ -3,14 +3,22 @@ import React, { useState, useEffect } from 'react';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 
-import { useRecoilValue } from 'recoil';
-import { userInfoState } from '../../atoms';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import { userInfoState, foodSelectedState, kcalPerGramState } from '../../atoms';
 
 import * as Api from '../../api';
 
-function MainGraph({ foodSelected, setFoodSelected, exerciseSelected, kcalPerGram, kcalPerHour }) {
+function MainGraph({
+  // foodSelected, kcalPerGram,
+  exerciseSelected,
+  kcalPerHour,
+}) {
   const user = useRecoilValue(userInfoState);
+  const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
+  const [kcalPerGram, setKcalPerGram] = useRecoilState(kcalPerGramState);
+  
   const [todayTracking, setTodayTracking] = useState();
+
 
   const labels = ["Today's calories"];
 
@@ -128,6 +136,7 @@ function MainGraph({ foodSelected, setFoodSelected, exerciseSelected, kcalPerGra
 
   useEffect(() => {
     Api.get(`tracking/${user._id}`).then((res) => {
+      console.log(res.data?.acc_cal)
       setTodayTracking(res.data?.acc_cal);
     });
   }, [todayTracking]);
