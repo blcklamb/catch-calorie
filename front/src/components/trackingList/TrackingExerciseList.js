@@ -9,12 +9,18 @@ import { trackingUpdateState } from '../../atoms';
 
 import * as Api from '../../api';
 
-function TrackingExerciseList({ exercise, isGetList, setIsGetList }) {
+function TrackingExerciseList({
+  exercise,
+}) {
   const [isEditing, setIsEditing] = useState(false);
   const [hour, setHour] = useState(parseInt(exercise.minute / 60));
   const [minute, setMinute] = useState(exercise.minute % 60);
 
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
+
+  const onChange = (e) => {
+    setHour(e.target.value);
+  };
 
   const handleCheck = async (e) => {
     await Api.put('tracking/exer', {
@@ -23,7 +29,7 @@ function TrackingExerciseList({ exercise, isGetList, setIsGetList }) {
     });
 
     setIsEditing(false);
-    setIsGetList(!isGetList);
+    // setIsGetList(!isGetList);
     setTrackingUpdate(!trackingUpdate);
   };
 
@@ -38,8 +44,12 @@ function TrackingExerciseList({ exercise, isGetList, setIsGetList }) {
   const handleDelete = (e) => {
     Api.delete(`tracking/exer/${exercise.id}`);
 
-    setIsGetList(!isGetList);
+    // setIsGetList(!isGetList);
     setTrackingUpdate(!trackingUpdate);
+  };
+
+  const previewKcal = () => {
+    return Math.round((exercise.calorie * (Number(hour) * 60 + Number(minute))) / exercise.minute);
   };
 
   return (
@@ -52,7 +62,7 @@ function TrackingExerciseList({ exercise, isGetList, setIsGetList }) {
               id="outlined-name"
               label="hour"
               value={hour}
-              onChange={(e) => setHour(e.target.value)}
+              onChange={onChange}
               style={{ marginRight: '30px' }}
             />
             <TextField
@@ -62,7 +72,7 @@ function TrackingExerciseList({ exercise, isGetList, setIsGetList }) {
               onChange={(e) => setMinute(e.target.value)}
               style={{ marginRight: '30px' }}
             />
-            <div style={{ marginRight: '30px' }}>{exercise.calorie}kcal</div>
+            <div style={{ marginRight: '30px' }}>{previewKcal()}kcal</div>
             <Button variant="contained" type="submit" onClick={handleCheck}>
               Check
             </Button>
