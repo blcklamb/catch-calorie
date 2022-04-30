@@ -9,19 +9,26 @@ import {
   foodSelectedState,
   kcalPerGramState,
   trackingUpdateState,
+  exerciseSelectedState,
+  timeState,
+  kcalPerHourState,
 } from '../../atoms';
 
 import * as Api from '../../api';
 
 function MainGraph({
   // foodSelected, kcalPerGram,
-  exerciseSelected,
-  kcalPerHour,
+  // exerciseSelected,
+  // kcalPerHour,
 }) {
   const user = useRecoilValue(userInfoState);
+
   const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
   const [kcalPerGram, setKcalPerGram] = useRecoilState(kcalPerGramState);
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
+
+  const [exerciseSelected, setExerciseSelected] = useRecoilState(exerciseSelectedState);
+  const [kcalPerHour, setKcalPerHour] = useRecoilState(kcalPerHourState);
 
   const [todayTracking, setTodayTracking] = useState();
 

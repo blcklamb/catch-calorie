@@ -89,14 +89,14 @@ const a11yProps = (index) => {
 };
 
 const MainTabs = ({
-  foodSelected,
-  setFoodSelected,
-  exerciseSelected,
-  setExerciseSelected,
-  kcalPerGram,
-  setKcalPerGram,
-  kcalPerHour,
-  setKcalPerHour,
+  // foodSelected,
+  // setFoodSelected,
+  // exerciseSelected,
+  // setExerciseSelected,
+  // kcalPerGram,
+  // setKcalPerGram,
+  // kcalPerHour,
+  // setKcalPerHour,
 }) => {
   const [value, setValue] = useState(0);
   const [isRerender, setIsRerender] = useState(false);
@@ -129,19 +129,19 @@ const MainTabs = ({
         </div>
         <TabPanel value={value} index={0}>
           <MainFoodTab
-            foodSelected={foodSelected}
-            setFoodSelected={setFoodSelected}
-            kcalPerGram={kcalPerGram}
-            setKcalPerGram={setKcalPerGram}
+            // foodSelected={foodSelected}
+            // setFoodSelected={setFoodSelected}
+            // kcalPerGram={kcalPerGram}
+            // setKcalPerGram={setKcalPerGram}
             clearForm={clearForm}
           />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <MainExerciseTab
-            exerciseSelected={exerciseSelected}
-            setExerciseSelected={setExerciseSelected}
-            kcalPerHour={kcalPerHour}
-            setKcalPerHour={setKcalPerHour}
+            // exerciseSelected={exerciseSelected}
+            // setExerciseSelected={setExerciseSelected}
+            // kcalPerHour={kcalPerHour}
+            // setKcalPerHour={setKcalPerHour}
             clearForm={clearForm}
           />
         </TabPanel>

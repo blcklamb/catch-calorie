@@ -22,9 +22,9 @@ const Main = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
   // const [foodSelected, setFoodSelected] = useState([]);
-  const [exerciseSelected, setExerciseSelected] = useState([]);
+  // const [exerciseSelected, setExerciseSelected] = useState([]);
   // const [kcalPerGram, setKcalPerGram] = useState([]);
-  const [kcalPerHour, setKcalPerHour] = useState([]);
+  // const [kcalPerHour, setKcalPerHour] = useState([]);
 
   const [user, setUser] = useState('');
 
@@ -55,23 +55,23 @@ const Main = () => {
         {/* <MainHello>Hello {user?.name}!</MainHello> */}
         <MainHello>Hello {userInfo.name}!</MainHello>
 
-        {/* <div style={{ margin: '80px 0px' }}> */}
-        <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
+        <div style={{ margin: '80px 0px' }}>
+        {/* <div style={{ display: 'inline-flex', margin: '80px 0px' }}> */}
           <MainTabs
             // foodSelected={foodSelected}
             // setFoodSelected={setFoodSelected}
-            exerciseSelected={exerciseSelected}
-            setExerciseSelected={setExerciseSelected}
+            // exerciseSelected={exerciseSelected}
+            // setExerciseSelected={setExerciseSelected}
             // kcalPerGram={kcalPerGram}
             // setKcalPerGram={setKcalPerGram}
-            kcalPerHour={kcalPerHour}
-            setKcalPerHour={setKcalPerHour}
+            // kcalPerHour={kcalPerHour}
+            // setKcalPerHour={setKcalPerHour}
           />
           <MainGraph
             // foodSelected={foodSelected}
-            exerciseSelected={exerciseSelected}
+            // exerciseSelected={exerciseSelected}
             // kcalPerGram={kcalPerGram}
-            kcalPerHour={kcalPerHour}
+            // kcalPerHour={kcalPerHour}
           />
         </div>
         <div>

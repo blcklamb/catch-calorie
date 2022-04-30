@@ -4,18 +4,25 @@ import MainButton from './style/MainButton';
 
 import MainExerciseForm from './MainExerciseForm';
 
+import { useRecoilState } from 'recoil';
+import { exerciseSelectedState, timeState, kcalPerHourState } from '../../atoms';
+
 import * as Api from '../../api';
 
 function MainExerciseTab({
-  exerciseSelected,
-  setExerciseSelected,
-  kcalPerHour,
-  setKcalPerHour,
+  // exerciseSelected,
+  // setExerciseSelected,
+  // kcalPerHour,
+  // setKcalPerHour,
   clearForm,
 }) {
   const [exerciseForms, setExerciseForms] = useState([0]);
 
-  const [time, setTime] = useState([]);
+  const [exerciseSelected, setExerciseSelected] = useRecoilState(exerciseSelectedState);
+  const [time, setTime] = useRecoilState(timeState);
+  const [kcalPerHour, setKcalPerHour] = useRecoilState(kcalPerHourState);
+
+  // const [time, setTime] = useState([]);
   const [hour, setHour] = useState([]);
   const [minute, setMinute] = useState([]);
 
@@ -60,16 +67,16 @@ function MainExerciseTab({
           <MainExerciseForm
             key={item}
             idx={item}
-            exerciseSelected={exerciseSelected}
-            setExerciseSelected={setExerciseSelected}
-            time={time}
-            setTime={setTime}
+            // exerciseSelected={exerciseSelected}
+            // setExerciseSelected={setExerciseSelected}
+            // time={time}
+            // setTime={setTime}
             hour={hour}
             setHour={setHour}
             minute={minute}
             setMinute={setMinute}
-            kcalPerHour={kcalPerHour}
-            setKcalPerHour={setKcalPerHour}
+            // kcalPerHour={kcalPerHour}
+            // setKcalPerHour={setKcalPerHour}
           />
         ))}
       <MainButton variant="contained" onClick={handleAddExerciseForm}>

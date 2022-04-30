@@ -9,20 +9,24 @@ import Autocomplete from '@mui/material/Autocomplete';
 import MainInput from './style/MainInput';
 import MainButton from './style/MainButton';
 
+import { useRecoilState } from 'recoil';
+import { exerciseSelectedState, timeState, kcalPerHourState } from '../../atoms';
+
+
 import * as Api from '../../api';
 
 function MainExerciseForm({
   idx,
-  exerciseSelected,
-  setExerciseSelected,
-  time,
-  setTime,
+  // exerciseSelected,
+  // setExerciseSelected,
+  // time,
+  // setTime,
   hour,
   setHour,
   minute,
   setMinute,
-  kcalPerHour,
-  setKcalPerHour,
+  // kcalPerHour,
+  // setKcalPerHour,
 }) {
   const navigate = useNavigate();
   const user = useRecoilValue(userInfoState);
@@ -35,6 +39,10 @@ function MainExerciseForm({
 
   // const [hour, setHour] = useState([]);
   // const [minute, setMinute] = useState([]);
+  const [exerciseSelected, setExerciseSelected] = useRecoilState(exerciseSelectedState);
+  const [time, setTime] = useRecoilState(timeState);
+  const [kcalPerHour, setKcalPerHour] = useRecoilState(kcalPerHourState);
+
 
   useEffect(() => {
     Api.get(`exercises`).then((res) => setExerciseList(res.data));
