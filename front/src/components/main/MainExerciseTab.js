@@ -5,7 +5,7 @@ import MainButton from './style/MainButton';
 import MainExerciseForm from './MainExerciseForm';
 
 import { useRecoilState } from 'recoil';
-import { exerciseSelectedState, timeState, kcalPerHourState } from '../../atoms';
+import { exerciseSelectedState, timeState, trackingUpdateState } from '../../atoms';
 
 import * as Api from '../../api';
 
@@ -20,7 +20,7 @@ function MainExerciseTab({
 
   const [exerciseSelected, setExerciseSelected] = useRecoilState(exerciseSelectedState);
   const [time, setTime] = useRecoilState(timeState);
-  const [kcalPerHour, setKcalPerHour] = useRecoilState(kcalPerHourState);
+  const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   // const [time, setTime] = useState([]);
   const [hour, setHour] = useState([]);
@@ -54,6 +54,7 @@ function MainExerciseTab({
     });
 
     setExerciseSelected(exerciseSelected.map((f, i) => 0));
+    setTrackingUpdate(!trackingUpdate);
 
     clearForm();
   };
