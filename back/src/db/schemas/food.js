@@ -16,6 +16,10 @@ const FoodSchema = new Schema({
         type: Number,
         required: true,
     },
+    kcal_per_lb: {
+        type: Number,
+        required: true,
+    },
     views: {
         type: Number,
         required: true,
