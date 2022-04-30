@@ -14,6 +14,7 @@ import Mypage from './components/mypage/Mypage'; // mypage 작업용
 
 import UserEditForm from './components/user/UserEditForm';
 import UserDelForm from './components/user/UserDelForm';
+import ChangePwForm from './components/user/ChangePwForm';
 
 function App() {
   const location = useLocation();
@@ -35,6 +36,8 @@ function App() {
       <Route path="/users" element={<UserEditForm />} />
       <Route path="/users/delete" element={<UserDelForm />} />
       <Route path="/mypage" element={<Mypage />} />
+      {/* <Route path="/password/init" element={<FindPwForm />} /> */}
+      <Route path="/password" element={<ChangePwForm />} />
       <Route path="*" element={<Portfolio />} />
     </Routes>
   );

@@ -91,7 +91,9 @@ function UserCard({ currentUserInfo, isNetworkPage }) {
               <ColorButton sx={{ width: 120, height: 60 }} onClick={() => navigate('/users')}>
                 Edit info
               </ColorButton>
-              <ColorButton sx={{ width: 120, height: 60 }}> Change PW</ColorButton>
+              <ColorButton sx={{ width: 120, height: 60 }} onClick={() => navigate('/password')}>
+                Change PW
+              </ColorButton>
             </UserBtnInfo>
           )}
         </UserCardFrame>
