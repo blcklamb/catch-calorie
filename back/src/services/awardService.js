@@ -1,10 +1,7 @@
 import { Award } from "../db";
 
 class awardService {
-    static async addAward({ user_id }) {
-        const userAward = await Award.findByUser({ user_id });
-        if (userAward) return { errorMessage: "awardService 이미 생성된 award입니다" };
-
+    static addAward({ user_id }) {
         return Award.create({ user_id });
     }
 

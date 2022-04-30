@@ -54,19 +54,19 @@ db.once("open", async () => {
             if (smasher >= 3) await Award.update({ user_id }, { smasher: 3 });
             else await Award.update({ user_id }, { smasher });
 
-            // triathlelte: 사이클, 러닝, 수영 각 1회 이상 (I)
+            // triathlete: 사이클, 러닝, 수영 각 1회 이상 (I)
             const cycle = exers.filter((exer) => /cycling/i.test(exer.name)).length > 0;
             const run = exers.filter((exer) => /running/i.test(exer.name)).length > 0;
             const swim = exers.filter((exer) => /swimming/i.test(exer.name)).length > 0;
-            const triathlelte = cycle && run && swim;
-            if (triathlelte) await Award.update({ user_id }, { triathlelte: 1 });
+            const triathlete = cycle && run && swim;
+            if (triathlete) await Award.update({ user_id }, { triathlelte: 1 });
 
             // -------------- FOOD COUNTING --------------
 
-            // protainer: 프로틴 쉐이크 섭취 5n회 이상 (I, II, III)
-            const protainer = Math.floor(foods.filter((food) => /protain/i.test(food.name)).length / 5);
-            if (protainer >= 3) await Award.update({ user_id }, { protainer: 3 });
-            else await Award.update({ user_id }, { protainer });
+            // proteiner: 프로틴 쉐이크 섭취 5n회 이상 (I, II, III)
+            const proteiner = Math.floor(foods.filter((food) => /protein/i.test(food.name)).length / 5);
+            if (proteiner >= 3) await Award.update({ user_id }, { proteiner: 3 });
+            else await Award.update({ user_id }, { proteiner });
 
             // fruits_lover: 과일 섭취 5n회 이상 (I, II, III)
             const fruits_lover = Math.floor(categorys.filter((category) => /fruit/i.test(category)).length / 5);
