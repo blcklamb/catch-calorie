@@ -1,13 +1,10 @@
-const nodemailer = require("nodemailer");
-
-const user = process.env.GOOGLE_ID;
-const pass = process.env.GOOGLE_SECRET;
+import nodemailer from "nodemailer";
 
 const transport = nodemailer.createTransport({
     service: "Gmail",
     auth: {
-        user,
-        pass,
+        user: process.env.GOOGLE_ID,
+        pass: process.env.GOOGLE_SECRET,
     },
 });
 
@@ -21,8 +18,7 @@ module.exports = (to, subject, text) =>
         };
         transport.sendMail(message, (err, info) => {
             if (err) {
-                reject(err);
-                return;
+                return reject(err);
             }
             resolve(info);
         });
