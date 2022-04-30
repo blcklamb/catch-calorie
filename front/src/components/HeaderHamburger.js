@@ -64,7 +64,7 @@ function Header(props) {
         <ListItem button key={'editProfile'} onClick={() => navigate('/users')}>
           <ListItemText primary={'Edit Profile'} />
         </ListItem>
-        <ListItem button key={'network'}>
+        <ListItem button key={'network'} onClick={() => navigate('/network')}>
           <ListItemText primary={'Network'} />
         </ListItem>
         <ListItem button key={'signOut'} onClick={logout}>
