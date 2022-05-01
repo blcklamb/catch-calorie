@@ -122,6 +122,7 @@ userRouter.put("/users/:id", login_required, async (req, res, next) => {
     }
 });
 
+// 회원가입 인증 이메일 발송
 userRouter.get("/users/email/:email", async (req, res, next) => {
     try {
         const { email } = req.params;
@@ -129,8 +130,8 @@ userRouter.get("/users/email/:email", async (req, res, next) => {
 
         await sendMail(
             email, //
-            "[Catch Calorie] 인증번호가 발급되었습니다",
-            `회원님의 인증번호는 [${code}] 입니다.\n회원가입을 완료해주세요.`,
+            "[Catch Calorie] Hi, We are happy you signed up for Catch Calorie",
+            `Your verification code is [${code}].\n Please complete signing up.`,
         );
 
         return res.status(200).send(code);

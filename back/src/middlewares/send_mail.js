@@ -11,7 +11,7 @@ const transport = nodemailer.createTransport({
 module.exports = (to, subject, text) =>
     new Promise((resolve, reject) => {
         const message = {
-            from: `"Portfolio Share Service" <${process.env.GOOGLE_ID}>`,
+            from: `"[Catch-Calorie] Sign Up" <${process.env.GOOGLE_ID}>`,
             to,
             subject,
             text,

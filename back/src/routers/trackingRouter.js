@@ -5,6 +5,7 @@ import { trackingService } from "../services/trackingService";
 
 const trackingRouter = Router();
 
+// 유저별 트래킹 정보를 보내는 요청
 trackingRouter.get("/tracking/:user_id", async (req, res, next) => {
     try {
         const { user_id } = req.params;
@@ -19,6 +20,7 @@ trackingRouter.get("/tracking/:user_id", async (req, res, next) => {
     }
 });
 
+// 유저가 섭취한 음식을 등록할 때
 trackingRouter.post("/tracking/food", login_required, async (req, res, next) => {
     try {
         const user_id = req.currentUserId;
@@ -33,6 +35,7 @@ trackingRouter.post("/tracking/food", login_required, async (req, res, next) => 
     }
 });
 
+// 유저가 소모한 운동을 등록할 때
 trackingRouter.post("/tracking/exer", login_required, async (req, res, next) => {
     try {
         const user_id = req.currentUserId;
@@ -47,6 +50,7 @@ trackingRouter.post("/tracking/exer", login_required, async (req, res, next) => 
     }
 });
 
+// 유저가 이미 등록한 음식 수정할 때
 trackingRouter.put("/tracking/food", login_required, async (req, res, next) => {
     try {
         const { id, gram } = req.body;
@@ -59,6 +63,7 @@ trackingRouter.put("/tracking/food", login_required, async (req, res, next) => {
     }
 });
 
+// 유저가 이미 등록한 운동 수정할 때
 trackingRouter.put("/tracking/exer", login_required, async (req, res, next) => {
     try {
         const { id, minute } = req.body;
@@ -71,6 +76,7 @@ trackingRouter.put("/tracking/exer", login_required, async (req, res, next) => {
     }
 });
 
+// 유저가 이미 등록한 음식 삭제할 때
 trackingRouter.delete("/tracking/food/:id", login_required, async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -83,6 +89,7 @@ trackingRouter.delete("/tracking/food/:id", login_required, async (req, res, nex
     }
 });
 
+// 유저가 이미 등록한 운동 삭제할 때
 trackingRouter.delete("/tracking/exer/:id", login_required, async (req, res, next) => {
     try {
         const { id } = req.params;

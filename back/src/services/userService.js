@@ -99,6 +99,8 @@ class userService {
 
     // 임시비밀번호 발급
     static async sendNewpassword({ email }) {
+        // 여기는 네이버인가요..? (채정) 아니면 보내는 이메일이 네이버인가요?
+        // middlewares/send_mail.js이랑 겹치는 것 같은데 확인 부탁드립니다
         const mailOption = {
             service: "Naver",
             host: "smtp.namer.com",
@@ -114,8 +116,10 @@ class userService {
         const message = {
             from: process.env.NODEMAIL_EMAIL,
             to: email,
-            subject: "Catch Calorie 임시 비밀번호 발급 안내 메일입니다.",
-            text: temp_pw,
+            subject: "[Catch Calorie] Password Reset",
+            text: `It seems like you forgot your password for Catch-Calorie.\n 
+            Your temporary password is [${temp_pw}].\n 
+            Please login again and change your password`,
         };
 
         const transporter = nodemailer.createTransport(mailOption);
