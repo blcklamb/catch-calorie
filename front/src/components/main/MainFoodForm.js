@@ -7,7 +7,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import MainInput from './style/MainInput';
 
 import { useRecoilState } from 'recoil';
-import { foodSelectedState, gramState, kcalPerGramState } from '../../atoms';
+import { foodListState, foodSelectedState, gramState, kcalPerGramState } from '../../atoms';
 
 import * as Api from '../../api';
 
@@ -17,10 +17,10 @@ function MainFoodForm({ idx }) {
   const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
   const [gram, setGram] = useRecoilState(gramState);
   const [kcalPerGram, setKcalPerGram] = useRecoilState(kcalPerGramState);
+  const [foodList, setFoodList] = useRecoilState(foodListState);
 
   const [value, setValue] = useState();
   const [inputValue, setInputValue] = useState([]); // 텍스트 상자에 표시되는 값
-  const [foodList, setFoodList] = useState('');
 
   useEffect(() => {
     Api.get(`foods`).then((res) => setFoodList(res.data));
