@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import TextField from '@mui/material/TextField';
+import Switch from '@mui/material/Switch';
 
 import MainButton from './style/MainButton';
 
@@ -19,16 +20,32 @@ function MainFoodAdd({}) {
 
   const user = useRecoilValue(userInfoState);
 
+  const [checked, setChecked] = useState(true);
+
   const [category, setCategory] = useState();
   const [name, setName] = useState();
-  const [kcalPer100g, setKcalPer100g] = useState();
+  const [kcal, setKcal] = useState();
+  const [unit, setUnit] = useState('gram');
+
+  const handleSwitch = (event) => {
+    setChecked(event.target.checked);
+  };
+
+  useEffect(() => {
+    if (checked === true) {
+      setUnit('gram');
+    } else {
+      setUnit('pound');
+    }
+  }, [checked]);
 
   const handleSubmit = async () => {
     try {
       await Api.post(`foods`, {
         category: category,
         name: name,
-        kcal_per_100g: kcalPer100g,
+        kcal: kcal,
+        unit: unit
       });
 
       alert('Food has been added');
@@ -61,13 +78,19 @@ function MainFoodAdd({}) {
               inputValue={name}
               onBlur={(e) => setName(e.target.value)}
             />
-            <h2>Please enter a kcal per 100g</h2>
+            <h2>Please enter a kcal</h2>
+            <Switch
+              checked={checked}
+              onChange={handleSwitch}
+              inputProps={{ 'aria-label': 'controlled' }}
+            />
+            {unit}
             <TextField
               id="outlined-basic"
-              label="kcal/100g"
+              label="kcal"
               variant="outlined"
-              inputValue={kcalPer100g}
-              onBlur={(e) => setKcalPer100g(e.target.value)}
+              inputValue={kcal}
+              onBlur={(e) => setKcal(e.target.value)}
             />
           </div>
         </div>
