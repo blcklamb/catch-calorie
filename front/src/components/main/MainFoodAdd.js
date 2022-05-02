@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
+import Autocomplete from '@mui/material/Autocomplete';
 
 import MainButton from './style/MainButton';
 
@@ -11,6 +12,9 @@ import Footer from '../Footer';
 import { useNavigate } from 'react-router-dom';
 
 import { useRecoilValue } from 'recoil';
+
+import { foodListState } from '../../atoms';
+
 import { userInfoState } from '../../atoms';
 
 import * as Api from '../../api';
@@ -19,17 +23,22 @@ function MainFoodAdd({}) {
   const navigate = useNavigate();
 
   const user = useRecoilValue(userInfoState);
+  const foodList = useRecoilValue(foodListState);
 
   const [checked, setChecked] = useState(true);
 
+  const [categoryList, setCategoryList] = useState([]);
   const [category, setCategory] = useState();
   const [name, setName] = useState();
   const [kcal, setKcal] = useState();
   const [unit, setUnit] = useState('gram');
 
-  const handleSwitch = (event) => {
-    setChecked(event.target.checked);
-  };
+  useEffect(() => {
+    const allFoodCategory = foodList.map((food) => food.category);
+    const set = new Set(allFoodCategory);
+
+    setCategoryList([...set]);
+  }, []);
 
   useEffect(() => {
     if (checked === true) {
@@ -39,13 +48,17 @@ function MainFoodAdd({}) {
     }
   }, [checked]);
 
+  const handleSwitch = (event) => {
+    setChecked(event.target.checked);
+  };
+
   const handleSubmit = async () => {
     try {
       await Api.post(`foods`, {
         category: category,
         name: name,
         kcal: kcal,
-        unit: unit
+        unit: unit,
       });
 
       alert('Food has been added');
@@ -63,12 +76,15 @@ function MainFoodAdd({}) {
         <div style={{ display: 'flex' }}>
           <div>
             <h2>Please enter a category</h2>
-            <TextField
-              id="outlined-basic"
-              label="category"
-              variant="outlined"
-              inputValue={category}
-              onBlur={(e) => setCategory(e.target.value)}
+            <Autocomplete
+              value={category}
+              onChange={(event, newValue) => {
+                setCategory(newValue);
+              }}
+              id="controllable-states-demo"
+              options={categoryList}
+              sx={{ width: 300 }}
+              renderInput={(params) => <TextField {...params} label="Controllable" />}
             />
             <h2>Please enter a name</h2>
             <TextField
