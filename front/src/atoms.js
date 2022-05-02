@@ -24,6 +24,13 @@ export const userInfoState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
+// 음식 전체 리스트
+export const foodListState = atom({
+  key: 'foodListState',
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+});
+
 export const foodSelectedState = atom({
   key: 'foodSelectedState',
   default: [],
@@ -47,12 +54,12 @@ export const kcalPerHourState = atom({
 export const gramState = atom({
   key: 'gramState',
   default: [],
-}); 
+});
 
 export const timeState = atom({
-  key: 'gramState',
+  key: 'timeState',
   default: [],
-}); 
+});
 
 export const trackingUpdateState = atom({
   key: 'trackingUpdateState',
