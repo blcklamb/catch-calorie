@@ -5,6 +5,7 @@ import { Bar } from 'react-chartjs-2';
 
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
+  trackingState,
   userInfoState,
   foodSelectedState,
   kcalPerGramState,
@@ -18,14 +19,16 @@ import * as Api from '../../api';
 function MainGraph({}) {
   const user = useRecoilValue(userInfoState);
 
+  const [tracking, setTracking] = useRecoilState(trackingState);
+  const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
+
   const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
   const [kcalPerGram, setKcalPerGram] = useRecoilState(kcalPerGramState);
-  const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   const [exerciseSelected, setExerciseSelected] = useRecoilState(exerciseSelectedState);
   const [kcalPerHour, setKcalPerHour] = useRecoilState(kcalPerHourState);
 
-  const [todayTracking, setTodayTracking] = useState();
+  const [trackingKcal, setTrackingKcal] = useState();
 
   const labels = ["Today's calories"];
 
@@ -65,16 +68,16 @@ function MainGraph({}) {
   };
 
   const remainingKcal = () => {
-    if (todayTracking?.acc_cal < 0) {
+    if (trackingKcal < 0) {
       return [3000];
     }
 
     // 선택된 항목이 없을 경우
     if (isNaN(kcalPerGram[0])) {
-      return [3000 - todayTracking];
+      return [3000 - trackingKcal];
     }
 
-    return [3000 - todayTracking - kcalPerGram.reduce((acc, cur) => acc + cur, 0)];
+    return [3000 - trackingKcal - kcalPerGram.reduce((acc, cur) => acc + cur, 0)];
   };
 
   const data = {
@@ -82,7 +85,7 @@ function MainGraph({}) {
     datasets: [
       {
         label: 'Current Calories',
-        data: [todayTracking],
+        data: [trackingKcal],
         backgroundColor: ['rgba(255, 99, 132, 0.2)'],
         borderColor: ['rgb(255, 99, 132)'],
         borderWidth: 1,
@@ -113,16 +116,13 @@ function MainGraph({}) {
     'rgba(153, 102, 255)',
   ];
 
-  const getTracking = () => {
-    Api.get(`tracking/${user._id}`).then((res) => {
-      setTodayTracking(res.data?.acc_cal);
-    });
-  };
-
-  getTracking();
-
   useEffect(() => {
-    getTracking();
+    Api.get(`tracking/${user._id}`).then((res) => {
+      // 오늘의 트래킹 정보
+      setTracking(res.data);
+      // 오늘의 트래킹 정보 중 칼로리
+      setTrackingKcal(res.data?.acc_cal);
+    });
   }, [trackingUpdate]);
 
   const addData = () => {
