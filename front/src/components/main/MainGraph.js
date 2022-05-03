@@ -113,19 +113,23 @@ function MainGraph({}) {
   };
 
   const backgroundColor = [
-    'rgba(148,216,45, 0.5)',
+    'rgba(156,253,8, 0.4)',
+    'rgba(152,235,26, 0.6)',
+    'rgba(148,216,45, 0.6)',
     'rgba(120,177,33, 0.5)',
     'rgba(91,134,25, 0.5)',
-    'rgba(54, 162, 235, 0.5)',
-    'rgba(153, 102, 255, 0.5)',
+    'rgba(62,91,17, 0.5)',
+    'rgba(47,70,13, 0.5)',
   ];
 
   const borderColor = [
+    'rgba(156,253,8)',
+    'rgba(152,235,26)',
     'rgba(148,216,45)',
     'rgba(120,177,33)',
     'rgba(91,134,25)',
-    'rgba(54, 162, 235)',
-    'rgba(153, 102, 255)',
+    'rgba(62,91,17)',
+    'rgba(47,70,13)',
   ];
 
   const addData = () => {
@@ -158,8 +162,8 @@ function MainGraph({}) {
     });
   };
 
-  // isMypage !== 'mypage' &&
-   addData();
+  // mypage에서는 음식/운동 선택 막대(초록) 보이지 않음
+  isMypage !== 'mypage' && addData();
 
   return (
     <div>
