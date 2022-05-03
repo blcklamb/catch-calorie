@@ -1,27 +1,24 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { Container, Col, Row, Form, Button } from "react-bootstrap";
 
 // Mui
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 
 import * as Api from '../../api';
-// import { DispatchContext } from '../../App';
 import Header from '../Header';
 import Footer from '../Footer';
 import { validateEmail } from '../../utils';
 // import recoil
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { tokenState, userState } from '../../atoms';
 
 // import styled compo
 import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
 import githubLogin from './GithubLogin';
-import { DispatchContext } from '../../App';
 
 function LoginForm() {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as Api from '../api';
 import Main from './main/Main';
 import { useRecoilValue, useSetRecoilState } from 'recoil';

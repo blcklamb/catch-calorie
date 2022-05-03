@@ -1,22 +1,14 @@
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { userInfoState, userState } from '../../atoms';
-import { Navigate, useNavigate } from 'react-router-dom';
-// import { Container, Col, Row, Form, Button } from 'react-bootstrap';
+import { userInfoState } from '../../atoms';
+import { useNavigate } from 'react-router-dom';
 
 import * as Api from '../../api';
 
 // Mui
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 
 //styled Compo
 import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';

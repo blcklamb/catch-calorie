@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { TextField } from '@mui/material';
-import MainButton from '../main/style/MainButton';
+
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { tokenState, userInfoState, userState } from '../../atoms';
 import * as Api from '../../api';
