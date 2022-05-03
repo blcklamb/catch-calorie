@@ -68,10 +68,10 @@ function TrackingExerciseList({ exercise, isMypage }) {
               style={{ marginRight: '30px' }}
             />
             <div style={{ marginRight: '30px' }}>{previewKcal()}kcal</div>
-            <Button variant="contained" type="submit" onClick={handleCheck}>
+            <Button variant="contained" type="button" onClick={handleCheck}>
               Check
             </Button>
-            <Button variant="contained" type="submit" onClick={handleCancel}>
+            <Button variant="contained" type="button" onClick={handleCancel}>
               Cancel
             </Button>
           </div>
@@ -87,10 +87,10 @@ function TrackingExerciseList({ exercise, isMypage }) {
             {/* 마이페이지에서는 버튼 X */}
             {isMypage !== 'mypage' && (
               <div>
-                <Button variant="contained" type="submit" onClick={handleModify}>
+                <Button variant="contained" type="button" onClick={handleModify}>
                   Modify
                 </Button>
-                <Button variant="contained" type="submit" onClick={handleDelete}>
+                <Button variant="contained" type="button" onClick={handleDelete}>
                   Delete
                 </Button>
               </div>
