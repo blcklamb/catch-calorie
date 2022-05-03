@@ -187,15 +187,11 @@ userRouter.get("/users/login/github", async (req, res) => {
         const { access_token } = token;
         const api = "https://api.github.com";
         const data = await fetch(`${api}/user`, {
-            headers: {
-                Authorization: `token ${access_token}`,
-            },
+            headers: { Authorization: `token ${access_token}` },
         }).then((res) => res.json());
 
         const emailData = await fetch(`${api}/user/emails`, {
-            headers: {
-                Authorization: `token ${access_token}`,
-            },
+            headers: { Authorization: `token ${access_token}` },
         }).then((res) => res.json());
         const { email } = emailData.find((email) => email.primary === true && email.verified === true);
 
@@ -209,7 +205,7 @@ userRouter.get("/users/login/github", async (req, res) => {
             });
         }
 
-        const { _id, name, description, oauth } = user;
+        const { _id, name, description } = user;
 
         return res.status(200).json({
             token: jwt.sign({ user_id: _id }, process.env.JWT_SECRET_KEY || "secret-key"),
@@ -217,7 +213,6 @@ userRouter.get("/users/login/github", async (req, res) => {
             email,
             name,
             description,
-            oauth,
         });
     } catch (error) {
         next(error);
