@@ -14,10 +14,15 @@ import {
   CardText,
 } from '../../styledCompo/uesrStyle';
 
+import MainGraph from '../../main/MainGraph';
+
 function UserGraph({ currentUserInfo }) {
   return (
     <>
-      <UserCardFrame>userGraph</UserCardFrame>
+      <UserCardFrame>
+        userGraph 데모
+        <MainGraph />
+      </UserCardFrame>
     </>
   );
 }
