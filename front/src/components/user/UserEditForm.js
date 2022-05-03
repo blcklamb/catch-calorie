@@ -59,7 +59,7 @@ const UserEditForm = () => {
 
       console.log('회원 정보 수정 후 PUT 응답으로 수정된 회원 정보를 가져옵니다.', res.data);
       setUserInfo(res.data);
-      navigate('/tracking');
+      navigate(-1);
       console.log('req 요청 갔고 응답 받았습니다..');
     } catch (err) {
       console.log(`req 요청이 제대로 가지 않았군요 ${err}`);
@@ -116,7 +116,7 @@ const UserEditForm = () => {
               }}
             />
             <br></br>
-            <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
+            {/* <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
@@ -126,7 +126,7 @@ const UserEditForm = () => {
             >
               <FormControlLabel value="male" control={<Radio color="success" />} label="Male" />
               <FormControlLabel value="female" control={<Radio color="success" />} label="Female" />
-            </RadioGroup>
+            </RadioGroup> */}
             <ValidationTextField
               required
               // {!checkLogin && error}

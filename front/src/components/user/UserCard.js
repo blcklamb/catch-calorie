@@ -17,18 +17,52 @@ import { Button, Container } from '@mui/material';
 import { Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import ChangePwForm from './ChangePwForm';
+import UserInfoCard from './UserInfoCard';
+import UserEditCard from './UserEditCard';
 
 //currentUserInfo는 Mypage에서 올 때 받는 props
 //eachUserId는 Network page 에서 올 때 받는 props
 function UserCard({ currentUserInfo, isNetworkPage }) {
   const user = useRecoilValue(userInfoState);
-  // const [curUser, setCurUser] = useState(undefined);
-  // const [isEditable, setIsEditable] = useState(false);
   const isEditable = useMemo(() => currentUserInfo?._id === user?._id, [currentUserInfo, user]);
-  const [isEditPw, setIsEditPw] = useState(false);
-  // console.log(eachUserId);
+  const [cardState, setCardState] = useState('userInfo');
+  // console.log(cardState);
+
   const navigate = useNavigate();
-  // const params = useParams();
+
+  // 유저 카드에서 버튼 누를시 각 페이지 렌더링 하는 스위치 함수
+  // userInfo, EditInfo, ChangePw
+  const switchCard = () => {
+    switch (cardState) {
+      case 'userInfo':
+        return (
+          <UserInfoCard
+            currentUserInfo={currentUserInfo}
+            isEditable={isEditable}
+            setCardState={setCardState}
+          />
+        );
+      case 'EditInfo':
+        return (
+          <UserEditCard
+            currentUserInfo={currentUserInfo}
+            isEditable={isEditable}
+            setCardState={setCardState}
+          />
+        );
+      case 'ChangePw':
+        return <ChangePwForm setCardState={setCardState} />;
+
+      default:
+        return (
+          <UserInfoCard
+            currentUserInfo={currentUserInfo}
+            isEditable={isEditable}
+            setCardState={setCardState}
+          />
+        );
+    }
+  };
 
   // 유저가 누구인지에 따라 편집버튼 보이게 할지 말지
   // useEffect(() => {
@@ -41,7 +75,6 @@ function UserCard({ currentUserInfo, isNetworkPage }) {
 
   return (
     <>
-      {/* <div>{curUser._id}</div> */}
       {isNetworkPage ? (
         <div
           style={{ width: 100 + '%', height: 360, backgroundColor: '#ecf8d9', borderRadius: 18 }}
@@ -68,43 +101,7 @@ function UserCard({ currentUserInfo, isNetworkPage }) {
           </Button>
         </div>
       ) : (
-        <>
-          {isEditPw ? (
-            <ChangePwForm setIsEditPw={setIsEditPw}></ChangePwForm>
-          ) : (
-            <UserCardFrame>
-              <UserBodyInfo>
-                <Typography variant="h6" style={{ color: '#c4c4c4' }}>
-                  height/weight
-                </Typography>
-                <Typography variant="h4">
-                  {currentUserInfo?.height}/{currentUserInfo?.weight}
-                </Typography>
-              </UserBodyInfo>
-              <UserBadgeImgInfo>
-                <img
-                  src={'/' + currentUserInfo?.icon + '.png'}
-                  alt="badge"
-                  style={{ width: 300 }}
-                ></img>
-              </UserBadgeImgInfo>
-              <UserAKAInfo>
-                <Typography variant="h4">{currentUserInfo?.name}</Typography>
-                <Typography variant="h6">{currentUserInfo?.status}</Typography>
-              </UserAKAInfo>
-              {isEditable && (
-                <UserBtnInfo>
-                  <ColorButton sx={{ width: 120, height: 60 }} onClick={() => navigate('/users')}>
-                    Edit info
-                  </ColorButton>
-                  <ColorButton sx={{ width: 120, height: 60 }} onClick={() => setIsEditPw(true)}>
-                    Change PW
-                  </ColorButton>
-                </UserBtnInfo>
-              )}
-            </UserCardFrame>
-          )}
-        </>
+        <>{switchCard()}</>
       )}
     </>
   );
