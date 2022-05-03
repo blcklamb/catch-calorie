@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { Header, Button, Popup, Grid } from 'semantic-ui-react';
 import Yoga from '../../src/components/mypage/yoga.png';
@@ -24,29 +24,49 @@ const Badgesboxs = styled.div`
   }
 `;
 
-const Tooltip = () => (
-  <Popup
-    style={{ borderRadius: '18px', backgroundColor: '#E1F4C4', border: 'none' }}
-    trigger={
-      <Badgesboxs>
-        <img src={Yoga} style={{ width: 200 }}></img>
-      </Badgesboxs>
-    }
-    flowing
-    hoverable
-  >
-    <Grid centered divided columns={1}>
-      <Grid.Column textAlign="center">
-        <Header as="h2">뱃지 이름</Header>
-        <p>
-          <b>2</b> 뱃지 정보
-        </p>
-        <Button style={{ borderRadius: '8px', backgroundColor: '#94D82D' }}>
-          프로필로 설정하기
-        </Button>
-      </Grid.Column>
-    </Grid>
-  </Popup>
-);
+const Tooltip = ({ badgeName, badges, isLock, imgNum }) => {
+  // const isLock = useMemo(() => badges[badgeName] === 0, [badgeName, badges]);
+  // const imgNum = useMemo(() => {
+  //   if (!isLock) {
+  //     return badges[badgeName];
+  //   } else {
+  //     return '';
+  //   }
+  // }, [isLock, badges, badgeName]);
+  // console.log(badgeName, badges[badgeName], isLock, imgNum);
+  // console.log('/badgeImgs/' + badgeName + imgNum + '.png');
+  return (
+    <Popup
+      style={{ borderRadius: '18px', backgroundColor: '#E1F4C4', border: 'none' }}
+      trigger={
+        // <Badgesboxs>
+        //   <img src={Yoga} style={{ width: 200 }}></img>
+        // </Badgesboxs>
+        <Badgesboxs>
+          <img
+            src={'/badgeImgs/' + badgeName + imgNum + '.png'}
+            style={{ width: 200 }}
+            alt="뱃지"
+          ></img>
+          <div>{isLock && <span>얘 락걸려 있음</span>}</div>
+        </Badgesboxs>
+      }
+      flowing
+      hoverable
+    >
+      <Grid centered divided columns={1}>
+        <Grid.Column textAlign="center">
+          <Header as="h2">뱃지 이름</Header>
+          <p>
+            <b>2</b> 뱃지 정보
+          </p>
+          <Button style={{ borderRadius: '8px', backgroundColor: '#94D82D' }}>
+            프로필로 설정하기
+          </Button>
+        </Grid.Column>
+      </Grid>
+    </Popup>
+  );
+};
 
 export default Tooltip;

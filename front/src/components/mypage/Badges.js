@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import * as Api from '../../api';
 import styled from 'styled-components';
 import Yoga from './yoga.png';
@@ -47,10 +47,21 @@ const BadgesText = styled.div`
 const Badges = () => {
   const user = useRecoilValue(userInfoState);
   const [badges, setBadges] = useState([]);
-  console.log('뱃지', badges);
+  const badgesAr = useMemo(
+    () =>
+      Object.keys(badges).filter((item) => {
+        if (item === '_id' || item === 'user_id' || item === '__v') {
+          return false;
+        } else {
+          return true;
+        }
+      }),
+    [badges],
+  );
 
   useEffect(() => {
-    Api.get('users', user._id).then((res) => setBadges(res.data.icon));
+    // Api.get('users', user._id).then((res) => setBadges(res.data.icon));
+    Api.get('awards', user._id).then((res) => setBadges(res.data));
   }, [user]);
 
   return (
@@ -59,22 +70,41 @@ const Badges = () => {
 
       <Container sx={{ marginTop: 2, bgcolor: '#94d82d', borderRadius: 3 }}>
         <Grid container spacing={1}>
-          <Grid spacing={3} sx={{ margin: 3 }}>
-            <Tooltip />
-          </Grid>
-          <Grid spacing={3} sx={{ margin: 3 }}>
-            <Tooltip />
-          </Grid>
-          <Grid spacing={3} sx={{ margin: 3 }}>
-            <Tooltip />
-          </Grid>
-          <Grid spacing={3} sx={{ margin: 3 }}>
-            <Tooltip />
-          </Grid>
-          <Grid spacing={3} sx={{ margin: 3 }}>
-            <Tooltip />
-          </Grid>
+          {badgesAr.map((badgeName) => {
+            let isLock = true;
+            let imgNum = '';
+
+            if (badges[badgeName] === 0) {
+              isLock = true;
+            } else {
+              isLock = false;
+              imgNum = badges[badgeName];
+            }
+            // console.log(badgeName, badges[badgeName], isLock, imgNum);
+            return (
+              <Grid item sx={{ margin: 3 }} key={badgeName}>
+                <Tooltip badgeName={badgeName} badges={badges} isLock={isLock} imgNum={imgNum} />
+              </Grid>
+            );
+          })}
         </Grid>
+        {/* <Grid container spacing={1}>
+          <Grid spacing={3} sx={{ margin: 3 }}>
+            <Tooltip />
+          </Grid>
+          <Grid spacing={3} sx={{ margin: 3 }}>
+            <Tooltip />
+          </Grid>
+          <Grid spacing={3} sx={{ margin: 3 }}>
+            <Tooltip />
+          </Grid>
+          <Grid spacing={3} sx={{ margin: 3 }}>
+            <Tooltip />
+          </Grid>
+          <Grid spacing={3} sx={{ margin: 3 }}>
+            <Tooltip />
+          </Grid>
+        </Grid> */}
       </Container>
 
       {/* <BadgesContainer>
