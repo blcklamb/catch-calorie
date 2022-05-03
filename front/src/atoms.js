@@ -40,12 +40,12 @@ export const trackingState = atom({
 
 export const foodSelectedState = atom({
   key: 'foodSelectedState',
-  default: [],
+  default: [0],
 });
 
 export const exerciseSelectedState = atom({
   key: 'exerciseSelectedState',
-  default: [],
+  default: [0],
 });
 
 export const kcalPerGramState = atom({
@@ -60,15 +60,27 @@ export const kcalPerHourState = atom({
 
 export const gramState = atom({
   key: 'gramState',
-  default: [],
+  default: [''],
 });
 
 export const timeState = atom({
   key: 'timeState',
-  default: [],
+  default: [''],
 });
 
 export const trackingUpdateState = atom({
   key: 'trackingUpdateState',
   default: false,
+});
+
+// Main 음식 폼 개수
+export const foodFormsState = atom({
+  key: 'foodFormsState',
+  default: [0],
+});
+
+// Main 운동 폼 개수
+export const exerciseFormsState = atom({
+  key: 'exerciseFormsState',
+  default: [0],
 });
