@@ -5,20 +5,23 @@ import TrackingFoodList from './TrackingFoodList';
 import TrackingExerciseList from './TrackingExerciseList';
 
 import { useRecoilState } from 'recoil';
-import { trackingUpdateState } from '../../atoms';
+import { trackingState, trackingUpdateState } from '../../atoms';
 
 import * as Api from '../../api';
 
 function TrackingLists() {
   const params = useParams();
 
+  
+  const [tracking, setTracking] = useRecoilState(trackingState);
+  // const [tracking, setTracking] = useState('')
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
-  const [trackingList, setTrackingList] = useState('');
+  const isMypage = window.location.href.split('/')[3];
 
   useEffect(() => {
     Api.get(`tracking/${params.user_id}`).then((res) => {
-      setTrackingList(res.data);
+      setTracking(res.data);
     });
   }, [trackingUpdate]);
 
@@ -38,9 +41,9 @@ function TrackingLists() {
             <h2>Intake Calories</h2>
           </div>
         </div>
-        {trackingList.food_record?.length ? (
-          trackingList.food_record.map((food) => {
-            return <TrackingFoodList food={food} />;
+        {tracking.food_record?.length ? (
+          tracking.food_record.map((food) => {
+            return <TrackingFoodList food={food} isMypage={isMypage} />;
           })
         ) : (
           <div>No Food Tracking</div>
@@ -59,9 +62,9 @@ function TrackingLists() {
             <h2>Consumed Calories</h2>
           </div>
         </div>
-        {trackingList.exer_record?.length ? (
-          trackingList.exer_record.map((exercise) => {
-            return <TrackingExerciseList exercise={exercise} />;
+        {tracking.exer_record?.length ? (
+          tracking.exer_record.map((exercise) => {
+            return <TrackingExerciseList exercise={exercise} isMypage={isMypage} />;
           })
         ) : (
           <div>No Exercise Tracking</div>
