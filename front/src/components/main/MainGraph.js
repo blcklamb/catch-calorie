@@ -30,7 +30,18 @@ function MainGraph({}) {
 
   const [trackingKcal, setTrackingKcal] = useState();
 
-  const labels = ["Today's calories"];
+  const isMypage = window.location.href.split('/')[3];
+
+  useEffect(() => {
+    Api.get(`tracking/${user._id}`).then((res) => {
+      // 오늘의 트래킹 정보
+      setTracking(res.data);
+      // 오늘의 트래킹 정보 중 칼로리
+      setTrackingKcal(res.data?.acc_cal);
+    });
+  }, [trackingUpdate]);
+
+  const labels = [''];
 
   const options = {
     // legend: {
@@ -84,14 +95,15 @@ function MainGraph({}) {
     labels: labels,
     datasets: [
       {
-        label: 'Current Calories',
+        label: 'Current Kcal',
         data: [trackingKcal],
-        backgroundColor: ['rgba(255, 99, 132, 0.2)'],
-        borderColor: ['rgb(255, 99, 132)'],
+        backgroundColor: ['rgba(240,62,62, 0.5)'],
+        // backgroundColor: ['#F03E3E'],
+        borderColor: ['rgba(240,62,62)'],
         borderWidth: 1,
       },
       {
-        label: 'Calories Remaining',
+        label: 'Kcal Remaining',
         data: remainingKcal(),
         backgroundColor: ['rgba(201, 203, 207, 0.2)'],
         borderColor: ['rgb(201, 203, 207)'],
@@ -101,29 +113,20 @@ function MainGraph({}) {
   };
 
   const backgroundColor = [
-    'rgba(255, 159, 64, 0.2)',
-    'rgba(255, 205, 86, 0.2)',
-    'rgba(75, 192, 192, 0.2)',
-    'rgba(54, 162, 235, 0.2)',
-    'rgba(153, 102, 255, 0.2)',
+    'rgba(148,216,45, 0.5)',
+    'rgba(120,177,33, 0.5)',
+    'rgba(91,134,25, 0.5)',
+    'rgba(54, 162, 235, 0.5)',
+    'rgba(153, 102, 255, 0.5)',
   ];
 
   const borderColor = [
-    'rgba(255, 159, 64)',
-    'rgba(255, 205, 86)',
-    'rgba(75, 192, 192)',
+    'rgba(148,216,45)',
+    'rgba(120,177,33)',
+    'rgba(91,134,25)',
     'rgba(54, 162, 235)',
     'rgba(153, 102, 255)',
   ];
-
-  useEffect(() => {
-    Api.get(`tracking/${user._id}`).then((res) => {
-      // 오늘의 트래킹 정보
-      setTracking(res.data);
-      // 오늘의 트래킹 정보 중 칼로리
-      setTrackingKcal(res.data?.acc_cal);
-    });
-  }, [trackingUpdate]);
 
   const addData = () => {
     foodSelected.map((food, idx) => {
@@ -155,7 +158,8 @@ function MainGraph({}) {
     });
   };
 
-  addData();
+  // isMypage !== 'mypage' &&
+   addData();
 
   return (
     <div>
