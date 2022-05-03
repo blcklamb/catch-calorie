@@ -37,8 +37,8 @@ function TrackingExerciseList({ exercise, isMypage }) {
     setIsEditing(false);
   };
 
-  const handleDelete = (e) => {
-    Api.delete(`tracking/exer/${exercise.id}`);
+  const handleDelete = async (e) => {
+    await Api.delete(`tracking/exer/${exercise.id}`);
 
     setTrackingUpdate(!trackingUpdate);
   };
