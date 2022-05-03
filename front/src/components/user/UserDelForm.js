@@ -87,11 +87,11 @@ export default function UserDelForm() {
             onChange={(e) => setDelMessage(e.target.value)}
           ></TextField>
           <br></br>
-          <Button sx={{ mt: 2 }} variant="contained" onClick={handleDel}>
-            확인
+          <Button sx={{ mt: 2 }} color="error" variant="contained" onClick={handleDel}>
+            Confirm
           </Button>
           <Button sx={{ mt: 2, ml: 1 }} variant="outlined" onClick={handleClose}>
-            취소
+            Cancel
           </Button>
         </Box>
       </Modal>

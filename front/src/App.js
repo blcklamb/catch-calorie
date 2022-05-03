@@ -5,7 +5,7 @@ import LoginForm from './components/user/LoginForm';
 import Home from './components/start/Home';
 
 import RegisterForm from './components/user/RegisterForm';
-import Portfolio from './components/Portfolio';
+import Validation from './components/Validation';
 import MainFoodAdd from './components/main/MainFoodAdd';
 import MainExerciseAdd from './components/main/MainExerciseAdd';
 import Network from './components/network/Network';
@@ -29,7 +29,7 @@ function App() {
       <Route path="/" exact element={<Home />} />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/register" element={<RegisterForm />} />
-      <Route path="/tracking/:user_id" element={<Portfolio />} />
+      <Route path="/tracking/:user_id" element={<Validation />} />
       <Route path="/tracking/addFood" element={<MainFoodAdd />} />
       <Route path="/tracking/addExercise" element={<MainExerciseAdd />} />
       <Route path="/network" element={<Network />} />
@@ -38,8 +38,7 @@ function App() {
       <Route path="/users/delete" element={<UserDelForm />} />
       <Route path="/mypage" element={<Mypage />} />
       <Route path="/password/init" element={<FindPwForm />} />
-      {/* <Route path="/password" element={<ChangePwForm />} /> */}
-      <Route path="*" element={<Portfolio />} />
+      <Route path="*" element={<Validation />} />
     </Routes>
   );
 }

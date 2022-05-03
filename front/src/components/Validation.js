@@ -5,7 +5,7 @@ import Main from './main/Main';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { tokenState, userInfoState, userState } from '../atoms';
 
-function Portfolio() {
+function Validation() {
   const navigate = useNavigate();
 
   // 아래 코드를 보면, isFetchCompleted가 false이면 "loading..."만 반환되어서, 화면에 이 로딩 문구만 뜨게 됨.
@@ -21,7 +21,6 @@ function Portfolio() {
       // 사용자 정보는 response의 data임.
       const ownerData = res.data;
       // console.log(res.data);
-      // portfolioOwner을 해당 사용자 정보로 세팅함.
       setUserInfo(ownerData);
       // fetchOwner 과정이 끝났으므로, isFetchCompleted를 true로 바꿈.
       setIsFetchCompleted(true);
@@ -56,4 +55,4 @@ function Portfolio() {
   );
 }
 
-export default Portfolio;
+export default Validation;
