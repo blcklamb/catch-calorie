@@ -18,6 +18,7 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 import UserGraph from './userGraph';
+import UserTrackingList from './UserTrackingList';
 
 function UserInfo({ currentUserInfo }) {
   return (
@@ -26,6 +27,7 @@ function UserInfo({ currentUserInfo }) {
         {/* <CardText>UserCard</CardText> */}
         <UserContainer>
           <UserCard currentUserInfo={currentUserInfo}></UserCard>
+          <UserTrackingList currentUserInfo={currentUserInfo}></UserTrackingList>
           <UserGraph currentUserInfo={currentUserInfo}></UserGraph>
         </UserContainer>
       </BadgesContainer>
