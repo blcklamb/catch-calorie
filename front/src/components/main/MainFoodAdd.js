@@ -42,9 +42,9 @@ function MainFoodAdd({}) {
 
   useEffect(() => {
     if (checked === true) {
-      setUnit('gram');
+      setUnit('100g');
     } else {
-      setUnit('pound');
+      setUnit('1lb');
     }
   }, [checked]);
 
@@ -75,7 +75,7 @@ function MainFoodAdd({}) {
         <h1>Add Food</h1>
         <div style={{ display: 'flex' }}>
           <div>
-            <h2>Please enter a category</h2>
+            <h2>Please Select a Category</h2>
             <Autocomplete
               value={category}
               onChange={(event, newValue) => {
@@ -84,9 +84,9 @@ function MainFoodAdd({}) {
               id="controllable-states-demo"
               options={categoryList}
               sx={{ width: 300 }}
-              renderInput={(params) => <TextField {...params} label="Controllable" />}
+              renderInput={(params) => <TextField {...params} label="category" />}
             />
-            <h2>Please enter a name</h2>
+            <h2>Please Enter a Name</h2>
             <TextField
               id="outlined-basic"
               label="food name"
@@ -94,7 +94,7 @@ function MainFoodAdd({}) {
               inputValue={name}
               onBlur={(e) => setName(e.target.value)}
             />
-            <h2>Please enter a kcal</h2>
+            <h2>Please Enter a Kcal Per Unit Weight</h2>
             <Switch
               checked={checked}
               onChange={handleSwitch}
