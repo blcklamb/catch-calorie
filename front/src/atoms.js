@@ -1,4 +1,4 @@
-import { atom, selector } from 'recoil';
+import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
@@ -47,12 +47,12 @@ export const kcalPerHourState = atom({
 export const gramState = atom({
   key: 'gramState',
   default: [],
-}); 
+});
 
 export const timeState = atom({
   key: 'gramState',
   default: [],
-}); 
+});
 
 export const trackingUpdateState = atom({
   key: 'trackingUpdateState',
