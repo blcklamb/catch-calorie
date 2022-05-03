@@ -8,6 +8,7 @@ import { exerRouter } from "./routers/exerRouter";
 import { trackingRouter } from "./routers/trackingRouter";
 import { heatmapRouter } from "./routers/heatmapRouter";
 import { awardRouter } from "./routers/awardRouter";
+import { badgeRouter } from "./routers/badgeRouter";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 import heatmap_scheduler from "./middlewares/heatmap_scheduler";
 
@@ -36,6 +37,7 @@ app.use(exerRouter);
 app.use(trackingRouter);
 app.use(heatmapRouter);
 app.use(awardRouter);
+app.use(badgeRouter);
 
 // // 순서 중요 (router 에서 next() 시 아래의 에러 핸들링  middleware로 전달됨)
 app.use(errorMiddleware);
