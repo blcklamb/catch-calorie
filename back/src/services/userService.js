@@ -119,21 +119,24 @@ class userService {
         };
 
         const transporter = nodemailer.createTransport(mailOption);
-        transporter.sendMail(message, (error, info) => {
+        transporter.sendMail(message, async (error, info) => {
+            const user = await User.findOne({ email });
             if (error) {
-                console.log(error);
+                throw new Error(error);
             } else {
                 console.log("Email sent: " + info.response);
+                
+                // 임시비밀번호로 비번 변경
+                const hashedTempPassword = await bcrypt.hash(temp_pw, 10);
+                const toUpdate = { password: hashedTempPassword };
+                const id = user._id;
+                return User.update({ id, toUpdate });
             }
         });
 
-        // 임시비밀번호로 비번 변경
-        const user = await User.findOne({ email });
-        const hashedTempPassword = await bcrypt.hash(temp_pw, 10);
-        const toUpdate = { password: hashedTempPassword };
-        const id = user._id;
+        
 
-        return User.update({ id, toUpdate });
+        
     }
 }
 
