@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import TrackingFoodList from './TrackingFoodList';
 import TrackingExerciseList from './TrackingExerciseList';
 
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { trackingState, trackingUpdateState } from '../../atoms';
 
 import * as Api from '../../api';
@@ -13,17 +13,17 @@ function TrackingLists() {
   const params = useParams();
 
   
-  const [tracking, setTracking] = useRecoilState(trackingState);
+  const tracking = useRecoilValue(trackingState);
   // const [tracking, setTracking] = useState('')
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   const isMypage = window.location.href.split('/')[3];
 
-  useEffect(() => {
-    Api.get(`tracking/${params.user_id}`).then((res) => {
-      setTracking(res.data);
-    });
-  }, [trackingUpdate]);
+  // useEffect(() => {
+  //   Api.get(`tracking/${params.user_id}`).then((res) => {
+  //     setTracking(res.data);
+  //   });
+  // }, [trackingUpdate]);
 
   return (
     <>
