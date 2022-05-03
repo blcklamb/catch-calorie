@@ -16,10 +16,10 @@ const AwardSchema = new Schema({
         type: Number,
         default: 0,
     },
-    climber: {
-        type: Number,
-        default: 0,
-    },
+    // climber: {
+    //     type: Number,
+    //     default: 0,
+    // },
     swimmer: {
         type: Number,
         default: 0,
@@ -28,10 +28,10 @@ const AwardSchema = new Schema({
         type: Number,
         default: 0,
     },
-    smasher: {
-        type: Number,
-        default: 0,
-    },
+    // smasher: {
+    //     type: Number,
+    //     default: 0,
+    // },
     triathlete: {
         type: Number,
         default: 0,
@@ -40,26 +40,26 @@ const AwardSchema = new Schema({
         type: Number,
         default: 0,
     },
-    fruits_lover: {
-        type: Number,
-        default: 0,
-    },
+    // fruits_lover: {
+    //     type: Number,
+    //     default: 0,
+    // },
     vegetables_lover: {
         type: Number,
         default: 0,
     },
-    yogurt_lover: {
-        type: Number,
-        default: 0,
-    },
-    meat_lover: {
-        type: Number,
-        default: 0,
-    },
-    candy_lover: {
-        type: Number,
-        default: 0,
-    },
+    // yogurt_lover: {
+    //     type: Number,
+    //     default: 0,
+    // },
+    // meat_lover: {
+    //     type: Number,
+    //     default: 0,
+    // },
+    // candy_lover: {
+    //     type: Number,
+    //     default: 0,
+    // },
     gourmand: {
         type: Number,
         default: 0,

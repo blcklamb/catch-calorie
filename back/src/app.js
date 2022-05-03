@@ -12,6 +12,8 @@ import { badgeRouter } from "./routers/badgeRouter";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 import heatmap_scheduler from "./middlewares/heatmap_scheduler";
 
+import { bucketRouter } from "./middlewares/upload_image"
+
 const app = express();
 
 // CORS 에러 방지
@@ -38,6 +40,8 @@ app.use(trackingRouter);
 app.use(heatmapRouter);
 app.use(awardRouter);
 app.use(badgeRouter);
+
+app.use(bucketRouter);
 
 // // 순서 중요 (router 에서 next() 시 아래의 에러 핸들링  middleware로 전달됨)
 app.use(errorMiddleware);
