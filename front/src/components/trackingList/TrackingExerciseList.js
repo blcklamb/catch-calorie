@@ -33,7 +33,7 @@ function TrackingExerciseList({ exercise, isMypage }) {
     setIsEditing(true);
   };
 
-  const handleCancle = (e) => {
+  const handleCancel = (e) => {
     setIsEditing(false);
   };
 
@@ -71,8 +71,8 @@ function TrackingExerciseList({ exercise, isMypage }) {
             <Button variant="contained" type="submit" onClick={handleCheck}>
               Check
             </Button>
-            <Button variant="contained" type="submit" onClick={handleCancle}>
-              Cancle
+            <Button variant="contained" type="submit" onClick={handleCancel}>
+              Cancel
             </Button>
           </div>
         </div>

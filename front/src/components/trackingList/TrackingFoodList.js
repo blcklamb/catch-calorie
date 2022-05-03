@@ -32,7 +32,7 @@ function TrackingFoodList({ food, isMypage }) {
     setIsEditing(true);
   };
 
-  const handleCancle = (e) => {
+  const handleCancel = (e) => {
     setIsEditing(false);
   };
 
@@ -65,8 +65,8 @@ function TrackingFoodList({ food, isMypage }) {
             <Button variant="contained" type="submit" onClick={handleCheck}>
               Check
             </Button>
-            <Button variant="contained" type="submit" onClick={handleCancle}>
-              Cancle
+            <Button variant="contained" type="submit" onClick={handleCancel}>
+              Cancel
             </Button>
           </div>
         </div>
