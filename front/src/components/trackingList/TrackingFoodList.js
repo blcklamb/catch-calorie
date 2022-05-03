@@ -8,7 +8,7 @@ import { trackingUpdateState } from '../../atoms';
 
 import * as Api from '../../api';
 
-function TrackingFoodList({ food }) {
+function TrackingFoodList({ food, isMypage }) {
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -76,12 +76,17 @@ function TrackingFoodList({ food }) {
             <div style={{ marginRight: '30px' }}>{food.name}</div>
             <div style={{ marginRight: '30px' }}>{food.gram}g</div>
             <div style={{ marginRight: '30px' }}>{food.calorie}kcal</div>
-            <Button variant="contained" type="submit" onClick={handleModify}>
-              Modify
-            </Button>
-            <Button variant="contained" type="submit" onClick={handleDelete}>
-              Delete
-            </Button>
+            {/* 마이페이지에서는 버튼 X */}
+            {isMypage !== 'mypage' && (
+              <div>
+                <Button variant="contained" type="submit" onClick={handleModify}>
+                  Modify
+                </Button>
+                <Button variant="contained" type="submit" onClick={handleDelete}>
+                  Delete
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       )}
