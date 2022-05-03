@@ -66,9 +66,6 @@ function Header(props) {
         <ListItem button key={'mypage'} onClick={() => navigate('/mypage')}>
           <ListItemText primary={'My Page'} />
         </ListItem>
-        <ListItem button key={'editProfile'} onClick={() => navigate('/users')}>
-          <ListItemText primary={'Edit Profile'} />
-        </ListItem>
         <ListItem button key={'network'} onClick={() => navigate('/network')}>
           <ListItemText primary={'Network'} />
         </ListItem>
