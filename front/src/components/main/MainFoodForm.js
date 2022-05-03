@@ -25,7 +25,9 @@ function MainFoodForm({ idx }) {
   useEffect(() => {
     Api.get(`foods`).then((res) => setFoodList(res.data));
 
-    setGram([...gram.slice(0, idx), 0, ...gram.slice(idx + 1)]);
+    // + 클릭 시 추가된 폼의 인풋을 0으로 초기화
+    // setFoodSelected([...foodSelected.slice(0, idx), 0, ...foodSelected.slice(idx + 1)]);
+    // setGram([...gram.slice(0, idx), 0, ...gram.slice(idx + 1)]);
   }, []);
 
   const onChangeFood = (e, value) => {
@@ -57,13 +59,7 @@ function MainFoodForm({ idx }) {
       <div style={{ display: 'flex' }}>
         <Autocomplete
           id="controllable-states-demo"
-          value={value}
-          options={foodList}
-          sx={{ width: 300 }}
-          renderInput={(params) => (
-            <MainInput {...params} label="Food" placeholder="Please select food" />
-          )}
-          getOptionLabel={(option) => option.name || ''}
+          value={foodSelected[idx]}
           onChange={(event, newValue) => {
             onChangeFood(event, newValue);
           }}
@@ -71,6 +67,12 @@ function MainFoodForm({ idx }) {
           onInputChange={(event, newInputValue) => {
             setInputValue(newInputValue);
           }}
+          options={foodList}
+          sx={{ width: 300 }}
+          renderInput={(params) => (
+            <MainInput {...params} label="Food" placeholder="Please select food" />
+          )}
+          getOptionLabel={(option) => option.name || ''}
           noOptionsText={
             <div>
               <p>No option</p>
@@ -95,7 +97,14 @@ function MainFoodForm({ idx }) {
           noValidate
           autoComplete="off"
         >
-          <MainInput id="outlined-basic" label="g" variant="outlined" onChange={onChangeGram} />
+          <MainInput
+            id="outlined-basic"
+            label="g"
+            variant="outlined"
+            value={gram[idx]}
+            onChange={onChangeGram}
+            // defaultValue={'안'}
+          />
         </div>
         <div>
           {/* {console.log(foodSelected[idx]?.kcal_per_100g)}
@@ -110,6 +119,8 @@ function MainFoodForm({ idx }) {
           {gram[idx]} 그램
           <br />총 {(Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per_100g}
           <br /> */}
+          {/* {foodSelected[idx]?.name} <br />
+          {gram[idx]} <br /> */}
           {kcalPerGram[idx]} Kcal/g
         </div>
       </div>
