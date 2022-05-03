@@ -31,6 +31,14 @@ export const foodListState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
+// 개인 트래킹 정보
+export const trackingState = atom({
+  key: 'trackingState',
+  default: [],
+  // effects_UNSTABLE: [persistAtom],
+});
+
+
 export const foodSelectedState = atom({
   key: 'foodSelectedState',
   default: [],
