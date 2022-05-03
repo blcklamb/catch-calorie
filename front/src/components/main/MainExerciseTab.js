@@ -1,23 +1,33 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import MainButton from './style/MainButton';
 
 import MainExerciseForm from './MainExerciseForm';
 
 import { useRecoilState } from 'recoil';
-import { exerciseSelectedState, timeState, trackingUpdateState } from '../../atoms';
+import {
+  exerciseSelectedState,
+  timeState,
+  trackingUpdateState,
+  exerciseFormsState,
+} from '../../atoms';
 
 import * as Api from '../../api';
 
 function MainExerciseTab({ clearForm }) {
-  const [exerciseForms, setExerciseForms] = useState([0]);
+  const [exerciseForms, setExerciseForms] = useRecoilState(exerciseFormsState);
 
   const [exerciseSelected, setExerciseSelected] = useRecoilState(exerciseSelectedState);
   const [time, setTime] = useRecoilState(timeState);
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
-  const [hour, setHour] = useState([]);
-  const [minute, setMinute] = useState([]);
+  const [hour, setHour] = useState(['']);
+  const [minute, setMinute] = useState(['']);
+
+  // useEffect(() => {
+  //   // 탭 변경하면 초기화
+  //   setExerciseSelected([]);
+  // }, []);
 
   const handleAddExerciseForm = () => {
     let countArr = [...exerciseForms];
@@ -27,6 +37,11 @@ function MainExerciseTab({ clearForm }) {
     countArr.push(counter);
 
     setExerciseForms(countArr);
+
+    // + 클릭 시 추가된 폼의 각 인풋 default를 빈칸으로
+    setExerciseSelected([...exerciseSelected, 0]);
+    setHour([...hour, '']);
+    setMinute([...minute, '']);
   };
 
   const handleTracking = () => {
@@ -41,7 +56,12 @@ function MainExerciseTab({ clearForm }) {
 
         await Api.post(`exercises/${exercise._id}`);
 
-        setExerciseSelected(exerciseSelected.map((f, i) => 0));
+        // 폼 및 그래프 레이블 초기화 위함
+        setExerciseForms([0])
+        setExerciseSelected([0]);
+        setHour([''])
+        setMinute([''])
+
         setTrackingUpdate(!trackingUpdate);
       } catch (err) {
         console.log('전송 실패', err);
@@ -53,6 +73,10 @@ function MainExerciseTab({ clearForm }) {
 
   return (
     <div>
+      {/* {console.log(exerciseForms)}
+      {console.log(exerciseSelected)}
+      {console.log(hour)}
+      {console.log(minute)} */}
       {exerciseForms &&
         exerciseForms.map((item) => (
           <MainExerciseForm
