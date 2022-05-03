@@ -16,18 +16,8 @@ import {
 
 //Mui
 import { Typography } from '@mui/material';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 
-const UserEditCard = ({ currentUserInfo, isEditable, setCardState }) => {
+const UserEditCard = ({ setCardState }) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [editUser, setEditUser] = useState(userInfo);
 
@@ -60,7 +50,7 @@ const UserEditCard = ({ currentUserInfo, isEditable, setCardState }) => {
 
       console.log('회원 정보 수정 후 PUT 응답으로 수정된 회원 정보를 가져옵니다.', res.data);
       setUserInfo(res.data);
-      setCardState('UserInfo');
+      setCardState();
       console.log('req 요청 갔고 응답 받았습니다..');
     } catch (err) {
       console.log(`req 요청이 제대로 가지 않았군요 ${err}`);
@@ -148,7 +138,7 @@ const UserEditCard = ({ currentUserInfo, isEditable, setCardState }) => {
           >
             Confirm
           </ColorButton>
-          <ColorButton sx={{ width: 120, height: 60 }} onClick={() => setCardState('UserInfo')}>
+          <ColorButton sx={{ width: 120, height: 60 }} onClick={() => setCardState()}>
             Cancel
           </ColorButton>
         </UserBtnInfo>

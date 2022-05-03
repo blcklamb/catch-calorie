@@ -52,7 +52,7 @@ const ChangePwForm = ({ setCardState }) => {
 
       const temp = res.data;
       console.log(temp, '수정 요청이 잘 갔습니다요!');
-      setCardState('UserInfo');
+      setCardState();
       alert('Your password has been changed successfully');
     } catch (err) {
       console.log('아쉽게도 잘 가지 않았군요 휴먼', err);
@@ -111,7 +111,7 @@ const ChangePwForm = ({ setCardState }) => {
           >
             Confirm
           </ColorButton>
-          <ColorButton sx={{ width: 120, height: 60 }} onClick={() => setCardState('UserInfo')}>
+          <ColorButton sx={{ width: 120, height: 60 }} onClick={() => setCardState()}>
             Cancel
           </ColorButton>
         </UserBtnInfo>
