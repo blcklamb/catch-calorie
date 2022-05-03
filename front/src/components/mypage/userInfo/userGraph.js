@@ -20,7 +20,6 @@ function UserGraph({ currentUserInfo }) {
   return (
     <>
       <UserCardFrame>
-        userGraph 데모
         <MainGraph />
       </UserCardFrame>
     </>

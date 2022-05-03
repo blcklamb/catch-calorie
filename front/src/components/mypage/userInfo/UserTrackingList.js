@@ -21,7 +21,6 @@ function UserTrackingList({ currentUserInfo }) {
   return (
     <>
       <UserCardFrame>
-        트래킹 리스트 데모
         <TrackingLists />
       </UserCardFrame>
     </>
