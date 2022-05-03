@@ -1,9 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import Lottie from 'react-lottie';
+import MainButton from '../main/style/MainButton.js';
 
 import Header from '../Header';
 import Footer from '../Footer';
+
+import video from '../../image/mainvideo_edit.mp4';
 
 import DefaultLineChart from '../DefaultLineChart.js';
 import { DefaultBarChart } from '../DefaultBarChart.js';
@@ -12,15 +15,58 @@ import DefaultObesityLineChart from '../DefaultObesityLineChart.js';
 import Walking from '../../lottie/walking.json';
 
 import { useNavigate } from 'react-router-dom';
-import { UserStateContext } from '../../App';
 
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { userState } from '../../atoms';
 
 const COLORS = ['#5bc691', '#FFBB28', '#C66868', '#FF8042'];
 
 const FirstPage = styled.section`
   height: 100vh;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const VideoContainer = styled.div`
+  width: 100%;
+  display: block;
+  position: relative;
+
+  &:before {
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: 0.3;
+    position: absolute;
+  }
+`;
+
+const Video = styled.video`
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+
+  &:before {
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: 0.5;
+    position: absolute;
+  }
+`;
+
+const FirstPageWrapper = styled.div`
+  position: absolute;
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,24 +75,9 @@ const FirstPage = styled.section`
 
 const FirstPageLogo = styled.div`
   font-size: 8rem;
-  color: #f03e3e;
+  color: #94d82d;
   font-style: bold;
-  margin: 150px;
-`;
-
-const FirstPageBtn = styled.button`
-  width: 500px;
-  height: 168px;
-  border-radius: 10px;
-  background: linear-gradient(145deg, #aaeb47, #8fc63b);
-
-  font-size: 5rem;
-  color: white;
-  border: none;
-
-  :hover {
-    box-shadow: 5px 5px 18px #668d2a, -5px -5px 18px #d8ff5a;
-  }
+  padding-bottom: 100px;
 `;
 
 const SecondPage = styled.section`
@@ -80,11 +111,12 @@ const SecondPageRight = styled.div`
   box-sizing: border-box;
   padding: 28px 24px 0;
 
-  border-radius: 14px;
-  background: #ecf8d9;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  font-size: 2rem;
-  border: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(30px);
+
+  border-radius: 40px;
 `;
 
 const ThirdPage = styled.section`
@@ -221,9 +253,23 @@ function Home() {
   return (
     <>
       <Header />
+
       <FirstPage>
-        <FirstPageLogo>Catch Calories</FirstPageLogo>
-        <FirstPageBtn onClick={() => navigate('/login', { replace: true })}>START</FirstPageBtn>
+        <VideoContainer>
+          <Video muted autoPlay loop>
+            <source src={video} type="video/mp4" />
+          </Video>
+        </VideoContainer>
+        <FirstPageWrapper>
+          <FirstPageLogo>Catch Calories</FirstPageLogo>
+          <MainButton
+            onClick={() => navigate('/login', { replace: true })}
+            variant="contained"
+            style={{ width: '20vw', height: '10vh', borderRadius: '25px', fontSize: '2.5rem' }}
+          >
+            START
+          </MainButton>
+        </FirstPageWrapper>
       </FirstPage>
       <SecondPage>
         <SecondPageLeft>

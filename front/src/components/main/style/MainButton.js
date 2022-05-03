@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Button from '@mui/material/Button';
 
 const MainButton = styled(Button)({
-//   backgroundColor: '#F03E3E',
-//   background: 'linear-gradient(45deg, #da534e 30%, #FF8E53 90%)',
+  //   backgroundColor: '#F03E3E',
+  //   background: 'linear-gradient(45deg, #da534e 30%, #FF8E53 90%)',
   background: 'linear-gradient(45deg, #F03E3E 30%, #F03E3E 90%)',
   border: 0,
   borderRadius: 20,
