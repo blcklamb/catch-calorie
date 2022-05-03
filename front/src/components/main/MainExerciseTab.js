@@ -30,23 +30,23 @@ function MainExerciseTab({ clearForm }) {
   };
 
   const handleTracking = () => {
-    exerciseSelected.map((exercise, i) => {
+    exerciseSelected.map(async (exercise, i) => {
       const t = Number(time[i]);
 
       try {
-        Api.post(`tracking/exer`, {
+        await Api.post(`tracking/exer`, {
           name: exercise.name,
           minute: t,
         });
+
+        await Api.post(`exercises/${exercise._id}`);
+
+        setExerciseSelected(exerciseSelected.map((f, i) => 0));
+        setTrackingUpdate(!trackingUpdate);
       } catch (err) {
         console.log('전송 실패', err);
       }
-
-      Api.post(`exercises/${exercise._id}`);
     });
-
-    setExerciseSelected(exerciseSelected.map((f, i) => 0));
-    setTrackingUpdate(!trackingUpdate);
 
     clearForm();
   };

@@ -26,23 +26,23 @@ function MainFoodTab({ clearForm }) {
   };
 
   const handleTracking = () => {
-    foodSelected.map((food, i) => {
+    foodSelected.map(async (food, i) => {
       const g = Number(gram[i]);
 
       try {
-        Api.post(`tracking/food`, {
+        await Api.post(`tracking/food`, {
           name: food.name,
           gram: g,
         });
+        
+        await Api.post(`foods/${food._id}`);
+
+        setFoodSelected(foodSelected.map((f, i) => 0)); // 그래프 레이블 초기화 위함
+        setTrackingUpdate(!trackingUpdate);
       } catch (err) {
         console.log('전송 실패', err);
       }
-
-      Api.post(`foods/${food._id}`);
     });
-
-    setFoodSelected(foodSelected.map((f, i) => 0)); // 그래프 레이블 초기화 위함
-    setTrackingUpdate(!trackingUpdate);
 
     clearForm();
   };
