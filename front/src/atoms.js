@@ -63,6 +63,16 @@ export const gramState = atom({
   default: [''],
 });
 
+export const hourState = atom({
+  key: 'hourState',
+  default: [''],
+});
+
+export const minState = atom({
+  key: 'minState',
+  default: [''],
+});
+
 export const timeState = atom({
   key: 'timeState',
   default: [''],

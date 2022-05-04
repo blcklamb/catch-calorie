@@ -8,6 +8,8 @@ import { useRecoilState } from 'recoil';
 import {
   exerciseSelectedState,
   timeState,
+  hourState,
+  minState,
   trackingUpdateState,
   exerciseFormsState,
 } from '../../atoms';
@@ -19,10 +21,12 @@ function MainExerciseTab({ clearForm }) {
 
   const [exerciseSelected, setExerciseSelected] = useRecoilState(exerciseSelectedState);
   const [time, setTime] = useRecoilState(timeState);
+  const [hour, setHour] = useRecoilState(hourState);
+  const [minute, setMinute] = useRecoilState(minState);
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
-  const [hour, setHour] = useState(['']);
-  const [minute, setMinute] = useState(['']);
+  // const [hour, setHour] = useState(['']);
+  // const [minute, setMinute] = useState(['']);
 
   // useEffect(() => {
   //   // 탭 변경하면 초기화
@@ -42,6 +46,7 @@ function MainExerciseTab({ clearForm }) {
     setExerciseSelected([...exerciseSelected, 0]);
     setHour([...hour, '']);
     setMinute([...minute, '']);
+    setTime([...time, '']);
   };
 
   const handleTracking = () => {
@@ -57,10 +62,10 @@ function MainExerciseTab({ clearForm }) {
         await Api.post(`exercises/${exercise._id}`);
 
         // 폼 및 그래프 레이블 초기화 위함
-        setExerciseForms([0])
+        setExerciseForms([0]);
         setExerciseSelected([0]);
-        setHour([''])
-        setMinute([''])
+        setHour(['']);
+        setMinute(['']);
 
         setTrackingUpdate(!trackingUpdate);
       } catch (err) {
@@ -76,7 +81,8 @@ function MainExerciseTab({ clearForm }) {
       {/* {console.log(exerciseForms)}
       {console.log(exerciseSelected)}
       {console.log(hour)}
-      {console.log(minute)} */}
+      {console.log(minute)}
+      {console.log(time)} */}
       {exerciseForms &&
         exerciseForms.map((item) => (
           <MainExerciseForm

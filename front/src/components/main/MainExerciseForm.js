@@ -9,16 +9,26 @@ import Autocomplete from '@mui/material/Autocomplete';
 import MainInput from './style/MainInput';
 
 import { useRecoilState } from 'recoil';
-import { exerciseSelectedState, timeState, kcalPerHourState } from '../../atoms';
+import {
+  exerciseSelectedState,
+  timeState,
+  hourState,
+  minState,
+  kcalPerHourState,
+} from '../../atoms';
 
 import * as Api from '../../api';
 
-function MainExerciseForm({ idx, hour, setHour, minute, setMinute }) {
+function MainExerciseForm({ idx, 
+  // hour, setHour, minute, setMinute 
+}) {
   const navigate = useNavigate();
 
   const user = useRecoilValue(userInfoState);
   const [exerciseSelected, setExerciseSelected] = useRecoilState(exerciseSelectedState);
   const [time, setTime] = useRecoilState(timeState);
+  const [hour, setHour] = useRecoilState(hourState);
+  const [minute, setMinute] = useRecoilState(minState);
   const [kcalPerHour, setKcalPerHour] = useRecoilState(kcalPerHourState);
 
   const [value, setValue] = useState();
@@ -159,10 +169,10 @@ function MainExerciseForm({ idx, hour, setHour, minute, setMinute }) {
         시간 당 {exerciseSelected[idx]?.kcal_per_kg}
         <br />
         {hour[idx]} 시간
-        <br />
+        <br /> */}
         {minute[idx]} 분
         <br />총 {time[idx]} 분
-        <br /> */}
+        <br />
         {kcalPerHour[idx]} kcal/hour
       </div>
     </div>
