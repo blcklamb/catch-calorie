@@ -32,8 +32,6 @@ const Jandi = () => {
 
   const [data, setData] = useState('');
 
-  console.log('jandi', user);
-
   const [emptyData, setEmptyData] = useState(false);
 
   useEffect(() => {
@@ -41,21 +39,21 @@ const Jandi = () => {
       const userId = params.user_id;
 
       Api.get('heatmap', userId).then((res) => {
-        if (res.data.record === undefined) {
+        if (res.data[0].record === undefined) {
           setEmptyData(false);
         } else {
-          setData(res.data.record);
+          setData(res.data[0].record);
           setEmptyData(true);
         }
-        console.log(res.data.record);
       });
     } else {
       Api.get('heatmap', user._id).then((res) => {
-        if (res.data.record === undefined) {
+        if (res.data[0].record === undefined) {
           setEmptyData(false);
         } else {
-          setData(res.data.record);
+          setData(res.data[0].record);
           setEmptyData(true);
+          console.log('heatmapData', res.data[0].record);
         }
       });
     }

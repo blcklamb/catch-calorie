@@ -9,6 +9,8 @@ import Tooltip from '../Tooltip';
 import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../../atoms';
 
+import { useParams } from 'react-router-dom';
+
 const BadgesContainer = styled.div`
   width: 1203px;
   height: 700px;
@@ -46,12 +48,11 @@ const BadgesText = styled.div`
 
 const Badges = () => {
   const user = useRecoilValue(userInfoState);
+  const params = useParams();
   const [badges, setBadges] = useState([]);
   console.log('뱃지', badges);
 
-  useEffect(() => {
-    Api.get('users', user._id).then((res) => setBadges(res.data.icon));
-  }, [user]);
+  useEffect(() => {}, []);
 
   return (
     <div>
