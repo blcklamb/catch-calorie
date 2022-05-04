@@ -17,10 +17,14 @@ import {
 //Mui
 import { Typography, FormLabel, FormControlLabel, RadioGroup, Radio } from '@mui/material';
 
+//단위변환
+import configureMeasurements, { mass, length } from 'convert-units';
+const convert = configureMeasurements({ mass, length });
+
 const UserEditCard = ({ setCardState }) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  const FTHeight = (userInfo.height * 0.03280839895013123).toFixed(2);
-  const LBWeight = (userInfo.weight * 2.2).toFixed(0);
+  const FTHeight = convert(userInfo.height).from('cm').to('ft').toFixed(0);
+  const LBWeight = convert(userInfo.weight).from('kg').to('lb').toFixed(0);
 
   const [editUser, setEditUser] = useState({ ...userInfo, UsHeight: FTHeight, UsWeight: LBWeight });
 

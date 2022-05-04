@@ -13,6 +13,10 @@ import {
 import { Typography } from '@mui/material';
 import { Switch } from '@mui/material';
 
+//단위변환
+import configureMeasurements, { mass, length } from 'convert-units';
+const convert = configureMeasurements({ mass, length });
+
 const UserInfoCard = ({ currentUserInfo, isEditable, setCardState }) => {
   const [checked, setChecked] = useState(currentUserInfo?.unit === 'us' ? true : false);
   console.log(checked);
@@ -29,9 +33,9 @@ const UserInfoCard = ({ currentUserInfo, isEditable, setCardState }) => {
           </Typography>
           <Typography variant="h4">
             {checked
-              ? currentUserInfo?.height * (0.03280839895013123).toFixed(2) +
+              ? convert(currentUserInfo?.height).from('cm').to('ft').toFixed(0) +
                 '/' +
-                currentUserInfo?.weight * (2.2).toFixed(0)
+                convert(currentUserInfo?.weight).from('kg').to('lb').toFixed(0)
               : currentUserInfo?.height + '/' + currentUserInfo?.weight}
           </Typography>
           <Switch checked={checked} onChange={handleChange} />
