@@ -35,7 +35,7 @@ function GithubLogin() {
         const response = await axios
           .get(`http://localhost:5002/users/login/github?${code}`)
           .then((res) => res.data);
-        console.log(response);
+
         if (response.token) {
           sessionStorage.setItem('userToken', response.token);
           navigate(`/tracking/${response._id}`, { replace: true });
@@ -63,7 +63,6 @@ function GithubLogin() {
         weight,
         icon,
       }).then((res) => res.data);
-      console.log(user);
       authentication(user);
     } catch (err) {
       console.log(`❌ Register Error: ${err}`);
@@ -75,6 +74,7 @@ function GithubLogin() {
     sessionStorage.setItem('userToken', jwtToken);
     navigate(`/tracking/${user._id}`, { replace: true });
   };
+
   return (
     <>
       <Header></Header>
