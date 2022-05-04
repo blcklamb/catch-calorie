@@ -49,10 +49,8 @@ class userService {
         const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
         const token = jwt.sign({ user_id: user._id }, secretKey, { expiresIn: "2h" });
 
-        if (user.unit === "us") {
-            const us_height = convert(user.height).from('cm').to('ft');
-            const us_weight = convert(user.weight).from('kg').to('lb');
-        }
+        const height = (user.unit ==="us") ? convert(user.height).from('cm').to('ft'): user.height
+        const weight = (user.unit ==="us") ? convert(user.weight).from('kg').to('lb'): user.weight
 
         return {
             token,
@@ -60,8 +58,8 @@ class userService {
             email: user.email,
             name: user.name,
             gender: user.gender,
-            height: (us_height) ? us_height : user.height,
-            weight: (us_weight) ? us_weight : user.weight,
+            height,
+            weight,
             icon: user.icon,
             errorMessage: null,
         };
@@ -115,8 +113,6 @@ class userService {
 
     // 임시비밀번호 발급
     static async sendNewpassword({ email }) {
-        // 여기는 네이버인가요..? (채정) 아니면 보내는 이메일이 네이버인가요?
-        // middlewares/send_mail.js이랑 겹치는 것 같은데 확인 부탁드립니다
         const mailOption = {
             service: "Naver",
             host: "smtp.namer.com",
