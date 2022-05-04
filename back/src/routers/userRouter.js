@@ -15,7 +15,7 @@ userRouter.post("/users/register", async (req, res, next) => {
             throw new Error("header의 Content-Type을 application/json으로 설정해주세요.");
         }
 
-        const { email, password, name, gender, height, weight, icon } = req.body;
+        const { email, password, name, gender, height, weight, unit, icon } = req.body;
 
         const newUser = await userService.addUser({
             email,
@@ -24,6 +24,7 @@ userRouter.post("/users/register", async (req, res, next) => {
             gender,
             height,
             weight,
+            unit,
             icon,
         });
 
