@@ -170,9 +170,9 @@ function MainExerciseForm({ idx,
         <br />
         {hour[idx]} 시간
         <br /> */}
-        {minute[idx]} 분
+        {/* {minute[idx]} 분
         <br />총 {time[idx]} 분
-        <br />
+        <br /> */}
         {kcalPerHour[idx]} kcal/hour
       </div>
     </div>
