@@ -14,7 +14,7 @@ class Heatmap {
     }
 
     static delete({ user_id }) {
-        return HeatmapModel.findByIdAndDelete({ user_id });
+        return HeatmapModel.findOneAndDelete({ user_id });
     }
 }
 

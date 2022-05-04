@@ -1,4 +1,4 @@
-import { User } from "../db";
+import { Award, Heatmap, Tracking, User } from "../db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuid } from "uuid";
@@ -76,17 +76,19 @@ class userService {
     }
 
     // 회원 정보 삭제하기
-    static async deleteUser({ id }) {
-        const user = await User.delete({ id });
-        user.errorMessage = "회원탈퇴했습니다.";
-        return user;
+    static deleteUser({ id }) {
+        return Promise.all(
+            Award.delete({ user_id: id }), //
+            Tracking.deleteByUser({ user_id: id }),
+            Heatmap.delete({ user_id: id }),
+            User.delete({ id }),
+        );
     }
 
     // 로그인한 회원 비밀번호 수정하기
     static async setPassword({ id, old_pw, new_pw }) {
         const user = await User.findById({ id });
         const pass = await bcrypt.compare(old_pw, user.password);
-
         if (!pass) {
             throw new Error("비밀번호를 정확하게 입력해주세요.");
         }
@@ -97,7 +99,7 @@ class userService {
         return User.update({ id, toUpdate });
     }
 
-    // 임시비밀번호 발급
+    // 임시비밀번호 발급 (sendMail middleware 사용?)
     static async sendNewpassword({ email }) {
         const mailOption = {
             service: "Naver",
@@ -128,10 +130,9 @@ class userService {
         });
 
         // 임시비밀번호로 비번 변경
-        const user = await User.findOne({ email });
+        const id = await User.findOne({ email }).then((data) => data._id);
         const hashedTempPassword = await bcrypt.hash(temp_pw, 10);
         const toUpdate = { password: hashedTempPassword };
-        const id = user._id;
 
         return User.update({ id, toUpdate });
     }

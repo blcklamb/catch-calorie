@@ -4,7 +4,6 @@ import fetch from "node-fetch";
 import { v4 as uuid } from "uuid";
 import { Router } from "express";
 import { userService } from "../services/userService";
-import { awardService } from "../services/awardService";
 import { login_required } from "../middlewares/login_required";
 import sendMail from "../middlewares/send_mail";
 
@@ -89,8 +88,6 @@ userRouter.delete("/users/:id", login_required, async (req, res, next) => {
         const { id } = req.params;
 
         await userService.deleteUser({ id });
-
-        await awardService.deleteAward({ user_id: id });
 
         return res.status(200).json({ result: "success" });
     } catch (error) {
