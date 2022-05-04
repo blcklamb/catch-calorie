@@ -8,6 +8,10 @@ import nodemailer from "nodemailer";
 import configureMeasurements, { mass, length } from 'convert-units';
 const convert = configureMeasurements({mass, length});
 
+//import {convert} from "convert-units";
+// const convert = configureMeasurements({allMeasures});
+
+
 class userService {
     // 회원 정보 추가
     static async addUser({ email, password, name, gender, height, weight, unit, open, icon }) {
@@ -16,9 +20,10 @@ class userService {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
+
         if (unit === "us") {
-            height = convert(height).from('ft').to('cm');
-            weight = convert(weight).from('lb').to('kg');
+            height = convert(height).from('ft').to('cm').toFixed(0);
+            weight = convert(weight).from('lb').to('kg').toFixed(0);
         }
 
         const newUser = {
@@ -49,8 +54,8 @@ class userService {
         const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
         const token = jwt.sign({ user_id: user._id }, secretKey, { expiresIn: "2h" });
 
-        const height = (user.unit ==="us") ? convert(user.height).from('cm').to('ft'): user.height
-        const weight = (user.unit ==="us") ? convert(user.weight).from('kg').to('lb'): user.weight
+        const height = (user.unit ==="us") ? convert(user.height).from('cm').to('ft').toFixed(0): user.height
+        const weight = (user.unit ==="us") ? convert(user.weight).from('kg').to('lb').toFixed(0): user.weight
 
         return {
             token,
