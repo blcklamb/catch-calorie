@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import TextField from '@mui/material/TextField';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import Switch from '@mui/material/Switch';
 
 import MainButton from './style/MainButton';
 
@@ -26,6 +22,20 @@ function MainExerciseAdd({}) {
   const [name, setName] = useState();
   const [kcal, setKcal] = useState();
   const [unit, setUnit] = useState('kilogram');
+
+  const [checked, setChecked] = useState(true);
+
+  useEffect(() => {
+    if (checked === true) {
+      setUnit('kilogram');
+    } else {
+      setUnit('pound');
+    }
+  }, [checked]);
+
+  const handleSwitch = (event) => {
+    setChecked(event.target.checked);
+  };
 
   const handleSubmit = async () => {
     try {
@@ -47,7 +57,7 @@ function MainExerciseAdd({}) {
         <h1>Add Exercise</h1>
         <div style={{ display: 'flex' }}>
           <div>
-            <h2>Please enter a name</h2>
+            <h2>Please Enter a Name</h2>
             <TextField
               id="outlined-basic"
               label="exercise name"
@@ -55,7 +65,13 @@ function MainExerciseAdd({}) {
               inputValue={name}
               onBlur={(e) => setName(e.target.value)}
             />
-            <h2>Please enter a kcal</h2>
+            <h2>Please Enter a Kcal Per Unit Weight</h2>
+            <Switch
+              checked={checked}
+              onChange={handleSwitch}
+              inputProps={{ 'aria-label': 'controlled' }}
+            />
+            {unit}
             <TextField
               id="outlined-basic"
               label="kcal"
@@ -63,20 +79,6 @@ function MainExerciseAdd({}) {
               inputValue={kcal}
               onBlur={(e) => setKcal(e.target.value)}
             />
-            <h2>Please select a unit</h2>
-
-            <FormControl>
-              <FormLabel id="demo-controlled-radio-buttons-group">unit</FormLabel>
-              <RadioGroup
-                aria-labelledby="demo-controlled-radio-buttons-group"
-                name="controlled-radio-buttons-group"
-                value={unit}
-                onChange={(e) => setUnit(e.target.value)}
-              >
-                <FormControlLabel value="kilogram" control={<Radio />} label="kilogram" />
-                <FormControlLabel value="pound" control={<Radio />} label="pound" />
-              </RadioGroup>
-            </FormControl>
           </div>
         </div>
         <MainButton variant="contained" onClick={handleSubmit}>
