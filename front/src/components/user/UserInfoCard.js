@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   UserAKAInfo,
@@ -11,18 +11,30 @@ import {
 
 //Mui
 import { Typography } from '@mui/material';
+import { Switch } from '@mui/material';
 
 const UserInfoCard = ({ currentUserInfo, isEditable, setCardState }) => {
+  const [checked, setChecked] = useState(currentUserInfo?.unit === 'us' ? true : false);
+  console.log(checked);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
   return (
     <>
       <UserCardFrame>
         <UserBodyInfo>
           <Typography variant="h6" style={{ color: '#c4c4c4' }}>
-            height/weight
+            {checked ? 'height(ft)/weight(lb)' : 'height(cm)/weight(kg)'}
           </Typography>
           <Typography variant="h4">
-            {currentUserInfo?.height}/{currentUserInfo?.weight}
+            {checked
+              ? currentUserInfo?.height * (0.03280839895013123).toFixed(2) +
+                '/' +
+                currentUserInfo?.weight * (2.2).toFixed(0)
+              : currentUserInfo?.height + '/' + currentUserInfo?.weight}
           </Typography>
+          <Switch checked={checked} onChange={handleChange} />
         </UserBodyInfo>
         <UserBadgeImgInfo>
           <img src={'/' + currentUserInfo?.icon + '.png'} alt="badge" style={{ width: 300 }}></img>
