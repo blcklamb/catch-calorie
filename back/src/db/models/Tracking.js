@@ -10,8 +10,8 @@ class Tracking {
     }
 
     static findByRecordId({ id, record }) {
-        if (record === "food") TrackingModel.findOne({ food_record: { $elemMatch: { id } } });
-        else if (record === "exer") TrackingModel.findOne({ exer_record: { $elemMatch: { id } } });
+        if (record === "food") return TrackingModel.findOne({ food_record: { $elemMatch: { id } } });
+        else if (record === "exer") return TrackingModel.findOne({ exer_record: { $elemMatch: { id } } });
     }
 
     static findByRecordAndUpdate({ id, record, toUpdate }) {
@@ -22,14 +22,16 @@ class Tracking {
                     $set: { "food_record.$.gram": toUpdate.gram, "food_record.$.calorie": toUpdate.calorie },
                     $inc: { acc_cal: toUpdate.acc_cal },
                 },
+                { new: true },
             );
         } else if (record === "exer") {
             return TrackingModel.findOneAndUpdate(
                 { exer_record: { $elemMatch: { id } } },
                 {
-                    $set: { "exer_record.$.minute": toUpdate.minute, "food_record.$.calorie": toUpdate.calorie },
+                    $set: { "exer_record.$.minute": toUpdate.minute, "exer_record.$.calorie": toUpdate.calorie },
                     $inc: { acc_cal: toUpdate.acc_cal },
                 },
+                { new: true },
             );
         }
     }

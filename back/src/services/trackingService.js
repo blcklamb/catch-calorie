@@ -62,9 +62,9 @@ class trackingService {
 
         const acc_cal = newCalorie - calorie;
 
-        const toUpdate = { gram, calorie, acc_cal };
+        const toUpdate = { gram, calorie: newCalorie, acc_cal };
 
-        return await Tracking.findByRecordAndUpdate({ id, record: "food", toUpdate });
+        return Tracking.findByRecordAndUpdate({ id, record: "food", toUpdate });
     }
 
     static async setExerTracking({ id, minute }) {
@@ -77,9 +77,9 @@ class trackingService {
 
         const acc_cal = -(newCalorie - calorie);
 
-        const toUpdate = { minute, calorie, acc_cal };
+        const toUpdate = { minute, calorie: newCalorie, acc_cal };
 
-        return await Tracking.findByRecordAndUpdate({ id, record: "food", toUpdate });
+        return Tracking.findByRecordAndUpdate({ id, record: "exer", toUpdate });
     }
 
     static async deleteFoodTracking({ id }) {
