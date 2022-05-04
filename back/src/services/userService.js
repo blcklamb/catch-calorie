@@ -48,7 +48,7 @@ class userService {
         const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
         const token = jwt.sign({ user_id: user._id }, secretKey, { expiresIn: "2h" });
 
-        const height = (user.unit ==="us") ? convert(user.height).from('cm').to('ft').toFixed(0): user.height
+        const height = (user.unit ==="us") ? convert(user.height).from('cm').to('ft').toFixed(2): user.height
         const weight = (user.unit ==="us") ? convert(user.weight).from('kg').to('lb').toFixed(0): user.weight
 
         return {
