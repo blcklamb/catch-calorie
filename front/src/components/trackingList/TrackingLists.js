@@ -5,19 +5,19 @@ import TrackingFoodList from './TrackingFoodList';
 import TrackingExerciseList from './TrackingExerciseList';
 
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { trackingState, trackingUpdateState } from '../../atoms';
+import { userInfoState, trackingState, trackingUpdateState } from '../../atoms';
 
 import * as Api from '../../api';
 
 function TrackingLists() {
+  const user = useRecoilValue(userInfoState);
   const params = useParams();
 
-  
   const tracking = useRecoilValue(trackingState);
   // const [tracking, setTracking] = useState('')
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
-  const isMypage = window.location.href.split('/')[3];
+  const isTrackingPage = window.location.href.split('/')[3];
 
   // useEffect(() => {
   //   Api.get(`tracking/${params.user_id}`).then((res) => {
@@ -43,7 +43,7 @@ function TrackingLists() {
         </div>
         {tracking.food_record?.length ? (
           tracking.food_record.map((food) => {
-            return <TrackingFoodList food={food} isMypage={isMypage} />;
+            return <TrackingFoodList food={food} isTrackingPage={isTrackingPage} />;
           })
         ) : (
           <div>No Food Tracking</div>
@@ -64,7 +64,7 @@ function TrackingLists() {
         </div>
         {tracking.exer_record?.length ? (
           tracking.exer_record.map((exercise) => {
-            return <TrackingExerciseList exercise={exercise} isMypage={isMypage} />;
+            return <TrackingExerciseList exercise={exercise} isTrackingPage={isTrackingPage} />;
           })
         ) : (
           <div>No Exercise Tracking</div>

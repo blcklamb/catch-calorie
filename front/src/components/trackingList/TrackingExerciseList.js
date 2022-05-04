@@ -8,7 +8,7 @@ import { trackingUpdateState } from '../../atoms';
 
 import * as Api from '../../api';
 
-function TrackingExerciseList({ exercise, isMypage }) {
+function TrackingExerciseList({ exercise, isTrackingPage }) {
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -84,8 +84,8 @@ function TrackingExerciseList({ exercise, isMypage }) {
               {parseInt(exercise.minute / 60)}H {exercise.minute % 60}M
             </div>
             <div style={{ marginRight: '30px' }}>{exercise.calorie}kcal</div>
-            {/* 마이페이지에서는 버튼 X */}
-            {isMypage !== 'mypage' && (
+            {/* 트래킹 페이지에서만 버튼 O */}
+            {isTrackingPage === 'tracking' && (
               <div>
                 <Button variant="contained" type="button" onClick={handleModify}>
                   Modify
