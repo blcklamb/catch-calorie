@@ -12,6 +12,7 @@ import {
   UserBadgeImgInfo,
   ColorButton,
   ValidationTextField,
+  IOSSwitch,
 } from '../styledCompo/uesrStyle';
 
 //Mui
@@ -29,7 +30,6 @@ const UserEditCard = ({ setCardState }) => {
 
   const [editUser, setEditUser] = useState({ ...userInfo, UsHeight: FTHeight, UsWeight: LBWeight });
 
-  console.log(editUser);
   const { UsHeight, UsWeight, height, weight, name, open, unit, status, gender, icon } = editUser;
 
   // 이름이 2글자 이상인지 여부를 확인함.
@@ -49,7 +49,30 @@ const UserEditCard = ({ setCardState }) => {
 
   // 스위치 State
   const [checked, setChecked] = useState(true);
-  console.log('switch', checked);
+  const [openChecked, setOpenChecked] = useState(true);
+
+  // unit 변경 함수
+  const handleUnitSwitch = (e) => {
+    setChecked(e.target.checked);
+    if (checked) {
+      setEditUser((prev) => ({ ...prev, unit: 'non_us' }));
+    } else {
+      setEditUser((prev) => ({ ...prev, unit: 'us' }));
+    }
+  };
+
+  // open 변경 함수
+  const handleOpenSwitch = (e) => {
+    setOpenChecked(e.target.checked);
+    if (openChecked) {
+      setEditUser((prev) => ({ ...prev, open: false }));
+    } else {
+      setEditUser((prev) => ({ ...prev, open: true }));
+    }
+  };
+
+  console.log(openChecked, checked);
+  console.log(editUser);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,15 +103,6 @@ const UserEditCard = ({ setCardState }) => {
     }
   };
 
-  const handleUnitSwitch = (e) => {
-    setChecked(e.target.checked);
-    if (checked) {
-      setEditUser((prev) => ({ ...prev, unit: 'non_us' }));
-    } else {
-      setEditUser((prev) => ({ ...prev, unit: 'us' }));
-    }
-  };
-
   return (
     <>
       <UserCardFrame>
@@ -110,8 +124,13 @@ const UserEditCard = ({ setCardState }) => {
             }}
           />
           <br />
-          <FormLabel id="demo-row-radio-buttons-group-label">open</FormLabel>
-          <RadioGroup
+          <FormLabel>open</FormLabel>
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Typography>Private</Typography>
+            <IOSSwitch checked={openChecked} onChange={handleOpenSwitch} />
+            <Typography>Public</Typography>
+          </Stack>
+          {/* <RadioGroup
             sx={{ width: 300 }}
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
@@ -121,7 +140,7 @@ const UserEditCard = ({ setCardState }) => {
           >
             <FormControlLabel value={true} control={<Radio color="success" />} label="Public" />
             <FormControlLabel value={false} control={<Radio color="success" />} label="Private" />
-          </RadioGroup>
+          </RadioGroup> */}
           <br />
           {/* <FormLabel id="demo-row-radio-buttons-group-label">Unit</FormLabel>
           <RadioGroup
@@ -135,9 +154,10 @@ const UserEditCard = ({ setCardState }) => {
             <FormControlLabel value="us" control={<Radio color="success" />} label="US" />
             <FormControlLabel value="non_us" control={<Radio color="success" />} label="Non-Us" />
           </RadioGroup> */}
+          <FormLabel>unit</FormLabel>
           <Stack direction="row" spacing={1} alignItems="center">
             <Typography>(ft/lb)</Typography>
-            <Switch checked={checked} onChange={handleUnitSwitch} />
+            <IOSSwitch checked={checked} onChange={handleUnitSwitch} />
             <Typography>(cm/kg)</Typography>
           </Stack>
           <br />

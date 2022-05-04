@@ -7,6 +7,7 @@ import {
   UserBtnInfo,
   UserBadgeImgInfo,
   ColorButton,
+  IOSSwitch,
 } from '../styledCompo/uesrStyle';
 
 //Mui
@@ -37,7 +38,7 @@ const UserInfoCard = ({ currentUserInfo, isEditable, setCardState }) => {
                 convert(currentUserInfo?.weight).from('kg').to('lb').toFixed(0)
               : currentUserInfo?.height + '/' + currentUserInfo?.weight}
           </Typography>
-          <Switch checked={checked} onChange={handleChange} />
+          <IOSSwitch checked={checked} onChange={handleChange} />
         </UserBodyInfo>
         <UserBadgeImgInfo>
           <img src={'/' + currentUserInfo?.icon + '.png'} alt="badge" style={{ width: 300 }}></img>
