@@ -119,8 +119,8 @@ function MainFoodForm({ idx }) {
           {gram[idx]} 그램
           <br />총 {(Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per_100g}
           <br /> */}
-          {/* {foodSelected[idx]?.name} <br />
-          {gram[idx]} <br /> */}
+          {foodSelected[idx]?.name} <br />
+          {gram[idx]} <br />
           {kcalPerGram[idx]} Kcal/g
         </div>
       </div>
