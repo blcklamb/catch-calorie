@@ -96,6 +96,7 @@ function MainGraph({}) {
       }
     }
 
+    // 소모 칼로리가 섭취 칼로리보다 많다면 최대치는 권장 칼로리
     if (trackingKcal < 0) {
       return [trackingRecKcal];
     }
@@ -115,7 +116,6 @@ function MainGraph({}) {
         label: 'Current Kcal',
         data: [trackingKcal],
         backgroundColor: ['rgba(240,62,62, 0.5)'],
-        // backgroundColor: ['#F03E3E'],
         borderColor: ['rgba(240,62,62)'],
         borderWidth: 1,
       },
