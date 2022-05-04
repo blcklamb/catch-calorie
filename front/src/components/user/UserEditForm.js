@@ -162,7 +162,7 @@ const UserEditForm = () => {
             noValidate
             autoComplete="off"
           >
-            <FormLabel id="demo-row-radio-buttons-group-label">Badges</FormLabel>
+            {/* <FormLabel id="demo-row-radio-buttons-group-label">Badges</FormLabel>
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
@@ -175,7 +175,7 @@ const UserEditForm = () => {
                 value="all-rounder"
                 labelPlacement="bottom"
                 control={<Radio color="success" />}
-                label={<img src="/all.png" alt="all" style={{ width: 100 }}></img>}
+                label={<img src="/all-rounder.png" alt="all" style={{ width: 100 }}></img>}
               />
               <FormControlLabel
                 value="weight"
@@ -195,7 +195,7 @@ const UserEditForm = () => {
                 control={<Radio color="success" />}
                 label={<img src="/runner.png" alt="all" style={{ width: 100 }}></img>}
               />
-            </RadioGroup>
+            </RadioGroup> */}
           </Box>
           <br></br>
           <Box
@@ -224,7 +224,7 @@ const UserEditForm = () => {
             <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
               Submit
             </ColorButton>
-            <ColorButtonB variant="outlined" onClick={() => navigate('/tracking')}>
+            <ColorButtonB variant="outlined" onClick={() => navigate(-1)}>
               back
             </ColorButtonB>
           </Stack>

@@ -7,11 +7,15 @@ import Footer from '../Footer';
 
 import DefaultLineChart from '../DefaultLineChart.js';
 import { DefaultBarChart } from '../DefaultBarChart.js';
+import DefaultObesityLineChart from '../DefaultObesityLineChart.js';
 
 import Walking from '../../lottie/walking.json';
 
 import { useNavigate } from 'react-router-dom';
 import { UserStateContext } from '../../App';
+
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userState } from '../../atoms';
 
 const COLORS = ['#5bc691', '#FFBB28', '#C66868', '#FF8042'];
 
@@ -27,7 +31,7 @@ const FirstPageLogo = styled.div`
   font-size: 8rem;
   color: #f03e3e;
   font-style: bold;
-  margin-bottom: 50px;
+  margin: 150px;
 `;
 
 const FirstPageBtn = styled.button`
@@ -125,14 +129,52 @@ const ThirdPageRight = styled.div`
 
 const FourthPage = styled.section`
   height: 100vh;
+  width: 100%;
+  background-color: #f7fcef;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;
+
+const FourthPageLeft = styled.div`
+  /* background-color: white; */
+  /* border: 1px solid #f0f1f3;
+  border-radius: 8px; */
+  width: 400px;
+  height: 407px;
+  box-sizing: border-box;
+  padding: 28px 35px;
+
+  font-size: 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const FourthPageRight = styled.div`
+  width: 750px;
+  height: 407px;
+  box-sizing: border-box;
+  padding: 28px 24px 0;
+
+  border-radius: 14px;
+  background: #ecf8d9;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  font-size: 2rem;
+  border: none;
+`;
+
+const FifthPage = styled.section`
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: #f7fcef;
+  background-color: #ecf8d9;
 `;
 
-const FourthPageCopy = styled.div`
+const FifthPageCopy = styled.div`
   font-size: 4rem;
   color: #f03e3e;
   font-style: bold;
@@ -145,7 +187,7 @@ const FourthPageCopy = styled.div`
   padding-top: 50px;
 `;
 
-const FourthPageBtn = styled.button`
+const FifthPageBtn = styled.button`
   width: 500px;
   height: 168px;
   border-radius: 10px;
@@ -162,6 +204,10 @@ const FourthPageBtn = styled.button`
 
 function Home() {
   const navigate = useNavigate();
+
+  const user = useRecoilValue(userState);
+
+  console.log(user);
 
   const defaultOptions = {
     loop: true,
@@ -202,12 +248,22 @@ function Home() {
         <ThirdPageRight>People who do less physical activity have a high BMI index </ThirdPageRight>
       </ThirdPage>
       <FourthPage>
-        <FourthPageCopy>
+        <FourthPageLeft>
+          The United States has a relatively high obesity rate compared to other countries, and the
+          increase is also on the rise.
+        </FourthPageLeft>
+        <FourthPageRight>
+          <DefaultObesityLineChart colors={COLORS}></DefaultObesityLineChart>
+        </FourthPageRight>
+      </FourthPage>
+      <FifthPage>
+        <FifthPageCopy>
           Track your calories with Catch Calories
           <Lottie options={defaultOptions} height={470} width={470} />
-          <FourthPageBtn onClick={() => navigate('/login', { replace: true })}>START</FourthPageBtn>
-        </FourthPageCopy>
-      </FourthPage>
+          <FifthPageBtn onClick={() => navigate('/login', { replace: true })}>START</FifthPageBtn>
+        </FifthPageCopy>
+      </FifthPage>
+
       <Footer />
     </>
   );

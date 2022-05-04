@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 // import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 
 import * as Api from '../../api';
+import axios from 'axios';
 
 // Mui
 import Box from '@mui/material/Box';
@@ -15,6 +16,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { validateEmail } from '../../utils';
 
 //styled Compo
 import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
@@ -41,16 +43,14 @@ function RegisterForm() {
   //useState로 weight 상태를 생성함.
   const [weight, setWeight] = useState('');
   //useState로 icon 상태를 생성함.
-  const [icon, setIcon] = useState('all-rounder');
+  const [icon, setIcon] = useState('runner');
 
-  //이메일이 abc@example.com 형태인지 regex를 이용해 확인함.
-  const validateEmail = (email) => {
-    return email
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      );
-  };
+  // ------------ EMAIL AUTHENTICATION ------------
+  const [code, setCode] = useState('');
+  const [resCode, setResCode] = useState('');
+  const reqCode = async () =>
+    setResCode(await Api.get(`users/email/${email}`).then((data) => data.data));
+  const isEmailAuthed = resCode === code;
 
   //위 validateEmail 함수를 통해 이메일 형태 적합 여부를 확인함.
   const isEmailValid = validateEmail(email);
@@ -72,7 +72,8 @@ function RegisterForm() {
     isPasswordSame &&
     isNameValid &&
     isHeightValid &&
-    isWeightValid;
+    isWeightValid &&
+    isEmailAuthed;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -145,6 +146,15 @@ function RegisterForm() {
                 // setCheckLogin(true);
               }}
               // defaultValue="Hello World"
+            />
+            <button style={{ width: 55, height: 55 }} onClick={reqCode}>
+              Email Auth
+            </button>
+            <input
+              onChange={(e) => {
+                e.preventDefault();
+                setCode(e.target.value);
+              }}
             />
             <br></br>
             <ValidationTextField
@@ -299,138 +309,6 @@ function RegisterForm() {
         </form>
       </Container>
       <Footer></Footer>
-      {/* <div>
-				<form onSubmit={handleSubmit}>
-					<div>
-						<label>이메일 주소</label>
-						<input
-							type="email"
-							autoComplete="off"
-							value={email}
-							onChange={e => setEmail(e.target.value)}
-						/>
-					</div>
-					{!isEmailValid && <p>이메일 형식이 올바르지 않습니다.</p>}
-
-					<div>
-						<label>비밀번호</label>
-						<input
-							type="password"
-							autoComplete="off"
-							value={password}
-							onChange={e => setPassword(e.target.value)}
-						/>
-						{!isPasswordValid && <p>비밀번호는 4글자 이상으로 설정해 주세요.</p>}
-					</div>
-
-					<div>
-						<label>비밀번호 재확인</label>
-						<input
-							ype="password"
-							autoComplete="off"
-							value={confirmPassword}
-							onChange={e => setConfirmPassword(e.target.value)}
-						/>
-					</div>
-					{!isPasswordSame && <p>비밀번호가 일치하지 않습니다.</p>}
-
-					<div>
-						<label>이름</label>
-						<input
-							type="text"
-							autoComplete="off"
-							value={name}
-							onChange={e => setName(e.target.value)}
-						/>
-					</div>
-					{!isNameValid && <p>이름은 2글자 이상으로 설정해 주세요.</p>}
-
-					<button type="submit" disabled={!isFormValid}>
-						회원가입
-					</button>
-					<button onClick={() => navigate('/login')}>로그인 하기</button>
-				</form>
-			</div> */}
-
-      {/* <Container>
-				<Row className="justify-content-md-center mt-5">
-					<Col lg={8}>
-						<Form onSubmit={handleSubmit}>
-							<Form.Group controlId="registerEmail">
-								<Form.Label>이메일 주소</Form.Label>
-								<Form.Control
-									type="email"
-									autoComplete="off"
-									value={email}
-									onChange={e => setEmail(e.target.value)}
-								/>
-								{!isEmailValid && (
-									<Form.Text className="text-success">이메일 형식이 올바르지 않습니다.</Form.Text>
-								)}
-							</Form.Group>
-
-							<Form.Group controlId="registerPassword" className="mt-3">
-								<Form.Label>비밀번호</Form.Label>
-								<Form.Control
-									type="password"
-									autoComplete="off"
-									value={password}
-									onChange={e => setPassword(e.target.value)}
-								/>
-								{!isPasswordValid && (
-									<Form.Text className="text-success">
-										비밀번호는 4글자 이상으로 설정해 주세요.
-									</Form.Text>
-								)}
-							</Form.Group>
-
-							<Form.Group controlId="registerConfirmPassword" className="mt-3">
-								<Form.Label>비밀번호 재확인</Form.Label>
-								<Form.Control
-									type="password"
-									autoComplete="off"
-									value={confirmPassword}
-									onChange={e => setConfirmPassword(e.target.value)}
-								/>
-								{!isPasswordSame && (
-									<Form.Text className="text-success">비밀번호가 일치하지 않습니다.</Form.Text>
-								)}
-							</Form.Group>
-
-							<Form.Group controlId="registerName" className="mt-3">
-								<Form.Label>이름</Form.Label>
-								<Form.Control
-									type="text"
-									autoComplete="off"
-									value={name}
-									onChange={e => setName(e.target.value)}
-								/>
-								{!isNameValid && (
-									<Form.Text className="text-success">
-										이름은 2글자 이상으로 설정해 주세요.
-									</Form.Text>
-								)}
-							</Form.Group>
-
-							<Form.Group as={Row} className="mt-3 text-center">
-								<Col sm={{ span: 20 }}>
-									<Button variant="primary" type="submit" disabled={!isFormValid}>
-										회원가입
-									</Button>
-								</Col>
-							</Form.Group>
-
-							<Form.Group as={Row} className="mt-3 text-center">
-								<Col sm={{ span: 20 }}>
-									<Button variant="light" onClick={() => navigate('/login')}>
-										로그인하기
-									</Button>
-								</Col>
-							</Form.Group>
-						</Form>
-					</Col>
-				</Row>
-			</Container> */}
     </>
   );
 }

@@ -12,6 +12,10 @@ class Award {
     static update({ user_id }, toUpdate) {
         return AwardModel.findOneAndUpdate({ user_id }, toUpdate, { new: true });
     }
+
+    static delete({ user_id }) {
+        return AwardModel.remove({ user_id });
+    }
 }
 
 export { Award };

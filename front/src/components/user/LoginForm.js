@@ -13,19 +13,21 @@ import * as Api from '../../api';
 // import { DispatchContext } from '../../App';
 import Header from '../Header';
 import Footer from '../Footer';
-
+import { validateEmail } from '../../utils';
 // import recoil
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { tokenState, userState } from '../../atoms';
 
 // import styled compo
 import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
+import githubLogin from './GithubLogin';
+import { DispatchContext } from '../../App';
 
 function LoginForm() {
   const navigate = useNavigate();
   // const dispatch = useContext(DispatchContext);
-  const [token, setToken] = useRecoilState(tokenState);
-  const [user, setUser] = useRecoilState(userState);
+  const setToken = useSetRecoilState(tokenState);
+  const setUser = useSetRecoilState(userState);
 
   //useState로 email 상태를 생성함.
   const [email, setEmail] = useState('');
@@ -33,15 +35,6 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   // input 상태관리
   const [checkLogin, setCheckLogin] = useState(true);
-
-  //이메일이 abc@example.com 형태인지 regex를 이용해 확인함.
-  const validateEmail = (email) => {
-    return email
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      );
-  };
 
   //위 validateEmail 함수를 통해 이메일 형태 적합 여부를 확인함.
   const isEmailValid = validateEmail(email);
@@ -66,18 +59,13 @@ function LoginForm() {
       const jwtToken = user.token;
       // sessionStorage에 "userToken"이라는 키로 JWT 토큰을 저장함.
       sessionStorage.setItem('userToken', jwtToken);
-      // dispatch 함수를 이용해 로그인 성공 상태로 만듦.
-      // console.log(user);
-      // dispatch({
-      //   type: 'LOGIN_SUCCESS',
-      //   payload: user,
-      // });
+
       console.log(user);
       setToken(user.token);
       setUser(user);
 
       // 기본 페이지로 이동함.
-      navigate('/tracking', { replace: true });
+      navigate(`/tracking/${user.id}`, { replace: true });
     } catch (err) {
       console.log('로그인에 실패하였습니다.\n', err);
       setCheckLogin(false);
@@ -148,11 +136,21 @@ function LoginForm() {
                   setCheckLogin(true);
                 }}
               />
+              <br></br>
+              <Button onClick={() => navigate('/password/init')}>Forget Password?</Button>
               <Stack
                 spacing={1}
                 direction="row"
                 sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
               >
+                {/* GitHub 로그인 기능 추가 */}
+                {/* <ColorButton
+                  style={{ color: 'whitesmoke', backgroundColor: '#2B3137' }}
+                  onClick={githubLogin}
+                >
+                  😺&nbsp;&nbsp;GitHub Login
+                </ColorButton> */}
+                {/* GitHub 로그인 기능 추가 */}
                 <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
                   Sign-in
                 </ColorButton>
@@ -165,32 +163,6 @@ function LoginForm() {
               </Stack>
             </Box>
           </form>
-          {/* <form onSubmit={handleSubmit}>
-            <div>
-              <label>이메일 주소</label>
-              <input
-                type="email"
-                autoComplete="on"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              />
-            </div>
-            {!isEmailValid && <p>이메일 형식이 올바르지 않습니다.</p>}
-            <div>
-              <label>비밀번호</label>
-              <input
-                type="password"
-                autoComplete="on"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-              />
-            </div>
-            {!isPasswordValid && <p> 비밀번호는 4글자 이상입니다. </p>}
-            <button type="submit" disabled={!isFormValid}>
-              로그인
-            </button>
-            <button onClick={() => navigate('/register')}>회원가입하기</button>
-          </form> */}
         </div>
       </Container>
       <Footer></Footer>
