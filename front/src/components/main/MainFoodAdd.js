@@ -59,9 +59,7 @@ function MainFoodAdd({}) {
         name: name,
         kcal: kcal,
         unit: unit,
-      });
-
-      alert('Food has been added');
+      }).then((res) => res.status === 201 && alert('Food has been added'));
       navigate(`/tracking/${user._id}`, { replace: false });
     } catch (err) {
       alert('Food that already exists');

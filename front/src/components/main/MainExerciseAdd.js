@@ -33,8 +33,7 @@ function MainExerciseAdd({}) {
         name: name,
         kcal: kcal,
         unit: unit,
-      });
-      alert('Exercise has been added');
+      }).then((res) => res.status === 201 && alert('Exercise has been added'));
       navigate(`/tracking/${user._id}`, { replace: false });
     } catch (err) {
       alert('Exercise that already exists');
