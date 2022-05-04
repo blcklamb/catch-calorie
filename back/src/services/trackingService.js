@@ -49,12 +49,12 @@ class trackingService {
         return Tracking.findByUser({ user_id });
     }
 
-    static async setFoodTracking({ id, gram }) {
-        return await Tracking.findRecordAndUpdate({id, record:"food", toUpdate: gram});
+    static async setFoodTracking({ id, weight, unit }) {
+        return await Tracking.findByRecordAndUpdate({ id, record: "food", toUpdate: gram });
     }
 
     static async setExerTracking({ id, minute }) {
-        return await Tracking.findRecordAndUpdate({id, record:"exer", toUpdate: minute})
+        return await Tracking.findByRecordAndUpdate({ id, record: "exer", toUpdate: minute });
     }
 
     static async deleteFoodTracking({ id }) {

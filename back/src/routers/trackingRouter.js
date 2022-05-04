@@ -57,9 +57,9 @@ trackingRouter.post("/tracking/exer", login_required, async (req, res, next) => 
 // 유저가 이미 등록한 음식 수정할 때
 trackingRouter.put("/tracking/food", login_required, async (req, res, next) => {
     try {
-        const { id, gram } = req.body;
+        const { id, weight, unit } = req.body;
 
-        const updatedTracking = await trackingService.setFoodTracking({ id, gram });
+        const updatedTracking = await trackingService.setFoodTracking({ id, weight, unit });
 
         return res.status(200).send(updatedTracking);
     } catch (error) {

@@ -10,24 +10,21 @@ class Tracking {
     }
 
     static findByRecordId({ id, record }) {
-        if (record === "food") {
-            return TrackingModel.findOne({ food_record: { $elemMatch: { id } } });
-        } else if (record === "exer") {
-            return TrackingModel.findOne({ exer_record: { $elemMatch: { id } } });
-        }
+        if (record === "food") return TrackingModel.findOne({ food_record: { $elemMatch: { id } } });
+        else if (record === "exer") return TrackingModel.findOne({ exer_record: { $elemMatch: { id } } });
     }
 
-    static findRecordAndUpdate({id, record, toUpdate}) {
+    static findByRecordAndUpdate({ id, record, toUpdate }) {
         if (record === "food") {
-            return TrackingModel.updateOne(
-                { food_record: {$elemMatch: {id}}},
-                { $set: { "food_record.$.gram": toUpdate} },
-                );
+            return TrackingModel.findOneAndUpdate(
+                { food_record: { $elemMatch: { id } } }, //
+                { $set: { "food_record.$.gram": toUpdate } },
+            );
         } else if (record === "exer") {
-            return TrackingModel.updateOne(
-                { exer_record: {$elemMatch: {id}}},
-                { $set: { "exer_record.$.minute": toUpdate} },
-                );
+            return TrackingModel.findOneAndUpdate(
+                { exer_record: { $elemMatch: { id } } }, //
+                { $set: { "exer_record.$.minute": toUpdate } },
+            );
         }
     }
 
