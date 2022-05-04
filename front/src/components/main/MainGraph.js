@@ -80,29 +80,60 @@ function MainGraph({}) {
     },
   };
 
-  const remainingKcal = () => {
-    // console.log(trackingKcal);
-    // console.log(trackingRecKcal);
-
-    // 권장 칼로리를 넘을 경우 최대치를 5000 단위로 늘림
+  const handelTrackingKcal = () => {
     if (trackingKcal > trackingRecKcal) {
-      let line = (parseInt(trackingKcal / 10000) * 10 + 5) * 1000;
-      // console.log(line);
+      return [trackingRecKcal];
+    } else {
+      return [trackingKcal];
+    }
+  };
 
-      if (trackingKcal > line) {
-        return [line + 5000 - trackingKcal];
-      } else {
-        return [line - trackingKcal];
-      }
+  const handelTrackingKcalColor = () => {
+    if (trackingKcal > trackingRecKcal) {
+      return ['rgba(91,7,7, 0.7)'];
+    } else {
+      return ['rgba(240,62,62, 0.5)'];
+    }
+  };
+
+  const handelTrackingKcalBorderColor = () => {
+    if (trackingKcal > trackingRecKcal) {
+      return ['rgba(91,7,7)'];
+    } else {
+      return ['rgba(240,62,62)'];
+    }
+  };
+
+  const remainingKcal = () => {
+    // console.log(typeof trackingKcal, trackingKcal);
+    // console.log(typeof trackingRecKcal, trackingRecKcal);
+    // console.log(kcalPerGram);
+
+    // 1)섭취 칼로리나 2)선택 칼로리나 3)섭취 + 선택 칼로리가 권장 칼로리를 넘는다면, 남는 칼로리 없음
+    if (
+      trackingKcal > trackingRecKcal ||
+      kcalPerGram.reduce((acc, cur) => acc + cur, 0) > trackingRecKcal ||
+      trackingKcal + kcalPerGram.reduce((acc, cur) => acc + cur, 0) > trackingRecKcal
+    ) {
+      return [0];
+      // 권장 칼로리를 넘을 경우 최대치를 5000 단위로 늘림
+      //   let line = (parseInt(trackingKcal / 10000) * 10 + 5) * 1000;
+      //   // console.log(line);
+
+      //   if (trackingKcal > line) {
+      //     return [line + 5000 - trackingKcal];
+      //   } else {
+      //     return [line - trackingKcal];
+      //   }
     }
 
     // 소모 칼로리가 섭취 칼로리보다 많다면 최대치는 권장 칼로리
     if (trackingKcal < 0) {
-      return [trackingRecKcal];
+      return [0];
     }
 
     // 선택된 항목이 없을 경우
-    if (isNaN(kcalPerGram[0])) {
+    if (kcalPerGram[0] === 0) {
       return [trackingRecKcal - trackingKcal];
     }
 
@@ -114,9 +145,11 @@ function MainGraph({}) {
     datasets: [
       {
         label: 'Current Kcal',
-        data: [trackingKcal],
-        backgroundColor: ['rgba(240,62,62, 0.5)'],
-        borderColor: ['rgba(240,62,62)'],
+        data: handelTrackingKcal(),
+        backgroundColor: handelTrackingKcalColor(),
+        // backgroundColor: ['rgba(240,62,62, 0.5)'],
+        borderColor: handelTrackingKcalBorderColor(),
+        // borderColor: ['rgba(240,62,62)'],
         borderWidth: 1,
       },
       {
@@ -187,6 +220,9 @@ function MainGraph({}) {
       <div style={{ width: 400 }}>
         <Bar data={data} options={options} height={300} />
       </div>
+      {trackingKcal > trackingRecKcal && (
+        <h3>It's over {trackingKcal - trackingRecKcal} calories</h3>
+      )}
     </div>
   );
 }
