@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
 import * as Api from '../../api';
+import axios from 'axios';
 
 // Mui
 import Box from '@mui/material/Box';
@@ -22,20 +22,25 @@ function GithubLogin() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+  const [data, setData] = useState('');
   const [gender, setGender] = useState('male');
-  const [height, setHeight] = useState('');
-  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState(null);
+  const [weight, setWeight] = useState(null);
   const [icon, setIcon] = useState('runner');
 
   useEffect(() => {
     const login = async () => {
       try {
         const code = new URLSearchParams(location.search);
-        const data = await Api.get(`users/login/github?${code}`).then((res) => res.data);
-        setEmail(data.email);
-        setName(data.name);
+        const response = await axios
+          .get(`http://localhost:5002/users/login/github?${code}`)
+          .then((res) => res.data);
+        console.log(response);
+        if (response.token) {
+          sessionStorage.setItem('userToken', response.token);
+          navigate(`/tracking/${response._id}`, { replace: true });
+        }
+        setData(response);
       } catch (error) {
         console.log(`❌ Error: ${error}`);
       }
@@ -43,30 +48,33 @@ function GithubLogin() {
     login();
   }, [location, navigate]);
 
-  const isHeightValid = Number(height) > 0 && height.length > 0;
-  const isWeightValid = Number(weight) > 0 && weight.length > 0;
+  const isHeightValid = height > 0;
+  const isWeightValid = weight > 0;
   const isFormValid = isHeightValid && isWeightValid;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const user = Api.post('users/register/social', {
-        email,
-        name,
+      const user = await Api.post('users/register/social', {
+        email: data.email,
+        name: data.name,
         gender,
-        height: Number(height),
-        weight: Number(weight),
+        height,
+        weight,
         icon,
-      });
-      console.log('1', user);
-      const jwtToken = user.token;
-      sessionStorage.setItem('userToken', jwtToken);
-      navigate(`/tracking/${user._id}`, { replace: true });
+      }).then((res) => res.data);
+      console.log(user);
+      authentication(user);
     } catch (err) {
       console.log(`❌ Register Error: ${err}`);
     }
   };
 
+  const authentication = (user) => {
+    const jwtToken = user.token;
+    sessionStorage.setItem('userToken', jwtToken);
+    navigate(`/tracking/${user._id}`, { replace: true });
+  };
   return (
     <>
       <Header></Header>
@@ -113,6 +121,7 @@ function GithubLogin() {
             <ValidationTextField
               required
               label="Height"
+              type="number"
               helperText={
                 !isHeightValid && <span>Please enter a number only.(The unit is feet.)</span>
               }
@@ -125,6 +134,7 @@ function GithubLogin() {
             <ValidationTextField
               required
               label="Weight"
+              type="number"
               helperText={
                 !isWeightValid && <span>Please enter a number only.(The unit is pounds.)</span>
               }
