@@ -69,11 +69,26 @@ function LoginForm() {
     }
   };
 
+  const githubLogin = () => {
+    const base = 'https://github.com/login/oauth/authorize';
+    const params = new URLSearchParams({
+      client_id: process.env.REACT_APP_GITHUB_ID,
+      scope: 'read:user user:email',
+    }).toString();
+    const url = `${base}?${params}`;
+    return (window.location.href = url);
+  };
+
   return (
     <div>
       <Header></Header>
       <Container
-        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 50 }}
+        style={{
+          display: 'flex', //
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: 50,
+        }}
       >
         <div>
           <form
@@ -140,14 +155,6 @@ function LoginForm() {
                 direction="row"
                 sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
               >
-                {/* GitHub 로그인 기능 추가 */}
-                {/* <ColorButton
-                  style={{ color: 'whitesmoke', backgroundColor: '#2B3137' }}
-                  onClick={githubLogin}
-                >
-                  😺&nbsp;&nbsp;GitHub Login
-                </ColorButton> */}
-                {/* GitHub 로그인 기능 추가 */}
                 <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
                   Sign-in
                 </ColorButton>
@@ -159,6 +166,20 @@ function LoginForm() {
                 </ColorButtonB>
               </Stack>
             </Box>
+            <hr style={{ width: '100%', margin: '18px 0 24px 0' }} />
+            <button
+              style={{
+                width: '100%', //
+                height: 36,
+                color: 'whitesmoke',
+                backgroundColor: '#2B3137',
+                border: 'none',
+                borderRadius: 4,
+              }}
+              onClick={githubLogin}
+            >
+              😺&nbsp;&nbsp;GitHub로 로그인하기
+            </button>
           </form>
         </div>
       </Container>

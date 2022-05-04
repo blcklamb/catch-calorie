@@ -20,7 +20,7 @@ db.once("open", async () => {
         const terms = async ({ user_id, trackings }) => {
             const foods = trackings.map((tracking) => tracking.food_record).flat();
             const exers = trackings.map((tracking) => tracking.exer_record).flat();
-            const categorys = await Promise.all(foods.map((food) => Food.findCategoryByName({ name: food.name })));
+            const categorys = await Promise.all(foods.map(async (food) => await Food.findByName({ name: food.name }).then((data) => data.category)));
 
             // ------------ EXERCISE COUNTING ------------
 
