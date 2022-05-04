@@ -135,6 +135,26 @@ class userService {
 
         return User.update({ id, toUpdate });
     }
+
+    static async addSocialUser({ email, name, gender, height, weight, icon }) {
+        const user = await User.findOne({ email });
+        if (user) return { errorMessage: "현재 사용 중인 이메일입니다. 다른 이메일을 입력해주세요." };
+
+        const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
+        const token = jwt.sign({ user_id: user._id }, secretKey, { expiresIn: "2h" });
+
+        const newUser = {
+            token,
+            email,
+            name,
+            gender,
+            height,
+            weight,
+            icon,
+        };
+
+        return User.create({ newUser });
+    }
 }
 
 export { userService };

@@ -1,4 +1,6 @@
 import is from "@sindresorhus/is";
+import jwt from "jsonwebtoken";
+import fetch from "node-fetch";
 import { v4 as uuid } from "uuid";
 import { Router } from "express";
 import { userService } from "../services/userService";
@@ -167,7 +169,7 @@ userRouter.put("/password/init", async (req, res, next) => {
     }
 });
 
-userRouter.get("/users/login/github", async (req, res) => {
+userRouter.get("/users/login/github", async (req, res, next) => {
     try {
         const { code } = req.query;
 
@@ -189,31 +191,48 @@ userRouter.get("/users/login/github", async (req, res) => {
         const data = await fetch(`${api}/user`, {
             headers: { Authorization: `token ${access_token}` },
         }).then((res) => res.json());
+        const name = data.name || data.login;
 
         const emailData = await fetch(`${api}/user/emails`, {
             headers: { Authorization: `token ${access_token}` },
         }).then((res) => res.json());
         const { email } = emailData.find((email) => email.primary === true && email.verified === true);
+        // // user 정보  처리
+        // let user = await userService.getUserByEmail({ email });
+        // if (!user) {
+        //     user = await userService.addUser({
+        //         name: data.name || data.login,
+        //         email,
+        //     });
+        // }
+        console.log(data.name || data.login, email);
+        // const { _id, name } = user;
+        return res.status(200).json({ email, name });
+        // return res.status(200).json({
+        //     token: jwt.sign({ user_id: _id }, process.env.JWT_SECRET_KEY || "secret-key"),
+        //     _id,
+        //     email,
+        //     name,
+        // });
+    } catch (error) {
+        next(error);
+    }
+});
 
-        // user 정보  처리
-        let user = await userService.getUserByEmail({ email });
-        if (!user) {
-            user = await userService.addUser({
-                name: data.name || data.login,
-                email,
-                description: data.bio || "Hello World!",
-            });
-        }
+userRouter.post("/users/register/social", async (req, res, next) => {
+    try {
+        const { email, name, gender, height, weight, icon } = req.body;
 
-        const { _id, name, description } = user;
-
-        return res.status(200).json({
-            token: jwt.sign({ user_id: _id }, process.env.JWT_SECRET_KEY || "secret-key"),
-            _id,
+        const newUser = await userService.addSocialUser({
             email,
             name,
-            description,
+            gender,
+            height,
+            weight,
+            icon,
         });
+
+        return res.status(201).json(newUser);
     } catch (error) {
         next(error);
     }
