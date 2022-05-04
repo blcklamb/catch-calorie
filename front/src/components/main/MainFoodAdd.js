@@ -34,7 +34,7 @@ function MainFoodAdd({}) {
   const [unit, setUnit] = useState('gram');
 
   useEffect(() => {
-    const allFoodCategory = foodList.map((food) => food.category);
+    const allFoodCategory = foodList.map((food) => food?.category);
     const set = new Set(allFoodCategory);
 
     setCategoryList([...set]);
@@ -42,9 +42,9 @@ function MainFoodAdd({}) {
 
   useEffect(() => {
     if (checked === true) {
-      setUnit('100g');
+      setUnit('gram');
     } else {
-      setUnit('1lb');
+      setUnit('pound');
     }
   }, [checked]);
 
