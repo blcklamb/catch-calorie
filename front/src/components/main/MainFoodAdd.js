@@ -132,6 +132,12 @@ function MainFoodAdd({}) {
         <MainButton variant="contained" onClick={handleSubmit}>
           Add
         </MainButton>
+        <MainButton
+          variant="contained"
+          onClick={() => navigate(`/tracking/${user._id}`, { replace: false })}
+        >
+          Cancel
+        </MainButton>
       </div>
       <Footer />
     </>
