@@ -52,13 +52,14 @@ class trackingService {
     }
 
     static async setFoodTracking({ id, gram }) {
-        const data = await Tracking.findByRecordId({ id, record: "food" });
-        const { user_id, date, food_record } = data;
-        const { name } = food_record.find((food) => food.id === id);
+        // const data = await Tracking.findByRecordId({ id, record: "food" });
+        // const { user_id, date, food_record } = data;
+        // const { name } = food_record.find((food) => food.id === id);
 
-        await this.deleteFoodTracking({ id });
+        // await this.deleteFoodTracking({ id });
+        return await Tracking.findRecordAndUpdate({id, record:"food", gram})
 
-        return this.addFoodTracking({ user_id, date, name, gram });
+        //return this.addFoodTracking({ user_id, date, name, gram });
     }
 
     static async setExerTracking({ id, minute }) {

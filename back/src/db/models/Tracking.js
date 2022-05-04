@@ -17,8 +17,16 @@ class Tracking {
         }
     }
 
-    static findByRecordIdAndUpdate({id, record, toUpdate}) {
-        
+    static findRecordAndUpdate({id, record, toUpdate}) {
+        if (record === "food") {
+            return TrackingModel.updateOne(
+                { food_record: { $elemMatch: { id } } },
+                { $set: {"gram":toUpdate} },
+                { new: true }
+                );
+        } else if (record === "exer") {
+            return TrackingModel.updateOne({ exer_record: { $elemMatch: { id } } });
+        }
     }
 
     static findByUserAndDate({ user_id, date }) {
