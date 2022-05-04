@@ -17,6 +17,20 @@ class Tracking {
         }
     }
 
+    static findRecordAndUpdate({id, record, toUpdate}) {
+        if (record === "food") {
+            return TrackingModel.updateOne(
+                { food_record: {$elemMatch: {id}}},
+                { $set: { "food_record.$.gram": toUpdate} },
+                );
+        } else if (record === "exer") {
+            return TrackingModel.updateOne(
+                { exer_record: {$elemMatch: {id}}},
+                { $set: { "exer_record.$.minute": toUpdate} },
+                );
+        }
+    }
+
     static findByUserAndDate({ user_id, date }) {
         return TrackingModel.findOne({ user_id, date });
     }
@@ -31,6 +45,10 @@ class Tracking {
 
     static delete({ id }) {
         return TrackingModel.deleteById(id);
+    }
+
+    static deleteByUser({ user_id }) {
+        return TrackingModel.deleteMany({ user_id });
     }
 }
 

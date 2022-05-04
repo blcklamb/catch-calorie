@@ -13,9 +13,9 @@ foodRouter.post("/foods", async (req, res, next) => {
         // 로그인 된 유저의 모든 food를 불러온 후 겹치는 제목이 있을경우 에러 발생.
         const foods = await foodService.getFoodByName({ name });
         if (foods) throw new Error("이미 등록되어 있는 음식입니다.");
-        
+
         const { kcal_per_100g, kcal_per_lb } = await foodService.convertUnit({ kcal, unit });
-        const newFood = await foodService.addFood({ category, name, kcal_per_100g, kcal_per_lb, views: 1});
+        const newFood = await foodService.addFood({ category, name, kcal_per_100g, kcal_per_lb, views: 1 });
 
         return res.status(201).json(newFood);
     } catch (error) {
