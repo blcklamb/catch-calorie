@@ -9,7 +9,7 @@ class Heatmap {
         return HeatmapModel.find({ user_id });
     }
 
-    static update({ user_id }, { toUpdate }) {
+    static update({ user_id, toUpdate }) {
         return HeatmapModel.findOneAndUpdate({ user_id }, toUpdate, { new: true });
     }
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -6,7 +6,6 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
-// import styled from 'styled-components';
 
 import MainFoodTab from './MainFoodTab';
 import MainExerciseTab from './MainExerciseTab';
@@ -15,16 +14,9 @@ const StyledTabs = styled((props) => (
   <Tabs {...props} TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }} />
 ))({
   width: '100%',
-    '& .MuiTabs-indicator': {
-      display: 'none',
-      // justifyContent: 'center',
-      // backgroundColor: 'transparent',
-    },
-    // '& .MuiTabs-indicatorSpan': {
-    //   maxWidth: 40,
-    //   width: '100%',
-    //   backgroundColor: '#635ee7',
-    // },
+  '& .MuiTabs-indicator': {
+    display: 'none',
+  },
 });
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
@@ -35,6 +27,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
   color: 'white',
   backgroundColor: '#8CB352',
   width: '50%',
+  maxWidth: '800px',
   '&.Mui-selected': {
     color: '#fff',
     backgroundColor: '#4C7115',
@@ -44,33 +37,8 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
   },
 }));
 
-// const StyledTab = styled.Tab`
-//   textTransform: 'none',
-//   fontWeight: theme.typography.fontWeightRegular,
-//   fontSize: theme.typography.pxToRem(15),
-//   marginRight: theme.spacing(1),
-//   color: 'white',
-//   backgroundColor: '#8CB352',
-//   '&.Mui-selected': {
-//     color: '#fff',
-// 	backgroundColor: '#4C7115',
-//   },
-//   '&.Mui-focusVisible': {
-//     backgroundColor: 'rgba(100, 95, 228, 0.32)',
-//   },
-// `
-
-// +++++++++++++++++++++++++++++++++++++++++++++++++
-
-// const MainTabsSection = styled.div`
-//   width: 100%;
-//   margin-right: 200px;
-// `;
-
-// ++++++++++++++++++++++++++++
-
 const MainTabsSection = styled(Box)`
-  width: 700px;
+  width: 900px;
   margin-right: 120px;
 `;
 
@@ -100,9 +68,8 @@ MainTabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-// !!!!!!!!!!!!!!!
 const TabPanel = styled(MainTabPanel)({
-  height: 300,
+  height: 'auto',
   backgroundColor: '#ECF8D9',
   padding: '40px 30px',
 });
@@ -114,49 +81,44 @@ const a11yProps = (index) => {
   };
 };
 
-const MainTabs = ({
-  foodSelected,
-  setFoodSelected,
-  totalFood,
-  setTotalFood,
-  exerciseSelected,
-  setExerciseSelected,
-  totalExercise,
-  setTotalExercise,
-}) => {
-  const [value, setValue] = React.useState(0);
+const MainTabs = ({}) => {
+  const [value, setValue] = useState(0);
+  const [isRerender, setIsRerender] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  useEffect(() => {
+    if (isRerender) {
+      setTimeout(() => {
+        setIsRerender(false);
+      }, 1);
+    }
+  }, [isRerender]);
+
+  const clearForm = () => {
+    setIsRerender(true);
+  };
+
   return (
-    <MainTabsSection>
-      <div>
-        <StyledTabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <StyledTab label="Food" {...a11yProps(0)} />
-          <StyledTab label="Exercise" {...a11yProps(1)} />
-        </StyledTabs>
-      </div>
-      {/* <div> */}
+    !isRerender && (
+      <MainTabsSection>
+        <div>
+          <StyledTabs value={value} onChange={handleChange} aria-label="basic tabs example">
+            {['Food', 'Exercise'].map((label, index) => (
+              <StyledTab key={label} label={label} {...a11yProps(index)} />
+            ))}
+          </StyledTabs>
+        </div>
         <TabPanel value={value} index={0}>
-          <MainFoodTab
-            foodSelected={foodSelected}
-            setFoodSelected={setFoodSelected}
-            totalFood={totalFood}
-            setTotalFood={setTotalFood}
-          />
+          <MainFoodTab clearForm={clearForm} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <MainExerciseTab
-            exerciseSelected={exerciseSelected}
-            setExerciseSelected={setExerciseSelected}
-            totalExercise={totalExercise}
-            setTotalExercise={setTotalExercise}
-          />
+          <MainExerciseTab clearForm={clearForm} />
         </TabPanel>
-      {/* </div> */}
-    </MainTabsSection>
+      </MainTabsSection>
+    )
   );
 };
 

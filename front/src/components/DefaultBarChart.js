@@ -1,54 +1,60 @@
-import { ResponsiveBar } from '@nivo/bar';
+import React from 'react';
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
+import { XAxis, YAxis, ResponsiveContainer, Cell, Bar, Tooltip, BarChart } from 'recharts';
 
-const data = [
-	{
-		day: 'Insufficient',
-		CalorieMonitoring: 30,
-	},
-	{
-		day: 'Normal',
-		CalorieMonitoring: 33,
-	},
-	{
-		day: 'Overweight',
-		CalorieMonitoring: 62,
-	},
-	{
-		day: 'obesity',
-		CalorieMonitoring: 110,
-	},
-];
+export function DefaultBarChart({ data, colors }) {
+  return (
+    <ResponsiveContainer width="100%" height="90%">
+      <BarChart
+        data={[
+          { name: 'Underweight', SCC: '250' },
+          { name: 'Normal', SCC: '280' },
+          { name: 'Overweight', SCC: '580' },
+          { name: 'Obesity', SCC: '980' },
+        ]}
+        margin={{
+          top: 20,
+          // right: 30,
+          // left: 20,
+          bottom: 5,
+        }}
+      >
+        <XAxis dataKey="name" stroke="#000" tick={{ fontSize: '1vw' }} />
+        <YAxis stroke="#000" tick={{ fontSize: '1.2vw' }} />
+        <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
 
-const BarChart = () => {
-	return (
-		<ResponsiveBar
-			data={data}
-			keys={['CalorieMonitoring']}
-			indexBy="day"
-			margin={{ top: 50, right: 40, bottom: 50, left: 60 }}
-			padding={0.4}
-			valueScale={{ type: 'linear' }}
-			colors="#94D82D"
-			animate={true}
-			enableLabel={false}
-			axisTop={null}
-			axisRight={null}
-			axisLeft={{
-				tickSize: 5,
-				tickPadding: 5,
-				tickRotation: 0,
-				legend: 'CalorieMonitoring',
-				legendPosition: 'middle',
-				legendOffset: -40,
-			}}
-		/>
-	);
+        {/* <Legend
+          width={100}
+          wrapperStyle={{
+            top: 320,
+            right: 12,
+            backgroundColor: '#FFFBFB',
+            border: '2px solid #d5d5d5',
+            borderRadius: 4,
+            lineHeight: '50px',
+          }}
+        /> */}
+        <Bar dataKey="SCC" fill="#82ca9c">
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+          ))}
+        </Bar>
+      </BarChart>
+    </ResponsiveContainer>
+  );
+}
+
+const CustomTooltip = ({ active, payload }) => {
+  if (active) {
+    return (
+      <div className="tooltip">
+        <p
+          className="label"
+          style={{ fontWeight: 'normal', color: '000', fontSize: '30px' }}
+        >{`${payload[0].value}People`}</p>
+      </div>
+    );
+  }
+
+  return null;
 };
-
-export default BarChart;

@@ -1,79 +1,89 @@
-// install (please make sure versions match peerDependencies)
-// yarn add @nivo/core @nivo/line
-import { ResponsiveLine } from '@nivo/line';
-import Linedata from '../chartdata/Linedata.json';
+import React from 'react';
+import { AreaChart, XAxis, YAxis, Tooltip, Area, ResponsiveContainer } from 'recharts';
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
-const LineChart = ({ data }) => (
-	<ResponsiveLine
-		data={Linedata}
-		margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-		xScale={{ type: 'point' }}
-		yScale={{
-			type: 'linear',
-			min: 'auto',
-			max: 'auto',
-			stacked: true,
-			reverse: false,
-		}}
-		yFormat=" >-.2f"
-		axisTop={null}
-		axisRight={null}
-		axisBottom={{
-			orient: 'bottom',
-			tickSize: 5,
-			tickPadding: 5,
-			tickRotation: 0,
-			legend: 'Physical activity frequency per day',
-			legendOffset: 36,
-			legendPosition: 'middle',
-		}}
-		axisLeft={{
-			orient: 'left',
-			tickSize: 5,
-			tickPadding: 5,
-			tickRotation: 0,
-			legend: 'BMI',
-			legendOffset: -40,
-			legendPosition: 'middle',
-		}}
-		pointSize={10}
-		pointColor={{ theme: 'background' }}
-		pointBorderWidth={2}
-		pointBorderColor={{ from: 'serieColor' }}
-		pointLabelYOffset={-12}
-		useMesh={true}
-		legends={[
-			{
-				anchor: 'bottom-right',
-				direction: 'column',
-				justify: false,
-				translateX: 100,
-				translateY: 0,
-				itemsSpacing: 0,
-				itemDirection: 'left-to-right',
-				itemWidth: 80,
-				itemHeight: 20,
-				itemOpacity: 0.75,
-				symbolSize: 12,
-				symbolShape: 'circle',
-				symbolBorderColor: 'rgba(0, 0, 0, .5)',
-				effects: [
-					{
-						on: 'hover',
-						style: {
-							itemBackground: 'rgba(0, 0, 0, .03)',
-							itemOpacity: 1,
-						},
-					},
-				],
-			},
-		]}
-	/>
-);
+const data = [
+  {
+    day: '4~5',
+    BMI: [24, 26],
+  },
+  {
+    day: '2~4',
+    BMI: [27, 29],
+  },
+  {
+    day: '1~2',
+    BMI: [29, 30],
+  },
+  {
+    day: '0',
+    BMI: [30, 32],
+  },
+];
 
-export default LineChart;
+export default function DefaultLineChart() {
+  return (
+    <ResponsiveContainer width="100%" height="90%">
+      <AreaChart
+        width={730}
+        height={250}
+        data={data}
+        margin={{
+          top: 20,
+          right: 20,
+          bottom: 20,
+          left: 20,
+        }}
+      >
+        <XAxis
+          dataKey="day"
+          padding={{ left: 40, right: 40 }}
+          fontSize="20"
+          stroke="#000"
+          label={{
+            value: 'Physical Activities',
+            position: 'bottom',
+            offset: 3,
+            fontSize: '15px',
+            fontWeight: 'bold',
+          }}
+        />
+        <YAxis
+          domain={[24, 32]}
+          padding={{ left: 30, right: 40 }}
+          fontSize="20"
+          stroke="#000"
+          label={{
+            value: 'BMI',
+            angle: -90,
+            position: 'insideLeft',
+            offset: 0,
+            fontSize: '15px',
+            fontWeight: 'bold',
+          }}
+        />
+        <Area dataKey="BMI" stroke="#94D82D" fill="#94D82D" />
+        <Tooltip content={<CustomTooltip />} />
+        <Tooltip />
+      </AreaChart>
+    </ResponsiveContainer>
+  );
+}
+
+function CustomTooltip({ payload, label, active }) {
+  if (active) {
+    return (
+      <div className="custom-tooltip">
+        <p
+          className="label"
+          style={{ fontWeight: 'normal', color: '000', fontSize: '20px' }}
+        >{`BMI  : ${payload[0].value[0]} ~ ${payload[0].value[1]}`}</p>
+        <p
+          className="label"
+          style={{ fontWeight: 'normal', color: '000', fontSize: '20px' }}
+        >{`Physical Activities : ${label}`}</p>
+      </div>
+    );
+  }
+
+  return null;
+}

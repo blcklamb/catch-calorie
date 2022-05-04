@@ -16,9 +16,14 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { validateEmail } from '../../utils';
 
-// styled Compo
-import { ValidationTextField, ColorButton, ColorButtonB } from './LoginForm';
+//styled Compo
+import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
+
+//Compo
+import Header from '../Header';
+import Footer from '../Footer';
 
 function RegisterForm() {
   const navigate = useNavigate();
@@ -40,20 +45,12 @@ function RegisterForm() {
   //useState로 icon 상태를 생성함.
   const [icon, setIcon] = useState('runner');
 
-  //이메일이 abc@example.com 형태인지 regex를 이용해 확인함.
-  const validateEmail = (email) => {
-    return email
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      );
-  };
-
   // ------------ EMAIL AUTHENTICATION ------------
   const [code, setCode] = useState('');
   const [resCode, setResCode] = useState('');
   const reqCode = async () =>
     setResCode(await Api.get(`users/email/${email}`).then((data) => data.data));
+  const isEmailAuthed = resCode === code;
 
   //위 validateEmail 함수를 통해 이메일 형태 적합 여부를 확인함.
   const isEmailValid = validateEmail(email);
@@ -67,8 +64,6 @@ function RegisterForm() {
   const isHeightValid = Number(height) > 0 && height.length > 0;
   // 공백이나 숫자인지 여부를 확인함.
   const isWeightValid = Number(weight) > 0 && weight.length > 0;
-
-  const isEmailAuthed = resCode === code;
 
   // 조건이 모두 동시에 만족되는지 여부를 확인함.
   const isFormValid =
@@ -89,7 +84,7 @@ function RegisterForm() {
         'color: #94D82D;',
       );
       // "user/register" 엔드포인트로 post요청함.
-      await Api.post('user/register', {
+      await Api.post('users/register', {
         email,
         password,
         name,
@@ -108,13 +103,31 @@ function RegisterForm() {
 
   return (
     <>
+      <Header></Header>
       <Container
-        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 50 }}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexFlow: 'column',
+          marginTop: 50,
+        }}
       >
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            marginTop: 100,
+            marginBottom: 100,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexFlow: 'column',
+          }}
+        >
+          <h1 style={{ margin: 10 }}>Register</h1>
           <Box
             sx={{
-              '& > :not(style)': { m: 1, width: '36ch' },
+              '& > :not(style)': { m: 1, width: '600px' },
             }}
             noValidate
             autoComplete="off"
@@ -143,7 +156,7 @@ function RegisterForm() {
                 setCode(e.target.value);
               }}
             />
-            <br />
+            <br></br>
             <ValidationTextField
               required
               // error={!checkLogin}
@@ -235,28 +248,53 @@ function RegisterForm() {
               // defaultValue="Hello World"
             />
             <br></br>
-            <FormLabel id="demo-row-radio-buttons-group-label">Icon</FormLabel>
+          </Box>
+          <Box
+            sx={{
+              '& > :not(style)': { m: 1, width: '600px' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <FormLabel id="demo-row-radio-buttons-group-label">Badges</FormLabel>
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
               value={icon}
               onChange={(e) => setIcon(e.target.value)}
+              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
             >
-              <FormControlLabel value="runner" control={<Radio color="success" />} label="runner" />
-              <FormControlLabel value="walker" control={<Radio color="success" />} label="walker" />
               <FormControlLabel
-                value="gymFreak"
+                value="all-rounder"
+                labelPlacement="bottom"
                 control={<Radio color="success" />}
-                label="gymFreak"
+                label={<img src="/all.png" alt="all" style={{ width: 100 }}></img>}
               />
               <FormControlLabel
-                value="beginner"
+                value="weight"
+                labelPlacement="bottom"
                 control={<Radio color="success" />}
-                label="beginner"
+                label={<img src="/weight.png" alt="all" style={{ width: 100 }}></img>}
+              />
+              <FormControlLabel
+                value="yoga"
+                labelPlacement="bottom"
+                control={<Radio color="success" />}
+                label={<img src="/yoga.png" alt="all" style={{ width: 100 }}></img>}
+              />
+              <FormControlLabel
+                value="runner"
+                labelPlacement="bottom"
+                control={<Radio color="success" />}
+                label={<img src="/runner.png" alt="all" style={{ width: 100 }}></img>}
               />
             </RadioGroup>
-            <Stack spacing={1} direction="row">
+            <Stack
+              spacing={1}
+              direction="row"
+              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            >
               <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
                 Sign-up
               </ColorButton>
@@ -270,139 +308,7 @@ function RegisterForm() {
           </Box>
         </form>
       </Container>
-
-      {/* <div>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>이메일 주소</label>
-            <input
-              type="email"
-              autoComplete="off"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          {!isEmailValid && <p>이메일 형식이 올바르지 않습니다.</p>}
-
-          <div>
-            <label>비밀번호</label>
-            <input
-              type="password"
-              autoComplete="off"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {!isPasswordValid && <p>비밀번호는 4글자 이상으로 설정해 주세요.</p>}
-          </div>
-
-          <div>
-            <label>비밀번호 재확인</label>
-            <input
-              ype="password"
-              autoComplete="off"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </div>
-          {!isPasswordSame && <p>비밀번호가 일치하지 않습니다.</p>}
-
-          <div>
-            <label>이름</label>
-            <input
-              type="text"
-              autoComplete="off"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          {!isNameValid && <p>이름은 2글자 이상으로 설정해 주세요.</p>}
-
-          <button type="submit" disabled={!isFormValid}>
-            회원가입
-          </button>
-          <button onClick={() => navigate('/login')}>로그인 하기</button>
-        </form>
-      </div> */}
-
-      {/* <Container>
-        <Row className="justify-content-md-center mt-5">
-          <Col lg={8}>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="registerEmail">
-                <Form.Label>이메일 주소</Form.Label>
-                <Form.Control
-                  type="email"
-                  autoComplete="off"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                {!isEmailValid && (
-                  <Form.Text className="text-success">이메일 형식이 올바르지 않습니다.</Form.Text>
-                )}
-              </Form.Group>
-
-              <Form.Group controlId="registerPassword" className="mt-3">
-                <Form.Label>비밀번호</Form.Label>
-                <Form.Control
-                  type="password"
-                  autoComplete="off"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                {!isPasswordValid && (
-                  <Form.Text className="text-success">
-                    비밀번호는 4글자 이상으로 설정해 주세요.
-                  </Form.Text>
-                )}
-              </Form.Group>
-
-              <Form.Group controlId="registerConfirmPassword" className="mt-3">
-                <Form.Label>비밀번호 재확인</Form.Label>
-                <Form.Control
-                  type="password"
-                  autoComplete="off"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-                {!isPasswordSame && (
-                  <Form.Text className="text-success">비밀번호가 일치하지 않습니다.</Form.Text>
-                )}
-              </Form.Group>
-
-              <Form.Group controlId="registerName" className="mt-3">
-                <Form.Label>이름</Form.Label>
-                <Form.Control
-                  type="text"
-                  autoComplete="off"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-                {!isNameValid && (
-                  <Form.Text className="text-success">
-                    이름은 2글자 이상으로 설정해 주세요.
-                  </Form.Text>
-                )}
-              </Form.Group>
-
-              <Form.Group as={Row} className="mt-3 text-center">
-                <Col sm={{ span: 20 }}>
-                  <Button variant="primary" type="submit" disabled={!isFormValid}>
-                    회원가입
-                  </Button>
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mt-3 text-center">
-                <Col sm={{ span: 20 }}>
-                  <Button variant="light" onClick={() => navigate('/login')}>
-                    로그인하기
-                  </Button>
-                </Col>
-              </Form.Group>
-            </Form>
-          </Col>
-        </Row>
-      </Container> */}
+      <Footer></Footer>
     </>
   );
 }

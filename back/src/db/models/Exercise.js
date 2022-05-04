@@ -13,7 +13,7 @@ class Exercise {
         return ExerModel.find().sort({ views: -1 });
     }
 
-    static update({ id }, { toUpdate }) {
+    static update({ id, toUpdate }) {
         return ExerModel.findByIdAndUpdate(id, toUpdate, { new: true });
     }
 

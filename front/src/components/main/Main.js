@@ -1,97 +1,94 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Button from '@mui/material/Button';
+import Header from '../Header';
+import Footer from '../Footer';
 
 import MainTabs from './MainTabs';
 import MainGraph from './MainGraph';
+import TrackingLists from '../trackingList/TrackingLists';
+import UserDelForm from '../user/UserDelForm';
+
 import MainButton from './style/MainButton';
-import { DispatchContext } from '../../App';
+
+import { useRecoilState } from 'recoil';
+import { tokenState, userInfoState, userState } from '../../atoms';
 
 const Main = () => {
-  const [foodSelected, setFoodSelected] = useState([]);
-  const [totalFood, setTotalFood] = useState(0);
-  const [exerciseSelected, setExerciseSelected] = useState([]);
-  const [totalExercise, setTotalExercise] = useState(0);
-
   const navigate = useNavigate();
-  const dispatch = useContext(DispatchContext);
+
+  const [token, setToken] = useRecoilState(tokenState);
+  const [recoilUser, setRecoilUser] = useRecoilState(userState);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
   const logout = () => {
     // sessionStorage 에 저장했던 JWT 토큰을 삭제함.
     sessionStorage.removeItem('userToken');
     // dispatch 함수를 이용해 로그아웃함.
-    dispatch({ type: 'LOGOUT' });
+    // dispatch({ type: 'LOGOUT' });
+    setRecoilUser(null);
+    setUserInfo(null);
+    setToken(null);
+
     // 기본 페이지로 돌아감.
     navigate('/login');
   };
-
-  const Container = styled.div`
-    margin: 70px 80px;
-  `;
 
   const MainHello = styled.div`
     font-size: 35px;
     font-weight: bold;
   `;
 
-  //   const MainTabs = styled.div`
-
-  //   `
-
-  const MainContents = styled.div`
-    display: inline-flex;
-    margin: 80px 0px;
-  `;
-
-  //   const styledMainTabs = styled(MainTabs)`
-  //     display: inline-flex;
-  //     margin: 80px 0px;
-  //   `;
-
-  const user = 'Elice';
-
   return (
-    <div style={{ margin: '70px 80px' }}>
-      <MainHello>Hello {user}!</MainHello>
+    <>
+      <Header />
+      <div style={{ margin: '100px 80px' }}>
+        <MainHello>Hello {userInfo.name}!</MainHello>
 
-      <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
-        <MainTabs
-          foodSelected={foodSelected}
-          setFoodSelected={setFoodSelected}
-          totalFood={totalFood}
-          setTotalFood={setTotalFood}
-          exerciseSelected={exerciseSelected}
-          setExerciseSelected={setExerciseSelected}
-          totalExercise={totalExercise}
-          setTotalExercise={setTotalExercise}
-        />
-        <MainGraph
-          foodSelected={foodSelected}
-          setFoodSelected={setFoodSelected}
-          totalFood={totalFood}
-          setTotalFood={setTotalFood}
-          exerciseSelected={exerciseSelected}
-          setExerciseSelected={setExerciseSelected}
-          totalExercise={totalExercise}
-          setTotalExercise={setTotalExercise}
-        />
+        {/* <div style={{ margin: '80px 0px' }}> */}
+        <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
+          <MainTabs />
+          <MainGraph />
+        </div>
+        <div>
+          <TrackingLists />
+          <MainButton
+            variant="contained"
+            style={{ marginBottom: '20px', width: '60%' }}
+            onClick={() => navigate('/network')}
+          >
+            network
+          </MainButton>
+          <br />
+          <MainButton
+            variant="contained"
+            style={{ marginBottom: '20px', width: '60%' }}
+            onClick={() => navigate('/users')}
+          >
+            edit
+          </MainButton>
+          <br />
+          <MainButton
+            variant="contained"
+            style={{ marginBottom: '20px', width: '60%' }}
+            onClick={() => navigate('/mypage')}
+          >
+            My page
+          </MainButton>
+          <br />
+          <MainButton
+            variant="contained"
+            style={{ marginBottom: '20px', width: '60%' }}
+            onClick={logout}
+          >
+            Log-out
+          </MainButton>
+          <UserDelForm></UserDelForm>
+        </div>
       </div>
-      <div>
-        <MainButton variant="contained" style={{ marginBottom: '20px', width: '60%' }}>
-          Modifying and deleting
-        </MainButton>
-        <br />
-        <MainButton variant="contained" style={{ marginBottom: '20px', width: '60%' }}>
-          View Details
-        </MainButton>
-        <br />
-        <MainButton variant="contained" style={{ width: '60%' }} onClick={logout}>
-          Log-out
-        </MainButton>
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
