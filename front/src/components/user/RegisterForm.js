@@ -18,7 +18,7 @@ import FormLabel from '@mui/material/FormLabel';
 import { validateEmail } from '../../utils';
 
 //styled Compo
-import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
+import { ValidationTextField, ColorButton, ColorButtonB, RedSpan } from '../styledCompo/uesrStyle';
 
 //Compo
 import Header from '../Header';
@@ -42,13 +42,16 @@ function RegisterForm() {
   //useState로 weight 상태를 생성함.
   const [weight, setWeight] = useState('');
   //useState로 icon 상태를 생성함.
-  const [icon, setIcon] = useState('runner');
+  const [icon, setIcon] = useState('all-rounder');
 
   // ------------ EMAIL AUTHENTICATION ------------
-  const [code, setCode] = useState('');
+  const [code, setCode] = useState('임시비밀번호가 들어오는 곳이랍니다.');
   const [resCode, setResCode] = useState('');
-  const reqCode = async () =>
-    setResCode(await Api.get(`users/email/${email}`).then((data) => data.data));
+  const reqCode = async () => {
+    alert('Your email verification number has been successfully sent to your email.');
+    return setResCode(await Api.get(`users/email/${email}`).then((data) => data.data));
+  };
+
   const isEmailAuthed = resCode === code;
 
   //위 validateEmail 함수를 통해 이메일 형태 적합 여부를 확인함.
@@ -128,7 +131,6 @@ function RegisterForm() {
             sx={{
               '& > :not(style)': { m: 1, width: '600px' },
             }}
-            noValidate
             autoComplete="off"
           >
             <ValidationTextField
@@ -138,7 +140,7 @@ function RegisterForm() {
               id="outlined-required"
               label="Email Address"
               autoComplete="email"
-              helperText={!isEmailValid && <span>The email format is not valid.</span>}
+              helperText={!isEmailValid && <RedSpan>The email format is not valid.</RedSpan>}
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -146,15 +148,21 @@ function RegisterForm() {
               }}
               // defaultValue="Hello World"
             />
-            <button style={{ width: 55, height: 55 }} onClick={reqCode}>
-              Email Auth
-            </button>
-            <input
+            <br></br>
+            <ColorButton onClick={reqCode}>Email Authentication</ColorButton>
+            <br></br>
+            <ValidationTextField
+              // error={!isEmailAuthed}
+              size="small"
+              helperText={
+                !isEmailAuthed && <RedSpan> The authentication number is invalid. </RedSpan>
+              }
+              placeholder="Please enter the authentication number after receiving the email verification."
               onChange={(e) => {
-                e.preventDefault();
                 setCode(e.target.value);
               }}
             />
+
             <br></br>
             <ValidationTextField
               required
@@ -164,7 +172,9 @@ function RegisterForm() {
               type="password"
               autoComplete="current-password"
               value={password}
-              helperText={!isPasswordValid && <span> Password is more than 4 characters. </span>}
+              helperText={
+                !isPasswordValid && <RedSpan> Password is more than 4 characters. </RedSpan>
+              }
               onChange={(e) => {
                 setPassword(e.target.value);
                 // setCheckLogin(true);
@@ -178,7 +188,7 @@ function RegisterForm() {
               type="password"
               autoComplete="current-password"
               value={confirmPassword}
-              helperText={!isPasswordSame && <span> Passwords do not match. </span>}
+              helperText={!isPasswordSame && <RedSpan> Passwords do not match. </RedSpan>}
               onChange={(e) => {
                 setConfirmPassword(e.target.value);
                 // setCheckLogin(true);
@@ -192,7 +202,7 @@ function RegisterForm() {
               label="Nick Name"
               // autoComplete="email"
               helperText={
-                !isNameValid && <span>Please set the nickname at least 2 characters.</span>
+                !isNameValid && <RedSpan>Please set the nickname at least 2 characters.</RedSpan>
               }
               value={name}
               onChange={(e) => {
@@ -220,7 +230,7 @@ function RegisterForm() {
               label="Height"
               // autoComplete="email"
               helperText={
-                !isHeightValid && <span>Please enter a number only.(The unit is feet.)</span>
+                !isHeightValid && <RedSpan>Please enter a number only.(The unit is feet.)</RedSpan>
               }
               value={height}
               onChange={(e) => {
@@ -237,7 +247,9 @@ function RegisterForm() {
               label="Weight"
               // autoComplete="email"
               helperText={
-                !isWeightValid && <span>Please enter a number only.(The unit is pounds.)</span>
+                !isWeightValid && (
+                  <RedSpan>Please enter a number only.(The unit is pounds.)</RedSpan>
+                )
               }
               value={weight}
               onChange={(e) => {
@@ -268,7 +280,7 @@ function RegisterForm() {
                 value="all-rounder"
                 labelPlacement="bottom"
                 control={<Radio color="success" />}
-                label={<img src="/all.png" alt="all" style={{ width: 100 }}></img>}
+                label={<img src="/all-rounder.png" alt="all" style={{ width: 100 }}></img>}
               />
               <FormControlLabel
                 value="weight"

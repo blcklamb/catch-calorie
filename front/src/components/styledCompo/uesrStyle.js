@@ -160,3 +160,7 @@ export const CardText = styled2.div`
   left: 70px;
   z-index:30;
 `;
+
+export const RedSpan = styled2.span`
+  color: #F03E3E;
+`;
