@@ -64,7 +64,7 @@ function MainFoodAdd({}) {
     setIsKcalNumber(Number(kcal) > 0);
 
     try {
-      if (category && name && kcal && isKcalNumber) {
+      if (category && name && kcal && Number(kcal) > 0) {
         await Api.post(`foods`, {
           category: category,
           name: name,
