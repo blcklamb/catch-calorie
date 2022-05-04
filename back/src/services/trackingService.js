@@ -1,5 +1,7 @@
 import { Tracking, Food, Exercise, User } from "../db";
 import { v4 as uuid } from "uuid";
+import configureMeasurements, { mass, length } from "convert-units";
+const convert = configureMeasurements({ mass, length });
 
 class trackingService {
     static async addTracking({ user_id, date }) {
@@ -50,11 +52,34 @@ class trackingService {
     }
 
     static async setFoodTracking({ id, weight, unit }) {
-        return await Tracking.findByRecordAndUpdate({ id, record: "food", toUpdate: gram });
+        const data = await Tracking.findByRecordId({ id, record: "food" });
+        const { name, calorie } = data.food_record.find((food) => food.id === id);
+
+        const gram = unit === "us" ? convert(weight).from("lb").to("g").toFixed(0) : weight;
+
+        const { kcal_per_100g } = await Food.findByName({ name });
+        const newCalorie = Math.floor((kcal_per_100g / 100) * gram);
+
+        const acc_cal = newCalorie - calorie;
+
+        const toUpdate = { gram, calorie, acc_cal };
+
+        return await Tracking.findByRecordAndUpdate({ id, record: "food", toUpdate });
     }
 
     static async setExerTracking({ id, minute }) {
-        return await Tracking.findByRecordAndUpdate({ id, record: "exer", toUpdate: minute });
+        const data = await Tracking.findByRecordId({ id, record: "exer" });
+        const { name, calorie } = data.exer_record.find((food) => food.id === id);
+
+        const { weight } = await User.findById({ id: data.user_id });
+        const { kcal_per_kg } = await Exercise.findByName({ name });
+        const newCalorie = Math.floor(((kcal_per_kg * weight) / 60) * minute);
+
+        const acc_cal = -(newCalorie - calorie);
+
+        const toUpdate = { minute, calorie, acc_cal };
+
+        return await Tracking.findByRecordAndUpdate({ id, record: "food", toUpdate });
     }
 
     static async deleteFoodTracking({ id }) {
