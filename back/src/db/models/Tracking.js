@@ -20,12 +20,14 @@ class Tracking {
     static findRecordAndUpdate({id, record, toUpdate}) {
         if (record === "food") {
             return TrackingModel.updateOne(
-                { food_record: { $elemMatch: { id } } },
-                { $set: {"gram":toUpdate} },
-                { new: true }
+                { food_record: {$elemMatch: {id}}},
+                { $set: { "food_record.$.gram": toUpdate} },
                 );
         } else if (record === "exer") {
-            return TrackingModel.updateOne({ exer_record: { $elemMatch: { id } } });
+            return TrackingModel.updateOne(
+                { exer_record: {$elemMatch: {id}}},
+                { $set: { "exer_record.$.minute": toUpdate} },
+                );
         }
     }
 
