@@ -6,10 +6,8 @@ import { Router } from "express";
 import { userService } from "../services/userService";
 import { login_required } from "../middlewares/login_required";
 import sendMail from "../middlewares/send_mail";
-import configureMeasurements, { mass, length } from 'convert-units';
-const convert = configureMeasurements({mass, length});
-
-
+import configureMeasurements, { mass, length } from "convert-units";
+const convert = configureMeasurements({ mass, length });
 
 const userRouter = Router();
 
@@ -112,17 +110,18 @@ userRouter.put("/users/:id", login_required, async (req, res, next) => {
             throw new Error("입력되지 않은 정보가 있습니다.");
         }
 
-        const converted_height = (unit ==="us") ? convert(height).from('ft').to('cm').toFixed(0): height
-        const converted_weight = (unit ==="us") ? convert(weight).from('lb').to('kg').toFixed(0): weight
+        const converted_height = unit === "us" ? convert(height).from("ft").to("cm").toFixed(0) : height;
+        const converted_weight = unit === "us" ? convert(weight).from("lb").to("kg").toFixed(0) : weight;
 
-        const toUpdate = { 
-            name, 
-            height: converted_height, 
-            weight: converted_weight, 
-            unit, 
-            open, 
-            icon, 
-            status };
+        const toUpdate = {
+            name,
+            height: converted_height,
+            weight: converted_weight,
+            unit,
+            open,
+            icon,
+            status,
+        };
 
         // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
         const updatedUser = await userService.setUser({ id, toUpdate });

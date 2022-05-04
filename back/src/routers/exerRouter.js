@@ -45,7 +45,7 @@ exerRouter.post("/exercises", login_required, async (req, res, next) => {
         const newExercise = await exerService.addExer({
             name,
             kcal_per_kg,
-            kcal_per_lb
+            kcal_per_lb,
         });
         if (newExercise.errorMessage) throw new Error(newExercise.errorMessage);
 
