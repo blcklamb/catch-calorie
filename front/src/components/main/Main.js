@@ -53,38 +53,6 @@ const Main = () => {
         </div>
         <div>
           <TrackingLists />
-          <MainButton
-            variant="contained"
-            style={{ marginBottom: '20px', width: '60%' }}
-            onClick={() => navigate('/network')}
-          >
-            network
-          </MainButton>
-          <br />
-          <MainButton
-            variant="contained"
-            style={{ marginBottom: '20px', width: '60%' }}
-            onClick={() => navigate('/users')}
-          >
-            edit
-          </MainButton>
-          <br />
-          <MainButton
-            variant="contained"
-            style={{ marginBottom: '20px', width: '60%' }}
-            onClick={() => navigate('/mypage')}
-          >
-            My page
-          </MainButton>
-          <br />
-          <MainButton
-            variant="contained"
-            style={{ marginBottom: '20px', width: '60%' }}
-            onClick={logout}
-          >
-            Log-out
-          </MainButton>
-          <UserDelForm></UserDelForm>
         </div>
       </div>
       <Footer />
