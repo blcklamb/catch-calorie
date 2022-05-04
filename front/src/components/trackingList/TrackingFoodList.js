@@ -12,6 +12,7 @@ function TrackingFoodList({ food, isTrackingPage }) {
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   const [isEditing, setIsEditing] = useState(false);
+  
   const [gram, setGram] = useState(food.gram);
 
   const [isGramEmpty, setIsGramEmpty] = useState(false);
@@ -26,11 +27,11 @@ function TrackingFoodList({ food, isTrackingPage }) {
   };
 
   const handleCheck = async (e) => {
-    setIsGramEmpty(!gram);
-    setIsGramNumber(Number(gram) > 0);
+    setIsGramEmpty(!Number(gram));
+    setIsGramNumber(!isNaN(gram));
 
     try {
-      if (gram && Number(gram) > 0) {
+      if (Number(gram) && !isNaN(gram)) {
         await Api.put('tracking/food', {
           id: food.id,
           gram: gram,
@@ -61,7 +62,8 @@ function TrackingFoodList({ food, isTrackingPage }) {
   };
 
   const previewKcal = () => {
-    if (Number(gram) > 0) {
+    // gram에 숫자가 아닌 값이 입력되면 미리보기 칼로리 0
+    if (!isNaN(gram)) {
       return Math.round((gram * food.calorie) / food.gram);
     } else {
       return 0;
@@ -81,14 +83,14 @@ function TrackingFoodList({ food, isTrackingPage }) {
               onChange={onChange}
               style={{ marginRight: '30px' }}
               helperText={
-                isGramEmpty ? (
-                  <span>Please enter a gram</span>
+                !isGramNumber ? (
+                  <span>Please enter a number only</span>
                 ) : (
-                  !isGramNumber && <span>Please enter a number only</span>
+                  isGramEmpty && <span>Please enter a gram</span>
                 )
               }
             />
-            <div style={{ marginRight: '30px' }}>{previewKcal()}</div>
+            <div style={{ marginRight: '30px' }}>{previewKcal()}kcal</div>
           </div>
           <div>
             <Button variant="contained" type="button" onClick={handleCheck}>
