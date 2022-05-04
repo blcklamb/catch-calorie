@@ -4,13 +4,22 @@ import jwt from "jsonwebtoken";
 import { v4 as uuid } from "uuid";
 import nodemailer from "nodemailer";
 
+
+import configureMeasurements, { mass, length } from 'convert-units';
+const convert = configureMeasurements({mass, length});
+
 class userService {
     // 회원 정보 추가
-    static async addUser({ email, password, name, gender, height, weight, icon }) {
+    static async addUser({ email, password, name, gender, height, weight, unit, open, icon }) {
         const user = await User.findOne({ email });
         if (user) return { errorMessage: "현재 사용 중인 이메일입니다. 다른 이메일을 입력해주세요." };
 
         const hashedPassword = await bcrypt.hash(password, 10);
+
+        if (unit === "us") {
+            height = convert(height).from('ft').to('cm');
+            weight = convert(weight).from('lb').to('kg');
+        }
 
         const newUser = {
             email,
@@ -19,6 +28,8 @@ class userService {
             gender,
             height,
             weight,
+            unit,
+            open,
             icon,
         };
 
@@ -38,14 +49,19 @@ class userService {
         const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
         const token = jwt.sign({ user_id: user._id }, secretKey, { expiresIn: "2h" });
 
+        if (user.unit === "us") {
+            const us_height = convert(user.height).from('cm').to('ft');
+            const us_weight = convert(user.weight).from('kg').to('lb');
+        }
+
         return {
             token,
             id: user._id,
             email: user.email,
             name: user.name,
             gender: user.gender,
-            height: user.height,
-            weight: user.weight,
+            height: (us_height) ? us_height : user.height,
+            weight: (us_weight) ? us_weight : user.weight,
             icon: user.icon,
             errorMessage: null,
         };
