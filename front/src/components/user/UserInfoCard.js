@@ -18,8 +18,7 @@ import configureMeasurements, { mass, length } from 'convert-units';
 const convert = configureMeasurements({ mass, length });
 
 const UserInfoCard = ({ currentUserInfo, isEditable, setCardState }) => {
-  const [checked, setChecked] = useState(currentUserInfo?.unit === 'us' ? true : false);
-  console.log(checked);
+  const [checked, setChecked] = useState(currentUserInfo?.unit === 'us' && true);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);

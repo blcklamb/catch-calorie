@@ -15,10 +15,11 @@ import {
 } from '../styledCompo/uesrStyle';
 
 //Mui
-import { Typography, FormLabel, FormControlLabel, RadioGroup, Radio } from '@mui/material';
+import { Typography, FormLabel, FormControlLabel, RadioGroup, Radio, Switch } from '@mui/material';
 
 //단위변환
 import configureMeasurements, { mass, length } from 'convert-units';
+import { Stack } from '@mui/material';
 const convert = configureMeasurements({ mass, length });
 
 const UserEditCard = ({ setCardState }) => {
@@ -46,6 +47,10 @@ const UserEditCard = ({ setCardState }) => {
   const isFormValid =
     isNameValid && isHeightValid && isWeightValid && isUsHeightValid && isUsWeightValid;
 
+  // 스위치 State
+  const [checked, setChecked] = useState(true);
+  console.log('switch', checked);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -72,6 +77,15 @@ const UserEditCard = ({ setCardState }) => {
       console.log('req 요청 갔고 응답 받았습니다..');
     } catch (err) {
       console.log(`req 요청이 제대로 가지 않았군요 ${err}`);
+    }
+  };
+
+  const handleUnitSwitch = (e) => {
+    setChecked(e.target.checked);
+    if (checked) {
+      setEditUser((prev) => ({ ...prev, unit: 'non_us' }));
+    } else {
+      setEditUser((prev) => ({ ...prev, unit: 'us' }));
     }
   };
 
@@ -109,7 +123,7 @@ const UserEditCard = ({ setCardState }) => {
             <FormControlLabel value={false} control={<Radio color="success" />} label="Private" />
           </RadioGroup>
           <br />
-          <FormLabel id="demo-row-radio-buttons-group-label">Unit</FormLabel>
+          {/* <FormLabel id="demo-row-radio-buttons-group-label">Unit</FormLabel>
           <RadioGroup
             sx={{ width: 300 }}
             row
@@ -120,7 +134,12 @@ const UserEditCard = ({ setCardState }) => {
           >
             <FormControlLabel value="us" control={<Radio color="success" />} label="US" />
             <FormControlLabel value="non_us" control={<Radio color="success" />} label="Non-Us" />
-          </RadioGroup>
+          </RadioGroup> */}
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Typography>(ft/lb)</Typography>
+            <Switch checked={checked} onChange={handleUnitSwitch} />
+            <Typography>(cm/kg)</Typography>
+          </Stack>
           <br />
           {unit === 'us' ? (
             <ValidationTextField
