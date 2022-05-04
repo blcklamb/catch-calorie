@@ -115,7 +115,7 @@ function Header(props) {
           display: { xs: 'block' },
           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
         }}
-        style={{ zIndex: 4000 }}
+        style={{ zIndex: 100000 }}
       >
         {drawer}
       </Drawer>
