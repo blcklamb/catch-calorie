@@ -17,6 +17,10 @@ class Tracking {
         }
     }
 
+    static findByRecordIdAndUpdate({id, record, toUpdate}) {
+        
+    }
+
     static findByUserAndDate({ user_id, date }) {
         return TrackingModel.findOne({ user_id, date });
     }
