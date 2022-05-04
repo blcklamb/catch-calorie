@@ -14,6 +14,9 @@ function TrackingFoodList({ food, isTrackingPage }) {
   const [isEditing, setIsEditing] = useState(false);
   const [gram, setGram] = useState(food.gram);
 
+  const [isGramEmpty, setIsGramEmpty] = useState(false);
+  const [isGramNumber, setIsGramNumber] = useState(true);
+
   useEffect(() => {
     setGram(food.gram);
   }, [food.gram]);
@@ -23,13 +26,22 @@ function TrackingFoodList({ food, isTrackingPage }) {
   };
 
   const handleCheck = async (e) => {
-    await Api.put('tracking/food', {
-      id: food.id,
-      gram: gram,
-    });
+    setIsGramEmpty(!gram);
+    setIsGramNumber(Number(gram) > 0);
 
-    setIsEditing(false);
-    setTrackingUpdate(!trackingUpdate);
+    try {
+      if (gram && Number(gram) > 0) {
+        await Api.put('tracking/food', {
+          id: food.id,
+          gram: gram,
+        });
+
+        setIsEditing(false);
+        setTrackingUpdate(!trackingUpdate);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleModify = (e) => {
@@ -37,6 +49,8 @@ function TrackingFoodList({ food, isTrackingPage }) {
   };
 
   const handleCancel = (e) => {
+    setGram(food.gram);
+
     setIsEditing(false);
   };
 
@@ -47,7 +61,11 @@ function TrackingFoodList({ food, isTrackingPage }) {
   };
 
   const previewKcal = () => {
-    return Math.round((gram * food.calorie) / food.gram);
+    if (Number(gram) > 0) {
+      return Math.round((gram * food.calorie) / food.gram);
+    } else {
+      return 0;
+    }
   };
 
   return (
@@ -62,6 +80,13 @@ function TrackingFoodList({ food, isTrackingPage }) {
               value={gram}
               onChange={onChange}
               style={{ marginRight: '30px' }}
+              helperText={
+                isGramEmpty ? (
+                  <span>Please enter a gram</span>
+                ) : (
+                  !isGramNumber && <span>Please enter a number only</span>
+                )
+              }
             />
             <div style={{ marginRight: '30px' }}>{previewKcal()}</div>
           </div>
