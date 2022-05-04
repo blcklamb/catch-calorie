@@ -9,12 +9,12 @@ class Heatmap {
         return HeatmapModel.find({ user_id });
     }
 
-    static update({ user_id }, { toUpdate }) {
+    static update({ user_id, toUpdate }) {
         return HeatmapModel.findOneAndUpdate({ user_id }, toUpdate, { new: true });
     }
 
     static delete({ user_id }) {
-        return HeatmapModel.findByIdAndDelete({ user_id });
+        return HeatmapModel.findOneAndDelete({ user_id });
     }
 }
 

@@ -1,8 +1,9 @@
 import is from "@sindresorhus/is";
+import jwt from "jsonwebtoken";
+import fetch from "node-fetch";
 import { v4 as uuid } from "uuid";
 import { Router } from "express";
 import { userService } from "../services/userService";
-import { awardService } from "../services/awardService";
 import { login_required } from "../middlewares/login_required";
 import sendMail from "../middlewares/send_mail";
 import configureMeasurements, { mass, length } from 'convert-units';
@@ -93,8 +94,6 @@ userRouter.delete("/users/:id", login_required, async (req, res, next) => {
 
         await userService.deleteUser({ id });
 
-        await awardService.deleteAward({ user_id: id });
-
         return res.status(200).json({ result: "success" });
     } catch (error) {
         next(error);
@@ -183,7 +182,7 @@ userRouter.put("/password/init", async (req, res, next) => {
     }
 });
 
-userRouter.get("/users/login/github", async (req, res) => {
+userRouter.get("/users/login/github", async (req, res, next) => {
     try {
         const { code } = req.query;
 
@@ -195,46 +194,47 @@ userRouter.get("/users/login/github", async (req, res) => {
         }).toString();
         const url = `${base}?${params}`;
 
-        const token = await fetch(url, {
+        const t0ken = await fetch(url, {
             method: "POST",
             headers: { Accept: "application/json" },
         }).then((res) => res.json());
 
-        const { access_token } = token;
+        const { access_token } = t0ken;
         const api = "https://api.github.com";
         const data = await fetch(`${api}/user`, {
-            headers: {
-                Authorization: `token ${access_token}`,
-            },
+            headers: { Authorization: `token ${access_token}` },
         }).then((res) => res.json());
+        const name = data.name || data.login;
 
         const emailData = await fetch(`${api}/user/emails`, {
-            headers: {
-                Authorization: `token ${access_token}`,
-            },
+            headers: { Authorization: `token ${access_token}` },
         }).then((res) => res.json());
         const { email } = emailData.find((email) => email.primary === true && email.verified === true);
 
-        // user 정보  처리
         let user = await userService.getUserByEmail({ email });
-        if (!user) {
-            user = await userService.addUser({
-                name: data.name || data.login,
-                email,
-                description: data.bio || "Hello World!",
-            });
-        }
+        const token = user ? jwt.sign({ user_id: _id }, process.env.JWT_SECRET_KEY || "secret-key") : null;
+        const _id = user ? user._id : null;
 
-        const { _id, name, description, oauth } = user;
+        return res.status(200).json({ token, _id, email, name });
+    } catch (error) {
+        next(error);
+    }
+});
 
-        return res.status(200).json({
-            token: jwt.sign({ user_id: _id }, process.env.JWT_SECRET_KEY || "secret-key"),
-            _id,
+userRouter.post("/users/register/social", async (req, res, next) => {
+    try {
+        const { email, name, gender, height, weight, icon } = req.body;
+
+        const newUser = await userService.addSocialUser({
             email,
             name,
-            description,
-            oauth,
+            gender,
+            height,
+            weight,
+            icon,
         });
+
+        return res.status(201).json(newUser);
     } catch (error) {
         next(error);
     }
