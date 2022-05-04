@@ -1,10 +1,10 @@
-import { User } from "../db";
+import { Award, Heatmap, Tracking, User } from "../db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuid } from "uuid";
 import nodemailer from "nodemailer";
-import configureMeasurements, { mass, length } from 'convert-units';
-const convert = configureMeasurements({mass, length});
+import configureMeasurements, { mass, length } from "convert-units";
+const convert = configureMeasurements({ mass, length });
 
 class userService {
     // 회원 정보 추가
@@ -14,10 +14,9 @@ class userService {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-
         if (unit === "us") {
-            height = convert(height).from('ft').to('cm').toFixed(0);
-            weight = convert(weight).from('lb').to('kg').toFixed(0);
+            height = convert(height).from("ft").to("cm").toFixed(0);
+            weight = convert(weight).from("lb").to("kg").toFixed(0);
         }
 
         const newUser = {
@@ -89,20 +88,20 @@ class userService {
     }
 
     // 회원 정보 삭제하기
-    static async deleteUser({ id }) {
-        const user = await User.delete({ id });
-        user.errorMessage = "회원탈퇴했습니다.";
-        return user;
+    static deleteUser({ id }) {
+        return Promise.all(
+            Award.delete({ user_id: id }), //
+            Tracking.deleteByUser({ user_id: id }),
+            Heatmap.delete({ user_id: id }),
+            User.delete({ id }),
+        );
     }
 
     // 로그인한 회원 비밀번호 수정하기
     static async setPassword({ id, old_pw, new_pw }) {
         const user = await User.findById({ id });
         const pass = await bcrypt.compare(old_pw, user.password);
-
-        if (!pass) {
-            throw new Error("비밀번호를 정확하게 입력해주세요.");
-        }
+        if (!pass) throw new Error("비밀번호를 정확하게 입력해주세요.");
 
         const hashedPassword = await bcrypt.hash(new_pw, 10);
         const toUpdate = { password: hashedPassword };
@@ -110,7 +109,7 @@ class userService {
         return User.update({ id, toUpdate });
     }
 
-    // 임시비밀번호 발급
+    // 임시비밀번호 발급 (sendMail middleware?)
     static async sendNewpassword({ email }) {
         const mailOption = {
             service: "Naver",
@@ -135,23 +134,28 @@ class userService {
 
         const transporter = nodemailer.createTransport(mailOption);
         transporter.sendMail(message, async (error, info) => {
-            const user = await User.findOne({ email });
-            if (error) {
-                throw new Error(error);
-            } else {
-                console.log("Email sent: " + info.response);
-                
+            if (error) throw new Error(error);
+            else {
+                console.log(`Email sent: ${info.response}`);
                 // 임시비밀번호로 비번 변경
+                const id = await User.findOne({ email }).then((data) => data._id);
                 const hashedTempPassword = await bcrypt.hash(temp_pw, 10);
                 const toUpdate = { password: hashedTempPassword };
-                const id = user._id;
                 return User.update({ id, toUpdate });
             }
         });
+    }
 
-        
+    static async addSocialUser({ email, name, gender, height, weight, icon }) {
+        const user = await User.findOne({ email });
+        if (user) return { errorMessage: "현재 사용 중인 이메일입니다. 다른 이메일을 입력해주세요." };
 
-        
+        const newUser = await User.create({ newUser: { email, name, gender, height, weight, icon } });
+        const { _id } = newUser;
+        const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
+        const token = jwt.sign({ user_id: newUser._id }, secretKey, { expiresIn: "2h" });
+
+        return { token, _id, email, name, gender, height, weight, icon };
     }
 }
 

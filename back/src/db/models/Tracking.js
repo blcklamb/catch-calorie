@@ -46,6 +46,10 @@ class Tracking {
     static delete({ id }) {
         return TrackingModel.deleteById(id);
     }
+
+    static deleteByUser({ user_id }) {
+        return TrackingModel.deleteMany({ user_id });
+    }
 }
 
 export { Tracking };
