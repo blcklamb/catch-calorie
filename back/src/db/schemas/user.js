@@ -35,8 +35,8 @@ const UserSchema = new Schema({
     unit: {
         type: String,
         enum: ["us", "non_us"],
-        //required: true,
-        default: "us"
+        required: true,
+        default: "non_us",
     },
     open: {
         type: Boolean,
