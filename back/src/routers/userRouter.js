@@ -102,13 +102,13 @@ userRouter.put("/users/:id", login_required, async (req, res, next) => {
         // URI로부터 사용자 id를 추출함.
         const { id } = req.params;
 
-        const { name, height, weight, icon, status } = req.body;
+        const { name, height, weight, unit, open, icon,  status } = req.body;
 
-        if (name === null || height === null || weight === null || icon == null || status == null) {
+        if (name === null || height === null || weight === null || icon == null || status == null || unit == null || open == null) {
             throw new Error("입력되지 않은 정보가 있습니다.");
         }
 
-        const toUpdate = { name, height, weight, icon, status };
+        const toUpdate = { name, height, weight, unit, open, icon, status };
 
         // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
         const updatedUser = await userService.setUser({ id, toUpdate });
