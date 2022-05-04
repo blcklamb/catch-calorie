@@ -47,7 +47,7 @@ function MainExerciseAdd({}) {
     setIsKcalNumber(Number(kcal) > 0);
 
     try {
-      if (name && kcal && isKcalNumber) {
+      if (name && kcal && Number(kcal) > 0) {
         await Api.post(`exercises`, {
           name: name,
           kcal: kcal,
