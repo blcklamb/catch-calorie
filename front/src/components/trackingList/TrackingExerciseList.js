@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -14,6 +14,11 @@ function TrackingExerciseList({ exercise, isTrackingPage }) {
   const [isEditing, setIsEditing] = useState(false);
   const [hour, setHour] = useState(parseInt(exercise.minute / 60));
   const [minute, setMinute] = useState(exercise.minute % 60);
+
+  useEffect(() => {
+    setHour(parseInt(exercise.minute / 60))
+    setMinute(exercise.minute % 60)
+  }, [exercise.minute]);
 
   const onChange = (e) => {
     setHour(e.target.value);
