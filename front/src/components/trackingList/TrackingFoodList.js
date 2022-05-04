@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -13,6 +13,10 @@ function TrackingFoodList({ food, isTrackingPage }) {
 
   const [isEditing, setIsEditing] = useState(false);
   const [gram, setGram] = useState(food.gram);
+
+  useEffect(() => {
+    setGram(food.gram);
+  }, [food.gram]);
 
   const onChange = (e) => {
     setGram(e.target.value);
