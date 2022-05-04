@@ -3,14 +3,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuid } from "uuid";
 import nodemailer from "nodemailer";
-
-
 import configureMeasurements, { mass, length } from 'convert-units';
 const convert = configureMeasurements({mass, length});
-
-//import {convert} from "convert-units";
-// const convert = configureMeasurements({allMeasures});
-
 
 class userService {
     // 회원 정보 추가
