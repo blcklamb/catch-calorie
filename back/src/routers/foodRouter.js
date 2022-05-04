@@ -4,15 +4,15 @@ import { foodService } from "../services/foodService";
 
 const foodRouter = Router();
 
+// DB에 없는 음식을 새로 등록할 때
 foodRouter.post("/foods", async (req, res, next) => {
     try {
         const { category, name, kcal, unit } = req.body;
         //gram일 경우 100g 당 calorie를 받아야 하고, pound일 경우 1pound 당 calorie를 받아야 함
 
-
         // 로그인 된 유저의 모든 food를 불러온 후 겹치는 제목이 있을경우 에러 발생.
         const foods = await foodService.getFoodByName({ name });
-        if (foods) throw new Error("이미 사용중인 제목입니다.");
+        if (foods) throw new Error("이미 등록되어 있는 음식입니다.");
         
         const { kcal_per_100g, kcal_per_lb } = await foodService.convertUnit({ kcal, unit });
         const newFood = await foodService.addFood({ category, name, kcal_per_100g, kcal_per_lb, views: 1});
@@ -23,6 +23,7 @@ foodRouter.post("/foods", async (req, res, next) => {
     }
 });
 
+// 검색창에 검색할 때 모든 리스트 불러내는 요청
 foodRouter.get("/foods", rateLimit({ windowMs: 1000, max: 5 }), async (req, res, next) => {
     try {
         const foods = await foodService.getFoodAll();
@@ -33,6 +34,7 @@ foodRouter.get("/foods", rateLimit({ windowMs: 1000, max: 5 }), async (req, res,
     }
 });
 
+// 검색 후 등록해서 조회수 올리는 요청
 foodRouter.post("/foods/:id", async (req, res, next) => {
     try {
         const { id } = req.params;

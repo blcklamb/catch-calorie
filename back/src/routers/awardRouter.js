@@ -3,6 +3,7 @@ import { awardService } from "../services/awardService";
 
 const awardRouter = Router();
 
+// 사용자별 뱃지의 락/언락을 식별하기 위해 보내는 업적 정보
 awardRouter.get("/awards/:user_id", async (req, res, next) => {
     try {
         const { user_id } = req.params;

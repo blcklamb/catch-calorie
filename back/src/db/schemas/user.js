@@ -32,6 +32,15 @@ const UserSchema = new Schema({
         type: Number,
         required: true,
     },
+    unit: {
+        type: String,
+        enum: ["us", "non_us"],
+        required: true,
+    },
+    open: {
+        type: Boolean,
+        required: true,
+    },
     icon: {
         type: String,
         required: true,
