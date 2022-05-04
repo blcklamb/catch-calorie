@@ -2,7 +2,9 @@ import { Router } from "express";
 import dayjs from "dayjs";
 import { login_required } from "../middlewares/login_required";
 import { trackingService } from "../services/trackingService";
+import configureMeasurements, { mass, length } from "convert-units";
 
+const convert = configureMeasurements({ mass, length });
 const trackingRouter = Router();
 
 // 유저별 트래킹 정보를 보내는 요청
@@ -24,10 +26,12 @@ trackingRouter.get("/tracking/:user_id", async (req, res, next) => {
 trackingRouter.post("/tracking/food", login_required, async (req, res, next) => {
     try {
         const user_id = req.currentUserId;
-        const { name, gram } = req.body;
+        const { name, weight, unit } = req.body;
         const date = dayjs().format("YYYY-MM-DD");
 
-        const newTracking = await trackingService.addFoodTracking({ user_id, date, name, gram });
+        const converted_weight = unit === "us" ? convert(weight).from("lb").to("g").toFixed(0) : weight;
+
+        const newTracking = await trackingService.addFoodTracking({ user_id, date, name, gram: converted_weight });
 
         return res.status(201).json(newTracking);
     } catch (error) {
