@@ -29,9 +29,7 @@ const JandiText = styled.div`
 const Jandi = () => {
   const user = useRecoilValue(userInfoState);
   const params = useParams();
-
   const [data, setData] = useState('');
-
   const [emptyData, setEmptyData] = useState(false);
 
   useEffect(() => {
@@ -53,7 +51,7 @@ const Jandi = () => {
         } else {
           setData(res.data[0].record);
           setEmptyData(true);
-          console.log('heatmapData', res.data[0].record);
+          // console.log('heatmapData', res.data[0].record);
         }
       });
     }
