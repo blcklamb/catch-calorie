@@ -29,6 +29,7 @@ function MainGraph({}) {
   const [kcalPerHour, setKcalPerHour] = useRecoilState(kcalPerHourState);
 
   const [trackingKcal, setTrackingKcal] = useState();
+  const [trackingRecKcal, setTrackingRecKcal] = useState();
 
   const isMypage = window.location.href.split('/')[3];
 
@@ -38,6 +39,7 @@ function MainGraph({}) {
       setTracking(res.data);
       // 오늘의 트래킹 정보 중 칼로리
       setTrackingKcal(res.data?.acc_cal);
+      setTrackingRecKcal(res.data?.rec_cal);
     });
   }, [trackingUpdate]);
 
@@ -79,16 +81,31 @@ function MainGraph({}) {
   };
 
   const remainingKcal = () => {
+    // console.log(trackingKcal);
+    // console.log(trackingRecKcal);
+
+    // 권장 칼로리를 넘을 경우 최대치를 5000 단위로 늘림
+    if (trackingKcal > trackingRecKcal) {
+      let line = (parseInt(trackingKcal / 10000) * 10 + 5) * 1000;
+      // console.log(line);
+
+      if (trackingKcal > line) {
+        return [line + 5000 - trackingKcal];
+      } else {
+        return [line - trackingKcal];
+      }
+    }
+
     if (trackingKcal < 0) {
-      return [3000];
+      return [trackingRecKcal];
     }
 
     // 선택된 항목이 없을 경우
     if (isNaN(kcalPerGram[0])) {
-      return [3000 - trackingKcal];
+      return [trackingRecKcal - trackingKcal];
     }
 
-    return [3000 - trackingKcal - kcalPerGram.reduce((acc, cur) => acc + cur, 0)];
+    return [trackingRecKcal - trackingKcal - kcalPerGram.reduce((acc, cur) => acc + cur, 0)];
   };
 
   const data = {
