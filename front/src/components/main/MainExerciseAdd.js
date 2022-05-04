@@ -25,6 +25,10 @@ function MainExerciseAdd({}) {
 
   const [checked, setChecked] = useState(true);
 
+  const [isNameEmpty, setIsNameEmpty] = useState(false);
+  const [isKcalEmpty, setIsKcalEmpty] = useState(false);
+  const [isKcalNumber, setIsKcalNumber] = useState(true);
+
   useEffect(() => {
     if (checked === true) {
       setUnit('kilogram');
@@ -38,13 +42,19 @@ function MainExerciseAdd({}) {
   };
 
   const handleSubmit = async () => {
+    setIsNameEmpty(!name);
+    setIsKcalEmpty(!kcal);
+    setIsKcalNumber(Number(kcal) > 0);
+
     try {
-      await Api.post(`exercises`, {
-        name: name,
-        kcal: kcal,
-        unit: unit,
-      }).then((res) => res.status === 201 && alert('Exercise has been added'));
-      navigate(`/tracking/${user._id}`, { replace: false });
+      if (name && kcal && isKcalNumber) {
+        await Api.post(`exercises`, {
+          name: name,
+          kcal: kcal,
+          unit: unit,
+        }).then((res) => res.status === 201 && alert('Exercise has been added'));
+        navigate(`/tracking/${user._id}`, { replace: false });
+      }
     } catch (err) {
       alert('Exercise that already exists');
     }
@@ -64,6 +74,7 @@ function MainExerciseAdd({}) {
               variant="outlined"
               inputValue={name}
               onBlur={(e) => setName(e.target.value)}
+              helperText={isNameEmpty && <span>Please enter a name</span>}
             />
             <h2>Please Enter a Kcal Per Unit Weight</h2>
             <Switch
@@ -78,6 +89,13 @@ function MainExerciseAdd({}) {
               variant="outlined"
               inputValue={kcal}
               onBlur={(e) => setKcal(e.target.value)}
+              helperText={
+                isKcalEmpty ? (
+                  <span>Please enter a kcal per unit weight</span>
+                ) : (
+                  !isKcalNumber && <span>Please enter a number only</span>
+                )
+              }
             />
           </div>
         </div>
