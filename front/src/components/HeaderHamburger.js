@@ -63,23 +63,27 @@ function Header(props) {
       <Toolbar />
       <Divider />
       <List>
-        <ListItem button key={'mypage'} onClick={() => navigate('/mypage')}>
+        <ListItem
+          button
+          key={'tracking'}
+          onClick={() => navigate(`/tracking/${userInfo._id}`, { replace: false })}
+        >
+          <ListItemText primary={'Home'} />
+        </ListItem>
+        <ListItem button key={'mypage'} onClick={() => navigate('/mypage', { replace: false })}>
           <ListItemText primary={'My Page'} />
         </ListItem>
-        <ListItem button key={'editProfile'} onClick={() => navigate('/users')}>
-          <ListItemText primary={'Edit Profile'} />
-        </ListItem>
-        <ListItem button key={'network'} onClick={() => navigate('/network')}>
+        <ListItem button key={'network'} onClick={() => navigate('/network', { replace: false })}>
           <ListItemText primary={'Network'} />
         </ListItem>
         <ListItem button key={'signOut'} onClick={logout}>
-          <ListItemText primary={'Sign Out'} />
+          <ListItemText primary={('Sign Out')} />
         </ListItem>
       </List>
       <Divider />
       <List>
-        <ListItem button key={'manual'}>
-          <ListItemText primary={'Manual'} />
+        <ListItem button key={('manual', { replace: false })}>
+          <ListItemText primary={('Manual')} />
         </ListItem>
         <UserDelForm />
       </List>

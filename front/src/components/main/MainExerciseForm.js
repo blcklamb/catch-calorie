@@ -9,16 +9,26 @@ import Autocomplete from '@mui/material/Autocomplete';
 import MainInput from './style/MainInput';
 
 import { useRecoilState } from 'recoil';
-import { exerciseSelectedState, timeState, kcalPerHourState } from '../../atoms';
+import {
+  exerciseSelectedState,
+  timeState,
+  hourState,
+  minState,
+  kcalPerHourState,
+} from '../../atoms';
 
 import * as Api from '../../api';
 
-function MainExerciseForm({ idx, hour, setHour, minute, setMinute }) {
+function MainExerciseForm({ idx, 
+  // hour, setHour, minute, setMinute 
+}) {
   const navigate = useNavigate();
 
   const user = useRecoilValue(userInfoState);
   const [exerciseSelected, setExerciseSelected] = useRecoilState(exerciseSelectedState);
   const [time, setTime] = useRecoilState(timeState);
+  const [hour, setHour] = useRecoilState(hourState);
+  const [minute, setMinute] = useRecoilState(minState);
   const [kcalPerHour, setKcalPerHour] = useRecoilState(kcalPerHourState);
 
   const [value, setValue] = useState();
@@ -29,8 +39,10 @@ function MainExerciseForm({ idx, hour, setHour, minute, setMinute }) {
   useEffect(() => {
     Api.get(`exercises`).then((res) => setExerciseList(res.data));
 
-    setHour([...hour.slice(0, idx), 0, ...hour.slice(idx + 1)]);
-    setMinute([...minute.slice(0, idx), 0, ...minute.slice(idx + 1)]);
+    // + 클릭 시 추가된 폼의 인풋을 0으로 초기화
+    // setExerciseSelected([...exerciseSelected.slice(0, idx), 0, ...exerciseSelected.slice(idx + 1)]);
+    // setHour([...hour.slice(0, idx), 0, ...hour.slice(idx + 1)]);
+    // setMinute([...minute.slice(0, idx), 0, ...minute.slice(idx + 1)]);
   }, []);
 
   const onChangeExercise = (e, value) => {
@@ -97,13 +109,7 @@ function MainExerciseForm({ idx, hour, setHour, minute, setMinute }) {
     <div style={{ display: 'flex' }}>
       <Autocomplete
         id="controllable"
-        value={value}
-        options={exerciseList}
-        sx={{ width: 300 }}
-        renderInput={(params) => (
-          <MainInput {...params} label="Exercise(kcal)" placeholder="Please select food" />
-        )}
-        getOptionLabel={(option) => option.name || ''}
+        value={exerciseSelected[idx]}
         onChange={(event, newValue) => {
           onChangeExercise(event, newValue);
         }}
@@ -111,6 +117,12 @@ function MainExerciseForm({ idx, hour, setHour, minute, setMinute }) {
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
         }}
+        options={exerciseList}
+        sx={{ width: 300 }}
+        renderInput={(params) => (
+          <MainInput {...params} label="Exercise(kcal)" placeholder="Please select food" />
+        )}
+        getOptionLabel={(option) => option.name || ''}
         noOptionsText={
           <div>
             <p>No options</p>
@@ -136,11 +148,18 @@ function MainExerciseForm({ idx, hour, setHour, minute, setMinute }) {
         autoComplete="off"
         style={{ display: 'inline-flex' }}
       >
-        <MainInput id="outlined-basic" label="hour" variant="outlined" onChange={onChangeHour} />
+        <MainInput
+          id="outlined-basic"
+          label="hour"
+          variant="outlined"
+          value={hour[idx]}
+          onChange={onChangeHour}
+        />
         <MainInput
           id="outlined-basic"
           label="minute"
           variant="outlined"
+          value={minute[idx]}
           onChange={onChangeMinute}
         />
       </div>
@@ -150,8 +169,8 @@ function MainExerciseForm({ idx, hour, setHour, minute, setMinute }) {
         시간 당 {exerciseSelected[idx]?.kcal_per_kg}
         <br />
         {hour[idx]} 시간
-        <br />
-        {minute[idx]} 분
+        <br /> */}
+        {/* {minute[idx]} 분
         <br />총 {time[idx]} 분
         <br /> */}
         {kcalPerHour[idx]} kcal/hour

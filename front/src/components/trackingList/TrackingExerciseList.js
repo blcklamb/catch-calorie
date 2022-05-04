@@ -8,7 +8,7 @@ import { trackingUpdateState } from '../../atoms';
 
 import * as Api from '../../api';
 
-function TrackingExerciseList({ exercise }) {
+function TrackingExerciseList({ exercise, isMypage }) {
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -33,12 +33,12 @@ function TrackingExerciseList({ exercise }) {
     setIsEditing(true);
   };
 
-  const handleCancle = (e) => {
+  const handleCancel = (e) => {
     setIsEditing(false);
   };
 
-  const handleDelete = (e) => {
-    Api.delete(`tracking/exer/${exercise.id}`);
+  const handleDelete = async (e) => {
+    await Api.delete(`tracking/exer/${exercise.id}`);
 
     setTrackingUpdate(!trackingUpdate);
   };
@@ -68,11 +68,11 @@ function TrackingExerciseList({ exercise }) {
               style={{ marginRight: '30px' }}
             />
             <div style={{ marginRight: '30px' }}>{previewKcal()}kcal</div>
-            <Button variant="contained" type="submit" onClick={handleCheck}>
+            <Button variant="contained" type="button" onClick={handleCheck}>
               Check
             </Button>
-            <Button variant="contained" type="submit" onClick={handleCancle}>
-              Cancle
+            <Button variant="contained" type="button" onClick={handleCancel}>
+              Cancel
             </Button>
           </div>
         </div>
@@ -84,12 +84,17 @@ function TrackingExerciseList({ exercise }) {
               {parseInt(exercise.minute / 60)}H {exercise.minute % 60}M
             </div>
             <div style={{ marginRight: '30px' }}>{exercise.calorie}kcal</div>
-            <Button variant="contained" type="submit" onClick={handleModify}>
-              Modify
-            </Button>
-            <Button variant="contained" type="submit" onClick={handleDelete}>
-              Delete
-            </Button>
+            {/* 마이페이지에서는 버튼 X */}
+            {isMypage !== 'mypage' && (
+              <div>
+                <Button variant="contained" type="button" onClick={handleModify}>
+                  Modify
+                </Button>
+                <Button variant="contained" type="button" onClick={handleDelete}>
+                  Delete
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       )}

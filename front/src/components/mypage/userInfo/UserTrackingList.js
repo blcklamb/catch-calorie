@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { userInfoState } from '../../../atoms';
+import { userInfoState, trackingListState } from '../../../atoms';
 
 import {
   BadgesContainer,
@@ -14,16 +14,17 @@ import {
   CardText,
 } from '../../styledCompo/uesrStyle';
 
-import MainGraph from '../../main/MainGraph';
+import TrackingLists from '../../trackingList/TrackingLists';
 
-function UserGraph({ currentUserInfo }) {
+function UserTrackingList({ currentUserInfo }) {
+
   return (
     <>
       <UserCardFrame>
-        <MainGraph />
+        <TrackingLists />
       </UserCardFrame>
     </>
   );
 }
 
-export default UserGraph;
+export default UserTrackingList;
