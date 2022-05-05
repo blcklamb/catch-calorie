@@ -1,7 +1,7 @@
 import { Award, Heatmap, Tracking, User } from "../db";
+import { v4 as uuid } from "uuid";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { v4 as uuid } from "uuid";
 import sendMail from "../middlewares/send_mail";
 import configureMeasurements, { mass, length } from "convert-units";
 const convert = configureMeasurements({ mass, length });
@@ -12,13 +12,12 @@ class userService {
         const user = await User.findOne({ email });
         if (user) return { errorMessage: "현재 사용 중인 이메일입니다. 다른 이메일을 입력해주세요." };
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-
         if (unit === "us") {
             height = convert(height).from("ft").to("cm").toFixed(0);
             weight = convert(weight).from("lb").to("kg").toFixed(0);
         }
 
+        const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = {
             email,
             password: hashedPassword,
@@ -100,6 +99,7 @@ class userService {
     // 로그인한 회원 비밀번호 수정하기
     static async setPassword({ id, old_pw, new_pw }) {
         const user = await User.findById({ id });
+
         const pass = await bcrypt.compare(old_pw, user.password);
         if (!pass) throw new Error("비밀번호를 정확하게 입력해주세요.");
 
@@ -112,7 +112,6 @@ class userService {
     // 임시비밀번호 발급 (sendMail middleware?)
     static async sendNewpassword({ email }) {
         const temp_pw = uuid().split("-")[0];
-
         await sendMail(
             email,
             "[Catch Calorie] Password Reset",
@@ -133,9 +132,9 @@ class userService {
         if (user) return { errorMessage: "현재 사용 중인 이메일입니다. 다른 이메일을 입력해주세요." };
 
         const newUser = await User.create({ newUser: { email, name, gender, height, weight, icon } });
-        const { _id } = newUser;
         const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
-        const token = jwt.sign({ user_id: newUser._id }, secretKey, { expiresIn: "2h" });
+        const token = jwt.sign({ user_id: newUser._id }, secretKey, { expiresIn: "12h" });
+        const { _id } = newUser;
 
         return { token, _id, email, name, gender, height, weight, icon };
     }

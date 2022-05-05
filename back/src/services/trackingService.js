@@ -1,4 +1,4 @@
-import { Tracking, Food, Exercise, User } from "../db";
+import { Food, Exercise, Tracking, User } from "../db";
 import { v4 as uuid } from "uuid";
 import configureMeasurements, { mass, length } from "convert-units";
 const convert = configureMeasurements({ mass, length });
@@ -56,12 +56,10 @@ class trackingService {
         const { name, calorie } = data.food_record.find((food) => food.id === id);
 
         const gram = unit === "us" ? convert(weight).from("lb").to("g").toFixed(0) : weight;
-
         const { kcal_per_100g } = await Food.findByName({ name });
         const newCalorie = Math.floor((kcal_per_100g / 100) * gram);
 
         const acc_cal = newCalorie - calorie;
-
         const toUpdate = { gram, calorie: newCalorie, acc_cal };
 
         return Tracking.findByRecordAndUpdate({ id, record: "food", toUpdate });
@@ -76,7 +74,6 @@ class trackingService {
         const newCalorie = Math.floor(((kcal_per_kg * weight) / 60) * minute);
 
         const acc_cal = -(newCalorie - calorie);
-
         const toUpdate = { minute, calorie: newCalorie, acc_cal };
 
         return Tracking.findByRecordAndUpdate({ id, record: "exer", toUpdate });

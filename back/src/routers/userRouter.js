@@ -17,7 +17,6 @@ userRouter.post("/users/register", async (req, res, next) => {
         if (is.emptyObject(req.body)) {
             throw new Error("header의 Content-Type을 application/json으로 설정해주세요.");
         }
-
         const { email, password, name, gender, height, weight, unit, icon } = req.body;
 
         const newUser = await userService.addUser({
@@ -30,7 +29,6 @@ userRouter.post("/users/register", async (req, res, next) => {
             unit,
             icon,
         });
-
         if (newUser.errorMessage) {
             throw new Error(newUser.errorMessage);
         }
@@ -47,7 +45,6 @@ userRouter.post("/users/login", async (req, res, next) => {
         const { email, password } = req.body;
 
         const user = await userService.getUser({ email, password });
-
         if (user.errorMessage) {
             throw new Error(user.errorMessage);
         }
@@ -105,8 +102,7 @@ userRouter.put("/users/:id", login_required, async (req, res, next) => {
         const { id } = req.params;
 
         const { name, height, weight, unit, open, icon, status } = req.body;
-
-        if (name === null || height === null || weight === null || icon == null || status == null || unit == null || open == null) {
+        if (name || height || weight || icon || status || unit || open === null) {
             throw new Error("입력되지 않은 정보가 있습니다.");
         }
 
@@ -139,8 +135,8 @@ userRouter.put("/users/:id", login_required, async (req, res, next) => {
 userRouter.get("/users/email/:email", async (req, res, next) => {
     try {
         const { email } = req.params;
-        const code = uuid().split("-")[0];
 
+        const code = uuid().split("-")[0];
         await sendMail(
             email, //
             "[Catch Calorie] Hi, We are happy you signed up for Catch Calorie",
@@ -159,7 +155,7 @@ userRouter.put("/password", login_required, async (req, res, next) => {
         const { old_pw, new_pw } = req.body;
 
         const user = await userService.setPassword({ id, old_pw, new_pw });
-        if (!user) throw new Error("비밀번호 설정 실패");
+        if (!user) throw new Error("비밀번호 변경에 실패했습니다.");
 
         return res.status(200).send(user);
     } catch (error) {
