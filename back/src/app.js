@@ -12,9 +12,15 @@ import { badgeRouter } from "./routers/badgeRouter";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 import heatmap_scheduler from "./middlewares/heatmap_scheduler";
 
-import { bucketRouter } from "./middlewares/upload_image"
+import { bucketRouter } from "./middlewares/upload_image";
+
+import swaggerUi from "swagger-ui-express";
+import swaggerJsDoc from "swagger-jsdoc";
 
 const app = express();
+const { specs } = require("./modules/swagger");
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
 
 // CORS 에러 방지
 app.use(cors());
