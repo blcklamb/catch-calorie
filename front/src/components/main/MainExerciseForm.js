@@ -137,7 +137,7 @@ function MainExerciseForm({ idx }) {
           </div>
         }
       />
-      {!exerciseSelected[idx] && <span>Please select a food</span>}
+      {!exerciseSelected[idx] && <span>Please select a exercise</span>}
       <div
         component="form"
         sx={{
