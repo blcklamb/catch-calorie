@@ -1,6 +1,7 @@
 import is from "@sindresorhus/is";
 import jwt from "jsonwebtoken";
 import fetch from "node-fetch";
+import rateLimit from "express-rate-limit";
 import { v4 as uuid } from "uuid";
 import { Router } from "express";
 import { userService } from "../services/userService";
@@ -132,7 +133,7 @@ userRouter.put("/users/:id", login_required, async (req, res, next) => {
 });
 
 // 회원가입 인증 이메일 발송
-userRouter.get("/users/email/:email", async (req, res, next) => {
+userRouter.get("/users/email/:email", rateLimit({ windowMs: 30000, max: 1 }), async (req, res, next) => {
     try {
         const { email } = req.params;
 
