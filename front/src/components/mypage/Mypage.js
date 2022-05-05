@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Header from '../Header.js';
 import Footer from '../Footer.js';
@@ -11,8 +11,8 @@ import * as Api from '../../api';
 import UserInfo from './userInfo/userInfo.js';
 
 const BadgesPage = styled.section`
-  height: 50%;
-  width: 100%;
+  height: auto;
+  width: auto;
   background-color: white;
   display: flex;
   align-items: center;
@@ -22,8 +22,8 @@ const BadgesPage = styled.section`
 `;
 
 const JandiPage = styled.section`
-  height: 60%;
-  width: 100%;
+  height: auto;
+  width: auto;
   background-color: white;
   display: flex;
   justify-content: center;
@@ -60,7 +60,7 @@ function Mypage() {
       <Header />
       <UserInfo currentUserInfo={currentUserInfo} />
       <BadgesPage>
-        <Badges />
+        <Badges currentUserInfo={currentUserInfo} />
       </BadgesPage>
       <JandiPage>
         <Jandi />

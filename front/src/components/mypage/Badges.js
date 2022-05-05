@@ -1,38 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import * as Api from '../../api';
+import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
-import Yoga from './yoga.png';
+import * as Api from '../../api';
+import Tooltip from './Tooltip';
 import { Container, Grid } from '@mui/material';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import { userInfoState, BadgesState } from '../../atoms';
+import { useParams } from 'react-router-dom';
 
-import Tooltip from '../Tooltip';
+// const BadgesContainer = styled.div`
+//   width: 1203px;
+//   height: 700px;
+//   border-radius: 15px;
+//   background-color: #94d82d;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
 
-import { useRecoilValue } from 'recoil';
-import { userInfoState } from '../../atoms';
+// const BadgesWrap = styled.div`
+//   width: 1100px;
+//   height: 600px;
 
-const BadgesContainer = styled.div`
-  width: 1203px;
-  height: 700px;
-  border-radius: 15px;
-  background-color: #94d82d;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+//   display: flex;
+//   gap: 20px 8%;
+//   flex-wrap: wrap;
+//   justify-content: center;
+//   align-items: center;
 
-const BadgesWrap = styled.div`
-  width: 1100px;
-  height: 600px;
+//   /* background-color: white; */
 
-  display: flex;
-  gap: 20px 8%;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-
-  /* background-color: white; */
-
-  position: absolute;
-`;
+//   position: absolute;
+// `;
 
 const BadgesText = styled.div`
   width: 1203px;
@@ -44,49 +42,76 @@ const BadgesText = styled.div`
   left: 30px;
 `;
 
-const Badges = () => {
+const Badges = ({ currentUserInfo }) => {
+  // const [badgesList, setBadgesList] = useRecoilState(badgesState);
+
   const user = useRecoilValue(userInfoState);
-  const [badges, setBadges] = useState([]);
-  console.log('뱃지', badges);
+  const params = useParams();
+  const [badges, setBadges] = useRecoilState(BadgesState);
+  const [award, setAward] = useState([]);
+
+  const isEditable = useMemo(() => currentUserInfo?._id === user?._id, [currentUserInfo, user]);
+
+  // const awardNameAr = useMemo(
+  //   () =>
+  //     Object.keys(award).filter((item) => {
+  //       if (item === '_id' || item === 'user_id' || item === '__v') {
+  //         return false;
+  //       } else {
+  //         return true;
+  //       }
+  //     }),
+  //   [award],
+  // );
+  useEffect(() => {
+    Api.get(`badges`).then((res) => setBadges(res.data));
+  }, []);
 
   useEffect(() => {
-    Api.get('users', user._id).then((res) => setBadges(res.data.icon));
+    if (params.user_id) {
+      const userId = params.user_id;
+      Api.get('awards', userId).then((res) => setAward(res.data));
+    } else {
+      Api.get('awards', user._id).then((res) => setAward(res.data));
+    }
   }, [user]);
 
+  // const userId = params.user_id;
+  // console.log(userId);
+
+  // useEffect(() => {
+  //   Api.get('awards', user._id).then((res) => setAward(res.data));
+  // }, [user]);
+
+  useEffect(() => {
+    console.log('뱃지데이터', badges);
+  }, [badges]);
   return (
     <div>
       <BadgesText>Badges</BadgesText>
 
       <Container sx={{ marginTop: 2, bgcolor: '#94d82d', borderRadius: 3 }}>
         <Grid container spacing={1}>
-          <Grid spacing={3} sx={{ margin: 3 }}>
-            <Tooltip />
-          </Grid>
-          <Grid spacing={3} sx={{ margin: 3 }}>
-            <Tooltip />
-          </Grid>
-          <Grid spacing={3} sx={{ margin: 3 }}>
-            <Tooltip />
-          </Grid>
-          <Grid spacing={3} sx={{ margin: 3 }}>
-            <Tooltip />
-          </Grid>
-          <Grid spacing={3} sx={{ margin: 3 }}>
-            <Tooltip />
-          </Grid>
+          {badges.map((badge, idx) => {
+            const isLock = award[badge.award_name] < badge.level;
+
+            return (
+              <Grid item sx={{ margin: 2 }} key={idx}>
+                <Tooltip
+                  badgeName={badge.badge_name}
+                  awardName={badge.award_name}
+                  src={badge.src}
+                  badgeLevel={badge.level}
+                  description={badge.description}
+                  isLock={isLock}
+                  currentUserInfo={currentUserInfo}
+                  isEditable={isEditable}
+                />
+              </Grid>
+            );
+          })}
         </Grid>
       </Container>
-
-      {/* <BadgesContainer>
-        <BadgesWrap>
-          <Tooltip />
-          <Tooltip />
-          <Tooltip />
-          <Tooltip />
-          <Tooltip />
-          <Tooltip />
-        </BadgesWrap>
-      </BadgesContainer> */}
     </div>
   );
 };

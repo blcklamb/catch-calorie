@@ -3,11 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 
+import { Section, GraphContainer } from '../styledCompo/mainStyle';
+
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
+  trackingState,
   userInfoState,
   foodSelectedState,
-  kcalPerGramState,
+  kcalPerUnitState,
   trackingUpdateState,
   exerciseSelectedState,
   kcalPerHourState,
@@ -18,16 +21,31 @@ import * as Api from '../../api';
 function MainGraph({}) {
   const user = useRecoilValue(userInfoState);
 
-  const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
-  const [kcalPerGram, setKcalPerGram] = useRecoilState(kcalPerGramState);
+  const [tracking, setTracking] = useRecoilState(trackingState);
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
+
+  const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
+  const [kcalPerUnit, setKcalPerUnit] = useRecoilState(kcalPerUnitState);
 
   const [exerciseSelected, setExerciseSelected] = useRecoilState(exerciseSelectedState);
   const [kcalPerHour, setKcalPerHour] = useRecoilState(kcalPerHourState);
 
-  const [todayTracking, setTodayTracking] = useState();
+  const [trackingKcal, setTrackingKcal] = useState();
+  const [trackingRecKcal, setTrackingRecKcal] = useState();
 
-  const labels = ["Today's calories"];
+  const isMypage = window.location.href.split('/')[3];
+
+  useEffect(() => {
+    Api.get(`tracking/${user._id}`).then((res) => {
+      // 오늘의 트래킹 정보
+      setTracking(res.data);
+      // 오늘의 트래킹 정보 중 칼로리
+      setTrackingKcal(res.data?.acc_cal);
+      setTrackingRecKcal(res.data?.rec_cal);
+    });
+  }, [trackingUpdate]);
+
+  const labels = [''];
 
   const options = {
     // legend: {
@@ -64,31 +82,80 @@ function MainGraph({}) {
     },
   };
 
+  const handelTrackingKcal = () => {
+    if (trackingKcal > trackingRecKcal) {
+      return [trackingRecKcal];
+    } else {
+      return [trackingKcal];
+    }
+  };
+
+  const handelTrackingKcalColor = () => {
+    if (trackingKcal > trackingRecKcal) {
+      return ['rgba(91,7,7, 0.7)'];
+    } else {
+      return ['rgba(240,62,62, 0.5)'];
+    }
+  };
+
+  const handelTrackingKcalBorderColor = () => {
+    if (trackingKcal > trackingRecKcal) {
+      return ['rgba(91,7,7)'];
+    } else {
+      return ['rgba(240,62,62)'];
+    }
+  };
+
   const remainingKcal = () => {
-    if (todayTracking?.acc_cal < 0) {
-      return [3000];
+    // console.log(typeof trackingKcal, trackingKcal);
+    // console.log(typeof trackingRecKcal, trackingRecKcal);
+    // console.log(kcalPerGram);
+
+    // 1)섭취 칼로리나 2)선택 칼로리나 3)섭취 + 선택 칼로리가 권장 칼로리를 넘는다면, 남는 칼로리 없음
+    if (
+      trackingKcal > trackingRecKcal ||
+      kcalPerUnit.reduce((acc, cur) => acc + cur, 0) > trackingRecKcal ||
+      trackingKcal + kcalPerUnit.reduce((acc, cur) => acc + cur, 0) > trackingRecKcal
+    ) {
+      return [0];
+      // 권장 칼로리를 넘을 경우 최대치를 5000 단위로 늘림
+      //   let line = (parseInt(trackingKcal / 10000) * 10 + 5) * 1000;
+      //   // console.log(line);
+
+      //   if (trackingKcal > line) {
+      //     return [line + 5000 - trackingKcal];
+      //   } else {
+      //     return [line - trackingKcal];
+      //   }
+    }
+
+    // 소모 칼로리가 섭취 칼로리보다 많다면 최대치는 권장 칼로리
+    if (trackingKcal < 0) {
+      return [0];
     }
 
     // 선택된 항목이 없을 경우
-    if (isNaN(kcalPerGram[0])) {
-      return [3000 - todayTracking];
+    if (kcalPerUnit[0] === 0) {
+      return [trackingRecKcal - trackingKcal];
     }
 
-    return [3000 - todayTracking - kcalPerGram.reduce((acc, cur) => acc + cur, 0)];
+    return [trackingRecKcal - trackingKcal - kcalPerUnit.reduce((acc, cur) => acc + cur, 0)];
   };
 
   const data = {
     labels: labels,
     datasets: [
       {
-        label: 'Current Calories',
-        data: [todayTracking],
-        backgroundColor: ['rgba(255, 99, 132, 0.2)'],
-        borderColor: ['rgb(255, 99, 132)'],
+        label: 'Current Kcal',
+        data: handelTrackingKcal(),
+        backgroundColor: handelTrackingKcalColor(),
+        // backgroundColor: ['rgba(240,62,62, 0.5)'],
+        borderColor: handelTrackingKcalBorderColor(),
+        // borderColor: ['rgba(240,62,62)'],
         borderWidth: 1,
       },
       {
-        label: 'Calories Remaining',
+        label: 'Kcal Remaining',
         data: remainingKcal(),
         backgroundColor: ['rgba(201, 203, 207, 0.2)'],
         borderColor: ['rgb(201, 203, 207)'],
@@ -98,32 +165,24 @@ function MainGraph({}) {
   };
 
   const backgroundColor = [
-    'rgba(255, 159, 64, 0.2)',
-    'rgba(255, 205, 86, 0.2)',
-    'rgba(75, 192, 192, 0.2)',
-    'rgba(54, 162, 235, 0.2)',
-    'rgba(153, 102, 255, 0.2)',
+    'rgba(156,253,8, 0.4)',
+    'rgba(152,235,26, 0.6)',
+    'rgba(148,216,45, 0.6)',
+    'rgba(120,177,33, 0.5)',
+    'rgba(91,134,25, 0.5)',
+    'rgba(62,91,17, 0.5)',
+    'rgba(47,70,13, 0.5)',
   ];
 
   const borderColor = [
-    'rgba(255, 159, 64)',
-    'rgba(255, 205, 86)',
-    'rgba(75, 192, 192)',
-    'rgba(54, 162, 235)',
-    'rgba(153, 102, 255)',
+    'rgba(156,253,8)',
+    'rgba(152,235,26)',
+    'rgba(148,216,45)',
+    'rgba(120,177,33)',
+    'rgba(91,134,25)',
+    'rgba(62,91,17)',
+    'rgba(47,70,13)',
   ];
-
-  const getTracking = () => {
-    Api.get(`tracking/${user._id}`).then((res) => {
-      setTodayTracking(res.data?.acc_cal);
-    });
-  };
-
-  getTracking();
-
-  useEffect(() => {
-    getTracking();
-  }, [trackingUpdate]);
 
   const addData = () => {
     foodSelected.map((food, idx) => {
@@ -132,7 +191,7 @@ function MainGraph({}) {
         backgroundColor: backgroundColor[idx],
         borderColor: borderColor[idx],
         borderWidth: 1,
-        data: [kcalPerGram[idx]],
+        data: [kcalPerUnit[idx]],
       };
 
       if (food !== 0) {
@@ -155,14 +214,19 @@ function MainGraph({}) {
     });
   };
 
-  addData();
+  // mypage에서는 음식/운동 선택 막대(초록) 보이지 않음
+  isMypage !== 'mypage' && addData();
 
   return (
-    <div>
-      <div style={{ width: 400 }}>
+    <Section>
+      <h1>Calorie Graph</h1>
+      <GraphContainer>
         <Bar data={data} options={options} height={300} />
-      </div>
-    </div>
+      </GraphContainer>
+      {trackingKcal > trackingRecKcal && (
+        <h3>It's over {trackingKcal - trackingRecKcal} calories</h3>
+      )}
+    </Section>
   );
 }
 

@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField';
 
 const MainInput = styled(TextField)({
   '& .MuiOutlinedInput-root': {
-    marginBottom: '80px', 
     '& fieldset': {
       color: 'red',
       label: 'red',

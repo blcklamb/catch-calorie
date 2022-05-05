@@ -3717,6 +3717,11 @@ convert-source-map@^1.4.0, convert-source-map@^1.5.0, convert-source-map@^1.6.0,
   dependencies:
     safe-buffer "~5.1.1"
 
+convert-units@^3.0.0-beta.4:
+  version "3.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/convert-units/-/convert-units-3.0.0-beta.4.tgz#56edeb39fd942bce6bb10ac8292216d2075c61b6"
+  integrity sha512-n/hYi+a2bj5PU0PJRn96Nv2wnJozXlWsVCpWTfbc2Yrl3M293u9Z/2NI5LelYpfyWpGTZaouZkOzHpBFGdk/UQ==
+
 cookie-signature@1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/cookie-signature/-/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"

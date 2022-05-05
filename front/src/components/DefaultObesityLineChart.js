@@ -62,7 +62,6 @@ export default function DefaultObesityLineChart() {
         bottom: 20,
       }}
     >
-      <CartesianGrid strokeDasharray="1 1" />
       <XAxis
         dataKey="name"
         padding={{ left: 40, right: 40 }}

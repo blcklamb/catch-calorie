@@ -1,27 +1,33 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { Container, Col, Row, Form, Button } from "react-bootstrap";
 
 // Mui
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 
 import * as Api from '../../api';
-// import { DispatchContext } from '../../App';
 import Header from '../Header';
 import Footer from '../Footer';
 import { validateEmail } from '../../utils';
 // import recoil
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { tokenState, userState } from '../../atoms';
 
 // import styled compo
-import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
+import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/muiCustom';
+import {
+  LoginGlass,
+  LoginText,
+  ForgetPw,
+  SignPWContainer,
+  SignBtn,
+  SignInBtn,
+  Btn,
+} from '../styledCompo/styledCompo';
 import githubLogin from './GithubLogin';
-import { DispatchContext } from '../../App';
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -87,13 +93,13 @@ function LoginForm() {
       <Header></Header>
       <Container
         style={{
-          display: 'flex', //
+          display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          marginTop: 50,
+          marginTop: 400,
         }}
       >
-        <div>
+        <LoginGlass>
           <form
             action="/"
             onSubmit={handleSubmit}
@@ -106,15 +112,17 @@ function LoginForm() {
               flexFlow: 'column',
             }}
           >
-            <h1 style={{ margin: 10 }}>Login</h1>
+            <LoginText>Login</LoginText>
+
             <Box
               sx={{
-                '& > :not(style)': { m: 1, width: '34ch' },
+                width: '328px',
               }}
               noValidate
               autoComplete="off"
             >
               <ValidationTextField
+                style={{ width: 328, marginBottom: 10 }}
                 autoFocus
                 required
                 // {!checkLogin && error}
@@ -135,6 +143,7 @@ function LoginForm() {
               />
               <br></br>
               <ValidationTextField
+                style={{ width: 328, marginBottom: 10 }}
                 required
                 error={!checkLogin}
                 id="outlined-password-input"
@@ -152,7 +161,17 @@ function LoginForm() {
                 }}
               />
               <br></br>
-              <Button onClick={() => navigate('/password/init')}>Forget Password?</Button>
+              {/* <Button color="success" onClick={() => navigate('/password/init')}>
+                Forget Password?
+              </Button> */}
+              <SignPWContainer>
+                <ForgetPw color="success" onClick={() => navigate('/password/init')}>
+                  Forget Password?
+                </ForgetPw>
+                <SignBtn color="success" onClick={() => navigate('/register')}>
+                  Sign-up
+                </SignBtn>
+              </SignPWContainer>
               <Stack
                 spacing={1}
                 direction="row"
@@ -161,12 +180,25 @@ function LoginForm() {
                 <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
                   Sign-in
                 </ColorButton>
-                <ColorButton variant="contained" onClick={() => navigate('/register')}>
-                  Sign-up
-                </ColorButton>
+
                 <ColorButtonB variant="outlined" onClick={() => navigate('/')}>
                   Start Page
                 </ColorButtonB>
+                {/* <button
+                  style={{
+                    borderRadius: '17px',
+                    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                    // backgroundColor: '#94D82D',
+                    background: 'linear-gradient(180deg, #A8E054 100%, #99DA36 100%)',
+                    borderImage: 'linear-gradient(to right, red 0%, orange 100%)',
+                    borderImageSlice: 1,
+                    color: '#F03E3E',
+                    height: '46px',
+                  }}
+                >
+                  qjxms
+                </button>
+                <Btn>djjd</Btn> */}
               </Stack>
             </Box>
             <hr style={{ width: '100%', margin: '18px 0 24px 0' }} />
@@ -184,7 +216,7 @@ function LoginForm() {
               😺&nbsp;&nbsp;GitHub로 로그인하기
             </button>
           </form>
-        </div>
+        </LoginGlass>
       </Container>
       <Footer></Footer>
     </div>

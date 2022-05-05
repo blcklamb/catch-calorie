@@ -13,11 +13,11 @@ import {
   UserBodyInfo,
   UserBtnInfo,
   UserBadgeImgInfo,
-  ColorButton,
-  ValidationTextField,
-} from '../styledCompo/uesrStyle';
+} from '../styledCompo/styledCompo';
 
-const ChangePwForm = ({ setIsEditPw }) => {
+import { ColorButton, ValidationTextField } from '../styledCompo/muiCustom';
+
+const ChangePwForm = ({ setCardState }) => {
   //현재 바밀번호와, 바꿀 비밀번호를 저장하는 state
   const [pwInfo, setPwInfo] = useState({
     oldPw: '',
@@ -52,7 +52,7 @@ const ChangePwForm = ({ setIsEditPw }) => {
 
       const temp = res.data;
       console.log(temp, '수정 요청이 잘 갔습니다요!');
-      setIsEditPw(false);
+      setCardState();
       alert('Your password has been changed successfully');
     } catch (err) {
       console.log('아쉽게도 잘 가지 않았군요 휴먼', err);
@@ -111,7 +111,7 @@ const ChangePwForm = ({ setIsEditPw }) => {
           >
             Confirm
           </ColorButton>
-          <ColorButton sx={{ width: 120, height: 60 }} onClick={() => setIsEditPw(false)}>
+          <ColorButton sx={{ width: 120, height: 60 }} onClick={() => setCardState()}>
             Cancel
           </ColorButton>
         </UserBtnInfo>

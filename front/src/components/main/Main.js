@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
+import * as Api from '../../api';
 
 import Header from '../Header';
 import Footer from '../Footer';
@@ -12,8 +14,10 @@ import UserDelForm from '../user/UserDelForm';
 
 import MainButton from './style/MainButton';
 
+import { BodyContainer, MainHelloSection, MainSection1 } from '../styledCompo/mainStyle';
+
 import { useRecoilState } from 'recoil';
-import { tokenState, userInfoState, userState } from '../../atoms';
+import { tokenState, userInfoState, userState, BadgesState } from '../../atoms';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -22,71 +26,41 @@ const Main = () => {
   const [recoilUser, setRecoilUser] = useRecoilState(userState);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
-  const logout = () => {
-    // sessionStorage 에 저장했던 JWT 토큰을 삭제함.
-    sessionStorage.removeItem('userToken');
-    // dispatch 함수를 이용해 로그아웃함.
-    // dispatch({ type: 'LOGOUT' });
-    setRecoilUser(null);
-    setUserInfo(null);
-    setToken(null);
+  const [badges, setBadges] = useRecoilState(BadgesState);
 
-    // 기본 페이지로 돌아감.
-    navigate('/login');
-  };
-
+  console.log('뱃지', badges);
   const MainHello = styled.div`
+    background: green;
+    display: flex;
+    align-items: center;
     font-size: 35px;
     font-weight: bold;
+    width: 100%;
+    height: 100px;
+    position: relative;
   `;
+
+  useEffect(() => {
+    Api.get(`badges`).then((res) => setBadges(res.data));
+  }, []);
 
   return (
     <>
       <Header />
-      <div style={{ margin: '100px 80px' }}>
-        <MainHello>Hello {userInfo.name}!</MainHello>
+      <BodyContainer>
+        <MainHelloSection>
+          <MainHello>Hello, {userInfo.name}</MainHello>
+        </MainHelloSection>
 
         {/* <div style={{ margin: '80px 0px' }}> */}
-        <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
+        <MainSection1>
           <MainTabs />
           <MainGraph />
-        </div>
+        </MainSection1>
         <div>
           <TrackingLists />
-          <MainButton
-            variant="contained"
-            style={{ marginBottom: '20px', width: '60%' }}
-            onClick={() => navigate('/network')}
-          >
-            network
-          </MainButton>
-          <br />
-          <MainButton
-            variant="contained"
-            style={{ marginBottom: '20px', width: '60%' }}
-            onClick={() => navigate('/users')}
-          >
-            edit
-          </MainButton>
-          <br />
-          <MainButton
-            variant="contained"
-            style={{ marginBottom: '20px', width: '60%' }}
-            onClick={() => navigate('/mypage')}
-          >
-            My page
-          </MainButton>
-          <br />
-          <MainButton
-            variant="contained"
-            style={{ marginBottom: '20px', width: '60%' }}
-            onClick={logout}
-          >
-            Log-out
-          </MainButton>
-          <UserDelForm></UserDelForm>
         </div>
-      </div>
+      </BodyContainer>
       <Footer />
     </>
   );

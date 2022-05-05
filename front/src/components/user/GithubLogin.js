@@ -12,18 +12,26 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 
 //styled Compo
-import { ValidationTextField, ColorButton } from '../styledCompo/uesrStyle';
+import { ValidationTextField, ColorButton } from '../styledCompo/muiCustom';
 
 //Compo
 import Header from '../Header';
 import Footer from '../Footer';
 
+//import recoil
+import { useSetRecoilState } from 'recoil';
+import { tokenState, userState } from '../../atoms';
+
 function GithubLogin() {
+  const setToken = useSetRecoilState(tokenState);
+  const setUser = useSetRecoilState(userState);
+
   const location = useLocation();
   const navigate = useNavigate();
 
   const [data, setData] = useState('');
   const [gender, setGender] = useState('male');
+  // height, weight input type number로 수정, 형 변환 필요 없을듯..?
   const [height, setHeight] = useState(null);
   const [weight, setWeight] = useState(null);
   const [icon, setIcon] = useState('runner');
@@ -32,6 +40,7 @@ function GithubLogin() {
     const login = async () => {
       try {
         const code = new URLSearchParams(location.search);
+        // Api 사용 시 오류가 나서 우선 axios 사용함.
         const response = await axios
           .get(`http://localhost:5002/users/login/github?${code}`)
           .then((res) => res.data);
@@ -40,6 +49,7 @@ function GithubLogin() {
           sessionStorage.setItem('userToken', response.token);
           navigate(`/tracking/${response._id}`, { replace: true });
         }
+
         setData(response);
       } catch (error) {
         console.log(`❌ Error: ${error}`);
@@ -63,16 +73,28 @@ function GithubLogin() {
         weight,
         icon,
       }).then((res) => res.data);
-      authentication(user);
+
+      const res = await Api.post('users/login', {
+        email: user.email,
+        password: user.password,
+      });
+      // 유저 정보는 response의 data임.
+      const user2 = res.data;
+      // JWT 토큰은 유저 정보의 token임.
+      const jwtToken = user.token;
+      // sessionStorage에 "userToken"이라는 키로 JWT 토큰을 저장함.
+      sessionStorage.setItem('userToken', jwtToken);
+
+      console.log(user2);
+      setToken(user2.token);
+      setUser(user2);
+
+      // sessionStorage.setItem('userToken', user.token);
+
+      navigate(`/tracking/${user._id}`, { replace: true });
     } catch (err) {
       console.log(`❌ Register Error: ${err}`);
     }
-  };
-
-  const authentication = (user) => {
-    const jwtToken = user.token;
-    sessionStorage.setItem('userToken', jwtToken);
-    navigate(`/tracking/${user._id}`, { replace: true });
   };
 
   return (
