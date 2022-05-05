@@ -21,6 +21,7 @@ db.once("open", async () => {
         const terms = async ({ user_id, trackings }) => {
             const foods = trackings.map((tracking) => tracking.food_record).flat();
             const exers = trackings.map((tracking) => tracking.exer_record).flat();
+            const days = trackings.map((tracking) => new Date(tracking.date).getTime() / (24 * 60 * 60 * 1000));
             const categorys = await Promise.all(foods.map(async (food) => await Food.findByName({ name: food.name }).then((data) => data.category)));
 
             // ------------ EXERCISE COUNTING ------------
@@ -105,9 +106,22 @@ db.once("open", async () => {
             const visitor = Math.floor(trackings.length / 5);
             if (visitor >= 6) await Award.update({ user_id }, { visitor: 6 });
             else await Award.update({ user_id }, { visitor });
+
+            // steady: 연속 출석 5n일 이상 (I, II, III)
+            let [count, steady] = [1, 1];
+            for (let i = 0; i < days.length; i++) {
+                if (days[i] + 1 === days[i + 1]) count++;
+                else {
+                    if (count > steady) steady = count;
+                    count = 1;
+                }
+            }
+            steady = Math.floor(steady / 5);
+            if (steady >= 3) await Award.update({ user_id }, { steady: 3 });
+            else await Award.update({ user_id }, { steady });
         };
 
-        if (change.operationType === "update") {
+        if (change.operationType === "insert" || "update") {
             const id = change.documentKey._id;
             const { user_id } = await Tracking.findById({ id });
             const trackings = await Tracking.findByUser({ user_id });

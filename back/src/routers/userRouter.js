@@ -159,12 +159,9 @@ userRouter.put("/password", login_required, async (req, res, next) => {
         const { old_pw, new_pw } = req.body;
 
         const user = await userService.setPassword({ id, old_pw, new_pw });
+        if (!user) throw new Error("비밀번호 설정 실패");
 
-        if (!user) {
-            throw new Error("비밀번호 설정 실패");
-        }
-
-        return res.send(user);
+        return res.status(200).send(user);
     } catch (error) {
         next(error);
     }
@@ -174,8 +171,10 @@ userRouter.put("/password", login_required, async (req, res, next) => {
 userRouter.put("/password/init", async (req, res, next) => {
     try {
         const { email } = req.body;
-        const user = await userService.sendNewpassword({ email });
-        return res.send("Successfully send");
+
+        await userService.sendNewpassword({ email });
+
+        return res.sendStatus(200);
     } catch (error) {
         next(error);
     }

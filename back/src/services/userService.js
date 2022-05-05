@@ -2,7 +2,7 @@ import { Award, Heatmap, Tracking, User } from "../db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuid } from "uuid";
-import nodemailer from "nodemailer";
+import sendMail from "../middlewares/send_mail";
 import configureMeasurements, { mass, length } from "convert-units";
 const convert = configureMeasurements({ mass, length });
 
@@ -111,39 +111,21 @@ class userService {
 
     // 임시비밀번호 발급 (sendMail middleware?)
     static async sendNewpassword({ email }) {
-        const mailOption = {
-            service: "Naver",
-            host: "smtp.namer.com",
-            port: 587,
-            auth: {
-                user: process.env.NODEMAIL_EMAIL,
-                pass: process.env.NODEMAIL_PW,
-            },
-        };
-
         const temp_pw = uuid().split("-")[0];
 
-        const message = {
-            from: process.env.NODEMAIL_EMAIL,
-            to: email,
-            subject: "[Catch Calorie] Password Reset",
-            text: `It seems like you forgot your password for Catch-Calorie.\n 
+        await sendMail(
+            email,
+            "[Catch Calorie] Password Reset",
+            `It seems like you forgot your password for Catch-Calorie.\n 
             Your temporary password is [${temp_pw}].\n 
             Please login again and change your password`,
-        };
+        );
 
-        const transporter = nodemailer.createTransport(mailOption);
-        transporter.sendMail(message, async (error, info) => {
-            if (error) throw new Error(error);
-            else {
-                console.log(`Email sent: ${info.response}`);
-                // 임시비밀번호로 비번 변경
-                const id = await User.findOne({ email }).then((data) => data._id);
-                const hashedTempPassword = await bcrypt.hash(temp_pw, 10);
-                const toUpdate = { password: hashedTempPassword };
-                return User.update({ id, toUpdate });
-            }
-        });
+        const id = await User.findOne({ email }).then((data) => data._id);
+        const hashedTempPassword = await bcrypt.hash(temp_pw, 10);
+        const toUpdate = { password: hashedTempPassword };
+
+        return User.update({ id, toUpdate });
     }
 
     static async addSocialUser({ email, name, gender, height, weight, icon }) {
