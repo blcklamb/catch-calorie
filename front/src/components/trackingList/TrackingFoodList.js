@@ -2,39 +2,59 @@ import React, { useState, useEffect } from 'react';
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Switch from '@mui/material/Switch';
 
 import { useRecoilState } from 'recoil';
-import { trackingUpdateState } from '../../atoms';
+import { trackingUpdateState, trackingFoodUnitState } from '../../atoms';
 
 import * as Api from '../../api';
 
 function TrackingFoodList({ food, isTrackingPage }) {
+  const convert = require('convert-units');
+
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   const [isEditing, setIsEditing] = useState(false);
-  
-  const [gram, setGram] = useState(food.gram);
 
-  const [isGramEmpty, setIsGramEmpty] = useState(false);
-  const [isGramNumber, setIsGramNumber] = useState(true);
+  const [weight, setWeight] = useState(food.gram);
+
+  const [isWeightEmpty, setIsWeightEmpty] = useState(false);
+  const [isWeightNumber, setIsWeightNumber] = useState(true);
+
+  const [unit, setUnit] = useState('us');
+
+  const [checked, setChecked] = useState(true);
 
   useEffect(() => {
-    setGram(food.gram);
+    setWeight(food.gram);
   }, [food.gram]);
 
+  useEffect(() => {
+    if (checked === true) {
+      setUnit('us');
+    } else {
+      setUnit('non us');
+    }
+  }, [checked]);
+
+  const handleSwitch = (event) => {
+    setChecked(event.target.checked);
+  };
+
   const onChange = (e) => {
-    setGram(e.target.value);
+    setWeight(e.target.value);
   };
 
   const handleCheck = async (e) => {
-    setIsGramEmpty(!Number(gram));
-    setIsGramNumber(!isNaN(gram));
+    setIsWeightEmpty(!Number(weight));
+    setIsWeightNumber(!isNaN(weight));
 
     try {
-      if (Number(gram) && !isNaN(gram)) {
+      if (Number(weight) && !isNaN(weight)) {
         await Api.put('tracking/food', {
           id: food.id,
-          gram: gram,
+          weight: Number(weight),
+          unit: unit,
         });
 
         setIsEditing(false);
@@ -50,7 +70,7 @@ function TrackingFoodList({ food, isTrackingPage }) {
   };
 
   const handleCancel = (e) => {
-    setGram(food.gram);
+    setWeight(food.gram);
 
     setIsEditing(false);
   };
@@ -63,8 +83,10 @@ function TrackingFoodList({ food, isTrackingPage }) {
 
   const previewKcal = () => {
     // gram에 숫자가 아닌 값이 입력되면 미리보기 칼로리 0
-    if (!isNaN(gram)) {
-      return Math.round((gram * food.calorie) / food.gram);
+    if (!isNaN(weight)) {
+      const gram = unit === 'us' ? convert(weight).from('lb').to('g').toFixed(0) : weight;
+      
+      return Math.round((Number(gram) * food.calorie) / food.gram);
     } else {
       return 0;
     }
@@ -78,18 +100,24 @@ function TrackingFoodList({ food, isTrackingPage }) {
             <div style={{ marginRight: '30px' }}>{food.name}</div>
             <TextField
               id="outlined-name"
-              label="gram"
-              value={gram}
+              label="weight"
+              value={weight}
               onChange={onChange}
               style={{ marginRight: '30px' }}
               helperText={
-                !isGramNumber ? (
+                !isWeightNumber ? (
                   <span>Please enter a number only</span>
                 ) : (
-                  isGramEmpty && <span>Please enter a gram</span>
+                  isWeightEmpty && <span>Please enter a weight</span>
                 )
               }
             />
+            <Switch
+              checked={checked}
+              onChange={handleSwitch}
+              inputProps={{ 'aria-label': 'controlled' }}
+            />
+            {unit}
             <div style={{ marginRight: '30px' }}>{previewKcal()}kcal</div>
           </div>
           <div>
@@ -105,7 +133,10 @@ function TrackingFoodList({ food, isTrackingPage }) {
         <div style={{ display: 'flex' }}>
           <div style={{ display: 'flex' }}>
             <div style={{ marginRight: '30px' }}>{food.name}</div>
-            <div style={{ marginRight: '30px' }}>{food.gram}g</div>
+            <div style={{ marginRight: '30px' }}>
+              {food.gram}
+              {unit === 'us' ? 'lb' : 'g'}
+            </div>
             <div style={{ marginRight: '30px' }}>{food.calorie}kcal</div>
             {/* 트래킹 페이지에서만 버튼 O */}
             {isTrackingPage === 'tracking' && (
