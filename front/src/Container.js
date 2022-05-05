@@ -4,7 +4,7 @@ const Container = ({ children }) => {
   return (
     <>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ maxWidth: '1440px' }}>{children}</div>
+        <div style={{ maxWidth: '1920px' }}>{children}</div>
       </div>
     </>
   );

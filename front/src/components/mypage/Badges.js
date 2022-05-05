@@ -4,7 +4,7 @@ import * as Api from '../../api';
 import Tooltip from './Tooltip';
 import { Container, Grid } from '@mui/material';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { userInfoState } from '../../atoms';
+import { userInfoState, BadgesState } from '../../atoms';
 import { useParams } from 'react-router-dom';
 
 // const BadgesContainer = styled.div`
@@ -47,7 +47,7 @@ const Badges = ({ currentUserInfo }) => {
 
   const user = useRecoilValue(userInfoState);
   const params = useParams();
-  const [badges, setBadges] = useState([]);
+  const [badges, setBadges] = useRecoilState(BadgesState);
   const [award, setAward] = useState([]);
 
   const isEditable = useMemo(() => currentUserInfo?._id === user?._id, [currentUserInfo, user]);

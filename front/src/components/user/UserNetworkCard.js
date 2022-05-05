@@ -13,11 +13,7 @@ const UserNetworkCard = ({ currentUserInfo }) => {
       <div>
         <div style={{ paddingTop: 20 }}>
           <img
-            src={
-              'https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/' +
-              currentUserInfo.icon +
-              '.png'
-            }
+            src={currentUserInfo.icon}
             alt="badge"
             style={{ width: 80 + '%', display: 'block', margin: 'auto' }}
           ></img>

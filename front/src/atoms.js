@@ -99,3 +99,10 @@ export const trackingFoodUnitState = atom({
   key: 'trackingFoodUnitState',
   default: [0],
 });
+
+// 뱃지이미지 정보
+export const BadgesState = atom({
+  key: 'BadgesState',
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+});

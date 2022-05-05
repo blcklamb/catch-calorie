@@ -59,7 +59,7 @@ const Tooltip = ({
       weight: userInfo.weight,
       unit: userInfo.unit,
       open: userInfo.open,
-      icon: badgeName,
+      icon: src,
       status: userInfo.status,
     }).then((res) => {
       setUserInfo(res.data);

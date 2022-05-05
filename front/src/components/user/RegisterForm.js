@@ -43,7 +43,9 @@ function RegisterForm() {
   //useState로 weight 상태를 생성함.
   const [weight, setWeight] = useState('');
   //useState로 icon 상태를 생성함.
-  const [icon, setIcon] = useState('all-rounder');
+  const [icon, setIcon] = useState(
+    'https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_1.png',
+  );
 
   // ------------ EMAIL AUTHENTICATION ------------
   const [code, setCode] = useState('임시비밀번호가 들어오는 곳이랍니다.');
@@ -279,28 +281,28 @@ function RegisterForm() {
               sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
             >
               <FormControlLabel
-                value="all-rounder"
+                value="https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_1.png"
                 labelPlacement="bottom"
                 control={<Radio color="success" />}
-                label={<img src="/all-rounder.png" alt="all" style={{ width: 100 }}></img>}
+                label={<img src="/first_badge_1.png" alt="all" style={{ width: 100 }}></img>}
               />
               <FormControlLabel
-                value="weight"
+                value="https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_2.png"
                 labelPlacement="bottom"
                 control={<Radio color="success" />}
-                label={<img src="/weight.png" alt="all" style={{ width: 100 }}></img>}
+                label={<img src="/first_badge_2.png" alt="all" style={{ width: 100 }}></img>}
               />
               <FormControlLabel
-                value="yoga"
+                value="https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_3.png"
                 labelPlacement="bottom"
                 control={<Radio color="success" />}
-                label={<img src="/yoga.png" alt="all" style={{ width: 100 }}></img>}
+                label={<img src="/first_badge_3.png" alt="all" style={{ width: 100 }}></img>}
               />
               <FormControlLabel
-                value="runner"
+                value="https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_4.png"
                 labelPlacement="bottom"
                 control={<Radio color="success" />}
-                label={<img src="/runner.png" alt="all" style={{ width: 100 }}></img>}
+                label={<img src="/first_badge_4.png" alt="all" style={{ width: 100 }}></img>}
               />
             </RadioGroup>
             <Stack

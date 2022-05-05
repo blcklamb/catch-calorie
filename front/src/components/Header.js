@@ -70,22 +70,11 @@ function Header() {
   return (
     <>
       <header className={scrollPosition < 80 ? 'mainHeader' : 'ver2'}>
-        {user ? (
-          <Logo>
-            <Link
-              to={{ pathname: `/tracking/${user._id}` }} // 로그인 되어있을 시 로그인 된 유저의 메인페이지로 이동
-              style={{ textDecoration: 'none', color: '#f03e3e', cursor: 'pointer' }}
-            >
-              Catch Calories
-            </Link>
-          </Logo>
-        ) : (
-          <Logo>
-            <Link to="/" style={{ textDecoration: 'none', color: '#f03e3e', cursor: 'pointer' }}>
-              Catch Calories
-            </Link>
-          </Logo>
-        )}
+        <Logo>
+          <Link to="/" style={{ textDecoration: 'none', color: '#f03e3e', cursor: 'pointer' }}>
+            Catch Calories
+          </Link>
+        </Logo>
 
         {user ? (
           <>
