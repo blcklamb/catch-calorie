@@ -87,7 +87,7 @@ const UserEditCard = ({ setCardState }) => {
       variant={unit === 'non_us' ? 'contained' : 'outlined'}
       onClick={() => setEditUser((prev) => ({ ...prev, unit: 'non_us' }))}
     >
-      (cm/kg)
+      Metric
     </Button>,
     <Button
       key="ft/lb"
@@ -95,7 +95,7 @@ const UserEditCard = ({ setCardState }) => {
       variant={unit === 'us' ? 'contained' : 'outlined'}
       onClick={() => setEditUser((prev) => ({ ...prev, unit: 'us' }))}
     >
-      (ft/lb)
+      U.S.Standard
     </Button>,
   ];
 
@@ -182,7 +182,7 @@ const UserEditCard = ({ setCardState }) => {
             <FormControlLabel value="us" control={<Radio color="success" />} label="US" />
             <FormControlLabel value="non_us" control={<Radio color="success" />} label="Non-Us" />
           </RadioGroup> */}
-          <FormLabel>unit</FormLabel>
+          {/* <FormLabel>unit</FormLabel> */}
           {/* <Stack direction="row" spacing={1} alignItems="center">
             <Typography>(cm/kg)</Typography>
             <IOSSwitch checked={checked} onChange={handleUnitSwitch} />

@@ -32,7 +32,7 @@ const UserInfoCard = ({ currentUserInfo, isEditable, setCardState }) => {
       variant={!checked ? 'contained' : 'outlined'}
       onClick={() => setChecked(false)}
     >
-      (cm/kg)
+      Metric
     </Button>,
     <Button
       key="ft/lb"
@@ -40,7 +40,7 @@ const UserInfoCard = ({ currentUserInfo, isEditable, setCardState }) => {
       variant={checked ? 'contained' : 'outlined'}
       onClick={() => setChecked(true)}
     >
-      (ft/lb)
+      U.S.Standard
     </Button>,
   ];
   return (
