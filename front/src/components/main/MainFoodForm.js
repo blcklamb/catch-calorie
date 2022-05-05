@@ -7,6 +7,12 @@ import Switch from '@mui/material/Switch';
 
 import MainInput from './style/MainInput';
 
+import {
+  TrackingForm,
+  TrackingAutoContainer,
+  TrackingTextFieldContainer,
+} from '../styledCompo/mainStyle';
+
 import { useRecoilState } from 'recoil';
 import {
   foodListState,
@@ -20,7 +26,6 @@ import * as Api from '../../api';
 
 function MainFoodForm({ idx }) {
   const navigate = useNavigate();
-  const convert = require('convert-units');
 
   const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
   const [weight, setWeight] = useRecoilState(weightState);
@@ -66,7 +71,7 @@ function MainFoodForm({ idx }) {
       setKcalPerUnit([...kcalPerUnit.slice(0, idx), 0, ...kcalPerUnit.slice(idx + 1)]);
     } else {
       const gram =
-        unit[idx] === 'us' ? convert(weight[idx]).from('lb').to('g').toFixed(0) : weight[idx];
+        unit[idx] === 'us' ? (weight[idx]) * 453.59 : weight[idx];
 
       setKcalPerUnit([
         ...kcalPerUnit.slice(0, idx),
@@ -82,48 +87,43 @@ function MainFoodForm({ idx }) {
 
   return (
     <>
-      <div style={{ display: 'flex' }}>
-        <Autocomplete
-          id="controllable-states-demo"
-          value={foodSelected[idx]}
-          onChange={(event, newValue) => {
-            onChangeFood(event, newValue);
-          }}
-          inputValue={inputValue}
-          onInputChange={(event, newInputValue) => {
-            setInputValue(newInputValue);
-          }}
-          options={foodList}
-          sx={{ width: 300 }}
-          renderInput={(params) => (
-            <MainInput {...params} label="Food" placeholder="Please select food" />
-          )}
-          getOptionLabel={(option) => option.name || ''}
-          noOptionsText={
-            <div>
-              <p>No option</p>
-              <Button
-                variant="contained"
-                color="primary"
-                type="button"
-                onClick={() => {
-                  navigate('/tracking/addFood', { replace: false });
-                }}
-              >
-                Add food
-              </Button>
-            </div>
-          }
-        />
-        {!foodSelected[idx] && <span>Please select a food</span>}
-        <div
-          component="form"
-          sx={{
-            '& > :not(style)': { m: 1, width: '25ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
+      <TrackingForm>
+        <TrackingAutoContainer>
+          <Autocomplete
+            id="controllable-states-demo"
+            value={foodSelected[idx]}
+            onChange={(event, newValue) => {
+              onChangeFood(event, newValue);
+            }}
+            inputValue={inputValue}
+            onInputChange={(event, newInputValue) => {
+              setInputValue(newInputValue);
+            }}
+            options={foodList}
+            // sx={{ width: 300 }}
+            renderInput={(params) => (
+              <MainInput {...params} label="Food" placeholder="Please select food" />
+            )}
+            getOptionLabel={(option) => option.name || ''}
+            noOptionsText={
+              <div>
+                <p>No option</p>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="button"
+                  onClick={() => {
+                    navigate('/tracking/addFood', { replace: false });
+                  }}
+                >
+                  Add food
+                </Button>
+              </div>
+            }
+          />
+          {!foodSelected[idx] && <span>Please select a food</span>}
+        </TrackingAutoContainer>
+        <TrackingTextFieldContainer>
           <MainInput
             id="outlined-basic"
             label="weight"
@@ -138,14 +138,16 @@ function MainFoodForm({ idx }) {
               )
             }
           />
-        </div>
-        <Switch
-          checked={checked}
-          onChange={handleSwitch}
-          inputProps={{ 'aria-label': 'controlled' }}
-        />
-        {unit[idx] === 'us' ? 'US standard' : 'metric'}
+        </TrackingTextFieldContainer>
         <div>
+          <div>
+            <Switch
+              checked={checked}
+              onChange={handleSwitch}
+              inputProps={{ 'aria-label': 'controlled' }}
+            />
+            <span>{unit[idx] === 'us' ? 'US standard' : 'metric'}</span>
+          </div>
           {/* {console.log(foodSelected[idx]?.kcal_per_100g)}
           {idx}
           <br />
@@ -158,11 +160,13 @@ function MainFoodForm({ idx }) {
           {gram[idx]} 그램
           <br />총 {(Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per_100g}
           <br /> */}
-          {foodSelected[idx]?.name} <br />
-          {weight[idx]} <br />
-          {isNaN(weight[idx]) ? 0 : kcalPerUnit[idx]} kcal/{unit[idx] === 'us' ? 'lb' : 'g'}
+          {/* {foodSelected[idx]?.name} <br />
+          {weight[idx]} <br /> */}
+          <span style={{ float: 'right' }}>
+            {isNaN(weight[idx]) ? 0 : kcalPerUnit[idx]} kcal/{unit[idx] === 'us' ? 'lb' : 'g'}
+          </span>
         </div>
-      </div>
+      </TrackingForm>
     </>
   );
 }

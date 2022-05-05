@@ -8,6 +8,12 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 import MainInput from './style/MainInput';
 
+import {
+  TrackingForm,
+  TrackingAutoContainer,
+  TrackingTextFieldContainer,
+} from '../styledCompo/mainStyle';
+
 import { useRecoilState } from 'recoil';
 import {
   exerciseSelectedState,
@@ -104,84 +110,91 @@ function MainExerciseForm({ idx }) {
   }, [time[idx], exerciseSelected[idx]]);
 
   return (
-    <div style={{ display: 'flex' }}>
-      <Autocomplete
-        id="controllable"
-        value={exerciseSelected[idx]}
-        onChange={(event, newValue) => {
-          onChangeExercise(event, newValue);
-        }}
-        inputValue={inputValue}
-        onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue);
-        }}
-        options={exerciseList}
-        sx={{ width: 300 }}
-        renderInput={(params) => (
-          <MainInput {...params} label="Exercise(kcal)" placeholder="Please select food" />
-        )}
-        getOptionLabel={(option) => option.name || ''}
-        noOptionsText={
-          <div>
-            <p>No options</p>
-            <Button
-              variant="contained"
-              color="primary"
-              type="button"
-              onClick={() => {
-                navigate('/tracking/addExercise', { replace: false });
-              }}
-            >
-              Add exercise
-            </Button>
-          </div>
-        }
-      />
-      {!exerciseSelected[idx] && <span>Please select a exercise</span>}
-      <div
-        component="form"
-        sx={{
-          '& > :not(style)': { m: 1, width: '25ch' },
-        }}
-        noValidate
-        autoComplete="off"
-        style={{ display: 'inline-flex' }}
-      >
-        <MainInput
-          id="outlined-basic"
-          label="hour"
-          variant="outlined"
-          value={hour[idx]}
-          onChange={onChangeHour}
-          helperText={
-            !hour[idx] && !minute[idx] ? (
-              <span>Please enter a time</span>
-            ) : (
-              (isNaN(hour[idx]) || isNaN(minute[idx])) && <span>Please enter a number only</span>
-            )
-          }
-        />
-        <MainInput
-          id="outlined-basic"
-          label="minute"
-          variant="outlined"
-          value={minute[idx]}
-          onChange={onChangeMinute}
-        />
-      </div>
-      <div>
-        {/* 인풋밸류 {inputValue}
+    <>
+      <TrackingForm>
+        <TrackingAutoContainer>
+          <Autocomplete
+            id="controllable"
+            value={exerciseSelected[idx]}
+            onChange={(event, newValue) => {
+              onChangeExercise(event, newValue);
+            }}
+            inputValue={inputValue}
+            onInputChange={(event, newInputValue) => {
+              setInputValue(newInputValue);
+            }}
+            options={exerciseList}
+            sx={{ width: 300 }}
+            renderInput={(params) => (
+              <MainInput {...params} label="Exercise(kcal)" placeholder="Please select food" />
+            )}
+            getOptionLabel={(option) => option.name || ''}
+            noOptionsText={
+              <div>
+                <p>No options</p>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="button"
+                  onClick={() => {
+                    navigate('/tracking/addExercise', { replace: false });
+                  }}
+                >
+                  Add exercise
+                </Button>
+              </div>
+            }
+          />
+          {!exerciseSelected[idx] && <span>Please select a exercise</span>}
+        </TrackingAutoContainer>
+        <TrackingTextFieldContainer
+        // component="form"
+        // sx={{
+        //   '& > :not(style)': { m: 1, width: '25ch' },
+        // }}
+        // noValidate
+        // autoComplete="off"
+        // style={{ display: 'inline-flex' }}
+        >
+          <MainInput
+            id="outlined-basic"
+            label="hour"
+            variant="outlined"
+            value={hour[idx]}
+            onChange={onChangeHour}
+            helperText={
+              !hour[idx] && !minute[idx] ? (
+                <span>Please enter a time</span>
+              ) : (
+                (isNaN(hour[idx]) || isNaN(minute[idx])) && <span>Please enter a number only</span>
+              )
+            }
+          />
+        </TrackingTextFieldContainer>
+        <TrackingTextFieldContainer>
+          <MainInput
+            id="outlined-basic"
+            label="minute"
+            variant="outlined"
+            value={minute[idx]}
+            onChange={onChangeMinute}
+          />
+        </TrackingTextFieldContainer>
+
+        <div style={{ paddingTop: '15px' }}>
+          {/* 인풋밸류 {inputValue}
         <br />
         시간 당 {exerciseSelected[idx]?.kcal_per_kg}
         <br />
         {hour[idx]} 시간
         <br /> */}
-        {/* {minute[idx]} 분
+          {/* {minute[idx]} 분
         <br />총 {time[idx]} 분
         <br /> */}
-        {kcalPerHour[idx]} kcal/hour
-      </div>
-    </div>
+          <span style={{ float: 'right' }}>{kcalPerHour[idx]} kcal/min</span>
+        </div>
+      </TrackingForm>
+    </>
   );
 }
 

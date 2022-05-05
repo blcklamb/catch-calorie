@@ -10,8 +10,6 @@ import { trackingUpdateState, trackingFoodUnitState } from '../../atoms';
 import * as Api from '../../api';
 
 function TrackingFoodList({ food, isTrackingPage }) {
-  const convert = require('convert-units');
-
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -84,8 +82,8 @@ function TrackingFoodList({ food, isTrackingPage }) {
   const previewKcal = () => {
     // gram에 숫자가 아닌 값이 입력되면 미리보기 칼로리 0
     if (!isNaN(weight)) {
-      const gram = unit === 'us' ? convert(weight).from('lb').to('g').toFixed(0) : weight;
-      
+      const gram = unit === 'us' ? weight * 453.59 : weight;
+
       return Math.round((Number(gram) * food.calorie) / food.gram);
     } else {
       return 0;
@@ -118,7 +116,9 @@ function TrackingFoodList({ food, isTrackingPage }) {
               inputProps={{ 'aria-label': 'controlled' }}
             />
             {unit === 'us' ? 'US standard' : 'metric'}
-            <div style={{ marginRight: '30px' }}>{previewKcal()}kcal</div>
+            <div style={{ marginRight: '30px' }}>
+              {previewKcal()}kcal/{unit === 'us' ? 'lb' : 'g'}
+            </div>
           </div>
           <div>
             <Button variant="contained" type="button" onClick={handleCheck}>
@@ -133,10 +133,7 @@ function TrackingFoodList({ food, isTrackingPage }) {
         <div style={{ display: 'flex' }}>
           <div style={{ display: 'flex' }}>
             <div style={{ marginRight: '30px' }}>{food.name}</div>
-            <div style={{ marginRight: '30px' }}>
-              {food.gram}
-              {unit === 'us' ? 'lb' : 'g'}
-            </div>
+            <div style={{ marginRight: '30px' }}>{food.gram}g</div>
             <div style={{ marginRight: '30px' }}>{food.calorie}kcal</div>
             {/* 트래킹 페이지에서만 버튼 O */}
             {isTrackingPage === 'tracking' && (

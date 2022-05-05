@@ -12,6 +12,8 @@ import UserDelForm from '../user/UserDelForm';
 
 import MainButton from './style/MainButton';
 
+import { BodyContainer, MainHelloSection, MainSection1 } from '../styledCompo/mainStyle';
+
 import { useRecoilState } from 'recoil';
 import { tokenState, userInfoState, userState } from '../../atoms';
 
@@ -22,39 +24,34 @@ const Main = () => {
   const [recoilUser, setRecoilUser] = useRecoilState(userState);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
-  const logout = () => {
-    // sessionStorage 에 저장했던 JWT 토큰을 삭제함.
-    sessionStorage.removeItem('userToken');
-    // dispatch 함수를 이용해 로그아웃함.
-    // dispatch({ type: 'LOGOUT' });
-    setRecoilUser(null);
-    setUserInfo(null);
-    setToken(null);
-
-    // 기본 페이지로 돌아감.
-    navigate('/login');
-  };
-
   const MainHello = styled.div`
+  background: green;
+  display: flex;
+  align-items: center;  
     font-size: 35px;
     font-weight: bold;
+    width: 100%;
+    height: 100px;
+    position: relative;
   `;
 
   return (
     <>
       <Header />
-      <div style={{ margin: '100px 80px' }}>
-        <MainHello>Hello {userInfo.name}!</MainHello>
+      <BodyContainer>
+        <MainHelloSection>
+          <MainHello>Hello, {userInfo.name}</MainHello>
+        </MainHelloSection>
 
         {/* <div style={{ margin: '80px 0px' }}> */}
-        <div style={{ display: 'inline-flex', margin: '80px 0px' }}>
+        <MainSection1>
           <MainTabs />
           <MainGraph />
-        </div>
+        </MainSection1>
         <div>
           <TrackingLists />
         </div>
-      </div>
+      </BodyContainer>
       <Footer />
     </>
   );
