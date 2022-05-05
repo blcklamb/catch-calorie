@@ -24,7 +24,6 @@ class foodService {
     static addFoodViews({ id }) {
         return Food.update({ id, toUpdate: { $inc: { views: 1 } } }, { new: true });
     }
-
 }
 
 export { foodService };

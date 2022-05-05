@@ -11,7 +11,6 @@ import { trackingRouter } from "./routers/trackingRouter";
 import { userRouter } from "./routers/userRouter";
 
 import { errorMiddleware } from "./middlewares/errorMiddleware";
-import { bucketRouter } from "./middlewares/upload_image";
 import heatmap_scheduler from "./middlewares/heatmap_scheduler";
 
 const app = express();
@@ -35,7 +34,6 @@ app.get("/", (req, res) => res.send("안녕하세요, 13팀 데이터 분석 프
 app.use(userRouter);
 app.use(awardRouter);
 app.use(badgeRouter);
-app.use(bucketRouter);
 app.use(exerRouter);
 app.use(foodRouter);
 app.use(heatmapRouter);

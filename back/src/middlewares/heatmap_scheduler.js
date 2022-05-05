@@ -1,4 +1,4 @@
-import { User, Tracking, Heatmap } from "../db";
+import { Heatmap, Tracking, User } from "../db";
 import dayjs from "dayjs";
 
 const heatmap_scheduler = async () => {

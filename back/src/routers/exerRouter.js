@@ -1,7 +1,7 @@
+import rateLimit from "express-rate-limit";
 import { Router } from "express";
 import { exerService } from "../services/exerService";
 import { login_required } from "../middlewares/login_required";
-import rateLimit from "express-rate-limit";
 
 const exerRouter = Router();
 
