@@ -19,9 +19,7 @@ import {
 
 import * as Api from '../../api';
 
-function MainExerciseForm({ idx, 
-  // hour, setHour, minute, setMinute 
-}) {
+function MainExerciseForm({ idx }) {
   const navigate = useNavigate();
 
   const user = useRecoilValue(userInfoState);
@@ -139,6 +137,7 @@ function MainExerciseForm({ idx,
           </div>
         }
       />
+      {!exerciseSelected[idx] && <span>Please select a exercise</span>}
       <div
         component="form"
         sx={{
@@ -154,6 +153,13 @@ function MainExerciseForm({ idx,
           variant="outlined"
           value={hour[idx]}
           onChange={onChangeHour}
+          helperText={
+            !hour[idx] && !minute[idx] ? (
+              <span>Please enter a time</span>
+            ) : (
+              (isNaN(hour[idx]) || isNaN(minute[idx])) && <span>Please enter a number only</span>
+            )
+          }
         />
         <MainInput
           id="outlined-basic"

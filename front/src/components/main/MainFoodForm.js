@@ -3,21 +3,32 @@ import { useNavigate } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
+import Switch from '@mui/material/Switch';
 
 import MainInput from './style/MainInput';
 
 import { useRecoilState } from 'recoil';
-import { foodListState, foodSelectedState, gramState, kcalPerGramState } from '../../atoms';
+import {
+  foodListState,
+  foodSelectedState,
+  weightState,
+  kcalPerUnitState,
+  trackingFoodUnitState,
+} from '../../atoms';
 
 import * as Api from '../../api';
 
 function MainFoodForm({ idx }) {
   const navigate = useNavigate();
+  const convert = require('convert-units');
 
   const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
-  const [gram, setGram] = useRecoilState(gramState);
-  const [kcalPerGram, setKcalPerGram] = useRecoilState(kcalPerGramState);
+  const [weight, setWeight] = useRecoilState(weightState);
+  const [kcalPerUnit, setKcalPerUnit] = useRecoilState(kcalPerUnitState);
   const [foodList, setFoodList] = useRecoilState(foodListState);
+  const [unit, setUnit] = useRecoilState(trackingFoodUnitState);
+
+  const [checked, setChecked] = useState(true);
 
   const [value, setValue] = useState();
   const [inputValue, setInputValue] = useState([]); // 텍스트 상자에 표시되는 값
@@ -30,29 +41,44 @@ function MainFoodForm({ idx }) {
     // setGram([...gram.slice(0, idx), 0, ...gram.slice(idx + 1)]);
   }, []);
 
+  useEffect(() => {
+    if (checked === true) {
+      setUnit([...unit.slice(0, idx), 'us', ...unit.slice(idx + 1)]);
+    } else {
+      setUnit([...unit.slice(0, idx), 'non us', ...unit.slice(idx + 1)]);
+    }
+  }, [checked]);
+
+  const handleSwitch = (event) => {
+    setChecked(event.target.checked);
+  };
+
   const onChangeFood = (e, value) => {
     setFoodSelected([...foodSelected.slice(0, idx), value, ...foodSelected.slice(idx + 1)]);
   };
 
-  const onChangeGram = (e) => {
-    setGram([...gram.slice(0, idx), e.target.value, ...gram.slice(idx + 1)]);
+  const onChangeWeight = (e) => {
+    setWeight([...weight.slice(0, idx), e.target.value, ...weight.slice(idx + 1)]);
   };
 
   useEffect(() => {
-    if (Number(gram[idx]) === 0 || !foodSelected[idx]?.kcal_per_100g) {
-      setKcalPerGram([...kcalPerGram.slice(0, idx), 0, ...kcalPerGram.slice(idx + 1)]);
+    if (Number(weight[idx]) === 0 || !foodSelected[idx]?.kcal_per_100g) {
+      setKcalPerUnit([...kcalPerUnit.slice(0, idx), 0, ...kcalPerUnit.slice(idx + 1)]);
     } else {
-      setKcalPerGram([
-        ...kcalPerGram.slice(0, idx),
-        (Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per_100g,
-        ...kcalPerGram.slice(idx + 1),
+      const gram =
+        unit[idx] === 'us' ? convert(weight[idx]).from('lb').to('g').toFixed(0) : weight[idx];
+
+      setKcalPerUnit([
+        ...kcalPerUnit.slice(0, idx),
+        Math.floor((gram / 100) * foodSelected[idx]?.kcal_per_100g),
+        ...kcalPerUnit.slice(idx + 1),
       ]);
     }
 
     if (foodSelected[idx] === null) {
       setFoodSelected([...foodSelected.slice(0, idx), 0, ...foodSelected.slice(idx + 1)]);
     }
-  }, [gram[idx], foodSelected[idx]]);
+  }, [unit[idx], weight[idx], foodSelected[idx]]);
 
   return (
     <>
@@ -89,6 +115,7 @@ function MainFoodForm({ idx }) {
             </div>
           }
         />
+        {!foodSelected[idx] && <span>Please select a food</span>}
         <div
           component="form"
           sx={{
@@ -99,13 +126,25 @@ function MainFoodForm({ idx }) {
         >
           <MainInput
             id="outlined-basic"
-            label="g"
+            label="weight"
             variant="outlined"
-            value={gram[idx]}
-            onChange={onChangeGram}
-            // defaultValue={'안'}
+            value={weight[idx]}
+            onChange={onChangeWeight}
+            helperText={
+              !weight[idx] ? (
+                <span>Please enter a weight</span>
+              ) : (
+                isNaN(weight[idx]) && <span>Please enter a number only</span>
+              )
+            }
           />
         </div>
+        <Switch
+          checked={checked}
+          onChange={handleSwitch}
+          inputProps={{ 'aria-label': 'controlled' }}
+        />
+        {unit[idx] === 'us' ? 'US standard' : 'metric'}
         <div>
           {/* {console.log(foodSelected[idx]?.kcal_per_100g)}
           {idx}
@@ -119,9 +158,9 @@ function MainFoodForm({ idx }) {
           {gram[idx]} 그램
           <br />총 {(Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per_100g}
           <br /> */}
-          {/* {foodSelected[idx]?.name} <br />
-          {gram[idx]} <br /> */}
-          {kcalPerGram[idx]} Kcal/g
+          {foodSelected[idx]?.name} <br />
+          {weight[idx]} <br />
+          {isNaN(weight[idx]) ? 0 : kcalPerUnit[idx]} kcal/{unit[idx] === 'us' ? 'lb' : 'g'}
         </div>
       </div>
     </>

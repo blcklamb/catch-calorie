@@ -51,29 +51,41 @@ function MainExerciseTab({ clearForm }) {
 
   const handleTracking = () => {
     exerciseSelected.map(async (exercise, i) => {
-      const t = Number(time[i]);
+      const numHour = hour.map((hour) => {
+        return Number(hour);
+      });
+
+      const numMin = minute.map((minute) => {
+        return Number(minute);
+      });
 
       try {
-        await Api.post(`tracking/exer`, {
-          name: exercise.name,
-          minute: t,
-        });
+        if (
+          !exerciseSelected.includes(0) &&
+          (!hour.includes('') || !minute.includes('')) &&
+          !numHour.includes(NaN) &&
+          !numMin.includes(NaN)
+        ) {
+          await Api.post(`tracking/exer`, {
+            name: exercise.name,
+            minute: Number(time[i]),
+          });
 
-        await Api.post(`exercises/${exercise._id}`);
+          await Api.post(`exercises/${exercise._id}`);
 
-        // 폼 및 그래프 레이블 초기화 위함
-        setExerciseForms([0]);
-        setExerciseSelected([0]);
-        setHour(['']);
-        setMinute(['']);
+          // 폼 및 그래프 레이블 초기화 위함
+          setExerciseForms([0]);
+          setExerciseSelected([0]);
+          setHour(['']);
+          setMinute(['']);
 
-        setTrackingUpdate(!trackingUpdate);
+          setTrackingUpdate(!trackingUpdate);
+          clearForm();
+        }
       } catch (err) {
         console.log('전송 실패', err);
       }
     });
-
-    clearForm();
   };
 
   return (
@@ -83,17 +95,7 @@ function MainExerciseTab({ clearForm }) {
       {console.log(hour)}
       {console.log(minute)}
       {console.log(time)} */}
-      {exerciseForms &&
-        exerciseForms.map((item) => (
-          <MainExerciseForm
-            key={item}
-            idx={item}
-            hour={hour}
-            setHour={setHour}
-            minute={minute}
-            setMinute={setMinute}
-          />
-        ))}
+      {exerciseForms && exerciseForms.map((item) => <MainExerciseForm key={item} idx={item} />)}
       <MainButton variant="contained" onClick={handleAddExerciseForm}>
         +
       </MainButton>

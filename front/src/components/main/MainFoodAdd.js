@@ -33,8 +33,13 @@ function MainFoodAdd({}) {
   const [kcal, setKcal] = useState();
   const [unit, setUnit] = useState('gram');
 
+  const [isCategoryEmpty, setIsCategoryEmpty] = useState(false);
+  const [isNameEmpty, setIsNameEmpty] = useState(false);
+  const [isKcalEmpty, setIsKcalEmpty] = useState(false);
+  const [isKcalNumber, setIsKcalNumber] = useState(true);
+
   useEffect(() => {
-    const allFoodCategory = foodList.map((food) => food.category);
+    const allFoodCategory = foodList.map((food) => food?.category);
     const set = new Set(allFoodCategory);
 
     setCategoryList([...set]);
@@ -42,9 +47,9 @@ function MainFoodAdd({}) {
 
   useEffect(() => {
     if (checked === true) {
-      setUnit('100g');
+      setUnit('gram');
     } else {
-      setUnit('1lb');
+      setUnit('pound');
     }
   }, [checked]);
 
@@ -53,14 +58,21 @@ function MainFoodAdd({}) {
   };
 
   const handleSubmit = async () => {
+    setIsCategoryEmpty(!category);
+    setIsNameEmpty(!name);
+    setIsKcalEmpty(!kcal);
+    setIsKcalNumber(Number(kcal) > 0);
+
     try {
-      await Api.post(`foods`, {
-        category: category,
-        name: name,
-        kcal: kcal,
-        unit: unit,
-      }).then((res) => res.status === 201 && alert('Food has been added'));
-      navigate(`/tracking/${user._id}`, { replace: false });
+      if (category && name && kcal && Number(kcal) > 0) {
+        await Api.post(`foods`, {
+          category: category,
+          name: name,
+          kcal: kcal,
+          unit: unit,
+        }).then((res) => res.status === 201 && alert('Food has been added'));
+        navigate(`/tracking/${user._id}`, { replace: false });
+      }
     } catch (err) {
       alert('Food that already exists');
     }
@@ -84,6 +96,7 @@ function MainFoodAdd({}) {
               sx={{ width: 300 }}
               renderInput={(params) => <TextField {...params} label="category" />}
             />
+            {isCategoryEmpty && <span>Please select a category</span>}
             <h2>Please Enter a Name</h2>
             <TextField
               id="outlined-basic"
@@ -91,6 +104,7 @@ function MainFoodAdd({}) {
               variant="outlined"
               inputValue={name}
               onBlur={(e) => setName(e.target.value)}
+              helperText={isNameEmpty && <span>Please enter a name</span>}
             />
             <h2>Please Enter a Kcal Per Unit Weight</h2>
             <Switch
@@ -105,11 +119,24 @@ function MainFoodAdd({}) {
               variant="outlined"
               inputValue={kcal}
               onBlur={(e) => setKcal(e.target.value)}
+              helperText={
+                isKcalEmpty ? (
+                  <span>Please enter a kcal per unit weight</span>
+                ) : (
+                  !isKcalNumber && <span>Please enter a number only</span>
+                )
+              }
             />
           </div>
         </div>
         <MainButton variant="contained" onClick={handleSubmit}>
           Add
+        </MainButton>
+        <MainButton
+          variant="contained"
+          onClick={() => navigate(`/tracking/${user._id}`, { replace: false })}
+        >
+          Cancel
         </MainButton>
       </div>
       <Footer />

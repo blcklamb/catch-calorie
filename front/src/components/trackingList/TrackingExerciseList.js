@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -8,25 +8,46 @@ import { trackingUpdateState } from '../../atoms';
 
 import * as Api from '../../api';
 
-function TrackingExerciseList({ exercise, isMypage }) {
+function TrackingExerciseList({ exercise, isTrackingPage }) {
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   const [isEditing, setIsEditing] = useState(false);
+
   const [hour, setHour] = useState(parseInt(exercise.minute / 60));
   const [minute, setMinute] = useState(exercise.minute % 60);
+
+  const [isTimeEmpty, setIsTimeEmpty] = useState(false);
+  const [isHourNumber, setIsHourNumber] = useState(true);
+  const [isMinNumber, setIsMinNumber] = useState(true);
+
+  useEffect(() => {
+    setHour(parseInt(exercise.minute / 60));
+    setMinute(exercise.minute % 60);
+  }, [exercise.minute]);
 
   const onChange = (e) => {
     setHour(e.target.value);
   };
 
   const handleCheck = async (e) => {
-    await Api.put('tracking/exer', {
-      id: exercise.id,
-      minute: Number(hour) * 60 + Number(minute),
-    });
+    setIsTimeEmpty(!Number(hour) && !Number(minute));
 
-    setIsEditing(false);
-    setTrackingUpdate(!trackingUpdate);
+    setIsHourNumber(!isNaN(hour));
+    setIsMinNumber(!isNaN(minute));
+
+    try {
+      if (!(!Number(hour) && !Number(minute)) && !isNaN(hour) && !isNaN(minute)) {
+        await Api.put('tracking/exer', {
+          id: exercise.id,
+          minute: Number(hour) * 60 + Number(minute),
+        });
+
+        setIsEditing(false);
+        setTrackingUpdate(!trackingUpdate);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleModify = (e) => {
@@ -34,6 +55,9 @@ function TrackingExerciseList({ exercise, isMypage }) {
   };
 
   const handleCancel = (e) => {
+    setHour(parseInt(exercise.minute / 60));
+    setMinute(exercise.minute % 60);
+
     setIsEditing(false);
   };
 
@@ -44,7 +68,14 @@ function TrackingExerciseList({ exercise, isMypage }) {
   };
 
   const previewKcal = () => {
-    return Math.round((exercise.calorie * (Number(hour) * 60 + Number(minute))) / exercise.minute);
+    //hour, minute에 숫자가 아닌 값이 입력되면 미리보기 칼로리 0
+    if (Number(hour) > 0 || Number(minute) > 0) {
+      return Math.round(
+        (exercise.calorie * (Number(hour) * 60 + Number(minute))) / exercise.minute,
+      );
+    } else {
+      return 0;
+    }
   };
 
   return (
@@ -59,6 +90,13 @@ function TrackingExerciseList({ exercise, isMypage }) {
               value={hour}
               onChange={onChange}
               style={{ marginRight: '30px' }}
+              helperText={
+                !isHourNumber || !isMinNumber ? (
+                  <span>Please enter a number only</span>
+                ) : (
+                  isTimeEmpty && <span>Please enter a time</span>
+                )
+              }
             />
             <TextField
               id="outlined-name"
@@ -84,8 +122,8 @@ function TrackingExerciseList({ exercise, isMypage }) {
               {parseInt(exercise.minute / 60)}H {exercise.minute % 60}M
             </div>
             <div style={{ marginRight: '30px' }}>{exercise.calorie}kcal</div>
-            {/* 마이페이지에서는 버튼 X */}
-            {isMypage !== 'mypage' && (
+            {/* 트래킹 페이지에서만 버튼 O */}
+            {isTrackingPage === 'tracking' && (
               <div>
                 <Button variant="contained" type="button" onClick={handleModify}>
                   Modify
