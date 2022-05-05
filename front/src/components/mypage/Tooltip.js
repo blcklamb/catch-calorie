@@ -47,7 +47,7 @@ const Tooltip = ({
   // useEffect(() => {
   //   Api.get('awards', user._id).then((res) => setAward(res.data));
   // }, []);
-
+  const [badgeURL, setBadgeURL] = useState('');
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
   //뱃지 변경 버튼 누르면 전역 유저 정보 state에 뱃지 아이콘 이름 업데이트
@@ -65,6 +65,7 @@ const Tooltip = ({
       setUserInfo(res.data);
     });
   };
+  console.log(userInfo);
 
   return (
     <Popup

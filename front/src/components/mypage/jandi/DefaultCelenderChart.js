@@ -10,7 +10,7 @@ const DefaultCelenderChart = ({ data }) => (
       to="2022-12-31"
       emptyColor="#eeeeee"
       colors={[' #F25151', 'F39999', '#C80C0C', '#f47560']}
-      minValue={1}
+      minValue={0}
       margin={{
         top: 100,
         right: 30,

@@ -42,7 +42,7 @@ const Jandi = () => {
         } else {
           setData(res.data[0].record);
           setEmptyData(true);
-          console.log('잔디데이터 들어오는 값', res.data[0].record);
+          // console.log('잔디데이터 들어오는 값', res.data[0].record);
         }
       });
     } else {
@@ -57,7 +57,7 @@ const Jandi = () => {
     }
   }, [user, params]);
 
-  console.log('잔디데이터 받아서 넣은 값', data);
+  // console.log('잔디데이터 받아서 넣은 값', data);
 
   // Api.get('heatmap', user._id).then((res) => {
   //   console.log(res.data.record);
