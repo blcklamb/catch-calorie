@@ -17,7 +17,8 @@ import { useSetRecoilState } from 'recoil';
 import { tokenState, userState } from '../../atoms';
 
 // import styled compo
-import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
+import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/muiCustom';
+import { LoginText } from '../styledCompo/styledCompo';
 import githubLogin from './GithubLogin';
 
 function LoginForm() {
@@ -73,9 +74,14 @@ function LoginForm() {
     <div>
       <Header></Header>
       <Container
-        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 50 }}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: 400,
+        }}
       >
-        <div>
+        <div style={{ backgroundColor: 'green', width: '50%', height: 741 }}>
           <form
             action="/"
             onSubmit={handleSubmit}
@@ -88,10 +94,11 @@ function LoginForm() {
               flexFlow: 'column',
             }}
           >
-            <h1 style={{ margin: 10 }}>Login</h1>
+            <LoginText>Login</LoginText>
+
             <Box
               sx={{
-                '& > :not(style)': { m: 1, width: '34ch' },
+                '& > :not(style)': { m: 1, width: '328px' },
               }}
               noValidate
               autoComplete="off"

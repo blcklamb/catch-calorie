@@ -11,7 +11,7 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 
 //styled Compo
-import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
+import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/muiCustom';
 
 //Compo
 import Header from '../Header';

@@ -10,10 +10,9 @@ import {
   UserBodyInfo,
   UserBtnInfo,
   UserBadgeImgInfo,
-  ColorButton,
-  ValidationTextField,
-  IOSSwitch,
-} from '../styledCompo/uesrStyle';
+} from '../styledCompo/styledCompo';
+
+import { ColorButton, ValidationTextField, IOSSwitch } from '../styledCompo/muiCustom';
 
 //Mui
 import {

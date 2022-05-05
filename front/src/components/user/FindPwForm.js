@@ -16,7 +16,7 @@ import Footer from '../Footer';
 import { validateEmail } from '../../utils';
 
 // import styled compo
-import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
+import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/muiCustom';
 
 function LoginForm() {
   const [email, setEmail] = useState('');

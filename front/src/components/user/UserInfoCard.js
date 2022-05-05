@@ -6,9 +6,9 @@ import {
   UserBodyInfo,
   UserBtnInfo,
   UserBadgeImgInfo,
-  ColorButton,
-  IOSSwitch,
-} from '../styledCompo/uesrStyle';
+} from '../styledCompo/styledCompo';
+
+import { ColorButton, IOSSwitch } from '../styledCompo/muiCustom';
 
 //Mui
 import { Typography } from '@mui/material';

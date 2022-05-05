@@ -12,12 +12,11 @@ import {
   UserBadgeImgInfo,
   ColorButton,
   CardText,
-} from '../../styledCompo/uesrStyle';
+} from '../../styledCompo/styledCompo';
 
 import TrackingLists from '../../trackingList/TrackingLists';
 
 function UserTrackingList({ currentUserInfo }) {
-
   return (
     <>
       <UserCardFrame>

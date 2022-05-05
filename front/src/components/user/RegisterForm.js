@@ -18,7 +18,7 @@ import FormLabel from '@mui/material/FormLabel';
 import { validateEmail } from '../../utils';
 
 //styled Compo
-import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
+import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/muiCustom';
 
 //Compo
 import Header from '../Header';

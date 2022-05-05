@@ -13,9 +13,9 @@ import {
   UserBodyInfo,
   UserBtnInfo,
   UserBadgeImgInfo,
-  ColorButton,
-  ValidationTextField,
-} from '../styledCompo/uesrStyle';
+} from '../styledCompo/styledCompo';
+
+import { ColorButton, ValidationTextField } from '../styledCompo/muiCustom';
 
 const ChangePwForm = ({ setCardState }) => {
   //현재 바밀번호와, 바꿀 비밀번호를 저장하는 state

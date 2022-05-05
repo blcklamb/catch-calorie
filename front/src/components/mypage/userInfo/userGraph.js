@@ -12,7 +12,7 @@ import {
   UserBadgeImgInfo,
   ColorButton,
   CardText,
-} from '../../styledCompo/uesrStyle';
+} from '../../styledCompo/styledCompo';
 
 import MainGraph from '../../main/MainGraph';
 
