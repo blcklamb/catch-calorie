@@ -16,7 +16,16 @@ import {
 } from '../styledCompo/uesrStyle';
 
 //Mui
-import { Typography, FormLabel, FormControlLabel, RadioGroup, Radio, Switch } from '@mui/material';
+import {
+  Typography,
+  FormLabel,
+  FormControlLabel,
+  RadioGroup,
+  Radio,
+  Switch,
+  ButtonGroup,
+  Button,
+} from '@mui/material';
 
 //단위변환
 import configureMeasurements, { mass, length } from 'convert-units';
@@ -25,8 +34,8 @@ const convert = configureMeasurements({ mass, length });
 
 const UserEditCard = ({ setCardState }) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  const FTHeight = convert(userInfo.height).from('cm').to('ft').toFixed(0);
-  const LBWeight = convert(userInfo.weight).from('kg').to('lb').toFixed(0);
+  const FTHeight = convert(userInfo.height).from('cm').to('ft').toFixed(2);
+  const LBWeight = convert(userInfo.weight).from('kg').to('lb').toFixed(2);
 
   const [editUser, setEditUser] = useState({ ...userInfo, UsHeight: FTHeight, UsWeight: LBWeight });
 
@@ -49,17 +58,17 @@ const UserEditCard = ({ setCardState }) => {
 
   // 스위치 State
   const [checked, setChecked] = useState(true);
-  const [openChecked, setOpenChecked] = useState(true);
+  const [openChecked, setOpenChecked] = useState(open);
 
   // unit 변경 함수
-  const handleUnitSwitch = (e) => {
-    setChecked(e.target.checked);
-    if (checked) {
-      setEditUser((prev) => ({ ...prev, unit: 'non_us' }));
-    } else {
-      setEditUser((prev) => ({ ...prev, unit: 'us' }));
-    }
-  };
+  // const handleUnitSwitch = (e) => {
+  //   setChecked(e.target.checked);
+  //   if (checked) {
+  //     setEditUser((prev) => ({ ...prev, unit: 'non_us' }));
+  //   } else {
+  //     setEditUser((prev) => ({ ...prev, unit: 'us' }));
+  //   }
+  // };
 
   // open 변경 함수
   const handleOpenSwitch = (e) => {
@@ -70,6 +79,25 @@ const UserEditCard = ({ setCardState }) => {
       setEditUser((prev) => ({ ...prev, open: true }));
     }
   };
+
+  const buttons = [
+    <Button
+      key="cm/kg"
+      color="success"
+      variant={unit === 'non_us' ? 'contained' : 'outlined'}
+      onClick={() => setEditUser((prev) => ({ ...prev, unit: 'non_us' }))}
+    >
+      (cm/kg)
+    </Button>,
+    <Button
+      key="ft/lb"
+      color="success"
+      variant={unit === 'us' ? 'contained' : 'outlined'}
+      onClick={() => setEditUser((prev) => ({ ...prev, unit: 'us' }))}
+    >
+      (ft/lb)
+    </Button>,
+  ];
 
   console.log(openChecked, checked);
   console.log(editUser);
@@ -155,11 +183,14 @@ const UserEditCard = ({ setCardState }) => {
             <FormControlLabel value="non_us" control={<Radio color="success" />} label="Non-Us" />
           </RadioGroup> */}
           <FormLabel>unit</FormLabel>
-          <Stack direction="row" spacing={1} alignItems="center">
-            <Typography>(ft/lb)</Typography>
-            <IOSSwitch checked={checked} onChange={handleUnitSwitch} />
+          {/* <Stack direction="row" spacing={1} alignItems="center">
             <Typography>(cm/kg)</Typography>
-          </Stack>
+            <IOSSwitch checked={checked} onChange={handleUnitSwitch} />
+            <Typography>(ft/lb)</Typography>
+          </Stack> */}
+          <ButtonGroup size="small" aria-label="small button group">
+            {buttons}
+          </ButtonGroup>
           <br />
           {unit === 'us' ? (
             <ValidationTextField
