@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 
+import { Section, GraphContainer } from '../styledCompo/mainStyle';
+
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
   trackingState,
@@ -216,14 +218,15 @@ function MainGraph({}) {
   isMypage !== 'mypage' && addData();
 
   return (
-    <div>
-      <div style={{ width: 400 }}>
+    <Section>
+      <h1>Calorie Graph</h1>
+      <GraphContainer>
         <Bar data={data} options={options} height={300} />
-      </div>
+      </GraphContainer>
       {trackingKcal > trackingRecKcal && (
         <h3>It's over {trackingKcal - trackingRecKcal} calories</h3>
       )}
-    </div>
+    </Section>
   );
 }
 
