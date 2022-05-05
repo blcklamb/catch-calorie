@@ -8,7 +8,7 @@ import {
   trackingState,
   userInfoState,
   foodSelectedState,
-  kcalPerGramState,
+  kcalPerUnitState,
   trackingUpdateState,
   exerciseSelectedState,
   kcalPerHourState,
@@ -23,7 +23,7 @@ function MainGraph({}) {
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   const [foodSelected, setFoodSelected] = useRecoilState(foodSelectedState);
-  const [kcalPerGram, setKcalPerGram] = useRecoilState(kcalPerGramState);
+  const [kcalPerUnit, setKcalPerUnit] = useRecoilState(kcalPerUnitState);
 
   const [exerciseSelected, setExerciseSelected] = useRecoilState(exerciseSelectedState);
   const [kcalPerHour, setKcalPerHour] = useRecoilState(kcalPerHourState);
@@ -112,8 +112,8 @@ function MainGraph({}) {
     // 1)섭취 칼로리나 2)선택 칼로리나 3)섭취 + 선택 칼로리가 권장 칼로리를 넘는다면, 남는 칼로리 없음
     if (
       trackingKcal > trackingRecKcal ||
-      kcalPerGram.reduce((acc, cur) => acc + cur, 0) > trackingRecKcal ||
-      trackingKcal + kcalPerGram.reduce((acc, cur) => acc + cur, 0) > trackingRecKcal
+      kcalPerUnit.reduce((acc, cur) => acc + cur, 0) > trackingRecKcal ||
+      trackingKcal + kcalPerUnit.reduce((acc, cur) => acc + cur, 0) > trackingRecKcal
     ) {
       return [0];
       // 권장 칼로리를 넘을 경우 최대치를 5000 단위로 늘림
@@ -133,11 +133,11 @@ function MainGraph({}) {
     }
 
     // 선택된 항목이 없을 경우
-    if (kcalPerGram[0] === 0) {
+    if (kcalPerUnit[0] === 0) {
       return [trackingRecKcal - trackingKcal];
     }
 
-    return [trackingRecKcal - trackingKcal - kcalPerGram.reduce((acc, cur) => acc + cur, 0)];
+    return [trackingRecKcal - trackingKcal - kcalPerUnit.reduce((acc, cur) => acc + cur, 0)];
   };
 
   const data = {
@@ -189,7 +189,7 @@ function MainGraph({}) {
         backgroundColor: backgroundColor[idx],
         borderColor: borderColor[idx],
         borderWidth: 1,
-        data: [kcalPerGram[idx]],
+        data: [kcalPerUnit[idx]],
       };
 
       if (food !== 0) {
