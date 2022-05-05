@@ -118,7 +118,7 @@ const SecondPageLeft = styled.div`
   justify-content: center;
 `;
 
-const SecondPageLeftHeadCopy = styled.div`
+const HeadCopy = styled.div`
   /* background-color: white; */
   margin-bottom: 50px;
   font-size: 2.7rem;
@@ -127,7 +127,7 @@ const SecondPageLeftHeadCopy = styled.div`
   font-weight: bold;
 `;
 
-const SecondPageLeftBodyCopy = styled.div`
+const BodyCopy = styled.div`
   /* background-color: yellow; */
   line-height: 30px;
 `;
@@ -178,7 +178,7 @@ const ThirdPageRight = styled.div`
   background-color: white;
   border: 1px solid #f0f1f3;
   border-radius: 8px;
-  width: 400px;
+  width: 690px;
   height: 407px;
   box-sizing: border-box;
   padding: 28px 35px;
@@ -186,7 +186,8 @@ const ThirdPageRight = styled.div`
   font-size: 1.5rem;
 
   display: flex;
-  align-items: center;
+  flex-direction: column;
+
   justify-content: center;
 
   border: none;
@@ -374,15 +375,15 @@ function Home() {
       <CircleGreen1 />
       <SecondPage>
         <SecondPageLeft>
-          <SecondPageLeftHeadCopy>
-            <span style={{ color: ' #e85858' }}>U.S.A Obesity Rate </span>is on the{' '}
+          <HeadCopy>
+            <span style={{ color: ' #e85858' }}>USA Obesity Rate </span>is on the{' '}
             <span style={{ color: '#77b63e' }}>Rise</span>
-          </SecondPageLeftHeadCopy>
-          <SecondPageLeftBodyCopy>
+          </HeadCopy>
+          <BodyCopy>
             The rising obesity rate is <br />
             not just a problem for the USA. <br />
             It's becoming a <span style={{ color: '#77b63e' }}>global issue.</span>
-          </SecondPageLeftBodyCopy>
+          </BodyCopy>
         </SecondPageLeft>
         <SecondPageRight>
           <DefaultObesityLineChart colors={COLORS}></DefaultObesityLineChart>
@@ -390,18 +391,6 @@ function Home() {
       </SecondPage>
       <ThirdPage>
         <ThirdPageLeft>
-          <DefaultLineChart />
-        </ThirdPageLeft>
-        <ThirdPageRight>People who do less physical activity have a high BMI index </ThirdPageRight>
-      </ThirdPage>
-      <FourthPage>
-        <CircleRed2 />
-        <CircleGreen2 />
-        <FourthPageLeft>
-          The United States has a relatively high obesity rate compared to other countries, and the
-          increase is also on the rise.
-        </FourthPageLeft>
-        <FourthPageRight>
           <DefaultBarChart
             data={[
               { name: 'Underweight', SCC: '250' },
@@ -411,6 +400,30 @@ function Home() {
             ]}
             colors={COLORS}
           ></DefaultBarChart>
+        </ThirdPageLeft>
+        <ThirdPageRight>
+          <HeadCopy>
+            Correlation between <br />
+            <span style={{ color: '#77b63e' }}>calorie monitoring</span> and{' '}
+            <span style={{ color: '#77b63e' }}>obesity levels</span>
+          </HeadCopy>{' '}
+          <BodyCopy>
+            Calorie monitoring can lower your obesity level.
+            <br />
+            Of the 2,000 people randomly selected, <br />
+            1,000 people did not monitor their income calories.
+          </BodyCopy>
+        </ThirdPageRight>
+      </ThirdPage>
+      <FourthPage>
+        <CircleRed2 />
+        <CircleGreen2 />
+        <FourthPageLeft>
+          The United States has a relatively high obesity rate compared to other countries, and the
+          increase is also on the rise.
+        </FourthPageLeft>
+        <FourthPageRight>
+          <DefaultLineChart />
         </FourthPageRight>
       </FourthPage>
       <FifthPage>

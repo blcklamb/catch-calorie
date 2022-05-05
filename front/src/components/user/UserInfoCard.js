@@ -25,7 +25,15 @@ const UserInfoCard = ({ currentUserInfo, isEditable, setCardState }) => {
           </Typography>
         </UserBodyInfo>
         <UserBadgeImgInfo>
-          <img src={'/' + currentUserInfo?.icon + '.png'} alt="badge" style={{ width: 300 }}></img>
+          <img
+            src={
+              'https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/' +
+              currentUserInfo?.icon +
+              '.png'
+            }
+            alt="badge"
+            style={{ width: 300 }}
+          ></img>
         </UserBadgeImgInfo>
         <UserAKAInfo>
           <Typography variant="h4">{currentUserInfo?.name}</Typography>

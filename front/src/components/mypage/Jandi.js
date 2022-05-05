@@ -29,9 +29,7 @@ const JandiText = styled.div`
 const Jandi = () => {
   const user = useRecoilValue(userInfoState);
   const params = useParams();
-
-  const [data, setData] = useState('');
-
+  const [data, setData] = useState([]);
   const [emptyData, setEmptyData] = useState(false);
 
   useEffect(() => {
@@ -44,6 +42,7 @@ const Jandi = () => {
         } else {
           setData(res.data[0].record);
           setEmptyData(true);
+          // console.log('잔디데이터 들어오는 값', res.data[0].record);
         }
       });
     } else {
@@ -53,11 +52,12 @@ const Jandi = () => {
         } else {
           setData(res.data[0].record);
           setEmptyData(true);
-          console.log('heatmapData', res.data[0].record);
         }
       });
     }
   }, [user, params]);
+
+  // console.log('잔디데이터 받아서 넣은 값', data);
 
   // Api.get('heatmap', user._id).then((res) => {
   //   console.log(res.data.record);

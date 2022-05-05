@@ -60,7 +60,7 @@ function Mypage() {
       <Header />
       <UserInfo currentUserInfo={currentUserInfo} />
       <BadgesPage>
-        <Badges />
+        <Badges currentUserInfo={currentUserInfo} />
       </BadgesPage>
       <JandiPage>
         <Jandi />
