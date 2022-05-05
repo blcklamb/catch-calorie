@@ -96,11 +96,12 @@ export const CardText = styled.div`
   z-index: 30;
 `;
 
+export const RedSpan = styled.span`
+  color: #f03e3e;
+`;
+
 // 로그인 페이지의 Login text
 export const LoginText = styled.h1`
-  font-family: 'Jost', sans-serif;
-  font-style: italic;
-  font-weight: 800;
   font-size: 81px;
   margin-bottom: 131px;
   color: #f03e3e;

@@ -52,7 +52,8 @@ function RegisterForm() {
     alert('Your email verification number has been successfully sent to your email.');
     return setResCode(await Api.get(`users/email/${email}`).then((data) => data.data));
   };
-
+  // 임시 비밀번호를 알고싶나요?
+  // console.log(resCode);
   const isEmailAuthed = resCode === code;
 
   //위 validateEmail 함수를 통해 이메일 형태 적합 여부를 확인함.

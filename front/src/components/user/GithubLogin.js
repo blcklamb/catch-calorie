@@ -12,7 +12,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 
 //styled Compo
-import { ValidationTextField, ColorButton } from '../styledCompo/uesrStyle';
+import { ValidationTextField, ColorButton } from '../styledCompo/muiCustom';
 
 //Compo
 import Header from '../Header';
