@@ -117,7 +117,7 @@ function TrackingFoodList({ food, isTrackingPage }) {
               onChange={handleSwitch}
               inputProps={{ 'aria-label': 'controlled' }}
             />
-            {unit}
+            {unit === 'us' ? 'US standard' : 'metric'}
             <div style={{ marginRight: '30px' }}>{previewKcal()}kcal</div>
           </div>
           <div>
