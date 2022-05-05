@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter } from 'react-router-dom';
-import { Container } from '@mui/material';
+import Container from './Container';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Container sx={{ maxWidth: '1440px' }}>
+    <Container>
       <BrowserRouter>
         <RecoilRoot>
           <App />
