@@ -53,14 +53,14 @@ const Tooltip = ({
   //뱃지 변경 버튼 누르면 전역 유저 정보 state에 뱃지 아이콘 이름 업데이트
   const changeBadgeHandler = async () => {
     await Api.put(`users/${userInfo._id}`, {
-      name: userInfo.name,
-      gender: userInfo.gender,
-      height: userInfo.height,
-      weight: userInfo.weight,
-      unit: userInfo.unit,
-      open: userInfo.open,
+      name: userInfo?.name,
+      // gender: userInfo.gender,
+      height: userInfo?.height,
+      weight: userInfo?.weight,
+      unit: userInfo?.unit,
+      open: userInfo?.open,
       icon: src,
-      status: userInfo.status,
+      status: userInfo?.status,
     }).then((res) => {
       setUserInfo(res.data);
     });
