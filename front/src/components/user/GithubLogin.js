@@ -18,7 +18,14 @@ import { ValidationTextField, ColorButton } from '../styledCompo/uesrStyle';
 import Header from '../Header';
 import Footer from '../Footer';
 
+//import recoil
+import { useSetRecoilState } from 'recoil';
+import { tokenState, userState } from '../../atoms';
+
 function GithubLogin() {
+  const setToken = useSetRecoilState(tokenState);
+  const setUser = useSetRecoilState(userState);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -67,7 +74,23 @@ function GithubLogin() {
         icon,
       }).then((res) => res.data);
 
-      sessionStorage.setItem('userToken', user.token);
+      const res = await Api.post('users/login', {
+        email: user.email,
+        password: user.password,
+      });
+      // 유저 정보는 response의 data임.
+      const user2 = res.data;
+      // JWT 토큰은 유저 정보의 token임.
+      const jwtToken = user.token;
+      // sessionStorage에 "userToken"이라는 키로 JWT 토큰을 저장함.
+      sessionStorage.setItem('userToken', jwtToken);
+
+      console.log(user2);
+      setToken(user2.token);
+      setUser(user2);
+
+      // sessionStorage.setItem('userToken', user.token);
+
       navigate(`/tracking/${user._id}`, { replace: true });
     } catch (err) {
       console.log(`❌ Register Error: ${err}`);
