@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '@mui/material';
 
 // UserCard에서 사용하는 스타일드 컴포넌트
 
@@ -103,4 +104,43 @@ export const LoginText = styled.h1`
   font-size: 81px;
   margin-bottom: 131px;
   color: #f03e3e;
+`;
+
+//로그인 글라스 효과
+export const LoginGlass = styled.div`
+  background-color: green;
+  width: 550px;
+  height: 741px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 2.73186px 20.489px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(20.489px);
+
+  border-radius: 27.3186px;
+`;
+
+//Sign-up, ForgetPassword Container
+export const SignPWContainer = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+`;
+
+//ForgetPassword
+export const ForgetPw = styled(Button)`
+  font-style: italic;
+  width: 140px;
+  margin: 0;
+`;
+
+// Sign-up
+export const SignBtn = styled(ForgetPw)`
+  width: 70px;
+
+  &::after {
+    content: '|';
+    font-style: normal;
+    color: #f03e3e;
+    position: relative;
+    left: 9px;
+  }
 `;

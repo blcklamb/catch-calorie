@@ -18,7 +18,13 @@ import { tokenState, userState } from '../../atoms';
 
 // import styled compo
 import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/muiCustom';
-import { LoginText } from '../styledCompo/styledCompo';
+import {
+  LoginGlass,
+  LoginText,
+  ForgetPw,
+  SignPWContainer,
+  SignBtn,
+} from '../styledCompo/styledCompo';
 import githubLogin from './GithubLogin';
 
 function LoginForm() {
@@ -81,7 +87,7 @@ function LoginForm() {
           marginTop: 400,
         }}
       >
-        <div style={{ backgroundColor: 'green', width: '50%', height: 741 }}>
+        <LoginGlass>
           <form
             action="/"
             onSubmit={handleSubmit}
@@ -98,12 +104,13 @@ function LoginForm() {
 
             <Box
               sx={{
-                '& > :not(style)': { m: 1, width: '328px' },
+                width: '328px',
               }}
               noValidate
               autoComplete="off"
             >
               <ValidationTextField
+                style={{ width: 328, marginBottom: 10 }}
                 autoFocus
                 required
                 // {!checkLogin && error}
@@ -124,6 +131,7 @@ function LoginForm() {
               />
               <br></br>
               <ValidationTextField
+                style={{ width: 328, marginBottom: 10 }}
                 required
                 error={!checkLogin}
                 id="outlined-password-input"
@@ -141,7 +149,15 @@ function LoginForm() {
                 }}
               />
               <br></br>
-              <Button onClick={() => navigate('/password/init')}>Forget Password?</Button>
+              {/* <Button color="success" onClick={() => navigate('/password/init')}>
+                Forget Password?
+              </Button> */}
+              <SignPWContainer>
+                <ForgetPw color="success" onClick={() => navigate('/password/init')}>
+                  Forget Password?
+                </ForgetPw>
+                <SignBtn color="success">Sign-up</SignBtn>
+              </SignPWContainer>
               <Stack
                 spacing={1}
                 direction="row"
@@ -158,6 +174,7 @@ function LoginForm() {
                 <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
                   Sign-in
                 </ColorButton>
+
                 <ColorButton variant="contained" onClick={() => navigate('/register')}>
                   Sign-up
                 </ColorButton>
@@ -167,7 +184,7 @@ function LoginForm() {
               </Stack>
             </Box>
           </form>
-        </div>
+        </LoginGlass>
       </Container>
       <Footer></Footer>
     </div>
