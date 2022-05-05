@@ -30,7 +30,6 @@ CannedFruit,Canned Tangerines,61,13.45
 CannedFruit,Dried Fruit,243,53.57
 Fruits,Acai,70,15.43
 Fruits,Apple,52,11.46
-Fruits,Applesauce,68,14.99
 Fruits,Apricot,48,10.58
 Fruits,Avocado,160,35.27
 Fruits,Banana,89,19.62
@@ -84,8 +83,6 @@ Fruits,Tangerine,53,11.68
 Fruits,Watermelon,30,6.61
 Tropical&ExoticFruits,Acerola,32,7.05
 Tropical&ExoticFruits,Asian Pear,42,9.26
-Tropical&ExoticFruits,Avocado,160,35.27
-Tropical&ExoticFruits,Banana,89,19.62
 Tropical&ExoticFruits,Breadfruit,103,22.71
 Tropical&ExoticFruits,Cantaloupe Melon,34,7.5
 Tropical&ExoticFruits,Casaba Melon,28,6.17
@@ -95,32 +92,21 @@ Tropical&ExoticFruits,Durian,147,32.41
 Tropical&ExoticFruits,Feijoa,55,12.13
 Tropical&ExoticFruits,Galia Melon,23,5.07
 Tropical&ExoticFruits,Grapefruit,42,9.26
-Tropical&ExoticFruits,Guava,68,14.99
 Tropical&ExoticFruits,Honeydew,36,7.94
-Tropical&ExoticFruits,Jackfruit,95,20.94
-Tropical&ExoticFruits,Kiwi,61,13.45
 Tropical&ExoticFruits,Kumquat,71,15.65
 Tropical&ExoticFruits,Lychee,66,14.55
-Tropical&ExoticFruits,Mandarin Oranges,53,11.68
-Tropical&ExoticFruits,Mango,60,13.23
 Tropical&ExoticFruits,Mangosteen,73,16.09
 Tropical&ExoticFruits,Maracuya,97,21.38
 Tropical&ExoticFruits,Maraschino Cherries,165,36.38
 Tropical&ExoticFruits,Muskmelon,34,7.5
 Tropical&ExoticFruits,Noni,53,11.68
-Tropical&ExoticFruits,Passion Fruit,97,21.38
-Tropical&ExoticFruits,Pineapple,50,11.02
 Tropical&ExoticFruits,Pink Grapefruit,42,9.26
 Tropical&ExoticFruits,Plantain,122,26.9
-Tropical&ExoticFruits,Pomegranate,83,18.3
 Tropical&ExoticFruits,Pomelo,38,8.38
 Tropical&ExoticFruits,Prickly Pear,41,9.04
-Tropical&ExoticFruits,Rambutan,82,18.08
 Tropical&ExoticFruits,Sapodilla,83,18.3
 Tropical&ExoticFruits,Soursop Fruit,66,14.55
 Tropical&ExoticFruits,Star Fruit,31,6.83
-Tropical&ExoticFruits,Tamarind,239,52.69
-Tropical&ExoticFruits,Watermelon,30,6.61
 PotatoProducts,All-blue Potatoes,61,13.45
 PotatoProducts,Baked Potato,93,20.5
 PotatoProducts,Boiled Potatoes,87,19.18
@@ -203,12 +189,10 @@ Vegetables,Mushrooms,22,4.85
 Vegetables,Mustard Greens,27,5.95
 Vegetables,Nori,35,7.72
 Vegetables,Okra,33,7.28
-Vegetables,Olives,115,25.35
 Vegetables,Onion,40,8.82
 Vegetables,Parsnips,75,16.53
 Vegetables,Peas,81,17.86
 Vegetables,Pepper,27,5.95
-Vegetables,Potato,77,16.98
 Vegetables,Pumpkin,26,5.73
 Vegetables,Radishes,16,3.53
 Vegetables,Red Cabbage,31,6.83
@@ -216,7 +200,6 @@ Vegetables,Rutabaga,38,8.38
 Vegetables,Shallots,72,15.87
 Vegetables,Spinach,23,5.07
 Vegetables,Squash,45,9.92
-Vegetables,Sweet Potato,86,18.96
 Vegetables,Tomato,18,3.97
 Vegetables,Turnip Greens,20,4.41
 Vegetables,Turnips,28,6.17
@@ -257,7 +240,6 @@ FastFood,Falafel,335,73.85
 FastFood,Filet-o-Fish,282,62.17
 FastFood,Fish and Chips,195,42.99
 FastFood,Fish Sandwich,273,60.19
-FastFood,French Fries,312,68.78
 FastFood,Grilled Chicken Salad,88,19.4
 FastFood,Ham Sandwich,241,53.13
 FastFood,Hamburger,254,56
@@ -392,13 +374,10 @@ Cheese,Swiss Cheese,380,83.78
 Cheese,White Cheddar,403,88.85
 Cheese,Wisconsin Cheese,389,85.76
 CreamCheese,Chive Cream Cheese,342,75.4
-CreamCheese,Cottage Cheese,98,21.61
 CreamCheese,Cream Cheese,342,75.4
 CreamCheese,Cream Cheese with Herbs,342,75.4
 CreamCheese,Feta Cream Cheese,342,75.4
 CreamCheese,Garlic Cream Cheese,342,75.4
-CreamCheese,Goat Cheese,364,80.25
-CreamCheese,Horseradish,48,10.58
 CreamCheese,Mascarpone,450,99.21
 CreamCheese,Obatzda,303,66.8
 CreamCheese,Olive Cream Cheese,342,75.4
@@ -414,7 +393,6 @@ Milk&DairyProducts,Chocolate Mousse,225,49.6
 Milk&DairyProducts,Coconut Milk,230,50.71
 Milk&DairyProducts,Coffee Creamer,195,42.99
 Milk&DairyProducts,Condensed Milk,321,70.77
-Milk&DairyProducts,Cottage Cheese,98,21.61
 Milk&DairyProducts,Cream,242,53.35
 Milk&DairyProducts,Creme Fraiche,393,86.64
 Milk&DairyProducts,Curd,98,21.61
@@ -441,39 +419,24 @@ Milk&DairyProducts,Tzatziki,117,25.79
 Milk&DairyProducts,Whipped Cream,257,56.66
 Milk&DairyProducts,Whole Milk,61,13.45
 Milk&DairyProducts,Yogurt,61,13.45
-SlicedCheese,American Cheese,148,32.63
-SlicedCheese,Applewood,410,90.39
 SlicedCheese,Bergkase,418,92.15
 SlicedCheese,Butter Cheese,388,85.54
-SlicedCheese,Cheddar,403,88.85
 SlicedCheese,Cheese Platter,357,78.7
 SlicedCheese,Cheese Slices,356,78.48
-SlicedCheese,Colby Cheese,394,86.86
-SlicedCheese,Colby-Jack Cheese,394,86.86
 SlicedCheese,Cold Pack Cheese,246,54.23
 SlicedCheese,Edam,357,78.7
-SlicedCheese,Edam Cheese,357,78.7
 SlicedCheese,Emmental,357,78.7
-SlicedCheese,Emmentaler,357,78.7
 SlicedCheese,Esrom (Cheese),322,70.99
 SlicedCheese,Fol Epi,388,85.54
-SlicedCheese,Fresh Mozzarella,280,61.73
-SlicedCheese,Gouda,356,78.48
 SlicedCheese,Gouda Cheese,356,78.48
-SlicedCheese,Havarti,371,81.79
 SlicedCheese,Lacy Swiss Cheese,321,70.77
 SlicedCheese,Leerdammer,284,62.61
 SlicedCheese,Leerdammer Cheese,284,62.61
-SlicedCheese,Maasdam Cheese,344,75.84
-SlicedCheese,Monterey Jack Cheese,373,82.23
-SlicedCheese,Mozzarella,280,61.73
-SlicedCheese,Muenster Cheese,368,81.13
 SlicedCheese,Pepper Cheese,100,22.05
 SlicedCheese,Sandwich Cheese,148,32.63
 SlicedCheese,Smoked Cheese,410,90.39
 SlicedCheese,Tilsit,340,74.96
 SlicedCheese,White American,148,32.63
-SlicedCheese,White Cheddar,403,88.85
 SlicedCheese,Young Gouda,356,78.48
 Yogurt,Activia,74,16.31
 Yogurt,Activia Lemon,100,22.05
@@ -493,13 +456,11 @@ Yogurt,Low-Fat Yogurt,63,13.89
 Yogurt,Mocca Yogurt,100,22.05
 Yogurt,Organic Yogurt,75,16.53
 Yogurt,Peach Yogurt,97,21.38
-Yogurt,Plain Yogurt,61,13.45
 Yogurt,Probiotic Yogurt,80,17.64
 Yogurt,Skim Milk Yogurt,56,12.35
 Yogurt,Stracciatella Yogurt,139,30.64
 Yogurt,Strawberry Yogurt,100,22.05
 Yogurt,Vanilla Yogurt,101,22.27
-Yogurt,Yogurt,61,13.45
 Yogurt,Yogurt Corner,119,26.23
 Yogurt,Yoplait Boston Cream Pie,90,19.84
 Yogurt,Yoplait French Vanilla,100,22.05
@@ -579,7 +540,6 @@ ColdCuts&LunchMeat,Pepperoni,494,108.91
 ColdCuts&LunchMeat,Pimento Loaf,265,58.42
 ColdCuts&LunchMeat,Pork Roast,247,54.45
 ColdCuts&LunchMeat,Prosciutto,195,42.99
-ColdCuts&LunchMeat,Roast Beef,267,58.86
 ColdCuts&LunchMeat,Salami,336,74.08
 ColdCuts&LunchMeat,Serrano Ham,300,66.14
 ColdCuts&LunchMeat,Smoked Ham,107,23.59
@@ -590,13 +550,9 @@ ColdCuts&LunchMeat,Turkey Breast,104,22.93
 ColdCuts&LunchMeat,Turkey Ham,126,27.78
 ColdCuts&LunchMeat,Turkey Salami,152,33.51
 Meat,Alligator,232,51.15
-Meat,Beef,248,54.67
-Meat,Beef Brisket,242,53.35
 Meat,Beef Jerky,410,90.39
-Meat,Beef Ribs,238,52.47
 Meat,Beef Tenderloin,218,48.06
 Meat,Chicken,219,48.28
-Meat,Chicken Breast,172,37.92
 Meat,Chicken Drumstick,185,40.79
 Meat,Chicken Fat,898,197.97
 Meat,Chicken Giblets,158,34.83
@@ -606,15 +562,9 @@ Meat,Chicken Liver,167,36.82
 Meat,Chicken Meat,172,37.92
 Meat,Chicken Thigh,229,50.49
 Meat,Chicken Wing,266,58.64
-Meat,Chuck Steak,277,61.07
 Meat,Cubed Steak,199,43.87
 Meat,Duck,337,74.3
-Meat,Filet Mignon,267,58.86
-Meat,Flank Steak,194,42.77
 Meat,Flat Iron Steak,137,30.2
-Meat,Ground Beef,246,54.23
-Meat,Ground Round,246,54.23
-Meat,Ham,163,35.94
 Meat,New York Strip Steak,199,43.87
 Meat,Ostrich,145,31.97
 Meat,Pork,196,43.21
@@ -622,52 +572,15 @@ Meat,Pork Baby Back Ribs,212,46.74
 Meat,Pork Chops,196,43.21
 Meat,Pork Country-Style Ribs,247,54.45
 Meat,Pork Loin,204,44.97
-Meat,Pork Roast,254,56
 Meat,Pork Steaks,196,43.21
-Meat,Roast Beef,140,30.86
 Meat,Round Steak,182,40.12
 Meat,Schnitzel,156,34.39
 Meat,Spare Ribs,238,52.47
 Meat,Standing Rib Roast,333,73.41
 Meat,T-Bone Steak,202,44.53
-Meat,Turkey,189,41.67
-Meat,Turkey Breast,135,29.76
 Meat,Turkey Legs,208,45.86
 Meat,Turkey Steak,189,41.67
 Meat,Turkey Wings,221,48.72
-Offal&Giblets,Beef Brain,196,43.21
-Offal&Giblets,Beef Heart,165,36.38
-Offal&Giblets,Beef Kidney,158,34.83
-Offal&Giblets,Beef Liver,191,42.11
-Offal&Giblets,Beef Lung,120,26.46
-Offal&Giblets,Beef Melt,271,59.75
-Offal&Giblets,Beef Tongue,284,62.61
-Offal&Giblets,Calf Brain,136,29.98
-Offal&Giblets,Calf Liver,192,42.33
-Offal&Giblets,Calf Lung,104,22.93
-Offal&Giblets,Calf Melt,256,56.44
-Offal&Giblets,Chicken Giblets,277,61.07
-Offal&Giblets,Chicken Heart,185,40.79
-Offal&Giblets,Chicken Liver,172,37.92
-Offal&Giblets,Chicken Stomach,148,32.63
-Offal&Giblets,Chitterlings,233,51.37
-Offal&Giblets,Duck Liver,136,29.98
-Offal&Giblets,Goose Liver,133,29.32
-Offal&Giblets,Hog Maws,157,34.61
-Offal&Giblets,Pig Brain,138,30.42
-Offal&Giblets,Pig Heart,148,32.63
-Offal&Giblets,Pig Kidney,151,33.29
-Offal&Giblets,Pig Lung,99,21.83
-Offal&Giblets,Pork Liver,165,36.38
-Offal&Giblets,Pork Melt,219,48.28
-Offal&Giblets,Pork Tongue,271,59.75
-Offal&Giblets,Turkey Giblets,173,38.14
-Offal&Giblets,Turkey Heart,174,38.36
-Offal&Giblets,Turkey Liver,189,41.67
-Offal&Giblets,Turkey Stomach,148,32.63
-Offal&Giblets,Veal Heart,186,41.01
-Offal&Giblets,Veal Kidney,163,35.94
-Offal&Giblets,Veal Tongue,202,44.53
 Pork,Bacon,407,89.73
 Pork,Brawn,309,68.12
 Pork,Canadian-Style Bacon,107,23.59
@@ -676,7 +589,6 @@ Pork,Ground Pork,263,57.98
 Pork,Hog Maws,250,55.12
 Pork,Lard,898,197.97
 Pork,Meatloaf,89,19.62
-Pork,Parma Ham,261,57.54
 Pork,Pig Ear,166,36.6
 Pork,Pig Fat,638,140.65
 Pork,Pig's Tail,396,87.3
@@ -685,17 +597,14 @@ Pork,Pork Bacon,407,89.73
 Pork,Pork Belly,518,114.2
 Pork,Pork Blade Steak,232,51.15
 Pork,Pork Chop,123,27.12
-Pork,Pork Country-Style Ribs,133,29.32
 Pork,Pork Crown Roast,212,46.74
 Pork,Pork Cutlet,131,28.88
 Pork,Pork Cutlets,131,28.88
 Pork,Pork Leg,201,44.31
-Pork,Pork Loin,143,31.53
 Pork,Pork Meatloaf,243,53.57
 Pork,Pork Ragout,73,16.09
 Pork,Pork Rib Roast,159,35.05
 Pork,Pork Ribs,292,64.37
-Pork,Pork Roast,194,42.77
 Pork,Pork Sausage,339,74.74
 Pork,Pork Shank,172,37.92
 Pork,Pork Shoulder,269,59.3
@@ -704,25 +613,17 @@ Pork,Pork Stomach,250,55.12
 Pork,Rack of Pork,241,53.13
 Pork,Salt Meat,286,63.05
 Pork,Salt Pork,286,63.05
-Pork,Serrano Ham,339,74.74
-Pork,Spare Ribs,396,87.3
 Pork,Spareribs,238,52.47
 Poultry&Fowl,Capon,229,50.49
-Poultry&Fowl,Chicken,219,48.28
-Poultry&Fowl,Chicken Breast,172,37.92
 Poultry&Fowl,Chicken Drumsticks,185,40.79
-Poultry&Fowl,Chicken Gizzards,154,33.95
 Poultry&Fowl,Chicken Legs,174,38.36
 Poultry&Fowl,Chicken Thighs,229,50.49
-Poultry&Fowl,Chicken Wings,266,58.64
 Poultry&Fowl,Cornish Hens,259,57.1
 Poultry&Fowl,Dove,213,46.96
-Poultry&Fowl,Duck,337,74.3
 Poultry&Fowl,Duck Breast,201,44.31
 Poultry&Fowl,Emu,152,33.51
 Poultry&Fowl,Goose,305,67.24
 Poultry&Fowl,Guinea-Fowl,158,34.83
-Poultry&Fowl,Ostrich,145,31.97
 Poultry&Fowl,Ostrich Meat,145,31.97
 Poultry&Fowl,Pheasant,239,52.69
 Poultry&Fowl,Pheasant Breast,133,29.32
@@ -732,32 +633,18 @@ Poultry&Fowl,Poularde,200,44.09
 Poultry&Fowl,Quail,227,50.04
 Poultry&Fowl,Quail Breast,123,27.12
 Poultry&Fowl,Rhea,160,35.27
-Poultry&Fowl,Turkey,189,41.67
-Poultry&Fowl,Turkey Breast,135,29.76
 Poultry&Fowl,Turkey Cutlet,189,41.67
 Poultry&Fowl,Turkey Drumsticks,208,45.86
-Poultry&Fowl,Turkey Legs,208,45.86
-Poultry&Fowl,Turkey Steak,189,41.67
-Poultry&Fowl,Turkey Wings,221,48.72
 Poultry&Fowl,Wild Duck,211,46.52
 Sausage,Andouille,232,51.15
-Sausage,Bacon,407,89.73
 Sausage,Black Pudding,379,83.56
 Sausage,Blood Sausage,379,83.56
 Sausage,Bockwurst,301,66.36
-Sausage,Boiled Ham,104,22.93
-Sausage,Bologna,247,54.45
 Sausage,Boudin,194,42.77
-Sausage,Bratwurst,297,65.48
-Sausage,Brawn,157,34.61
 Sausage,Breakfast Sausage Links,339,74.74
 Sausage,Cheese Pastry,374,82.45
-Sausage,Chicken Breast,79,17.42
-Sausage,Chicken Meat,79,17.42
 Sausage,Chicken Salad,81,17.86
-Sausage,Chorizo,455,100.31
 Sausage,Cooked Ham,133,29.32
-Sausage,Corned Beef,153,33.73
 Sausage,Cumberland Sausage,250,55.12
 Sausage,Frankfurters,305,67.24
 Sausage,Garlic Sausage,169,37.26
@@ -770,24 +657,17 @@ Sausage,Knackwurst,307,67.68
 Sausage,Landjaeger,352,77.6
 Sausage,Linguica,282,62.17
 Sausage,Liver Pate,319,70.33
-Sausage,Liverwurst,326,71.87
 Sausage,Luncheon Meat,117,25.79
 Sausage,Mettwurst,310,68.34
 Sausage,Mortadella,311,68.56
-Sausage,Pastrami,133,29.32
-Sausage,Pepperoni,494,108.91
 Sausage,Polish Sausage,301,66.36
-Sausage,Pork,247,54.45
 Sausage,Pork Roll,302,66.58
-Sausage,Prosciutto,195,42.99
 Sausage,Ring Bologna,286,63.05
-Sausage,Salami,336,74.08
 Sausage,Sausage,230,50.71
 Sausage,Smoked Sausage,301,66.36
 Sausage,Souse,157,34.61
 Sausage,Spam,315,69.45
 Sausage,Weisswurst,313,69
-Venison&Game,Alligator,104,22.93
 Venison&Game,Alligator Meat,232,51.15
 Venison&Game,Antelope Meat,150,33.07
 Venison&Game,Bear Meat,259,57.1
@@ -798,7 +678,6 @@ Venison&Game,Bison Sirloin,171,37.7
 Venison&Game,Buffalo,131,28.88
 Venison&Game,Buffalo Meat,131,28.88
 Venison&Game,Caribou,159,35.05
-Venison&Game,Goose,238,52.47
 Venison&Game,Goose Meat,238,52.47
 Venison&Game,Lamb,202,44.53
 Venison&Game,Lamb Meat,202,44.53
@@ -808,9 +687,6 @@ Venison&Game,Moose,134,29.54
 Venison&Game,Moose Meat,134,29.54
 Venison&Game,Mutton,234,51.59
 Venison&Game,Mutton Meat,234,51.59
-Venison&Game,Ostrich,175,38.58
-Venison&Game,Ostrich Meat,175,38.58
-Venison&Game,Pheasant,239,52.69
 Venison&Game,Pheasant Meat,239,52.69
 Venison&Game,Rabbit,197,43.43
 Venison&Game,Racoon,255,56.22
@@ -977,7 +853,6 @@ Candy&Sweets,Pop Rocks,358,78.93
 Candy&Sweets,Popcorn,582,128.31
 Candy&Sweets,Pumpkin Seeds,560,123.46
 Candy&Sweets,Reeses Peanut Butter Cups,536,118.17
-Candy&Sweets,Rice Pudding,134,29.54
 Candy&Sweets,Roasted Almonds,452,99.65
 Candy&Sweets,Rolo,474,104.5
 Candy&Sweets,S'mores,500,110.23
@@ -991,9 +866,7 @@ Candy&Sweets,Speculoos,469,103.4
 Candy&Sweets,Spritz Cookies,500,110.23
 Candy&Sweets,Take 5,476,104.94
 Candy&Sweets,Toblerone,525,115.74
-Candy&Sweets,Trifle,186,41.01
 Candy&Sweets,Twix,495,109.13
-Candy&Sweets,Waffles,272,59.97
 Candy&Sweets,Whoopie Pie,400,88.18
 IceCream,Baskin-Robbins,239,52.69
 IceCream,Ben and Jerry's,228,50.27
@@ -1052,7 +925,6 @@ IceCream,Vanilla Ice Cream,201,44.31
 (Fruit)Juices,Chamomile Tea,0,0
 (Fruit)Juices,Cherry Juice,45,9.92
 (Fruit)Juices,Clamato,60,13.23
-(Fruit)Juices,Coconut Milk,233,51.37
 (Fruit)Juices,Coconut Water,19,4.19
 (Fruit)Juices,Concord Grape,71,15.65
 (Fruit)Juices,Cranberry Apple Juice,67,14.77
@@ -1109,7 +981,7 @@ AlcoholicDrinks&Beverages,Gin,263,57.98
 AlcoholicDrinks&Beverages,Glenfiddich,230,50.71
 AlcoholicDrinks&Beverages,Grand Marnier,253,55.78
 AlcoholicDrinks&Beverages,Irish Whiskey,233,51.37
-AlcoholicDrinks&Beverages,Jack Daniel?s,146,32.19
+AlcoholicDrinks&Beverages,Jack Daniel's,146,32.19
 AlcoholicDrinks&Beverages,Jagermeister,250,55.12
 AlcoholicDrinks&Beverages,Jim Beam,222,48.94
 AlcoholicDrinks&Beverages,Kahlua,180,39.68
@@ -1138,7 +1010,6 @@ Beer,Ale,35,7.72
 Beer,Altbier,43,9.48
 Beer,Bass,45,9.92
 Beer,Beck's,39,8.6
-Beer,Beer,43,9.48
 Beer,Blue Moon,48,10.58
 Beer,Bock Beer,50,11.02
 Beer,Buckler (N.A.),21,4.63
@@ -1241,27 +1112,19 @@ Non-AlcoholicDrinks&Beverages,Ginger Tea,0,0
 Non-AlcoholicDrinks&Beverages,Hawaiian Punch,31,6.83
 Non-AlcoholicDrinks&Beverages,Hi-C,49,10.8
 Non-AlcoholicDrinks&Beverages,Horchata,54,11.9
-Non-AlcoholicDrinks&Beverages,Hot Chocolate,89,19.62
 Non-AlcoholicDrinks&Beverages,Ice Tea,27,5.95
 Non-AlcoholicDrinks&Beverages,Iced Tea,27,5.95
 Non-AlcoholicDrinks&Beverages,Karamalz,37,8.16
 Non-AlcoholicDrinks&Beverages,Kombucha,13,2.87
 Non-AlcoholicDrinks&Beverages,Kool-Aid,26,5.73
-Non-AlcoholicDrinks&Beverages,Lassi,104,22.93
 Non-AlcoholicDrinks&Beverages,Latte Macchiato,57,12.57
-Non-AlcoholicDrinks&Beverages,Lemonade,42,9.26
-Non-AlcoholicDrinks&Beverages,Malt Beer,37,8.16
-Non-AlcoholicDrinks&Beverages,Milk,61,13.45
 Non-AlcoholicDrinks&Beverages,Milkshake (dry),329,72.53
 Non-AlcoholicDrinks&Beverages,Milo,409,90.17
 Non-AlcoholicDrinks&Beverages,Nectar,53,11.68
-Non-AlcoholicDrinks&Beverages,Nestea,36,7.94
-Non-AlcoholicDrinks&Beverages,Non-alcoholic Beer,37,8.16
 Non-AlcoholicDrinks&Beverages,Powerade,16,3.53
 Non-AlcoholicDrinks&Beverages,Slurpee,4,0.88
 Non-AlcoholicDrinks&Beverages,Slush Puppie,50,11.02
 Non-AlcoholicDrinks&Beverages,Smoothie,37,8.16
-Non-AlcoholicDrinks&Beverages,Soy Milk,45,9.92
 Non-AlcoholicDrinks&Beverages,Strawberry Milkshake,113,24.91
 Non-AlcoholicDrinks&Beverages,Tang,381,84
 Non-AlcoholicDrinks&Beverages,Tap Water,0,0
@@ -1276,13 +1139,11 @@ Soda&SoftDrinks,Bitter Lemon,34,7.5
 Soda&SoftDrinks,Canada Dry Ginger Ale,41,9.04
 Soda&SoftDrinks,Cherry Coke,44,9.7
 Soda&SoftDrinks,Coke,42,9.26
-Soda&SoftDrinks,Coke Zero,0,0
 Soda&SoftDrinks,Diet Cherry Coke,1,0.22
-Soda&SoftDrinks,Diet Coke,1,0.22
 Soda&SoftDrinks,Diet Dr. Pepper,0,0
 Soda&SoftDrinks,Diet Pepsi,0,0
 Soda&SoftDrinks,Diet Sunkist,0,0
-Soda&SoftDrinks,Dr. Brown?s,53,11.68
+Soda&SoftDrinks,Dr. Brown's,53,11.68
 Soda&SoftDrinks,Dr. Pepper,27,5.95
 Soda&SoftDrinks,Fanta,39,8.6
 Soda&SoftDrinks,Fanta Zero,0,0
@@ -1291,12 +1152,8 @@ Soda&SoftDrinks,Fresca,0,0
 Soda&SoftDrinks,Full Throttle,110,24.25
 Soda&SoftDrinks,Fuze,20,4.41
 Soda&SoftDrinks,Fuze Tea,25,5.51
-Soda&SoftDrinks,Gatorade,25,5.51
 Soda&SoftDrinks,Ginger Ale,35,7.72
-Soda&SoftDrinks,Ice Tea,27,5.95
 Soda&SoftDrinks,Jolt Cola,44,9.7
-Soda&SoftDrinks,Kool-Aid,26,5.73
-Soda&SoftDrinks,Lemonade,42,9.26
 Soda&SoftDrinks,Mello Yello,49,10.8
 Soda&SoftDrinks,Minute Maid,46,10.14
 Soda&SoftDrinks,Minute Maid Light,2,0.44
@@ -1304,7 +1161,6 @@ Soda&SoftDrinks,Mug Root Beer,42,9.26
 Soda&SoftDrinks,Orange Soda,48,10.58
 Soda&SoftDrinks,Pepsi,44,9.7
 Soda&SoftDrinks,Pibb Xtra,40,8.82
-Soda&SoftDrinks,Powerade,120,26.46
 Soda&SoftDrinks,Schweppes Ginger Ale,38,8.38
 Soda&SoftDrinks,Soda,53,11.68
 Soda&SoftDrinks,Sprite,37,8.16
@@ -1317,7 +1173,6 @@ Soda&SoftDrinks,Tonic Water,35,7.72
 Soda&SoftDrinks,Vanilla Coke,45,9.92
 Wine,Cabernet Sauvignon,77,16.98
 Wine,Cava,76,16.76
-Wine,Champagne,76,16.76
 Wine,Chardonnay,85,18.74
 Wine,Chenin Blanc,80,17.64
 Wine,Chocolate Wine,256,56.44
@@ -1334,24 +1189,16 @@ Wine,Pinot Gris,83,18.3
 Wine,Pinot Noir,75,16.53
 Wine,Plum Wine,163,35.94
 Wine,Port Wine,160,35.27
-Wine,Prosecco,71,15.65
-Wine,Red Wine,85,18.74
 Wine,Red Wines,85,18.74
 Wine,Riesling,80,17.64
 Wine,Riesling Wine,80,17.64
-Wine,Rose Wine,71,15.65
-Wine,Sangria,132,29.1
 Wine,Sauvignon Blanc,81,17.86
-Wine,Sherry,116,25.57
 Wine,Shiraz,71,15.65
 Wine,Sparkling Wine,190,41.89
 Wine,Sweet Red Wine,81,17.86
 Wine,Sweet White Wine,82,18.08
 Wine,Sweet Wines,83,18.3
-Wine,Vermouth,108,23.81
-Wine,White Wine,82,18.08
 Wine,White Zinfandel,88,19.4
-Wine,Wine,83,18.3
 Wine,Yellow Tail Wine,71,15.65
 Wine,Zinfandel,88,19.4
 CerealProducts,Amaranth,371,81.79
@@ -1454,7 +1301,6 @@ CerealProducts,Wholegrain Oat,375,82.67
 "Oatmeal,Muesli&Cereals",Quaker Oatmeal Squares,400,88.18
 "Oatmeal,Muesli&Cereals",Raisin Bran,322,70.99
 "Oatmeal,Muesli&Cereals",Raisin Bran Crunch,355,78.26
-"Oatmeal,Muesli&Cereals",Raisin Bran Crunch,355,78.26
 "Oatmeal,Muesli&Cereals",Raisin Nut Bran,367,80.91
 "Oatmeal,Muesli&Cereals",Ready Brek,359,79.15
 "Oatmeal,Muesli&Cereals",Rice Chex,387,85.32
@@ -1480,8 +1326,6 @@ Pasta&Noodles,Cappelletti,164,36.16
 Pasta&Noodles,Cellophane Noodles,351,77.38
 Pasta&Noodles,Cheese Tortellini,291,64.15
 Pasta&Noodles,Dampfnudel,274,60.41
-Pasta&Noodles,Dumpling Dough,99,21.83
-Pasta&Noodles,Durum Wheat Semolina,397,87.52
 Pasta&Noodles,Egg Noodles,384,84.66
 Pasta&Noodles,Farfalle,358,78.93
 Pasta&Noodles,Fettuccine,353,77.82
@@ -1521,10 +1365,8 @@ Dishes&Meals,Baked Chicken,164,36.16
 Dishes&Meals,BBQ Ribs,255,56.22
 Dishes&Meals,Beef Stew,95,20.94
 Dishes&Meals,Biryani,176,38.8
-Dishes&Meals,Black Pudding,253,55.78
 Dishes&Meals,Black Rice,323,71.21
 Dishes&Meals,BLT,247,54.45
-Dishes&Meals,Brown Rice,362,79.81
 Dishes&Meals,Burrito,163,35.94
 Dishes&Meals,Butter Chicken,140,30.86
 Dishes&Meals,California Roll,93,20.5
@@ -1537,7 +1379,6 @@ Dishes&Meals,Chicken Tikka Masala,81,17.86
 Dishes&Meals,Chili con Carne,105,23.15
 Dishes&Meals,Chimichanga,232,51.15
 Dishes&Meals,Cobb Salad,118,26.01
-Dishes&Meals,Collard Greens,28,6.17
 Dishes&Meals,Corn Dog,250,55.12
 Dishes&Meals,Corned Beef Hash,164,36.16
 Dishes&Meals,Cottage Pie,139,30.64
@@ -1547,7 +1388,6 @@ Dishes&Meals,Dim Sum,193,42.55
 Dishes&Meals,Dosa,66,14.55
 Dishes&Meals,Enchiladas,168,37.04
 Dishes&Meals,Fajita,117,25.79
-Dishes&Meals,Fish and Chips,195,42.99
 Dishes&Meals,Fried Rice,186,41.01
 Dishes&Meals,Fried Shrimp,277,61.07
 Dishes&Meals,Grilled Cheese Sandwich,288,63.49
@@ -1558,9 +1398,7 @@ Dishes&Meals,Kebab,215,47.4
 Dishes&Meals,Lasagne,132,29.1
 Dishes&Meals,Mac and Cheese,370,81.57
 Dishes&Meals,Macaroni and Cheese,370,81.57
-Dishes&Meals,Mashed Potatoes,83,18.3
 Dishes&Meals,Meat Pie,242,53.35
-Dishes&Meals,Meatloaf,254,56
 Dishes&Meals,Naan,310,68.34
 Dishes&Meals,Orange Chicken,259,57.1
 Dishes&Meals,Pad Thai,150,33.07
@@ -1571,13 +1409,9 @@ Dishes&Meals,Peanut Butter Sandwich,408,89.95
 Dishes&Meals,Peking Duck,225,49.6
 Dishes&Meals,Philly Cheese Steak,250,55.12
 Dishes&Meals,Pizza,267,58.86
-Dishes&Meals,Pork Chop,225,49.6
-Dishes&Meals,Potato Salad,143,31.53
 Dishes&Meals,Pulled Pork Sandwich,211,46.52
 Dishes&Meals,Ramen,447,98.55
-Dishes&Meals,Ravioli,203,44.75
 Dishes&Meals,Reuben Sandwich,208,45.86
-Dishes&Meals,Roast Beef,111,24.47
 Dishes&Meals,Roast Dinner,198,43.65
 Dishes&Meals,Samosa,214,47.18
 Dishes&Meals,Sausage Roll,350,77.16
@@ -1630,10 +1464,8 @@ Soups,Mushroom Soup,35,7.72
 Soups,Noodle Soup,34,7.5
 Soups,Onion Soup,23,5.07
 Soups,Oxtail Soup,28,6.17
-Soups,Pea Soup,75,16.53
 Soups,Potato Soup,80,17.64
 Soups,Pumpkin Soup,29,6.39
-Soups,Ramen,436,96.12
 Soups,Scotch Broth,33,7.28
 Soups,Succotash,115,25.35
 Soups,Thai Soup,60,13.23
@@ -1656,13 +1488,11 @@ Legumes,Brown Lentil,353,77.82
 Legumes,Butternut,612,134.92
 Legumes,Chickpeas,364,80.25
 Legumes,Chili Bean,97,21.38
-Legumes,Dal,230,50.71
 Legumes,Deep-Fried Tofu,271,59.75
 Legumes,Extra-Firm Tofu,91,20.06
 Legumes,Firm Tofu,70,15.43
 Legumes,Flageolet,85,18.74
 Legumes,Fried Bean Curd,271,59.75
-Legumes,Green Beans,31,6.83
 Legumes,Green Gram,347,76.5
 Legumes,Green Lentil,257,56.66
 Legumes,Kidney Beans,337,74.3
@@ -1674,9 +1504,7 @@ Legumes,Mung Beans,12,2.65
 Legumes,Natto,212,46.74
 Legumes,Navy Bean,337,74.3
 Legumes,Okara,77,16.98
-Legumes,Okra,33,7.28
 Legumes,Peanuts,567,125
-Legumes,Peas,42,9.26
 Legumes,Pecan,691,152.34
 Legumes,Pinto Beans,347,76.5
 Legumes,Puy Lentils,345,76.06
@@ -1711,198 +1539,30 @@ Nuts&Seeds,Alfalfa Sprouts,23,5.07
 Nuts&Seeds,Almonds,575,126.77
 Nuts&Seeds,Beechnut,576,126.99
 Nuts&Seeds,Brazil Nuts,656,144.62
-Nuts&Seeds,Breadfruit,191,42.11
-Nuts&Seeds,Butternut,612,134.92
 Nuts&Seeds,Cashew,553,121.92
 Nuts&Seeds,Chestnut,213,46.96
 Nuts&Seeds,Chia Seeds,486,107.14
 Nuts&Seeds,Coconut,354,78.04
 Nuts&Seeds,Cotton Seeds,506,111.55
-Nuts&Seeds,Flaxseed,534,117.73
 Nuts&Seeds,Ginkgo Nuts,182,40.12
 Nuts&Seeds,Goa Bean,409,90.17
 Nuts&Seeds,Hazelnut,628,138.45
 Nuts&Seeds,Hickory Nuts,657,144.84
-Nuts&Seeds,Lima Beans,71,15.65
 Nuts&Seeds,Lotus Seed,89,19.62
 Nuts&Seeds,Macadamia Nuts,718,158.29
-Nuts&Seeds,Peanuts,567,125
-Nuts&Seeds,Peas,81,17.86
 Nuts&Seeds,Pecan Nuts,691,152.34
 Nuts&Seeds,Pecans,691,152.34
 Nuts&Seeds,Pili Nuts,719,158.51
 Nuts&Seeds,Pine Nuts,673,148.37
-Nuts&Seeds,Pinto Beans,347,76.5
 Nuts&Seeds,Pistachios,562,123.9
 Nuts&Seeds,Poppy Seeds,525,115.74
-Nuts&Seeds,Pumpkin Seeds,559,123.24
 Nuts&Seeds,Radish Seeds,43,9.48
 Nuts&Seeds,Safflower Seeds,517,113.98
 Nuts&Seeds,Sesame Seeds,573,126.32
 Nuts&Seeds,Smoked Almonds,575,126.77
 Nuts&Seeds,Soy Beans,147,32.41
-Nuts&Seeds,Sunflower Seeds,584,128.75
 Nuts&Seeds,Sweet Chestnut,194,42.77
 Nuts&Seeds,Walnuts,654,144.18
-Nuts&Seeds,Watermelon,30,6.61
-Oils&Fats,Almond Oil,882,194.45
-Oils&Fats,Avocado Oil,857,188.94
-Oils&Fats,Butter,720,158.73
-Oils&Fats,Canola Oil,884,194.89
-Oils&Fats,Coconut Oil,857,188.94
-Oils&Fats,Cod Liver Oil,1000,220.46
-Oils&Fats,Corn Oil,800,176.37
-Oils&Fats,Cottonseed Oil,882,194.45
-Oils&Fats,Flaxseed Oil,884,194.89
-Oils&Fats,Ghee,120,26.46
-Oils&Fats,Goose Fat,898,197.97
-Oils&Fats,Grape Seed Oil,884,194.89
-Oils&Fats,Hemp Oil,807,177.91
-Oils&Fats,Herring Oil,902,198.86
-Oils&Fats,I can\?t believe it\?s not Butter,357,78.7
-Oils&Fats,Lard,902,198.86
-Oils&Fats,Macadamia Oil,819,180.56
-Oils&Fats,Margarine,717,158.07
-Oils&Fats,Mustard Oil,884,194.89
-Oils&Fats,Olive Oil,884,194.89
-Oils&Fats,Palm Oil,882,194.45
-Oils&Fats,Peanut Oil,857,188.94
-Oils&Fats,Real Butter,720,158.73
-Oils&Fats,Rice Bran Oil,889,195.99
-Oils&Fats,Safflower Oil,857,188.94
-Oils&Fats,Sardine Oil,902,198.86
-Oils&Fats,Sesame Oil,884,194.89
-Oils&Fats,Soybean Oil,889,195.99
-Oils&Fats,Sunflower Oil,884,194.89
-Oils&Fats,Walnut Oil,889,195.99
-VegetableOils,Almond Oil,882,194.45
-VegetableOils,Apricot Kernel Oil,889,195.99
-VegetableOils,Argan Oil,896,197.53
-VegetableOils,Avocado Oil,857,188.94
-VegetableOils,Babassu Oil,884,194.89
-VegetableOils,Canola Oil,884,194.89
-VegetableOils,Coconut Oil,857,188.94
-VegetableOils,Corn Oil,800,176.37
-VegetableOils,Cottonseed Oil,882,194.45
-VegetableOils,Flaxseed Oil,884,194.89
-VegetableOils,Grape Seed Oil,884,194.89
-VegetableOils,Hazelnut Oil,889,195.99
-VegetableOils,Linseed Oil,837,184.53
-VegetableOils,Menhaden Oil,911,200.84
-VegetableOils,Mustard Oil,884,194.89
-VegetableOils,Oat Oil,884,194.89
-VegetableOils,Olive Oil,800,176.37
-VegetableOils,Palm Kernel Oil,882,194.45
-VegetableOils,Palm Oil,882,194.45
-VegetableOils,Peanut Oil,857,188.94
-VegetableOils,Poppy Seed Oil,884,194.89
-VegetableOils,Pumpkin Seed Oil,880,194.01
-VegetableOils,Rice Bran Oil,889,195.99
-VegetableOils,Safflower Oil,857,188.94
-VegetableOils,Salmon Oil,911,200.84
-VegetableOils,Sesame Oil,889,195.99
-VegetableOils,Shea Oil,884,194.89
-VegetableOils,Soy Oil,882,194.45
-VegetableOils,Sunflower Oil,884,194.89
-VegetableOils,Tomato Seed Oil,884,194.89
-VegetableOils,Vegetable Oil,800,176.37
-VegetableOils,Walnut Oil,889,195.99
-VegetableOils,Wheat Germ Oil,929,204.81
-BakingIngredients,Agar-Agar,26,5.73
-BakingIngredients,Agave Syrup,310,68.34
-BakingIngredients,All Purpose Flour,364,80.25
-BakingIngredients,Almond Extract,258,56.88
-BakingIngredients,Almonds,529,116.62
-BakingIngredients,Apple Pie Filling,100,22.05
-BakingIngredients,Baking Powder,53,11.68
-BakingIngredients,Baking Soda,0,0
-BakingIngredients,Bread Flour,361,79.59
-BakingIngredients,Brittle,592,130.51
-BakingIngredients,Brown Sugar,395,87.08
-BakingIngredients,Buttermilk,62,13.67
-BakingIngredients,Butterscotch Chips,539,118.83
-BakingIngredients,Cake Flour,362,79.81
-BakingIngredients,Candied Orange Peel,97,21.38
-BakingIngredients,Cane Sugar,387,85.32
-BakingIngredients,Chocolate Chips,467,102.96
-BakingIngredients,Chocolate Sprinkles,500,110.23
-BakingIngredients,Cocoa Powder,228,50.27
-BakingIngredients,Coconut Flakes,456,100.53
-BakingIngredients,Coconut Milk,50,11.02
-BakingIngredients,Corn Flour,361,79.59
-BakingIngredients,Corn Syrup,281,61.95
-BakingIngredients,Cornmeal,362,79.81
-BakingIngredients,Cornstarch,381,84
-BakingIngredients,Couverture,600,132.28
-BakingIngredients,Cream Cheese,54,11.9
-BakingIngredients,Cream of Tartar,258,56.88
-BakingIngredients,Crystallized Ginger,335,73.85
-BakingIngredients,Custard Powder,337,74.3
-BakingIngredients,Dark Rum,216,47.62
-BakingIngredients,Dextrose,375,82.67
-BakingIngredients,Dried Apricots,241,53.13
-BakingIngredients,Dried Cranberries,308,67.9
-BakingIngredients,Dried Figs,249,54.9
-BakingIngredients,Dried Prunes,107,23.59
-BakingIngredients,Duck Egg,185,40.79
-BakingIngredients,Egg,97,21.38
-BakingIngredients,Egg Nog,88,19.4
-BakingIngredients,Egg White,13,2.87
-BakingIngredients,Egg Yolk,322,70.99
-BakingIngredients,Evaporated Milk,134,29.54
-BakingIngredients,Flour,364,80.25
-BakingIngredients,Fructose,368,81.13
-BakingIngredients,Gelatin,335,73.85
-BakingIngredients,Glucose,286,63.05
-BakingIngredients,Glucose Syrup,387,85.32
-BakingIngredients,Granulated Sugar,387,85.32
-BakingIngredients,Ground Cinnamon,247,54.45
-BakingIngredients,Hazelnuts,628,138.45
-BakingIngredients,Heavy Cream,345,76.06
-BakingIngredients,Jaggery,383,84.44
-BakingIngredients,Lemon Pie Filling,143,31.53
-BakingIngredients,Malt Powder,361,79.59
-BakingIngredients,Malted Milk,405,89.29
-BakingIngredients,Maltitol,210,46.3
-BakingIngredients,Maltodextrin,375,82.67
-BakingIngredients,Maltose,344,75.84
-BakingIngredients,Maple Syrup,270,59.52
-BakingIngredients,Molasses,290,63.93
-BakingIngredients,Nonpareils,475,104.72
-BakingIngredients,Peppermint Extract,0,0
-BakingIngredients,Poppy Seeds,525,115.74
-BakingIngredients,Powdered Milk,496,109.35
-BakingIngredients,Powdered Sugar,389,85.76
-BakingIngredients,Protein Powder,411,90.61
-BakingIngredients,Raisins,474,104.5
-BakingIngredients,Rice Milk,49,10.8
-BakingIngredients,Rock Sugar,625,137.79
-BakingIngredients,Rolled Oats,384,84.66
-BakingIngredients,Rum,246,54.23
-BakingIngredients,Semolina Flour,350,77.16
-BakingIngredients,Sesame Seeds,573,126.32
-BakingIngredients,Shredded Coconut,501,110.45
-BakingIngredients,Sorbitol,375,82.67
-BakingIngredients,Soy Milk,41,9.04
-BakingIngredients,Soy Protein Powder,338,74.52
-BakingIngredients,Sprinkles,500,110.23
-BakingIngredients,Starch,381,84
-BakingIngredients,Strawberry Preserves,278,61.29
-BakingIngredients,Sucrose,387,85.32
-BakingIngredients,Sugar,405,89.29
-BakingIngredients,Sunflower Seeds,117,25.79
-BakingIngredients,Sweetened Condensed Milk,321,70.77
-BakingIngredients,Sweetener,360,79.37
-BakingIngredients,Unsalted Butter,717,158.07
-BakingIngredients,Vanilla Extract,288,63.49
-BakingIngredients,Vanilla Sugar,357,78.7
-BakingIngredients,Vegetable Oil,884,194.89
-BakingIngredients,Vegetable Shortening,884,194.89
-BakingIngredients,Walnuts,131,28.88
-BakingIngredients,Whole Milk,61,13.45
-BakingIngredients,Whole Wheat Flour,340,74.96
-BakingIngredients,Xylitol,240,52.91
-BakingIngredients,Yeast (dry),325,71.65
 Fish&Seafood,Anchovy,131,28.88
 Fish&Seafood,Bluefish,159,35.05
 Fish&Seafood,Bream,135,29.76
@@ -1956,105 +1616,12 @@ Fish&Seafood,Sushi,150,33.07
 Fish&Seafood,Swordfish,172,37.92
 Fish&Seafood,Triggerfish,93,20.5
 Fish&Seafood,Trout,190,41.89
-Fish&Seafood,Tuna,132,29.1
 Fish&Seafood,Tuna Salad,187,41.23
 Fish&Seafood,Turbot,122,26.9
 Fish&Seafood,Wahoo,167,36.82
 Fish&Seafood,Whitefish,172,37.92
 Fish&Seafood,Whiting,116,25.57
 Fish&Seafood,Zander,84,18.52
-Herbs&Spices,Almond Extract,374,82.45
-Herbs&Spices,Anise,337,74.3
-Herbs&Spices,Anise Seed,337,74.3
-Herbs&Spices,Arrowroot,65,14.33
-Herbs&Spices,Arugula,25,5.51
-Herbs&Spices,Balsamic Vinegar,88,19.4
-Herbs&Spices,Basil,233,51.37
-Herbs&Spices,Black Pepper,251,55.34
-Herbs&Spices,Black Sesame Seeds,573,126.32
-Herbs&Spices,Broth,100,22.05
-Herbs&Spices,Capers,23,5.07
-Herbs&Spices,Caraway Seeds,333,73.41
-Herbs&Spices,Cardamom,311,68.56
-Herbs&Spices,Cassava,160,35.27
-Herbs&Spices,Cayenne Pepper,318,70.11
-Herbs&Spices,Chard,19,4.19
-Herbs&Spices,Chicory Greens,23,5.07
-Herbs&Spices,Chicory Roots,72,15.87
-Herbs&Spices,Chili,282,62.17
-Herbs&Spices,Chili Powder,282,62.17
-Herbs&Spices,Chives,30,6.61
-Herbs&Spices,Cider Vinegar,21,4.63
-Herbs&Spices,Cilantro,23,5.07
-Herbs&Spices,Cinnamon,247,54.45
-Herbs&Spices,Cloves,274,60.41
-Herbs&Spices,Coriander,23,5.07
-Herbs&Spices,Cream of Tartar,258,56.88
-Herbs&Spices,Cress,32,7.05
-Herbs&Spices,Crystallized Ginger,335,73.85
-Herbs&Spices,Cumin,375,82.67
-Herbs&Spices,Cumin Seed,375,82.67
-Herbs&Spices,Curry,325,71.65
-Herbs&Spices,Dandelion,45,9.92
-Herbs&Spices,Dill,43,9.48
-Herbs&Spices,Dill Weed,43,9.48
-Herbs&Spices,Fennel,31,6.83
-Herbs&Spices,Fennel Seed,345,76.06
-Herbs&Spices,Fenugreek,323,71.21
-Herbs&Spices,Garlic,149,32.85
-Herbs&Spices,Garlic Powder,331,72.97
-Herbs&Spices,Garlic Salt,0,0
-Herbs&Spices,Ginger,80,17.64
-Herbs&Spices,Grape Leaves,93,20.5
-Herbs&Spices,Ground Ginger,335,73.85
-Herbs&Spices,Horseradish,48,10.58
-Herbs&Spices,Hot Pepper,318,70.11
-Herbs&Spices,Iodized Salt,0,0
-Herbs&Spices,Jalapeno,13,2.87
-Herbs&Spices,Juniper,45,9.92
-Herbs&Spices,Lemon Grass,99,21.83
-Herbs&Spices,Licorice,375,82.67
-Herbs&Spices,Maggi,104,22.93
-Herbs&Spices,Marjoram,271,59.75
-Herbs&Spices,Minced Onion,40,8.82
-Herbs&Spices,Mint,70,15.43
-Herbs&Spices,Mustard Seed,508,111.99
-Herbs&Spices,Nutmeg,525,115.74
-Herbs&Spices,Okra,33,7.28
-Herbs&Spices,Onion,40,8.82
-Herbs&Spices,Onion Powder,341,75.18
-Herbs&Spices,Orange Peel,97,21.38
-Herbs&Spices,Oregano,265,58.42
-Herbs&Spices,Paprika,282,62.17
-Herbs&Spices,Parsley,36,7.94
-Herbs&Spices,Parsnip,75,16.53
-Herbs&Spices,Pepper,251,55.34
-Herbs&Spices,Poppy Seed,525,115.74
-Herbs&Spices,Poultry Seasoning,307,67.68
-Herbs&Spices,Pumpkin Pie Spice,342,75.4
-Herbs&Spices,Red Pepper,251,55.34
-Herbs&Spices,Red Wine Vinegar,19,4.19
-Herbs&Spices,Rosemary,131,28.88
-Herbs&Spices,Saffron,310,68.34
-Herbs&Spices,Sage,315,69.45
-Herbs&Spices,Salt,0,0
-Herbs&Spices,Savory,272,59.97
-Herbs&Spices,Sea Salt,0,0
-Herbs&Spices,Serrano Pepper,32,7.05
-Herbs&Spices,Sesame Seeds,573,126.32
-Herbs&Spices,Stevia,0,0
-Herbs&Spices,Tamarind,239,52.69
-Herbs&Spices,Taro,112,24.69
-Herbs&Spices,Tarragon,295,65.04
-Herbs&Spices,Thyme,276,60.85
-Herbs&Spices,Turmeric,354,78.04
-Herbs&Spices,Vanilla Bean,250,55.12
-Herbs&Spices,Vanilla Extract,288,63.49
-Herbs&Spices,Vinegar,18,3.97
-Herbs&Spices,White Pepper,296,65.26
-Herbs&Spices,Yam,118,26.01
-"Pastries,Breads&Rolls",Apple Pie,237,52.25
-"Pastries,Breads&Rolls",Apple Turnover,348,76.72
 "Pastries,Breads&Rolls",Bagel,257,56.66
 "Pastries,Breads&Rolls",Baguette,274,60.41
 "Pastries,Breads&Rolls",Banana Bread,326,71.87
@@ -2070,12 +1637,10 @@ Herbs&Spices,Yam,118,26.01
 "Pastries,Breads&Rolls",Brownies,405,89.29
 "Pastries,Breads&Rolls",Bun,316,69.67
 "Pastries,Breads&Rolls",Cannoli,254,56
-"Pastries,Breads&Rolls",Caramel Cake,385,84.88
 "Pastries,Breads&Rolls",Challah,283,62.39
 "Pastries,Breads&Rolls",Chapati,240,52.91
 "Pastries,Breads&Rolls",Ciabatta,271,59.75
 "Pastries,Breads&Rolls",Cinnamon Bun,436,96.12
-"Pastries,Breads&Rolls",Coffee Cake,418,92.15
 "Pastries,Breads&Rolls",Conchas/Mexican Sweet Bread,353,77.82
 "Pastries,Breads&Rolls",Cornbread,179,39.46
 "Pastries,Breads&Rolls",Crepes,224,49.38
@@ -2083,7 +1648,6 @@ Herbs&Spices,Yam,118,26.01
 "Pastries,Breads&Rolls",Crumpet,178,39.24
 "Pastries,Breads&Rolls",Cupcakes,305,67.24
 "Pastries,Breads&Rolls",Donut/Doughnut,421,92.81
-"Pastries,Breads&Rolls",Dosa,209,46.08
 "Pastries,Breads&Rolls",Empanada,335,73.85
 "Pastries,Breads&Rolls",English Muffin,227,50.04
 "Pastries,Breads&Rolls",Flatbread,311,68.56
@@ -2096,20 +1660,16 @@ Herbs&Spices,Yam,118,26.01
 "Pastries,Breads&Rolls",Monkey Bread,290,63.93
 "Pastries,Breads&Rolls",Muffin,296,65.26
 "Pastries,Breads&Rolls",Multi-Grain Bread,265,58.42
-"Pastries,Breads&Rolls",Naan,275,60.63
 "Pastries,Breads&Rolls",Oatmeal Cookies,450,99.21
 "Pastries,Breads&Rolls",Oatmeal Raisin Cookies,435,95.9
 "Pastries,Breads&Rolls",Pan de Sal,293,64.6
-"Pastries,Breads&Rolls",Pancake,233,51.37
 "Pastries,Breads&Rolls",Pandesal,293,64.6
-"Pastries,Breads&Rolls",Panettone,318,70.11
 "Pastries,Breads&Rolls",Pide,268,59.08
 "Pastries,Breads&Rolls",Pie,237,52.25
 "Pastries,Breads&Rolls",Pita Bread,275,60.63
 "Pastries,Breads&Rolls",Potato Bread,266,58.64
 "Pastries,Breads&Rolls",Pretzel,338,74.52
 "Pastries,Breads&Rolls",Pretzel Roll,338,74.52
-"Pastries,Breads&Rolls",Puff Pastry,558,123.02
 "Pastries,Breads&Rolls",Pumpernickel,250,55.12
 "Pastries,Breads&Rolls",Raisin Bread,274,60.41
 "Pastries,Breads&Rolls",Roll,316,69.67
@@ -2125,102 +1685,7 @@ Herbs&Spices,Yam,118,26.01
 "Pastries,Breads&Rolls",Spanakopita,246,54.23
 "Pastries,Breads&Rolls",Spice Cake,332,73.19
 "Pastries,Breads&Rolls",Sweet Rolls,333,73.41
-"Pastries,Breads&Rolls",Swiss Roll,313,69
 "Pastries,Breads&Rolls",Toast,261,57.54
-"Pastries,Breads&Rolls",Tortilla,297,65.48
 "Pastries,Breads&Rolls",Tortilla Bread,265,58.42
 "Pastries,Breads&Rolls",White Bread,238,52.47
 "Pastries,Breads&Rolls",Whole Wheat Bread,247,54.45
-Sauces&Dressings,1000 Island Dressing,370,81.57
-Sauces&Dressings,Ajvar,18,3.97
-Sauces&Dressings,Arrabiata Sauce,36,7.94
-Sauces&Dressings,Balsamic Vinaigrette Dressing,290,63.93
-Sauces&Dressings,Barbecue Sauce,150,33.07
-Sauces&Dressings,Bechamel Sauce,225,49.6
-Sauces&Dressings,Bernaise Sauce,414,91.27
-Sauces&Dressings,Blue Cheese Dressing,533,117.51
-Sauces&Dressings,Bolognese,106,23.37
-Sauces&Dressings,Buttermilk Ranch Dressing,533,117.51
-Sauces&Dressings,Caesar Dressing,429,94.58
-Sauces&Dressings,Catalina Dressing,282,62.17
-Sauces&Dressings,Chasseur Sauce,45,9.92
-Sauces&Dressings,Chili Sauce,112,24.69
-Sauces&Dressings,Cream Sauce,180,39.68
-Sauces&Dressings,Curry Ketchup,124,27.34
-Sauces&Dressings,Curry Sauce,26,5.73
-Sauces&Dressings,French Dressing,60,13.23
-Sauces&Dressings,Gravy,53,11.68
-Sauces&Dressings,Greek Dressing,467,102.96
-Sauces&Dressings,Hamburger Sauce,383,84.44
-Sauces&Dressings,Harissa,52,11.46
-Sauces&Dressings,Hollandaise Sauce,535,117.95
-Sauces&Dressings,Honey Mustard Dressing,464,102.29
-Sauces&Dressings,Horseradish,48,10.58
-Sauces&Dressings,Italian Dressing,293,64.6
-Sauces&Dressings,Ketchup,100,22.05
-Sauces&Dressings,Mayonnaise,692,152.56
-Sauces&Dressings,Mustard,60,13.23
-Sauces&Dressings,Mustard Sauce,645,142.2
-Sauces&Dressings,Orange Sauce,179,39.46
-Sauces&Dressings,Pesto,458,100.97
-Sauces&Dressings,Ranch Dressing,510,112.44
-Sauces&Dressings,Remoulade Sauce,635,139.99
-Sauces&Dressings,Russian Dressing,400,88.18
-Sauces&Dressings,Salad Dressing,449,98.99
-Sauces&Dressings,Sambal Oelek,21,4.63
-Sauces&Dressings,Sesame Ginger Dressing,464,102.29
-Sauces&Dressings,Sesame Paste,595,131.17
-Sauces&Dressings,Sour Cream,217,47.84
-Sauces&Dressings,Sour Cream Sauce,60,13.23
-Sauces&Dressings,Soy Sauce,67,14.77
-Sauces&Dressings,Sweet and Sour Sauce,179,39.46
-Sauces&Dressings,Tabasco,70,15.43
-Sauces&Dressings,Teriyaki Sauce,89,19.62
-Sauces&Dressings,Thai Curry Paste,155,34.17
-Sauces&Dressings,Tomato Paste,82,18.08
-Sauces&Dressings,Tomato Puree,38,8.38
-Sauces&Dressings,Tomato Sauce,24,5.29
-Sauces&Dressings,Tzatziki,94,20.72
-Sauces&Dressings,Vinaigrette,120,26.46
-Sauces&Dressings,Worcestershire Sauce,78,17.2
-Sauces&Dressings,Yogurt Dressing,45,9.92
-Sauces&Dressings,Zesty Italian Dressing,267,58.86
-Spreads,Almond Butter,614,135.36
-Spreads,Apple Butter,173,38.14
-Spreads,Applesauce,68,14.99
-Spreads,Apricot Jam,250,55.12
-Spreads,Blackberry Jam,250,55.12
-Spreads,Blackcurrant Jam,250,55.12
-Spreads,Blueberry Jam,250,55.12
-Spreads,Cheese Spread,290,63.93
-Spreads,Cherry Jam,250,55.12
-Spreads,Chocolate Philadelphia,287,63.27
-Spreads,Chocolate Spread,541,119.27
-Spreads,Cream Cheese,342,75.4
-Spreads,Egg,97,21.38
-Spreads,Grape Jelly,255,56.22
-Spreads,Honey,304,67.02
-Spreads,Jelly,278,61.29
-Spreads,Jif Peanut Butter,580,127.87
-Spreads,Liverwurst,305,67.24
-Spreads,Margarine,717,158.07
-Spreads,Marmite,225,49.6
-Spreads,Marshmallow Fluff,666,146.83
-Spreads,Nutella,544,119.93
-Spreads,Olive Spread,550,121.25
-Spreads,Pate de Pates,319,70.33
-Spreads,Peanut Butter,589,129.85
-Spreads,Peter Pan Peanut Butter,609,134.26
-Spreads,Philadelphia Cream Cheese,342,75.4
-Spreads,Plum Jam,250,55.12
-Spreads,Salted Butter,717,158.07
-Spreads,Skippy Peanut Butter,594,130.95
-Spreads,Smuckers Strawberry Jam,250,55.12
-Spreads,Strawberry Jam,250,55.12
-Spreads,Strawberry Jelly,250,55.12
-Spreads,Sunbutter,617,136.03
-Spreads,Sunflower Butter,617,136.03
-Spreads,Tapenade,233,51.37
-Spreads,Unsalted Butter,717,158.07
-Spreads,Vegemite,180,39.68
-Spreads,Wild Honey,286,63.05
