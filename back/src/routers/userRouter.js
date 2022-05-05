@@ -204,7 +204,7 @@ userRouter.get("/users/login/github", async (req, res, next) => {
         const emailData = await fetch(`${api}/user/emails`, {
             headers: { Authorization: `token ${access_token}` },
         }).then((res) => res.json());
-        const { email } = emailData.find((email) => email.primary === true && email.verified === true);
+        const { email } = emailData.find((email) => email.primary && email.verified === true);
 
         let user = await userService.getUserByEmail({ email });
         const token = user ? jwt.sign({ user_id: _id }, process.env.JWT_SECRET_KEY || "secret-key") : null;
