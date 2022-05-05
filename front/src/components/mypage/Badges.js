@@ -42,13 +42,15 @@ const BadgesText = styled.div`
   left: 30px;
 `;
 
-const Badges = () => {
+const Badges = ({ currentUserInfo }) => {
   // const [badgesList, setBadgesList] = useRecoilState(badgesState);
 
   const user = useRecoilValue(userInfoState);
   const params = useParams();
   const [badges, setBadges] = useState([]);
   const [award, setAward] = useState([]);
+
+  const isEditable = useMemo(() => currentUserInfo?._id === user?._id, [currentUserInfo, user]);
 
   // const awardNameAr = useMemo(
   //   () =>
@@ -102,6 +104,8 @@ const Badges = () => {
                   badgeLevel={badge.level}
                   description={badge.description}
                   isLock={isLock}
+                  currentUserInfo={currentUserInfo}
+                  isEditable={isEditable}
                 />
               </Grid>
             );

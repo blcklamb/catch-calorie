@@ -30,10 +30,19 @@ const Badgesboxs = styled.div`
   }
 `;
 
-const Tooltip = ({ badgeName, awardName, src, badgeLevel, description, isLock }) => {
+const Tooltip = ({
+  badgeName,
+  awardName,
+  src,
+  badgeLevel,
+  description,
+  isLock,
+  currentUserInfo,
+  isEditable,
+}) => {
   const user = useRecoilValue(userInfoState);
   const params = useParams();
-  const userId = params.user_id;
+  // const userId = params.user_id;
 
   // useEffect(() => {
   //   Api.get('awards', user._id).then((res) => setAward(res.data));
@@ -82,13 +91,15 @@ const Tooltip = ({ badgeName, awardName, src, badgeLevel, description, isLock })
             <b>Level: {`${badgeLevel}`}</b> <br />
             {description === undefined ? 'Basic Badge' : `${description}`}
           </p>
-          {!params.user_id && ( //params값이 없을 때(접속한 사람 본인일 때) 버튼 노출
+          {isEditable && !isLock ? ( //isEditable이 true일 때(접속한 사람 본인일 때) , isLock이 false일 때만(자물쇠 없을 때) 버튼 노출
             <Button
               style={{ borderRadius: '8px', backgroundColor: '#94D82D' }}
               onClick={changeBadgeHandler}
             >
               Change your badge
             </Button>
+          ) : (
+            <div></div>
           )}
         </Grid.Column>
       </Grid>

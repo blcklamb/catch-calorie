@@ -7,13 +7,17 @@ import { Typography } from '@mui/material';
 
 const UserNetworkCard = ({ currentUserInfo }) => {
   const navigate = useNavigate();
-
+  console.log(currentUserInfo.icon);
   return (
     <div style={{ width: 100 + '%', height: 360, backgroundColor: '#ecf8d9', borderRadius: 18 }}>
       <div>
         <div style={{ paddingTop: 20 }}>
           <img
-            src={'/' + currentUserInfo.icon + '.png'}
+            src={
+              'https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/' +
+              currentUserInfo.icon +
+              '.png'
+            }
             alt="badge"
             style={{ width: 80 + '%', display: 'block', margin: 'auto' }}
           ></img>
