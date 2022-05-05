@@ -43,12 +43,18 @@ export const ValidationTextField = styled(TextField)({
 export const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText('#94D82D'),
 
-  boxShadow: '0px 2px 2px #86C725',
-  backgroundColor: '#94D82D',
+  borderRadius: '17px',
+  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+  // backgroundColor: '#94D82D',
+  background: 'linear-gradient(180deg, #A8E054 100%, #99DA36 100%)',
+  borderImage: 'linear-gradient(to right, red 0%, orange 100%)',
+  borderImageSlice: 1,
   color: '#F03E3E',
+  height: '46px',
+  // border: '1px solid black',
+
   '&:hover': {
     backgroundColor: '#94D82D',
-    boxShadow: '0px 2px 3px #699C1D',
   },
 
   '& + &': {

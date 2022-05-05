@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Button } from '@mui/material';
+import { ColorButton } from './muiCustom';
 
 // UserCard에서 사용하는 스타일드 컴포넌트
 
@@ -97,7 +98,6 @@ export const CardText = styled.div`
 
 // 로그인 페이지의 Login text
 export const LoginText = styled.h1`
-  margin: 10px;
   font-family: 'Jost', sans-serif;
   font-style: italic;
   font-weight: 800;
@@ -125,14 +125,14 @@ export const SignPWContainer = styled.div`
   flex-direction: row-reverse;
 `;
 
-//ForgetPassword
+//ForgetPassword btn
 export const ForgetPw = styled(Button)`
   font-style: italic;
   width: 140px;
   margin: 0;
 `;
 
-// Sign-up
+// Sign-up btn
 export const SignBtn = styled(ForgetPw)`
   width: 70px;
 
@@ -142,5 +142,32 @@ export const SignBtn = styled(ForgetPw)`
     color: #f03e3e;
     position: relative;
     left: 9px;
+  }
+`;
+
+//Sign-in btn
+// export const SignInBtn = styled(ColorButton)`
+//   border: 1px solid black;
+// `;
+
+//실험
+export const Btn = styled.button`
+  border-radius: 100rem;
+  padding: 1rem;
+  font-family: 'Avenir Next';
+  font-size: 1rem;
+  padding: 0.5rem 3rem;
+  color: $color-black;
+  box-shadow: 0 0 6px 0 rgba(157, 96, 212, 0.5);
+  border: solid 3px transparent;
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)),
+    linear-gradient(-45deg, #a8e054, #99da36);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px #fff inset;
+
+  &:hover {
+    box-shadow: none;
+    color: white;
   }
 `;

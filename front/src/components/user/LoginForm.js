@@ -24,6 +24,8 @@ import {
   ForgetPw,
   SignPWContainer,
   SignBtn,
+  SignInBtn,
+  Btn,
 } from '../styledCompo/styledCompo';
 import githubLogin from './GithubLogin';
 
@@ -156,7 +158,9 @@ function LoginForm() {
                 <ForgetPw color="success" onClick={() => navigate('/password/init')}>
                   Forget Password?
                 </ForgetPw>
-                <SignBtn color="success">Sign-up</SignBtn>
+                <SignBtn color="success" onClick={() => navigate('/register')}>
+                  Sign-up
+                </SignBtn>
               </SignPWContainer>
               <Stack
                 spacing={1}
@@ -175,12 +179,24 @@ function LoginForm() {
                   Sign-in
                 </ColorButton>
 
-                <ColorButton variant="contained" onClick={() => navigate('/register')}>
-                  Sign-up
-                </ColorButton>
                 <ColorButtonB variant="outlined" onClick={() => navigate('/')}>
                   Start Page
                 </ColorButtonB>
+                {/* <button
+                  style={{
+                    borderRadius: '17px',
+                    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                    // backgroundColor: '#94D82D',
+                    background: 'linear-gradient(180deg, #A8E054 100%, #99DA36 100%)',
+                    borderImage: 'linear-gradient(to right, red 0%, orange 100%)',
+                    borderImageSlice: 1,
+                    color: '#F03E3E',
+                    height: '46px',
+                  }}
+                >
+                  qjxms
+                </button>
+                <Btn>djjd</Btn> */}
               </Stack>
             </Box>
           </form>
