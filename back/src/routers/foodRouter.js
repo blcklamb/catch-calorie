@@ -10,7 +10,6 @@ const foodRouter = Router();
 foodRouter.post("/foods", async (req, res, next) => {
     try {
         const { category, name, kcal, unit } = req.body;
-        //gram일 경우 100g 당 calorie를 받아야 하고, pound일 경우 1pound 당 calorie를 받아야 함
 
         // 로그인 된 유저의 모든 food를 불러온 후 겹치는 제목이 있을경우 에러 발생.
         const foods = await foodService.getFoodByName({ name });

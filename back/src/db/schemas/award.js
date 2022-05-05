@@ -68,6 +68,10 @@ const AwardSchema = new Schema({
         type: Number,
         default: 0,
     },
+    steady: {
+        type: Number,
+        default: 0,
+    },
 });
 
 const AwardModel = model("Award", AwardSchema);
