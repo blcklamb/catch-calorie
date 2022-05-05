@@ -48,8 +48,8 @@ export const exerciseSelectedState = atom({
   default: [0],
 });
 
-export const kcalPerGramState = atom({
-  key: 'kcalPerGramState',
+export const kcalPerUnitState = atom({
+  key: 'kcalPerUnitState',
   default: [],
 });
 
@@ -58,8 +58,8 @@ export const kcalPerHourState = atom({
   default: [],
 });
 
-export const gramState = atom({
-  key: 'gramState',
+export const weightState = atom({
+  key: 'weightState',
   default: [''],
 });
 
@@ -92,5 +92,10 @@ export const foodFormsState = atom({
 // Main 운동 폼 개수
 export const exerciseFormsState = atom({
   key: 'exerciseFormsState',
+  default: [0],
+});
+
+export const trackingFoodUnitState = atom({
+  key: 'trackingFoodUnitState',
   default: [0],
 });
