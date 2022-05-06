@@ -10,18 +10,11 @@ const foodRouter = Router();
 foodRouter.post("/foods", async (req, res, next) => {
     try {
         const { category, name, kcal, unit } = req.body;
-        if (typeof(category) !== string) throw new Error("category 문자 아님");
-        // if (typeof(kcal) !== number) throw new Error("kcal 숫자 아님");
-        // if (typeof(name) !== string) throw new Error("name 문자 아님");
-        // if (typeof(unit) !== string) throw new Error("unit 문자 아님");
-        // if (typeof(category) !== string) throw new Error("category 문자 아님");
 
         // 로그인 된 유저의 모든 food를 불러온 후 겹치는 제목이 있을경우 에러 발생.
         const foods = await foodService.getFoodByName({ name });
         if (foods) throw new Error("이미 등록되어 있는 음식입니다.");
-        const num = 1;
-        console.log(convert(num).from("lb").to("g"))
-        console.log(convert(1).from("lb").to("g"))
+ 
         // const { kcal_per_100g, kcal_per_lb } = await foodService.convertUnit({ kcal, unit });
         // const kcal_per_100g = unit === "gram" ? kcal : convert(kcal).from("lb").to("g").toFixed(2) * 100;
         const kcal_per_lb = unit === "pound" ? kcal: convert(kcal * 100).from("g").to("lb").toFixed(2);
