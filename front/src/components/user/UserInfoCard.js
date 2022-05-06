@@ -6,7 +6,7 @@ import {
   UserBodyInfo,
   UserBtnInfo,
   UserBadgeImgInfo,
-} from '../styledCompo/styledCompo';
+} from '../styledCompo/LoginStyle';
 
 import { ColorButton, IOSSwitch } from '../styledCompo/muiCustom';
 
