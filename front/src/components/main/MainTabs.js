@@ -105,8 +105,8 @@ MainTabPanel.propTypes = {
 const TabPanel = styled(MainTabPanel)({
   // height: 'auto',
   backgroundColor: '#ECF8D9',
-  overflow: 'auto', 
-    height: '300px', 
+  overflow: 'auto',
+  height: '300px',
 });
 
 const a11yProps = (index) => {
@@ -157,8 +157,10 @@ const MainTabs = ({}) => {
             </TabPanel>
           </MainTabsSection>
         </Section>
+        {/* {scroll()} */}
       </MainTrackingSection>
-    )
+    ) 
+    // && scroll()
   );
 };
 

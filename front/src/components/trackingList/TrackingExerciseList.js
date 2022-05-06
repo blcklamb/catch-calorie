@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
+import {ValidationTextField} from '../styledCompo/muiCustom'
+
 import { useRecoilState } from 'recoil';
 import { trackingUpdateState } from '../../atoms';
 
@@ -84,7 +86,7 @@ function TrackingExerciseList({ exercise, isTrackingPage }) {
         <div style={{ display: 'flex' }}>
           <div style={{ display: 'flex' }}>
             <div style={{ marginRight: '30px' }}>{exercise.name}</div>
-            <TextField
+            <ValidationTextField
               id="outlined-name"
               label="hour"
               value={hour}
@@ -98,7 +100,7 @@ function TrackingExerciseList({ exercise, isTrackingPage }) {
                 )
               }
             />
-            <TextField
+            <ValidationTextField
               id="outlined-name"
               label="minute"
               value={minute}

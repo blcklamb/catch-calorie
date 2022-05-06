@@ -11,7 +11,10 @@ import {
   TrackingForm,
   TrackingAutoContainer,
   TrackingTextFieldContainer,
+  TrackingSwitchContainer,
 } from '../styledCompo/mainStyle';
+
+import { ValidationTextField } from '../styledCompo/muiCustom';
 
 import { useRecoilState } from 'recoil';
 import {
@@ -70,8 +73,7 @@ function MainFoodForm({ idx }) {
     if (Number(weight[idx]) === 0 || !foodSelected[idx]?.kcal_per_100g) {
       setKcalPerUnit([...kcalPerUnit.slice(0, idx), 0, ...kcalPerUnit.slice(idx + 1)]);
     } else {
-      const gram =
-        unit[idx] === 'us' ? (weight[idx]) * 453.59 : weight[idx];
+      const gram = unit[idx] === 'us' ? weight[idx] * 453.59 : weight[idx];
 
       setKcalPerUnit([
         ...kcalPerUnit.slice(0, idx),
@@ -100,7 +102,6 @@ function MainFoodForm({ idx }) {
               setInputValue(newInputValue);
             }}
             options={foodList}
-            // sx={{ width: 300 }}
             renderInput={(params) => (
               <MainInput {...params} label="Food" placeholder="Please select food" />
             )}
@@ -124,7 +125,7 @@ function MainFoodForm({ idx }) {
           {!foodSelected[idx] && <span>Please select a food</span>}
         </TrackingAutoContainer>
         <TrackingTextFieldContainer>
-          <MainInput
+          <ValidationTextField
             id="outlined-basic"
             label="weight"
             variant="outlined"
@@ -139,7 +140,7 @@ function MainFoodForm({ idx }) {
             }
           />
         </TrackingTextFieldContainer>
-        <div>
+        <TrackingSwitchContainer>
           <div>
             <Switch
               checked={checked}
@@ -162,10 +163,10 @@ function MainFoodForm({ idx }) {
           <br /> */}
           {/* {foodSelected[idx]?.name} <br />
           {weight[idx]} <br /> */}
-          <span style={{ float: 'right' }}>
+          <span>
             {isNaN(weight[idx]) ? 0 : kcalPerUnit[idx]} kcal/{unit[idx] === 'us' ? 'lb' : 'g'}
           </span>
-        </div>
+        </TrackingSwitchContainer>
       </TrackingForm>
     </>
   );

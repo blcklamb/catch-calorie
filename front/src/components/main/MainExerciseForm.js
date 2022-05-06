@@ -11,8 +11,10 @@ import MainInput from './style/MainInput';
 import {
   TrackingForm,
   TrackingAutoContainer,
-  TrackingTextFieldContainer,
+  TrackingTextFieldContainer,TrackingSwitchContainer, 
 } from '../styledCompo/mainStyle';
+
+import {ValidationTextField} from '../styledCompo/muiCustom'
 
 import { useRecoilState } from 'recoil';
 import {
@@ -156,7 +158,7 @@ function MainExerciseForm({ idx }) {
         // autoComplete="off"
         // style={{ display: 'inline-flex' }}
         >
-          <MainInput
+          <ValidationTextField
             id="outlined-basic"
             label="hour"
             variant="outlined"
@@ -172,7 +174,7 @@ function MainExerciseForm({ idx }) {
           />
         </TrackingTextFieldContainer>
         <TrackingTextFieldContainer>
-          <MainInput
+          <ValidationTextField
             id="outlined-basic"
             label="minute"
             variant="outlined"
@@ -181,7 +183,7 @@ function MainExerciseForm({ idx }) {
           />
         </TrackingTextFieldContainer>
 
-        <div style={{ paddingTop: '15px' }}>
+        <TrackingSwitchContainer style={{ paddingTop: '15px' }}>
           {/* 인풋밸류 {inputValue}
         <br />
         시간 당 {exerciseSelected[idx]?.kcal_per_kg}
@@ -192,7 +194,7 @@ function MainExerciseForm({ idx }) {
         <br />총 {time[idx]} 분
         <br /> */}
           <span style={{ float: 'right' }}>{kcalPerHour[idx]} kcal/min</span>
-        </div>
+        </TrackingSwitchContainer>
       </TrackingForm>
     </>
   );

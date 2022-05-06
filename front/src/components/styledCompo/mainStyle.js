@@ -90,6 +90,13 @@ noValidate
 autoComplete="off"
 `;
 
+export const TrackingSwitchContainer = styled2.div`
+  float: right;
+  flex-grow: 1;
+  text-align: right;
+
+`;
+
 export const TrackingButtonContainer = styled2.div`
 width: 100%;
 

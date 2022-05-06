@@ -6,6 +6,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 import MainButton from './style/MainButton';
 
+import {ValidationTextField} from '../styledCompo/muiCustom'
+
 import Header from '../Header';
 import Footer from '../Footer';
 
@@ -98,7 +100,7 @@ function MainFoodAdd({}) {
             />
             {isCategoryEmpty && <span>Please select a category</span>}
             <h2>Please Enter a Name</h2>
-            <TextField
+            <ValidationTextField
               id="outlined-basic"
               label="food name"
               variant="outlined"
@@ -113,7 +115,7 @@ function MainFoodAdd({}) {
               inputProps={{ 'aria-label': 'controlled' }}
             />
             {unit}
-            <TextField
+            <ValidationTextField
               id="outlined-basic"
               label="kcal"
               variant="outlined"

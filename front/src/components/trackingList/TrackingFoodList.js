@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
 
+import {ValidationTextField} from '../styledCompo/muiCustom'
+
 import { useRecoilState } from 'recoil';
 import { trackingUpdateState, trackingFoodUnitState } from '../../atoms';
 
@@ -96,7 +98,7 @@ function TrackingFoodList({ food, isTrackingPage }) {
         <div style={{ display: 'flex' }}>
           <div style={{ display: 'flex' }}>
             <div style={{ marginRight: '30px' }}>{food.name}</div>
-            <TextField
+            <ValidationTextField
               id="outlined-name"
               label="weight"
               value={weight}
