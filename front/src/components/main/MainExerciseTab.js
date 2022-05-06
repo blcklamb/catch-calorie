@@ -11,6 +11,11 @@ import {
   TrackingRightButtonContainer,
   TrackingPlusButtonContainer,
 } from '../styledCompo/mainStyle';
+import {
+  TrackingPlusButton,
+  TrackingResetButton,
+  TrackingTrackingButton,
+} from '../styledCompo/MainMuiCustom';
 
 import { useRecoilState } from 'recoil';
 import {
@@ -123,17 +128,17 @@ function MainExerciseTab({ clearForm }) {
       </TrackingForms>
       <TrackingButtonContainer>
         <TrackingLeftButtonContainer>
-          <MainButton variant="contained" onClick={handleResetForm}>
-            reset
-          </MainButton>
+          <TrackingResetButton variant="contained" onClick={handleResetForm}>
+            Reset
+          </TrackingResetButton>
         </TrackingLeftButtonContainer>
         <TrackingRightButtonContainer>
-          <MainButton variant="contained" onClick={handleAddExerciseForm}>
+          <TrackingPlusButton variant="contained" onClick={handleAddExerciseForm}>
             +
-          </MainButton>
-          <MainButton variant="contained" onClick={handleTracking}>
-            tracking
-          </MainButton>
+          </TrackingPlusButton>
+          <TrackingTrackingButton variant="contained" onClick={handleTracking}>
+            Tracking
+          </TrackingTrackingButton>
         </TrackingRightButtonContainer>
       </TrackingButtonContainer>
     </div>
