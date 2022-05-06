@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import MainButton from './style/MainButton';
 import MainFoodForm from './MainFoodForm';
 
-import {TrackingButtonContainer} from '../styledCompo/mainStyle'
+import { TrackingButtonContainer } from '../styledCompo/mainStyle';
 
 import { useRecoilState } from 'recoil';
 import {
@@ -82,6 +82,17 @@ function MainFoodTab({ clearForm }) {
     });
   };
 
+  const handleResetForm = () => {
+    setFoodForms([0]);
+    setFoodSelected([0]);
+    setWeight(['']);
+    setUnit(['us']);
+    setKcalPerUnit([0]);
+
+    setTrackingUpdate(!trackingUpdate);
+    // clearForm();
+  };
+
   return (
     <div>
       {/* {console.log(foodForms)}
@@ -89,6 +100,9 @@ function MainFoodTab({ clearForm }) {
       {/* {console.log(weight)}
       {console.log(unit)}
       {console.log(kcalPerUnit)} */}
+      <MainButton variant="contained" onClick={handleResetForm}>
+        reset
+      </MainButton>
       {foodForms && foodForms.map((item) => <MainFoodForm key={item} idx={item} />)}
       <MainButton variant="contained" onClick={handleAddFoodForm}>
         +
