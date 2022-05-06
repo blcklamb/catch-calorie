@@ -122,13 +122,18 @@ export const TrackingPlusButtonContainer = styled.div`
 export const CalorieGraphSection = styled.div`
   text-align: center;
   height: 480px;
+  position: relative;
+  margin-top: 50px;
 `;
 
 export const GraphContainer = styled.div`
   width: 400px;
 `;
 
-export const GraphOverContainer = styled.div``;
+export const GraphOverContainer = styled.div`
+  /* position: absolute;
+  bottom: 0; */
+`;
 
 // Tracking List ----------------------------------------------------
 export const TrackingListTable = styled.table`
