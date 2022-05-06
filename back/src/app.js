@@ -16,7 +16,12 @@ import heatmap_scheduler from "./middlewares/heatmap_scheduler";
 const app = express();
 
 // CORS 에러 방지
-app.use(cors());
+// app.use(cors());
+const corsOptions = {
+    origin: `${process.env.FRONT_URL || "http://localhost:3000"}`,
+    credentials: true,
+};
+app.use(cors(corsOptions));
 
 // express 기본 제공 middleware
 // express.json(): POST 등의 요청과 함께 오는 json형태의 데이터를 인식하고 핸들링할 수 있게 함.
