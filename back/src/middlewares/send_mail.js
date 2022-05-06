@@ -17,9 +17,7 @@ module.exports = (to, subject, text) =>
             text,
         };
         transport.sendMail(message, (err, info) => {
-            if (err) {
-                return reject(err);
-            }
+            if (err) return reject(err);
             resolve(info);
         });
     });
