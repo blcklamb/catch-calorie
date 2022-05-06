@@ -78,25 +78,40 @@ function TrackingLists() {
           <div style={{ display: 'flex' }}></div>
         </div>
         <div>
-          <h1>Exercise</h1>
-          <div style={{ display: 'flex' }}>
-            <div style={{ marginRight: '30px' }}>
-              <h2>Exercise</h2>
-            </div>
-            <div style={{ marginRight: '30px' }}>
-              <h2>Time</h2>
-            </div>
-            <div style={{ marginRight: '30px' }}>
-              <h2>Consumed Calories</h2>
-            </div>
-          </div>
-          {tracking.exer_record?.length ? (
-            tracking.exer_record.map((exercise) => {
-              return <TrackingExerciseList exercise={exercise} isTrackingPage={isTrackingPage} />;
-            })
-          ) : (
-            <div>No Exercise Tracking</div>
-          )}
+          <TrackingListTable>
+            <thead>
+              <tr>
+                <TrackingListThName>
+                  <h2>Exercise</h2>
+                </TrackingListThName>
+                <TrackingListThContent>
+                  <h2>Time</h2>
+                </TrackingListThContent>
+                <TrackingListThContent>
+                  <h2>Consumed Calories</h2>
+                </TrackingListThContent>
+                <TrackingListThAction>
+                  <h2>Edit</h2>
+                </TrackingListThAction>
+                <TrackingListThEnd>
+                  <h2>Del</h2>
+                </TrackingListThEnd>
+              </tr>
+            </thead>
+            <tbody>
+              {tracking.exer_record?.length ? (
+                tracking.exer_record.map((exercise) => {
+                  return (
+                    <TrackingExerciseList exercise={exercise} isTrackingPage={isTrackingPage} />
+                  );
+                })
+              ) : (
+                <tr>
+                  <div>No Exercise Tracking</div>
+                </tr>
+              )}
+            </tbody>
+          </TrackingListTable>
         </div>
       </Section>
     </>
