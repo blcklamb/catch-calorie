@@ -8,12 +8,12 @@ const convert = configureMeasurements({ mass, length });
 
 class userService {
     // 회원 정보 추가
-    static async addUser({ email, password, name, gender, height, weight, unit, open, icon }) {
+    static async addUser({ email, password, name, gender, height, weight, open, icon }) {
         const user = await User.findOne({ email });
         if (user) return { errorMessage: "현재 사용 중인 이메일입니다. 다른 이메일을 입력해주세요." };
-        
-        const converted_height = unit ?? convert(height).from("ft").to("cm").toFixed(0); height;
-        const converted_weight = unit ?? convert(weight).from("lb").to("kg").toFixed(0) ; weight;
+
+        const converted_height = convert(height).from("ft").to("cm").toFixed(0);
+        const converted_weight = convert(weight).from("lb").to("kg").toFixed(0);
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = {
@@ -87,7 +87,7 @@ class userService {
     // 회원 정보 삭제하기
     static deleteUser({ id }) {
         return Promise.all([
-            Award.delete({ user_id: id }), 
+            Award.delete({ user_id: id }), //
             Heatmap.delete({ user_id: id }),
             Tracking.deleteByUser({ user_id: id }),
             User.delete({ id }),
