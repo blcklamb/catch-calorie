@@ -15,10 +15,10 @@ foodRouter.post("/foods", async (req, res, next) => {
         const foods = await foodService.getFoodByName({ name });
         if (foods) throw new Error("이미 등록되어 있는 음식입니다.");
 
-        // const { kcal_per_100g, kcal_per_lb } = await foodService.convertUnit({ kcal, unit });
-        const kcal_per_100g = unit === "gram" ? kcal : convert(kcal).from("lb").to("g").toFixed(2) * 100;
-        const kcal_per_lb = unit === "pound" ? kcal: convert(kcal * 100).from("g").to("lb").toFixed(2);
-
+        const { kcal_per_100g, kcal_per_lb } = await foodService.convertUnit({ kcal, unit });
+        // const kcal_per_100g = unit === "gram" ? kcal : convert(kcal).from("lb").to("g").toFixed(2) * 100;
+        // const kcal_per_lb = unit === "pound" ? kcal: convert(kcal * 100).from("g").to("lb").toFixed(2);
+        
         const newFood = await foodService.addFood({ category, name, kcal_per_100g, kcal_per_lb, views: 1 });
 
         return res.status(201).json(newFood);
