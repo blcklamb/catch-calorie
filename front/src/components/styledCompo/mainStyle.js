@@ -70,7 +70,7 @@ width: 400px;
 export const TrackingForm = styled.div`
 height: 80px; 
 display: flex;
-margin: 10px 0;
+margin: 20px 0;
 `;
 
 export const TrackingAutoContainer = styled.div`
