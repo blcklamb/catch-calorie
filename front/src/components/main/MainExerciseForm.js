@@ -16,7 +16,7 @@ import {
 } from '../styledCompo/mainStyle';
 
 import { ValidationTextField } from '../styledCompo/muiCustom';
-import { RedSpan } from '../styledCompo/styledCompo';
+import { RedSpan } from '../styledCompo/LoginStyle';
 
 import { useRecoilState } from 'recoil';
 import {
