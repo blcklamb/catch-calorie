@@ -10,6 +10,13 @@ import {
   TrackingRightButtonContainer,
   TrackingPlusButtonContainer,
 } from '../styledCompo/mainStyle';
+import {
+  TrackingPlusButton,
+  TrackingResetButton,
+  TrackingTrackingButton,
+} from '../styledCompo/MainMuiCustom';
+import { ColorButton } from '../styledCompo/muiCustom';
+// import {SignBtn} from '../styledCompo/LoginStyle'
 
 import { useRecoilState } from 'recoil';
 import {
@@ -106,32 +113,26 @@ function MainFoodTab({ clearForm }) {
 
   return (
     <>
-      <div id="main-food-tab">
-        {/* {console.log(foodForms)}
-      {console.log(foodSelected)} */}
-        {/* {console.log(weight)}
-      {console.log(unit)}
-      {console.log(kcalPerUnit)} */}
-        <TrackingForms id="tracking-food-forms">
-          {foodForms && foodForms.map((item) => <MainFoodForm key={item} idx={item} />)}
-        </TrackingForms>
-
-        <TrackingButtonContainer>
-          <TrackingLeftButtonContainer>
-            <MainButton variant="contained" onClick={handleResetForm}>
-              reset
-            </MainButton>
-          </TrackingLeftButtonContainer>
-          <TrackingRightButtonContainer>
-            <MainButton variant="contained" onClick={handleAddFoodForm}>
+      <TrackingForms id="tracking-food-forms">
+        {foodForms && foodForms.map((item) => <MainFoodForm key={item} idx={item} />)}
+      </TrackingForms>
+      <TrackingButtonContainer>
+        <TrackingLeftButtonContainer>
+          <TrackingResetButton variant="contained" onClick={handleResetForm}>
+            Reset
+          </TrackingResetButton>
+        </TrackingLeftButtonContainer>
+        <TrackingRightButtonContainer>
+          {/* <TrackingPlusButtonContainer> */}
+            <TrackingPlusButton variant="contained" onClick={handleAddFoodForm}>
               +
-            </MainButton>
-            <MainButton variant="contained" onClick={handleTracking}>
-              tracking
-            </MainButton>
-          </TrackingRightButtonContainer>
-        </TrackingButtonContainer>
-      </div>
+            </TrackingPlusButton>
+          {/* </TrackingPlusButtonContainer> */}
+          <TrackingTrackingButton variant="contained" onClick={handleTracking}>
+            Tracking
+          </TrackingTrackingButton>
+        </TrackingRightButtonContainer>
+      </TrackingButtonContainer>
     </>
   );
 }
