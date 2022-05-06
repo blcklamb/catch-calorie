@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
@@ -24,6 +25,8 @@ import {
 import * as Api from '../../api';
 
 function MainGraph({}) {
+  const params = useParams();
+
   const user = useRecoilValue(userInfoState);
 
   const [tracking, setTracking] = useRecoilState(trackingState);
@@ -40,15 +43,25 @@ function MainGraph({}) {
 
   const isMypage = window.location.href.split('/')[3];
 
+  const [getUser, setGetUser] = useState('');
+
   useEffect(() => {
-    Api.get(`tracking/${user._id}`).then((res) => {
+    if (params?.user_id === user?._id || isMypage === 'mypage') {
+      setGetUser(user?._id);
+    } else {
+      setGetUser(params.user_id);
+    }
+  }, [params, user])
+
+  useEffect(() => {
+    Api.get(`tracking/${getUser}`).then((res) => {
       // 오늘의 트래킹 정보
       setTracking(res.data);
       // 오늘의 트래킹 정보 중 칼로리
       setTrackingKcal(res.data?.acc_cal);
       setTrackingRecKcal(res.data?.rec_cal);
     });
-  }, [trackingUpdate]);
+  }, [getUser, trackingUpdate]);
 
   const labels = [''];
 
