@@ -107,8 +107,8 @@ userRouter.put("/users/:id", login_required, async (req, res, next) => {
             throw new Error("입력되지 않은 정보가 있습니다.");
         }
 
-        const converted_height = unit === "us" ? convert(height).from("ft").to("cm").toFixed(0) : height;
-        const converted_weight = unit === "us" ? convert(weight).from("lb").to("kg").toFixed(0) : weight;
+        const converted_height = unit === "us" ? convert(height * 1).from("ft").to("cm").toFixed(0) : height;
+        const converted_weight = unit === "us" ? convert(weight * 1).from("lb").to("kg").toFixed(0) : weight;
 
         const toUpdate = {
             name,
