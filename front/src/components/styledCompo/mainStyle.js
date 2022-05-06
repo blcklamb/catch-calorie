@@ -175,7 +175,7 @@ export const TrackingListTr = styled.tr`
 `;
 
 export const TrackingListTd = styled.td`
-  border: 1px solid #444444;
+  /* border: 1px solid #444444; */
   padding: 10px;
 `;
 
@@ -190,14 +190,13 @@ export const TrackingListTdStart = styled(TrackingListTd)`
 export const TrackingListTdEnd = styled(TrackingListTdAction)`
   padding-right: 30px;
   text-align: right;
-
 `;
 
-
-// testing
-export const TestTd = styled.td`
-  border: 1px solid #444444;
+export const TrackingListTdInput = styled(TrackingListTd)`
+  padding: 0px;
+  line-height: 0.4rem;
 `;
-export const TestTr = styled.tr`
-  border: 1px solid #444444;
+
+export const TrackingListTdInputText = styled.td`
+  text-align: center;
 `;
