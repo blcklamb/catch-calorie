@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import * as Api from '../../api';
-import axios from 'axios';
 
 // Mui
 import Box from '@mui/material/Box';
@@ -31,32 +30,31 @@ function GithubLogin() {
 
   const [data, setData] = useState('');
   const [gender, setGender] = useState('male');
-  // height, weight input type number로 수정, 형 변환 필요 없을듯..?
   const [height, setHeight] = useState(null);
   const [weight, setWeight] = useState(null);
   const [icon, setIcon] = useState('runner');
 
   useEffect(() => {
-    const login = async () => {
-      try {
-        const code = new URLSearchParams(location.search);
-        // Api 사용 시 오류가 나서 우선 axios 사용함.
-        const response = await axios
-          .get(`http://localhost:5002/users/login/github?${code}`)
-          .then((res) => res.data);
+    try {
+      const code = new URLSearchParams(location.search);
 
-        if (response.token) {
-          sessionStorage.setItem('userToken', response.token);
-          navigate(`/tracking/${response._id}`, { replace: true });
-        }
+      const res = Api.get(`users/login/github?${code}`).then((res) => res.data);
 
-        setData(response);
-      } catch (error) {
-        console.log(`❌ Error: ${error}`);
+      if (res.token) {
+        const user = Api.get(`users/${res._id}`).then((res) => res.data);
+
+        sessionStorage.setItem('userToken', res.token);
+        setToken(user.token);
+        setUser(user);
+
+        return navigate(`/tracking/${user._id}`, { replace: true });
       }
-    };
-    login();
-  }, [location, navigate]);
+
+      return setData(res);
+    } catch (error) {
+      console.log(`❌ Error: ${error}`);
+    }
+  }, [location.search, navigate, setToken, setUser]);
 
   const isHeightValid = height > 0;
   const isWeightValid = weight > 0;
@@ -74,22 +72,19 @@ function GithubLogin() {
         icon,
       }).then((res) => res.data);
 
+      console.log('suecsese');
       const res = await Api.post('users/login', {
         email: user.email,
-        password: user.password,
       });
+
       // 유저 정보는 response의 data임.
       const user2 = res.data;
       // JWT 토큰은 유저 정보의 token임.
       const jwtToken = user.token;
       // sessionStorage에 "userToken"이라는 키로 JWT 토큰을 저장함.
       sessionStorage.setItem('userToken', jwtToken);
-
-      console.log(user2);
       setToken(user2.token);
       setUser(user2);
-
-      // sessionStorage.setItem('userToken', user.token);
 
       navigate(`/tracking/${user._id}`, { replace: true });
     } catch (err) {

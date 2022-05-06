@@ -57,7 +57,7 @@ userRouter.post("/users/login", async (req, res, next) => {
 });
 
 // 특정 유저 정보 가져오기
-userRouter.get("/users/:id", login_required, async (req, res, next) => {
+userRouter.get("/users/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
 
@@ -204,11 +204,11 @@ userRouter.get("/users/login/github", async (req, res, next) => {
         const emailData = await fetch(`${api}/user/emails`, {
             headers: { Authorization: `token ${access_token}` },
         }).then((res) => res.json());
-        const { email } = emailData.find((email) => email.primary && email.verified === true);
+        const { email } = emailData.find((email) => email.primary === true && email.verified === true);
 
-        let user = await userService.getUserByEmail({ email });
-        const token = user ? jwt.sign({ user_id: _id }, process.env.JWT_SECRET_KEY || "secret-key") : null;
-        const _id = user ? user._id : null;
+        const user = await userService.getUserByEmail({ email });
+        const token = jwt.sign({ user_id: user._id }, process.env.JWT_SECRET_KEY || "secret-key") || null;
+        const _id = user._id || null;
 
         return res.status(200).json({ token, _id, email, name });
     } catch (error) {
