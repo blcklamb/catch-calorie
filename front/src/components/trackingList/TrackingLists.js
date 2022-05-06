@@ -38,7 +38,7 @@ function TrackingLists() {
               <h2>Food</h2>
             </div>
             <div style={{ marginRight: '30px' }}>
-              <h2>Amount Eaten</h2>
+              <h2>Amount</h2>
             </div>
             <div style={{ marginRight: '30px' }}>
               <h2>Intake Calories</h2>
@@ -59,7 +59,7 @@ function TrackingLists() {
               <h2>Exercise</h2>
             </div>
             <div style={{ marginRight: '30px' }}>
-              <h2>Time Exercised</h2>
+              <h2>Time</h2>
             </div>
             <div style={{ marginRight: '30px' }}>
               <h2>Consumed Calories</h2>
