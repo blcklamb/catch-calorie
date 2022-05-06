@@ -69,7 +69,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
 const MainTrackingSection = styled2.div`
 position: relative;
   width: 900px;
-  margin-right: 120px;
+  margin-right: 80px;
 `;
 
 const MainTabsSection = styled2.div`
@@ -103,8 +103,11 @@ MainTabPanel.propTypes = {
 };
 
 const TabPanel = styled(MainTabPanel)({
-  // height: 'auto',
   backgroundColor: '#ECF8D9',
+  // 폼만 스크롤
+  // height: '500px',
+
+  // 스크롤 전범위
   overflow: 'auto',
   height: '400px',
 });

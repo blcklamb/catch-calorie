@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import MainButton from './style/MainButton';
 import MainFoodForm from './MainFoodForm';
 
-import { TrackingButtonContainer, TrackingPlusButtonContainer } from '../styledCompo/mainStyle';
+import { TrackingForms, TrackingButtonContainer, TrackingPlusButtonContainer } from '../styledCompo/mainStyle';
 
 import { useRecoilState } from 'recoil';
 import {
@@ -113,7 +113,9 @@ function MainFoodTab({ clearForm }) {
         <MainButton variant="contained" onClick={handleResetForm}>
           reset
         </MainButton>
-        {foodForms && foodForms.map((item) => <MainFoodForm key={item} idx={item} />)}
+        <TrackingForms>
+          {foodForms && foodForms.map((item) => <MainFoodForm key={item} idx={item} />)}
+        </TrackingForms>
 
         <TrackingButtonContainer>
           <TrackingPlusButtonContainer>
