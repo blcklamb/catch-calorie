@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
-import styled2 from 'styled-components';
+// import { styled } from '@mui/material/styles';
+import styled from 'styled-components';
 
 import Container from '@mui/material/Container';
 
@@ -9,42 +9,37 @@ import Button from '@mui/material/Button';
 
 const COLORS = ['#5bc691', '#FFBB28', '#C66868', '#FF8042'];
 
-export const BodyContainer = styled2.div`
-    width: 100%; 
+export const BodyContainer = styled.div`
+  width: 100%;
 
-    background: pink;
+  background: pink;
 
-
-
-    align-content: center;
-    justify-content: center;
-    margin-top: 180px;
-    margin-bottom: 180px;
-    display: grid;
+  align-content: center;
+  justify-content: center;
+  margin-top: 180px;
+  margin-bottom: 180px;
+  display: grid;
 `;
 
-export const MainHelloSection = styled2.div`
-width: 100%;
-padding: 20px 20px;
+export const MainHelloSection = styled.div`
+  width: 100%;
+  padding: 20px 20px;
 
-background: yellow;
-display: flex;
-align-items: center;
-    height: 150px;
-    align-content: center;
-    position: relative;
+  background: yellow;
+  display: flex;
+  align-items: center;
+  height: 150px;
+  align-content: center;
+  position: relative;
 `;
 
-export const MainSection1 = styled2.div`
-
-display: inline-flex;
-margin: 80px 0px;
-
-
+export const MainSection1 = styled.div`
+  display: inline-flex;
+  margin: 80px 0px;
 `;
 
-export const Section = styled2.div`
-height: 100%;
+export const Section = styled.div`
+  height: 100%;
   position: relative;
   padding: 30px 40px;
   left: 0%;
@@ -61,134 +56,148 @@ height: 100%;
   border-radius: 40px;
 `;
 
-// 그래프 ----------------------------------------------------------------------------------------
-export const GraphContainer = styled2.div`
-width: 400px;
-`;
-
 // 탭 ----------------------------------------------------------------------------------------
-export const TrackingForm = styled2.div`
-height: 80px; 
-display: flex;
-margin: 10px 0;
+export const TrackingForms = styled.div`
+  // 폼만 스크롤 범위
+  /* height: 200px;
+  overflow: auto; */
+
+  // 스크롤 전범위
+  height: auto;
 `;
 
-export const TrackingAutoContainer = styled2.div`
-width: 300px;
-margin-right: 20px;
+export const TrackingForm = styled.div`
+  /* height: 80px;  */
+  display: flex;
+  margin: 20px 0;
 `;
 
-export const TrackingTextFieldContainer = styled2.div`
-width: 150px;
-margin-right: 20px;
+export const TrackingAutoContainer = styled.div`
+  width: 300px;
+  margin-right: 20px;
+`;
 
-component="form"
+export const TrackingTextFieldContainer = styled.div`
+  width: 150px;
+  margin-right: 20px;
+
+  /* component="form"
 sx={{
 '& > :not(style)': { m: 1, width: '25ch' },
 }}
 noValidate
-autoComplete="off"
+autoComplete="off" */
 `;
 
-export const TrackingButtonContainer = styled2.div`
-width: 100%;
+export const TrackingSwitchContainer = styled.div`
+  float: right;
+  flex-grow: 1;
+  text-align: right;
+`;
 
+export const TrackingButtonContainer = styled.div`
+  width: 100%;
+  margin-top: 40px;
+  text-align: center;
+`;
+
+export const TrackingPlusButtonContainer = styled.div`
+  margin-bottom: 60px;
+`;
+
+// 그래프 ----------------------------------------------------------------------------------------
+export const CalorieGraphSection = styled.div`
+  text-align: center;
+  height: 480px;
+`;
+
+export const GraphContainer = styled.div`
+  width: 400px;
+`;
+
+export const GraphOverContainer = styled.div``;
+
+// Tracking List ----------------------------------------------------
+export const TrackingListTable = styled.table`
+  width: 100%;
+  border: 1px solid #444444;
+  border-collapse: collapse;
+
+  // 행 여백
+  border-collapse: separate;
+  border-spacing: 0 20px;
+`;
+
+// Table Header
+export const TrackingListTh = styled.th`
+  /* border: 1px solid #444444; */
+  padding: 10px;
+  text-align: left;
+`;
+
+export const TrackingListThName = styled(TrackingListTh)`
+  width: 40%;
+  padding-left: 30px;
+`;
+
+export const TrackingListThContent = styled(TrackingListTh)`
+  width: 20%;
+`;
+
+export const TrackingListThAction = styled(TrackingListTh)`
+  width: 5%;
+  text-align: center;
+`;
+
+export const TrackingListThEnd = styled(TrackingListThAction)`
+  padding-right: 30px;
+`;
+
+// Table Body
+export const TrackingListTr = styled.tr`
+  line-height: 3.5rem;
+
+  // 유리
+  box-sizing: border-box;
+
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  /* background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(255, 255, 255, 0.3); */
+  box-shadow: 0px 5.334px 40.005px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(40.005px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 26.67px;
+`;
+
+export const TrackingListTd = styled.td`
+  border: 1px solid #444444;
+  padding: 10px;
+`;
+
+export const TrackingListTdAction = styled(TrackingListTd)`
+  text-align: center;
+`;
+
+export const TrackingListTdStart = styled(TrackingListTd)`
+  padding-left: 30px;
+`;
+
+export const TrackingListTdEnd = styled(TrackingListTdAction)`
+  padding-right: 30px;
+  text-align: right;
 
 `;
 
-// export const FirstPage = styled.section`
-//   height: 100vh;
-//   display: flex;
 
-//   align-items: center;
-//   justify-content: center;
-//   flex-direction: column;
-// `;
-
-// const FirstPageWrapper = styled.div`
-//   position: absolute;
-//   z-index: 500;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   flex-direction: column;
-//   padding-top: 200px;
-// `;
-
-// const MainButton = styled(Button)({
-//   background: 'linear-gradient(45deg, #F03E3E 30%, #F03E3E 90%)',
-//   border: 0,
-//   borderRadius: 20,
-//   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-//   color: 'white',
-// });
-
-// const CircleRed1 = styled.div`
-//   position: absolute;
-//   z-index: 300;
-//   width: 470.49px;
-//   height: 470.49px;
-//   left: 1589px;
-//   top: 1000.51px;
-//   border-radius: 50%;
-//   background: radial-gradient(
-//       87.63% 87.63% at 30.82% 78.65%,
-//       #c62e2e 0%,
-//       #e44545 29.02%,
-//       #f39999 69.13%
-//     )
-//     /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
-//   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-// `;
-
-// const CircleGreen1 = styled.div`
-//   position: absolute;
-
-//   right: -55px;
-//   z-index: 300;
-//   width: 700px;
-//   height: 700px;
-//   left: -330.39px;
-//   top: 1800px;
-//   border-radius: 50%;
-//   background: radial-gradient(
-//     87.63% 87.63% at 30.82% 78.65%,
-//     rgba(105, 156, 29, 0.9) 0%,
-//     #77bb41 29.02%,
-//     #d6eeb1 69.13%
-//   );
-//   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-// `;
-// const CircleRed2 = styled.div`
-//   position: absolute;
-//   width: 200px;
-//   height: 200px;
-//   left: 830.75px;
-//   top: 3079.47px;
-
-//   border-radius: 50%;
-//   background: radial-gradient(
-//       87.63% 87.63% at 30.82% 78.65%,
-//       #c62e2e 0%,
-//       #e44545 29.02%,
-//       #f39999 69.13%
-//     )
-//     /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
-//   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-// `;
-// const CircleGreen2 = styled.div`
-//   position: absolute;
-
-//   width: 700px;
-//   height: 700px;
-//   left: 600px;
-//   top: 3500px;
-//   border-radius: 50%;
-//   background: radial-gradient(
-//     87.63% 87.63% at 30.82% 78.65%,
-//     rgba(105, 156, 29, 0.9) 0%,
-//     #77bb41 29.02%,
-//     #d6eeb1 69.13%
-//   );
-//   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-// `;
+// testing
+export const TestTd = styled.td`
+  border: 1px solid #444444;
+`;
+export const TestTr = styled.tr`
+  border: 1px solid #444444;
+`;

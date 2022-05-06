@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import MainButton from './style/MainButton';
 import MainFoodForm from './MainFoodForm';
 
-import {TrackingButtonContainer} from '../styledCompo/mainStyle'
+import { TrackingForms, TrackingButtonContainer, TrackingPlusButtonContainer } from '../styledCompo/mainStyle';
 
 import { useRecoilState } from 'recoil';
 import {
@@ -44,6 +44,9 @@ function MainFoodTab({ clearForm }) {
     setFoodSelected([...foodSelected, 0]);
     setWeight([...weight, '']);
     setUnit([...unit, 'us']);
+
+    const boxid = document.querySelector('#simple-tabpanel-0');
+    boxid.scrollTop = boxid.scrollHeight;
   };
 
   const handleTracking = async () => {
@@ -82,27 +85,59 @@ function MainFoodTab({ clearForm }) {
     });
   };
 
+  const handleResetForm = () => {
+    setFoodForms([0]);
+    setFoodSelected([0]);
+    setWeight(['']);
+    setUnit(['us']);
+    setKcalPerUnit([0]);
+
+    setTrackingUpdate(!trackingUpdate);
+    // clearForm();
+  };
+
+  const scroll = () => {
+    console.log('scroll');
+    const box = document.querySelector('#simple-tabpanel-0');
+    box.scrollTop = box.scrollHeight;
+  };
+
   return (
-    <div>
-      {/* {console.log(foodForms)}
+    <>
+      <div id="main-food-tab">
+        {/* {console.log(foodForms)}
       {console.log(foodSelected)} */}
-      {/* {console.log(weight)}
+        {/* {console.log(weight)}
       {console.log(unit)}
       {console.log(kcalPerUnit)} */}
-      {foodForms && foodForms.map((item) => <MainFoodForm key={item} idx={item} />)}
-      <MainButton variant="contained" onClick={handleAddFoodForm}>
-        +
-      </MainButton>
-      {/* {console.log(foodSelected)}
+        <MainButton variant="contained" onClick={handleResetForm}>
+          reset
+        </MainButton>
+        <TrackingForms>
+          {foodForms && foodForms.map((item) => <MainFoodForm key={item} idx={item} />)}
+        </TrackingForms>
+
+        <TrackingButtonContainer>
+          <TrackingPlusButtonContainer>
+            <MainButton variant="contained" onClick={handleAddFoodForm}>
+              +
+            </MainButton>
+          </TrackingPlusButtonContainer>
+          {/* {console.log(foodSelected)}
       {console.log(weight)}
       {console.log(isFoodEmpty)}
       {console.log(isWeightEmpty)}
       {console.log(isWeightNumber)} */}
-      {/* {isFormEmpty && <span>값을 제대로 적어라</span>} */}
-      <MainButton variant="contained" onClick={handleTracking}>
-        tracking
-      </MainButton>
-    </div>
+          {/* {isFormEmpty && <span>값을 제대로 적어라</span>} */}
+          <div>
+            <MainButton variant="contained" onClick={handleTracking}>
+              tracking
+            </MainButton>
+          </div>
+        </TrackingButtonContainer>
+      </div>
+      {/* {scroll()} */}
+    </>
   );
 }
 

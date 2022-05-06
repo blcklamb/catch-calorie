@@ -12,7 +12,11 @@ import {
   TrackingForm,
   TrackingAutoContainer,
   TrackingTextFieldContainer,
+  TrackingSwitchContainer,
 } from '../styledCompo/mainStyle';
+
+import { ValidationTextField } from '../styledCompo/muiCustom';
+import { RedSpan } from '../styledCompo/styledCompo';
 
 import { useRecoilState } from 'recoil';
 import {
@@ -126,7 +130,12 @@ function MainExerciseForm({ idx }) {
             options={exerciseList}
             sx={{ width: 300 }}
             renderInput={(params) => (
-              <MainInput {...params} label="Exercise(kcal)" placeholder="Please select food" />
+              <ValidationTextField
+                {...params}
+                label="Exercise"
+                placeholder="Please select food"
+                helperText={!exerciseSelected[idx] && <RedSpan>Please select a exercise</RedSpan>}
+              />
             )}
             getOptionLabel={(option) => option.name || ''}
             noOptionsText={
@@ -145,43 +154,36 @@ function MainExerciseForm({ idx }) {
               </div>
             }
           />
-          {!exerciseSelected[idx] && <span>Please select a exercise</span>}
         </TrackingAutoContainer>
-        <TrackingTextFieldContainer
-        // component="form"
-        // sx={{
-        //   '& > :not(style)': { m: 1, width: '25ch' },
-        // }}
-        // noValidate
-        // autoComplete="off"
-        // style={{ display: 'inline-flex' }}
-        >
-          <MainInput
+        <TrackingTextFieldContainer>
+          <ValidationTextField
             id="outlined-basic"
-            label="hour"
+            label="Hour"
             variant="outlined"
             value={hour[idx]}
             onChange={onChangeHour}
             helperText={
               !hour[idx] && !minute[idx] ? (
-                <span>Please enter a time</span>
+                <RedSpan>Please enter a time</RedSpan>
               ) : (
-                (isNaN(hour[idx]) || isNaN(minute[idx])) && <span>Please enter a number only</span>
+                (isNaN(hour[idx]) || isNaN(minute[idx])) && (
+                  <RedSpan>Please enter a number only</RedSpan>
+                )
               )
             }
           />
         </TrackingTextFieldContainer>
         <TrackingTextFieldContainer>
-          <MainInput
+          <ValidationTextField
             id="outlined-basic"
-            label="minute"
+            label="Minute"
             variant="outlined"
             value={minute[idx]}
             onChange={onChangeMinute}
           />
         </TrackingTextFieldContainer>
 
-        <div style={{ paddingTop: '15px' }}>
+        <TrackingSwitchContainer style={{ paddingTop: '15px' }}>
           {/* 인풋밸류 {inputValue}
         <br />
         시간 당 {exerciseSelected[idx]?.kcal_per_kg}
@@ -192,7 +194,7 @@ function MainExerciseForm({ idx }) {
         <br />총 {time[idx]} 분
         <br /> */}
           <span style={{ float: 'right' }}>{kcalPerHour[idx]} kcal/min</span>
-        </div>
+        </TrackingSwitchContainer>
       </TrackingForm>
     </>
   );

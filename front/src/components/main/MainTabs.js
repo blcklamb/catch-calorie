@@ -41,7 +41,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
   marginRight: 0,
   // color: 'white',
   backgroundColor: '#8CB352',
-  width: '50%',
+  width: '47%',
   maxWidth: '800px',
   '&.Mui-selected': {
     color: '#fff',
@@ -69,7 +69,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
 const MainTrackingSection = styled2.div`
 position: relative;
   width: 900px;
-  margin-right: 120px;
+  margin-right: 80px;
 `;
 
 const MainTabsSection = styled2.div`
@@ -103,10 +103,13 @@ MainTabPanel.propTypes = {
 };
 
 const TabPanel = styled(MainTabPanel)({
-  // height: 'auto',
   backgroundColor: '#ECF8D9',
-  overflow: 'auto', 
-    height: '300px', 
+  // 폼만 스크롤
+  // height: '500px',
+
+  // 스크롤 전범위
+  overflow: 'auto',
+  height: '400px',
 });
 
 const a11yProps = (index) => {
@@ -157,8 +160,10 @@ const MainTabs = ({}) => {
             </TabPanel>
           </MainTabsSection>
         </Section>
+        {/* {scroll()} */}
       </MainTrackingSection>
-    )
+    ) 
+    // && scroll()
   );
 };
 
