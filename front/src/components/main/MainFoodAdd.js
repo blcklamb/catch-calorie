@@ -94,7 +94,7 @@ function MainFoodAdd({}) {
     <>
       <Header />
       <BodyContainer>
-        <LoginGlass style={{marginTop: '150px'}}>
+        <LoginGlass style={{ marginTop: '150px' }}>
           {/* <AddGlassBodyContainer> */}
           <AddTitle>Add Food</AddTitle>
           <AddFormsContainer>
@@ -108,10 +108,15 @@ function MainFoodAdd({}) {
                 id="controllable-states-demo"
                 options={categoryList}
                 sx={{ width: 300 }}
-                renderInput={(params) => <ValidationTextField {...params} label="category" />}
+                renderInput={(params) => (
+                  <ValidationTextField
+                    {...params}
+                    label="category"
+                    helperText={isCategoryEmpty && <RedSpan>Please select a category</RedSpan>}
+                  />
+                )}
                 style={{ width: '100%' }}
               />
-              {isCategoryEmpty && <RedSpan>Please select a category</RedSpan>}
             </AddFormSection>
             <AddFormSection>
               <AddFormTitle>Please Enter a Name</AddFormTitle>
@@ -123,7 +128,6 @@ function MainFoodAdd({}) {
                 onBlur={(e) => setName(e.target.value)}
                 helperText={isNameEmpty && <RedSpan>Please enter a name</RedSpan>}
                 style={{ width: '100%' }}
-
               />
             </AddFormSection>
             <AddFormSection>
