@@ -106,7 +106,7 @@ const TabPanel = styled(MainTabPanel)({
   // height: 'auto',
   backgroundColor: '#ECF8D9',
   overflow: 'auto',
-  height: '300px',
+  height: '400px',
 });
 
 const a11yProps = (index) => {
