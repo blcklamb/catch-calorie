@@ -121,7 +121,7 @@ db.once("open", async () => {
             else await Award.update({ user_id }, { steady });
         };
 
-        if (change.operationType === "insert" || "update") {
+        if (change.operationType === "insert" || change.operationType === "update") {
             const id = change.documentKey._id;
             const { user_id } = await Tracking.findById({ id });
             const trackings = await Tracking.findByUser({ user_id });
