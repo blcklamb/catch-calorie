@@ -23,7 +23,6 @@ class userService {
             gender,
             height: converted_height,
             weight: converted_weight,
-            unit,
             open,
             icon,
         };
