@@ -4,7 +4,15 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
 
-import {ValidationTextField} from '../styledCompo/muiCustom'
+import {
+  TrackingListTr,
+  TrackingListTd,
+  TrackingListTdAction,
+  TrackingListTdStart,
+  TrackingListTdEnd,
+} from '../styledCompo/mainStyle';
+
+import { ValidationTextField } from '../styledCompo/muiCustom';
 
 import { useRecoilState } from 'recoil';
 import { trackingUpdateState, trackingFoodUnitState } from '../../atoms';
@@ -95,6 +103,7 @@ function TrackingFoodList({ food, isTrackingPage }) {
   return (
     <>
       {isEditing ? (
+        // 수정 모드
         <div style={{ display: 'flex' }}>
           <div style={{ display: 'flex' }}>
             <div style={{ marginRight: '30px' }}>{food.name}</div>
@@ -132,24 +141,26 @@ function TrackingFoodList({ food, isTrackingPage }) {
           </div>
         </div>
       ) : (
-        <div style={{ display: 'flex' }}>
-          <div style={{ display: 'flex' }}>
-            <div style={{ marginRight: '30px' }}>{food.name}</div>
-            <div style={{ marginRight: '30px' }}>{food.gram}g</div>
-            <div style={{ marginRight: '30px' }}>{food.calorie}kcal</div>
-            {/* 트래킹 페이지에서만 버튼 O */}
-            {isTrackingPage === 'tracking' && (
-              <div>
+        <TrackingListTr>
+          <TrackingListTdStart>{food.name}</TrackingListTdStart>
+          <TrackingListTd>{food.gram}g</TrackingListTd>
+          <TrackingListTd>{food.calorie}kcal</TrackingListTd>
+          {/* 트래킹 페이지에서만 버튼 O */}
+          {isTrackingPage === 'tracking' && (
+            <>
+              <TrackingListTdAction>
                 <Button variant="contained" type="button" onClick={handleModify}>
                   Modify
                 </Button>
+              </TrackingListTdAction>
+              <TrackingListTdEnd>
                 <Button variant="contained" type="button" onClick={handleDelete}>
                   Delete
                 </Button>
-              </div>
-            )}
-          </div>
-        </div>
+              </TrackingListTdEnd>
+            </>
+          )}
+        </TrackingListTr>
       )}
     </>
   );

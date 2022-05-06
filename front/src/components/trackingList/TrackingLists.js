@@ -4,7 +4,16 @@ import { useParams } from 'react-router-dom';
 import TrackingFoodList from './TrackingFoodList';
 import TrackingExerciseList from './TrackingExerciseList';
 
-import { Section, GraphContainer } from '../styledCompo/mainStyle';
+import {
+  Section,
+  TrackingListTable,
+  TrackingListThName,
+  TrackingListThContent,
+  TrackingListThAction,
+  TrackingListThEnd,
+  TrackingListTbody,
+  TrackingListTd,
+} from '../styledCompo/mainStyle';
 
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userInfoState, trackingState, trackingUpdateState } from '../../atoms';
@@ -32,25 +41,41 @@ function TrackingLists() {
       <Section>
         <h1>Tracking List</h1>
         <div>
-          <h1>Food</h1>
-          <div style={{ display: 'flex' }}>
-            <div style={{ marginRight: '30px' }}>
-              <h2>Food</h2>
-            </div>
-            <div style={{ marginRight: '30px' }}>
-              <h2>Amount</h2>
-            </div>
-            <div style={{ marginRight: '30px' }}>
-              <h2>Intake Calories</h2>
-            </div>
-          </div>
-          {tracking.food_record?.length ? (
-            tracking.food_record.map((food) => {
-              return <TrackingFoodList food={food} isTrackingPage={isTrackingPage} />;
-            })
-          ) : (
-            <div>No Food Tracking</div>
-          )}
+          <TrackingListTable>
+            <thead>
+              <tr>
+                <TrackingListThName>
+                  <h2>Food</h2>
+                </TrackingListThName>
+                <TrackingListThContent>
+                  <h2>Amount</h2>
+                </TrackingListThContent>
+                <TrackingListThContent>
+                  <h2>Intake Calories</h2>
+                </TrackingListThContent>
+                <TrackingListThAction>
+                  <h2>Edit</h2>
+                </TrackingListThAction>
+                <TrackingListThEnd>
+                  <h2>Del</h2>
+                </TrackingListThEnd>
+              </tr>
+            </thead>
+            <tbody>
+              {tracking.food_record?.length ? (
+                // <tr>
+                tracking.food_record.map((food) => {
+                  return <TrackingFoodList food={food} isTrackingPage={isTrackingPage} />;
+                })
+              ) : (
+                // </tr>
+                <tr>
+                  <div>No Food Tracking</div>
+                </tr>
+              )}
+            </tbody>
+          </TrackingListTable>
+          <div style={{ display: 'flex' }}></div>
         </div>
         <div>
           <h1>Exercise</h1>

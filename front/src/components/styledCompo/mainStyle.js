@@ -56,12 +56,16 @@ export const Section = styled.div`
   border-radius: 40px;
 `;
 
-// 그래프 ----------------------------------------------------------------------------------------
-export const GraphContainer = styled.div`
-  width: 400px;
+// 탭 ----------------------------------------------------------------------------------------
+export const TrackingForms = styled.div`
+  // 폼만 스크롤 범위
+  /* height: 200px;
+  overflow: auto; */
+
+  // 스크롤 전범위
+  height: auto;
 `;
 
-// 탭 ----------------------------------------------------------------------------------------
 export const TrackingForm = styled.div`
   /* height: 80px;  */
   display: flex;
@@ -99,4 +103,92 @@ export const TrackingButtonContainer = styled.div`
 
 export const TrackingPlusButtonContainer = styled.div`
   margin-bottom: 60px;
+`;
+
+// 그래프 ----------------------------------------------------------------------------------------
+export const CalorieGraphSection = styled.div`
+  text-align: center;
+  height: 480px;
+`;
+
+export const GraphContainer = styled.div`
+  width: 400px;
+`;
+
+export const GraphOverContainer = styled.div``;
+
+// Tracking List ----------------------------------------------------
+export const TrackingListTable = styled.table`
+  width: 100%;
+  /* border: 1px solid #444444; */
+  /* border-collapse: collapse; */
+
+  // 행 여백
+  border-collapse: separate;
+  border-spacing: 0 20px;
+`;
+
+// Table Header
+export const TrackingListTh = styled.th`
+  /* border: 1px solid #444444; */
+  padding: 10px;
+  text-align: left;
+`;
+
+export const TrackingListThName = styled(TrackingListTh)`
+  width: 40%;
+  padding-left: 30px;
+`;
+
+export const TrackingListThContent = styled(TrackingListTh)`
+  width: 20%;
+`;
+
+export const TrackingListThAction = styled(TrackingListTh)`
+  width: 5%;
+  text-align: center;
+`;
+
+export const TrackingListThEnd = styled(TrackingListThAction)`
+  padding-right: 30px;
+`;
+
+// Table Body
+export const TrackingListTr = styled.tr`
+  line-height: 3.5rem;
+
+  // 유리
+  box-sizing: border-box;
+
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  /* background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(255, 255, 255, 0.3); */
+  box-shadow: 0px 5.334px 40.005px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(40.005px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 26.67px;
+`;
+
+export const TrackingListTd = styled.td`
+  /* border: 1px solid #444444; */
+  padding: 10px;
+`;
+
+export const TrackingListTdAction = styled(TrackingListTd)`
+  text-align: center;
+`;
+
+export const TrackingListTdStart = styled(TrackingListTd)`
+  padding-left: 30px;
+`;
+
+export const TrackingListTdEnd = styled(TrackingListTdAction)`
+  padding-right: 30px;
+  text-align: right;
+
 `;
