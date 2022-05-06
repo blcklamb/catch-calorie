@@ -52,7 +52,7 @@ function MainFoodTab({ clearForm }) {
     setUnit([...unit, 'us']);
 
     setTimeout(() => {
-      const boxid = document.querySelector('#simple-tabpanel-0');
+      const boxid = document.querySelector('#tracking-food-forms');
       boxid.scrollTop = boxid.scrollHeight;
     }, 1);
   };
@@ -104,12 +104,6 @@ function MainFoodTab({ clearForm }) {
     // clearForm();
   };
 
-  const scroll = () => {
-    console.log('scroll');
-    const box = document.querySelector('#simple-tabpanel-0');
-    box.scrollTop = box.scrollHeight;
-  };
-
   return (
     <>
       <div id="main-food-tab">
@@ -118,7 +112,7 @@ function MainFoodTab({ clearForm }) {
         {/* {console.log(weight)}
       {console.log(unit)}
       {console.log(kcalPerUnit)} */}
-        <TrackingForms>
+        <TrackingForms id="tracking-food-forms">
           {foodForms && foodForms.map((item) => <MainFoodForm key={item} idx={item} />)}
         </TrackingForms>
 
@@ -138,7 +132,6 @@ function MainFoodTab({ clearForm }) {
           </TrackingRightButtonContainer>
         </TrackingButtonContainer>
       </div>
-      {/* {scroll()} */}
     </>
   );
 }

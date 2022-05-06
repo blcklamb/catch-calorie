@@ -103,13 +103,14 @@ MainTabPanel.propTypes = {
 };
 
 const TabPanel = styled(MainTabPanel)({
-  backgroundColor: '#ECF8D9',
+  // backgroundColor: '#ECF8D9',
   // 폼만 스크롤
-  // height: '500px',
+  height: '450px',
 
   // 스크롤 전범위
-  overflow: 'auto',
-  height: '400px',
+  // overflow: 'auto',
+  // height: '400px',
+  // position: 'relative',
 });
 
 const a11yProps = (index) => {
@@ -162,7 +163,7 @@ const MainTabs = ({}) => {
         </Section>
         {/* {scroll()} */}
       </MainTrackingSection>
-    ) 
+    )
     // && scroll()
   );
 };
