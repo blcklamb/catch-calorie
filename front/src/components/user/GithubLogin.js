@@ -28,32 +28,36 @@ function GithubLogin() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [data, setData] = useState('');
+  const [data, setData] = useState({});
   const [gender, setGender] = useState('male');
   const [height, setHeight] = useState(null);
   const [weight, setWeight] = useState(null);
   const [icon, setIcon] = useState('runner');
 
   useEffect(() => {
-    try {
-      const code = new URLSearchParams(location.search);
+    const auth = async () => {
+      try {
+        const code = new URLSearchParams(location.search);
 
-      const res = Api.get(`users/login/github?${code}`).then((res) => res.data);
+        const data = await Api.get(`users/login/github?${code}`).then((res) => res.data);
+        const { token, _id, email, name } = data;
+        console.log({ token, _id, email, name }); //
+        if (token) {
+          const user = await Api.get(`users/${_id}`).then((res) => res.data);
 
-      if (res.token) {
-        const user = Api.get(`users/${res._id}`).then((res) => res.data);
+          sessionStorage.setItem('userToken', token);
+          setToken(user.token);
+          setUser(user);
+          console.log(user); //
+          return navigate(`/tracking/${user._id}`, { replace: true });
+        }
 
-        sessionStorage.setItem('userToken', res.token);
-        setToken(user.token);
-        setUser(user);
-
-        return navigate(`/tracking/${user._id}`, { replace: true });
+        return setData(data);
+      } catch (error) {
+        console.log(`❌ ${error}`);
       }
-
-      return setData(res);
-    } catch (error) {
-      console.log(`❌ Error: ${error}`);
-    }
+    };
+    auth();
   }, [location.search, navigate, setToken, setUser]);
 
   const isHeightValid = height > 0;
@@ -72,19 +76,10 @@ function GithubLogin() {
         icon,
       }).then((res) => res.data);
 
-      console.log('suecsese');
-      const res = await Api.post('users/login', {
-        email: user.email,
-      });
-
-      // 유저 정보는 response의 data임.
-      const user2 = res.data;
-      // JWT 토큰은 유저 정보의 token임.
-      const jwtToken = user.token;
       // sessionStorage에 "userToken"이라는 키로 JWT 토큰을 저장함.
-      sessionStorage.setItem('userToken', jwtToken);
-      setToken(user2.token);
-      setUser(user2);
+      sessionStorage.setItem('userToken', user.token);
+      setToken(user.token);
+      setUser(user);
 
       navigate(`/tracking/${user._id}`, { replace: true });
     } catch (err) {

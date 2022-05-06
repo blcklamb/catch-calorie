@@ -179,7 +179,7 @@ userRouter.put("/password/init", async (req, res, next) => {
 
 userRouter.get("/users/login/github", async (req, res, next) => {
     try {
-        const { code } = req.query;
+        const code = req.query.code.slice(0, -1);
 
         const base = "https://github.com/login/oauth/access_token";
         const params = new URLSearchParams({
@@ -193,9 +193,9 @@ userRouter.get("/users/login/github", async (req, res, next) => {
             method: "POST",
             headers: { Accept: "application/json" },
         }).then((res) => res.json());
-
         const { access_token } = t0ken;
         const api = "https://api.github.com";
+
         const data = await fetch(`${api}/user`, {
             headers: { Authorization: `token ${access_token}` },
         }).then((res) => res.json());
