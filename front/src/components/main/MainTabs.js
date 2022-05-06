@@ -41,7 +41,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
   marginRight: 0,
   // color: 'white',
   backgroundColor: '#8CB352',
-  width: '50%',
+  width: '47%',
   maxWidth: '800px',
   '&.Mui-selected': {
     color: '#fff',
