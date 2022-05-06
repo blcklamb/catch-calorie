@@ -33,13 +33,13 @@ const convert = configureMeasurements({ mass, length });
 
 const UserEditCard = ({ setCardState }) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  // const FTHeight = convert(userInfo.height).from('cm').to('ft').toFixed(2);
-  // const LBWeight = convert(userInfo.weight).from('kg').to('lb').toFixed(2);
+  const FTHeight = Number(convert(userInfo.height).from('cm').to('ft').toFixed(2));
+  const LBWeight = Number(convert(userInfo.weight).from('kg').to('lb').toFixed(2));
 
   const [editUser, setEditUser] = useState({
     ...userInfo,
-    UsHeight: convert(userInfo.height).from('cm').to('ft'),
-    UsWeight: convert(userInfo.weight).from('kg').to('lb'),
+    UsHeight: FTHeight,
+    UsWeight: LBWeight,
   });
 
   const { UsHeight, UsWeight, height, weight, name, open, unit, status, gender, icon } = editUser;
@@ -48,8 +48,8 @@ const UserEditCard = ({ setCardState }) => {
     if (unit === 'us') {
       setEditUser((cur) => ({
         ...cur,
-        UsHeight: convert(cur.height).from('cm').to('ft'),
-        UsWeight: convert(cur.weight).from('kg').to('lb'),
+        UsHeight: convert(Number(cur.height)).from('cm').to('ft').toFixed(2),
+        UsWeight: convert(Number(cur.weight)).from('kg').to('lb').toFixed(2),
       }));
       return;
     }
@@ -59,8 +59,8 @@ const UserEditCard = ({ setCardState }) => {
     if (unit === 'non_us') {
       setEditUser((cur) => ({
         ...cur,
-        height: convert(cur.UsHeight).from('ft').to('cm'),
-        weight: convert(cur.UsWeight).from('lb').to('kg'),
+        height: convert(Number(cur.UsHeight)).from('ft').to('cm').toFixed(2),
+        weight: convert(Number(cur.UsWeight)).from('lb').to('kg').toFixed(2),
       }));
     }
   }, [unit]);
@@ -223,6 +223,7 @@ const UserEditCard = ({ setCardState }) => {
           {unit === 'us' ? (
             <ValidationTextField
               required
+              type="number"
               sx={{ width: 300 }}
               error={!isHeightValid}
               label="Height-feet"
@@ -231,12 +232,13 @@ const UserEditCard = ({ setCardState }) => {
               }
               value={UsHeight}
               onChange={(e) => {
-                setEditUser((prev) => ({ ...prev, UsHeight: Number(e.target.value) }));
+                setEditUser((prev) => ({ ...prev, UsHeight: e.target.value }));
               }}
             />
           ) : (
             <ValidationTextField
               required
+              type="number"
               sx={{ width: 300 }}
               error={!isHeightValid}
               label="Height-cm"
@@ -245,7 +247,7 @@ const UserEditCard = ({ setCardState }) => {
               }
               value={height}
               onChange={(e) => {
-                setEditUser((prev) => ({ ...prev, height: Number(e.target.value) }));
+                setEditUser((prev) => ({ ...prev, height: e.target.value }));
               }}
             />
           )}
@@ -253,6 +255,7 @@ const UserEditCard = ({ setCardState }) => {
           {unit === 'us' ? (
             <ValidationTextField
               required
+              type="number"
               sx={{ width: 300 }}
               error={!isWeightValid}
               label="Weight-lb"
@@ -261,12 +264,13 @@ const UserEditCard = ({ setCardState }) => {
               }
               value={UsWeight}
               onChange={(e) => {
-                setEditUser((prev) => ({ ...prev, UsWeight: Number(e.target.value) }));
+                setEditUser((prev) => ({ ...prev, UsWeight: e.target.value }));
               }}
             />
           ) : (
             <ValidationTextField
               required
+              type="number"
               sx={{ width: 300 }}
               error={!isWeightValid}
               label="Weight-kg"
@@ -275,7 +279,7 @@ const UserEditCard = ({ setCardState }) => {
               }
               value={weight}
               onChange={(e) => {
-                setEditUser((prev) => ({ ...prev, weight: Number(e.target.value) }));
+                setEditUser((prev) => ({ ...prev, weight: e.target.value }));
               }}
             />
           )}

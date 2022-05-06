@@ -16,6 +16,7 @@ const UserNetworkCard = ({ currentUserInfo }) => {
             src={currentUserInfo.icon}
             alt="badge"
             style={{ width: 80 + '%', display: 'block', margin: 'auto' }}
+            onClick={() => navigate(`/${currentUserInfo._id}`)}
           ></img>
         </div>
       </div>
