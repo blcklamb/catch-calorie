@@ -11,11 +11,9 @@ class userService {
     static async addUser({ email, password, name, gender, height, weight, unit, open, icon }) {
         const user = await User.findOne({ email });
         if (user) return { errorMessage: "현재 사용 중인 이메일입니다. 다른 이메일을 입력해주세요." };
-
-        if (unit === "us") {
-            height = convert(height).from("ft").to("cm").toFixed(0);
-            weight = convert(weight).from("lb").to("kg").toFixed(0);
-        }
+        
+        const converted_height = unit ?? convert(height).from("ft").to("cm").toFixed(0); height;
+        const converted_weight = unit ?? convert(weight).from("lb").to("kg").toFixed(0) ; weight;
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = {
@@ -23,8 +21,8 @@ class userService {
             password: hashedPassword,
             name,
             gender,
-            height,
-            weight,
+            height: converted_height,
+            weight: converted_weight,
             unit,
             open,
             icon,
@@ -87,13 +85,21 @@ class userService {
     }
 
     // 회원 정보 삭제하기
-    static deleteUser({ id }) {
-        return Promise.all(
-            Award.delete({ user_id: id }), //
-            Tracking.deleteByUser({ user_id: id }),
+    static async deleteUser({ id }) {
+        // const award =  Award.delete({ user_id: id })
+        // const tracking =  Tracking.deleteByUser({ user_id: id })
+        // const heatmap = Heatmap.delete({ user_id: id })
+        // const user = User.delete({ id })
+        // return User.delete({ id });
+        // 현재 tracking을 삭제하려하면 user_id로 접근하는 것에서 오류 발생
+        // index.js에서 mongodb watch때문에 발생하는 것으로 예상
+        // 일단은 tracking과 은 삭제하지 말고 다른 것만 삭제하는 것으로 둡시다!
+        // heatmap도 비슷한 오류가 발생할 것 같은데 만약 넣을 거면 목 데이터로 검사하는 것이 좋을 듯
+        return await Promise.all([
+            Award.delete({ user_id: id }), 
             Heatmap.delete({ user_id: id }),
             User.delete({ id }),
-        );
+        ]);
     }
 
     // 로그인한 회원 비밀번호 수정하기

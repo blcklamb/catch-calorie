@@ -61,7 +61,7 @@ db.once("open", async () => {
             const run = exers.filter((exer) => /running/i.test(exer.name)).length > 0;
             const swim = exers.filter((exer) => /swimming/i.test(exer.name)).length > 0;
             const triathlete = cycle && run && swim;
-            if (triathlete) await Award.update({ user_id }, { triathlelte: 1 });
+            if (triathlete) await Award.update({ user_id }, { triathlete: 1 });
 
             // -------------- FOOD COUNTING --------------
 
