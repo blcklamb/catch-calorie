@@ -13,6 +13,7 @@ import MainFoodTab from './MainFoodTab';
 import MainExerciseTab from './MainExerciseTab';
 
 import { Section } from '../styledCompo/mainStyle';
+import { ColorButton } from '../styledCompo/muiCustom';
 
 const StyledTabs = styled((props) => (
   <Tabs
@@ -31,20 +32,16 @@ const StyledTabs = styled((props) => (
 });
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
-  // marginTop: '20px',
-  // marginBottom: '20px',
   margin: '20px',
 
   textTransform: 'none',
-  fontWeight: theme.typography.fontWeightRegular,
-  fontSize: theme.typography.pxToRem(15),
   marginRight: 0,
-  // color: 'white',
-  backgroundColor: '#8CB352',
   width: '47%',
+  height: '20px', 
   maxWidth: '800px',
   '&.Mui-selected': {
-    color: '#fff',
+    // color: '#fff',
+    color: '#F03E3E',
     backgroundColor: '#94D82D',
   },
   '&.Mui-focusVisible': {
@@ -58,12 +55,22 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
   top: '0%',
   bottom: '0%',
 
-  background: 'rgba(255, 255, 255, 0.3)',
-  boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.25)',
   backdropFilter: 'blur(40px)',
   /* Note: backdrop-filter has minimal browser support */
 
-  borderRadius: '17px',
+  // +++++++++++++++++++++++++++++++++++++++++++++++++
+  fontFamily: ['Jost'],
+  fontStyle: 'italic',
+  fontWeight: 700,
+  fontSize: '22px',
+  boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.25)',
+  // backgroundColor: '#94D82D',
+  // background: 'linear-gradient(180deg, #A8E054 100%, #99DA36 100%)',
+  backgroundColor: '#FCFFF8',
+  border: 'solid', 
+  borderColor: '#94D82D',
+  borderRadius: '20px',
+  color: '#F03E3E',
 }));
 
 const MainTrackingSection = styled2.div`
@@ -161,7 +168,6 @@ const MainTabs = ({}) => {
             </TabPanel>
           </MainTabsSection>
         </Section>
-        {/* {scroll()} */}
       </MainTrackingSection>
     )
     // && scroll()
