@@ -37,9 +37,7 @@ exerRouter.post("/exercises", login_required, async (req, res, next) => {
 
         const exercise = await exerService.getExerByName({ name });
         if (exercise) throw new Error("Router: 이미 등록되어 있는 운동입니다.");
-
-        // 단위와 단위별 받은 칼로리에 대해 kg, lb 둘 다 저장하는 코드
-        // 이후 사용자 몸무게 설정을 kg으로 했는지, lb로 했는지 구분한다면 쓸 예정
+    
         const { kcal_per_lb, kcal_per_kg } = await exerService.convertUnit({ kcal, unit });
 
         const newExercise = await exerService.addExer({
