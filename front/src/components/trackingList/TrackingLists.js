@@ -40,78 +40,84 @@ function TrackingLists() {
     <>
       <Section>
         <h1>Tracking List</h1>
-        <div>
-          <TrackingListTable>
-            <thead>
-              <tr>
-                <TrackingListThName>
-                  <h2>Food</h2>
-                </TrackingListThName>
-                <TrackingListThContent>
-                  <h2>Amount</h2>
-                </TrackingListThContent>
-                <TrackingListThContent>
-                  <h2>Intake Calories</h2>
-                </TrackingListThContent>
-                <TrackingListThAction>
-                  <h2>Edit</h2>
-                </TrackingListThAction>
-                <TrackingListThEnd>
-                  <h2>Del</h2>
-                </TrackingListThEnd>
-              </tr>
-            </thead>
-            <tbody>
-              {tracking.food_record?.length ? (
-                // <tr>
-                tracking.food_record.map((food) => {
-                  return <TrackingFoodList food={food} isTrackingPage={isTrackingPage} />;
-                })
-              ) : (
-                // </tr>
+        <div style={isTrackingPage !== 'tracking' ? { height: '480px', overflow: 'auto' } : {}}>
+          <div>
+            <TrackingListTable>
+              <thead>
                 <tr>
-                  <div>No Food Tracking</div>
+                  <TrackingListThName>
+                    <h2>Food</h2>
+                  </TrackingListThName>
+                  <TrackingListThContent>
+                    <h2>Amount</h2>
+                  </TrackingListThContent>
+                  <TrackingListThContent>
+                    <h2>Intake Calories</h2>
+                  </TrackingListThContent>
+                  {isTrackingPage === 'tracking' && (
+                    <>
+                      <TrackingListThAction>
+                        <h2>Edit</h2>
+                      </TrackingListThAction>
+                      <TrackingListThEnd>
+                        <h2>Del</h2>
+                      </TrackingListThEnd>
+                    </>
+                  )}
                 </tr>
-              )}
-            </tbody>
-          </TrackingListTable>
-          <div style={{ display: 'flex' }}></div>
-        </div>
-        <div>
-          <TrackingListTable>
-            <thead>
-              <tr>
-                <TrackingListThName>
-                  <h2>Exercise</h2>
-                </TrackingListThName>
-                <TrackingListThContent>
-                  <h2>Time</h2>
-                </TrackingListThContent>
-                <TrackingListThContent>
-                  <h2>Consumed Calories</h2>
-                </TrackingListThContent>
-                <TrackingListThAction>
-                  <h2>Edit</h2>
-                </TrackingListThAction>
-                <TrackingListThEnd>
-                  <h2>Del</h2>
-                </TrackingListThEnd>
-              </tr>
-            </thead>
-            <tbody>
-              {tracking.exer_record?.length ? (
-                tracking.exer_record.map((exercise) => {
-                  return (
-                    <TrackingExerciseList exercise={exercise} isTrackingPage={isTrackingPage} />
-                  );
-                })
-              ) : (
+              </thead>
+              <tbody>
+                {tracking.food_record?.length ? (
+                  // <tr>
+                  tracking.food_record.map((food) => {
+                    return <TrackingFoodList food={food} isTrackingPage={isTrackingPage} />;
+                  })
+                ) : (
+                  // </tr>
+                  <tr>
+                    <div>No Food Tracking</div>
+                  </tr>
+                )}
+              </tbody>
+            </TrackingListTable>
+            <div style={{ display: 'flex' }}></div>
+          </div>
+          <div>
+            <TrackingListTable>
+              <thead>
                 <tr>
-                  <div>No Exercise Tracking</div>
+                  <TrackingListThName>
+                    <h2>Exercise</h2>
+                  </TrackingListThName>
+                  <TrackingListThContent>
+                    <h2>Time</h2>
+                  </TrackingListThContent>
+                  <TrackingListThContent>
+                    <h2>Consumed Calories</h2>
+                  </TrackingListThContent>
+                  <TrackingListThAction>
+                    <h2>Edit</h2>
+                  </TrackingListThAction>
+                  <TrackingListThEnd>
+                    <h2>Del</h2>
+                  </TrackingListThEnd>
                 </tr>
-              )}
-            </tbody>
-          </TrackingListTable>
+              </thead>
+              <tbody>
+                {tracking.exer_record?.length ? (
+                  tracking.exer_record.map((exercise) => {
+                    return (
+                      <TrackingExerciseList exercise={exercise} isTrackingPage={isTrackingPage} />
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <div>No Exercise Tracking</div>
+                  </tr>
+                )}
+              </tbody>
+            </TrackingListTable>
+          </div>
         </div>
       </Section>
     </>
