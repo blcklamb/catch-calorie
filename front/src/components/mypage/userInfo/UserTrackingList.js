@@ -12,7 +12,7 @@ import {
   UserBadgeImgInfo,
   ColorButton,
   CardText,
-} from '../../styledCompo/styledCompo';
+} from '../../styledCompo/LoginStyle';
 
 import TrackingLists from '../../trackingList/TrackingLists';
 

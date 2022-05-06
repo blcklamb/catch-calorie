@@ -20,21 +20,28 @@ import { tokenState, userState } from '../../atoms';
 import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/muiCustom';
 import {
   LoginGlass,
-  LoginText,
+  TitleText,
   ForgetPw,
   SignPWContainer,
   SignBtn,
   SignInBtn,
   Btn,
-} from '../styledCompo/styledCompo';
+  CatchBack,
+  CaloriesBack,
+  GitHubBtn,
+  Separator,
+} from '../styledCompo/LoginStyle';
 import githubLogin from './GithubLogin';
+import { fontSize } from '@mui/system';
 
 function LoginForm() {
   const navigate = useNavigate();
-  // const dispatch = useContext(DispatchContext);
+
+  ///@ 전역 유저 정보
   const setToken = useSetRecoilState(tokenState);
   const setUser = useSetRecoilState(userState);
 
+  ///@ 상태
   //useState로 email 상태를 생성함.
   const [email, setEmail] = useState('');
   //useState로 password 상태를 생성함.
@@ -50,6 +57,7 @@ function LoginForm() {
   // 이메일과 비밀번호 조건이 동시에 만족되는지 확인함.
   const isFormValid = isEmailValid && isPasswordValid;
 
+  ///@ 로그인 시 작동하는 함수(post 요청)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -74,10 +82,12 @@ function LoginForm() {
       navigate(`/tracking/${user.id}`, { replace: true });
     } catch (err) {
       console.log('로그인에 실패하였습니다.\n', err);
+      alert('Login failed');
       setCheckLogin(false);
     }
   };
 
+  ///@ 깃헙 로그인 요청
   const githubLogin = () => {
     const base = 'https://github.com/login/oauth/authorize';
     const params = new URLSearchParams({
@@ -90,6 +100,9 @@ function LoginForm() {
 
   return (
     <div>
+      {/* ///@ 백그라운드 글자 */}
+      <CatchBack>Catch</CatchBack>
+      <CaloriesBack>Calories</CaloriesBack>
       <Header></Header>
       <Container
         style={{
@@ -97,6 +110,7 @@ function LoginForm() {
           justifyContent: 'center',
           alignItems: 'center',
           marginTop: 400,
+          marginBottom: 400,
         }}
       >
         <LoginGlass>
@@ -104,27 +118,26 @@ function LoginForm() {
             action="/"
             onSubmit={handleSubmit}
             style={{
-              marginTop: 100,
-              marginBottom: 100,
+              marginTop: 120,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexFlow: 'column',
             }}
           >
-            <LoginText>Login</LoginText>
-
+            {/* ///@ 타이틀 */}
+            <TitleText>Login</TitleText>
             <Box
               sx={{
-                width: '328px',
+                width: '438px',
               }}
               noValidate
               autoComplete="off"
             >
+              {/* ///@ 이메일 input */}
               <ValidationTextField
-                style={{ width: 328, marginBottom: 10 }}
+                style={{ width: 438, marginBottom: 10 }}
                 autoFocus
-                required
                 // {!checkLogin && error}
                 error={!checkLogin}
                 id="outlined-required"
@@ -142,9 +155,9 @@ function LoginForm() {
                 // defaultValue="Hello World"
               />
               <br></br>
+              {/* ///@ 비밀번호 input */}
               <ValidationTextField
-                style={{ width: 328, marginBottom: 10 }}
-                required
+                style={{ width: 438 }}
                 error={!checkLogin}
                 id="outlined-password-input"
                 label="Password"
@@ -164,14 +177,24 @@ function LoginForm() {
               {/* <Button color="success" onClick={() => navigate('/password/init')}>
                 Forget Password?
               </Button> */}
+              {/* ///@ 회원가입버튼 & 비밀번호 찾끼 */}
               <SignPWContainer>
-                <ForgetPw color="success" onClick={() => navigate('/password/init')}>
+                <ForgetPw
+                  sx={{ fontSize: 16 }}
+                  color="success"
+                  onClick={() => navigate('/password/init')}
+                >
                   Forget Password?
                 </ForgetPw>
-                <SignBtn color="success" onClick={() => navigate('/register')}>
+                <SignBtn
+                  sx={{ fontSize: 16 }}
+                  color="success"
+                  onClick={() => navigate('/register')}
+                >
                   Sign-up
                 </SignBtn>
               </SignPWContainer>
+              {/* ///@ 버튼들 */}
               <Stack
                 spacing={1}
                 direction="row"
@@ -182,7 +205,7 @@ function LoginForm() {
                 </ColorButton>
 
                 <ColorButtonB variant="outlined" onClick={() => navigate('/')}>
-                  Start Page
+                  Back
                 </ColorButtonB>
                 {/* <button
                   style={{
@@ -201,24 +224,24 @@ function LoginForm() {
                 <Btn>djjd</Btn> */}
               </Stack>
             </Box>
-            <hr style={{ width: '100%', margin: '18px 0 24px 0' }} />
-            <button
-              style={{
-                width: '100%', //
-                height: 36,
-                color: 'whitesmoke',
-                backgroundColor: '#2B3137',
-                border: 'none',
-                borderRadius: 4,
-              }}
-              onClick={githubLogin}
-            >
-              😺&nbsp;&nbsp;GitHub로 로그인하기
-            </button>
           </form>
+
+          <Box
+            sx={{
+              width: '438px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexFlow: 'column',
+            }}
+          >
+            <Separator />
+            {/* ///@ 깃헙버튼 */}
+            <GitHubBtn onClick={githubLogin}>😺&nbsp;&nbsp;Sign in with GitHub</GitHubBtn>
+          </Box>
         </LoginGlass>
+        {/* <Footer></Footer> */}
       </Container>
-      <Footer></Footer>
     </div>
   );
 }

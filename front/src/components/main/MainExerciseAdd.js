@@ -9,6 +9,8 @@ import MainButton from './style/MainButton';
 import Header from '../Header';
 import Footer from '../Footer';
 
+import {ValidationTextField} from '../styledCompo/muiCustom'
+
 import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../../atoms';
 
@@ -68,7 +70,7 @@ function MainExerciseAdd({}) {
         <div style={{ display: 'flex' }}>
           <div>
             <h2>Please Enter a Name</h2>
-            <TextField
+            <ValidationTextField
               id="outlined-basic"
               label="exercise name"
               variant="outlined"
@@ -83,7 +85,7 @@ function MainExerciseAdd({}) {
               inputProps={{ 'aria-label': 'controlled' }}
             />
             {unit}
-            <TextField
+            <ValidationTextField
               id="outlined-basic"
               label="kcal"
               variant="outlined"

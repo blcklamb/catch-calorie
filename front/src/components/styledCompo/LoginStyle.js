@@ -96,22 +96,30 @@ export const CardText = styled.div`
   z-index: 30;
 `;
 
+//헬퍼텍스트
 export const RedSpan = styled.span`
   color: #f03e3e;
 `;
 
 // 로그인 페이지의 Login text
-export const LoginText = styled.h1`
-  font-size: 81px;
-  margin-bottom: 131px;
+export const TitleText = styled.h1`
+  font-family: 'Jost', sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 108px;
+  margin-bottom: 150px;
   color: #f03e3e;
 `;
 
 //로그인 글라스 효과
 export const LoginGlass = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
   background-color: green;
-  width: 550px;
-  height: 741px;
+  width: 734px;
+  height: 988px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
     rgba(255, 255, 255, 0.3);
   box-shadow: 0px 2.73186px 20.489px rgba(0, 0, 0, 0.25);
@@ -124,26 +132,50 @@ export const LoginGlass = styled.div`
 export const SignPWContainer = styled.div`
   display: flex;
   flex-direction: row-reverse;
+  margin-bottom: 10px;
 `;
 
 //ForgetPassword btn
 export const ForgetPw = styled(Button)`
   font-style: italic;
-  width: 140px;
+  width: 180px;
   margin: 0;
 `;
 
 // Sign-up btn
 export const SignBtn = styled(ForgetPw)`
-  width: 70px;
-
+  width: 90px;
   &::after {
     content: '|';
     font-style: normal;
     color: #f03e3e;
     position: relative;
-    left: 9px;
+    left: 10px;
   }
+`;
+
+//background CATCH in loginform
+export const CatchBack = styled.div`
+  position: absolute;
+  font-family: 'Jost', sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 357px;
+  color: rgba(240, 62, 62, 0.3);
+  top: 451px;
+  left: -8%;
+`;
+
+//background CALORIES in loginform
+export const CaloriesBack = styled.div`
+  position: absolute;
+  font-family: 'Jost', sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 357px;
+  color: rgba(240, 62, 62, 0.3);
+  top: 968px;
+  right: -5%;
 `;
 
 //Sign-in btn
@@ -152,23 +184,40 @@ export const SignBtn = styled(ForgetPw)`
 // `;
 
 //실험
-export const Btn = styled.button`
-  border-radius: 100rem;
-  padding: 1rem;
-  font-family: 'Avenir Next';
-  font-size: 1rem;
-  padding: 0.5rem 3rem;
-  color: $color-black;
-  box-shadow: 0 0 6px 0 rgba(157, 96, 212, 0.5);
-  border: solid 3px transparent;
-  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)),
-    linear-gradient(-45deg, #a8e054, #99da36);
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-  box-shadow: 2px 1000px 1px #fff inset;
+// export const Btn = styled.button`
+//   border-radius: 100rem;
+//   padding: 1rem;
+//   font-family: 'Avenir Next';
+//   font-size: 1rem;
+//   padding: 0.5rem 3rem;
+//   color: $color-black;
+//   box-shadow: 0 0 6px 0 rgba(157, 96, 212, 0.5);
+//   border: solid 3px transparent;
+//   background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)),
+//     linear-gradient(-45deg, #a8e054, #99da36);
+//   background-origin: border-box;
+//   background-clip: content-box, border-box;
+//   box-shadow: 2px 1000px 1px #fff inset;
 
-  &:hover {
-    box-shadow: none;
-    color: white;
-  }
+//   &:hover {
+//     box-shadow: none;
+//     color: white;
+//   }
+// `;
+
+// 로그인 구분선
+export const Separator = styled.div`
+  border-top: 1px solid #203009;
+  width: 98%;
+  margin: 18px 0 24px 0;
+`;
+
+// 깃헙 로그인 버튼
+export const GitHubBtn = styled.button`
+  width: 100%;
+  height: 40px;
+  color: whitesmoke;
+  background-color: #2b3137;
+  border: none;
+  border-radius: 10px;
 `;

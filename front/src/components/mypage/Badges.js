@@ -83,9 +83,9 @@ const Badges = ({ currentUserInfo }) => {
   //   Api.get('awards', user._id).then((res) => setAward(res.data));
   // }, [user]);
 
-  useEffect(() => {
-    console.log('뱃지데이터', badges);
-  }, [badges]);
+  // useEffect(() => {
+  //   console.log('뱃지데이터', badges);
+  // }, [badges]);
   return (
     <div>
       <BadgesText>Badges</BadgesText>

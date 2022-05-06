@@ -4,6 +4,18 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
 
+import {
+  TrackingListTr,
+  TrackingListTd,
+  TrackingListTdAction,
+  TrackingListTdStart,
+  TrackingListTdEnd,
+  TestTd,
+  TestTr,
+} from '../styledCompo/mainStyle';
+
+import { ValidationTextField } from '../styledCompo/muiCustom';
+
 import { useRecoilState } from 'recoil';
 import { trackingUpdateState, trackingFoodUnitState } from '../../atoms';
 
@@ -93,61 +105,121 @@ function TrackingFoodList({ food, isTrackingPage }) {
   return (
     <>
       {isEditing ? (
-        <div style={{ display: 'flex' }}>
-          <div style={{ display: 'flex' }}>
-            <div style={{ marginRight: '30px' }}>{food.name}</div>
-            <TextField
-              id="outlined-name"
-              label="weight"
-              value={weight}
-              onChange={onChange}
-              style={{ marginRight: '30px' }}
-              helperText={
-                !isWeightNumber ? (
-                  <span>Please enter a number only</span>
-                ) : (
-                  isWeightEmpty && <span>Please enter a weight</span>
-                )
-              }
-            />
-            <Switch
-              checked={checked}
-              onChange={handleSwitch}
-              inputProps={{ 'aria-label': 'controlled' }}
-            />
-            {unit === 'us' ? 'US standard' : 'metric'}
-            <div style={{ marginRight: '30px' }}>
-              {previewKcal()}kcal/{unit === 'us' ? 'lb' : 'g'}
-            </div>
-          </div>
-          <div>
+        // 수정 모드
+        <TrackingListTr>
+          <TrackingListTdStart>{food.name}</TrackingListTdStart>
+          <TrackingListTd>
+            <tr>
+              <TestTd rowspan="2">
+                <ValidationTextField
+                  id="outlined-name"
+                  label="weight"
+                  value={weight}
+                  onChange={onChange}
+                  helperText={
+                    !isWeightNumber ? (
+                      <span>Please enter a number only</span>
+                    ) : (
+                      isWeightEmpty && <span>Please enter a weight</span>
+                    )
+                  }
+                />
+              </TestTd>
+              <TestTd>
+                <Switch
+                  checked={checked}
+                  onChange={handleSwitch}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                />
+              </TestTd>
+            </tr>
+            <tr>
+              <TestTd>
+                {/* <TestTr>
+                <Switch
+                  checked={checked}
+                  onChange={handleSwitch}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                />
+              </TestTr> */}
+                {unit === 'us' ? 'US standard' : 'metric'}
+              </TestTd>
+            </tr>
+          </TrackingListTd>
+
+          <TrackingListTd>
+            {/* <div style={{ marginRight: '30px' }}> */}
+            {previewKcal()}kcal/{unit === 'us' ? 'lb' : 'g'}
+            {/* </div> */}
+          </TrackingListTd>
+          <TrackingListTdAction>
             <Button variant="contained" type="button" onClick={handleCheck}>
               Check
             </Button>
+          </TrackingListTdAction>
+          <TrackingListTdEnd>
             <Button variant="contained" type="button" onClick={handleCancel}>
               Cancel
             </Button>
-          </div>
-        </div>
+          </TrackingListTdEnd>
+        </TrackingListTr>
       ) : (
-        <div style={{ display: 'flex' }}>
-          <div style={{ display: 'flex' }}>
-            <div style={{ marginRight: '30px' }}>{food.name}</div>
-            <div style={{ marginRight: '30px' }}>{food.gram}g</div>
-            <div style={{ marginRight: '30px' }}>{food.calorie}kcal</div>
-            {/* 트래킹 페이지에서만 버튼 O */}
-            {isTrackingPage === 'tracking' && (
-              <div>
+        // <div style={{ display: 'flex' }}>
+        //   <div style={{ display: 'flex' }}>
+        //     <div style={{ marginRight: '30px' }}>{food.name}</div>
+        //     <ValidationTextField
+        //       id="outlined-name"
+        //       label="weight"
+        //       value={weight}
+        //       onChange={onChange}
+        //       style={{ marginRight: '30px' }}
+        //       helperText={
+        //         !isWeightNumber ? (
+        //           <span>Please enter a number only</span>
+        //         ) : (
+        //           isWeightEmpty && <span>Please enter a weight</span>
+        //         )
+        //       }
+        //     />
+        //     <Switch
+        //       checked={checked}
+        //       onChange={handleSwitch}
+        //       inputProps={{ 'aria-label': 'controlled' }}
+        //     />
+        //     {unit === 'us' ? 'US standard' : 'metric'}
+        //     <div style={{ marginRight: '30px' }}>
+        //       {previewKcal()}kcal/{unit === 'us' ? 'lb' : 'g'}
+        //     </div>
+        //   </div>
+        //   <div>
+        //     <Button variant="contained" type="button" onClick={handleCheck}>
+        //       Check
+        //     </Button>
+        //     <Button variant="contained" type="button" onClick={handleCancel}>
+        //       Cancel
+        //     </Button>
+        //   </div>
+        // </div>
+        <TrackingListTr>
+          <TrackingListTdStart>{food.name}</TrackingListTdStart>
+          <TrackingListTd>{food.gram}g</TrackingListTd>
+          <TrackingListTd>{food.calorie}kcal</TrackingListTd>
+          {/* 트래킹 페이지에서만 버튼 O */}
+          {isTrackingPage === 'tracking' && (
+            <>
+              <TrackingListTdAction>
                 <Button variant="contained" type="button" onClick={handleModify}>
                   Modify
                 </Button>
+              </TrackingListTdAction>
+              <TrackingListTdEnd>
                 <Button variant="contained" type="button" onClick={handleDelete}>
                   Delete
                 </Button>
-              </div>
-            )}
-          </div>
-        </div>
+              </TrackingListTdEnd>
+            </>
+          )}
+        </TrackingListTr>
       )}
     </>
   );

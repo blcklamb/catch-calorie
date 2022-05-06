@@ -1,6 +1,6 @@
 import UserCard from '../../user/UserCard';
 
-import { BadgesContainer, UserContainer } from '../../styledCompo/styledCompo';
+import { BadgesContainer, UserContainer } from '../../styledCompo/LoginStyle';
 
 import UserGraph from './userGraph';
 import UserTrackingList from './UserTrackingList';
