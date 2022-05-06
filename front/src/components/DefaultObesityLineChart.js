@@ -68,11 +68,16 @@ export default function DefaultObesityLineChart() {
         fontSize="20"
         stroke="#000"
         label={{
-          value: 'Year group',
           position: 'bottom',
           offset: 3,
           fontSize: '15px',
           fontWeight: 'bold',
+          fontSize: '1rem',
+          fontFamily: 'Roboto',
+        }}
+        style={{
+          fontSize: '1rem',
+          fontFamily: 'Roboto',
         }}
       />
       <YAxis
@@ -83,14 +88,21 @@ export default function DefaultObesityLineChart() {
         label={{
           angle: -90,
           value: 'Mean Obesity',
-          position: 'Left',
-          offset: 10,
+          position: 'insideLeft',
+          dy: 30,
+          offset: 15,
           fontSize: '15px',
           fontWeight: 'bold',
+          fontSize: '1rem',
+          fontFamily: 'Roboto',
+        }}
+        style={{
+          fontSize: '1rem',
+          fontFamily: 'Roboto',
         }}
       />
       <Tooltip content={<CustomTooltip />} />
-      <Legend verticalAlign="bottom" align="right" height={1} />
+      <Legend verticalAlign="bottom" align="right" height={1} fontFamily="Roboto" />
       <Line type="monotone" dataKey="USA" stroke="#8884d8" activeDot={{ r: 8 }} />
       <Line type="monotone" dataKey="NonUSA" stroke="#82ca9d" />
     </LineChart>
@@ -100,16 +112,28 @@ export default function DefaultObesityLineChart() {
 function CustomTooltip({ payload, label, active }) {
   if (active) {
     return (
-      <div className="custom-tooltip">
+      <div
+        className="custom-tooltip"
+        style={{
+          fontWeight: 'normal',
+          color: ' #77b63e',
+
+          fontFamily: 'Roboto',
+        }}
+      >
         <h2>{`${label}'s  Mean Obesity `}</h2>
         <p
           className="label"
-          style={{ fontWeight: 'normal', color: '000', fontSize: '20px' }}
-        >{`USA  : ${payload[0].value}`}</p>
-        <p
-          className="label"
-          style={{ fontWeight: 'normal', color: '000', fontSize: '20px' }}
-        >{`NonUSA : ${payload[1].value}`}</p>
+          style={{
+            fontWeight: 'bold',
+            color: '#e85858',
+            fontSize: '1.2rem',
+            fontFamily: 'Roboto',
+          }}
+        >
+          {`USA  : ${payload[0].value}`} <br />
+          {`NonUSA : ${payload[1].value}`}
+        </p>
       </div>
     );
   }

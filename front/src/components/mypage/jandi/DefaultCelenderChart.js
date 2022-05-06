@@ -5,23 +5,38 @@ import { ResponsiveCalendar } from '@nivo/calendar';
 const DefaultCelenderChart = ({ data }) => (
   <div className="" style={{ height: 300 }}>
     <ResponsiveCalendar
+      theme={{
+        fontFamily: 'Roboto',
+        fontSize: 15,
+
+        tooltip: {
+          container: {
+            fontSize: 20,
+            fontFamily: 'Roboto',
+            background: '#ECF8D9',
+          },
+        },
+      }}
       data={data}
       from="2022-01-01"
       to="2022-12-31"
-      emptyColor="#eeeeee"
-      colors={[' #eeeeee', 'F39999', '#C80C0C', '#f47560']}
-      minValue={-1}
+      emptyColor="#F7FCEF"
+      colors={['#F79D9D', '#F46D6D', '#F03E3E', '#E91212']}
+      minValue={0}
       margin={{
-        top: 100,
+        top: 0,
         right: 30,
-        bottom: 60,
-        left: 30,
+        bottom: 0,
+        left: 40,
       }}
       yearSpacing={60}
-      monthBorderColor="#ffffff"
+      monthBorderWidth={2}
+      monthSpacing={15}
+      monthBorderColor=" #C0E883"
       monthLegendOffset={10}
       dayBorderWidth={2}
-      dayBorderColor="#ffffff"
+      dayBorderColor="#FBCCCC"
+      daySpacing={1}
       legends={[
         {
           anchor: 'bottom-right',

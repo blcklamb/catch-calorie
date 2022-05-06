@@ -48,8 +48,8 @@ function Mypage() {
       }
       getUserInfo(userId);
     } else {
-      // 네트워크가 아닌 마이페이 누르기를 통해 들어온 경우 전역에 있는 아이디값을 통해 자신의 마이페이지 정보를 가저옴
-      // console.log(user);
+      // 네트워크가 아닌 마이페이지 누르기를 통해 들어온 경우 전역에 있는 아이디값을 통해 자신의 마이페이지 정보를 가저옴
+      // console.log(user.icon);
       setCurrentUserInfo(user);
       // setIsEditable(true);
     }
@@ -66,7 +66,7 @@ function Mypage() {
         <Jandi />
       </JandiPage>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

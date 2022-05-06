@@ -9,7 +9,7 @@ import Footer from '../Footer';
 import video from '../../image/mainvideo_edit.mp4';
 
 import DefaultLineChart from '../DefaultLineChart.js';
-import { DefaultBarChart } from '../DefaultBarChart.js';
+import DefaultBarChart from '../DefaultBarChart.js';
 import DefaultObesityLineChart from '../DefaultObesityLineChart.js';
 
 import Walking from '../../lottie/walking.json';
@@ -32,6 +32,8 @@ import {
   SecondPage,
   SecondPageLeft,
   HeadCopy,
+  HeadCopy2,
+  HeadCopy3,
   BodyCopy,
   GraphCopy,
   SecondPageRight,
@@ -45,6 +47,8 @@ import {
   FourthPageRight,
   FifthPage,
   FifthPageCopy,
+  StartButton,
+  StartButton2,
 } from '../styledCompo/homeStyle';
 
 const COLORS = ['#5bc691', '#FFBB28', '#C66868', '#FF8042'];
@@ -88,8 +92,8 @@ function Home() {
         <FirstPageWrapper>
           <FirstPageLogo>Catch Calories</FirstPageLogo>
           {user ? (
-            <MainButton
-              onClick={() => navigate('/tracking/{user._id}', { replace: true })}
+            <StartButton
+              onClick={() => navigate(`/tracking/${user._id}`, { replace: true })}
               variant="contained"
               style={{
                 width: '20vw',
@@ -99,9 +103,9 @@ function Home() {
               }}
             >
               START
-            </MainButton>
+            </StartButton>
           ) : (
-            <MainButton
+            <StartButton
               onClick={() => navigate('/login', { replace: true })}
               variant="contained"
               style={{
@@ -111,8 +115,8 @@ function Home() {
                 fontSize: '2.5rem',
               }}
             >
-              START
-            </MainButton>
+              Start
+            </StartButton>
           )}
         </FirstPageWrapper>
       </FirstPage>
@@ -125,9 +129,15 @@ function Home() {
             <span style={{ color: '#77b63e' }}>Rise</span>
           </HeadCopy>
           <BodyCopy>
-            The rising obesity rate is <br />
-            not just a problem for the USA. <br />
-            It's becoming a <span style={{ color: '#77b63e' }}>global issue.</span>
+            <HeadCopy2>
+              <span style={{ color: '#77b63e' }}>'CDC says'&nbsp;</span>{' '}
+              <span style={{ color: ' #e85858' }}>more Americans on diets</span>&nbsp;compared to a
+              decade ago'&nbsp;
+            </HeadCopy2>
+            <HeadCopy3 style={{ fontSize: '0.8rem' }}>-NBC NEWS-</HeadCopy3>
+            <br />
+            The rising obesity rate is not just a problem for the USA. &nbsp;It's becoming a{' '}
+            <span style={{ color: '#e85858' }}>global issue.</span>
           </BodyCopy>
         </SecondPageLeft>
         <SecondPageRight>
@@ -138,8 +148,8 @@ function Home() {
         <ThirdPageLeft>
           <GraphCopy>
             {' '}
-            The more obese people are, <br />
-            the more people don't monitor their calories!
+            The more <span style={{ color: '#77b63e' }}>obese people</span> are, <br />
+            the more people <span style={{ color: '#e85858' }}>don't monitor their calories!</span>
           </GraphCopy>
           {/* <DefaultObesityLineChart colors={COLORS}></DefaultObesityLineChart> */}
           <DefaultBarChart
@@ -156,7 +166,7 @@ function Home() {
           <HeadCopy>
             Correlation between <br />
             <span style={{ color: '#77b63e' }}>calorie monitoring</span> and{' '}
-            <span style={{ color: '#77b63e' }}>obesity levels</span>
+            <span style={{ color: '#e85858' }}>obesity levels</span>
           </HeadCopy>{' '}
           <BodyCopy>
             Calorie monitoring can lower your obesity level.
@@ -182,14 +192,35 @@ function Home() {
           </BodyCopy>
         </FourthPageLeft>
         <FourthPageRight>
+          <GraphCopy>
+            {' '}
+            <span
+              style={{
+                color: '#e85858',
+              }}
+            >
+              Frequency of physical activity
+            </span>
+            &nbsp;of high obesity
+            <br />
+            which BMI index is <span style={{ color: '#77b63e' }}>30 to 32 is Zero!</span>
+          </GraphCopy>
           <DefaultLineChart />
         </FourthPageRight>
       </FourthPage>
       <FifthPage>
         <FifthPageCopy>
-          Track your calories with Catch Calories
+          <span>
+            Monitor calories with{' '}
+            <span style={{ color: '#77b63e' }}>
+              Catch Calories <br />
+            </span>
+          </span>
+          <span style={{ color: '#f03e3e', fontSize: '4rem' }}>
+            for your <span style={{ color: '#77b63e' }}>Eating & Workout routine!</span>
+          </span>
           <Lottie options={defaultOptions} height={470} width={470} />
-          <MainButton
+          <StartButton
             onClick={() => navigate('/login', { replace: true })}
             variant="contained"
             style={{
@@ -200,7 +231,7 @@ function Home() {
             }}
           >
             START
-          </MainButton>
+          </StartButton>
         </FifthPageCopy>
       </FifthPage>
     </>
