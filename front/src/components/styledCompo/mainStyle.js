@@ -121,7 +121,7 @@ export const TrackingPlusButtonContainer = styled.div`
 // 그래프 ----------------------------------------------------------------------------------------
 export const CalorieGraphSection = styled.div`
   text-align: center;
-  height: 480px;
+  /* height: 480px; */
   position: relative;
   margin-top: 50px;
 `;
@@ -185,9 +185,10 @@ export const TrackingListTr = styled.tr`
 
   /* background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
     rgba(255, 255, 255, 0.3); */
-  box-shadow: 0px 5.334px 40.005px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0px 5.334px 40.005px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(40.005px); */
+  box-shadow: 0px 1.334px 20.005px rgba(0, 0, 0, 0.20);
   backdrop-filter: blur(40.005px);
-  /* Note: backdrop-filter has minimal browser support */
 
   border-radius: 26.67px;
 `;
