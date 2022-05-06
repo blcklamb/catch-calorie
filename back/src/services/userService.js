@@ -91,6 +91,7 @@ class userService {
         // const heatmap = Heatmap.delete({ user_id: id })
         // const user = User.delete({ id })
         // return User.delete({ id });
+        
         // 현재 tracking을 삭제하려하면 user_id로 접근하는 것에서 오류 발생
         // index.js에서 mongodb watch때문에 발생하는 것으로 예상
         // 일단은 tracking과 은 삭제하지 말고 다른 것만 삭제하는 것으로 둡시다!
