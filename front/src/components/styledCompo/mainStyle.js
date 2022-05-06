@@ -106,6 +106,13 @@ export const TrackingSwitchContainer = styled.div`
   float: right;
   flex-grow: 1;
   text-align: right;
+  margin-right: 10px;
+`;
+
+export const TrackingText = styled.span`
+  font-weight: 500;
+  font-size: revert;
+  color: #9d9d9d;
 `;
 
 export const TrackingButtonContainer = styled.div`

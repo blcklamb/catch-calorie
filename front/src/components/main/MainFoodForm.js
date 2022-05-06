@@ -12,6 +12,7 @@ import {
   TrackingAutoContainer,
   TrackingTextFieldContainer,
   TrackingSwitchContainer,
+  TrackingText, 
 } from '../styledCompo/mainStyle';
 
 import { ValidationTextField } from '../styledCompo/muiCustom';
@@ -147,7 +148,7 @@ function MainFoodForm({ idx }) {
         </TrackingTextFieldContainer>
         <TrackingSwitchContainer>
           <div>
-            <span>{unit[idx] === 'us' ? 'US standard' : 'metric'}</span>
+            <TrackingText>{unit[idx] === 'us' ? 'US standard' : 'metric'}</TrackingText>
             <Switch
               checked={checked}
               onChange={handleSwitch}
@@ -168,9 +169,9 @@ function MainFoodForm({ idx }) {
           <br /> */}
           {/* {foodSelected[idx]?.name} <br />
           {weight[idx]} <br /> */}
-          <span>
+          <TrackingText>
             {isNaN(weight[idx]) ? 0 : kcalPerUnit[idx]} kcal/{unit[idx] === 'us' ? 'lb' : 'g'}
-          </span>
+          </TrackingText>
         </TrackingSwitchContainer>
       </TrackingForm>
     </>
