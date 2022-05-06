@@ -12,7 +12,7 @@ const COLORS = ['#5bc691', '#FFBB28', '#C66868', '#FF8042'];
 export const BodyContainer = styled.div`
   width: 100%;
 
-  background: pink;
+  /* background: pink; */
 
   align-content: center;
   justify-content: center;
@@ -25,7 +25,7 @@ export const MainHelloSection = styled.div`
   width: 100%;
   padding: 20px 20px;
 
-  background: yellow;
+  /* background: yellow; */
   display: flex;
   align-items: center;
   height: 150px;
@@ -97,8 +97,18 @@ export const TrackingSwitchContainer = styled.div`
 
 export const TrackingButtonContainer = styled.div`
   width: 100%;
-  margin-top: 40px;
   text-align: center;
+  display: inline-flex;
+  /* margin-top: 190px; */
+
+`;
+
+export const TrackingLeftButtonContainer = styled.div`
+
+`;
+export const TrackingRightButtonContainer = styled.div`
+flex-grow: 1;
+    text-align: right;
 `;
 
 export const TrackingPlusButtonContainer = styled.div`
@@ -120,7 +130,7 @@ export const GraphOverContainer = styled.div``;
 // Tracking List ----------------------------------------------------
 export const TrackingListTable = styled.table`
   width: 100%;
-  border: 1px solid #444444;
+  /* border: 1px solid #444444; */
   border-collapse: collapse;
 
   // 행 여백

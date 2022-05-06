@@ -7,7 +7,7 @@ import {
   TrackingForms,
   TrackingButtonContainer,
   TrackingLeftButtonContainer,
-  TrackingRightButtonContainer, 
+  TrackingRightButtonContainer,
   TrackingPlusButtonContainer,
 } from '../styledCompo/mainStyle';
 
@@ -118,24 +118,24 @@ function MainFoodTab({ clearForm }) {
         {/* {console.log(weight)}
       {console.log(unit)}
       {console.log(kcalPerUnit)} */}
-        <MainButton variant="contained" onClick={handleResetForm}>
-          reset
-        </MainButton>
         <TrackingForms>
           {foodForms && foodForms.map((item) => <MainFoodForm key={item} idx={item} />)}
         </TrackingForms>
 
         <TrackingButtonContainer>
-          <TrackingPlusButtonContainer>
+          <TrackingLeftButtonContainer>
+            <MainButton variant="contained" onClick={handleResetForm}>
+              reset
+            </MainButton>
+          </TrackingLeftButtonContainer>
+          <TrackingRightButtonContainer>
             <MainButton variant="contained" onClick={handleAddFoodForm}>
               +
             </MainButton>
-          </TrackingPlusButtonContainer>
-          <div>
             <MainButton variant="contained" onClick={handleTracking}>
               tracking
             </MainButton>
-          </div>
+          </TrackingRightButtonContainer>
         </TrackingButtonContainer>
       </div>
       {/* {scroll()} */}
