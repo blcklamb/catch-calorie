@@ -16,7 +16,7 @@ export const BodyContainer = styled.div`
 
   align-content: center;
   justify-content: center;
-  margin-top: 180px;
+  margin-top: 100px;
   margin-bottom: 180px;
   display: grid;
 `;
@@ -35,7 +35,7 @@ export const MainHelloSection = styled.div`
 
 export const MainSection1 = styled.div`
   display: inline-flex;
-  margin: 80px 0px;
+  margin-bottom: 80px;
 `;
 
 export const Section = styled.div`
@@ -59,11 +59,11 @@ export const Section = styled.div`
 // 탭 ----------------------------------------------------------------------------------------
 export const TrackingForms = styled.div`
   // 폼만 스크롤 범위
-  /* height: 200px;
-  overflow: auto; */
+  height: 250px;
+  overflow: auto;
 
   // 스크롤 전범위
-  height: auto;
+  /* height: auto; */
 `;
 
 export const TrackingForm = styled.div`
@@ -100,15 +100,18 @@ export const TrackingButtonContainer = styled.div`
   text-align: center;
   display: inline-flex;
   /* margin-top: 190px; */
+  margin-top: 50px;
 
+  // 버튼 하단으로 조정
+  /* position: relative;
+  left: 0;
+  bottom: 0; */
 `;
 
-export const TrackingLeftButtonContainer = styled.div`
-
-`;
+export const TrackingLeftButtonContainer = styled.div``;
 export const TrackingRightButtonContainer = styled.div`
-flex-grow: 1;
-    text-align: right;
+  flex-grow: 1;
+  text-align: right;
 `;
 
 export const TrackingPlusButtonContainer = styled.div`
