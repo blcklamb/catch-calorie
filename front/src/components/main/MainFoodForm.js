@@ -52,9 +52,9 @@ function MainFoodForm({ idx }) {
 
   useEffect(() => {
     if (checked === true) {
-      setUnit([...unit.slice(0, idx), 'us', ...unit.slice(idx + 1)]);
-    } else {
       setUnit([...unit.slice(0, idx), 'non us', ...unit.slice(idx + 1)]);
+    } else {
+      setUnit([...unit.slice(0, idx), 'us', ...unit.slice(idx + 1)]);
     }
   }, [checked]);
 
