@@ -6,6 +6,7 @@ import { Bar } from 'react-chartjs-2';
 
 import {
   Section,
+  SectionTitle,
   CalorieGraphSection,
   GraphContainer,
   GraphOverContainer,
@@ -51,7 +52,7 @@ function MainGraph({}) {
     } else {
       setGetUser(params.user_id);
     }
-  }, [params, user])
+  }, [params, user]);
 
   useEffect(() => {
     Api.get(`tracking/${getUser}`).then((res) => {
@@ -237,7 +238,7 @@ function MainGraph({}) {
 
   return (
     <Section>
-      <h1>Calorie Graph</h1>
+      <SectionTitle>Calorie Graph</SectionTitle>
       <CalorieGraphSection>
         <GraphContainer>
           <Bar data={data} options={options} height={300} />

@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 import MainFoodTab from './MainFoodTab';
 import MainExerciseTab from './MainExerciseTab';
 
-import { Section } from '../styledCompo/mainStyle';
+import { Section, SectionTitle } from '../styledCompo/mainStyle';
 import { ColorButton } from '../styledCompo/muiCustom';
 
 const StyledTabs = styled((props) => (
@@ -151,7 +151,7 @@ const MainTabs = ({}) => {
     !isRerender && (
       <MainTrackingSection>
         <Section>
-          <h1>Tracking</h1>
+          <SectionTitle>Tracking</SectionTitle>
           <MainTabsSection>
             <div>
               <StyledTabs value={value} onChange={handleChange} aria-label="basic tabs example">

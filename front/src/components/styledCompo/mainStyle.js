@@ -1,13 +1,4 @@
-import React, { useContext, useEffect } from 'react';
-// import { styled } from '@mui/material/styles';
 import styled from 'styled-components';
-
-import Container from '@mui/material/Container';
-
-// import MainButton from '../main/style/MainButton.js';
-import Button from '@mui/material/Button';
-
-const COLORS = ['#5bc691', '#FFBB28', '#C66868', '#FF8042'];
 
 export const BodyContainer = styled.div`
   width: 100%;
@@ -21,6 +12,13 @@ export const BodyContainer = styled.div`
   display: grid;
 `;
 
+export const SectionTitle = styled.h1`
+  font-family: Jost;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 28px;
+`;
+
 export const MainHelloSection = styled.div`
   width: 100%;
   padding: 20px 20px;
@@ -31,6 +29,21 @@ export const MainHelloSection = styled.div`
   height: 150px;
   align-content: center;
   position: relative;
+`;
+
+export const MainHello = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  position: relative;
+`;
+
+export const MainHelloTitle = styled.h1`
+  font-family: Jost;
+  font-style: italic;
+  font-weight: 750;
+  font-size: 40px;
 `;
 
 export const MainSection1 = styled.div`
@@ -112,10 +125,12 @@ export const TrackingLeftButtonContainer = styled.div``;
 export const TrackingRightButtonContainer = styled.div`
   flex-grow: 1;
   text-align: right;
+  /* display: inline-flex; */
 `;
 
 export const TrackingPlusButtonContainer = styled.div`
-  margin-bottom: 60px;
+  /* margin-bottom: 60px; */
+  margin-right: 10px;
 `;
 
 // 그래프 ----------------------------------------------------------------------------------------
@@ -187,7 +202,7 @@ export const TrackingListTr = styled.tr`
     rgba(255, 255, 255, 0.3); */
   /* box-shadow: 0px 5.334px 40.005px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(40.005px); */
-  box-shadow: 0px 1.334px 20.005px rgba(0, 0, 0, 0.20);
+  box-shadow: 0px 1.334px 20.005px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(40.005px);
 
   border-radius: 26.67px;

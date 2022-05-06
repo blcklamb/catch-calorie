@@ -5,7 +5,7 @@ import TrackingFoodList from './TrackingFoodList';
 import TrackingExerciseList from './TrackingExerciseList';
 
 import {
-  Section,
+  Section, SectionTitle, 
   TrackingListTable,
   TrackingListThName,
   TrackingListThContent,
@@ -39,7 +39,7 @@ function TrackingLists() {
   return (
     <>
       <Section>
-        <h1>Tracking List</h1>
+        <SectionTitle>Tracking List</SectionTitle>
         <div style={isTrackingPage !== 'tracking' ? { height: '480px', overflow: 'auto' } : {}}>
           <div>
             <TrackingListTable>
