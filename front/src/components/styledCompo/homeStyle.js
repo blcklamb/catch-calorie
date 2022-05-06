@@ -92,6 +92,7 @@ export const BodyCopy = styled.div`
   /* font-style: italic; */
   /* background-color: yellow; */
   line-height: 30px;
+  font-size: 1.5rem;
 `;
 
 export const GraphCopy = styled.div`
@@ -103,6 +104,7 @@ export const GraphCopy = styled.div`
   justify-content: center;
   font-size: 1.7rem;
   color: #373737;
+  position: relative;
 `;
 export const SecondPage = styled.section`
   height: 100vh;
@@ -111,19 +113,21 @@ export const SecondPage = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  position: relative;
+
+  padding: 20px;
 `;
 
 export const SecondPageLeft = styled.div`
   /* background-color: white; */
   /* border: 1px solid #f0f1f3;
   border-radius: 8px; */
+  position: relative;
 
   width: 450px;
   height: 407px;
   box-sizing: border-box;
   padding: 28px 35px;
-
-  font-size: 1.5rem;
 
   display: flex;
   flex-direction: column;
@@ -132,6 +136,7 @@ export const SecondPageLeft = styled.div`
 `;
 
 export const SecondPageRight = styled.div`
+  position: relative;
   z-index: 400;
   width: 750px;
   height: 407px;
@@ -158,7 +163,7 @@ export const ThirdPage = styled.section`
 export const ThirdPageLeft = styled.div`
   z-index: 400;
   width: 750px;
-  height: auto;
+  height: 500px;
   box-sizing: border-box;
   padding: 28px 24px 0;
 
@@ -181,8 +186,6 @@ export const ThirdPageRight = styled.div`
   height: 407px;
   box-sizing: border-box;
   padding: 28px 35px;
-
-  font-size: 1.5rem;
 
   display: flex;
   flex-direction: column;
@@ -210,7 +213,6 @@ export const FourthPageLeft = styled.div`
   box-sizing: border-box;
   padding: 28px 35px;
 
-  font-size: 1.5rem;
   flex-direction: column;
   display: flex;
 

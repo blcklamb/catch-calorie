@@ -63,6 +63,7 @@ const Tooltip = ({
       status: userInfo?.status,
     }).then((res) => {
       setUserInfo(res.data);
+      alert('Your Badge has been successfully changed.');
     });
   };
 
@@ -75,7 +76,7 @@ const Tooltip = ({
           {isLock && (
             <img
               src={Lock}
-              style={{ width: 100, position: 'absolute', opacity: '0.6', borderRadius: '30px' }}
+              style={{ width: 100, position: 'absolute', opacity: '0.5', borderRadius: '18px' }}
               alt="자물쇠"
             ></img>
           )}

@@ -28,7 +28,7 @@ const Main = () => {
 
   const [badges, setBadges] = useRecoilState(BadgesState);
 
-  console.log('뱃지', badges);
+  // console.log('뱃지', badges);
   const MainHello = styled.div`
     background: green;
     display: flex;
@@ -61,7 +61,7 @@ const Main = () => {
           <TrackingLists />
         </div>
       </BodyContainer>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

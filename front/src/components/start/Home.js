@@ -141,7 +141,7 @@ function Home() {
             The more obese people are, <br />
             the more people don't monitor their calories!
           </GraphCopy>
-
+          {/* <DefaultObesityLineChart colors={COLORS}></DefaultObesityLineChart> */}
           <DefaultBarChart
             data={[
               { name: 'Underweight', SCC: '250' },
@@ -203,8 +203,6 @@ function Home() {
           </MainButton>
         </FifthPageCopy>
       </FifthPage>
-
-      <Footer />
     </>
   );
 }
