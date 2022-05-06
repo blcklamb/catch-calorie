@@ -26,8 +26,11 @@ import {
   SignBtn,
   SignInBtn,
   Btn,
+  CatchBack,
+  CaloriesBack,
 } from '../styledCompo/styledCompo';
 import githubLogin from './GithubLogin';
+import { fontSize } from '@mui/system';
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -74,6 +77,7 @@ function LoginForm() {
       navigate(`/tracking/${user.id}`, { replace: true });
     } catch (err) {
       console.log('로그인에 실패하였습니다.\n', err);
+      alert('Login failed');
       setCheckLogin(false);
     }
   };
@@ -90,6 +94,8 @@ function LoginForm() {
 
   return (
     <div>
+      <CatchBack>Catch</CatchBack>
+      <CaloriesBack>Calories</CaloriesBack>
       <Header></Header>
       <Container
         style={{
@@ -104,8 +110,7 @@ function LoginForm() {
             action="/"
             onSubmit={handleSubmit}
             style={{
-              marginTop: 100,
-              marginBottom: 100,
+              marginTop: 120,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -116,15 +121,14 @@ function LoginForm() {
 
             <Box
               sx={{
-                width: '328px',
+                width: '438px',
               }}
               noValidate
               autoComplete="off"
             >
               <ValidationTextField
-                style={{ width: 328, marginBottom: 10 }}
+                style={{ width: 438, marginBottom: 10 }}
                 autoFocus
-                required
                 // {!checkLogin && error}
                 error={!checkLogin}
                 id="outlined-required"
@@ -143,8 +147,7 @@ function LoginForm() {
               />
               <br></br>
               <ValidationTextField
-                style={{ width: 328, marginBottom: 10 }}
-                required
+                style={{ width: 438 }}
                 error={!checkLogin}
                 id="outlined-password-input"
                 label="Password"
@@ -165,10 +168,18 @@ function LoginForm() {
                 Forget Password?
               </Button> */}
               <SignPWContainer>
-                <ForgetPw color="success" onClick={() => navigate('/password/init')}>
+                <ForgetPw
+                  sx={{ fontSize: 18 }}
+                  color="success"
+                  onClick={() => navigate('/password/init')}
+                >
                   Forget Password?
                 </ForgetPw>
-                <SignBtn color="success" onClick={() => navigate('/register')}>
+                <SignBtn
+                  sx={{ fontSize: 18 }}
+                  color="success"
+                  onClick={() => navigate('/register')}
+                >
                   Sign-up
                 </SignBtn>
               </SignPWContainer>
@@ -182,7 +193,7 @@ function LoginForm() {
                 </ColorButton>
 
                 <ColorButtonB variant="outlined" onClick={() => navigate('/')}>
-                  Start Page
+                  Back
                 </ColorButtonB>
                 {/* <button
                   style={{
@@ -201,7 +212,15 @@ function LoginForm() {
                 <Btn>djjd</Btn> */}
               </Stack>
             </Box>
+          </form>
+
+          <Box
+            sx={{
+              width: '438px',
+            }}
+          >
             <hr style={{ width: '100%', margin: '18px 0 24px 0' }} />
+
             <button
               style={{
                 width: '100%', //
@@ -215,7 +234,7 @@ function LoginForm() {
             >
               😺&nbsp;&nbsp;GitHub로 로그인하기
             </button>
-          </form>
+          </Box>
         </LoginGlass>
       </Container>
       <Footer></Footer>

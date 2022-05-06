@@ -42,15 +42,21 @@ export const ValidationTextField = styled(TextField)({
 
 export const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText('#94D82D'),
-
-  borderRadius: '17px',
-  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+  textTransform: 'none',
+  width: '50%',
+  height: '61px',
+  fontFamily: ['Jost'],
+  fontStyle: 'italic',
+  fontWeight: 800,
+  fontSize: '32px',
+  borderRadius: '22px',
+  boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.25)',
   // backgroundColor: '#94D82D',
   background: 'linear-gradient(180deg, #A8E054 100%, #99DA36 100%)',
-  borderImage: 'linear-gradient(to right, red 0%, orange 100%)',
-  borderImageSlice: 1,
   color: '#F03E3E',
-  height: '46px',
+
+  //borderImage: 'linear-gradient(to right, red 0%, orange 100%)',
+
   // border: '1px solid black',
 
   '&:hover': {
@@ -64,7 +70,16 @@ export const ColorButton = styled(Button)(({ theme }) => ({
 
 export const ColorButtonB = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText('#94D82D'),
+  textTransform: 'none',
+  width: '50%',
+  height: '61px',
+  fontFamily: ['Jost'],
+  fontStyle: 'italic',
+  fontWeight: 800,
+  fontSize: '32px',
   borderColor: '#94D82D',
+  borderRadius: '22px',
+
   color: '#F03E3E',
   '&:hover': {
     // boxShadow: '0px 2px 3px #699C1D',
