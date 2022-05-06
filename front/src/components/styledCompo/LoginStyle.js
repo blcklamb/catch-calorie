@@ -96,12 +96,13 @@ export const CardText = styled.div`
   z-index: 30;
 `;
 
+//헬퍼텍스트
 export const RedSpan = styled.span`
   color: #f03e3e;
 `;
 
 // 로그인 페이지의 Login text
-export const LoginText = styled.h1`
+export const TitleText = styled.h1`
   font-family: 'Jost', sans-serif;
   font-style: italic;
   font-weight: 800;
@@ -137,19 +138,19 @@ export const SignPWContainer = styled.div`
 //ForgetPassword btn
 export const ForgetPw = styled(Button)`
   font-style: italic;
-  width: 200px;
+  width: 180px;
   margin: 0;
 `;
 
 // Sign-up btn
 export const SignBtn = styled(ForgetPw)`
-  width: 100px;
+  width: 90px;
   &::after {
     content: '|';
     font-style: normal;
     color: #f03e3e;
     position: relative;
-    left: 11px;
+    left: 10px;
   }
 `;
 
@@ -203,3 +204,20 @@ export const CaloriesBack = styled.div`
 //     color: white;
 //   }
 // `;
+
+// 로그인 구분선
+export const Separator = styled.div`
+  border-top: 1px solid #203009;
+  width: 98%;
+  margin: 18px 0 24px 0;
+`;
+
+// 깃헙 로그인 버튼
+export const GitHubBtn = styled.button`
+  width: 100%;
+  height: 40px;
+  color: whitesmoke;
+  background-color: #2b3137;
+  border: none;
+  border-radius: 10px;
+`;

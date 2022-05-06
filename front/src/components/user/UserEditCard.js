@@ -10,7 +10,7 @@ import {
   UserBodyInfo,
   UserBtnInfo,
   UserBadgeImgInfo,
-} from '../styledCompo/styledCompo';
+} from '../styledCompo/LoginStyle';
 
 import { ColorButton, ValidationTextField, IOSSwitch } from '../styledCompo/muiCustom';
 
