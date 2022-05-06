@@ -1,32 +1,33 @@
 badge_name,award_name,level,src,description
-basic I,,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_1.png,
-basic II,,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_2.png,
-basic II,,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_3.png,
-basic IV,,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_4.png,
-beginner,athlete,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/beginner.png,Do exercise over 5 times
-newcomer,athlete,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/newcomer.png,Do exercise over 10 times
-rookie_1,athlete,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/rokie_1.png,Do exercise over 15 times
-rookie_2,athlete,4,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/rokie_2.png,Do exercise over 20 times
-expert,athlete,5,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/expert.png,Do exercise over 25 times
-master,athlete,6,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/master.png,Do exercise over 30 times
-warm_up,runner,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/warm_up.png,Run over 5 times
-streaker,runner,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/streaker.png,Run over 10 times
-chaser,runner,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/chaser.png,Run over 15 times
-sea_​​otter,swimmer,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/sea%20otter.png,Swim over 5 times
-dolphin,swimmer,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/dolphin.png,Swim over 10 times
-elephant_seal,swimmer,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/elephant%20seal.png,Swim over 15 times
-yo_ho,gym_rat,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/yo_ho.png,Do weight training over 5 times
-heave_ho,gym_rat,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/heave_ho.png,Do weight training over 5 times
-alley_oop,gym_rat,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/alley_oop.png,Do weight training over 5 times
-triathlete,triathlete,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/triathlete.png,"Register one or more cycling, running, and swimming"
-proteiner I,proteiner,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/proteiner%20I.png,Eat protein shake over 5 times
-proteiner II,proteiner,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/proteiner%20II.png,Eat protein shake over 10 times
-proteiner III,proteiner,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/proteiner%20III.png,Eat protein shake over 15 times
-rabbit,vegetables_lover,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/rabbit.png,Eat vegetables 5 times
-deer,vegetables_lover,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/deer.png,Eat vegetables 10 times
-panda,vegetables_lover,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/panda.png,Eat vegetables 15 times
-cheating_day,gourmand,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/cheating_day.png,"Eat at least 20,000 calories per day"
-calorie_bomb,gourmand,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/calorie_bomb.png,"Eat at least 40,000 calories per day"
-big_eater,gourmand,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/big_eater.png,"Eat at least 60,000 calories per day"
-insider_1,visitor,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/insider_1.png,Visit someone else's My Page 5 times
-insider_2,visitor,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/insider_2.png,Visit someone else's My Page 10 times
+Basic I,,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_1.png,
+Basic II,,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_2.png,
+Basic III,,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_3.png,
+Basic IV,,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_4.png,
+Beginner,athlete,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/beginner.png,Do exercise over 5 times
+Newcomer,athlete,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/newcomer.png,Do exercise over 10 times
+Rookie I,athlete,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/rokie_1.png,Do exercise over 15 times
+Rookie II,athlete,4,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/rokie_2.png,Do exercise over 20 times
+Expert,athlete,5,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/expert.png,Do exercise over 25 times
+Master,athlete,6,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/master.png,Do exercise over 30 times
+Warm Up,runner,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/warm_up.png,Run over 5 times
+Streaker,runner,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/streaker.png,Run over 10 times
+Chaser,runner,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/chaser.png,Run over 15 times
+Sea Otter,swimmer,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/sea%20otter.png,Swim over 5 times
+Dolphin,swimmer,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/dolphin.png,Swim over 10 times
+Elephant Seal,swimmer,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/elephant%20seal.png,Swim over 15 times
+Yo Ho,gym_rat,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/yo_ho.png,Do weight training over 5 times
+Heave Ho,gym_rat,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/heave_ho.png,Do weight training over 5 times
+Alley Oop,gym_rat,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/alley_oop.png,Do weight training over 5 times
+Triathlete,triathlete,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/triathlete.png,"Register one or more cycling, running, and swimming"
+Proteiner I,proteiner,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/proteiner%20I.png,Eat protein shake over 5 times
+Proteiner II,proteiner,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/proteiner%20II.png,Eat protein shake over 10 times
+Proteiner III,proteiner,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/proteiner%20III.png,Eat protein shake over 15 times
+Rabbit,vegetables_lover,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/rabbit.png,Eat vegetables 5 times
+Deer,vegetables_lover,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/deer.png,Eat vegetables 10 times
+Panda,vegetables_lover,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/panda.png,Eat vegetables 15 times
+Cheating Day,gourmand,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/cheating_day.png,"Eat at least 20,000 calories per day"
+Calorie Bomb,gourmand,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/calorie_bomb.png,"Eat at least 40,000 calories per day"
+Big Eater,gourmand,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/big_eater.png,"Eat at least 60,000 calories per day"
+Insider I,visitor,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/insider_1.png,Visit someone else's My Page 5 times
+Insider II,visitor,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/insider_2.png,Visit someone else's My Page 10 times
+Catch Calorie 10,steady,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/catch_calories_10.png,Visit over 10 times in Catch Calorie! Thx!
