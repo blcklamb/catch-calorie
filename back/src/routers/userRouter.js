@@ -102,7 +102,7 @@ userRouter.put("/users/:id", login_required, async (req, res, next) => {
         const { id } = req.params;
 
         const { name, height, weight, unit, open, icon, status } = req.body;
-        if (name || height || weight || icon || status || unit || open === null) {
+        if (name === null || height === null || weight === null || icon === null || status === null || unit === null || open === null) {
             throw new Error("입력되지 않은 정보가 있습니다.");
         }
 
