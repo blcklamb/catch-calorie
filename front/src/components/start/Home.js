@@ -17,7 +17,7 @@ import Walking from '../../lottie/walking.json';
 import { useNavigate } from 'react-router-dom';
 // import { useParams } from 'react-router-dom';
 
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userInfoState } from '../../atoms';
 
 import {
@@ -52,7 +52,7 @@ const COLORS = ['#5bc691', '#FFBB28', '#C66868', '#FF8042'];
 function Home() {
   const navigate = useNavigate();
 
-  const user = useRecoilValue(userInfoState);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
   // const userId = user._id;
   // console.log('id', userId);
@@ -87,9 +87,9 @@ function Home() {
         </VideoContainer>
         <FirstPageWrapper>
           <FirstPageLogo>Catch Calories</FirstPageLogo>
-          {user ? (
+          {userInfo ? (
             <MainButton
-              onClick={() => navigate('/tracking/{user._id}', { replace: true })}
+              onClick={() => navigate(`/tracking/${userInfo._id}`, { replace: false })}
               variant="contained"
               style={{
                 width: '20vw',
