@@ -88,6 +88,16 @@ function MainExerciseTab({ clearForm }) {
     });
   };
 
+  const handleResetForm = () => {
+    setExerciseForms([0]);
+    setExerciseSelected([0]);
+    setHour(['']);
+    setMinute(['']);
+
+    setTrackingUpdate(!trackingUpdate);
+    // clearForm();
+  };
+
   return (
     <div>
       {/* {console.log(exerciseForms)}
@@ -95,6 +105,9 @@ function MainExerciseTab({ clearForm }) {
       {console.log(hour)}
       {console.log(minute)}
       {console.log(time)} */}
+      <MainButton variant="contained" onClick={handleResetForm}>
+        reset
+      </MainButton>
       {exerciseForms && exerciseForms.map((item) => <MainExerciseForm key={item} idx={item} />)}
       <MainButton variant="contained" onClick={handleAddExerciseForm}>
         +
