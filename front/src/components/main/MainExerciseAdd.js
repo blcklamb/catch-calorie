@@ -90,7 +90,9 @@ function MainExerciseAdd({}) {
                 variant="outlined"
                 inputValue={name}
                 onBlur={(e) => setName(e.target.value)}
-                helperText={isNameEmpty && <span>Please enter a name</span>}
+                helperText={isNameEmpty && <RedSpan>Please enter a name</RedSpan>}
+                style={{ width: '100%' }}
+
               />
             </AddFormSection>
             <AddFormSection>
@@ -111,11 +113,13 @@ function MainExerciseAdd({}) {
                 onBlur={(e) => setKcal(e.target.value)}
                 helperText={
                   isKcalEmpty ? (
-                    <span>Please enter a kcal per unit weight</span>
+                    <RedSpan>Please enter a kcal per unit weight</RedSpan>
                   ) : (
-                    !isKcalNumber && <span>Please enter a number only</span>
+                    !isKcalNumber && <RedSpan>Please enter a number only</RedSpan>
                   )
                 }
+                style={{ width: '70%' }}
+
               />{' '}
             </AddFormSection>{' '}
           </AddFormsContainer>
