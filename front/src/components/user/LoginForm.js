@@ -217,8 +217,8 @@ function LoginForm() {
             </button>
           </form>
         </LoginGlass>
+        {/* <Footer></Footer> */}
       </Container>
-      <Footer></Footer>
     </div>
   );
 }

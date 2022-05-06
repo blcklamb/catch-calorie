@@ -26,8 +26,11 @@ import HeaderHamburger from './HeaderHamburger';
 // `;
 
 const Logo = styled.h3`
+  font-family: 'Jost', sans-serif;
+  font-weight: bold;
+  font-style: italic;
   width: 50vw;
-  font-size: 2.9rem;
+  font-size: 3rem;
   color: #f03e3e;
   font-style: bold;
   margin: 25px 30px 3px;

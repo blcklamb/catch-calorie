@@ -47,7 +47,7 @@ const Tooltip = ({
   // useEffect(() => {
   //   Api.get('awards', user._id).then((res) => setAward(res.data));
   // }, []);
-  const [badgeURL, setBadgeURL] = useState('');
+
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
   //뱃지 변경 버튼 누르면 전역 유저 정보 state에 뱃지 아이콘 이름 업데이트
@@ -63,9 +63,9 @@ const Tooltip = ({
       status: userInfo?.status,
     }).then((res) => {
       setUserInfo(res.data);
+      alert('Your Badge has been successfully changed.');
     });
   };
-  console.log(userInfo);
 
   return (
     <Popup
@@ -76,7 +76,7 @@ const Tooltip = ({
           {isLock && (
             <img
               src={Lock}
-              style={{ width: 100, position: 'absolute', opacity: '0.6', borderRadius: '30px' }}
+              style={{ width: 100, position: 'absolute', opacity: '0.5', borderRadius: '18px' }}
               alt="자물쇠"
             ></img>
           )}
