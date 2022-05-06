@@ -29,6 +29,7 @@ import {
 //단위변환
 import configureMeasurements, { mass, length } from 'convert-units';
 import { Stack } from '@mui/material';
+import { BodyInfo } from '../styledCompo/UserCardStyle';
 const convert = configureMeasurements({ mass, length });
 
 const UserEditCard = ({ setCardState }) => {
@@ -163,7 +164,7 @@ const UserEditCard = ({ setCardState }) => {
     <>
       <UserCardFrame>
         <UserBodyInfo>
-          <Typography variant="h4">Edit User Info</Typography>
+          <BodyInfo variant="h5">Edit User Info</BodyInfo>
         </UserBodyInfo>
         <UserBodyInfo></UserBodyInfo>
 
@@ -297,13 +298,13 @@ const UserEditCard = ({ setCardState }) => {
 
         <UserBtnInfo>
           <ColorButton
-            sx={{ width: 120, height: 60 }}
+            sx={{ width: 130, height: 50, fontSize: 18, marginRight: 2 }}
             disabled={!isFormValid}
             onClick={handleSubmit}
           >
             Confirm
           </ColorButton>
-          <ColorButton sx={{ width: 120, height: 60 }} onClick={() => setCardState()}>
+          <ColorButton sx={{ width: 130, height: 50, fontSize: 18 }} onClick={() => setCardState()}>
             Cancel
           </ColorButton>
         </UserBtnInfo>
