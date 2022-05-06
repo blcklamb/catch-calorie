@@ -28,6 +28,6 @@ Panda,vegetables_lover,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/i
 Cheating Day,gourmand,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/cheating_day.png,"Eat at least 20,000 calories per day"
 Calorie Bomb,gourmand,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/calorie_bomb.png,"Eat at least 40,000 calories per day"
 Big Eater,gourmand,3,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/big_eater.png,"Eat at least 60,000 calories per day"
-Insider I,visitor,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/insider_1.png,Visit someone else's My Page 5 times
-Insider II,visitor,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/insider_2.png,Visit someone else's My Page 10 times
-Catch Calorie 10,steady,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/catch_calories_10.png,Visit over 10 times in Catch Calorie! Thx!
+Visitor I,visitor,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/insider_1.png,Visit over 5 days in Catch Calorie
+Visitor II,visitor,2,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/insider_2.png,Visit over 10 days in Catch Calorie
+Catch Calorie 5,steady,1,https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/catch_calories_10.png,Visit over 5 days in Catch Calorie continuously! Thx!
