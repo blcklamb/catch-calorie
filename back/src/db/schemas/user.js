@@ -36,7 +36,7 @@ const UserSchema = new Schema({
         type: String,
         enum: ["us", "non_us"],
         required: true,
-        default: "non_us",
+        default: "us",
     },
     open: {
         type: Boolean,
