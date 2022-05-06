@@ -10,6 +10,7 @@ export const AddFormsContainer = styled.div`
 export const AddTitle = styled(TitleText)`
   padding-top: 80px;
   margin-bottom: 70px;
+  text-align: center;
 `;
 
 export const AddFormSection = styled.div`

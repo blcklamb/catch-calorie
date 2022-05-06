@@ -6,10 +6,20 @@ import Switch from '@mui/material/Switch';
 
 import MainButton from './style/MainButton';
 
+import { BodyContainer, TrackingSwitchContainer } from '../styledCompo/mainStyle';
+import {
+  AddGlassBodyContainer,
+  AddFormsContainer,
+  AddTitle,
+  AddFormSection,
+  AddFormTitle,
+  AddButtonContainer,
+} from '../styledCompo/Add';
+import { LoginGlass, TitleText, RedSpan } from '../styledCompo/LoginStyle';
+import { ValidationTextField } from '../styledCompo/muiCustom';
+
 import Header from '../Header';
 import Footer from '../Footer';
-
-import {ValidationTextField} from '../styledCompo/muiCustom'
 
 import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../../atoms';
@@ -65,53 +75,63 @@ function MainExerciseAdd({}) {
   return (
     <>
       <Header />
-      <div style={{ margin: '100px 80px' }}>
-        <h1>Add Exercise</h1>
-        <div style={{ display: 'flex' }}>
-          <div>
-            <h2>Please Enter a Name</h2>
-            <ValidationTextField
-              id="outlined-basic"
-              label="exercise name"
-              variant="outlined"
-              inputValue={name}
-              onBlur={(e) => setName(e.target.value)}
-              helperText={isNameEmpty && <span>Please enter a name</span>}
-            />
-            <h2>Please Enter a Kcal Per Unit Weight</h2>
-            <Switch
-              checked={checked}
-              onChange={handleSwitch}
-              inputProps={{ 'aria-label': 'controlled' }}
-            />
-            {unit}
-            <ValidationTextField
-              id="outlined-basic"
-              label="kcal"
-              variant="outlined"
-              inputValue={kcal}
-              onBlur={(e) => setKcal(e.target.value)}
-              helperText={
-                isKcalEmpty ? (
-                  <span>Please enter a kcal per unit weight</span>
-                ) : (
-                  !isKcalNumber && <span>Please enter a number only</span>
-                )
-              }
-            />
-          </div>
-        </div>
-        <MainButton variant="contained" onClick={handleSubmit}>
-          Add
-        </MainButton>
-        <MainButton
-          variant="contained"
-          onClick={() => navigate(`/tracking/${user._id}`, { replace: false })}
-        >
-          Cancel
-        </MainButton>
-      </div>
-      <Footer />
+      <BodyContainer>
+        <LoginGlass style={{ marginTop: '150px' }}>
+          <AddTitle>
+            Add <br />
+            Exercise
+          </AddTitle>
+          <AddFormsContainer>
+            <AddFormSection>
+              <AddFormTitle>Please Enter a Name</AddFormTitle>
+              <ValidationTextField
+                id="outlined-basic"
+                label="exercise name"
+                variant="outlined"
+                inputValue={name}
+                onBlur={(e) => setName(e.target.value)}
+                helperText={isNameEmpty && <span>Please enter a name</span>}
+              />
+            </AddFormSection>
+            <AddFormSection>
+              <AddFormTitle>Please Enter a Kcal Per Unit Weight</AddFormTitle>
+              <TrackingSwitchContainer>
+                {unit}
+                <Switch
+                  checked={checked}
+                  onChange={handleSwitch}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                />
+              </TrackingSwitchContainer>
+              <ValidationTextField
+                id="outlined-basic"
+                label="kcal"
+                variant="outlined"
+                inputValue={kcal}
+                onBlur={(e) => setKcal(e.target.value)}
+                helperText={
+                  isKcalEmpty ? (
+                    <span>Please enter a kcal per unit weight</span>
+                  ) : (
+                    !isKcalNumber && <span>Please enter a number only</span>
+                  )
+                }
+              />{' '}
+            </AddFormSection>{' '}
+          </AddFormsContainer>
+          <AddButtonContainer>
+            <MainButton variant="contained" onClick={handleSubmit}>
+              Add
+            </MainButton>
+            <MainButton
+              variant="contained"
+              onClick={() => navigate(`/tracking/${user._id}`, { replace: false })}
+            >
+              Cancel
+            </MainButton>
+          </AddButtonContainer>
+        </LoginGlass>
+      </BodyContainer>
     </>
   );
 }
