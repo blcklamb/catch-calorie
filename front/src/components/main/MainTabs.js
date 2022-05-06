@@ -105,7 +105,7 @@ MainTabPanel.propTypes = {
 const TabPanel = styled(MainTabPanel)({
   // backgroundColor: '#ECF8D9',
   // 폼만 스크롤
-  height: '450px',
+  height: '400px',
 
   // 스크롤 전범위
   // overflow: 'auto',
