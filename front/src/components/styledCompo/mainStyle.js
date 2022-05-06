@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
-import styled2 from 'styled-components';
+// import { styled } from '@mui/material/styles';
+import styled from 'styled-components';
 
 import Container from '@mui/material/Container';
 
@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 
 const COLORS = ['#5bc691', '#FFBB28', '#C66868', '#FF8042'];
 
-export const BodyContainer = styled2.div`
+export const BodyContainer = styled.div`
     width: 100%; 
 
     background: pink;
@@ -23,7 +23,7 @@ export const BodyContainer = styled2.div`
     display: grid;
 `;
 
-export const MainHelloSection = styled2.div`
+export const MainHelloSection = styled.div`
 width: 100%;
 padding: 20px 20px;
 
@@ -35,7 +35,7 @@ align-items: center;
     position: relative;
 `;
 
-export const MainSection1 = styled2.div`
+export const MainSection1 = styled.div`
 
 display: inline-flex;
 margin: 80px 0px;
@@ -43,7 +43,7 @@ margin: 80px 0px;
 
 `;
 
-export const Section = styled2.div`
+export const Section = styled.div`
 height: 100%;
   position: relative;
   padding: 30px 40px;
@@ -62,46 +62,50 @@ height: 100%;
 `;
 
 // 그래프 ----------------------------------------------------------------------------------------
-export const GraphContainer = styled2.div`
+export const GraphContainer = styled.div`
 width: 400px;
 `;
 
 // 탭 ----------------------------------------------------------------------------------------
-export const TrackingForm = styled2.div`
+export const TrackingForm = styled.div`
 height: 80px; 
 display: flex;
 margin: 10px 0;
 `;
 
-export const TrackingAutoContainer = styled2.div`
+export const TrackingAutoContainer = styled.div`
 width: 300px;
 margin-right: 20px;
 `;
 
-export const TrackingTextFieldContainer = styled2.div`
+export const TrackingTextFieldContainer = styled.div`
 width: 150px;
 margin-right: 20px;
 
-component="form"
+/* component="form"
 sx={{
 '& > :not(style)': { m: 1, width: '25ch' },
 }}
 noValidate
-autoComplete="off"
+autoComplete="off" */
 `;
 
-export const TrackingSwitchContainer = styled2.div`
+export const TrackingSwitchContainer = styled.div`
   float: right;
   flex-grow: 1;
   text-align: right;
 
 `;
 
-export const TrackingButtonContainer = styled2.div`
+export const TrackingButtonContainer = styled.div`
 width: 100%;
-
-
+margin-top:40px;
+text-align: center;
 `;
+
+export const TrackingPlusButtonContainer = styled.div`
+margin-bottom: 60px;
+`
 
 // export const FirstPage = styled.section`
 //   height: 100vh;

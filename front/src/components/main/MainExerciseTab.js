@@ -4,6 +4,8 @@ import MainButton from './style/MainButton';
 
 import MainExerciseForm from './MainExerciseForm';
 
+import { TrackingButtonContainer, TrackingPlusButtonContainer } from '../styledCompo/mainStyle';
+
 import { useRecoilState } from 'recoil';
 import {
   exerciseSelectedState,
@@ -109,12 +111,18 @@ function MainExerciseTab({ clearForm }) {
         reset
       </MainButton>
       {exerciseForms && exerciseForms.map((item) => <MainExerciseForm key={item} idx={item} />)}
-      <MainButton variant="contained" onClick={handleAddExerciseForm}>
-        +
-      </MainButton>
-      <MainButton variant="contained" onClick={handleTracking}>
-        tracking
-      </MainButton>
+      <TrackingButtonContainer>
+        <TrackingPlusButtonContainer>
+          <MainButton variant="contained" onClick={handleAddExerciseForm}>
+            +
+          </MainButton>
+        </TrackingPlusButtonContainer>
+        <div>
+          <MainButton variant="contained" onClick={handleTracking}>
+            tracking
+          </MainButton>
+        </div>
+      </TrackingButtonContainer>
     </div>
   );
 }

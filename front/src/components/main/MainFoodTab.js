@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import MainButton from './style/MainButton';
 import MainFoodForm from './MainFoodForm';
 
-import { TrackingButtonContainer } from '../styledCompo/mainStyle';
+import { TrackingButtonContainer, TrackingPlusButtonContainer } from '../styledCompo/mainStyle';
 
 import { useRecoilState } from 'recoil';
 import {
@@ -115,18 +115,24 @@ function MainFoodTab({ clearForm }) {
         </MainButton>
         {foodForms && foodForms.map((item) => <MainFoodForm key={item} idx={item} />)}
 
-        <MainButton variant="contained" onClick={handleAddFoodForm}>
-          +
-        </MainButton>
-        {/* {console.log(foodSelected)}
+        <TrackingButtonContainer>
+          <TrackingPlusButtonContainer>
+            <MainButton variant="contained" onClick={handleAddFoodForm}>
+              +
+            </MainButton>
+          </TrackingPlusButtonContainer>
+          {/* {console.log(foodSelected)}
       {console.log(weight)}
       {console.log(isFoodEmpty)}
       {console.log(isWeightEmpty)}
       {console.log(isWeightNumber)} */}
-        {/* {isFormEmpty && <span>값을 제대로 적어라</span>} */}
-        <MainButton variant="contained" onClick={handleTracking}>
-          tracking
-        </MainButton>
+          {/* {isFormEmpty && <span>값을 제대로 적어라</span>} */}
+          <div>
+            <MainButton variant="contained" onClick={handleTracking}>
+              tracking
+            </MainButton>
+          </div>
+        </TrackingButtonContainer>
       </div>
       {/* {scroll()} */}
     </>
