@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
+  position: relative;
   height: 100px;
-  width: auto;
+  width: 100vw;
   background-color: #e9e9e9;
   display: flex;
   justify-content: center;

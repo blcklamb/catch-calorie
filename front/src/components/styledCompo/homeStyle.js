@@ -32,7 +32,7 @@ export const VideoContainer = styled.div`
 
 export const Video = styled.video`
   width: 100%;
-  /* height: auto; */
+  height: 100%;
   object-fit: fill;
 
   &:before {
@@ -58,6 +58,9 @@ export const FirstPageWrapper = styled.div`
 `;
 
 export const FirstPageLogo = styled.div`
+  font-family: 'Jost', sans-serif;
+  font-weight: bold;
+  font-style: italic;
   font-size: 8rem;
   color: #94d82d;
   font-style: bold;
@@ -72,7 +75,35 @@ export const MainButton = styled(Button)({
   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
   color: 'white',
 });
+export const HeadCopy = styled.div`
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  /* background-color: white; */
+  margin-bottom: 50px;
+  font-size: 2.7rem;
+  color: #373737;
+  line-height: 40px;
+  font-weight: bold;
+`;
 
+export const BodyCopy = styled.div`
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  /* font-style: italic; */
+  /* background-color: yellow; */
+  line-height: 30px;
+`;
+
+export const GraphCopy = styled.div`
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  /* background-color: yellow; */
+  line-height: 30px;
+  display: flex;
+  justify-content: center;
+  font-size: 1.7rem;
+  color: #373737;
+`;
 export const SecondPage = styled.section`
   height: 100vh;
   width: 100%;
@@ -98,20 +129,6 @@ export const SecondPageLeft = styled.div`
   flex-direction: column;
 
   justify-content: center;
-`;
-
-export const HeadCopy = styled.div`
-  /* background-color: white; */
-  margin-bottom: 50px;
-  font-size: 2.7rem;
-  color: #373737;
-  line-height: 40px;
-  font-weight: bold;
-`;
-
-export const BodyCopy = styled.div`
-  /* background-color: yellow; */
-  line-height: 30px;
 `;
 
 export const SecondPageRight = styled.div`
@@ -141,7 +158,7 @@ export const ThirdPage = styled.section`
 export const ThirdPageLeft = styled.div`
   z-index: 400;
   width: 750px;
-  height: 407px;
+  height: auto;
   box-sizing: border-box;
   padding: 28px 24px 0;
 
@@ -188,15 +205,15 @@ export const FourthPageLeft = styled.div`
   /* background-color: white; */
   /* border: 1px solid #f0f1f3;
   border-radius: 8px; */
-  width: 400px;
+  width: 750px;
   height: 407px;
   box-sizing: border-box;
   padding: 28px 35px;
 
   font-size: 1.5rem;
-
+  flex-direction: column;
   display: flex;
-  align-items: center;
+
   justify-content: center;
 `;
 
@@ -218,6 +235,10 @@ export const FourthPageRight = styled.div`
 `;
 
 export const FifthPage = styled.section`
+  font-family: 'Jost', sans-serif;
+  font-weight: bold;
+  font-style: italic;
+
   position: relative;
   z-index: 400;
   height: 100vh;

@@ -15,7 +15,7 @@ import DefaultObesityLineChart from '../DefaultObesityLineChart.js';
 import Walking from '../../lottie/walking.json';
 
 import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../../atoms';
@@ -33,6 +33,7 @@ import {
   SecondPageLeft,
   HeadCopy,
   BodyCopy,
+  GraphCopy,
   SecondPageRight,
   ThirdPage,
   ThirdPageLeft,
@@ -53,8 +54,8 @@ function Home() {
 
   const user = useRecoilValue(userInfoState);
 
-  const userId = user._id;
-  console.log('id', userId);
+  // const userId = user._id;
+  // console.log('id', userId);
 
   const defaultOptions = {
     loop: true,
@@ -64,7 +65,16 @@ function Home() {
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
-
+  // {user ? (
+  //   <Logo>
+  //     <Link
+  //       to={{ pathname: `/tracking/${user._id}` }} // 로그인 되어있을 시 로그인 된 유저의 메인페이지로 이동
+  //       style={{ textDecoration: 'none', color: '#f03e3e', cursor: 'pointer' }}
+  //     >
+  //       Catch Calories
+  //     </Link>
+  //   </Logo>
+  // )
   return (
     <>
       <Header />
@@ -79,7 +89,7 @@ function Home() {
           <FirstPageLogo>Catch Calories</FirstPageLogo>
           {user ? (
             <MainButton
-              onClick={() => navigate('/tracking/{userId}', { replace: true })}
+              onClick={() => navigate('/tracking/{user._id}', { replace: true })}
               variant="contained"
               style={{
                 width: '20vw',
@@ -126,6 +136,12 @@ function Home() {
       </SecondPage>
       <ThirdPage>
         <ThirdPageLeft>
+          <GraphCopy>
+            {' '}
+            The more obese people are, <br />
+            the more people don't monitor their calories!
+          </GraphCopy>
+
           <DefaultBarChart
             data={[
               { name: 'Underweight', SCC: '250' },
@@ -154,8 +170,16 @@ function Home() {
         <CircleRed2 />
         <CircleGreen2 />
         <FourthPageLeft>
-          The United States has a relatively high obesity rate compared to other countries, and the
-          increase is also on the rise.
+          <HeadCopy>
+            Correlation between <br />
+            <span style={{ color: '#77b63e' }}>BMI index</span> and{' '}
+            <span style={{ color: '#e85858' }}>physical activity</span>
+          </HeadCopy>
+          <BodyCopy>
+            The higher the BMI index, the lower the frequency of physical activity.
+            <br />
+            High obesity people don't do physical activity at all.
+          </BodyCopy>
         </FourthPageLeft>
         <FourthPageRight>
           <DefaultLineChart />
