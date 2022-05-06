@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { Container, Col, Row, Form, Button } from "react-bootstrap";
+import { useAlert } from 'react-alert';
 
 // Mui
 import Box from '@mui/material/Box';
@@ -36,6 +37,7 @@ import { fontSize } from '@mui/system';
 
 function LoginForm() {
   const navigate = useNavigate();
+  const Alert = useAlert();
 
   ///@ 전역 유저 정보
   const setToken = useSetRecoilState(tokenState);
@@ -77,12 +79,23 @@ function LoginForm() {
       console.log(user);
       setToken(user.token);
       setUser(user);
-
       // 기본 페이지로 이동함.
       navigate(`/tracking/${user.id}`, { replace: true });
     } catch (err) {
-      console.log('로그인에 실패하였습니다.\n', err);
-      alert('Login failed');
+      console.log(err.response.data.errorMessage);
+      if (
+        err.response.data.errorMessage === '비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
+      ) {
+        Alert.error('Passwords do not match. Please check again.');
+      } else if (
+        err.response.data.errorMessage ===
+        '가입 내역이 없는 이메일입니다. 다시 한 번 확인해 주세요.'
+      ) {
+        Alert.error('This email has no subscription history. Please check again.');
+      }
+
+      // console.log('로그인에 실패하였습니다.\n', err);
+      // alert('Login failed');
       setCheckLogin(false);
     }
   };

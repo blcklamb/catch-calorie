@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { userInfoState } from '../../atoms';
@@ -33,12 +33,41 @@ const convert = configureMeasurements({ mass, length });
 
 const UserEditCard = ({ setCardState }) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  const FTHeight = convert(userInfo.height).from('cm').to('ft').toFixed(2);
-  const LBWeight = convert(userInfo.weight).from('kg').to('lb').toFixed(2);
+  // const FTHeight = convert(userInfo.height).from('cm').to('ft').toFixed(2);
+  // const LBWeight = convert(userInfo.weight).from('kg').to('lb').toFixed(2);
 
-  const [editUser, setEditUser] = useState({ ...userInfo, UsHeight: FTHeight, UsWeight: LBWeight });
+  const [editUser, setEditUser] = useState({
+    ...userInfo,
+    UsHeight: convert(userInfo.height).from('cm').to('ft'),
+    UsWeight: convert(userInfo.weight).from('kg').to('lb'),
+  });
 
   const { UsHeight, UsWeight, height, weight, name, open, unit, status, gender, icon } = editUser;
+  console.log('unit', unit);
+  useEffect(() => {
+    if (unit === 'us') {
+      setEditUser((cur) => ({
+        ...cur,
+        UsHeight: convert(cur.height).from('cm').to('ft'),
+        UsWeight: convert(cur.weight).from('kg').to('lb'),
+      }));
+      return;
+    }
+  }, [unit]);
+
+  useEffect(() => {
+    if (unit === 'non_us') {
+      setEditUser((cur) => ({
+        ...cur,
+        height: convert(cur.UsHeight).from('ft').to('cm'),
+        weight: convert(cur.UsWeight).from('lb').to('kg'),
+      }));
+    }
+  }, [unit]);
+
+  useEffect(() => {
+    console.log('editUer', editUser);
+  }, [editUser]);
 
   // 이름이 2글자 이상인지 여부를 확인함.
   const isNameValid = name.length >= 2;
@@ -98,8 +127,8 @@ const UserEditCard = ({ setCardState }) => {
     </Button>,
   ];
 
-  console.log(openChecked, checked);
-  console.log(editUser);
+  // console.log(openChecked, checked);
+  // console.log(editUser);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -202,7 +231,7 @@ const UserEditCard = ({ setCardState }) => {
               }
               value={UsHeight}
               onChange={(e) => {
-                setEditUser((prev) => ({ ...prev, UsHeight: e.target.value }));
+                setEditUser((prev) => ({ ...prev, UsHeight: Number(e.target.value) }));
               }}
             />
           ) : (
@@ -216,7 +245,7 @@ const UserEditCard = ({ setCardState }) => {
               }
               value={height}
               onChange={(e) => {
-                setEditUser((prev) => ({ ...prev, height: e.target.value }));
+                setEditUser((prev) => ({ ...prev, height: Number(e.target.value) }));
               }}
             />
           )}
@@ -232,7 +261,7 @@ const UserEditCard = ({ setCardState }) => {
               }
               value={UsWeight}
               onChange={(e) => {
-                setEditUser((prev) => ({ ...prev, UsWeight: e.target.value }));
+                setEditUser((prev) => ({ ...prev, UsWeight: Number(e.target.value) }));
               }}
             />
           ) : (
@@ -246,7 +275,7 @@ const UserEditCard = ({ setCardState }) => {
               }
               value={weight}
               onChange={(e) => {
-                setEditUser((prev) => ({ ...prev, weight: e.target.value }));
+                setEditUser((prev) => ({ ...prev, weight: Number(e.target.value) }));
               }}
             />
           )}
