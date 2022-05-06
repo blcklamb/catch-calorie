@@ -10,6 +10,8 @@ import {
   TrackingListTdAction,
   TrackingListTdStart,
   TrackingListTdEnd,
+  TestTd,
+  TestTr,
 } from '../styledCompo/mainStyle';
 
 import { ValidationTextField } from '../styledCompo/muiCustom';
@@ -104,43 +106,100 @@ function TrackingFoodList({ food, isTrackingPage }) {
     <>
       {isEditing ? (
         // 수정 모드
-        <div style={{ display: 'flex' }}>
-          <div style={{ display: 'flex' }}>
-            <div style={{ marginRight: '30px' }}>{food.name}</div>
-            <ValidationTextField
-              id="outlined-name"
-              label="weight"
-              value={weight}
-              onChange={onChange}
-              style={{ marginRight: '30px' }}
-              helperText={
-                !isWeightNumber ? (
-                  <span>Please enter a number only</span>
-                ) : (
-                  isWeightEmpty && <span>Please enter a weight</span>
-                )
-              }
-            />
-            <Switch
-              checked={checked}
-              onChange={handleSwitch}
-              inputProps={{ 'aria-label': 'controlled' }}
-            />
-            {unit === 'us' ? 'US standard' : 'metric'}
-            <div style={{ marginRight: '30px' }}>
-              {previewKcal()}kcal/{unit === 'us' ? 'lb' : 'g'}
-            </div>
-          </div>
-          <div>
+        <TrackingListTr>
+          <TrackingListTdStart>{food.name}</TrackingListTdStart>
+          <TrackingListTd>
+            <tr>
+              <TestTd rowspan="2">
+                <ValidationTextField
+                  id="outlined-name"
+                  label="weight"
+                  value={weight}
+                  onChange={onChange}
+                  helperText={
+                    !isWeightNumber ? (
+                      <span>Please enter a number only</span>
+                    ) : (
+                      isWeightEmpty && <span>Please enter a weight</span>
+                    )
+                  }
+                />
+              </TestTd>
+              <TestTd>
+                <Switch
+                  checked={checked}
+                  onChange={handleSwitch}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                />
+              </TestTd>
+            </tr>
+            <tr>
+              <TestTd>
+                {/* <TestTr>
+                <Switch
+                  checked={checked}
+                  onChange={handleSwitch}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                />
+              </TestTr> */}
+                {unit === 'us' ? 'US standard' : 'metric'}
+              </TestTd>
+            </tr>
+          </TrackingListTd>
+
+          <TrackingListTd>
+            {/* <div style={{ marginRight: '30px' }}> */}
+            {previewKcal()}kcal/{unit === 'us' ? 'lb' : 'g'}
+            {/* </div> */}
+          </TrackingListTd>
+          <TrackingListTdAction>
             <Button variant="contained" type="button" onClick={handleCheck}>
               Check
             </Button>
+          </TrackingListTdAction>
+          <TrackingListTdEnd>
             <Button variant="contained" type="button" onClick={handleCancel}>
               Cancel
             </Button>
-          </div>
-        </div>
+          </TrackingListTdEnd>
+        </TrackingListTr>
       ) : (
+        // <div style={{ display: 'flex' }}>
+        //   <div style={{ display: 'flex' }}>
+        //     <div style={{ marginRight: '30px' }}>{food.name}</div>
+        //     <ValidationTextField
+        //       id="outlined-name"
+        //       label="weight"
+        //       value={weight}
+        //       onChange={onChange}
+        //       style={{ marginRight: '30px' }}
+        //       helperText={
+        //         !isWeightNumber ? (
+        //           <span>Please enter a number only</span>
+        //         ) : (
+        //           isWeightEmpty && <span>Please enter a weight</span>
+        //         )
+        //       }
+        //     />
+        //     <Switch
+        //       checked={checked}
+        //       onChange={handleSwitch}
+        //       inputProps={{ 'aria-label': 'controlled' }}
+        //     />
+        //     {unit === 'us' ? 'US standard' : 'metric'}
+        //     <div style={{ marginRight: '30px' }}>
+        //       {previewKcal()}kcal/{unit === 'us' ? 'lb' : 'g'}
+        //     </div>
+        //   </div>
+        //   <div>
+        //     <Button variant="contained" type="button" onClick={handleCheck}>
+        //       Check
+        //     </Button>
+        //     <Button variant="contained" type="button" onClick={handleCancel}>
+        //       Cancel
+        //     </Button>
+        //   </div>
+        // </div>
         <TrackingListTr>
           <TrackingListTdStart>{food.name}</TrackingListTdStart>
           <TrackingListTd>{food.gram}g</TrackingListTd>

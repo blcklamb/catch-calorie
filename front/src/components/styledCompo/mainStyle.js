@@ -120,8 +120,8 @@ export const GraphOverContainer = styled.div``;
 // Tracking List ----------------------------------------------------
 export const TrackingListTable = styled.table`
   width: 100%;
-  /* border: 1px solid #444444; */
-  /* border-collapse: collapse; */
+  border: 1px solid #444444;
+  border-collapse: collapse;
 
   // 행 여백
   border-collapse: separate;
@@ -175,7 +175,7 @@ export const TrackingListTr = styled.tr`
 `;
 
 export const TrackingListTd = styled.td`
-  /* border: 1px solid #444444; */
+  border: 1px solid #444444;
   padding: 10px;
 `;
 
@@ -191,4 +191,13 @@ export const TrackingListTdEnd = styled(TrackingListTdAction)`
   padding-right: 30px;
   text-align: right;
 
+`;
+
+
+// testing
+export const TestTd = styled.td`
+  border: 1px solid #444444;
+`;
+export const TestTr = styled.tr`
+  border: 1px solid #444444;
 `;
