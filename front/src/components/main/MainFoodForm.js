@@ -15,6 +15,7 @@ import {
 } from '../styledCompo/mainStyle';
 
 import { ValidationTextField } from '../styledCompo/muiCustom';
+import { RedSpan } from '../styledCompo/styledCompo';
 
 import { useRecoilState } from 'recoil';
 import {
@@ -103,7 +104,12 @@ function MainFoodForm({ idx }) {
             }}
             options={foodList}
             renderInput={(params) => (
-              <MainInput {...params} label="Food" placeholder="Please select food" />
+              <ValidationTextField
+                {...params}
+                label="Food"
+                placeholder="Please select food"
+                helperText={!foodSelected[idx] && <RedSpan>Please select a food</RedSpan>}
+              />
             )}
             getOptionLabel={(option) => option.name || ''}
             noOptionsText={
@@ -122,32 +128,31 @@ function MainFoodForm({ idx }) {
               </div>
             }
           />
-          {!foodSelected[idx] && <span>Please select a food</span>}
         </TrackingAutoContainer>
         <TrackingTextFieldContainer>
           <ValidationTextField
             id="outlined-basic"
-            label="weight"
+            label="Weight"
             variant="outlined"
             value={weight[idx]}
             onChange={onChangeWeight}
             helperText={
               !weight[idx] ? (
-                <span>Please enter a weight</span>
+                <RedSpan>Please enter a weight</RedSpan>
               ) : (
-                isNaN(weight[idx]) && <span>Please enter a number only</span>
+                isNaN(weight[idx]) && <RedSpan>Please enter a number only</RedSpan>
               )
             }
           />
         </TrackingTextFieldContainer>
         <TrackingSwitchContainer>
           <div>
+            <span>{unit[idx] === 'us' ? 'US standard' : 'metric'}</span>
             <Switch
               checked={checked}
               onChange={handleSwitch}
               inputProps={{ 'aria-label': 'controlled' }}
             />
-            <span>{unit[idx] === 'us' ? 'US standard' : 'metric'}</span>
           </div>
           {/* {console.log(foodSelected[idx]?.kcal_per_100g)}
           {idx}
