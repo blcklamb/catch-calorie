@@ -367,8 +367,9 @@ function RegisterForm() {
               </RadioGroup> */}
               <br></br>
               {/* ///@ 유닛 */}
-              <ButtonGroup size="small" style={{ justifyContent: 'space-between' }}>
-                <Stack direction="row" spacing={1} alignItems="center">
+              <ButtonGroup size="small" style={{ justifyContent: 'flex-end' }}>
+                {/* ///@ 공개여부 */}
+                {/* <Stack direction="row" spacing={1} alignItems="center">
                   <Typography>Private</Typography>
                   <IOSSwitch
                     title="Whether to disclose body information"
@@ -376,7 +377,7 @@ function RegisterForm() {
                     onChange={handleOpenSwitch}
                   />
                   <Typography>Public</Typography>
-                </Stack>
+                </Stack> */}
                 <div>{unitButtons}</div>
               </ButtonGroup>
 
