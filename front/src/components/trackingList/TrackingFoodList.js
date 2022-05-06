@@ -41,9 +41,9 @@ function TrackingFoodList({ food, isTrackingPage }) {
 
   useEffect(() => {
     if (checked === true) {
-      setUnit('us');
-    } else {
       setUnit('non us');
+    } else {
+      setUnit('us');
     }
   }, [checked]);
 
