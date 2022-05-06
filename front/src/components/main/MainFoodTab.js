@@ -3,7 +3,13 @@ import React, { useState, useEffect } from 'react';
 import MainButton from './style/MainButton';
 import MainFoodForm from './MainFoodForm';
 
-import { TrackingForms, TrackingButtonContainer, TrackingPlusButtonContainer } from '../styledCompo/mainStyle';
+import {
+  TrackingForms,
+  TrackingButtonContainer,
+  TrackingLeftButtonContainer,
+  TrackingRightButtonContainer, 
+  TrackingPlusButtonContainer,
+} from '../styledCompo/mainStyle';
 
 import { useRecoilState } from 'recoil';
 import {
@@ -45,8 +51,10 @@ function MainFoodTab({ clearForm }) {
     setWeight([...weight, '']);
     setUnit([...unit, 'us']);
 
-    const boxid = document.querySelector('#simple-tabpanel-0');
-    boxid.scrollTop = boxid.scrollHeight;
+    setTimeout(() => {
+      const boxid = document.querySelector('#simple-tabpanel-0');
+      boxid.scrollTop = boxid.scrollHeight;
+    }, 1);
   };
 
   const handleTracking = async () => {
@@ -123,12 +131,6 @@ function MainFoodTab({ clearForm }) {
               +
             </MainButton>
           </TrackingPlusButtonContainer>
-          {/* {console.log(foodSelected)}
-      {console.log(weight)}
-      {console.log(isFoodEmpty)}
-      {console.log(isWeightEmpty)}
-      {console.log(isWeightNumber)} */}
-          {/* {isFormEmpty && <span>값을 제대로 적어라</span>} */}
           <div>
             <MainButton variant="contained" onClick={handleTracking}>
               tracking
