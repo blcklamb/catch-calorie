@@ -15,7 +15,7 @@ trackingRouter.get("/tracking/:user_id", async (req, res, next) => {
 
         const tracking = await trackingService.getTrackingByUserAndDate({ user_id, date });
         if (!tracking) return trackingService.addTracking({ user_id, date });
-
+        
         return res.status(200).send(tracking);
     } catch (error) {
         next(error);
