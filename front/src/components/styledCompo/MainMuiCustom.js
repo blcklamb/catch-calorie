@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 
-import { ColorButton } from './muiCustom';
+import { ColorButton, ColorButtonB } from './muiCustom';
 
 export const TrackingPlusButton = styled(ColorButton)({
   width: '44px',
@@ -10,7 +10,7 @@ export const TrackingPlusButton = styled(ColorButton)({
   fontSize: '22px',
   minWidth: '0px',
   fontStyle: 'normal',
-  marginRight: '30px', 
+  marginRight: '30px',
 });
 
 export const TrackingResetButton = styled(ColorButton)({
@@ -34,4 +34,16 @@ export const TrackingTrackingButton = styled(ColorButton)({
 
   borderRadius: '15px',
   color: 'white',
+});
+
+export const AddButton = styled(ColorButtonB)({
+  fontWeight: 800,
+  fontSize: '18px',
+  width: '100%',
+  height: '40px',
+  backgroundColor: '#FCFFF8',
+  border: 'solid',
+  borderColor: '#94D82D',
+  borderRadius: '15px',
+  color: '#F03E3E',
 });

@@ -6,6 +6,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Switch from '@mui/material/Switch';
 
 import MainInput from './style/MainInput';
+import {AddButton} from '../styledCompo/MainMuiCustom'
 
 import {
   TrackingForm,
@@ -116,16 +117,14 @@ function MainFoodForm({ idx }) {
             noOptionsText={
               <div>
                 <p>No option</p>
-                <Button
-                  variant="contained"
-                  color="primary"
+                <AddButton
                   type="button"
                   onClick={() => {
                     navigate('/tracking/addFood', { replace: false });
                   }}
                 >
                   Add food
-                </Button>
+                </AddButton>
               </div>
             }
           />
