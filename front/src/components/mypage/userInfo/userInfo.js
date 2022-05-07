@@ -16,23 +16,31 @@ function UserInfo({ currentUserInfo }) {
           <Flippy
             flipOnClick={true}
             style={{
-              width: 'auto',
-              height: 'auto',
+              width: '500px',
+              height: '600px',
+              borderRadius: '30px',
 
               // backgroundColor: ' #91c13d',
             }}
           >
             <FrontSide
               style={{
-                width: 'auto',
-                height: 'auto',
-
-                backgroundColor: ' #ffffff',
+                width: '500px',
+                height: '600px',
+                borderRadius: '30px',
+                // backgroundColor: ' #ffffff',
               }}
             >
               <UserTrackingList currentUserInfo={currentUserInfo}></UserTrackingList>
             </FrontSide>
-            <BackSide>
+            <BackSide
+              style={{
+                width: '500px',
+                height: '600px',
+                borderRadius: '30px',
+                // backgroundColor: ' #ffffff',
+              }}
+            >
               <UserGraph currentUserInfo={currentUserInfo}></UserGraph>
             </BackSide>
           </Flippy>
