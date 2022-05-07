@@ -3,7 +3,17 @@ import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-import {ValidationTextField} from '../styledCompo/muiCustom'
+import {
+  TrackingListTr,
+  TrackingListTd,
+  TrackingListTdAction,
+  TrackingListTdStart,
+  TrackingListTdEnd,
+  TrackingListTdInput,
+  TrackingListTdInputText,
+} from '../styledCompo/mainStyle';
+
+import { ValidationTextField } from '../styledCompo/muiCustom';
 
 import { useRecoilState } from 'recoil';
 import { trackingUpdateState } from '../../atoms';
@@ -60,6 +70,10 @@ function TrackingExerciseList({ exercise, isTrackingPage }) {
     setHour(parseInt(exercise.minute / 60));
     setMinute(exercise.minute % 60);
 
+    setIsTimeEmpty(false);
+    setIsHourNumber(true);
+    setIsMinNumber(true);
+
     setIsEditing(false);
   };
 
@@ -83,60 +97,72 @@ function TrackingExerciseList({ exercise, isTrackingPage }) {
   return (
     <>
       {isEditing ? (
-        <div style={{ display: 'flex' }}>
-          <div style={{ display: 'flex' }}>
-            <div style={{ marginRight: '30px' }}>{exercise.name}</div>
-            <ValidationTextField
-              id="outlined-name"
-              label="hour"
-              value={hour}
-              onChange={onChange}
-              style={{ marginRight: '30px' }}
-              helperText={
-                !isHourNumber || !isMinNumber ? (
-                  <span>Please enter a number only</span>
-                ) : (
-                  isTimeEmpty && <span>Please enter a time</span>
-                )
-              }
-            />
-            <ValidationTextField
-              id="outlined-name"
-              label="minute"
-              value={minute}
-              onChange={(e) => setMinute(e.target.value)}
-              style={{ marginRight: '30px' }}
-            />
-            <div style={{ marginRight: '30px' }}>{previewKcal()}kcal</div>
+        <TrackingListTr>
+          <TrackingListTdStart>{exercise.name}</TrackingListTdStart>
+          <TrackingListTdInput>
+            <tr>
+              <td>
+                <ValidationTextField
+                  id="outlined-name"
+                  label="hour"
+                  value={hour}
+                  onChange={onChange}
+                  style={{ marginRight: '30px' }}
+                  helperText={
+                    !isHourNumber || !isMinNumber ? (
+                      <span>Please enter a number only</span>
+                    ) : (
+                      isTimeEmpty && <span>Please enter a time</span>
+                    )
+                  }
+                />
+              </td>
+              <td>
+                <ValidationTextField
+                  id="outlined-name"
+                  label="minute"
+                  value={minute}
+                  onChange={(e) => setMinute(e.target.value)}
+                  style={{ marginRight: '30px' }}
+                />
+              </td>
+            </tr>
+          </TrackingListTdInput>
+          <TrackingListTd>{previewKcal()}kcal</TrackingListTd>
+          <TrackingListTdAction>
             <Button variant="contained" type="button" onClick={handleCheck}>
               Check
             </Button>
+          </TrackingListTdAction>
+          <TrackingListTdEnd>
             <Button variant="contained" type="button" onClick={handleCancel}>
               Cancel
             </Button>
-          </div>
-        </div>
+          </TrackingListTdEnd>
+        </TrackingListTr>
       ) : (
-        <div style={{ display: 'flex' }}>
-          <div style={{ display: 'flex' }}>
-            <div style={{ marginRight: '30px' }}>{exercise.name}</div>
-            <div style={{ marginRight: '30px' }}>
-              {parseInt(exercise.minute / 60)}H {exercise.minute % 60}M
-            </div>
-            <div style={{ marginRight: '30px' }}>{exercise.calorie}kcal</div>
-            {/* 트래킹 페이지에서만 버튼 O */}
-            {isTrackingPage === 'tracking' && (
-              <div>
+        <TrackingListTr>
+          <TrackingListTdStart>{exercise.name}</TrackingListTdStart>
+          <TrackingListTd>
+            {parseInt(exercise.minute / 60)}H {exercise.minute % 60}M
+          </TrackingListTd>
+          <TrackingListTd>{exercise.calorie}kcal</TrackingListTd>
+          {/* 트래킹 페이지에서만 버튼 O */}
+          {isTrackingPage === 'tracking' && (
+            <>
+              <TrackingListTdAction>
                 <Button variant="contained" type="button" onClick={handleModify}>
                   Modify
-                </Button>
+                </Button>{' '}
+              </TrackingListTdAction>
+              <TrackingListTdEnd>
                 <Button variant="contained" type="button" onClick={handleDelete}>
-                  Delete
+                  Delete{' '}
                 </Button>
-              </div>
-            )}
-          </div>
-        </div>
+              </TrackingListTdEnd>
+            </>
+          )}
+        </TrackingListTr>
       )}
     </>
   );

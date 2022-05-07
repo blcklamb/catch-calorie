@@ -1,31 +1,29 @@
-import React, { useContext, useEffect } from 'react';
-// import { styled } from '@mui/material/styles';
 import styled from 'styled-components';
-
-import Container from '@mui/material/Container';
-
-// import MainButton from '../main/style/MainButton.js';
-import Button from '@mui/material/Button';
-
-const COLORS = ['#5bc691', '#FFBB28', '#C66868', '#FF8042'];
 
 export const BodyContainer = styled.div`
   width: 100%;
 
-  background: pink;
+  /* background: pink; */
 
   align-content: center;
   justify-content: center;
-  margin-top: 180px;
+  margin-top: 100px;
   margin-bottom: 180px;
   display: grid;
+`;
+
+export const SectionTitle = styled.h1`
+  font-family: Jost;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 28px;
 `;
 
 export const MainHelloSection = styled.div`
   width: 100%;
   padding: 20px 20px;
 
-  background: yellow;
+  /* background: yellow; */
   display: flex;
   align-items: center;
   height: 150px;
@@ -33,9 +31,24 @@ export const MainHelloSection = styled.div`
   position: relative;
 `;
 
+export const MainHello = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  position: relative;
+`;
+
+export const MainHelloTitle = styled.h1`
+  font-family: Jost;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 40px;
+`;
+
 export const MainSection1 = styled.div`
   display: inline-flex;
-  margin: 80px 0px;
+  margin-bottom: 80px;
 `;
 
 export const Section = styled.div`
@@ -59,11 +72,11 @@ export const Section = styled.div`
 // 탭 ----------------------------------------------------------------------------------------
 export const TrackingForms = styled.div`
   // 폼만 스크롤 범위
-  /* height: 200px;
-  overflow: auto; */
+  height: 250px;
+  overflow: auto;
 
   // 스크롤 전범위
-  height: auto;
+  /* height: auto; */
 `;
 
 export const TrackingForm = styled.div`
@@ -93,34 +106,67 @@ export const TrackingSwitchContainer = styled.div`
   float: right;
   flex-grow: 1;
   text-align: right;
+  margin-right: 10px;
+`;
+
+export const TrackingText = styled.span`
+  font-weight: 500;
+  font-size: revert;
+  color: #9d9d9d;
 `;
 
 export const TrackingButtonContainer = styled.div`
   width: 100%;
-  margin-top: 40px;
   text-align: center;
+  display: inline-flex;
+  /* margin-top: 190px; */
+  margin-top: 50px;
+
+  // 버튼 하단으로 조정
+  /* position: relative;
+  left: 0;
+  bottom: 0; */
+`;
+
+export const TrackingLeftButtonContainer = styled.div``;
+export const TrackingRightButtonContainer = styled.div`
+  flex-grow: 1;
+  text-align: right;
+  /* display: inline-flex; */
 `;
 
 export const TrackingPlusButtonContainer = styled.div`
-  margin-bottom: 60px;
+  /* margin-bottom: 60px; */
+  margin-right: 10px;
 `;
 
 // 그래프 ----------------------------------------------------------------------------------------
 export const CalorieGraphSection = styled.div`
   text-align: center;
-  height: 480px;
+  /* height: 480px; */
+  position: relative;
+  margin-top: 50px;
 `;
 
 export const GraphContainer = styled.div`
   width: 400px;
 `;
 
-export const GraphOverContainer = styled.div``;
+export const GraphOverContainer = styled.div`
+  /* position: absolute;
+  bottom: 0; */
+`;
+
+export const GraphOverText = styled.span`
+  font-family: Jost;
+  font-weight: 700;
+  font-size: 20px;
+`;
 
 // Tracking List ----------------------------------------------------
 export const TrackingListTable = styled.table`
   width: 100%;
-  border: 1px solid #444444;
+  /* border: 1px solid #444444; */
   border-collapse: collapse;
 
   // 행 여백
@@ -133,6 +179,13 @@ export const TrackingListTh = styled.th`
   /* border: 1px solid #444444; */
   padding: 10px;
   text-align: left;
+`;
+
+export const TrackingTableTitle = styled.span`
+  font-family: Jost;
+  font-style: italic;
+  font-weight: 630;
+  font-size: 23px;
 `;
 
 export const TrackingListThName = styled(TrackingListTh)`
@@ -167,16 +220,18 @@ export const TrackingListTr = styled.tr`
 
   /* background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
     rgba(255, 255, 255, 0.3); */
-  box-shadow: 0px 5.334px 40.005px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0px 5.334px 40.005px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(40.005px); */
+  box-shadow: 0px 1.334px 20.005px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(40.005px);
-  /* Note: backdrop-filter has minimal browser support */
 
-  border-radius: 26.67px;
+  border-radius: 18px;
 `;
 
 export const TrackingListTd = styled.td`
-  border: 1px solid #444444;
+  /* border: 1px solid #444444; */
   padding: 10px;
+  font-size: large;
 `;
 
 export const TrackingListTdAction = styled(TrackingListTd)`
@@ -190,14 +245,13 @@ export const TrackingListTdStart = styled(TrackingListTd)`
 export const TrackingListTdEnd = styled(TrackingListTdAction)`
   padding-right: 30px;
   text-align: right;
-
 `;
 
-
-// testing
-export const TestTd = styled.td`
-  border: 1px solid #444444;
+export const TrackingListTdInput = styled(TrackingListTd)`
+  padding: 0px;
+  line-height: 0.4rem;
 `;
-export const TestTr = styled.tr`
-  border: 1px solid #444444;
+
+export const TrackingListTdInputText = styled.td`
+  text-align: center;
 `;
