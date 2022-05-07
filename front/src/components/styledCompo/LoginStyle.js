@@ -28,8 +28,12 @@ export const UserContainer = styled.div`
 export const UserCardFrame = styled.div`
   width: 500px;
   height: 600px;
-  border-radius: 15px;
-  background-color: #ecf8d9;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 2.73186px 20.489px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(20.489px);
+
+  border-radius: 27.3186px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,8 +58,8 @@ export const UserBodyInfo = styled.div`
 
 export const UserAKAInfo = styled.div`
   width: 400px;
-  height: 50px;
-  border-radius: 15px;
+  height: 70px;
+  /* border-radius: 15px; */
   // background-color: #94d82d;
   display: flex;
   justify-content: center;
@@ -72,6 +76,7 @@ export const UserBtnInfo = styled.div`
   justify-content: center;
   align-items: center;
   margin: 20px;
+  margin-top: 10px;
 `;
 
 export const UserBadgeImgInfo = styled.div`
@@ -127,6 +132,28 @@ export const LoginGlass = styled.div`
 
   border-radius: 27.3186px;
 `;
+
+//경고 글라스 효과
+// export const AlertGlass = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-flow: column;
+//   background-color: green;
+//   width: 800px;
+//   height: 400px;
+//   background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+//     rgba(255, 255, 255, 0.3);
+
+//   /* border-image: linear-gradient(to right, red 0%, orange 100%);
+//   border-image-slice: 1;
+//   box-shadow: 0px 2.73186px 20.489px rgba(0, 0, 0, 0.25); */
+
+//   backdrop-filter: blur(20.489px);
+
+//   border-radius: 27.3186px;
+//   border: 3px solid red;
+// `;
 
 //Sign-up, ForgetPassword Container
 export const SignPWContainer = styled.div`

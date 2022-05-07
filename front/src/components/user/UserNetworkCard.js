@@ -2,35 +2,37 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 //Mui
-import { Button } from '@mui/material';
-import { Typography } from '@mui/material';
+
+import { NetworkGlass, StatusText, NickText } from '../styledCompo/NetworkCardStyle';
+import { ColorButton } from '../styledCompo/muiCustom';
 
 const UserNetworkCard = ({ currentUserInfo }) => {
   const navigate = useNavigate();
   console.log(currentUserInfo.icon);
   return (
-    <div style={{ width: 100 + '%', height: 360, backgroundColor: '#ecf8d9', borderRadius: 18 }}>
+    <NetworkGlass>
       <div>
         <div style={{ paddingTop: 20 }}>
           <img
             src={currentUserInfo.icon}
             alt="badge"
-            style={{ width: 80 + '%', display: 'block', margin: 'auto' }}
+            style={{ width: 80 + '%', display: 'block', margin: 'auto', marginBottom: 10 }}
+            onClick={() => navigate(`/${currentUserInfo._id}`)}
           ></img>
         </div>
       </div>
-      <div style={{ marginLeft: '10px' }}>
-        <Typography variant="h5">{currentUserInfo.name}</Typography>
-        <Typography>{currentUserInfo.status}</Typography>
+      <div style={{ marginLeft: 10 }}>
+        <NickText>{currentUserInfo.name}</NickText>
+        <StatusText>{currentUserInfo.status}</StatusText>
       </div>
-      <Button
-        sx={{ display: 'block', margin: 'auto', marginTop: '14px' }}
+      <ColorButton
         variant="contained"
+        style={{ width: '40%', height: 40, margin: 20 }}
         onClick={() => navigate(`/${currentUserInfo._id}`)}
       >
-        go
-      </Button>
-    </div>
+        Go
+      </ColorButton>
+    </NetworkGlass>
   );
 };
 

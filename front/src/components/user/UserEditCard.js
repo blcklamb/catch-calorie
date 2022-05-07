@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { userInfoState } from '../../atoms';
@@ -29,16 +29,46 @@ import {
 //단위변환
 import configureMeasurements, { mass, length } from 'convert-units';
 import { Stack } from '@mui/material';
+import { BodyInfo } from '../styledCompo/UserCardStyle';
 const convert = configureMeasurements({ mass, length });
 
 const UserEditCard = ({ setCardState }) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  const FTHeight = convert(userInfo.height).from('cm').to('ft').toFixed(2);
-  const LBWeight = convert(userInfo.weight).from('kg').to('lb').toFixed(2);
+  const FTHeight = Number(convert(userInfo.height).from('cm').to('ft').toFixed(2));
+  const LBWeight = Number(convert(userInfo.weight).from('kg').to('lb').toFixed(2));
 
-  const [editUser, setEditUser] = useState({ ...userInfo, UsHeight: FTHeight, UsWeight: LBWeight });
+  const [editUser, setEditUser] = useState({
+    ...userInfo,
+    UsHeight: FTHeight,
+    UsWeight: LBWeight,
+  });
 
   const { UsHeight, UsWeight, height, weight, name, open, unit, status, gender, icon } = editUser;
+  console.log('unit', unit);
+  useEffect(() => {
+    if (unit === 'us') {
+      setEditUser((cur) => ({
+        ...cur,
+        UsHeight: convert(Number(cur.height)).from('cm').to('ft').toFixed(2),
+        UsWeight: convert(Number(cur.weight)).from('kg').to('lb').toFixed(2),
+      }));
+      return;
+    }
+  }, [unit]);
+
+  useEffect(() => {
+    if (unit === 'non_us') {
+      setEditUser((cur) => ({
+        ...cur,
+        height: convert(Number(cur.UsHeight)).from('ft').to('cm').toFixed(2),
+        weight: convert(Number(cur.UsWeight)).from('lb').to('kg').toFixed(2),
+      }));
+    }
+  }, [unit]);
+
+  useEffect(() => {
+    console.log('editUer', editUser);
+  }, [editUser]);
 
   // 이름이 2글자 이상인지 여부를 확인함.
   const isNameValid = name.length >= 2;
@@ -98,8 +128,8 @@ const UserEditCard = ({ setCardState }) => {
     </Button>,
   ];
 
-  console.log(openChecked, checked);
-  console.log(editUser);
+  // console.log(openChecked, checked);
+  // console.log(editUser);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -134,7 +164,7 @@ const UserEditCard = ({ setCardState }) => {
     <>
       <UserCardFrame>
         <UserBodyInfo>
-          <Typography variant="h4">Edit User Info</Typography>
+          <BodyInfo variant="h5">Edit User Info</BodyInfo>
         </UserBodyInfo>
         <UserBodyInfo></UserBodyInfo>
 
@@ -194,6 +224,7 @@ const UserEditCard = ({ setCardState }) => {
           {unit === 'us' ? (
             <ValidationTextField
               required
+              type="number"
               sx={{ width: 300 }}
               error={!isHeightValid}
               label="Height-feet"
@@ -208,6 +239,7 @@ const UserEditCard = ({ setCardState }) => {
           ) : (
             <ValidationTextField
               required
+              type="number"
               sx={{ width: 300 }}
               error={!isHeightValid}
               label="Height-cm"
@@ -224,6 +256,7 @@ const UserEditCard = ({ setCardState }) => {
           {unit === 'us' ? (
             <ValidationTextField
               required
+              type="number"
               sx={{ width: 300 }}
               error={!isWeightValid}
               label="Weight-lb"
@@ -238,6 +271,7 @@ const UserEditCard = ({ setCardState }) => {
           ) : (
             <ValidationTextField
               required
+              type="number"
               sx={{ width: 300 }}
               error={!isWeightValid}
               label="Weight-kg"
@@ -264,13 +298,13 @@ const UserEditCard = ({ setCardState }) => {
 
         <UserBtnInfo>
           <ColorButton
-            sx={{ width: 120, height: 60 }}
+            sx={{ width: 130, height: 50, fontSize: 18, marginRight: 2 }}
             disabled={!isFormValid}
             onClick={handleSubmit}
           >
             Confirm
           </ColorButton>
-          <ColorButton sx={{ width: 120, height: 60 }} onClick={() => setCardState()}>
+          <ColorButton sx={{ width: 130, height: 50, fontSize: 18 }} onClick={() => setCardState()}>
             Cancel
           </ColorButton>
         </UserBtnInfo>

@@ -16,6 +16,7 @@ import { Switch, Button, ButtonGroup } from '@mui/material';
 
 //단위변환
 import configureMeasurements, { mass, length } from 'convert-units';
+import { BodyInfo, NickInCardText, StatusInCardText } from '../styledCompo/UserCardStyle';
 const convert = configureMeasurements({ mass, length });
 
 const UserInfoCard = ({ currentUserInfo, isEditable, setCardState }) => {
@@ -48,36 +49,46 @@ const UserInfoCard = ({ currentUserInfo, isEditable, setCardState }) => {
       <UserCardFrame>
         {currentUserInfo?.open && (
           <UserBodyInfo>
-            <Typography variant="h6" style={{ color: '#c4c4c4' }}>
+            <Typography style={{ color: '#c4c4c4', paddingTop: 30 }}>
               {checked ? 'height(ft)/weight(lb)' : 'height(cm)/weight(kg)'}
             </Typography>
-            <Typography variant="h4">
+            <BodyInfo style={{ paddingTop: 2, fontSize: '20px' }}>
               {checked
                 ? convert(currentUserInfo?.height).from('cm').to('ft').toFixed(2) +
                   '/' +
                   convert(currentUserInfo?.weight).from('kg').to('lb').toFixed(2)
                 : currentUserInfo?.height + '/' + currentUserInfo?.weight}
-            </Typography>
+            </BodyInfo>
             {/* <IOSSwitch checked={checked} onChange={handleChange} /> */}
-            <ButtonGroup size="small" aria-label="small button group">
+            <ButtonGroup
+              style={{ marginBottom: -10, marginTop: 10 }}
+              size="small"
+              aria-label="small button group"
+            >
               {buttons}
             </ButtonGroup>
           </UserBodyInfo>
         )}
         <br></br>
         <UserBadgeImgInfo>
-          <img src={currentUserInfo?.icon} alt="badge" style={{ width: 300 }}></img>
+          <img src={currentUserInfo?.icon} alt="badge" style={{ width: 280 }}></img>
         </UserBadgeImgInfo>
         <UserAKAInfo>
-          <Typography variant="h4">{currentUserInfo?.name}</Typography>
-          <Typography variant="h6">{currentUserInfo?.status}</Typography>
+          <NickInCardText>{currentUserInfo?.name}</NickInCardText>
+          <StatusInCardText>{currentUserInfo?.status}</StatusInCardText>
         </UserAKAInfo>
         {isEditable && (
           <UserBtnInfo>
-            <ColorButton sx={{ width: 120, height: 60 }} onClick={() => setCardState('EditInfo')}>
+            <ColorButton
+              sx={{ width: 130, height: 50, fontSize: 18, marginRight: 2 }}
+              onClick={() => setCardState('EditInfo')}
+            >
               Edit info
             </ColorButton>
-            <ColorButton sx={{ width: 120, height: 60 }} onClick={() => setCardState('ChangePw')}>
+            <ColorButton
+              sx={{ width: 130, height: 50, fontSize: 18 }}
+              onClick={() => setCardState('ChangePw')}
+            >
               Change PW
             </ColorButton>
           </UserBtnInfo>
