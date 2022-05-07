@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import {
   UserAKAInfo,
@@ -20,11 +20,16 @@ import { BodyInfo, NickInCardText, StatusInCardText } from '../styledCompo/UserC
 const convert = configureMeasurements({ mass, length });
 
 const UserInfoCard = ({ currentUserInfo, isEditable, setCardState }) => {
-  const [checked, setChecked] = useState(currentUserInfo?.unit === 'us' && true);
+  const [checked, setChecked] = useState(false);
 
-  // const handleChange = (event) => {
-  //   setChecked(event.target.checked);
-  // };
+  const temp = useMemo(() => {
+    if (currentUserInfo?.unit === 'us') {
+      setChecked(true);
+      return;
+    } else {
+      setChecked(false);
+    }
+  }, [currentUserInfo]);
 
   const buttons = [
     <Button
