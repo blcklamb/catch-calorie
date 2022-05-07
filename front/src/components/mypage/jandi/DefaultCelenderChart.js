@@ -48,6 +48,21 @@ const DefaultCelenderChart = ({ data }) => (
           itemDirection: 'top-to-bottom',
         },
       ]}
+      tooltip={(data) => {
+        return (
+          <div
+            style={{
+              fontWeight: 'bold',
+              color: '000',
+              fontSize: '1.2rem',
+              fontFamily: 'Roboto',
+            }}
+          >
+            <span>{data.day}</span>
+            <p style={{ color: '#3E5B11' }}>Kcal Remaining : {data.value} kcal </p>
+          </div>
+        );
+      }}
     />
   </div>
 );
