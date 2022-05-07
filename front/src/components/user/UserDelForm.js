@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { TextField } from '@mui/material';
-import MainButton from '../main/style/MainButton';
+
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { tokenState, userInfoState, userState } from '../../atoms';
 import * as Api from '../../api';
@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router';
 
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import { DelBox } from '../styledCompo/UserDelStyle';
 
 const style = {
   position: 'absolute',
@@ -67,13 +68,13 @@ export default function UserDelForm() {
         <ListItemText>Delete my account</ListItemText>
       </ListItem>
       <Modal
-        style={{ zIndex: 4000 }}
+        style={{ zIndex: 400000000 }}
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <DelBox sx={style}>
           <Typography id="modal-modal-title" variant="h5" component="h2">
             ⚠️&nbsp;&nbsp;&nbsp;Do you really want to delete your account?&nbsp;&nbsp;⚠️
           </Typography>
@@ -87,13 +88,13 @@ export default function UserDelForm() {
             onChange={(e) => setDelMessage(e.target.value)}
           ></TextField>
           <br></br>
-          <Button sx={{ mt: 2 }} variant="contained" onClick={handleDel}>
-            확인
+          <Button sx={{ mt: 2 }} color="error" variant="contained" onClick={handleDel}>
+            Confirm
           </Button>
-          <Button sx={{ mt: 2, ml: 1 }} variant="outlined" onClick={handleClose}>
-            취소
+          <Button sx={{ mt: 2, ml: 1 }} variant="outlined" color="success" onClick={handleClose}>
+            Cancel
           </Button>
-        </Box>
+        </DelBox>
       </Modal>
     </div>
   );

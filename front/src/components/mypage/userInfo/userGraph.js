@@ -12,12 +12,16 @@ import {
   UserBadgeImgInfo,
   ColorButton,
   CardText,
-} from '../../styledCompo/uesrStyle';
+} from '../../styledCompo/LoginStyle';
+
+import MainGraph from '../../main/MainGraph';
 
 function UserGraph({ currentUserInfo }) {
   return (
     <>
-      <UserCardFrame>userGraph</UserCardFrame>
+      {/* <UserCardFrame> */}
+      <MainGraph />
+      {/* </UserCardFrame> */}
     </>
   );
 }

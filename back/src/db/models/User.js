@@ -22,7 +22,7 @@ class User {
     }
 
     static delete({ id }) {
-        return UserModel.remove({ id });
+        return UserModel.findByIdAndDelete(id);
     }
 }
 

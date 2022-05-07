@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import TextField from '@mui/material/TextField';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import Switch from '@mui/material/Switch';
+import { Button, ButtonGroup } from '@mui/material';
 
 import MainButton from './style/MainButton';
+import { AddAddButton, AddCancelButton } from '../styledCompo/MainMuiCustom';
+
+import { BodyContainer, TrackingSwitchContainer } from '../styledCompo/mainStyle';
+import {
+  AddGlassBodyContainer,
+  AddFormsContainer,
+  AddTitle,
+  AddFormSection,
+  AddFormTitle,
+  AddButtonContainer,
+} from '../styledCompo/Add';
+import { LoginGlass, TitleText, RedSpan } from '../styledCompo/LoginStyle';
+import { ValidationTextField } from '../styledCompo/muiCustom';
 
 import Header from '../Header';
 import Footer from '../Footer';
@@ -27,64 +37,125 @@ function MainExerciseAdd({}) {
   const [kcal, setKcal] = useState();
   const [unit, setUnit] = useState('kilogram');
 
+  const [checked, setChecked] = useState(true);
+
+  const [isNameEmpty, setIsNameEmpty] = useState(false);
+  const [isKcalEmpty, setIsKcalEmpty] = useState(false);
+  const [isKcalNumber, setIsKcalNumber] = useState(true);
+
+  useEffect(() => {
+    if (checked === true) {
+      setUnit('kilogram');
+    } else {
+      setUnit('pound');
+    }
+  }, [checked]);
+
+  const handleSwitch = (event) => {
+    setChecked(event.target.checked);
+  };
+
   const handleSubmit = async () => {
+    setIsNameEmpty(!name);
+    setIsKcalEmpty(!kcal);
+    setIsKcalNumber(Number(kcal) > 0);
+
     try {
-      await Api.post(`exercises`, {
-        name: name,
-        kcal: kcal,
-        unit: unit,
-      });
-      alert('Exercise has been added');
-      navigate(`/tracking/${user._id}`, { replace: false });
+      if (name && kcal && Number(kcal) > 0) {
+        await Api.post(`exercises`, {
+          name: name,
+          kcal: kcal,
+          unit: unit,
+        }).then((res) => res.status === 201 && alert('Exercise has been added'));
+        navigate(`/tracking/${user._id}`, { replace: false });
+      }
     } catch (err) {
       alert('Exercise that already exists');
     }
   };
 
+  const buttons = [
+    <Button
+      key="cm/kg"
+      color="success"
+      variant={checked ? 'contained' : 'outlined'}
+      onClick={() => setChecked(true)}
+    >
+      Metric
+    </Button>,
+    <Button
+      key="ft/lb"
+      color="success"
+      variant={!checked ? 'contained' : 'outlined'}
+      onClick={() => setChecked(false)}
+    >
+      U.S.Standard
+    </Button>,
+  ];
+
   return (
     <>
       <Header />
-      <div style={{ margin: '100px 80px' }}>
-        <h1>Add Exercise</h1>
-        <div style={{ display: 'flex' }}>
-          <div>
-            <h2>Please enter a name</h2>
-            <TextField
-              id="outlined-basic"
-              label="exercise name"
-              variant="outlined"
-              inputValue={name}
-              onBlur={(e) => setName(e.target.value)}
-            />
-            <h2>Please enter a kcal</h2>
-            <TextField
-              id="outlined-basic"
-              label="kcal"
-              variant="outlined"
-              inputValue={kcal}
-              onBlur={(e) => setKcal(e.target.value)}
-            />
-            <h2>Please select a unit</h2>
-
-            <FormControl>
-              <FormLabel id="demo-controlled-radio-buttons-group">unit</FormLabel>
-              <RadioGroup
-                aria-labelledby="demo-controlled-radio-buttons-group"
-                name="controlled-radio-buttons-group"
-                value={unit}
-                onChange={(e) => setUnit(e.target.value)}
-              >
-                <FormControlLabel value="kilogram" control={<Radio />} label="kilogram" />
-                <FormControlLabel value="pound" control={<Radio />} label="pound" />
-              </RadioGroup>
-            </FormControl>
-          </div>
-        </div>
-        <MainButton variant="contained" onClick={handleSubmit}>
-          Add
-        </MainButton>
-      </div>
-      <Footer />
+      <BodyContainer>
+        <LoginGlass style={{ marginTop: '150px' }}>
+          <AddTitle>
+            Add <br />
+            Exercise
+          </AddTitle>
+          <AddFormsContainer>
+            <AddFormSection>
+              <AddFormTitle>Please Enter a Name</AddFormTitle>
+              <ValidationTextField
+                id="outlined-basic"
+                label="exercise name"
+                variant="outlined"
+                inputValue={name}
+                onBlur={(e) => setName(e.target.value)}
+                helperText={isNameEmpty && <RedSpan>Please enter a name</RedSpan>}
+                style={{ width: '100%' }}
+              />
+            </AddFormSection>
+            <AddFormSection>
+              <AddFormTitle>Please Enter a Kcal Per Unit Weight</AddFormTitle>
+              <TrackingSwitchContainer>
+                <ButtonGroup
+                  style={{ marginBottom: -10, marginTop: 10 }}
+                  size="small"
+                  aria-label="small button group"
+                >
+                  {buttons}
+                </ButtonGroup>
+              </TrackingSwitchContainer>
+              <ValidationTextField
+                id="outlined-basic"
+                label="kcal"
+                variant="outlined"
+                inputValue={kcal}
+                onBlur={(e) => setKcal(e.target.value)}
+                helperText={
+                  isKcalEmpty ? (
+                    <RedSpan>Please enter a kcal per unit weight</RedSpan>
+                  ) : (
+                    !isKcalNumber && <RedSpan>Please enter a number only</RedSpan>
+                  )
+                }
+                style={{ width: '50%' }}
+              />{' '}
+            </AddFormSection>{' '}
+          </AddFormsContainer>
+          <AddButtonContainer>
+            <AddAddButton variant="contained" onClick={handleSubmit}>
+              Add
+            </AddAddButton>
+            <AddCancelButton
+              variant="contained"
+              onClick={() => navigate(`/tracking/${user._id}`, { replace: false })}
+            >
+              Cancel
+            </AddCancelButton>
+          </AddButtonContainer>
+        </LoginGlass>
+      </BodyContainer>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { Food } from "../db";
 
 class foodService {
-    static addFood({ category, name, kcal_per_100g, kcal_per_lb}) {
+    static addFood({ category, name, kcal_per_100g, kcal_per_lb }) {
         return Food.create({ newFood: { category, name, kcal_per_100g, kcal_per_lb } });
     }
 
@@ -25,7 +25,7 @@ class foodService {
         return Food.update({ id, toUpdate: { $inc: { views: 1 } } }, { new: true });
     }
 
-    static async convertUnit({kcal, unit}) {
+    static async convertUnit({ kcal, unit }) {
         let kcal_per_lb = kcal;
         let kcal_per_100g = kcal;
 

@@ -1,12 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { Container, Col, Row, Form, Button } from "react-bootstrap";
+import Alert, { useAlert } from 'react-alert';
 
 // Mui
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+
 import Container from '@mui/material/Container';
 
 import * as Api from '../../api';
@@ -14,67 +14,76 @@ import * as Api from '../../api';
 import Header from '../Header';
 import Footer from '../Footer';
 import { validateEmail } from '../../utils';
-// import recoil
-import { useRecoilState } from 'recoil';
-import { tokenState, userState } from '../../atoms';
 
 // import styled compo
-import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/uesrStyle';
+import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/muiCustom';
+import { CaloriesBack, CatchBack, LoginGlass, TitleText } from '../styledCompo/LoginStyle';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
   const isEmailValid = validateEmail(email);
   const [sentEmail, setSentEmail] = useState(true);
   const navigate = useNavigate();
+  const Alert = useAlert();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await Api.put('password/init', {
-      email,
-    });
-
-    const temp = res.data;
-    console.log(temp, '이메일이 정상적으로 전송되었습니다.');
-    alert('Temporary password sent successfully.');
-    navigate('/login', { replace: true });
-
-    setEmail('');
     try {
+      Alert.success('Temporary password sent successfully.');
+      const res = await Api.put('password/init', {
+        email,
+      });
+
+      const temp = res.data;
+      console.log(temp, '이메일이 정상적으로 전송되었습니다.');
+
+      navigate('/login', { replace: true });
+
+      setEmail('');
     } catch (err) {
       setSentEmail(false);
-      alert('이메일이 정상적으로 전송되지 못했습니다.');
+      Alert.success('The email was not sent normally.');
+      // alert('이메일이 정상적으로 전송되지 못했습니다.');
     }
   };
 
   return (
     <div>
       <Header></Header>
+      <CatchBack>Catch</CatchBack>
+      <CaloriesBack>Calories</CaloriesBack>
       <Container
-        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 50 }}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: 400,
+          marginBottom: 400,
+        }}
       >
-        <div>
+        <LoginGlass>
           <form
             action="/"
             onSubmit={handleSubmit}
             style={{
-              marginTop: 100,
-              marginBottom: 100,
+              marginTop: 120,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexFlow: 'column',
             }}
           >
-            <h1 style={{ margin: 10 }}>Find Password</h1>
+            <TitleText style={{ fontSize: '80px' }}>Find Password</TitleText>
             <Box
               sx={{
-                '& > :not(style)': { m: 1, width: '34ch' },
+                width: '438px',
               }}
               noValidate
               autoComplete="off"
             >
               <ValidationTextField
+                style={{ width: 438, marginBottom: 80 }}
                 autoFocus
                 required
                 // {!checkLogin && error}
@@ -96,10 +105,16 @@ function LoginForm() {
               <br></br>
               <Stack
                 spacing={1}
-                direction="row"
-                sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                // direction="row"
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginBottom: 10,
+                }}
               >
                 <ColorButton
+                  style={{ width: '100%' }}
                   variant="contained"
                   type="submit"
                   disabled={!isEmailValid}
@@ -107,7 +122,11 @@ function LoginForm() {
                 >
                   Send a temporary PW
                 </ColorButton>
-                <ColorButtonB variant="outlined" onClick={() => navigate(-1)}>
+                <ColorButtonB
+                  style={{ width: '100%' }}
+                  variant="outlined"
+                  onClick={() => navigate(-1)}
+                >
                   back
                 </ColorButtonB>
               </Stack>
@@ -139,9 +158,8 @@ function LoginForm() {
             </button>
             <button onClick={() => navigate('/register')}>회원가입하기</button>
           </form> */}
-        </div>
+        </LoginGlass>
       </Container>
-      <Footer></Footer>
     </div>
   );
 }

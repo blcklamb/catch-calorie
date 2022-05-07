@@ -2,12 +2,14 @@ import express from "express";
 import cors from "cors";
 import schedule from "node-schedule";
 
-import { userRouter } from "./routers/userRouter";
-import { foodRouter } from "./routers/foodRouter";
-import { exerRouter } from "./routers/exerRouter";
-import { trackingRouter } from "./routers/trackingRouter";
-import { heatmapRouter } from "./routers/heatmapRouter";
 import { awardRouter } from "./routers/awardRouter";
+import { badgeRouter } from "./routers/badgeRouter";
+import { exerRouter } from "./routers/exerRouter";
+import { foodRouter } from "./routers/foodRouter";
+import { heatmapRouter } from "./routers/heatmapRouter";
+import { trackingRouter } from "./routers/trackingRouter";
+import { userRouter } from "./routers/userRouter";
+
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 import heatmap_scheduler from "./middlewares/heatmap_scheduler";
 
@@ -25,19 +27,19 @@ app.use(express.urlencoded({ extended: false }));
 // 매일 00시 00분 00초마다 heatmap DB 업데이트
 schedule.scheduleJob("0 0 0 * * *", heatmap_scheduler);
 
-// 기본 페이지
-// 브라우저에서 로그아웃 시 연결되게 하여 쿠키에 저장된 refresh token 삭제
+// 기본 페이지, 브라우저에서 로그아웃 시 연결되게 하여 쿠키에 저장된 refresh token 삭제
 app.get("/", (req, res) => res.send("안녕하세요, 13팀 데이터 분석 프로젝트 API 입니다."));
 
-// // router, service 구현 (userRouter는 맨 위에 있어야 함.)
+// router, service 구현 (userRouter는 맨 위에 있어야 함.)
 app.use(userRouter);
-app.use(foodRouter);
-app.use(exerRouter);
-app.use(trackingRouter);
-app.use(heatmapRouter);
 app.use(awardRouter);
+app.use(badgeRouter);
+app.use(exerRouter);
+app.use(foodRouter);
+app.use(heatmapRouter);
+app.use(trackingRouter);
 
-// // 순서 중요 (router 에서 next() 시 아래의 에러 핸들링  middleware로 전달됨)
+// 순서 중요 (router 에서 next() 시 아래의 에러 핸들링  middleware로 전달됨)
 app.use(errorMiddleware);
 
 export { app };

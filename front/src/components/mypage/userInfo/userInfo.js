@@ -1,32 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
-import { userInfoState } from '../../../atoms';
-
 import UserCard from '../../user/UserCard';
 
-import {
-  BadgesContainer,
-  UserAKAInfo,
-  UserContainer,
-  UserCardFrame,
-  UserBodyInfo,
-  UserBtnInfo,
-  UserBadgeImgInfo,
-  ColorButton,
-  CardText,
-} from '../../styledCompo/uesrStyle';
+import { BadgesContainer, UserContainer } from '../../styledCompo/LoginStyle';
 
-import { useNavigate } from 'react-router-dom';
+import Flippy, { FrontSide, BackSide } from 'react-flippy';
+
 import UserGraph from './userGraph';
+import UserTrackingList from './UserTrackingList';
 
 function UserInfo({ currentUserInfo }) {
   return (
     <>
       <BadgesContainer>
-        {/* <CardText>UserCard</CardText> */}
-        <UserContainer>
+        <UserContainer style={{ zIndex: '55' }}>
           <UserCard currentUserInfo={currentUserInfo}></UserCard>
-          <UserGraph currentUserInfo={currentUserInfo}></UserGraph>
+          <Flippy flipOnClick={true}>
+            <FrontSide
+              style={{
+                width: '500px',
+                height: '600px',
+                borderRadius: '27.3186px',
+                zIndex: '300',
+                padding: '30px',
+
+                background:
+                  'linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), rgba(255, 255, 255, 0.3)',
+                boxShadow: '0px 5.334px 40.005px rgba(0, 0, 0, 0.25)',
+                backdropFilter: 'blur(10.005px)',
+              }}
+            >
+              <UserTrackingList currentUserInfo={currentUserInfo}></UserTrackingList>
+            </FrontSide>
+            <BackSide
+              style={{
+                width: '500px',
+                height: '600px',
+                borderRadius: '27.3186px',
+                zIndex: '300',
+                padding: '35px',
+
+                background:
+                  'linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), rgba(255, 255, 255, 0.3)',
+                boxShadow: '0px 5.334px 40.005px rgba(0, 0, 0, 0.25)',
+                backdropFilter: 'blur(10.005px)',
+              }}
+            >
+              <UserGraph currentUserInfo={currentUserInfo}></UserGraph>
+            </BackSide>
+          </Flippy>
         </UserContainer>
       </BadgesContainer>
     </>

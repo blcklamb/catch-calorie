@@ -30,10 +30,10 @@ exerRouter.post("/exercises/:id", async (req, res, next) => {
     }
 });
 
-// 운동 새로 등록할 때
+// DB에 없는 운동 새로 등록할 때
 exerRouter.post("/exercises", login_required, async (req, res, next) => {
     try {
-        const { name, kcal, unit } = req.body;
+        const { name, kcal, unit } = req.body; // validation
 
         const exercise = await exerService.getExerByName({ name });
         if (exercise) throw new Error("Router: 이미 등록되어 있는 운동입니다.");
@@ -43,7 +43,7 @@ exerRouter.post("/exercises", login_required, async (req, res, next) => {
         const newExercise = await exerService.addExer({
             name,
             kcal_per_kg,
-            kcal_per_lb
+            kcal_per_lb,
         });
         if (newExercise.errorMessage) throw new Error(newExercise.errorMessage);
 

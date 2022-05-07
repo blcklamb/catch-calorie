@@ -1,38 +1,95 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Switch from '@mui/material/Switch';
+import { ButtonGroup } from '@mui/material';
+
+import {
+  TrackingListTr,
+  TrackingListTd,
+  TrackingListTdAction,
+  TrackingListTdStart,
+  TrackingListTdEnd,
+  TrackingListTdInput,
+  TrackingListTdInputText,
+  TrackingListIconContainer,
+  TrackingListIcon,
+} from '../styledCompo/mainStyle';
+
+import { ValidationTextField } from '../styledCompo/muiCustom';
+
+import { RedSpan } from '../styledCompo/LoginStyle';
 
 import { useRecoilState } from 'recoil';
-import { trackingUpdateState } from '../../atoms';
+import { trackingUpdateState, trackingFoodUnitState } from '../../atoms';
 
 import * as Api from '../../api';
 
-function TrackingFoodList({ food }) {
+function TrackingFoodList({ food, isTrackingPage }) {
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   const [isEditing, setIsEditing] = useState(false);
-  const [gram, setGram] = useState(food.gram);
+
+  const [weight, setWeight] = useState(food.gram);
+
+  const [isWeightEmpty, setIsWeightEmpty] = useState(false);
+  const [isWeightNumber, setIsWeightNumber] = useState(true);
+
+  const [unit, setUnit] = useState('us');
+
+  const [checked, setChecked] = useState(true);
+
+  useEffect(() => {
+    setWeight(food.gram);
+  }, [food.gram]);
+
+  useEffect(() => {
+    if (checked === true) {
+      setUnit('non us');
+    } else {
+      setUnit('us');
+    }
+  }, [checked]);
+
+  const handleSwitch = (event) => {
+    setChecked(event.target.checked);
+  };
 
   const onChange = (e) => {
-    setGram(e.target.value);
+    setWeight(e.target.value);
   };
 
   const handleCheck = async (e) => {
-    await Api.put('tracking/food', {
-      id: food.id,
-      gram: gram,
-    });
+    setIsWeightEmpty(!Number(weight));
+    setIsWeightNumber(!isNaN(weight));
 
-    setIsEditing(false);
-    setTrackingUpdate(!trackingUpdate);
+    try {
+      if (Number(weight) && !isNaN(weight)) {
+        await Api.put('tracking/food', {
+          id: food.id,
+          weight: Number(weight),
+          unit: unit,
+        });
+
+        setIsEditing(false);
+        setTrackingUpdate(!trackingUpdate);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleModify = (e) => {
     setIsEditing(true);
   };
 
-  const handleCancle = (e) => {
+  const handleCancel = (e) => {
+    setWeight(food.gram);
+
+    setIsWeightEmpty(false);
+    setIsWeightNumber(true);
+
     setIsEditing(false);
   };
 
@@ -43,47 +100,108 @@ function TrackingFoodList({ food }) {
   };
 
   const previewKcal = () => {
-    return Math.round((gram * food.calorie) / food.gram);
+    // gram에 숫자가 아닌 값이 입력되면 미리보기 칼로리 0
+    if (!isNaN(weight)) {
+      const gram = unit === 'us' ? weight * 453.59 : weight;
+
+      return Math.round((Number(gram) * food.calorie) / food.gram);
+    } else {
+      return 0;
+    }
   };
+
+  const buttons = [
+    <Button
+      key="cm/kg"
+      color="success"
+      variant={checked ? 'contained' : 'outlined'}
+      onClick={() => setChecked(true)}
+    >
+      Metric
+    </Button>,
+    <Button
+      key="ft/lb"
+      color="success"
+      variant={!checked ? 'contained' : 'outlined'}
+      onClick={() => setChecked(false)}
+    >
+      U.S.Standard
+    </Button>,
+  ];
 
   return (
     <>
       {isEditing ? (
-        <div style={{ display: 'flex' }}>
-          <div style={{ display: 'flex' }}>
-            <div style={{ marginRight: '30px' }}>{food.name}</div>
-            <TextField
-              id="outlined-name"
-              label="gram"
-              value={gram}
-              onChange={onChange}
-              style={{ marginRight: '30px' }}
-            />
-            <div style={{ marginRight: '30px' }}>{previewKcal()}</div>
-          </div>
-          <div>
-            <Button variant="contained" type="submit" onClick={handleCheck}>
-              Check
-            </Button>
-            <Button variant="contained" type="submit" onClick={handleCancle}>
-              Cancle
-            </Button>
-          </div>
-        </div>
+        // 수정 모드
+        <TrackingListTr>
+          <TrackingListTdStart>{food.name}</TrackingListTdStart>
+          <TrackingListTdInput>
+            <tr>
+              <ValidationTextField
+                id="outlined-name"
+                label="weight"
+                value={weight}
+                onChange={onChange}
+                helperText={
+                  !isWeightNumber ? (
+                    <RedSpan>Please enter a number only</RedSpan>
+                  ) : (
+                    isWeightEmpty && <RedSpan>Please enter a weight</RedSpan>
+                  )
+                }
+              />
+            </tr>
+            <tr>
+              <ButtonGroup
+                size="small"
+                aria-label="small button group"
+              >
+                {buttons}
+              </ButtonGroup>
+            </tr>
+          </TrackingListTdInput>
+          <TrackingListTd>
+            {previewKcal()}kcal/{unit === 'us' ? 'lb' : 'g'}
+          </TrackingListTd>
+          <TrackingListTdAction>
+            <TrackingListIcon src="/done.png" alt="Done" onClick={handleCheck}></TrackingListIcon>
+          </TrackingListTdAction>
+          <TrackingListTdEnd>
+            <TrackingListIcon
+              src="/cancel.png"
+              alt="Cancel"
+              onClick={handleCancel}
+            ></TrackingListIcon>
+          </TrackingListTdEnd>
+        </TrackingListTr>
       ) : (
-        <div style={{ display: 'flex' }}>
-          <div style={{ display: 'flex' }}>
-            <div style={{ marginRight: '30px' }}>{food.name}</div>
-            <div style={{ marginRight: '30px' }}>{food.gram}g</div>
-            <div style={{ marginRight: '30px' }}>{food.calorie}kcal</div>
-            <Button variant="contained" type="submit" onClick={handleModify}>
-              Modify
-            </Button>
-            <Button variant="contained" type="submit" onClick={handleDelete}>
-              Delete
-            </Button>
-          </div>
-        </div>
+        <TrackingListTr
+          style={isTrackingPage !== 'tracking' ? { lineHeight: '20px' } : { lineHeight: '3.5rem' }}
+        >
+          {/* <TrackingListTr isTrackingPage={isTrackingPage}> */}
+          <TrackingListTdStart>{food.name}</TrackingListTdStart>
+          <TrackingListTd>{food.gram}g</TrackingListTd>
+          <TrackingListTd>{food.calorie}kcal</TrackingListTd>
+          {/* 트래킹 페이지에서만 버튼 O */}
+          {isTrackingPage === 'tracking' && (
+            <>
+              <TrackingListTdAction>
+                <TrackingListIcon
+                  src="/edit.png"
+                  alt="Edit"
+                  onClick={handleModify}
+                ></TrackingListIcon>
+              </TrackingListTdAction>
+              <TrackingListTdEnd>
+                <TrackingListIcon
+                  src="/del.png"
+                  alt="Del"
+                  onClick={handleDelete}
+                ></TrackingListIcon>
+              </TrackingListTdEnd>
+            </>
+          )}
+        </TrackingListTr>
       )}
     </>
   );

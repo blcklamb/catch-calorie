@@ -1,5 +1,7 @@
-import { Tracking, Food, Exercise, User } from "../db";
+import { Food, Exercise, Tracking, User } from "../db";
 import { v4 as uuid } from "uuid";
+import configureMeasurements, { mass, length } from "convert-units";
+const convert = configureMeasurements({ mass, length });
 
 class trackingService {
     static async addTracking({ user_id, date }) {
@@ -11,10 +13,8 @@ class trackingService {
     }
 
     static async addFoodTracking({ user_id, date, name, gram }) {
-        const calorie = await Food.findByName({ name })
-            .then((data) => data.kcal_per_100g) // kcal_per_100g
-            .then((kcal_per_100g) => kcal_per_100g / 100) // kcal_per_g
-            .then((kcal_per_1g) => Math.floor(kcal_per_1g * gram));
+        const { kcal_per_100g } = await Food.findByName({ name });
+        const calorie = Math.floor((kcal_per_100g / 100) * gram);
 
         const toUpdate = {
             $push: { food_record: { id: uuid(), name, gram, calorie } },
@@ -43,32 +43,43 @@ class trackingService {
         return Tracking.update({ user_id, date, toUpdate });
     }
 
-    static getTrackingByUserAndDate({ user_id, date }) {
-        return Tracking.findByUserAndDate({ user_id, date });
+    static async getTrackingByUserAndDate({ user_id, date }) {
+        const tracking = await Tracking.findByUserAndDate({ user_id, date });
+        //첫 트래킹 시도 시 데이터가 없으면 권장 칼로리가 불러와지지 않는 문제 해결 위한 코드
+        if (!tracking) return this.addTracking({ user_id, date })
+        return tracking
     }
 
     static getTrackingByUser({ user_id }) {
         return Tracking.findByUser({ user_id });
     }
 
-    static async setFoodTracking({ id, gram }) {
+    static async setFoodTracking({ id, weight, unit }) {
         const data = await Tracking.findByRecordId({ id, record: "food" });
-        const { user_id, date, food_record } = data;
-        const { name } = food_record.find((food) => food.id === id);
+        const { name, calorie } = data.food_record.find((food) => food.id === id);
 
-        await this.deleteFoodTracking({ id });
+        const gram = unit === "us" ? convert(weight * 1).from("lb").to("g").toFixed(0) : weight;
+        const { kcal_per_100g } = await Food.findByName({ name });
+        const newCalorie = Math.floor((kcal_per_100g / 100) * gram);
 
-        return this.addFoodTracking({ user_id, date, name, gram });
+        const acc_cal = newCalorie - calorie;
+        const toUpdate = { gram, calorie: newCalorie, acc_cal };
+
+        return Tracking.findByRecordAndUpdate({ id, record: "food", toUpdate });
     }
 
     static async setExerTracking({ id, minute }) {
         const data = await Tracking.findByRecordId({ id, record: "exer" });
-        const { user_id, date, exer_record } = data;
-        const { name } = exer_record.find((exer) => exer.id === id);
+        const { name, calorie } = data.exer_record.find((food) => food.id === id);
 
-        await this.deleteExerTracking({ id });
+        const { weight } = await User.findById({ id: data.user_id });
+        const { kcal_per_kg } = await Exercise.findByName({ name });
+        const newCalorie = Math.floor(((kcal_per_kg * weight) / 60) * minute);
 
-        return this.addExerTracking({ user_id, date, name, minute });
+        const acc_cal = -(newCalorie - calorie);
+        const toUpdate = { minute, calorie: newCalorie, acc_cal };
+
+        return Tracking.findByRecordAndUpdate({ id, record: "exer", toUpdate });
     }
 
     static async deleteFoodTracking({ id }) {

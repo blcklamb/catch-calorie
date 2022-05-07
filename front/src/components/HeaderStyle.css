@@ -1,0 +1,30 @@
+header.mainHeader {
+  position: fixed;
+  z-index: 99999;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  top: 0;
+  left: 0;
+  transition-duration: 1s;
+  /* background-color: none; */
+  box-shadow: 1px 1px 4px 1px rgba(117, 117, 117, 0.1);
+}
+header.mainHeader:hover {
+  background-color: #f7fcef;
+  transition: background-color 0.5s;
+}
+header.ver2 {
+  position: fixed;
+  z-index: 99999;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  top: 0;
+  left: 0;
+  background-color: #f7fcef;
+  transition: background-color 1s;
+}

@@ -5,7 +5,7 @@ class awardService {
         return Award.create({ user_id });
     }
 
-    static getAwardByUser({ user_id  }) {
+    static getAwardByUser({ user_id }) {
         return Award.findByUser({ user_id });
     }
 

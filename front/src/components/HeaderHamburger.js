@@ -63,23 +63,27 @@ function Header(props) {
       <Toolbar />
       <Divider />
       <List>
-        <ListItem button key={'mypage'} onClick={() => navigate('/mypage')}>
+        <ListItem
+          button
+          key={'tracking'}
+          onClick={() => navigate(`/tracking/${userInfo._id}`, { replace: false })}
+        >
+          <ListItemText primary={'Tracking Page'} />
+        </ListItem>
+        <ListItem button key={'mypage'} onClick={() => navigate('/mypage', { replace: false })}>
           <ListItemText primary={'My Page'} />
         </ListItem>
-        <ListItem button key={'editProfile'} onClick={() => navigate('/users')}>
-          <ListItemText primary={'Edit Profile'} />
-        </ListItem>
-        <ListItem button key={'network'} onClick={() => navigate('/network')}>
+        <ListItem button key={'network'} onClick={() => navigate('/network', { replace: false })}>
           <ListItemText primary={'Network'} />
         </ListItem>
-        <ListItem button key={'signOut'} onClick={logout}>
-          <ListItemText primary={'Sign Out'} />
+        <ListItem button key={('manual', { replace: false })}>
+          <ListItemText primary={'How to use'} />
         </ListItem>
       </List>
       <Divider />
       <List>
-        <ListItem button key={'manual'}>
-          <ListItemText primary={'Manual'} />
+        <ListItem button key={'signOut'} onClick={logout}>
+          <ListItemText primary={'Log-Out'} />
         </ListItem>
         <UserDelForm />
       </List>
@@ -111,7 +115,7 @@ function Header(props) {
           display: { xs: 'block' },
           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
         }}
-        style={{ zIndex: 4000 }}
+        style={{ zIndex: 100000 }}
       >
         {drawer}
       </Drawer>

@@ -14,7 +14,7 @@ class Award {
     }
 
     static delete({ user_id }) {
-        return AwardModel.remove({ user_id });
+        return AwardModel.findOneAndDelete({ user_id });
     }
 }
 

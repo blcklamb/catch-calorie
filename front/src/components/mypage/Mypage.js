@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Header from '../Header.js';
-import Footer from '../Footer.js';
+
 import Jandi from './Jandi.js';
 import Badges from './Badges.js';
 import { useRecoilValue } from 'recoil';
@@ -10,9 +10,11 @@ import { userInfoState } from '../../atoms.js';
 import * as Api from '../../api';
 import UserInfo from './userInfo/userInfo.js';
 
+import * as MP from '../styledCompo/MypageStyle';
+
 const BadgesPage = styled.section`
-  height: 50%;
-  width: 100%;
+  height: auto;
+  width: auto;
   background-color: white;
   display: flex;
   align-items: center;
@@ -22,8 +24,8 @@ const BadgesPage = styled.section`
 `;
 
 const JandiPage = styled.section`
-  height: 60%;
-  width: 100%;
+  height: auto;
+  width: auto;
   background-color: white;
   display: flex;
   justify-content: center;
@@ -48,8 +50,8 @@ function Mypage() {
       }
       getUserInfo(userId);
     } else {
-      // 네트워크가 아닌 마이페이 누르기를 통해 들어온 경우 전역에 있는 아이디값을 통해 자신의 마이페이지 정보를 가저옴
-      console.log(user);
+      // 네트워크가 아닌 마이페이지 누르기를 통해 들어온 경우 전역에 있는 아이디값을 통해 자신의 마이페이지 정보를 가저옴
+      // console.log(user.icon);
       setCurrentUserInfo(user);
       // setIsEditable(true);
     }
@@ -58,15 +60,18 @@ function Mypage() {
   return (
     <>
       <Header />
+      <MP.MypageCircleRed></MP.MypageCircleRed>
+      <MP.MypageCircleGreen></MP.MypageCircleGreen>
       <UserInfo currentUserInfo={currentUserInfo} />
       <BadgesPage>
-        <Badges />
+        <Badges currentUserInfo={currentUserInfo} />
       </BadgesPage>
+      <MP.MypageCircleRed2></MP.MypageCircleRed2>
       <JandiPage>
         <Jandi />
       </JandiPage>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

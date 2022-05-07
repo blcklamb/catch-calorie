@@ -9,31 +9,38 @@ import { useParams } from 'react-router-dom';
 
 const JandiContainer = styled.div`
   position: relative;
-  width: 1203px;
-  height: 387px;
-  border-radius: 15px;
-  background-color: #94d82d;
-  bottom: 0px;
+  width: 1205px;
+  height: auto;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 5.33376px 40.0032px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10.0032px);
+  z-index: 55;
+  border-radius: 36.4393px;
 `;
 
 const JandiText = styled.div`
+  font-family: 'Jost', sans-serif;
+  font-weight: 800;
+  font-style: italic;
   width: 1203px;
   height: 50px;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #f03e3e;
   position: relative;
   left: 30px;
+
+  padding-top: 10px;
+
+  z-index: 55;
 `;
 
 const Jandi = () => {
   const user = useRecoilValue(userInfoState);
   const params = useParams();
-
-  const [data, setData] = useState('');
-
-  console.log('jandi', user);
-
+  const [data, setData] = useState([]);
   const [emptyData, setEmptyData] = useState(false);
 
   useEffect(() => {
@@ -41,25 +48,27 @@ const Jandi = () => {
       const userId = params.user_id;
 
       Api.get('heatmap', userId).then((res) => {
-        if (res.data.record === undefined) {
+        if (res.data[0].record === undefined) {
           setEmptyData(false);
         } else {
-          setData(res.data.record);
+          setData(res.data[0].record);
           setEmptyData(true);
+          // console.log('잔디데이터 들어오는 값', res.data[0].record);
         }
-        console.log(res.data.record);
       });
     } else {
       Api.get('heatmap', user._id).then((res) => {
-        if (res.data.record === undefined) {
+        if (res.data[0].record === undefined) {
           setEmptyData(false);
         } else {
-          setData(res.data.record);
+          setData(res.data[0].record);
           setEmptyData(true);
         }
       });
     }
   }, [user, params]);
+
+  // console.log('잔디데이터 받아서 넣은 값', data);
 
   // Api.get('heatmap', user._id).then((res) => {
   //   console.log(res.data.record);

@@ -1,213 +1,37 @@
 import React, { useContext, useEffect } from 'react';
-import styled from 'styled-components';
+
 import Lottie from 'react-lottie';
+// import MainButton from '../main/style/MainButton.js';
 
 import Header from '../Header';
-import Footer from '../Footer';
+
+import video from '../../image/mainvideo_edit.mp4';
 
 import DefaultLineChart from '../DefaultLineChart.js';
-import { DefaultBarChart } from '../DefaultBarChart.js';
+import DefaultBarChart from '../DefaultBarChart.js';
 import DefaultObesityLineChart from '../DefaultObesityLineChart.js';
 
 import Walking from '../../lottie/walking.json';
 
 import { useNavigate } from 'react-router-dom';
-import { UserStateContext } from '../../App';
+// import { useParams } from 'react-router-dom';
 
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { userState } from '../../atoms';
+import { useRecoilValue } from 'recoil';
+import { userInfoState } from '../../atoms';
+
+//HomeStyled 파일 모두 가져오기
+import * as HS from '../styledCompo/homeStyle';
 
 const COLORS = ['#5bc691', '#FFBB28', '#C66868', '#FF8042'];
-
-const FirstPage = styled.section`
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-`;
-
-const FirstPageLogo = styled.div`
-  font-size: 8rem;
-  color: #f03e3e;
-  font-style: bold;
-  margin: 150px;
-`;
-
-const FirstPageBtn = styled.button`
-  width: 500px;
-  height: 168px;
-  border-radius: 10px;
-  background: linear-gradient(145deg, #aaeb47, #8fc63b);
-
-  font-size: 5rem;
-  color: white;
-  border: none;
-
-  :hover {
-    box-shadow: 5px 5px 18px #668d2a, -5px -5px 18px #d8ff5a;
-  }
-`;
-
-const SecondPage = styled.section`
-  height: 100vh;
-  width: 100%;
-  background-color: #f7fcef;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-`;
-
-const SecondPageLeft = styled.div`
-  /* background-color: white; */
-  /* border: 1px solid #f0f1f3;
-  border-radius: 8px; */
-  width: 400px;
-  height: 407px;
-  box-sizing: border-box;
-  padding: 28px 35px;
-
-  font-size: 1.5rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SecondPageRight = styled.div`
-  width: 750px;
-  height: 407px;
-  box-sizing: border-box;
-  padding: 28px 24px 0;
-
-  border-radius: 14px;
-  background: #ecf8d9;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  font-size: 2rem;
-  border: none;
-`;
-
-const ThirdPage = styled.section`
-  height: 100vh;
-  width: 100%;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-`;
-
-const ThirdPageLeft = styled.div`
-  width: 750px;
-  height: 407px;
-  box-sizing: border-box;
-  padding: 28px 24px 0;
-
-  border-radius: 14px;
-  background: #ecf8d9;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  font-size: 2rem;
-  border: none;
-`;
-
-const ThirdPageRight = styled.div`
-  background-color: white;
-  border: 1px solid #f0f1f3;
-  border-radius: 8px;
-  width: 400px;
-  height: 407px;
-  box-sizing: border-box;
-  padding: 28px 35px;
-
-  font-size: 1.5rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: none;
-`;
-
-const FourthPage = styled.section`
-  height: 100vh;
-  width: 100%;
-  background-color: #f7fcef;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-`;
-
-const FourthPageLeft = styled.div`
-  /* background-color: white; */
-  /* border: 1px solid #f0f1f3;
-  border-radius: 8px; */
-  width: 400px;
-  height: 407px;
-  box-sizing: border-box;
-  padding: 28px 35px;
-
-  font-size: 1.5rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const FourthPageRight = styled.div`
-  width: 750px;
-  height: 407px;
-  box-sizing: border-box;
-  padding: 28px 24px 0;
-
-  border-radius: 14px;
-  background: #ecf8d9;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  font-size: 2rem;
-  border: none;
-`;
-
-const FifthPage = styled.section`
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #ecf8d9;
-`;
-
-const FifthPageCopy = styled.div`
-  font-size: 4rem;
-  color: #f03e3e;
-  font-style: bold;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  padding-top: 50px;
-`;
-
-const FifthPageBtn = styled.button`
-  width: 500px;
-  height: 168px;
-  border-radius: 10px;
-  background: linear-gradient(145deg, #aaeb47, #8fc63b);
-
-  font-size: 5rem;
-  color: white;
-  border: none;
-
-  :hover {
-    box-shadow: 5px 5px 18px #668d2a, -5px -5px 18px #d8ff5a;
-  }
-`;
 
 function Home() {
   const navigate = useNavigate();
 
-  const user = useRecoilValue(userState);
+  // const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const user = useRecoilValue(userInfoState);
 
-  console.log(user);
+  // const userId = user._id;
+  // console.log('id', userId);
 
   const defaultOptions = {
     loop: true,
@@ -217,19 +41,87 @@ function Home() {
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
-
+  // {user ? (
+  //   <Logo>
+  //     <Link
+  //       to={{ pathname: `/tracking/${user._id}` }} // 로그인 되어있을 시 로그인 된 유저의 메인페이지로 이동
+  //       style={{ textDecoration: 'none', color: '#f03e3e', cursor: 'pointer' }}
+  //     >
+  //       Catch Calories
+  //     </Link>
+  //   </Logo>
+  // )
   return (
     <>
       <Header />
-      <FirstPage>
-        <FirstPageLogo>Catch Calories</FirstPageLogo>
-        <FirstPageBtn onClick={() => navigate('/login', { replace: true })}>START</FirstPageBtn>
-      </FirstPage>
-      <SecondPage>
-        <SecondPageLeft>
-          The more obese people are, the more people do not monitor calories.
-        </SecondPageLeft>
-        <SecondPageRight>
+
+      <HS.FirstPage>
+        <HS.VideoContainer>
+          <HS.Video muted autoPlay loop>
+            <source src={video} type="video/mp4" />
+          </HS.Video>
+        </HS.VideoContainer>
+        <HS.FirstPageWrapper>
+          <HS.FirstPageLogo>Catch Calories</HS.FirstPageLogo>
+          {user ? (
+            <HS.StartButton
+              onClick={() => navigate(`/tracking/${user._id}`, { replace: true })}
+              variant="contained"
+              style={{
+                width: '20vw',
+                height: '10vh',
+                borderRadius: '25px',
+                fontSize: '2.5rem',
+              }}
+            >
+              START
+            </HS.StartButton>
+          ) : (
+            <HS.StartButton
+              onClick={() => navigate('/login', { replace: true })}
+              variant="contained"
+              style={{
+                width: '20vw',
+                height: '10vh',
+                borderRadius: '25px',
+                fontSize: '2.5rem',
+              }}
+            >
+              Start
+            </HS.StartButton>
+          )}
+        </HS.FirstPageWrapper>
+      </HS.FirstPage>
+      <HS.CircleRed1 />
+      <HS.CircleGreen1 />
+      <HS.SecondPage>
+        <HS.SecondPageLeft>
+          <HS.HeadCopy>
+            <span style={{ color: ' #e85858' }}>USA Obesity Rate </span>is on the{' '}
+            <span style={{ color: '#77b63e' }}>Rise</span>
+          </HS.HeadCopy>
+          <HS.BodyCopy>
+            <span style={{ color: '#77b63e', fontSize: '2rem' }}>'CDC says'&nbsp;</span>{' '}
+            <span style={{ color: ' #e85858', fontSize: '2rem' }}>more Americans on diets</span>
+            &nbsp;<span style={{ fontSize: '2rem' }}>compared to a decade ago</span>&nbsp;
+            <HS.HeadCopy3 style={{ fontSize: '0.8rem' }}>-NBC NEWS-</HS.HeadCopy3>
+            <br />
+            The rising obesity rate is not just a problem for the USA. &nbsp;It's becoming a{' '}
+            <span style={{ color: '#e85858' }}>global issue.</span>
+          </HS.BodyCopy>
+        </HS.SecondPageLeft>
+        <HS.SecondPageRight>
+          <DefaultObesityLineChart colors={COLORS}></DefaultObesityLineChart>
+        </HS.SecondPageRight>
+      </HS.SecondPage>
+      <HS.ThirdPage>
+        <HS.ThirdPageLeft>
+          <HS.GraphCopy>
+            {' '}
+            The more <span style={{ color: '#77b63e' }}>obese people</span> are, <br />
+            the more people <span style={{ color: '#e85858' }}>don't monitor their calories!</span>
+          </HS.GraphCopy>
+          {/* <DefaultObesityLineChart colors={COLORS}></DefaultObesityLineChart> */}
           <DefaultBarChart
             data={[
               { name: 'Underweight', SCC: '250' },
@@ -239,32 +131,79 @@ function Home() {
             ]}
             colors={COLORS}
           ></DefaultBarChart>
-        </SecondPageRight>
-      </SecondPage>
-      <ThirdPage>
-        <ThirdPageLeft>
+        </HS.ThirdPageLeft>
+        <HS.ThirdPageRight>
+          <HS.HeadCopy>
+            Correlation between <br />
+            <span style={{ color: '#77b63e' }}>calorie monitoring</span> and{' '}
+            <span style={{ color: '#e85858' }}>obesity levels</span>
+          </HS.HeadCopy>{' '}
+          <HS.BodyCopy>
+            Calorie monitoring can lower your obesity level.
+            <br />
+            Of the 2,000 people randomly selected, <br />
+            1,000 people did not monitor their income calories.
+          </HS.BodyCopy>
+        </HS.ThirdPageRight>
+      </HS.ThirdPage>
+      <HS.FourthPage>
+        <HS.CircleRed2 />
+        <HS.CircleGreen2 />
+        <HS.FourthPageLeft>
+          <HS.HeadCopy>
+            Correlation between <br />
+            <span style={{ color: '#77b63e' }}>BMI index</span> and{' '}
+            <span style={{ color: '#e85858' }}>physical activity</span>
+          </HS.HeadCopy>
+          <HS.BodyCopy>
+            The higher the BMI index, the lower the frequency of physical activity.
+            <br />
+            High obesity people don't do physical activity at all.
+          </HS.BodyCopy>
+        </HS.FourthPageLeft>
+        <HS.FourthPageRight>
+          <HS.GraphCopy>
+            {' '}
+            <span
+              style={{
+                color: '#e85858',
+              }}
+            >
+              Frequency of physical activity
+            </span>
+            &nbsp;of high obesity
+            <br />
+            which BMI index is <span style={{ color: '#77b63e' }}>30 to 32 is Zero!</span>
+          </HS.GraphCopy>
           <DefaultLineChart />
-        </ThirdPageLeft>
-        <ThirdPageRight>People who do less physical activity have a high BMI index </ThirdPageRight>
-      </ThirdPage>
-      <FourthPage>
-        <FourthPageLeft>
-          The United States has a relatively high obesity rate compared to other countries, and the
-          increase is also on the rise.
-        </FourthPageLeft>
-        <FourthPageRight>
-          <DefaultObesityLineChart colors={COLORS}></DefaultObesityLineChart>
-        </FourthPageRight>
-      </FourthPage>
-      <FifthPage>
-        <FifthPageCopy>
-          Track your calories with Catch Calories
+        </HS.FourthPageRight>
+      </HS.FourthPage>
+      <HS.FifthPage>
+        <HS.FifthPageCopy>
+          <span>
+            Monitor calories with{' '}
+            <span style={{ color: '#77b63e' }}>
+              Catch Calories <br />
+            </span>
+          </span>
+          <span style={{ color: '#f03e3e', fontSize: '4rem' }}>
+            for your <span style={{ color: '#77b63e' }}>Eating & Workout routine!</span>
+          </span>
           <Lottie options={defaultOptions} height={470} width={470} />
-          <FifthPageBtn onClick={() => navigate('/login', { replace: true })}>START</FifthPageBtn>
-        </FifthPageCopy>
-      </FifthPage>
-
-      <Footer />
+          <HS.StartButton
+            onClick={() => navigate('/login', { replace: true })}
+            variant="contained"
+            style={{
+              width: '20vw',
+              height: '10vh',
+              borderRadius: '25px',
+              fontSize: '2.5rem',
+            }}
+          >
+            START
+          </HS.StartButton>
+        </HS.FifthPageCopy>
+      </HS.FifthPage>
     </>
   );
 }

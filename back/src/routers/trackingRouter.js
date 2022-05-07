@@ -1,10 +1,13 @@
-import { Router } from "express";
 import dayjs from "dayjs";
-import { login_required } from "../middlewares/login_required";
+import { Router } from "express";
 import { trackingService } from "../services/trackingService";
+import { login_required } from "../middlewares/login_required";
+import configureMeasurements, { mass, length } from "convert-units";
+const convert = configureMeasurements({ mass, length });
 
 const trackingRouter = Router();
 
+// 유저별 트래킹 정보를 보내는 요청
 trackingRouter.get("/tracking/:user_id", async (req, res, next) => {
     try {
         const { user_id } = req.params;
@@ -12,20 +15,22 @@ trackingRouter.get("/tracking/:user_id", async (req, res, next) => {
 
         const tracking = await trackingService.getTrackingByUserAndDate({ user_id, date });
         if (!tracking) return trackingService.addTracking({ user_id, date });
-
+        
         return res.status(200).send(tracking);
     } catch (error) {
         next(error);
     }
 });
 
+// 유저가 섭취한 음식을 등록할 때
 trackingRouter.post("/tracking/food", login_required, async (req, res, next) => {
     try {
         const user_id = req.currentUserId;
-        const { name, gram } = req.body;
+        const { name, weight, unit } = req.body;
         const date = dayjs().format("YYYY-MM-DD");
 
-        const newTracking = await trackingService.addFoodTracking({ user_id, date, name, gram });
+        const converted_weight = unit === "us" ? convert(weight * 1).from("lb").to("g").toFixed(0) : weight;
+        const newTracking = await trackingService.addFoodTracking({ user_id, date, name, gram: converted_weight });
 
         return res.status(201).json(newTracking);
     } catch (error) {
@@ -33,6 +38,7 @@ trackingRouter.post("/tracking/food", login_required, async (req, res, next) => 
     }
 });
 
+// 유저가 소모한 운동을 등록할 때
 trackingRouter.post("/tracking/exer", login_required, async (req, res, next) => {
     try {
         const user_id = req.currentUserId;
@@ -47,11 +53,12 @@ trackingRouter.post("/tracking/exer", login_required, async (req, res, next) => 
     }
 });
 
+// 유저가 이미 등록한 음식 수정할 때
 trackingRouter.put("/tracking/food", login_required, async (req, res, next) => {
     try {
-        const { id, gram } = req.body;
+        const { id, weight, unit } = req.body;
 
-        const updatedTracking = await trackingService.setFoodTracking({ id, gram });
+        const updatedTracking = await trackingService.setFoodTracking({ id, weight, unit });
 
         return res.status(200).send(updatedTracking);
     } catch (error) {
@@ -59,6 +66,7 @@ trackingRouter.put("/tracking/food", login_required, async (req, res, next) => {
     }
 });
 
+// 유저가 이미 등록한 운동 수정할 때
 trackingRouter.put("/tracking/exer", login_required, async (req, res, next) => {
     try {
         const { id, minute } = req.body;
@@ -71,6 +79,7 @@ trackingRouter.put("/tracking/exer", login_required, async (req, res, next) => {
     }
 });
 
+// 유저가 이미 등록한 음식 삭제할 때
 trackingRouter.delete("/tracking/food/:id", login_required, async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -83,6 +92,7 @@ trackingRouter.delete("/tracking/food/:id", login_required, async (req, res, nex
     }
 });
 
+// 유저가 이미 등록한 운동 삭제할 때
 trackingRouter.delete("/tracking/exer/:id", login_required, async (req, res, next) => {
     try {
         const { id } = req.params;

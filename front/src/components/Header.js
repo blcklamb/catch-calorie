@@ -1,80 +1,93 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import avocado from '../image/avocado.gif';
+import avocado from '../lottie/avocado.json';
+import Lottie from 'react-lottie';
 // import { UserStateContext } from '../App';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../atoms';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { throttle } from 'lodash';
+
+import './HeaderStyle.css';
 
 import HeaderHamburger from './HeaderHamburger';
 
-const Container = styled.div`
-  position: fixed;
-  height: 100px;
-  width: 100vw;
-  background-color: #9fdc42;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  z-index: 3000;
-  top: 0;
-`;
+// const Container = styled.div`
+//   position: sticky;
+//   height: 100px;
+//   width: 100vw;
+//   background-color: transparent;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   z-index: 3000;
+//   top: 0;
+// `;
 
 const Logo = styled.h3`
+  font-family: 'Jost', sans-serif;
+  font-weight: 800;
+  font-style: italic;
   width: 50vw;
-  font-size: 2.9rem;
+  font-size: 3rem;
   color: #f03e3e;
   font-style: bold;
-  margin: 15px 30px -5px;
-  display: inline-block;
+  margin: 25px 30px 3px;
+
   z-index: 3500;
 `;
 
-const LogoCopy = styled.div`
-  font-size: 1rem;
-  color: white;
-  font-style: bold;
-  margin-left: 35px;
-  margin-bottom: 10px;
-`;
+// const Avocadobox = styled.div`
+//   width: auto;
+//   height: auto;
 
-const Avocadobox = styled.div`
-  width: 100vw;
-  height: 100px;
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: inline;
-  align-items: center;
-  position: absolute;
-`;
-const Avocado = styled.img`
-  width: 100px;
-  height: 100px;
-  margin: 15px;
-`;
+//   margin-left: 1800px;
+//   position: absolute;
+// `;
 
 function Header() {
-  const [user, setUser] = useRecoilState(userInfoState);
+  const user = useRecoilValue(userInfoState);
+  // const params = useParams();
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', throttle(updateScroll, 300));
+    return () => {
+      window.removeEventListener('scroll', throttle(updateScroll, 300));
+    };
+  }, []);
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: avocado,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
+
+  // console.log('로그인 유저', user);
   return (
     <>
-      <Container>
+      <header className={scrollPosition < 80 ? 'mainHeader' : 'ver2'}>
         <Logo>
           <Link to="/" style={{ textDecoration: 'none', color: '#f03e3e', cursor: 'pointer' }}>
             Catch Calories
           </Link>
         </Logo>
-        <LogoCopy>health tracker</LogoCopy>
+
         {user ? (
-          <>
-            <HeaderHamburger />
-          </>
+          <HeaderHamburger />
         ) : (
-          <Avocadobox>
-            <Avocado src={avocado} />
-          </Avocadobox>
+          <></>
+          // <Avocadobox>
+          //   <Lottie options={defaultOptions} height={100} width={100} />
+          // </Avocadobox>
         )}
-      </Container>
+      </header>
     </>
   );
 }

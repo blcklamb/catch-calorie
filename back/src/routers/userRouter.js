@@ -1,10 +1,14 @@
 import is from "@sindresorhus/is";
+import jwt from "jsonwebtoken";
+import fetch from "node-fetch";
+import rateLimit from "express-rate-limit";
 import { v4 as uuid } from "uuid";
 import { Router } from "express";
 import { userService } from "../services/userService";
-import { awardService } from "../services/awardService";
 import { login_required } from "../middlewares/login_required";
 import sendMail from "../middlewares/send_mail";
+import configureMeasurements, { mass, length } from "convert-units";
+const convert = configureMeasurements({ mass, length });
 
 const userRouter = Router();
 
@@ -14,8 +18,7 @@ userRouter.post("/users/register", async (req, res, next) => {
         if (is.emptyObject(req.body)) {
             throw new Error("header의 Content-Type을 application/json으로 설정해주세요.");
         }
-
-        const { email, password, name, gender, height, weight, icon } = req.body;
+        const { email, password, name, gender, height, weight, unit, icon } = req.body;
 
         const newUser = await userService.addUser({
             email,
@@ -24,9 +27,9 @@ userRouter.post("/users/register", async (req, res, next) => {
             gender,
             height,
             weight,
+            unit,
             icon,
         });
-
         if (newUser.errorMessage) {
             throw new Error(newUser.errorMessage);
         }
@@ -43,7 +46,6 @@ userRouter.post("/users/login", async (req, res, next) => {
         const { email, password } = req.body;
 
         const user = await userService.getUser({ email, password });
-
         if (user.errorMessage) {
             throw new Error(user.errorMessage);
         }
@@ -55,7 +57,7 @@ userRouter.post("/users/login", async (req, res, next) => {
 });
 
 // 특정 유저 정보 가져오기
-userRouter.get("/users/:id", login_required, async (req, res, next) => {
+userRouter.get("/users/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
 
@@ -88,8 +90,6 @@ userRouter.delete("/users/:id", login_required, async (req, res, next) => {
 
         await userService.deleteUser({ id });
 
-        await awardService.deleteAward({ user_id: id });
-
         return res.status(200).json({ result: "success" });
     } catch (error) {
         next(error);
@@ -102,13 +102,23 @@ userRouter.put("/users/:id", login_required, async (req, res, next) => {
         // URI로부터 사용자 id를 추출함.
         const { id } = req.params;
 
-        const { name, height, weight, icon, status } = req.body;
-
-        if (name === null || height === null || weight === null || icon == null || status == null) {
+        const { name, height, weight, unit, open, icon, status } = req.body;
+        if (name === null || height === null || weight === null || icon === null || status === null || unit === null || open === null) {
             throw new Error("입력되지 않은 정보가 있습니다.");
         }
 
-        const toUpdate = { name, height, weight, icon, status };
+        const converted_height = unit === "us" ? convert(height * 1).from("ft").to("cm").toFixed(0) : height;
+        const converted_weight = unit === "us" ? convert(weight * 1).from("lb").to("kg").toFixed(0) : weight;
+
+        const toUpdate = {
+            name,
+            height: converted_height,
+            weight: converted_weight,
+            unit,
+            open,
+            icon,
+            status,
+        };
 
         // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
         const updatedUser = await userService.setUser({ id, toUpdate });
@@ -122,15 +132,16 @@ userRouter.put("/users/:id", login_required, async (req, res, next) => {
     }
 });
 
-userRouter.get("/users/email/:email", async (req, res, next) => {
+// 회원가입 인증 이메일 발송
+userRouter.get("/users/email/:email", rateLimit({ windowMs: 30000, max: 1 }), async (req, res, next) => {
     try {
         const { email } = req.params;
-        const code = uuid().split("-")[0];
 
+        const code = uuid().split("-")[0];
         await sendMail(
             email, //
-            "[Catch Calorie] 인증번호가 발급되었습니다",
-            `회원님의 인증번호는 [${code}] 입니다.\n회원가입을 완료해주세요.`,
+            "[Catch Calorie] Hi, We are happy you signed up for Catch Calorie",
+            `Your verification code is [${code}].\n Please complete signing up.`,
         );
 
         return res.status(200).send(code);
@@ -145,12 +156,9 @@ userRouter.put("/password", login_required, async (req, res, next) => {
         const { old_pw, new_pw } = req.body;
 
         const user = await userService.setPassword({ id, old_pw, new_pw });
+        if (!user) throw new Error("비밀번호 변경에 실패했습니다.");
 
-        if (!user) {
-            throw new Error("비밀번호 설정 실패");
-        }
-
-        return res.send(user);
+        return res.status(200).send(user);
     } catch (error) {
         next(error);
     }
@@ -160,16 +168,18 @@ userRouter.put("/password", login_required, async (req, res, next) => {
 userRouter.put("/password/init", async (req, res, next) => {
     try {
         const { email } = req.body;
-        const user = await userService.sendNewpassword({ email });
-        return res.send("Successfully send");
+
+        await userService.sendNewpassword({ email });
+
+        return res.sendStatus(200);
     } catch (error) {
         next(error);
     }
 });
 
-userRouter.get("/users/login/github", async (req, res) => {
+userRouter.get("/users/login/github", async (req, res, next) => {
     try {
-        const { code } = req.query;
+        const code = req.query.code.slice(0, -1);
 
         const base = "https://github.com/login/oauth/access_token";
         const params = new URLSearchParams({
@@ -179,46 +189,49 @@ userRouter.get("/users/login/github", async (req, res) => {
         }).toString();
         const url = `${base}?${params}`;
 
-        const token = await fetch(url, {
+        const t0ken = await fetch(url, {
             method: "POST",
             headers: { Accept: "application/json" },
         }).then((res) => res.json());
-
-        const { access_token } = token;
+        const { access_token } = t0ken;
         const api = "https://api.github.com";
+
         const data = await fetch(`${api}/user`, {
-            headers: {
-                Authorization: `token ${access_token}`,
-            },
+            headers: { Authorization: `token ${access_token}` },
         }).then((res) => res.json());
+        const name = data.name || data.login;
 
         const emailData = await fetch(`${api}/user/emails`, {
-            headers: {
-                Authorization: `token ${access_token}`,
-            },
+            headers: { Authorization: `token ${access_token}` },
         }).then((res) => res.json());
         const { email } = emailData.find((email) => email.primary === true && email.verified === true);
 
-        // user 정보  처리
-        let user = await userService.getUserByEmail({ email });
-        if (!user) {
-            user = await userService.addUser({
-                name: data.name || data.login,
-                email,
-                description: data.bio || "Hello World!",
-            });
+        const user = await userService.getUserByEmail({ email });
+        if (user) {
+            var token = jwt.sign({ user_id: user._id }, process.env.JWT_SECRET_KEY || "secret-key") || null;
+            var _id = user._id || null;
         }
 
-        const { _id, name, description, oauth } = user;
+        return res.status(200).json({ token, _id, email, name });
+    } catch (error) {
+        next(error);
+    }
+});
 
-        return res.status(200).json({
-            token: jwt.sign({ user_id: _id }, process.env.JWT_SECRET_KEY || "secret-key"),
-            _id,
+userRouter.post("/users/register/social", async (req, res, next) => {
+    try {
+        const { email, name, gender, height, weight, icon } = req.body;
+
+        const newUser = await userService.addSocialUser({
             email,
             name,
-            description,
-            oauth,
+            gender,
+            height,
+            weight,
+            icon,
         });
+
+        return res.status(201).json(newUser);
     } catch (error) {
         next(error);
     }

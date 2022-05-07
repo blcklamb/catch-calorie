@@ -13,11 +13,12 @@ import {
   UserBodyInfo,
   UserBtnInfo,
   UserBadgeImgInfo,
-  ColorButton,
-  ValidationTextField,
-} from '../styledCompo/uesrStyle';
+} from '../styledCompo/LoginStyle';
 
-const ChangePwForm = ({ setIsEditPw }) => {
+import { ColorButton, ValidationTextField } from '../styledCompo/muiCustom';
+import { BodyInfo } from '../styledCompo/UserCardStyle';
+
+const ChangePwForm = ({ setCardState }) => {
   //현재 바밀번호와, 바꿀 비밀번호를 저장하는 state
   const [pwInfo, setPwInfo] = useState({
     oldPw: '',
@@ -52,7 +53,7 @@ const ChangePwForm = ({ setIsEditPw }) => {
 
       const temp = res.data;
       console.log(temp, '수정 요청이 잘 갔습니다요!');
-      setIsEditPw(false);
+      setCardState();
       alert('Your password has been changed successfully');
     } catch (err) {
       console.log('아쉽게도 잘 가지 않았군요 휴먼', err);
@@ -64,7 +65,7 @@ const ChangePwForm = ({ setIsEditPw }) => {
       <UserCardFrame>
         <UserBodyInfo></UserBodyInfo>
         <UserBodyInfo>
-          <Typography variant="h4">PW Change Form</Typography>
+          <BodyInfo variant="h5">PW Change Form</BodyInfo>
         </UserBodyInfo>
 
         <UserBadgeImgInfo style={{ flexFlow: 'column' }}>
@@ -105,13 +106,13 @@ const ChangePwForm = ({ setIsEditPw }) => {
 
         <UserBtnInfo>
           <ColorButton
-            sx={{ width: 120, height: 60 }}
+            sx={{ width: 130, height: 50, fontSize: 18, marginRight: 2 }}
             disabled={!isFormValid}
             onClick={handleSubmit}
           >
             Confirm
           </ColorButton>
-          <ColorButton sx={{ width: 120, height: 60 }} onClick={() => setIsEditPw(false)}>
+          <ColorButton sx={{ width: 130, height: 50, fontSize: 18 }} onClick={() => setCardState()}>
             Cancel
           </ColorButton>
         </UserBtnInfo>

@@ -1,92 +1,119 @@
-import React, { useState, useEffect } from 'react';
-import * as Api from '../../api';
+import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
-import Yoga from './yoga.png';
-import { Container, Grid } from '@mui/material';
-
-import Tooltip from '../Tooltip';
-
-import { useRecoilValue } from 'recoil';
-import { userInfoState } from '../../atoms';
+import * as Api from '../../api';
+import Tooltip from './Tooltip';
+import { Container, Grid, shadows } from '@mui/material';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import { userInfoState, BadgesState } from '../../atoms';
+import { useParams } from 'react-router-dom';
 
 const BadgesContainer = styled.div`
-  width: 1203px;
-  height: 700px;
-  border-radius: 15px;
-  background-color: #94d82d;
+  width: 1205px;
+  height: 650px;
+
   display: flex;
   justify-content: center;
   align-items: center;
-`;
 
-const BadgesWrap = styled.div`
-  width: 1100px;
-  height: 600px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 3.64393px 27.3295px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(27.3295px);
+  /* Note: backdrop-filter has minimal browser support */
 
-  display: flex;
-  gap: 20px 8%;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-
-  /* background-color: white; */
-
-  position: absolute;
+  border-radius: 36.4393px;
 `;
 
 const BadgesText = styled.div`
-  width: 1203px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  width: 20px;
   height: 50px;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #f03e3e;
   position: relative;
   left: 30px;
+
+  padding-top: 10px;
 `;
 
-const Badges = () => {
+const Badges = ({ currentUserInfo }) => {
+  // const [badgesList, setBadgesList] = useRecoilState(badgesState);
+
   const user = useRecoilValue(userInfoState);
-  const [badges, setBadges] = useState([]);
-  console.log('뱃지', badges);
+  const params = useParams();
+  const [badges, setBadges] = useRecoilState(BadgesState);
+  const [award, setAward] = useState([]);
+
+  const isEditable = useMemo(() => currentUserInfo?._id === user?._id, [currentUserInfo, user]);
+
+  // const awardNameAr = useMemo(
+  //   () =>
+  //     Object.keys(award).filter((item) => {
+  //       if (item === '_id' || item === 'user_id' || item === '__v') {
+  //         return false;
+  //       } else {
+  //         return true;
+  //       }
+  //     }),
+  //   [award],
+  // );
+
+  // useEffect(() => {
+  //   Api.get(`badges`).then((res) => setBadges(res.data));
+  // }, []);
+
+  // const userId = params.user_id;
+  // console.log(userId);
+
+  // useEffect(() => {
+  //   Api.get('awards', user._id).then((res) => setAward(res.data));
+  // }, [user]);
+
+  // useEffect(() => {
+  //   console.log('뱃지데이터', badges);
+  // }, [badges]);
 
   useEffect(() => {
-    Api.get('users', user._id).then((res) => setBadges(res.data.icon));
-  }, [user]);
+    if (params.user_id) {
+      const userId = params.user_id;
+      Api.get('awards', userId).then((res) => setAward(res.data));
+    } else {
+      Api.get('awards', user._id).then((res) => setAward(res.data));
+    }
+  }, [params.user_id, user]);
 
   return (
-    <div>
+    <div style={{ zIndex: '55' }}>
       <BadgesText>Badges</BadgesText>
+      <BadgesContainer>
+        <Container title sx={{ marginTop: 2 }}>
+          <Grid container spacing={3.2}>
+            {badges.map((badge, idx) => {
+              const isLock = award[badge.award_name] < badge.level; //유저 어워드 정보의 각 뱃지 레벨이 뱃지 리스트 정보의 레벨 보다 낮으면 락 걸기
 
-      <Container sx={{ marginTop: 2, bgcolor: '#94d82d', borderRadius: 3 }}>
-        <Grid container spacing={1}>
-          <Grid spacing={3} sx={{ margin: 3 }}>
-            <Tooltip />
+              return (
+                <Grid item sx={{ margin: 0.1 }} key={idx}>
+                  <Tooltip
+                    badgeName={badge.badge_name}
+                    awardName={badge.award_name}
+                    src={badge.src}
+                    badgeLevel={badge.level}
+                    description={badge.description}
+                    isLock={isLock}
+                    currentUserInfo={currentUserInfo}
+                    isEditable={isEditable}
+                  />
+                </Grid>
+              );
+            })}
           </Grid>
-          <Grid spacing={3} sx={{ margin: 3 }}>
-            <Tooltip />
-          </Grid>
-          <Grid spacing={3} sx={{ margin: 3 }}>
-            <Tooltip />
-          </Grid>
-          <Grid spacing={3} sx={{ margin: 3 }}>
-            <Tooltip />
-          </Grid>
-          <Grid spacing={3} sx={{ margin: 3 }}>
-            <Tooltip />
-          </Grid>
-        </Grid>
-      </Container>
-
-      {/* <BadgesContainer>
-        <BadgesWrap>
-          <Tooltip />
-          <Tooltip />
-          <Tooltip />
-          <Tooltip />
-          <Tooltip />
-          <Tooltip />
-        </BadgesWrap>
-      </BadgesContainer> */}
+        </Container>
+      </BadgesContainer>
+      {/* <Container sx={{ marginTop: 2, bgcolor: '#94d82d', borderRadius: 3, boxShadow: 3 }}> */}
+      {/* </Container> */}
     </div>
   );
 };
