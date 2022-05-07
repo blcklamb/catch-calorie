@@ -12,6 +12,8 @@ import {
   TrackingListTdEnd,
   TrackingListTdInput,
   TrackingListTdInputText,
+  TrackingListIconContainer,
+  TrackingListIcon,
 } from '../styledCompo/mainStyle';
 
 import { ValidationTextField } from '../styledCompo/muiCustom';
@@ -136,9 +138,9 @@ function TrackingFoodList({ food, isTrackingPage }) {
                 />
               </td>
             </tr>
-              <TrackingListTdInputText style={{ float: 'left', height: '20px' }}>
-                {unit === 'us' ? 'US standard' : 'metric'}
-              </TrackingListTdInputText>
+            <TrackingListTdInputText style={{ float: 'left', height: '20px' }}>
+              {unit === 'us' ? 'US standard' : 'metric'}
+            </TrackingListTdInputText>
           </TrackingListTdInput>
 
           <TrackingListTd>
@@ -202,14 +204,18 @@ function TrackingFoodList({ food, isTrackingPage }) {
           {isTrackingPage === 'tracking' && (
             <>
               <TrackingListTdAction>
-                <Button variant="contained" type="button" onClick={handleModify}>
-                  Modify
-                </Button>
+                  <TrackingListIcon
+                    src="/edit.png"
+                    alt="Edit"
+                    onClick={handleModify}
+                  ></TrackingListIcon>
               </TrackingListTdAction>
               <TrackingListTdEnd>
-                <Button variant="contained" type="button" onClick={handleDelete}>
-                  Delete
-                </Button>
+                  <TrackingListIcon
+                    src="/del.png"
+                    alt="Del"
+                    onClick={handleDelete}
+                  ></TrackingListIcon>
               </TrackingListTdEnd>
             </>
           )}
