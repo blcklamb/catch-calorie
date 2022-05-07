@@ -6,9 +6,9 @@ import { Typography } from '@mui/material';
 // 유리
 export const NetworkGlass = styled(LoginGlass)`
   width: 100%;
-  height: 354px;
-  @media screen and (max-width: 1040px) {
-    height: 460px;
+  height: 400px;
+  @media screen and (max-width: 1200px) {
+    height: 560px;
   }
 `;
 
@@ -20,9 +20,9 @@ export const StatusText = styled.div`
   width: 200px;
   font-size: 16px;
 
-  @media screen and (max-width: 1040px) {
-    width: 100px;
-    font-size: 14px;
+  @media screen and (max-width: 1200px) {
+    width: 300px;
+    font-size: 18px;
   }
 `;
 
@@ -38,8 +38,8 @@ export const NickText = styled.div`
   font-size: 20px;
   margin-bottom: 10px;
 
-  @media screen and (max-width: 1040px) {
-    width: 100px;
-    font-size: 18px;
+  @media screen and (max-width: 1200px) {
+    width: 300px;
+    font-size: 22px;
   }
 `;

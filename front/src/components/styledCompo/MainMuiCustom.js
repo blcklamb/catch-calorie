@@ -1,6 +1,23 @@
 import { styled } from '@mui/material/styles';
 
+import Autocomplete from '@mui/material/Autocomplete';
+
 import { ColorButton, ColorButtonB } from './muiCustom';
+
+export const AutoCompleteCustom = styled(Autocomplete)({
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#94D82D',
+      borderWidth: 2,
+    },
+    '&:hover fieldset': {
+      borderColor: '#9CFD08',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'green',
+    },
+  },
+});
 
 export const TrackingPlusButton = styled(ColorButton)({
   width: '44px',
@@ -54,7 +71,6 @@ export const AddAddButton = styled(TrackingTrackingButton)({
   width: '80%',
   height: '50px',
   margin: '0px 20px',
-
 });
 
 export const AddCancelButton = styled(ColorButtonB)({

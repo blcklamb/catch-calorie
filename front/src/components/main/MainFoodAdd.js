@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
 import Autocomplete from '@mui/material/Autocomplete';
+import { Button, ButtonGroup } from '@mui/material';
 
 import MainButton from './style/MainButton';
-import { AddAddButton, AddCancelButton } from '../styledCompo/MainMuiCustom';
+import { AutoCompleteCustom, AddAddButton, AddCancelButton } from '../styledCompo/MainMuiCustom';
 
 import { BodyContainer, TrackingSwitchContainer } from '../styledCompo/mainStyle';
 import {
@@ -91,6 +92,25 @@ function MainFoodAdd({}) {
     }
   };
 
+  const buttons = [
+    <Button
+      key="cm/kg"
+      color="success"
+      variant={checked ? 'contained' : 'outlined'}
+      onClick={() => setChecked(true)}
+    >
+      Metric
+    </Button>,
+    <Button
+      key="ft/lb"
+      color="success"
+      variant={!checked ? 'contained' : 'outlined'}
+      onClick={() => setChecked(false)}
+    >
+      U.S.Standard
+    </Button>,
+  ];
+
   return (
     <>
       <Header />
@@ -101,7 +121,7 @@ function MainFoodAdd({}) {
           <AddFormsContainer>
             <AddFormSection>
               <AddFormTitle>Please Select a Category</AddFormTitle>
-              <Autocomplete
+              <AutoCompleteCustom
                 value={category}
                 onChange={(event, newValue) => {
                   setCategory(newValue);
@@ -146,15 +166,16 @@ function MainFoodAdd({}) {
                     !isKcalNumber && <RedSpan>Please enter a number only</RedSpan>
                   )
                 }
-                style={{ width: '70%' }}
+                style={{ width: '50%' }}
               />
               <TrackingSwitchContainer>
-                {unit}
-                <Switch
-                  checked={checked}
-                  onChange={handleSwitch}
-                  inputProps={{ 'aria-label': 'controlled' }}
-                />
+                <ButtonGroup
+                  style={{ marginBottom: -10, marginTop: 10 }}
+                  size="small"
+                  aria-label="small button group"
+                >
+                  {buttons}
+                </ButtonGroup>
               </TrackingSwitchContainer>
             </AddFormSection>
           </AddFormsContainer>

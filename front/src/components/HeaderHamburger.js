@@ -68,7 +68,7 @@ function Header(props) {
           key={'tracking'}
           onClick={() => navigate(`/tracking/${userInfo._id}`, { replace: false })}
         >
-          <ListItemText primary={'Tracking'} />
+          <ListItemText primary={'Tracking Page'} />
         </ListItem>
         <ListItem button key={'mypage'} onClick={() => navigate('/mypage', { replace: false })}>
           <ListItemText primary={'My Page'} />

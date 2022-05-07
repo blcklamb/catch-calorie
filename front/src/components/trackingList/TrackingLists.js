@@ -16,6 +16,7 @@ import {
   TrackingListTbody,
   TrackingListTd,
   TrackingListNoTrackingText,
+  TrackingListIcon,
 } from '../styledCompo/mainStyle';
 
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -41,9 +42,15 @@ function TrackingLists() {
 
   return (
     <>
-      <Section>
+      {/* <Section> */}
         <SectionTitle>Tracking List</SectionTitle>
-        <div style={isTrackingPage !== 'tracking' ? { height: '480px', overflow: 'auto' } : {}}>
+        <div
+          style={
+            isTrackingPage !== 'tracking'
+              ? { height: '480px', overflow: 'auto', padding: '0px 20px' }
+              : {}
+          }
+        >
           <div>
             <TrackingListTable>
               <thead>
@@ -54,11 +61,11 @@ function TrackingLists() {
                   <TrackingListThContent>
                     <TrackingTableTitle>Amount</TrackingTableTitle>
                   </TrackingListThContent>
-                  <TrackingListThContent>
-                    <TrackingTableTitle>Intake Calories</TrackingTableTitle>
-                  </TrackingListThContent>
-                  {isTrackingPage === 'tracking' && (
+                  {isTrackingPage === 'tracking' ? (
                     <>
+                      <TrackingListThContent>
+                        <TrackingTableTitle>Intake Calories</TrackingTableTitle>
+                      </TrackingListThContent>
                       <TrackingListThAction>
                         <TrackingTableTitle>Edit</TrackingTableTitle>
                       </TrackingListThAction>
@@ -66,6 +73,12 @@ function TrackingLists() {
                         <TrackingTableTitle>Del</TrackingTableTitle>
                       </TrackingListThEnd>
                     </>
+                  ) : (
+                    <TrackingListThContent>
+                      <TrackingTableTitle>
+                        <TrackingListIcon src="/meal.png" alt="Intake"></TrackingListIcon>
+                      </TrackingTableTitle>
+                    </TrackingListThContent>
                   )}
                 </tr>
               </thead>
@@ -94,11 +107,11 @@ function TrackingLists() {
                   <TrackingListThContent>
                     <TrackingTableTitle>Time</TrackingTableTitle>
                   </TrackingListThContent>
-                  <TrackingListThContent>
-                    <TrackingTableTitle>Consumed Calories</TrackingTableTitle>
-                  </TrackingListThContent>
-                  {isTrackingPage === 'tracking' && (
+                  {isTrackingPage === 'tracking' ? (
                     <>
+                      <TrackingListThContent>
+                        <TrackingTableTitle>Consumed Calories</TrackingTableTitle>
+                      </TrackingListThContent>
                       <TrackingListThAction>
                         <TrackingTableTitle>Edit</TrackingTableTitle>
                       </TrackingListThAction>
@@ -106,6 +119,12 @@ function TrackingLists() {
                         <TrackingTableTitle>Del</TrackingTableTitle>
                       </TrackingListThEnd>
                     </>
+                  ) : (
+                    <TrackingListThContent>
+                      <TrackingTableTitle>
+                        <TrackingListIcon src="/burn.png" alt="Consumed"></TrackingListIcon>
+                      </TrackingTableTitle>
+                    </TrackingListThContent>
                   )}
                 </tr>
               </thead>
@@ -125,7 +144,7 @@ function TrackingLists() {
             </TrackingListTable>
           </div>
         </div>
-      </Section>
+      {/* </Section> */}
     </>
   );
 }

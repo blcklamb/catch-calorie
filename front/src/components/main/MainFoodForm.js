@@ -4,16 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
 import Switch from '@mui/material/Switch';
+import { ButtonGroup } from '@mui/material';
 
 import MainInput from './style/MainInput';
-import {AddButton} from '../styledCompo/MainMuiCustom'
+import { AutoCompleteCustom, AddButton } from '../styledCompo/MainMuiCustom';
 
 import {
   TrackingForm,
   TrackingAutoContainer,
   TrackingTextFieldContainer,
   TrackingSwitchContainer,
-  TrackingText, 
+  TrackingText,
 } from '../styledCompo/mainStyle';
 
 import { ValidationTextField } from '../styledCompo/muiCustom';
@@ -60,9 +61,9 @@ function MainFoodForm({ idx }) {
     }
   }, [checked]);
 
-  const handleSwitch = (event) => {
-    setChecked(event.target.checked);
-  };
+  // const handleSwitch = (event) => {
+  //   setChecked(event.target.checked);
+  // };
 
   const onChangeFood = (e, value) => {
     setFoodSelected([...foodSelected.slice(0, idx), value, ...foodSelected.slice(idx + 1)]);
@@ -90,11 +91,30 @@ function MainFoodForm({ idx }) {
     }
   }, [unit[idx], weight[idx], foodSelected[idx]]);
 
+  const buttons = [
+    <Button
+      key="cm/kg"
+      color="success"
+      variant={checked ? 'contained' : 'outlined'}
+      onClick={() => setChecked(true)}
+    >
+      Metric
+    </Button>,
+    <Button
+      key="ft/lb"
+      color="success"
+      variant={!checked ? 'contained' : 'outlined'}
+      onClick={() => setChecked(false)}
+    >
+      U.S.Standard
+    </Button>,
+  ];
+
   return (
     <>
       <TrackingForm>
         <TrackingAutoContainer>
-          <Autocomplete
+          <AutoCompleteCustom
             id="controllable-states-demo"
             value={foodSelected[idx]}
             onChange={(event, newValue) => {
@@ -136,6 +156,7 @@ function MainFoodForm({ idx }) {
             variant="outlined"
             value={weight[idx]}
             onChange={onChangeWeight}
+            style={{ width: '250px' }}
             helperText={
               !weight[idx] ? (
                 <RedSpan>Please enter a weight</RedSpan>
@@ -147,12 +168,13 @@ function MainFoodForm({ idx }) {
         </TrackingTextFieldContainer>
         <TrackingSwitchContainer>
           <div>
-            <TrackingText>{unit[idx] === 'us' ? 'US standard' : 'metric'}</TrackingText>
-            <Switch
-              checked={checked}
-              onChange={handleSwitch}
-              inputProps={{ 'aria-label': 'controlled' }}
-            />
+            <ButtonGroup
+              style={{ marginBottom: 10, marginTop: 10 }}
+              size="small"
+              aria-label="small button group"
+            >
+              {buttons}
+            </ButtonGroup>
           </div>
           {/* {console.log(foodSelected[idx]?.kcal_per_100g)}
           {idx}

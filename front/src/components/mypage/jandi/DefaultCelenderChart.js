@@ -34,7 +34,7 @@ const DefaultCelenderChart = ({ data }) => (
       monthSpacing={28}
       monthBorderColor=" #C0E883"
       monthLegendOffset={10}
-      dayBorderWidth={2}
+      dayBorderWidth={1}
       dayBorderColor="#97e421"
       daySpacing={1}
       legends={[
