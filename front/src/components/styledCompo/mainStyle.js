@@ -19,6 +19,7 @@ export const SectionTitle = styled.h1`
   font-size: 28px;
 `;
 
+// Main Hello
 export const MainHelloSection = styled.div`
   width: 100%;
   padding: 20px 20px;
@@ -30,6 +31,11 @@ export const MainHelloSection = styled.div`
   align-content: center;
   position: relative;
 `;
+
+export const MainHelloBadge = styled.div`
+margin-right: 15px;
+
+`
 
 export const MainHello = styled.div`
   display: flex;
@@ -232,6 +238,7 @@ export const TrackingListTd = styled.td`
   /* border: 1px solid #444444; */
   padding: 10px;
   font-size: large;
+  /* line-height: 20px; */
 `;
 
 export const TrackingListTdAction = styled(TrackingListTd)`
