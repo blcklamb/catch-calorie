@@ -13,6 +13,7 @@ export const BadgesContainer = styled.div`
   justify-content: center;
   position: relative;
   flex-flow: column;
+  padding-bottom: 45px;
 `;
 
 export const UserContainer = styled.div`
@@ -21,7 +22,7 @@ export const UserContainer = styled.div`
   border-radius: 15px;
   // background-color: #c4c4c4;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -31,7 +32,7 @@ export const UserCardFrame = styled.div`
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
     rgba(255, 255, 255, 0.3);
   box-shadow: 0px 2.73186px 20.489px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(20.489px);
+  backdrop-filter: blur(10.489px);
 
   border-radius: 27.3186px;
   display: flex;

@@ -11,24 +11,21 @@ function UserInfo({ currentUserInfo }) {
   return (
     <>
       <BadgesContainer>
-        <UserContainer>
+        <UserContainer style={{ zIndex: '55' }}>
           <UserCard currentUserInfo={currentUserInfo}></UserCard>
-          <Flippy
-            flipOnClick={true}
-            style={{
-              width: '500px',
-              height: '600px',
-              borderRadius: '30px',
-
-              // backgroundColor: ' #91c13d',
-            }}
-          >
+          <Flippy flipOnClick={true}>
             <FrontSide
               style={{
                 width: '500px',
                 height: '600px',
-                borderRadius: '30px',
-                // backgroundColor: ' #ffffff',
+                borderRadius: '27.3186px',
+                zIndex: '300',
+                padding: '30px',
+
+                background:
+                  'linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), rgba(255, 255, 255, 0.3)',
+                boxShadow: '0px 5.334px 40.005px rgba(0, 0, 0, 0.25)',
+                backdropFilter: 'blur(10.005px)',
               }}
             >
               <UserTrackingList currentUserInfo={currentUserInfo}></UserTrackingList>
@@ -37,8 +34,14 @@ function UserInfo({ currentUserInfo }) {
               style={{
                 width: '500px',
                 height: '600px',
-                borderRadius: '30px',
-                // backgroundColor: ' #ffffff',
+                borderRadius: '27.3186px',
+                zIndex: '300',
+                padding: '35px',
+
+                background:
+                  'linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), rgba(255, 255, 255, 0.3)',
+                boxShadow: '0px 5.334px 40.005px rgba(0, 0, 0, 0.25)',
+                backdropFilter: 'blur(10.005px)',
               }}
             >
               <UserGraph currentUserInfo={currentUserInfo}></UserGraph>

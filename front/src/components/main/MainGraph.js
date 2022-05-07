@@ -253,7 +253,8 @@ function MainGraph({}) {
   isMypage !== 'mypage' && addData();
 
   return (
-    <Section>
+    // <Section>
+    <>
       <SectionTitle>Calorie Graph</SectionTitle>
       <CalorieGraphSection>
         <GraphContainer>
@@ -265,7 +266,8 @@ function MainGraph({}) {
           )}
         </GraphOverContainer>
       </CalorieGraphSection>
-    </Section>
+    </>
+    // </Section>
   );
 }
 
