@@ -30,8 +30,8 @@ function GithubLogin() {
 
   const [data, setData] = useState({});
   const [gender, setGender] = useState('male');
-  const [height, setHeight] = useState(null);
-  const [weight, setWeight] = useState(null);
+  const [height, setHeight] = useState(0);
+  const [weight, setWeight] = useState(0);
   const [icon, setIcon] = useState('runner');
 
   useEffect(() => {
