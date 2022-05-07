@@ -58,7 +58,7 @@ function GithubLogin() {
       }
     };
     auth();
-  }, [location.search, navigate, setToken, setUser]);
+  }, [location, navigate, setToken, setUser]);
 
   const isHeightValid = height > 0;
   const isWeightValid = weight > 0;
