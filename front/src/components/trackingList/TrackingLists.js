@@ -109,6 +109,9 @@ function TrackingLists() {
                   </TrackingListThContent>
                   {isTrackingPage === 'tracking' ? (
                     <>
+                      <TrackingListThContent>
+                        <TrackingTableTitle>Consumed Calories</TrackingTableTitle>
+                      </TrackingListThContent>
                       <TrackingListThAction>
                         <TrackingTableTitle>Edit</TrackingTableTitle>
                       </TrackingListThAction>
