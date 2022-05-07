@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
+import { ButtonGroup } from '@mui/material';
 
 import {
   TrackingListTr,
@@ -109,6 +110,25 @@ function TrackingFoodList({ food, isTrackingPage }) {
     }
   };
 
+  const buttons = [
+    <Button
+      key="cm/kg"
+      color="success"
+      variant={checked ? 'contained' : 'outlined'}
+      onClick={() => setChecked(true)}
+    >
+      Metric
+    </Button>,
+    <Button
+      key="ft/lb"
+      color="success"
+      variant={!checked ? 'contained' : 'outlined'}
+      onClick={() => setChecked(false)}
+    >
+      U.S.Standard
+    </Button>,
+  ];
+
   return (
     <>
       {isEditing ? (
@@ -117,38 +137,31 @@ function TrackingFoodList({ food, isTrackingPage }) {
           <TrackingListTdStart>{food.name}</TrackingListTdStart>
           <TrackingListTdInput>
             <tr>
-              <td>
-                <ValidationTextField
-                  id="outlined-name"
-                  label="weight"
-                  value={weight}
-                  onChange={onChange}
-                  helperText={
-                    !isWeightNumber ? (
-                      <RedSpan>Please enter a number only</RedSpan>
-                    ) : (
-                      isWeightEmpty && <RedSpan>Please enter a weight</RedSpan>
-                    )
-                  }
-                />
-              </td>
-              <td>
-                <Switch
-                  checked={checked}
-                  onChange={handleSwitch}
-                  inputProps={{ 'aria-label': 'controlled' }}
-                />
-              </td>
+              <ValidationTextField
+                id="outlined-name"
+                label="weight"
+                value={weight}
+                onChange={onChange}
+                helperText={
+                  !isWeightNumber ? (
+                    <RedSpan>Please enter a number only</RedSpan>
+                  ) : (
+                    isWeightEmpty && <RedSpan>Please enter a weight</RedSpan>
+                  )
+                }
+              />
             </tr>
-            <TrackingListTdInputText style={{ float: 'left', height: '20px' }}>
-              {unit === 'us' ? 'US standard' : 'metric'}
-            </TrackingListTdInputText>
+            <tr>
+              <ButtonGroup
+                size="small"
+                aria-label="small button group"
+              >
+                {buttons}
+              </ButtonGroup>
+            </tr>
           </TrackingListTdInput>
-
           <TrackingListTd>
-            {/* <div style={{ marginRight: '30px' }}> */}
             {previewKcal()}kcal/{unit === 'us' ? 'lb' : 'g'}
-            {/* </div> */}
           </TrackingListTd>
           <TrackingListTdAction>
             <TrackingListIcon src="/done.png" alt="Done" onClick={handleCheck}></TrackingListIcon>
