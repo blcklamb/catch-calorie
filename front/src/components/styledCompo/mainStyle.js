@@ -269,3 +269,7 @@ export const TrackingListIcon = styled.img`
   display: table-cell;
   height: 25px;
 `;
+
+export const TrackingListNoTrackingText = styled.h2`
+  color: #9d9d9d;
+`;

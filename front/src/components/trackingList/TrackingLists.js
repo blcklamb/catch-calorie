@@ -15,6 +15,7 @@ import {
   TrackingListThEnd,
   TrackingListTbody,
   TrackingListTd,
+  TrackingListNoTrackingText,
 } from '../styledCompo/mainStyle';
 
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -75,10 +76,9 @@ function TrackingLists() {
                     return <TrackingFoodList food={food} isTrackingPage={isTrackingPage} />;
                   })
                 ) : (
-                  // </tr>
-                  <tr>
-                    <div>No Food Tracking</div>
-                  </tr>
+                  <th colspan="5">
+                    <TrackingListNoTrackingText>No Food Tracking</TrackingListNoTrackingText>
+                  </th>
                 )}
               </tbody>
             </TrackingListTable>
@@ -117,7 +117,9 @@ function TrackingLists() {
                     );
                   })
                 ) : (
-                  <th colspan="5">No Exercise Tracking</th>
+                  <th colspan="5">
+                    <TrackingListNoTrackingText>No Exercise Tracking</TrackingListNoTrackingText>
+                  </th>
                 )}
               </tbody>
             </TrackingListTable>
