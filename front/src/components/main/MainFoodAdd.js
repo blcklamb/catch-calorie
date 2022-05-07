@@ -5,7 +5,7 @@ import Switch from '@mui/material/Switch';
 import Autocomplete from '@mui/material/Autocomplete';
 
 import MainButton from './style/MainButton';
-import { AddAddButton, AddCancelButton } from '../styledCompo/MainMuiCustom';
+import { AutoCompleteCustom, AddAddButton, AddCancelButton } from '../styledCompo/MainMuiCustom';
 
 import { BodyContainer, TrackingSwitchContainer } from '../styledCompo/mainStyle';
 import {
@@ -101,7 +101,7 @@ function MainFoodAdd({}) {
           <AddFormsContainer>
             <AddFormSection>
               <AddFormTitle>Please Select a Category</AddFormTitle>
-              <Autocomplete
+              <AutoCompleteCustom
                 value={category}
                 onChange={(event, newValue) => {
                   setCategory(newValue);

@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
 
 import MainInput from './style/MainInput';
-import { AddButton } from '../styledCompo/MainMuiCustom';
+import { AutoCompleteCustom, AddButton } from '../styledCompo/MainMuiCustom';
 
 import {
   TrackingForm,
@@ -119,7 +119,7 @@ function MainExerciseForm({ idx }) {
     <>
       <TrackingForm>
         <TrackingAutoContainer>
-          <Autocomplete
+          <AutoCompleteCustom
             id="controllable"
             value={exerciseSelected[idx]}
             onChange={(event, newValue) => {

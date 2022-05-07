@@ -6,7 +6,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Switch from '@mui/material/Switch';
 
 import MainInput from './style/MainInput';
-import {AddButton} from '../styledCompo/MainMuiCustom'
+import {AutoCompleteCustom, AddButton} from '../styledCompo/MainMuiCustom'
 
 import {
   TrackingForm,
@@ -94,7 +94,7 @@ function MainFoodForm({ idx }) {
     <>
       <TrackingForm>
         <TrackingAutoContainer>
-          <Autocomplete
+          <AutoCompleteCustom
             id="controllable-states-demo"
             value={foodSelected[idx]}
             onChange={(event, newValue) => {
