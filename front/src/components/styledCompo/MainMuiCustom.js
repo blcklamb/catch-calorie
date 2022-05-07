@@ -6,7 +6,7 @@ export const TrackingPlusButton = styled(ColorButton)({
   width: '44px',
   height: '44px',
   borderRadius: '50%',
-  fontWeight: 800,
+  fontWeight: 600,
   fontSize: '22px',
   minWidth: '0px',
   fontStyle: 'normal',
