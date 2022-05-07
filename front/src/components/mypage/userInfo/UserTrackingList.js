@@ -19,9 +19,9 @@ import TrackingLists from '../../trackingList/TrackingLists';
 function UserTrackingList({ currentUserInfo }) {
   return (
     <>
-      <UserCardFrame>
-        <TrackingLists />
-      </UserCardFrame>
+      {/* <UserCardFrame> */}
+      <TrackingLists />
+      {/* </UserCardFrame> */}
     </>
   );
 }

@@ -19,9 +19,9 @@ import MainGraph from '../../main/MainGraph';
 function UserGraph({ currentUserInfo }) {
   return (
     <>
-      <UserCardFrame>
-        <MainGraph />
-      </UserCardFrame>
+      {/* <UserCardFrame> */}
+      <MainGraph />
+      {/* </UserCardFrame> */}
     </>
   );
 }
