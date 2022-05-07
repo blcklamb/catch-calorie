@@ -47,28 +47,39 @@ const Jandi = () => {
     if (params.user_id) {
       const userId = params.user_id;
 
-      Api.get('heatmap', userId).then((res) => {
-        if (res.data[0].record === undefined) {
-          setEmptyData(false);
-        } else {
-          setData(res.data[0].record);
-          setEmptyData(true);
-          // console.log('잔디데이터 들어오는 값', res.data[0].record);
-        }
-      });
+      console.log('userId', userId);
+      // params로 들어오는 경우 데이터가 빈배열이면 더미데이터
+      Api.get('heatmap', userId)
+        .then((res) => {
+          if (res?.data[0].record === []) {
+            setEmptyData(false);
+            // params로 들어오는 경우 데이터가 있으면 진짜 데이터 (res.data[0].record)
+          } else {
+            setData(res?.data[0].record);
+            setEmptyData(true);
+            console.log('잔디데이터 들어오는 값', res.data[0].record);
+          }
+        })
+        .catch(console.log);
     } else {
-      Api.get('heatmap', user._id).then((res) => {
-        if (res.data[0].record === undefined) {
-          setEmptyData(false);
-        } else {
-          setData(res.data[0].record);
-          setEmptyData(true);
-        }
-      });
+      console.log(user._id);
+      // 본인 아이디로 들어오는 경우 데이터가 빈배열이면 더미데이터
+      Api.get('heatmap', user._id)
+        .then((res) => {
+          if (res?.data[0].record === []) {
+            setEmptyData(false);
+
+            // 본인 아이디로 들어오는 경우 데이터가 있으면 진짜 데이터 (res.data[0].record)
+          } else {
+            setData(res?.data[0].record);
+            setEmptyData(true);
+          }
+        })
+        .catch(console.log);
     }
   }, [user, params]);
 
-  // console.log('잔디데이터 받아서 넣은 값', data);
+  console.log('잔디데이터 받아서 넣은 값', data);
 
   // Api.get('heatmap', user._id).then((res) => {
   //   console.log(res.data.record);

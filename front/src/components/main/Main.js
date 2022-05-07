@@ -46,7 +46,7 @@ const Main = () => {
     <>
       <Header />
       <RegisterCircleRed1></RegisterCircleRed1>
-      <RegisterCircleGreen2></RegisterCircleGreen2>
+      {/* <RegisterCircleGreen2></RegisterCircleGreen2> */}
       <BodyContainer>
         <MainHelloSection>
           <MainHelloBadge onClick={() => navigate('/mypage', { replace: false })}>
