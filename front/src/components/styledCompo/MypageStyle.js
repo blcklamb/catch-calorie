@@ -15,6 +15,10 @@ export const MypageCircleGreen = styled.div`
     #d6eeb1 69.13%
   );
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media screen and (max-width: 1440px) {
+    display: none;
+  }
 `;
 
 export const MypageCircleRed = styled.div`
@@ -34,6 +38,10 @@ export const MypageCircleRed = styled.div`
     )
     /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media screen and (max-width: 1440px) {
+    display: none;
+  }
 `;
 
 export const MypageCircleRed2 = styled.div`
@@ -41,7 +49,7 @@ export const MypageCircleRed2 = styled.div`
   position: absolute;
   width: 300px;
   height: 300px;
-  left: 9%;
+  left: n9%;
   top: 155%;
 
   border-radius: 50%;
@@ -52,4 +60,8 @@ export const MypageCircleRed2 = styled.div`
     #d6eeb1 69.13%
   );
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media screen and (max-width: 1440px) {
+    display: none;
+  }
 `;

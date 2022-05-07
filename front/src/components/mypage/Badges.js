@@ -22,6 +22,16 @@ const BadgesContainer = styled.div`
   /* Note: backdrop-filter has minimal browser support */
 
   border-radius: 36.4393px;
+
+  @media screen and (max-width: 1440px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: auto;
+    /* left: 40%; */
+  }
 `;
 
 const BadgesText = styled.div`

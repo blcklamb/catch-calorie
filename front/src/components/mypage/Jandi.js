@@ -18,6 +18,10 @@ const JandiContainer = styled.div`
   backdrop-filter: blur(10.0032px);
   z-index: 55;
   border-radius: 36.4393px;
+
+  @media screen and (max-width: 1440px) {
+    direction: vertical;
+  }
 `;
 
 const JandiText = styled.div`

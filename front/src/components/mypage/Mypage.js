@@ -21,6 +21,10 @@ const BadgesPage = styled.section`
   justify-content: center;
   position: relative;
   padding-bottom: 30px;
+
+  @media screen and (max-width: 1440px) {
+    padding-top: 500px;
+  }
 `;
 
 const JandiPage = styled.section`
