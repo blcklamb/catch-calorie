@@ -4,6 +4,7 @@ const FoodSchema = new Schema({
     category: {
         type: String,
         required: true,
+        unique: true,
         trim: true,
     },
     name: {

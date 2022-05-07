@@ -4,6 +4,7 @@ const BadgeSchema = new Schema({
     badge_name: {
         type: String,
         required: true,
+        unique: true,
     },
     award_name: {
         type: String,
