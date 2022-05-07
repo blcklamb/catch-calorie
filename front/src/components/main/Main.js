@@ -17,6 +17,7 @@ import MainButton from './style/MainButton';
 import {
   BodyContainer,
   MainHelloSection,
+  MainHelloBadge,
   MainHello,
   MainHelloTitle,
   MainSection1,
@@ -43,6 +44,9 @@ const Main = () => {
       <Header />
       <BodyContainer>
         <MainHelloSection>
+          <MainHelloBadge >
+            <img src={userInfo?.icon} alt="badge" style={{ width: 80 }}></img>
+          </MainHelloBadge>
           <MainHello>
             <MainHelloTitle>Hello, {userInfo.name}</MainHelloTitle>
           </MainHello>
