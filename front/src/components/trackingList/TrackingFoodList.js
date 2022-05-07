@@ -18,6 +18,8 @@ import {
 
 import { ValidationTextField } from '../styledCompo/muiCustom';
 
+import { RedSpan } from '../styledCompo/LoginStyle';
+
 import { useRecoilState } from 'recoil';
 import { trackingUpdateState, trackingFoodUnitState } from '../../atoms';
 
@@ -123,9 +125,9 @@ function TrackingFoodList({ food, isTrackingPage }) {
                   onChange={onChange}
                   helperText={
                     !isWeightNumber ? (
-                      <span>Please enter a number only</span>
+                      <RedSpan>Please enter a number only</RedSpan>
                     ) : (
-                      isWeightEmpty && <span>Please enter a weight</span>
+                      isWeightEmpty && <RedSpan>Please enter a weight</RedSpan>
                     )
                   }
                 />

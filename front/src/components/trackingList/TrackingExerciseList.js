@@ -17,6 +17,8 @@ import {
 
 import { ValidationTextField } from '../styledCompo/muiCustom';
 
+import { RedSpan } from '../styledCompo/LoginStyle';
+
 import { useRecoilState } from 'recoil';
 import { trackingUpdateState } from '../../atoms';
 
@@ -87,7 +89,7 @@ function TrackingExerciseList({ exercise, isTrackingPage }) {
 
   const previewKcal = () => {
     //hour, minute에 숫자가 아닌 값이 입력되면 미리보기 칼로리 0
-    if (Number(hour) > 0 || Number(minute) > 0) {
+    if (!isNaN(hour) && !isNaN(minute)) {
       return Math.round(
         (exercise.calorie * (Number(hour) * 60 + Number(minute))) / exercise.minute,
       );
@@ -112,9 +114,9 @@ function TrackingExerciseList({ exercise, isTrackingPage }) {
                   style={{ marginRight: '30px' }}
                   helperText={
                     !isHourNumber || !isMinNumber ? (
-                      <span>Please enter a number only</span>
+                      <RedSpan>Please enter a number only</RedSpan>
                     ) : (
-                      isTimeEmpty && <span>Please enter a time</span>
+                      isTimeEmpty && <RedSpan>Please enter a time</RedSpan>
                     )
                   }
                 />
@@ -126,6 +128,13 @@ function TrackingExerciseList({ exercise, isTrackingPage }) {
                   value={minute}
                   onChange={(e) => setMinute(e.target.value)}
                   style={{ marginRight: '30px' }}
+                  helperText={
+                    !isHourNumber || !isMinNumber ? (
+                      <span style={{ color: 'white' }}>Please enter a number only</span>
+                    ) : (
+                      isTimeEmpty && <span style={{ color: 'white' }}>Please enter a time</span>
+                    )
+                  }
                 />
               </td>
             </tr>
