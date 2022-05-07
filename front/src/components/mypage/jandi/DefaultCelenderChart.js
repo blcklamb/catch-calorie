@@ -59,7 +59,7 @@ const DefaultCelenderChart = ({ data }) => (
             }}
           >
             <span>{data.day}</span>
-            <p style={{ color: '#3E5B11' }}>Kcal Remaining : {data.value} kcal </p>
+            <p style={{ color: '#3E5B11' }}>Left to eat : {data.value} kcal </p>
           </div>
         );
       }}
