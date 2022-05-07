@@ -43,8 +43,11 @@ class trackingService {
         return Tracking.update({ user_id, date, toUpdate });
     }
 
-    static getTrackingByUserAndDate({ user_id, date }) {
-        return Tracking.findByUserAndDate({ user_id, date });
+    static async getTrackingByUserAndDate({ user_id, date }) {
+        const tracking = await Tracking.findByUserAndDate({ user_id, date });
+        //첫 트래킹 시도 시 데이터가 없으면 권장 칼로리가 불러와지지 않는 문제 해결 위한 코드
+        if (!tracking) return this.addTracking({ user_id, date })
+        return tracking
     }
 
     static getTrackingByUser({ user_id }) {
