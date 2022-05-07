@@ -32,10 +32,10 @@ const Network = () => {
       <RegisterCircleRed2></RegisterCircleRed2>
       <RegisterCircleGreen1></RegisterCircleGreen1>
       <RegisterCircleGreen2></RegisterCircleGreen2>
-      <Container sx={{ marginBottom: 30, marginTop: 20 }}>
+      <Container sx={{ marginBottom: 30, marginTop: 30 }}>
         <Grid container spacing={4}>
           {userList.map((eachUserId, index) => (
-            <Grid item xs={6} md={3} key={index}>
+            <Grid item xs={12} md={6} lg={3} key={index}>
               <UserCard currentUserInfo={eachUserId} isNetworkPage={true}></UserCard>
             </Grid>
           ))}
