@@ -2,11 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
-import Autocomplete from '@mui/material/Autocomplete';
-import Switch from '@mui/material/Switch';
 import { ButtonGroup } from '@mui/material';
 
-import MainInput from './style/MainInput';
 import { AutoCompleteCustom, AddButton } from '../styledCompo/MainMuiCustom';
 
 import {
@@ -42,15 +39,10 @@ function MainFoodForm({ idx }) {
 
   const [checked, setChecked] = useState(true);
 
-  const [value, setValue] = useState();
   const [inputValue, setInputValue] = useState([]); // 텍스트 상자에 표시되는 값
 
   useEffect(() => {
     Api.get(`foods`).then((res) => setFoodList(res.data));
-
-    // + 클릭 시 추가된 폼의 인풋을 0으로 초기화
-    // setFoodSelected([...foodSelected.slice(0, idx), 0, ...foodSelected.slice(idx + 1)]);
-    // setGram([...gram.slice(0, idx), 0, ...gram.slice(idx + 1)]);
   }, []);
 
   useEffect(() => {
@@ -60,10 +52,6 @@ function MainFoodForm({ idx }) {
       setUnit([...unit.slice(0, idx), 'us', ...unit.slice(idx + 1)]);
     }
   }, [checked]);
-
-  // const handleSwitch = (event) => {
-  //   setChecked(event.target.checked);
-  // };
 
   const onChangeFood = (e, value) => {
     setFoodSelected([...foodSelected.slice(0, idx), value, ...foodSelected.slice(idx + 1)]);
@@ -120,7 +108,6 @@ function MainFoodForm({ idx }) {
             onChange={(event, newValue) => {
               onChangeFood(event, newValue);
             }}
-            inputValue={inputValue}
             onInputChange={(event, newInputValue) => {
               setInputValue(newInputValue);
             }}
@@ -176,20 +163,6 @@ function MainFoodForm({ idx }) {
               {buttons}
             </ButtonGroup>
           </div>
-          {/* {console.log(foodSelected[idx]?.kcal_per_100g)}
-          {idx}
-          <br />
-          밸류 {value}
-          <br />
-          인풋밸류 {inputValue}
-          <br />
-          {foodSelected[idx]?.kcal_per_100g} 칼로리
-          <br />
-          {gram[idx]} 그램
-          <br />총 {(Number(gram[idx]) / 100) * foodSelected[idx]?.kcal_per_100g}
-          <br /> */}
-          {/* {foodSelected[idx]?.name} <br />
-          {weight[idx]} <br /> */}
           <TrackingText>
             {isNaN(weight[idx]) ? 0 : kcalPerUnit[idx]} kcal/{unit[idx] === 'us' ? 'lb' : 'g'}
           </TrackingText>

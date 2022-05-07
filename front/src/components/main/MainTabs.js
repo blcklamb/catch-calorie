@@ -13,18 +13,14 @@ import MainFoodTab from './MainFoodTab';
 import MainExerciseTab from './MainExerciseTab';
 
 import { Section, SectionTitle } from '../styledCompo/mainStyle';
-import { ColorButton } from '../styledCompo/muiCustom';
 
 const StyledTabs = styled((props) => (
   <Tabs
     {...props}
-    // style={{padding: '10px 20px'}}
 
     TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
   />
 ))({
-  // backgroundColor: 'red',
-  // padding: '0px 20px',
   width: '100%',
   '& .MuiTabs-indicator': {
     display: 'none',
@@ -40,7 +36,6 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
   height: '20px', 
   maxWidth: '800px',
   '&.Mui-selected': {
-    // color: '#fff',
     color: '#F03E3E',
     backgroundColor: '#94D82D',
   },
@@ -56,16 +51,11 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
   bottom: '0%',
 
   backdropFilter: 'blur(40px)',
-  /* Note: backdrop-filter has minimal browser support */
-
-  // +++++++++++++++++++++++++++++++++++++++++++++++++
   fontFamily: ['Jost'],
   fontStyle: 'italic',
   fontWeight: 700,
   fontSize: '22px',
   boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.25)',
-  // backgroundColor: '#94D82D',
-  // background: 'linear-gradient(180deg, #A8E054 100%, #99DA36 100%)',
   backgroundColor: '#FCFFF8',
   border: 'solid', 
   borderColor: '#94D82D',
@@ -110,14 +100,7 @@ MainTabPanel.propTypes = {
 };
 
 const TabPanel = styled(MainTabPanel)({
-  // backgroundColor: '#ECF8D9',
-  // 폼만 스크롤
   height: '400px',
-
-  // 스크롤 전범위
-  // overflow: 'auto',
-  // height: '400px',
-  // position: 'relative',
 });
 
 const a11yProps = (index) => {
@@ -170,7 +153,6 @@ const MainTabs = ({}) => {
         </Section>
       </MainTrackingSection>
     )
-    // && scroll()
   );
 };
 

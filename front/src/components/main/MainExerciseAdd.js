@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import TextField from '@mui/material/TextField';
-import Switch from '@mui/material/Switch';
 import { Button, ButtonGroup } from '@mui/material';
 
-import MainButton from './style/MainButton';
 import { AddAddButton, AddCancelButton } from '../styledCompo/MainMuiCustom';
 
 import { BodyContainer, TrackingSwitchContainer } from '../styledCompo/mainStyle';
 import {
-  AddGlassBodyContainer,
   AddFormsContainer,
   AddTitle,
   AddFormSection,
   AddFormTitle,
   AddButtonContainer,
 } from '../styledCompo/Add';
-import { LoginGlass, TitleText, RedSpan } from '../styledCompo/LoginStyle';
+import { LoginGlass, RedSpan } from '../styledCompo/LoginStyle';
 import { ValidationTextField } from '../styledCompo/muiCustom';
 
 import Header from '../Header';
@@ -50,10 +46,6 @@ function MainExerciseAdd({}) {
       setUnit('pound');
     }
   }, [checked]);
-
-  const handleSwitch = (event) => {
-    setChecked(event.target.checked);
-  };
 
   const handleSubmit = async () => {
     setIsNameEmpty(!name);

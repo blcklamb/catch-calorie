@@ -1,27 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
-import TextField from '@mui/material/TextField';
-import Switch from '@mui/material/Switch';
-import Autocomplete from '@mui/material/Autocomplete';
 import { Button, ButtonGroup } from '@mui/material';
 
-import MainButton from './style/MainButton';
 import { AutoCompleteCustom, AddAddButton, AddCancelButton } from '../styledCompo/MainMuiCustom';
 
 import { BodyContainer, TrackingSwitchContainer } from '../styledCompo/mainStyle';
 import {
-  AddGlassBodyContainer,
   AddFormsContainer,
   AddTitle,
   AddFormSection,
   AddFormTitle,
   AddButtonContainer,
 } from '../styledCompo/Add';
-import { LoginGlass, TitleText, RedSpan } from '../styledCompo/LoginStyle';
+import { LoginGlass, RedSpan } from '../styledCompo/LoginStyle';
 import { ValidationTextField } from '../styledCompo/muiCustom';
 
 import Header from '../Header';
-import Footer from '../Footer';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -33,7 +27,7 @@ import { userInfoState } from '../../atoms';
 
 import * as Api from '../../api';
 
-function MainFoodAdd({}) {
+function MainFoodAdd() {
   const navigate = useNavigate();
 
   const user = useRecoilValue(userInfoState);
@@ -66,10 +60,6 @@ function MainFoodAdd({}) {
       setUnit('pound');
     }
   }, [checked]);
-
-  const handleSwitch = (event) => {
-    setChecked(event.target.checked);
-  };
 
   const handleSubmit = async () => {
     setIsCategoryEmpty(!category);
@@ -116,7 +106,6 @@ function MainFoodAdd({}) {
       <Header />
       <BodyContainer>
         <LoginGlass style={{ marginTop: '150px' }}>
-          {/* <AddGlassBodyContainer> */}
           <AddTitle>Add Food</AddTitle>
           <AddFormsContainer>
             <AddFormSection>
@@ -190,7 +179,6 @@ function MainFoodAdd({}) {
               Cancel
             </AddCancelButton>
           </AddButtonContainer>
-          {/* </AddGlassBodyContainer> */}
         </LoginGlass>
       </BodyContainer>
     </>

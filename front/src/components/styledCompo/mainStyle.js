@@ -296,4 +296,5 @@ export const TrackingListIcon = styled.img`
 
 export const TrackingListNoTrackingText = styled.h2`
   color: #9d9d9d;
+  text-align: center;
 `;
