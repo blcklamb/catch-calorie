@@ -16,12 +16,11 @@ styleLink.href = 'https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css
 document.head.appendChild(styleLink);
 
 const Badgesboxs = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 18px;
-  background: #ecf8d9;
-
-  border: none;
+  background: #97e421;
+  /* border: 1px solid #f03e3e; */
 
   display: flex;
   justify-content: center;
@@ -85,7 +84,7 @@ const Tooltip = ({
           {isLock && (
             <img
               src={Lock}
-              style={{ width: 100, position: 'absolute', opacity: '0.5', borderRadius: '18px' }}
+              style={{ width: 120, position: 'absolute', opacity: '0.5', borderRadius: '18px' }}
               alt="자물쇠"
             ></img>
           )}

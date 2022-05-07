@@ -7,20 +7,20 @@ const DefaultCelenderChart = ({ data }) => (
     <ResponsiveCalendar
       theme={{
         fontFamily: 'Roboto',
-        fontSize: 15,
+        fontSize: 17,
 
         tooltip: {
           container: {
             fontSize: 20,
             fontFamily: 'Roboto',
-            background: '#ECF8D9',
+            background: ' #97e421',
           },
         },
       }}
       data={data}
       from="2022-01-01"
       to="2022-12-31"
-      emptyColor="#F7FCEF"
+      emptyColor=" #f7fcef"
       colors={['#F79D9D', '#F46D6D', '#F03E3E', '#E91212']}
       minValue={0}
       margin={{
@@ -30,12 +30,12 @@ const DefaultCelenderChart = ({ data }) => (
         left: 40,
       }}
       yearSpacing={60}
-      monthBorderWidth={2}
-      monthSpacing={15}
+      monthBorderWidth={7}
+      monthSpacing={28}
       monthBorderColor=" #C0E883"
       monthLegendOffset={10}
       dayBorderWidth={2}
-      dayBorderColor="#FBCCCC"
+      dayBorderColor="#97e421"
       daySpacing={1}
       legends={[
         {

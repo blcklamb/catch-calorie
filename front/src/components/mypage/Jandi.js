@@ -9,19 +9,22 @@ import { useParams } from 'react-router-dom';
 
 const JandiContainer = styled.div`
   position: relative;
-  width: 100%;
+  width: 1300px;
   height: auto;
-  border-radius: 15px;
-  background-color: #94d82d;
-  bottom: 0px;
 
-  box-shadow: 0px 5.33376px 40.0032px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 3.64393px 27.3295px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(27.3295px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 36.4393px;
 `;
 
 const JandiText = styled.div`
   font-family: 'Jost', sans-serif;
   font-weight: 800;
-  /* font-style: italic; */
+  font-style: italic;
   width: 1203px;
   height: 50px;
   font-size: 2.5rem;
@@ -29,6 +32,8 @@ const JandiText = styled.div`
   color: #f03e3e;
   position: relative;
   left: 30px;
+
+  padding-top: 10px;
 `;
 
 const Jandi = () => {

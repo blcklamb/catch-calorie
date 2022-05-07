@@ -7,15 +7,22 @@ import { useRecoilValue, useRecoilState } from 'recoil';
 import { userInfoState, BadgesState } from '../../atoms';
 import { useParams } from 'react-router-dom';
 
-// const BadgesContainer = styled.div`
-//   width: 1203px;
-//   height: 700px;
-//   border-radius: 15px;
-//   background-color: #94d82d;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `;
+const BadgesContainer = styled.div`
+  width: 1300px;
+  height: 700px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 3.64393px 27.3295px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(27.3295px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 36.4393px;
+`;
 
 // const BadgesWrap = styled.div`
 //   width: 1100px;
@@ -35,7 +42,7 @@ import { useParams } from 'react-router-dom';
 const BadgesText = styled.div`
   font-family: 'Jost', sans-serif;
   font-weight: 800;
-  /* font-style: italic; */
+  font-style: italic;
   width: 1203px;
   height: 50px;
   font-size: 2.5rem;
@@ -43,6 +50,8 @@ const BadgesText = styled.div`
   color: #f03e3e;
   position: relative;
   left: 30px;
+
+  padding-top: 10px;
 `;
 
 const Badges = ({ currentUserInfo }) => {
@@ -94,29 +103,32 @@ const Badges = ({ currentUserInfo }) => {
   return (
     <div>
       <BadgesText>Badges</BadgesText>
+      <BadgesContainer>
+        <Container title sx={{ marginTop: 2 }}>
+          <Grid container spacing={3.2}>
+            {badges.map((badge, idx) => {
+              const isLock = award[badge.award_name] < badge.level; //유저 어워드 정보의 각 뱃지 레벨이 뱃지 리스트 정보의 레벨 보다 낮으면 락 걸기
 
-      <Container sx={{ marginTop: 2, bgcolor: '#94d82d', borderRadius: 3, boxShadow: 3 }}>
-        <Grid container spacing={1.5}>
-          {badges.map((badge, idx) => {
-            const isLock = award[badge.award_name] < badge.level; //유저 어워드 정보의 각 뱃지 레벨이 뱃지 리스트 정보의 레벨 보다 낮으면 락 걸기
-
-            return (
-              <Grid item sx={{ margin: 2 }} key={idx}>
-                <Tooltip
-                  badgeName={badge.badge_name}
-                  awardName={badge.award_name}
-                  src={badge.src}
-                  badgeLevel={badge.level}
-                  description={badge.description}
-                  isLock={isLock}
-                  currentUserInfo={currentUserInfo}
-                  isEditable={isEditable}
-                />
-              </Grid>
-            );
-          })}
-        </Grid>
-      </Container>
+              return (
+                <Grid item sx={{ margin: 0.1 }} key={idx}>
+                  <Tooltip
+                    badgeName={badge.badge_name}
+                    awardName={badge.award_name}
+                    src={badge.src}
+                    badgeLevel={badge.level}
+                    description={badge.description}
+                    isLock={isLock}
+                    currentUserInfo={currentUserInfo}
+                    isEditable={isEditable}
+                  />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Container>
+      </BadgesContainer>
+      {/* <Container sx={{ marginTop: 2, bgcolor: '#94d82d', borderRadius: 3, boxShadow: 3 }}> */}
+      {/* </Container> */}
     </div>
   );
 };

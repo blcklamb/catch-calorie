@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
 
 import MainButton from './style/MainButton';
+import { AddAddButton, AddCancelButton } from '../styledCompo/MainMuiCustom';
 
 import { BodyContainer, TrackingSwitchContainer } from '../styledCompo/mainStyle';
 import {
@@ -92,7 +93,6 @@ function MainExerciseAdd({}) {
                 onBlur={(e) => setName(e.target.value)}
                 helperText={isNameEmpty && <RedSpan>Please enter a name</RedSpan>}
                 style={{ width: '100%' }}
-
               />
             </AddFormSection>
             <AddFormSection>
@@ -119,20 +119,19 @@ function MainExerciseAdd({}) {
                   )
                 }
                 style={{ width: '70%' }}
-
               />{' '}
             </AddFormSection>{' '}
           </AddFormsContainer>
           <AddButtonContainer>
-            <MainButton variant="contained" onClick={handleSubmit}>
+            <AddAddButton variant="contained" onClick={handleSubmit}>
               Add
-            </MainButton>
-            <MainButton
+            </AddAddButton>
+            <AddCancelButton
               variant="contained"
               onClick={() => navigate(`/tracking/${user._id}`, { replace: false })}
             >
               Cancel
-            </MainButton>
+            </AddCancelButton>
           </AddButtonContainer>
         </LoginGlass>
       </BodyContainer>

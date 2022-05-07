@@ -12,9 +12,13 @@ import {
   TrackingListTdEnd,
   TrackingListTdInput,
   TrackingListTdInputText,
+  TrackingListIconContainer,
+  TrackingListIcon,
 } from '../styledCompo/mainStyle';
 
 import { ValidationTextField } from '../styledCompo/muiCustom';
+
+import { RedSpan } from '../styledCompo/LoginStyle';
 
 import { useRecoilState } from 'recoil';
 import { trackingUpdateState, trackingFoodUnitState } from '../../atoms';
@@ -121,9 +125,9 @@ function TrackingFoodList({ food, isTrackingPage }) {
                   onChange={onChange}
                   helperText={
                     !isWeightNumber ? (
-                      <span>Please enter a number only</span>
+                      <RedSpan>Please enter a number only</RedSpan>
                     ) : (
-                      isWeightEmpty && <span>Please enter a weight</span>
+                      isWeightEmpty && <RedSpan>Please enter a weight</RedSpan>
                     )
                   }
                 />
@@ -136,9 +140,9 @@ function TrackingFoodList({ food, isTrackingPage }) {
                 />
               </td>
             </tr>
-              <TrackingListTdInputText style={{ float: 'left', height: '20px' }}>
-                {unit === 'us' ? 'US standard' : 'metric'}
-              </TrackingListTdInputText>
+            <TrackingListTdInputText style={{ float: 'left', height: '20px' }}>
+              {unit === 'us' ? 'US standard' : 'metric'}
+            </TrackingListTdInputText>
           </TrackingListTdInput>
 
           <TrackingListTd>
@@ -147,54 +151,18 @@ function TrackingFoodList({ food, isTrackingPage }) {
             {/* </div> */}
           </TrackingListTd>
           <TrackingListTdAction>
-            <Button variant="contained" type="button" onClick={handleCheck}>
-              Check
-            </Button>
+            <TrackingListIcon src="/done.png" alt="Done" onClick={handleCheck}></TrackingListIcon>
           </TrackingListTdAction>
           <TrackingListTdEnd>
-            <Button variant="contained" type="button" onClick={handleCancel}>
-              Cancel
-            </Button>
+            <TrackingListIcon
+              src="/cancel.png"
+              alt="Cancel"
+              onClick={handleCancel}
+            ></TrackingListIcon>
           </TrackingListTdEnd>
         </TrackingListTr>
       ) : (
-        // <div style={{ display: 'flex' }}>
-        //   <div style={{ display: 'flex' }}>
-        //     <div style={{ marginRight: '30px' }}>{food.name}</div>
-        //     <ValidationTextField
-        //       id="outlined-name"
-        //       label="weight"
-        //       value={weight}
-        //       onChange={onChange}
-        //       style={{ marginRight: '30px' }}
-        //       helperText={
-        //         !isWeightNumber ? (
-        //           <span>Please enter a number only</span>
-        //         ) : (
-        //           isWeightEmpty && <span>Please enter a weight</span>
-        //         )
-        //       }
-        //     />
-        //     <Switch
-        //       checked={checked}
-        //       onChange={handleSwitch}
-        //       inputProps={{ 'aria-label': 'controlled' }}
-        //     />
-        //     {unit === 'us' ? 'US standard' : 'metric'}
-        //     <div style={{ marginRight: '30px' }}>
-        //       {previewKcal()}kcal/{unit === 'us' ? 'lb' : 'g'}
-        //     </div>
-        //   </div>
-        //   <div>
-        //     <Button variant="contained" type="button" onClick={handleCheck}>
-        //       Check
-        //     </Button>
-        //     <Button variant="contained" type="button" onClick={handleCancel}>
-        //       Cancel
-        //     </Button>
-        //   </div>
-        // </div>
-        <TrackingListTr>
+        <TrackingListTr isTrackingPage={isTrackingPage}>
           <TrackingListTdStart>{food.name}</TrackingListTdStart>
           <TrackingListTd>{food.gram}g</TrackingListTd>
           <TrackingListTd>{food.calorie}kcal</TrackingListTd>
@@ -202,14 +170,18 @@ function TrackingFoodList({ food, isTrackingPage }) {
           {isTrackingPage === 'tracking' && (
             <>
               <TrackingListTdAction>
-                <Button variant="contained" type="button" onClick={handleModify}>
-                  Modify
-                </Button>
+                <TrackingListIcon
+                  src="/edit.png"
+                  alt="Edit"
+                  onClick={handleModify}
+                ></TrackingListIcon>
               </TrackingListTdAction>
               <TrackingListTdEnd>
-                <Button variant="contained" type="button" onClick={handleDelete}>
-                  Delete
-                </Button>
+                <TrackingListIcon
+                  src="/del.png"
+                  alt="Del"
+                  onClick={handleDelete}
+                ></TrackingListIcon>
               </TrackingListTdEnd>
             </>
           )}

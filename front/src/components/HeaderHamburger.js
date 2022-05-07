@@ -68,7 +68,7 @@ function Header(props) {
           key={'tracking'}
           onClick={() => navigate(`/tracking/${userInfo._id}`, { replace: false })}
         >
-          <ListItemText primary={'Home'} />
+          <ListItemText primary={'Tracking'} />
         </ListItem>
         <ListItem button key={'mypage'} onClick={() => navigate('/mypage', { replace: false })}>
           <ListItemText primary={'My Page'} />
@@ -76,14 +76,14 @@ function Header(props) {
         <ListItem button key={'network'} onClick={() => navigate('/network', { replace: false })}>
           <ListItemText primary={'Network'} />
         </ListItem>
-        <ListItem button key={'signOut'} onClick={logout}>
-          <ListItemText primary={('Sign Out')} />
+        <ListItem button key={('manual', { replace: false })}>
+          <ListItemText primary={'How to use'} />
         </ListItem>
       </List>
       <Divider />
       <List>
-        <ListItem button key={('manual', { replace: false })}>
-          <ListItemText primary={('Manual')} />
+        <ListItem button key={'signOut'} onClick={logout}>
+          <ListItemText primary={'Log-Out'} />
         </ListItem>
         <UserDelForm />
       </List>

@@ -176,6 +176,21 @@ function RegisterForm() {
     }
   };
 
+  ///@ height, weight 조건부 헬퍼텍스트 렌더링
+  const unitChangeHeight = () => {
+    if (unit === 'us') {
+      return <RedSpan>Please enter a number only.(The unit is feet.)</RedSpan>;
+    }
+    return <RedSpan>Please enter a number only.(The unit is cm.)</RedSpan>;
+  };
+
+  const unitChangeWeight = () => {
+    if (unit === 'us') {
+      return <RedSpan>Please enter a number only.(The unit is lb.)</RedSpan>;
+    }
+    return <RedSpan>Please enter a number only.(The unit is kg.)</RedSpan>;
+  };
+
   ///@ 회원가입 요청
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -387,13 +402,10 @@ function RegisterForm() {
                 required
                 // {!checkLogin && error}
                 // error={!checkLogin}
+                type="number"
                 label="Height"
                 // autoComplete="email"
-                helperText={
-                  !isHeightValid && (
-                    <RedSpan>Please enter a number only.(The unit is feet.)</RedSpan>
-                  )
-                }
+                helperText={!isHeightValid && unitChangeHeight()}
                 value={height}
                 onChange={(e) => {
                   setHeight(e.target.value);
@@ -407,13 +419,10 @@ function RegisterForm() {
                 required
                 // {!checkLogin && error}
                 // error={!checkLogin}
+                type="number"
                 label="Weight"
                 // autoComplete="email"
-                helperText={
-                  !isWeightValid && (
-                    <RedSpan>Please enter a number only.(The unit is pounds.)</RedSpan>
-                  )
-                }
+                helperText={!isWeightValid && unitChangeWeight()}
                 value={weight}
                 onChange={(e) => {
                   setWeight(e.target.value);
@@ -496,7 +505,6 @@ function RegisterForm() {
           </form>
         </RegisterGlass>
       </Container>
-      <Footer></Footer>
     </>
   );
 }
