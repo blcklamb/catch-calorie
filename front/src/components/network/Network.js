@@ -21,8 +21,7 @@ const Network = () => {
   return (
     <>
       <Header></Header>
-
-      <Container sx={{ height: 5000, marginTop: 20 }}>
+      <Container sx={{ marginBottom: 30, marginTop: 20 }}>
         <Grid container spacing={4}>
           {userList.map((eachUserId, index) => (
             <Grid item xs={6} md={3} key={index}>
@@ -31,8 +30,6 @@ const Network = () => {
           ))}
         </Grid>
       </Container>
-
-      <Footer></Footer>
     </>
   );
 };

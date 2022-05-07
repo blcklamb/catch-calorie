@@ -505,7 +505,6 @@ function RegisterForm() {
           </form>
         </RegisterGlass>
       </Container>
-      <Footer></Footer>
     </>
   );
 }
