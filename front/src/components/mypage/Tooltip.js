@@ -69,7 +69,12 @@ const Tooltip = ({
 
   return (
     <Popup
-      style={{ borderRadius: '18px', backgroundColor: '#E1F4C4', border: 'none' }}
+      style={{
+        borderRadius: '18px',
+        backgroundColor: '#E1F4C4',
+        border: 'none',
+        fontFamily: 'Roboto',
+      }}
       trigger={
         <Badgesboxs>
           <img src={`${src}`} style={{ width: 105 }} alt="뱃지"></img>
