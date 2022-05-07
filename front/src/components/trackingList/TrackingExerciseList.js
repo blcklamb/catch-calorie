@@ -11,6 +11,8 @@ import {
   TrackingListTdEnd,
   TrackingListTdInput,
   TrackingListTdInputText,
+  TrackingListIconContainer,
+  TrackingListIcon,
 } from '../styledCompo/mainStyle';
 
 import { ValidationTextField } from '../styledCompo/muiCustom';
@@ -151,14 +153,18 @@ function TrackingExerciseList({ exercise, isTrackingPage }) {
           {isTrackingPage === 'tracking' && (
             <>
               <TrackingListTdAction>
-                <Button variant="contained" type="button" onClick={handleModify}>
-                  Modify
-                </Button>{' '}
+                  <TrackingListIcon
+                    src="/edit.png"
+                    alt="Edit"
+                    onClick={handleModify}
+                  ></TrackingListIcon>
               </TrackingListTdAction>
               <TrackingListTdEnd>
-                <Button variant="contained" type="button" onClick={handleDelete}>
-                  Delete{' '}
-                </Button>
+                  <TrackingListIcon
+                    src="/del.png"
+                    alt="Del"
+                    onClick={handleDelete}
+                  ></TrackingListIcon>
               </TrackingListTdEnd>
             </>
           )}
