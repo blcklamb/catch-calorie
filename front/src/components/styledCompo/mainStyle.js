@@ -232,7 +232,7 @@ export const TrackingListTr = styled.tr`
     line-height: 0rem;
     `} */
 
-  // 유리
+  // Table Row Glass
   box-sizing: border-box;
 
   left: 0%;
@@ -240,14 +240,19 @@ export const TrackingListTr = styled.tr`
   top: 0%;
   bottom: 0%;
 
-  /* background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
-    rgba(255, 255, 255, 0.3); */
-  /* box-shadow: 0px 5.334px 40.005px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(40.005px); */
   box-shadow: 0px 1.334px 20.005px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(40.005px);
 
   border-radius: 18px;
+
+  // 짝수 열마다 색
+  &:nth-child(even) {
+    background: rgba(225, 244, 196, 0.3);
+    box-shadow: 0px 1.334px 20.005px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(40.005px);
+
+    border-radius: 18px;
+  }
 `;
 
 export const TrackingListTd = styled.td`
