@@ -107,8 +107,20 @@ userRouter.put("/users/:id", login_required, async (req, res, next) => {
             throw new Error("입력되지 않은 정보가 있습니다.");
         }
 
-        const converted_height = unit === "us" ? convert(height * 1).from("ft").to("cm").toFixed(0) : height;
-        const converted_weight = unit === "us" ? convert(weight * 1).from("lb").to("kg").toFixed(0) : weight;
+        const converted_height =
+            unit === "us"
+                ? convert(height * 1)
+                      .from("ft")
+                      .to("cm")
+                      .toFixed(0)
+                : height;
+        const converted_weight =
+            unit === "us"
+                ? convert(weight * 1)
+                      .from("lb")
+                      .to("kg")
+                      .toFixed(0)
+                : weight;
 
         const toUpdate = {
             name,
@@ -207,8 +219,10 @@ userRouter.get("/users/login/github", async (req, res, next) => {
         const { email } = emailData.find((email) => email.primary === true && email.verified === true);
 
         const user = await userService.getUserByEmail({ email });
-        const token = jwt.sign({ user_id: user._id }, process.env.JWT_SECRET_KEY || "secret-key") || null;
-        const _id = user._id || null;
+        if (user) {
+            var token = jwt.sign({ user_id: user._id }, process.env.JWT_SECRET_KEY || "secret-key") || null;
+            var _id = user._id || null;
+        }
 
         return res.status(200).json({ token, _id, email, name });
     } catch (error) {

@@ -40,15 +40,15 @@ function GithubLogin() {
         const code = new URLSearchParams(location.search);
 
         const data = await Api.get(`users/login/github?${code}`).then((res) => res.data);
-        const { token, _id, email, name } = data;
-        console.log({ token, _id, email, name }); //
+        const { token, _id } = data;
+
         if (token) {
           const user = await Api.get(`users/${_id}`).then((res) => res.data);
 
           sessionStorage.setItem('userToken', token);
-          setToken(user.token);
+          setToken(token);
           setUser(user);
-          console.log(user); //
+
           return navigate(`/tracking/${user._id}`, { replace: true });
         }
 
