@@ -5,6 +5,7 @@ import Switch from '@mui/material/Switch';
 import Autocomplete from '@mui/material/Autocomplete';
 
 import MainButton from './style/MainButton';
+import { AddAddButton, AddCancelButton } from '../styledCompo/MainMuiCustom';
 
 import { BodyContainer, TrackingSwitchContainer } from '../styledCompo/mainStyle';
 import {
@@ -158,15 +159,15 @@ function MainFoodAdd({}) {
             </AddFormSection>
           </AddFormsContainer>
           <AddButtonContainer>
-            <MainButton variant="contained" onClick={handleSubmit}>
+            <AddAddButton variant="contained" onClick={handleSubmit}>
               Add
-            </MainButton>
-            <MainButton
+            </AddAddButton>
+            <AddCancelButton
               variant="contained"
               onClick={() => navigate(`/tracking/${user._id}`, { replace: false })}
             >
               Cancel
-            </MainButton>
+            </AddCancelButton>
           </AddButtonContainer>
           {/* </AddGlassBodyContainer> */}
         </LoginGlass>
