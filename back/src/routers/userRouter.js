@@ -86,7 +86,7 @@ userRouter.get("/users", login_required, async (req, res, next) => {
 // 회원 탈퇴하기
 userRouter.delete("/users", login_required, async (req, res, next) => {
     try {
-        const { id } = req.currentUserId;
+        const id = req.currentUserId;
 
         await userService.deleteUser({ id });
 
