@@ -43,7 +43,7 @@ function TrackingLists() {
     <>
       <Section>
         <SectionTitle>Tracking List</SectionTitle>
-        <div style={isTrackingPage !== 'tracking' ? { height: '480px', overflow: 'auto' } : {}}>
+        <div style={isTrackingPage !== 'tracking' ? { height: '480px', overflow: 'auto', padding: '0px 20px'} : {}}>
           <div>
             <TrackingListTable>
               <thead>

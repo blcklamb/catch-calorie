@@ -162,7 +162,10 @@ function TrackingFoodList({ food, isTrackingPage }) {
           </TrackingListTdEnd>
         </TrackingListTr>
       ) : (
-        <TrackingListTr isTrackingPage={isTrackingPage}>
+        <TrackingListTr
+          style={isTrackingPage !== 'tracking' ? { lineHeight: '20px' } : { lineHeight: '3.5rem' }}
+        >
+          {/* <TrackingListTr isTrackingPage={isTrackingPage}> */}
           <TrackingListTdStart>{food.name}</TrackingListTdStart>
           <TrackingListTd>{food.gram}g</TrackingListTd>
           <TrackingListTd>{food.calorie}kcal</TrackingListTd>
