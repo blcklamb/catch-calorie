@@ -55,8 +55,8 @@ export const ColorButton = styled(Button)(({ theme }) => ({
   background: 'linear-gradient(180deg, #A8E054 100%, #99DA36 100%)',
   color: '#F03E3E',
 
-  //borderImage: 'linear-gradient(to right, red 0%, orange 100%)',
-
+  // borderImage: 'linear-gradient(to right, red 0%, orange 100%)',
+  // borderImageSlice: 1,
   // border: '1px solid black',
 
   '&:hover': {

@@ -16,6 +16,7 @@ import {
 } from '../styledCompo/LoginStyle';
 
 import { ColorButton, ValidationTextField } from '../styledCompo/muiCustom';
+import { BodyInfo } from '../styledCompo/UserCardStyle';
 
 const ChangePwForm = ({ setCardState }) => {
   //현재 바밀번호와, 바꿀 비밀번호를 저장하는 state
@@ -64,7 +65,7 @@ const ChangePwForm = ({ setCardState }) => {
       <UserCardFrame>
         <UserBodyInfo></UserBodyInfo>
         <UserBodyInfo>
-          <Typography variant="h4">PW Change Form</Typography>
+          <BodyInfo variant="h5">PW Change Form</BodyInfo>
         </UserBodyInfo>
 
         <UserBadgeImgInfo style={{ flexFlow: 'column' }}>
@@ -105,13 +106,13 @@ const ChangePwForm = ({ setCardState }) => {
 
         <UserBtnInfo>
           <ColorButton
-            sx={{ width: 120, height: 60 }}
+            sx={{ width: 130, height: 50, fontSize: 18, marginRight: 2 }}
             disabled={!isFormValid}
             onClick={handleSubmit}
           >
             Confirm
           </ColorButton>
-          <ColorButton sx={{ width: 120, height: 60 }} onClick={() => setCardState()}>
+          <ColorButton sx={{ width: 130, height: 50, fontSize: 18 }} onClick={() => setCardState()}>
             Cancel
           </ColorButton>
         </UserBtnInfo>

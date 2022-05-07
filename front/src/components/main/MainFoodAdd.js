@@ -6,7 +6,17 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 import MainButton from './style/MainButton';
 
-import {ValidationTextField} from '../styledCompo/muiCustom'
+import { BodyContainer, TrackingSwitchContainer } from '../styledCompo/mainStyle';
+import {
+  AddGlassBodyContainer,
+  AddFormsContainer,
+  AddTitle,
+  AddFormSection,
+  AddFormTitle,
+  AddButtonContainer,
+} from '../styledCompo/Add';
+import { LoginGlass, TitleText, RedSpan } from '../styledCompo/LoginStyle';
+import { ValidationTextField } from '../styledCompo/muiCustom';
 
 import Header from '../Header';
 import Footer from '../Footer';
@@ -83,65 +93,84 @@ function MainFoodAdd({}) {
   return (
     <>
       <Header />
-      <div style={{ margin: '100px 80px' }}>
-        <h1>Add Food</h1>
-        <div style={{ display: 'flex' }}>
-          <div>
-            <h2>Please Select a Category</h2>
-            <Autocomplete
-              value={category}
-              onChange={(event, newValue) => {
-                setCategory(newValue);
-              }}
-              id="controllable-states-demo"
-              options={categoryList}
-              sx={{ width: 300 }}
-              renderInput={(params) => <TextField {...params} label="category" />}
-            />
-            {isCategoryEmpty && <span>Please select a category</span>}
-            <h2>Please Enter a Name</h2>
-            <ValidationTextField
-              id="outlined-basic"
-              label="food name"
-              variant="outlined"
-              inputValue={name}
-              onBlur={(e) => setName(e.target.value)}
-              helperText={isNameEmpty && <span>Please enter a name</span>}
-            />
-            <h2>Please Enter a Kcal Per Unit Weight</h2>
-            <Switch
-              checked={checked}
-              onChange={handleSwitch}
-              inputProps={{ 'aria-label': 'controlled' }}
-            />
-            {unit}
-            <ValidationTextField
-              id="outlined-basic"
-              label="kcal"
-              variant="outlined"
-              inputValue={kcal}
-              onBlur={(e) => setKcal(e.target.value)}
-              helperText={
-                isKcalEmpty ? (
-                  <span>Please enter a kcal per unit weight</span>
-                ) : (
-                  !isKcalNumber && <span>Please enter a number only</span>
-                )
-              }
-            />
-          </div>
-        </div>
-        <MainButton variant="contained" onClick={handleSubmit}>
-          Add
-        </MainButton>
-        <MainButton
-          variant="contained"
-          onClick={() => navigate(`/tracking/${user._id}`, { replace: false })}
-        >
-          Cancel
-        </MainButton>
-      </div>
-      <Footer />
+      <BodyContainer>
+        <LoginGlass style={{ marginTop: '150px' }}>
+          {/* <AddGlassBodyContainer> */}
+          <AddTitle>Add Food</AddTitle>
+          <AddFormsContainer>
+            <AddFormSection>
+              <AddFormTitle>Please Select a Category</AddFormTitle>
+              <Autocomplete
+                value={category}
+                onChange={(event, newValue) => {
+                  setCategory(newValue);
+                }}
+                id="controllable-states-demo"
+                options={categoryList}
+                sx={{ width: 300 }}
+                renderInput={(params) => (
+                  <ValidationTextField
+                    {...params}
+                    label="category"
+                    helperText={isCategoryEmpty && <RedSpan>Please select a category</RedSpan>}
+                  />
+                )}
+                style={{ width: '100%' }}
+              />
+            </AddFormSection>
+            <AddFormSection>
+              <AddFormTitle>Please Enter a Name</AddFormTitle>
+              <ValidationTextField
+                id="outlined-basic"
+                label="food name"
+                variant="outlined"
+                inputValue={name}
+                onBlur={(e) => setName(e.target.value)}
+                helperText={isNameEmpty && <RedSpan>Please enter a name</RedSpan>}
+                style={{ width: '100%' }}
+              />
+            </AddFormSection>
+            <AddFormSection>
+              <AddFormTitle>Please Enter a Kcal Per Unit Weight</AddFormTitle>
+              <ValidationTextField
+                id="outlined-basic"
+                label="kcal"
+                variant="outlined"
+                inputValue={kcal}
+                onBlur={(e) => setKcal(e.target.value)}
+                helperText={
+                  isKcalEmpty ? (
+                    <RedSpan>Please enter a kcal per unit weight</RedSpan>
+                  ) : (
+                    !isKcalNumber && <RedSpan>Please enter a number only</RedSpan>
+                  )
+                }
+                style={{ width: '70%' }}
+              />
+              <TrackingSwitchContainer>
+                {unit}
+                <Switch
+                  checked={checked}
+                  onChange={handleSwitch}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                />
+              </TrackingSwitchContainer>
+            </AddFormSection>
+          </AddFormsContainer>
+          <AddButtonContainer>
+            <MainButton variant="contained" onClick={handleSubmit}>
+              Add
+            </MainButton>
+            <MainButton
+              variant="contained"
+              onClick={() => navigate(`/tracking/${user._id}`, { replace: false })}
+            >
+              Cancel
+            </MainButton>
+          </AddButtonContainer>
+          {/* </AddGlassBodyContainer> */}
+        </LoginGlass>
+      </BodyContainer>
     </>
   );
 }

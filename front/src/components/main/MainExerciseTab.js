@@ -4,7 +4,18 @@ import MainButton from './style/MainButton';
 
 import MainExerciseForm from './MainExerciseForm';
 
-import { TrackingButtonContainer, TrackingPlusButtonContainer } from '../styledCompo/mainStyle';
+import {
+  TrackingForms,
+  TrackingButtonContainer,
+  TrackingLeftButtonContainer,
+  TrackingRightButtonContainer,
+  TrackingPlusButtonContainer,
+} from '../styledCompo/mainStyle';
+import {
+  TrackingPlusButton,
+  TrackingResetButton,
+  TrackingTrackingButton,
+} from '../styledCompo/MainMuiCustom';
 
 import { useRecoilState } from 'recoil';
 import {
@@ -49,6 +60,11 @@ function MainExerciseTab({ clearForm }) {
     setHour([...hour, '']);
     setMinute([...minute, '']);
     setTime([...time, '']);
+
+    setTimeout(() => {
+      const boxid = document.querySelector('#tracking-exercise-forms');
+      boxid.scrollTop = boxid.scrollHeight;
+    }, 1);
   };
 
   const handleTracking = () => {
@@ -107,21 +123,23 @@ function MainExerciseTab({ clearForm }) {
       {console.log(hour)}
       {console.log(minute)}
       {console.log(time)} */}
-      <MainButton variant="contained" onClick={handleResetForm}>
-        reset
-      </MainButton>
-      {exerciseForms && exerciseForms.map((item) => <MainExerciseForm key={item} idx={item} />)}
+      <TrackingForms id="tracking-exercise-forms">
+        {exerciseForms && exerciseForms.map((item) => <MainExerciseForm key={item} idx={item} />)}
+      </TrackingForms>
       <TrackingButtonContainer>
-        <TrackingPlusButtonContainer>
-          <MainButton variant="contained" onClick={handleAddExerciseForm}>
+        <TrackingLeftButtonContainer>
+          <TrackingResetButton variant="contained" onClick={handleResetForm}>
+            Reset
+          </TrackingResetButton>
+        </TrackingLeftButtonContainer>
+        <TrackingRightButtonContainer>
+          <TrackingPlusButton variant="contained" onClick={handleAddExerciseForm}>
             +
-          </MainButton>
-        </TrackingPlusButtonContainer>
-        <div>
-          <MainButton variant="contained" onClick={handleTracking}>
-            tracking
-          </MainButton>
-        </div>
+          </TrackingPlusButton>
+          <TrackingTrackingButton variant="contained" onClick={handleTracking}>
+            Tracking
+          </TrackingTrackingButton>
+        </TrackingRightButtonContainer>
       </TrackingButtonContainer>
     </div>
   );

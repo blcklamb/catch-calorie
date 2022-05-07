@@ -13,6 +13,7 @@ import {
   TrackingAutoContainer,
   TrackingTextFieldContainer,
   TrackingSwitchContainer,
+  TrackingText, 
 } from '../styledCompo/mainStyle';
 
 import { ValidationTextField } from '../styledCompo/muiCustom';
@@ -193,7 +194,7 @@ function MainExerciseForm({ idx }) {
           {/* {minute[idx]} 분
         <br />총 {time[idx]} 분
         <br /> */}
-          <span style={{ float: 'right' }}>{kcalPerHour[idx]} kcal/min</span>
+          <TrackingText style={{ float: 'right' }}>{kcalPerHour[idx]} kcal/min</TrackingText>
         </TrackingSwitchContainer>
       </TrackingForm>
     </>

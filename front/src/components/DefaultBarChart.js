@@ -2,7 +2,7 @@ import React from 'react';
 
 import { XAxis, YAxis, ResponsiveContainer, Cell, Bar, Tooltip, BarChart } from 'recharts';
 
-export function DefaultBarChart({ data, colors }) {
+export default function DefaultBarChart({ data, colors }) {
   return (
     <ResponsiveContainer width="100%" height="90%">
       <BarChart
@@ -13,13 +13,21 @@ export function DefaultBarChart({ data, colors }) {
           { name: 'Obesity', SCC: '980' },
         ]}
         margin={{
-          top: 20,
-          // right: 30,
-          // left: 20,
-          bottom: 5,
+          top: 30,
+          right: 30,
+          left: 20,
+          bottom: 30,
         }}
       >
-        <XAxis dataKey="name" stroke="#000" tick={{ fontSize: '1vw' }} />
+        <XAxis
+          dataKey="name"
+          stroke="#000"
+          tick={{ fontSize: '1vw' }}
+          style={{
+            fontSize: '1rem',
+            fontFamily: 'Roboto',
+          }}
+        />
         {/* <YAxis stroke="#000" tick={{ fontSize: '1.2vw' }} /> */}
         <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
 
@@ -50,7 +58,7 @@ const CustomTooltip = ({ active, payload }) => {
       <div className="tooltip">
         <p
           className="label"
-          style={{ fontWeight: 'normal', color: '000', fontSize: '30px' }}
+          style={{ fontWeight: 'normal', color: '000', fontSize: '30px', fontFamily: 'Roboto' }}
         >{`${payload[0].value}People`}</p>
       </div>
     );

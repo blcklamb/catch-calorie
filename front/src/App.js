@@ -32,6 +32,7 @@ function App() {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/login/github" element={<GithubLogin />} />
         <Route path="/register" element={<RegisterForm />} />
+        <Route path="/tracking" element={<Home />} />
         <Route path="/tracking/:user_id" element={<Validation />} />
         <Route path="/tracking/addFood" element={<MainFoodAdd />} />
         <Route path="/tracking/addExercise" element={<MainExerciseAdd />} />
@@ -41,7 +42,7 @@ function App() {
         <Route path="/users/delete" element={<UserDelForm />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/password/init" element={<FindPwForm />} />
-        <Route path="*" element={<Validation />} />
+        <Route path="*" element={<Home />} />
       </Routes>
 
       {/* <span style={{ fontFamily: 'Jost', fontStyle: 'italic', fontWeight: 800, fontSize: 46 }}>

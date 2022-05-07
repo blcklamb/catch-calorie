@@ -3,6 +3,48 @@ import styled from 'styled-components';
 // import MainButton from '../main/style/MainButton.js';
 import Button from '@mui/material/Button';
 
+export const StartButton = styled.button`
+  height: 80px;
+  width: 304px;
+  border-radius: 22px;
+  border-color: #f25b5b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, RGB(244, 97, 97) 0%, RGB(241, 68, 68) 100%),
+    rgba(255, 255, 255, 0.3);
+
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  font-family: 'Jost', sans-serif;
+  font-weight: 800;
+  /* font-style: italic; */
+  font-size: 2rem;
+  color: #94d82d;
+  cursor: pointer;
+`;
+export const StartButton2 = styled.button`
+  height: 80px;
+  width: 304px;
+  border-radius: 22px;
+  border-color: #f25b5b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background: linear-gradient(180deg, RGB(244, 97, 97) 0%, RGB(241, 68, 68) 100%),
+    rgba(255, 255, 255, 0.3); */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  font-family: 'Jost', sans-serif;
+  font-weight: 800;
+  /* font-style: italic; */
+  font-size: 2rem;
+  color: #f25b5b;
+  cursor: pointer;
+`;
+
 export const FirstPage = styled.section`
   height: 100vh;
   display: flex;
@@ -59,7 +101,7 @@ export const FirstPageWrapper = styled.div`
 
 export const FirstPageLogo = styled.div`
   font-family: 'Jost', sans-serif;
-  font-weight: bold;
+  font-weight: 800;
   font-style: italic;
   font-size: 8rem;
   color: #94d82d;
@@ -80,10 +122,33 @@ export const HeadCopy = styled.div`
   font-weight: bold;
   /* background-color: white; */
   margin-bottom: 50px;
-  font-size: 2.7rem;
+  font-size: 2.9rem;
   color: #373737;
-  line-height: 40px;
+  line-height: 50px;
   font-weight: bold;
+`;
+
+export const HeadCopy2 = styled.div`
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  /* background-color: white; */
+  margin-bottom: 10px;
+  font-size: 2rem;
+  color: #373737;
+  line-height: 20px;
+  display: flex;
+`;
+
+export const HeadCopy3 = styled.div`
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  /* background-color: white; */
+  margin-bottom: 10px;
+  font-size: 2rem;
+  color: #373737;
+  line-height: 10px;
+  text-align: end;
+  line-height: 20px;
 `;
 
 export const BodyCopy = styled.div`
@@ -100,11 +165,13 @@ export const GraphCopy = styled.div`
   font-weight: bold;
   /* background-color: yellow; */
   line-height: 30px;
-  display: flex;
+  /* display: flex;
   justify-content: center;
+  text-align: center; */
   font-size: 1.7rem;
   color: #373737;
   position: relative;
+  text-align: center;
 `;
 export const SecondPage = styled.section`
   height: 100vh;
@@ -124,8 +191,8 @@ export const SecondPageLeft = styled.div`
   border-radius: 8px; */
   position: relative;
 
-  width: 450px;
-  height: 407px;
+  width: auto;
+  height: auto;
   box-sizing: border-box;
   padding: 28px 35px;
 
@@ -138,10 +205,10 @@ export const SecondPageLeft = styled.div`
 export const SecondPageRight = styled.div`
   position: relative;
   z-index: 400;
-  width: 750px;
-  height: 407px;
+  width: auto;
+  height: auto;
   box-sizing: border-box;
-  padding: 28px 24px 0;
+  padding: 55px 55px 55px 55px;
 
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
     rgba(255, 255, 255, 0.3);
@@ -182,8 +249,8 @@ export const ThirdPageRight = styled.div`
   background-color: white;
   border: 1px solid #f0f1f3;
   border-radius: 8px;
-  width: 690px;
-  height: 407px;
+  width: auto;
+  height: auto;
   box-sizing: border-box;
   padding: 28px 35px;
 
@@ -202,14 +269,15 @@ export const FourthPage = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  position: relative;
 `;
 
 export const FourthPageLeft = styled.div`
   /* background-color: white; */
   /* border: 1px solid #f0f1f3;
   border-radius: 8px; */
-  width: 750px;
-  height: 407px;
+  width: auto;
+  height: auto;
   box-sizing: border-box;
   padding: 28px 35px;
 
@@ -220,8 +288,9 @@ export const FourthPageLeft = styled.div`
 `;
 
 export const FourthPageRight = styled.div`
-  width: 750px;
-  height: 407px;
+  z-index: 400;
+  width: auto;
+  height: auto;
   box-sizing: border-box;
   padding: 28px 24px 0;
 
@@ -234,12 +303,16 @@ export const FourthPageRight = styled.div`
 
   /* font-size: 5rem; */
   border: none;
+
+  display: flex;
+  flex-direction: column;
+  position: relative;
 `;
 
 export const FifthPage = styled.section`
   font-family: 'Jost', sans-serif;
   font-weight: bold;
-  font-style: italic;
+  /* font-style: italic; */
 
   position: relative;
   z-index: 400;
@@ -252,7 +325,7 @@ export const FifthPage = styled.section`
 `;
 
 export const FifthPageCopy = styled.div`
-  font-size: 4rem;
+  font-size: 5rem;
   color: #f03e3e;
   font-style: bold;
 
@@ -260,7 +333,7 @@ export const FifthPageCopy = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
+  line-height: 100px;
   padding-top: 50px;
 `;
 
@@ -269,8 +342,8 @@ export const CircleRed1 = styled.div`
   z-index: 300;
   width: 470.49px;
   height: 470.49px;
-  left: 1589px;
-  top: 1000.51px;
+  right: -10%;
+  top: 100%;
   border-radius: 50%;
   background: radial-gradient(
       87.63% 87.63% at 30.82% 78.65%,
@@ -289,8 +362,8 @@ export const CircleGreen1 = styled.div`
   z-index: 300;
   width: 700px;
   height: 700px;
-  left: -330.39px;
-  top: 1800px;
+  left: -15%;
+  top: 185%;
   border-radius: 50%;
   background: radial-gradient(
     87.63% 87.63% at 30.82% 78.65%,
@@ -301,11 +374,12 @@ export const CircleGreen1 = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 export const CircleRed2 = styled.div`
+  z-index: 200;
   position: absolute;
   width: 200px;
   height: 200px;
-  left: 830.75px;
-  top: 3079.47px;
+  left: 50%;
+  top: 15%;
 
   border-radius: 50%;
   background: radial-gradient(
@@ -319,11 +393,11 @@ export const CircleRed2 = styled.div`
 `;
 export const CircleGreen2 = styled.div`
   position: absolute;
-
+  z-index: 200;
   width: 700px;
   height: 700px;
-  left: 600px;
-  top: 3500px;
+  left: 35%;
+  top: 65%;
   border-radius: 50%;
   background: radial-gradient(
     87.63% 87.63% at 30.82% 78.65%,

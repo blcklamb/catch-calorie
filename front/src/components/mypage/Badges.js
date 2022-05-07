@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import * as Api from '../../api';
 import Tooltip from './Tooltip';
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, shadows } from '@mui/material';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { userInfoState, BadgesState } from '../../atoms';
 import { useParams } from 'react-router-dom';
@@ -33,9 +33,12 @@ import { useParams } from 'react-router-dom';
 // `;
 
 const BadgesText = styled.div`
+  font-family: 'Jost', sans-serif;
+  font-weight: 800;
+  /* font-style: italic; */
   width: 1203px;
   height: 50px;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #f03e3e;
   position: relative;
@@ -63,18 +66,10 @@ const Badges = ({ currentUserInfo }) => {
   //     }),
   //   [award],
   // );
-  useEffect(() => {
-    Api.get(`badges`).then((res) => setBadges(res.data));
-  }, []);
 
-  useEffect(() => {
-    if (params.user_id) {
-      const userId = params.user_id;
-      Api.get('awards', userId).then((res) => setAward(res.data));
-    } else {
-      Api.get('awards', user._id).then((res) => setAward(res.data));
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   Api.get(`badges`).then((res) => setBadges(res.data));
+  // }, []);
 
   // const userId = params.user_id;
   // console.log(userId);
@@ -86,14 +81,24 @@ const Badges = ({ currentUserInfo }) => {
   // useEffect(() => {
   //   console.log('뱃지데이터', badges);
   // }, [badges]);
+
+  useEffect(() => {
+    if (params.user_id) {
+      const userId = params.user_id;
+      Api.get('awards', userId).then((res) => setAward(res.data));
+    } else {
+      Api.get('awards', user._id).then((res) => setAward(res.data));
+    }
+  }, [params.user_id, user]);
+
   return (
     <div>
       <BadgesText>Badges</BadgesText>
 
-      <Container sx={{ marginTop: 2, bgcolor: '#94d82d', borderRadius: 3 }}>
-        <Grid container spacing={1}>
+      <Container sx={{ marginTop: 2, bgcolor: '#94d82d', borderRadius: 3, boxShadow: 3 }}>
+        <Grid container spacing={1.5}>
           {badges.map((badge, idx) => {
-            const isLock = award[badge.award_name] < badge.level;
+            const isLock = award[badge.award_name] < badge.level; //유저 어워드 정보의 각 뱃지 레벨이 뱃지 리스트 정보의 레벨 보다 낮으면 락 걸기
 
             return (
               <Grid item sx={{ margin: 2 }} key={idx}>

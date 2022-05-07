@@ -9,7 +9,7 @@ import Footer from '../Footer';
 import video from '../../image/mainvideo_edit.mp4';
 
 import DefaultLineChart from '../DefaultLineChart.js';
-import { DefaultBarChart } from '../DefaultBarChart.js';
+import DefaultBarChart from '../DefaultBarChart.js';
 import DefaultObesityLineChart from '../DefaultObesityLineChart.js';
 
 import Walking from '../../lottie/walking.json';
@@ -20,32 +20,8 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { userInfoState } from '../../atoms';
 
-import {
-  FirstPage,
-  VideoContainer,
-  Video,
-  FirstPageWrapper,
-  FirstPageLogo,
-  MainButton,
-  CircleRed1,
-  CircleGreen1,
-  SecondPage,
-  SecondPageLeft,
-  HeadCopy,
-  BodyCopy,
-  GraphCopy,
-  SecondPageRight,
-  ThirdPage,
-  ThirdPageLeft,
-  ThirdPageRight,
-  FourthPage,
-  CircleRed2,
-  CircleGreen2,
-  FourthPageLeft,
-  FourthPageRight,
-  FifthPage,
-  FifthPageCopy,
-} from '../styledCompo/homeStyle';
+//HomeStyled 파일 모두 가져오기
+import * as HS from '../styledCompo/homeStyle';
 
 const COLORS = ['#5bc691', '#FFBB28', '#C66868', '#FF8042'];
 
@@ -79,17 +55,17 @@ function Home() {
     <>
       <Header />
 
-      <FirstPage>
-        <VideoContainer>
-          <Video muted autoPlay loop>
+      <HS.FirstPage>
+        <HS.VideoContainer>
+          <HS.Video muted autoPlay loop>
             <source src={video} type="video/mp4" />
-          </Video>
-        </VideoContainer>
-        <FirstPageWrapper>
-          <FirstPageLogo>Catch Calories</FirstPageLogo>
-          {userInfo ? (
-            <MainButton
-              onClick={() => navigate(`/tracking/${userInfo._id}`, { replace: false })}
+          </HS.Video>
+        </HS.VideoContainer>
+        <HS.FirstPageWrapper>
+          <HS.FirstPageLogo>Catch Calories</HS.FirstPageLogo>
+          {user ? (
+            <HS.StartButton
+              onClick={() => navigate(`/tracking/${user._id}`, { replace: true })}
               variant="contained"
               style={{
                 width: '20vw',
@@ -99,9 +75,9 @@ function Home() {
               }}
             >
               START
-            </MainButton>
+            </HS.StartButton>
           ) : (
-            <MainButton
+            <HS.StartButton
               onClick={() => navigate('/login', { replace: true })}
               variant="contained"
               style={{
@@ -111,36 +87,42 @@ function Home() {
                 fontSize: '2.5rem',
               }}
             >
-              START
-            </MainButton>
+              Start
+            </HS.StartButton>
           )}
-        </FirstPageWrapper>
-      </FirstPage>
-      <CircleRed1 />
-      <CircleGreen1 />
-      <SecondPage>
-        <SecondPageLeft>
-          <HeadCopy>
+        </HS.FirstPageWrapper>
+      </HS.FirstPage>
+      <HS.CircleRed1 />
+      <HS.CircleGreen1 />
+      <HS.SecondPage>
+        <HS.SecondPageLeft>
+          <HS.HeadCopy>
             <span style={{ color: ' #e85858' }}>USA Obesity Rate </span>is on the{' '}
             <span style={{ color: '#77b63e' }}>Rise</span>
-          </HeadCopy>
-          <BodyCopy>
-            The rising obesity rate is <br />
-            not just a problem for the USA. <br />
-            It's becoming a <span style={{ color: '#77b63e' }}>global issue.</span>
-          </BodyCopy>
-        </SecondPageLeft>
-        <SecondPageRight>
+          </HS.HeadCopy>
+          <HS.BodyCopy>
+            <HS.HeadCopy2>
+              <span style={{ color: '#77b63e' }}>'CDC says'&nbsp;</span>{' '}
+              <span style={{ color: ' #e85858' }}>more Americans on diets</span>&nbsp;compared to a
+              decade ago'&nbsp;
+            </HS.HeadCopy2>
+            <HS.HeadCopy3 style={{ fontSize: '0.8rem' }}>-NBC NEWS-</HS.HeadCopy3>
+            <br />
+            The rising obesity rate is not just a problem for the USA. &nbsp;It's becoming a{' '}
+            <span style={{ color: '#e85858' }}>global issue.</span>
+          </HS.BodyCopy>
+        </HS.SecondPageLeft>
+        <HS.SecondPageRight>
           <DefaultObesityLineChart colors={COLORS}></DefaultObesityLineChart>
-        </SecondPageRight>
-      </SecondPage>
-      <ThirdPage>
-        <ThirdPageLeft>
-          <GraphCopy>
+        </HS.SecondPageRight>
+      </HS.SecondPage>
+      <HS.ThirdPage>
+        <HS.ThirdPageLeft>
+          <HS.GraphCopy>
             {' '}
-            The more obese people are, <br />
-            the more people don't monitor their calories!
-          </GraphCopy>
+            The more <span style={{ color: '#77b63e' }}>obese people</span> are, <br />
+            the more people <span style={{ color: '#e85858' }}>don't monitor their calories!</span>
+          </HS.GraphCopy>
           {/* <DefaultObesityLineChart colors={COLORS}></DefaultObesityLineChart> */}
           <DefaultBarChart
             data={[
@@ -151,45 +133,66 @@ function Home() {
             ]}
             colors={COLORS}
           ></DefaultBarChart>
-        </ThirdPageLeft>
-        <ThirdPageRight>
-          <HeadCopy>
+        </HS.ThirdPageLeft>
+        <HS.ThirdPageRight>
+          <HS.HeadCopy>
             Correlation between <br />
             <span style={{ color: '#77b63e' }}>calorie monitoring</span> and{' '}
-            <span style={{ color: '#77b63e' }}>obesity levels</span>
-          </HeadCopy>{' '}
-          <BodyCopy>
+            <span style={{ color: '#e85858' }}>obesity levels</span>
+          </HS.HeadCopy>{' '}
+          <HS.BodyCopy>
             Calorie monitoring can lower your obesity level.
             <br />
             Of the 2,000 people randomly selected, <br />
             1,000 people did not monitor their income calories.
-          </BodyCopy>
-        </ThirdPageRight>
-      </ThirdPage>
-      <FourthPage>
-        <CircleRed2 />
-        <CircleGreen2 />
-        <FourthPageLeft>
-          <HeadCopy>
+          </HS.BodyCopy>
+        </HS.ThirdPageRight>
+      </HS.ThirdPage>
+      <HS.FourthPage>
+        <HS.CircleRed2 />
+        <HS.CircleGreen2 />
+        <HS.FourthPageLeft>
+          <HS.HeadCopy>
             Correlation between <br />
             <span style={{ color: '#77b63e' }}>BMI index</span> and{' '}
             <span style={{ color: '#e85858' }}>physical activity</span>
-          </HeadCopy>
-          <BodyCopy>
+          </HS.HeadCopy>
+          <HS.BodyCopy>
             The higher the BMI index, the lower the frequency of physical activity.
             <br />
             High obesity people don't do physical activity at all.
-          </BodyCopy>
-        </FourthPageLeft>
-        <FourthPageRight>
+          </HS.BodyCopy>
+        </HS.FourthPageLeft>
+        <HS.FourthPageRight>
+          <HS.GraphCopy>
+            {' '}
+            <span
+              style={{
+                color: '#e85858',
+              }}
+            >
+              Frequency of physical activity
+            </span>
+            &nbsp;of high obesity
+            <br />
+            which BMI index is <span style={{ color: '#77b63e' }}>30 to 32 is Zero!</span>
+          </HS.GraphCopy>
           <DefaultLineChart />
-        </FourthPageRight>
-      </FourthPage>
-      <FifthPage>
-        <FifthPageCopy>
-          Track your calories with Catch Calories
+        </HS.FourthPageRight>
+      </HS.FourthPage>
+      <HS.FifthPage>
+        <HS.FifthPageCopy>
+          <span>
+            Monitor calories with{' '}
+            <span style={{ color: '#77b63e' }}>
+              Catch Calories <br />
+            </span>
+          </span>
+          <span style={{ color: '#f03e3e', fontSize: '4rem' }}>
+            for your <span style={{ color: '#77b63e' }}>Eating & Workout routine!</span>
+          </span>
           <Lottie options={defaultOptions} height={470} width={470} />
-          <MainButton
+          <HS.StartButton
             onClick={() => navigate('/login', { replace: true })}
             variant="contained"
             style={{
@@ -200,9 +203,9 @@ function Home() {
             }}
           >
             START
-          </MainButton>
-        </FifthPageCopy>
-      </FifthPage>
+          </HS.StartButton>
+        </HS.FifthPageCopy>
+      </HS.FifthPage>
     </>
   );
 }
