@@ -1,7 +1,6 @@
 import { styled } from '@mui/material/styles';
 
 import { ColorButton } from './muiCustom';
-import Button from '@mui/material/Button';
 
 export const TrackingPlusButton = styled(ColorButton)({
   width: '44px',

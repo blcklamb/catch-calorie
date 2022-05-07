@@ -15,8 +15,6 @@ import {
   TrackingResetButton,
   TrackingTrackingButton,
 } from '../styledCompo/MainMuiCustom';
-import { ColorButton } from '../styledCompo/muiCustom';
-// import {SignBtn} from '../styledCompo/LoginStyle'
 
 import { useRecoilState } from 'recoil';
 import {
@@ -123,11 +121,9 @@ function MainFoodTab({ clearForm }) {
           </TrackingResetButton>
         </TrackingLeftButtonContainer>
         <TrackingRightButtonContainer>
-          {/* <TrackingPlusButtonContainer> */}
             <TrackingPlusButton variant="contained" onClick={handleAddFoodForm}>
               +
             </TrackingPlusButton>
-          {/* </TrackingPlusButtonContainer> */}
           <TrackingTrackingButton variant="contained" onClick={handleTracking}>
             Tracking
           </TrackingTrackingButton>
