@@ -148,7 +148,7 @@ export const TrackingPlusButtonContainer = styled.div`
 
 // 그래프 ----------------------------------------------------------------------------------------
 export const CalorieGraphSection = styled.div`
-  text-align: center;
+  text-align: -webkit-center;
   /* height: 480px; */
   position: relative;
   margin-top: 50px;
