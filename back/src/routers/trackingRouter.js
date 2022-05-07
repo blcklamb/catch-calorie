@@ -29,7 +29,7 @@ trackingRouter.post("/tracking/food", login_required, async (req, res, next) => 
         const { name, weight, unit } = req.body;
         const date = dayjs().format("YYYY-MM-DD");
 
-        const converted_weight = unit === "us" ? convert(weight).from("lb").to("g").toFixed(0) : weight;
+        const converted_weight = unit === "us" ? convert(weight * 1).from("lb").to("g").toFixed(0) : weight;
         const newTracking = await trackingService.addFoodTracking({ user_id, date, name, gram: converted_weight });
 
         return res.status(201).json(newTracking);

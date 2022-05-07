@@ -27,7 +27,7 @@ import HeaderHamburger from './HeaderHamburger';
 
 const Logo = styled.h3`
   font-family: 'Jost', sans-serif;
-  font-weight: bold;
+  font-weight: 800;
   font-style: italic;
   width: 50vw;
   font-size: 3rem;

@@ -55,7 +55,7 @@ class trackingService {
         const data = await Tracking.findByRecordId({ id, record: "food" });
         const { name, calorie } = data.food_record.find((food) => food.id === id);
 
-        const gram = unit === "us" ? convert(weight).from("lb").to("g").toFixed(0) : weight;
+        const gram = unit === "us" ? convert(weight * 1).from("lb").to("g").toFixed(0) : weight;
         const { kcal_per_100g } = await Food.findByName({ name });
         const newCalorie = Math.floor((kcal_per_100g / 100) * gram);
 

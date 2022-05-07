@@ -57,7 +57,7 @@ userRouter.post("/users/login", async (req, res, next) => {
 });
 
 // 특정 유저 정보 가져오기
-userRouter.get("/users/:id", login_required, async (req, res, next) => {
+userRouter.get("/users/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
 
@@ -107,8 +107,8 @@ userRouter.put("/users/:id", login_required, async (req, res, next) => {
             throw new Error("입력되지 않은 정보가 있습니다.");
         }
 
-        const converted_height = unit === "us" ? convert(height).from("ft").to("cm").toFixed(0) : height;
-        const converted_weight = unit === "us" ? convert(weight).from("lb").to("kg").toFixed(0) : weight;
+        const converted_height = unit === "us" ? convert(height * 1).from("ft").to("cm").toFixed(0) : height;
+        const converted_weight = unit === "us" ? convert(weight * 1).from("lb").to("kg").toFixed(0) : weight;
 
         const toUpdate = {
             name,
@@ -179,7 +179,7 @@ userRouter.put("/password/init", async (req, res, next) => {
 
 userRouter.get("/users/login/github", async (req, res, next) => {
     try {
-        const { code } = req.query;
+        const code = req.query.code.slice(0, -1);
 
         const base = "https://github.com/login/oauth/access_token";
         const params = new URLSearchParams({
@@ -193,9 +193,9 @@ userRouter.get("/users/login/github", async (req, res, next) => {
             method: "POST",
             headers: { Accept: "application/json" },
         }).then((res) => res.json());
-
         const { access_token } = t0ken;
         const api = "https://api.github.com";
+
         const data = await fetch(`${api}/user`, {
             headers: { Authorization: `token ${access_token}` },
         }).then((res) => res.json());
@@ -204,11 +204,11 @@ userRouter.get("/users/login/github", async (req, res, next) => {
         const emailData = await fetch(`${api}/user/emails`, {
             headers: { Authorization: `token ${access_token}` },
         }).then((res) => res.json());
-        const { email } = emailData.find((email) => email.primary && email.verified === true);
+        const { email } = emailData.find((email) => email.primary === true && email.verified === true);
 
-        let user = await userService.getUserByEmail({ email });
-        const token = user ? jwt.sign({ user_id: _id }, process.env.JWT_SECRET_KEY || "secret-key") : null;
-        const _id = user ? user._id : null;
+        const user = await userService.getUserByEmail({ email });
+        const token = jwt.sign({ user_id: user._id }, process.env.JWT_SECRET_KEY || "secret-key") || null;
+        const _id = user._id || null;
 
         return res.status(200).json({ token, _id, email, name });
     } catch (error) {

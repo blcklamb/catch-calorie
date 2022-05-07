@@ -30,6 +30,7 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/login/github" element={<GithubLogin />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/tracking" element={<Home />} />
         <Route path="/tracking/:user_id" element={<Validation />} />
