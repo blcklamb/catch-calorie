@@ -8,6 +8,7 @@ import { useRecoilValue, useRecoilState } from 'recoil';
 import { userInfoState } from '../../atoms';
 
 import Lock from '../../image/lock5.png';
+import { useAlert } from 'react-alert';
 
 const styleLink = document.createElement('link');
 styleLink.rel = 'stylesheet';
@@ -42,6 +43,7 @@ const Tooltip = ({
 }) => {
   const user = useRecoilValue(userInfoState);
   const params = useParams();
+  const Alert = useAlert();
   // const userId = params.user_id;
 
   // useEffect(() => {
@@ -63,13 +65,14 @@ const Tooltip = ({
       status: userInfo?.status,
     }).then((res) => {
       setUserInfo(res.data);
-      alert('Your Badge has been successfully changed.');
+      // alert('Your Badge has been successfully changed.');
+      Alert.success('Your Badge has been successfully changed.');
     });
   };
 
   return (
     <Popup
-      style={{ borderRadius: '18px', backgroundColor: '#E1F4C4', border: 'none' }}
+      style={{ borderRadius: '18px', backgroundColor: '#E1F4C4', border: 'none', zIndex: 80 }}
       trigger={
         <Badgesboxs>
           <img src={`${src}`} style={{ width: 105 }} alt="뱃지"></img>
