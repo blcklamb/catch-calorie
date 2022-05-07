@@ -10,6 +10,7 @@ import {
   CalorieGraphSection,
   GraphContainer,
   GraphOverContainer,
+  GraphOverText, 
 } from '../styledCompo/mainStyle';
 
 import { useRecoilValue, useRecoilState } from 'recoil';
@@ -245,7 +246,7 @@ function MainGraph({}) {
         </GraphContainer>
         <GraphOverContainer>
           {trackingKcal > trackingRecKcal && (
-            <h3>It's over {trackingKcal - trackingRecKcal} calories</h3>
+            <GraphOverText>over {trackingKcal - trackingRecKcal} kcal</GraphOverText>
           )}
         </GraphOverContainer>
       </CalorieGraphSection>
