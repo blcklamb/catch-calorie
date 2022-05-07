@@ -29,7 +29,7 @@ export const ValidationTextField = styled(TextField)({
   // },
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
-      borderColor: 'red',
+      // borderColor: 'red',
     },
     '&:hover fieldset': {
       borderColor: '#9CFD08',
