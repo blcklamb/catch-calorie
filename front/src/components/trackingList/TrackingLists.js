@@ -5,9 +5,11 @@ import TrackingFoodList from './TrackingFoodList';
 import TrackingExerciseList from './TrackingExerciseList';
 
 import {
-  Section, SectionTitle, 
+  Section,
+  SectionTitle,
   TrackingListTable,
   TrackingListThName,
+  TrackingTableTitle,
   TrackingListThContent,
   TrackingListThAction,
   TrackingListThEnd,
@@ -46,21 +48,21 @@ function TrackingLists() {
               <thead>
                 <tr>
                   <TrackingListThName>
-                    <h2>Food</h2>
+                    <TrackingTableTitle>Food</TrackingTableTitle>
                   </TrackingListThName>
                   <TrackingListThContent>
-                    <h2>Amount</h2>
+                    <TrackingTableTitle>Amount</TrackingTableTitle>
                   </TrackingListThContent>
                   <TrackingListThContent>
-                    <h2>Intake Calories</h2>
+                    <TrackingTableTitle>Intake Calories</TrackingTableTitle>
                   </TrackingListThContent>
                   {isTrackingPage === 'tracking' && (
                     <>
                       <TrackingListThAction>
-                        <h2>Edit</h2>
+                        <TrackingTableTitle>Edit</TrackingTableTitle>
                       </TrackingListThAction>
                       <TrackingListThEnd>
-                        <h2>Del</h2>
+                        <TrackingTableTitle>Del</TrackingTableTitle>
                       </TrackingListThEnd>
                     </>
                   )}
@@ -87,20 +89,24 @@ function TrackingLists() {
               <thead>
                 <tr>
                   <TrackingListThName>
-                    <h2>Exercise</h2>
+                    <TrackingTableTitle>Exercise</TrackingTableTitle>
                   </TrackingListThName>
                   <TrackingListThContent>
-                    <h2>Time</h2>
+                    <TrackingTableTitle>Time</TrackingTableTitle>
                   </TrackingListThContent>
                   <TrackingListThContent>
-                    <h2>Consumed Calories</h2>
+                    <TrackingTableTitle>Consumed Calories</TrackingTableTitle>
                   </TrackingListThContent>
-                  <TrackingListThAction>
-                    <h2>Edit</h2>
-                  </TrackingListThAction>
-                  <TrackingListThEnd>
-                    <h2>Del</h2>
-                  </TrackingListThEnd>
+                  {isTrackingPage === 'tracking' && (
+                    <>
+                      <TrackingListThAction>
+                        <TrackingTableTitle>Edit</TrackingTableTitle>
+                      </TrackingListThAction>
+                      <TrackingListThEnd>
+                        <TrackingTableTitle>Del</TrackingTableTitle>
+                      </TrackingListThEnd>
+                    </>
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -111,9 +117,7 @@ function TrackingLists() {
                     );
                   })
                 ) : (
-                  <tr>
-                    <div>No Exercise Tracking</div>
-                  </tr>
+                  <th colspan="5">No Exercise Tracking</th>
                 )}
               </tbody>
             </TrackingListTable>
