@@ -125,7 +125,7 @@ function MainFoodTab({ clearForm }) {
               +
             </TrackingPlusButton>
           <TrackingTrackingButton variant="contained" onClick={handleTracking}>
-            Tracking
+            Submit
           </TrackingTrackingButton>
         </TrackingRightButtonContainer>
       </TrackingButtonContainer>
