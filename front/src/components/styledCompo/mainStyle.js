@@ -15,7 +15,7 @@ export const BodyContainer = styled.div`
 export const SectionTitle = styled.h1`
   font-family: Jost;
   font-style: italic;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 28px;
 `;
 
@@ -42,7 +42,7 @@ export const MainHello = styled.div`
 export const MainHelloTitle = styled.h1`
   font-family: Jost;
   font-style: italic;
-  font-weight: 750;
+  font-weight: 700;
   font-size: 40px;
 `;
 
@@ -157,6 +157,12 @@ export const GraphOverContainer = styled.div`
   bottom: 0; */
 `;
 
+export const GraphOverText = styled.span`
+  font-family: Jost;
+  font-weight: 700;
+  font-size: 20px;
+`;
+
 // Tracking List ----------------------------------------------------
 export const TrackingListTable = styled.table`
   width: 100%;
@@ -173,6 +179,13 @@ export const TrackingListTh = styled.th`
   /* border: 1px solid #444444; */
   padding: 10px;
   text-align: left;
+`;
+
+export const TrackingTableTitle = styled.span`
+  font-family: Jost;
+  font-style: italic;
+  font-weight: 630;
+  font-size: 23px;
 `;
 
 export const TrackingListThName = styled(TrackingListTh)`
@@ -212,12 +225,13 @@ export const TrackingListTr = styled.tr`
   box-shadow: 0px 1.334px 20.005px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(40.005px);
 
-  border-radius: 26.67px;
+  border-radius: 18px;
 `;
 
 export const TrackingListTd = styled.td`
   /* border: 1px solid #444444; */
   padding: 10px;
+  font-size: large;
 `;
 
 export const TrackingListTdAction = styled(TrackingListTd)`
