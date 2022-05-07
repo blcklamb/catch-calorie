@@ -14,8 +14,8 @@ const heatmap_scheduler = async () => {
 
                 const tracking = await Tracking.findByUserAndDate({ user_id, day });
                 if (tracking) {
-                    // 권장 kcal - (acc_cal: 섭취 kcal - 소모 kcal)
-                    const value = tracking.rec_cal - tracking.acc_cal;
+                    // -acc_cal: 소모 kcal - 섭취 kcal
+                    const value = -tracking.acc_cal;
                     if (value >= 0) {
                         const toUpdate = { $push: { record: { value, day } } };
                         await Heatmap.update({ user_id, toUpdate });
