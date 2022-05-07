@@ -217,6 +217,21 @@ export const TrackingListThEnd = styled(TrackingListThAction)`
 export const TrackingListTr = styled.tr`
   line-height: 3.5rem;
 
+  /* line-height: ${(isTrackingPage) => (isTrackingPage !== 'tracking' ? '0rem' : '3.5rem')}; */
+
+  /* ${({ isTrackingPage }) => {
+    return isTrackingPage ? `line-height: 0rem` : `line-height: 3.5rem`;
+  }} */
+  /* ${({ isTrackingPage }) => {
+    return isTrackingPage !== 'tracking' ? `line-height: 0rem` : `line-height: 3.5rem`;
+  }}
+
+  ${(isTrackingPage) =>
+    isTrackingPage !== 'tracking' &&
+    `
+    line-height: 0rem;
+    `} */
+
   // 유리
   box-sizing: border-box;
 
@@ -240,6 +255,10 @@ export const TrackingListTd = styled.td`
   padding: 10px;
   font-size: large;
   /* line-height: 20px; */
+
+  ${({ isTrackingPage }) => {
+    // return isTrackingPage !== 'tracking' && 'line-height: 20px';
+  }}
 `;
 
 export const TrackingListTdAction = styled(TrackingListTd)`
