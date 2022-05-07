@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 // import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 
 import * as Api from '../../api';
 
 // Mui
-import { Box, Button, ButtonGroup } from '@mui/material';
+import { Box, Button, ButtonGroup, Typography } from '@mui/material';
 
 import Stack from '@mui/material/Stack';
 
@@ -28,6 +29,7 @@ import {
   ColorButton,
   ColorButtonB,
   SmallButton,
+  IOSSwitch,
 } from '../styledCompo/muiCustom';
 
 import {
@@ -42,6 +44,7 @@ import {
 
 function RegisterForm() {
   const navigate = useNavigate();
+  const Alert = useAlert();
 
   ///@ 각 input 상태값
   //useState로 email 상태를 생성함.
@@ -62,16 +65,29 @@ function RegisterForm() {
   const [icon, setIcon] = useState(
     'https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_1.png',
   );
+  // Check 버튼 상태
+  const [checkNum, setCheckNum] = useState(true);
+  const [isEmailAuthed, setIsEmailAuthed] = useState(false);
+  // unit
+  const [unit, setUnit] = useState('us');
+  // open
+  const [open, setOpen] = useState(false);
+  const [openChecked, setOpenChecked] = useState(open);
 
   const [code, setCode] = useState('유저가 임시번호를 치면 받아오는 곳이랍니다.');
   const [resCode, setResCode] = useState('임시번호가 할당되는 곳이랍니다.');
+
+  ///@ 이메일로 임시 번호 보내는 곳
   const reqCode = async () => {
-    alert('Your email verification number has been successfully sent to your email.');
-    return setResCode(await Api.get(`users/email/${email}`).then((data) => data.data));
+    try {
+      Alert.success('Your email verification number has been successfully sent to your email.');
+      return setResCode(await Api.get(`users/email/${email}`).then((data) => data.data));
+    } catch (err) {
+      Alert.error('Email transmission failed.', err.response.data.errorMessage);
+    }
   };
   ///@ 임시번호를 알고싶나요? 콘솔을 켜시면 됩니당.
-  // console.log(resCode);
-  const isEmailAuthed = resCode === code;
+  console.log(resCode);
 
   ///@ 각 input 유효성 검사
   //위 validateEmail 함수를 통해 이메일 형태 적합 여부를 확인함.
@@ -86,8 +102,6 @@ function RegisterForm() {
   const isHeightValid = Number(height) > 0 && height.length > 0;
   // 공백이나 숫자인지 여부를 확인함.
   const isWeightValid = Number(weight) > 0 && weight.length > 0;
-  // Check 버튼 상태
-  const [checkNum, setCheckNum] = useState('트루');
 
   ///@ 조건이 모두 동시에 만족되는지 여부를 확인함.
   const isFormValid =
@@ -97,21 +111,23 @@ function RegisterForm() {
     isNameValid &&
     isHeightValid &&
     isWeightValid &&
-    isEmailAuthed &&
-    checkNum === '이메일 인증 완료';
+    isEmailAuthed;
 
   ///@ 임시번호 확인후 상태값 변경
   const checkTempNumValid = () => {
-    if (isEmailAuthed) {
-      alert('You have successfully authenticated your email.');
-      setCheckNum('이메일 인증 완료');
+    if (code === resCode) {
+      Alert.success('You have successfully authenticated your email.');
+      setIsEmailAuthed(true);
+      // setCheckNum('이메일 인증 완료');
     } else {
-      alert('The authentication number was entered incorrectly.');
-      setCheckNum('');
+      Alert.error('The authentication number was entered incorrectly.');
+      setIsEmailAuthed(false);
+      setCheckNum(false);
+      // setCheckNum('');
     }
   };
 
-  ///@ 버튼 그룹
+  ///@ 버튼 그룹 gender
   const buttons = [
     <GenderBtn
       key="male"
@@ -130,6 +146,35 @@ function RegisterForm() {
       female
     </GenderBtn>,
   ];
+  ///@ 버튼 그룹 unit
+  const unitButtons = [
+    <Button
+      key="cm/kg"
+      color="success"
+      variant={unit === 'non_us' ? 'contained' : 'outlined'}
+      onClick={() => setUnit('non_us')}
+    >
+      Metric
+    </Button>,
+    <Button
+      key="ft/lb"
+      color="success"
+      variant={unit === 'us' ? 'contained' : 'outlined'}
+      onClick={() => setUnit('us')}
+    >
+      U.S.Standard
+    </Button>,
+  ];
+
+  ///@ open 상태변경 함수
+  const handleOpenSwitch = (e) => {
+    setOpenChecked(e.target.checked);
+    if (openChecked) {
+      setOpen(false);
+    } else {
+      setOpen(true);
+    }
+  };
 
   ///@ 회원가입 요청
   const handleSubmit = async (e) => {
@@ -148,13 +193,22 @@ function RegisterForm() {
         gender,
         height: Number(height),
         weight: Number(weight),
+        unit,
+        open,
         icon,
       });
 
       // 로그인 페이지로 이동함.
+
       navigate('/login');
+      Alert.success('You have successfully registered as a member.');
     } catch (err) {
-      console.log('회원가입에 실패하였습니다.', err);
+      if (
+        err.response.data.errorMessage ===
+        '현재 사용 중인 이메일입니다. 다른 이메일을 입력해주세요.'
+      ) {
+        Alert.error('This email is currently in use. Please enter another email.');
+      }
     }
   };
 
@@ -207,7 +261,7 @@ function RegisterForm() {
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
-                  // setCheckLogin(true);
+                  setIsEmailAuthed(false);
                 }}
                 // defaultValue="Hello World"
               />
@@ -227,7 +281,9 @@ function RegisterForm() {
                 error={!checkNum}
                 size="small"
                 helperText={
-                  !isEmailAuthed && <RedSpan> The authentication number is invalid. </RedSpan>
+                  !isEmailAuthed && (
+                    <RedSpan> Please enter the temporary number and press the button. </RedSpan>
+                  )
                 }
                 placeholder="Please enter the authentication number after receiving the email verification."
                 onChange={(e) => {
@@ -309,6 +365,22 @@ function RegisterForm() {
                 <FormControlLabel value="male" control={<Radio color="success" />} label="Male" />
                 <FormControlLabel value="female" control={<Radio color="success" />} label="Female" />
               </RadioGroup> */}
+              <br></br>
+              {/* ///@ 유닛 */}
+              <ButtonGroup size="small" style={{ justifyContent: 'flex-end' }}>
+                {/* ///@ 공개여부 */}
+                {/* <Stack direction="row" spacing={1} alignItems="center">
+                  <Typography>Private</Typography>
+                  <IOSSwitch
+                    title="Whether to disclose body information"
+                    checked={openChecked}
+                    onChange={handleOpenSwitch}
+                  />
+                  <Typography>Public</Typography>
+                </Stack> */}
+                <div>{unitButtons}</div>
+              </ButtonGroup>
+
               <br></br>
               {/* ///@ 키 */}
               <ValidationTextField

@@ -10,8 +10,8 @@ import {
   TrackingListTdAction,
   TrackingListTdStart,
   TrackingListTdEnd,
-  TestTd,
-  TestTr,
+  TrackingListTdInput,
+  TrackingListTdInputText,
 } from '../styledCompo/mainStyle';
 
 import { ValidationTextField } from '../styledCompo/muiCustom';
@@ -41,9 +41,9 @@ function TrackingFoodList({ food, isTrackingPage }) {
 
   useEffect(() => {
     if (checked === true) {
-      setUnit('us');
-    } else {
       setUnit('non us');
+    } else {
+      setUnit('us');
     }
   }, [checked]);
 
@@ -82,6 +82,9 @@ function TrackingFoodList({ food, isTrackingPage }) {
   const handleCancel = (e) => {
     setWeight(food.gram);
 
+    setIsWeightEmpty(false);
+    setIsWeightNumber(true);
+
     setIsEditing(false);
   };
 
@@ -108,9 +111,9 @@ function TrackingFoodList({ food, isTrackingPage }) {
         // 수정 모드
         <TrackingListTr>
           <TrackingListTdStart>{food.name}</TrackingListTdStart>
-          <TrackingListTd>
+          <TrackingListTdInput>
             <tr>
-              <TestTd rowspan="2">
+              <td>
                 <ValidationTextField
                   id="outlined-name"
                   label="weight"
@@ -124,28 +127,19 @@ function TrackingFoodList({ food, isTrackingPage }) {
                     )
                   }
                 />
-              </TestTd>
-              <TestTd>
+              </td>
+              <td>
                 <Switch
                   checked={checked}
                   onChange={handleSwitch}
                   inputProps={{ 'aria-label': 'controlled' }}
                 />
-              </TestTd>
+              </td>
             </tr>
-            <tr>
-              <TestTd>
-                {/* <TestTr>
-                <Switch
-                  checked={checked}
-                  onChange={handleSwitch}
-                  inputProps={{ 'aria-label': 'controlled' }}
-                />
-              </TestTr> */}
+              <TrackingListTdInputText style={{ float: 'left', height: '20px' }}>
                 {unit === 'us' ? 'US standard' : 'metric'}
-              </TestTd>
-            </tr>
-          </TrackingListTd>
+              </TrackingListTdInputText>
+          </TrackingListTdInput>
 
           <TrackingListTd>
             {/* <div style={{ marginRight: '30px' }}> */}

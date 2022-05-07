@@ -9,17 +9,22 @@ import { useParams } from 'react-router-dom';
 
 const JandiContainer = styled.div`
   position: relative;
-  width: 1203px;
-  height: 387px;
+  width: 100%;
+  height: auto;
   border-radius: 15px;
   background-color: #94d82d;
   bottom: 0px;
+
+  box-shadow: 0px 5.33376px 40.0032px rgba(0, 0, 0, 0.25);
 `;
 
 const JandiText = styled.div`
+  font-family: 'Jost', sans-serif;
+  font-weight: 800;
+  /* font-style: italic; */
   width: 1203px;
   height: 50px;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #f03e3e;
   position: relative;
