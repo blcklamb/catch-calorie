@@ -21,9 +21,10 @@ import {
   MainHello,
   MainHelloTitle,
   MainSection1,
+  Section,
 } from '../styledCompo/mainStyle';
 
-import {RegisterCircleRed1, RegisterCircleGreen2} from '../styledCompo/RegisterStyle'
+import { RegisterCircleRed1, RegisterCircleGreen2 } from '../styledCompo/RegisterStyle';
 
 import { useRecoilState } from 'recoil';
 import { tokenState, userInfoState, userState, BadgesState } from '../../atoms';
@@ -57,10 +58,14 @@ const Main = () => {
         </MainHelloSection>
         <MainSection1>
           <MainTabs />
-          <MainGraph />
+          <Section>
+            <MainGraph />
+          </Section>
         </MainSection1>
         <div>
-          <TrackingLists />
+          <Section>
+            <TrackingLists />
+          </Section>
         </div>
       </BodyContainer>
     </>

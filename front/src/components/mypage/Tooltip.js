@@ -18,16 +18,16 @@ document.head.appendChild(styleLink);
 const Badgesboxs = styled.div`
   width: 120px;
   height: 120px;
-  border-radius: 18px;
-  background: #97e421;
-  /* border: 1px solid #f03e3e; */
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 5.33338px 40.0003px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(40.0003px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 26.6669px;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  :hover {
-    box-shadow: inset 8px 8px 16px #c88383, inset -8px -8px 16px #faa3a3;
-  }
 `;
 
 const Tooltip = ({
@@ -76,7 +76,7 @@ const Tooltip = ({
         backgroundColor: '#E1F4C4',
         border: 'none',
         fontFamily: 'Roboto',
-        zIndex: 80,
+        zIndex: 600,
       }}
       trigger={
         <Badgesboxs>

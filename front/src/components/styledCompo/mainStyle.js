@@ -72,7 +72,7 @@ export const Section = styled.div`
   backdrop-filter: blur(30px);
   /* Note: backdrop-filter has minimal browser support */
 
-  border-radius: 40px;
+  border-radius: 20px;
 `;
 
 // 탭 ----------------------------------------------------------------------------------------
