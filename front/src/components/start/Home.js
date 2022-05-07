@@ -17,7 +17,7 @@ import Walking from '../../lottie/walking.json';
 import { useNavigate } from 'react-router-dom';
 // import { useParams } from 'react-router-dom';
 
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../../atoms';
 
 //HomeStyled 파일 모두 가져오기
@@ -28,7 +28,8 @@ const COLORS = ['#5bc691', '#FFBB28', '#C66868', '#FF8042'];
 function Home() {
   const navigate = useNavigate();
 
-  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  // const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const user = useRecoilValue(userInfoState);
 
   // const userId = user._id;
   // console.log('id', userId);
