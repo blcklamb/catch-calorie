@@ -84,9 +84,9 @@ userRouter.get("/users", login_required, async (req, res, next) => {
 });
 
 // 회원 탈퇴하기
-userRouter.delete("/users/:id", login_required, async (req, res, next) => {
+userRouter.delete("/users", login_required, async (req, res, next) => {
     try {
-        const { id } = req.params;
+        const { id } = req.currentUserId;
 
         await userService.deleteUser({ id });
 
@@ -107,8 +107,8 @@ userRouter.put("/users/:id", login_required, async (req, res, next) => {
             throw new Error("입력되지 않은 정보가 있습니다.");
         }
 
-        const converted_height = unit === "us" ? convert(height * 1).from("ft").to("cm").toFixed(0) : height;
-        const converted_weight = unit === "us" ? convert(weight * 1).from("lb").to("kg").toFixed(0) : weight;
+        const converted_height = unit === "us" ? convert(Number(height)).from("ft").to("cm").toFixed(0) : Number(height);
+        const converted_weight = unit === "us" ? convert(Number(weight)).from("lb").to("kg").toFixed(0) : Number(weight);
 
         const toUpdate = {
             name,
