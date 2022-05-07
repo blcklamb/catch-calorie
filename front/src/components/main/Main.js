@@ -44,7 +44,7 @@ const Main = () => {
       <Header />
       <BodyContainer>
         <MainHelloSection>
-          <MainHelloBadge >
+          <MainHelloBadge onClick={() => navigate('/mypage', { replace: false })}>
             <img src={userInfo?.icon} alt="badge" style={{ width: 80 }}></img>
           </MainHelloBadge>
           <MainHello>

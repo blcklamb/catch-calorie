@@ -22,7 +22,7 @@ export const SectionTitle = styled.h1`
 // Main Hello
 export const MainHelloSection = styled.div`
   width: 100%;
-  padding: 20px 20px;
+  margin: 30px 20px;
 
   /* background: yellow; */
   display: flex;
@@ -33,9 +33,9 @@ export const MainHelloSection = styled.div`
 `;
 
 export const MainHelloBadge = styled.div`
-margin-right: 15px;
-
-`
+  margin-right: 15px;
+  cursor: pointer;
+`;
 
 export const MainHello = styled.div`
   display: flex;
