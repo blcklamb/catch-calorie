@@ -132,14 +132,14 @@ function TrackingExerciseList({ exercise, isTrackingPage }) {
           </TrackingListTdInput>
           <TrackingListTd>{previewKcal()}kcal</TrackingListTd>
           <TrackingListTdAction>
-            <Button variant="contained" type="button" onClick={handleCheck}>
-              Check
-            </Button>
+            <TrackingListIcon src="/done.png" alt="Done" onClick={handleCheck}></TrackingListIcon>
           </TrackingListTdAction>
           <TrackingListTdEnd>
-            <Button variant="contained" type="button" onClick={handleCancel}>
-              Cancel
-            </Button>
+            <TrackingListIcon
+              src="/cancel.png"
+              alt="Cancel"
+              onClick={handleCancel}
+            ></TrackingListIcon>
           </TrackingListTdEnd>
         </TrackingListTr>
       ) : (
@@ -153,18 +153,18 @@ function TrackingExerciseList({ exercise, isTrackingPage }) {
           {isTrackingPage === 'tracking' && (
             <>
               <TrackingListTdAction>
-                  <TrackingListIcon
-                    src="/edit.png"
-                    alt="Edit"
-                    onClick={handleModify}
-                  ></TrackingListIcon>
+                <TrackingListIcon
+                  src="/edit.png"
+                  alt="Edit"
+                  onClick={handleModify}
+                ></TrackingListIcon>
               </TrackingListTdAction>
               <TrackingListTdEnd>
-                  <TrackingListIcon
-                    src="/del.png"
-                    alt="Del"
-                    onClick={handleDelete}
-                  ></TrackingListIcon>
+                <TrackingListIcon
+                  src="/del.png"
+                  alt="Del"
+                  onClick={handleDelete}
+                ></TrackingListIcon>
               </TrackingListTdEnd>
             </>
           )}
