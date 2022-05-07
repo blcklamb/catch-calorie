@@ -28,6 +28,7 @@ function GithubLogin() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [isDone, setIsDone] = useState(false);
   const [data, setData] = useState({});
   const [gender, setGender] = useState('male');
   const [height, setHeight] = useState(0);
@@ -52,7 +53,8 @@ function GithubLogin() {
           return navigate(`/tracking/${user._id}`, { replace: true });
         }
 
-        return setData(data);
+        setData(data);
+        setIsDone(true);
       } catch (error) {
         console.log(`❌ ${error}`);
       }
@@ -99,110 +101,116 @@ function GithubLogin() {
           marginTop: 50,
         }}
       >
-        <form
-          onSubmit={handleSubmit}
-          style={{
-            marginTop: 100,
-            marginBottom: 100,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexFlow: 'column',
-          }}
-        >
-          <h1 style={{ margin: 10 }}>Register</h1>
-          <Box
-            sx={{
-              '& > :not(style)': { m: 1, width: '600px' },
+        {isDone && (
+          <form
+            onSubmit={handleSubmit}
+            style={{
+              marginTop: 100,
+              marginBottom: 100,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexFlow: 'column',
             }}
-            noValidate
-            autoComplete="off"
           >
-            <br />
-            <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
-            <RadioGroup
-              row
-              aria-labelledby="demo-row-radio-buttons-group-label"
-              name="row-radio-buttons-group"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-            >
-              <FormControlLabel value="male" control={<Radio color="success" />} label="Male" />
-              <FormControlLabel value="female" control={<Radio color="success" />} label="Female" />
-            </RadioGroup>
-            <ValidationTextField
-              required
-              label="Height"
-              type="number"
-              helperText={
-                !isHeightValid && <span>Please enter a number only.(The unit is feet.)</span>
-              }
-              value={height}
-              onChange={(e) => {
-                setHeight(e.target.value);
+            <h1 style={{ margin: 10 }}>Register</h1>
+            <Box
+              sx={{
+                '& > :not(style)': { m: 1, width: '600px' },
               }}
-            />
-            <br />
-            <ValidationTextField
-              required
-              label="Weight"
-              type="number"
-              helperText={
-                !isWeightValid && <span>Please enter a number only.(The unit is pounds.)</span>
-              }
-              value={weight}
-              onChange={(e) => {
-                setWeight(e.target.value);
-              }}
-            />
-            <br />
-          </Box>
-          <Box
-            sx={{
-              '& > :not(style)': { m: 1, width: '600px' },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <FormLabel id="demo-row-radio-buttons-group-label">Badges</FormLabel>
-            <RadioGroup
-              row
-              aria-labelledby="demo-row-radio-buttons-group-label"
-              name="row-radio-buttons-group"
-              value={icon}
-              onChange={(e) => setIcon(e.target.value)}
-              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+              noValidate
+              autoComplete="off"
             >
-              <FormControlLabel
-                value="all-rounder"
-                labelPlacement="bottom"
-                control={<Radio color="success" />}
-                label={<img src="/all.png" alt="all" style={{ width: 100 }}></img>}
+              <br />
+              <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+              >
+                <FormControlLabel value="male" control={<Radio color="success" />} label="Male" />
+                <FormControlLabel
+                  value="female"
+                  control={<Radio color="success" />}
+                  label="Female"
+                />
+              </RadioGroup>
+              <ValidationTextField
+                required
+                label="Height"
+                type="number"
+                helperText={
+                  !isHeightValid && <span>Please enter a number only.(The unit is feet.)</span>
+                }
+                value={height}
+                onChange={(e) => {
+                  setHeight(e.target.value);
+                }}
               />
-              <FormControlLabel
-                value="weight"
-                labelPlacement="bottom"
-                control={<Radio color="success" />}
-                label={<img src="/weight.png" alt="all" style={{ width: 100 }}></img>}
+              <br />
+              <ValidationTextField
+                required
+                label="Weight"
+                type="number"
+                helperText={
+                  !isWeightValid && <span>Please enter a number only.(The unit is pounds.)</span>
+                }
+                value={weight}
+                onChange={(e) => {
+                  setWeight(e.target.value);
+                }}
               />
-              <FormControlLabel
-                value="yoga"
-                labelPlacement="bottom"
-                control={<Radio color="success" />}
-                label={<img src="/yoga.png" alt="all" style={{ width: 100 }}></img>}
-              />
-              <FormControlLabel
-                value="runner"
-                labelPlacement="bottom"
-                control={<Radio color="success" />}
-                label={<img src="/runner.png" alt="all" style={{ width: 100 }}></img>}
-              />
-            </RadioGroup>
-            <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
-              Login
-            </ColorButton>
-          </Box>
-        </form>
+              <br />
+            </Box>
+            <Box
+              sx={{
+                '& > :not(style)': { m: 1, width: '600px' },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <FormLabel id="demo-row-radio-buttons-group-label">Badges</FormLabel>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
+                value={icon}
+                onChange={(e) => setIcon(e.target.value)}
+                sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+              >
+                <FormControlLabel
+                  value="all-rounder"
+                  labelPlacement="bottom"
+                  control={<Radio color="success" />}
+                  label={<img src="/all.png" alt="all" style={{ width: 100 }}></img>}
+                />
+                <FormControlLabel
+                  value="weight"
+                  labelPlacement="bottom"
+                  control={<Radio color="success" />}
+                  label={<img src="/weight.png" alt="all" style={{ width: 100 }}></img>}
+                />
+                <FormControlLabel
+                  value="yoga"
+                  labelPlacement="bottom"
+                  control={<Radio color="success" />}
+                  label={<img src="/yoga.png" alt="all" style={{ width: 100 }}></img>}
+                />
+                <FormControlLabel
+                  value="runner"
+                  labelPlacement="bottom"
+                  control={<Radio color="success" />}
+                  label={<img src="/runner.png" alt="all" style={{ width: 100 }}></img>}
+                />
+              </RadioGroup>
+              <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
+                Login
+              </ColorButton>
+            </Box>
+          </form>
+        )}
       </Container>
       <Footer></Footer>
     </>
