@@ -47,3 +47,33 @@ export const AddButton = styled(ColorButtonB)({
   borderRadius: '15px',
   color: '#F03E3E',
 });
+
+export const AddAddButton = styled(TrackingTrackingButton)({
+  fontWeight: 700,
+  fontSize: '20px',
+  width: '80%',
+  height: '50px',
+  margin: '0px 20px',
+
+});
+
+export const AddCancelButton = styled(ColorButtonB)({
+  fontWeight: 700,
+  fontSize: '20px',
+  width: '80%',
+  height: '50px',
+
+  backgroundColor: '#fff',
+
+  border: 'solid',
+  borderColor: '#F14444',
+  borderRadius: '15px',
+  color: '#F03E3E',
+
+  margin: '0px 20px',
+
+  '&:hover': {
+    backgroundColor: '#FCFFF8',
+    borderColor: '#BA0E0E',
+  },
+});
