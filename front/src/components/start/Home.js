@@ -27,6 +27,7 @@ const COLORS = ['#5bc691', '#FFBB28', '#C66868', '#FF8042'];
 function Home() {
   const navigate = useNavigate();
 
+  // const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const user = useRecoilValue(userInfoState);
 
   // const userId = user._id;

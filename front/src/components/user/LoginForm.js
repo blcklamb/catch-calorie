@@ -100,7 +100,7 @@ function LoginForm() {
     }
   };
 
-  ///@ 깃헙 로그인 요청
+  // 깃헙 로그인 요청
   const githubLogin = () => {
     const base = 'https://github.com/login/oauth/authorize';
     const params = new URLSearchParams({
