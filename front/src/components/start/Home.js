@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import styled from 'styled-components';
+
 import Lottie from 'react-lottie';
 // import MainButton from '../main/style/MainButton.js';
-import Button from '@mui/material/Button';
+
 import Header from '../Header';
-import Footer from '../Footer';
 
 import video from '../../image/mainvideo_edit.mp4';
 
@@ -101,11 +100,9 @@ function Home() {
             <span style={{ color: '#77b63e' }}>Rise</span>
           </HS.HeadCopy>
           <HS.BodyCopy>
-            <HS.HeadCopy2>
-              <span style={{ color: '#77b63e' }}>'CDC says'&nbsp;</span>{' '}
-              <span style={{ color: ' #e85858' }}>more Americans on diets</span>&nbsp;compared to a
-              decade ago'&nbsp;
-            </HS.HeadCopy2>
+            <span style={{ color: '#77b63e', fontSize: '2rem' }}>'CDC says'&nbsp;</span>{' '}
+            <span style={{ color: ' #e85858', fontSize: '2rem' }}>more Americans on diets</span>
+            &nbsp;<span style={{ fontSize: '2rem' }}>compared to a decade ago</span>&nbsp;
             <HS.HeadCopy3 style={{ fontSize: '0.8rem' }}>-NBC NEWS-</HS.HeadCopy3>
             <br />
             The rising obesity rate is not just a problem for the USA. &nbsp;It's becoming a{' '}

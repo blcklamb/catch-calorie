@@ -18,7 +18,7 @@ export const StartButton = styled.button`
   backdrop-filter: blur(10px);
   font-family: 'Jost', sans-serif;
   font-weight: 800;
-  /* font-style: italic; */
+  font-style: italic;/
   font-size: 2rem;
   color: #94d82d;
   cursor: pointer;
@@ -39,7 +39,7 @@ export const StartButton2 = styled.button`
   backdrop-filter: blur(10px);
   font-family: 'Jost', sans-serif;
   font-weight: 800;
-  /* font-style: italic; */
+  font-style: italic;
   font-size: 2rem;
   color: #f25b5b;
   cursor: pointer;
