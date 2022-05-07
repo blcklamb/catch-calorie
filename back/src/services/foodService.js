@@ -25,7 +25,7 @@ class foodService {
         return Food.update({ id, toUpdate: { $inc: { views: 1 } } }, { new: true });
     }
 
-    static async convertUnit({kcal, unit}) {
+    static async convertUnit({ kcal, unit }) {
         let kcal_per_lb = kcal;
         let kcal_per_100g = kcal;
 
@@ -39,7 +39,6 @@ class foodService {
 
         return { kcal_per_100g, kcal_per_lb };
     }
-
 }
 
 export { foodService };
