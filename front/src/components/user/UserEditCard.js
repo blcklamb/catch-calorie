@@ -181,8 +181,9 @@ const UserEditCard = ({ setCardState }) => {
             }}
           />
           <br />
-          <FormLabel>open</FormLabel>
+
           <Stack direction="row" spacing={1} alignItems="center">
+            <FormLabel style={{ marginRight: 16 }}>physical info open</FormLabel>
             <Typography>Private</Typography>
             <IOSSwitch checked={openChecked} onChange={handleOpenSwitch} />
             <Typography>Public</Typography>
@@ -220,6 +221,11 @@ const UserEditCard = ({ setCardState }) => {
           <ButtonGroup size="small" aria-label="small button group">
             {buttons}
           </ButtonGroup>
+          <div style={{ width: 290, marginTop: 14, marginBottom: 6 }}>
+            <Typography>
+              If you modify the body information, it will be reflected from the next day.
+            </Typography>
+          </div>
           <br />
           {unit === 'us' ? (
             <ValidationTextField
