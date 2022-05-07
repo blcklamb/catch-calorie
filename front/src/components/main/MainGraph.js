@@ -10,11 +10,12 @@ import {
   CalorieGraphSection,
   GraphContainer,
   GraphOverContainer,
-  GraphOverText, 
+  GraphOverText,
 } from '../styledCompo/mainStyle';
 
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
+  tokenState,
   trackingState,
   userInfoState,
   foodSelectedState,
@@ -30,6 +31,7 @@ function MainGraph({}) {
   const params = useParams();
 
   const user = useRecoilValue(userInfoState);
+  const token = useRecoilValue(tokenState);
 
   const [tracking, setTracking] = useRecoilState(trackingState);
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
@@ -48,21 +50,34 @@ function MainGraph({}) {
   const [getUser, setGetUser] = useState('');
 
   useEffect(() => {
+    // console.log('여기다 11111111');
     if (params?.user_id === user?._id || isMypage === 'mypage') {
       setGetUser(user?._id);
     } else {
       setGetUser(params.user_id);
     }
-  }, [params, user]);
+  }, [params, user, token]);
 
   useEffect(() => {
-    Api.get(`tracking/${getUser}`).then((res) => {
-      // 오늘의 트래킹 정보
-      setTracking(res.data);
-      // 오늘의 트래킹 정보 중 칼로리
-      setTrackingKcal(res.data?.acc_cal);
-      setTrackingRecKcal(res.data?.rec_cal);
-    });
+    // console.log('여기다 22222222');
+    // console.log(getUser);
+
+    const getTracking = async () => {
+      try {
+        await Api.get(`tracking/${getUser}`).then((res) => {
+          console.log(res.data);
+          // 오늘의 트래킹 정보
+          setTracking(res.data);
+          // 오늘의 트래킹 정보 중 칼로리
+          setTrackingKcal(res.data?.acc_cal);
+          setTrackingRecKcal(res.data?.rec_cal);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getTracking();
   }, [getUser, trackingUpdate]);
 
   const labels = [''];
