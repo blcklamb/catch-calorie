@@ -19,9 +19,10 @@ export const SectionTitle = styled.h1`
   font-size: 28px;
 `;
 
+// Main Hello
 export const MainHelloSection = styled.div`
   width: 100%;
-  padding: 20px 20px;
+  margin: 30px 20px;
 
   /* background: yellow; */
   display: flex;
@@ -29,6 +30,11 @@ export const MainHelloSection = styled.div`
   height: 150px;
   align-content: center;
   position: relative;
+`;
+
+export const MainHelloBadge = styled.div`
+  margin-right: 15px;
+  cursor: pointer;
 `;
 
 export const MainHello = styled.div`
@@ -200,6 +206,7 @@ export const TrackingListThContent = styled(TrackingListTh)`
 export const TrackingListThAction = styled(TrackingListTh)`
   width: 5%;
   text-align: center;
+  cursor: pointer;
 `;
 
 export const TrackingListThEnd = styled(TrackingListThAction)`
@@ -209,6 +216,21 @@ export const TrackingListThEnd = styled(TrackingListThAction)`
 // Table Body
 export const TrackingListTr = styled.tr`
   line-height: 3.5rem;
+
+  /* line-height: ${(isTrackingPage) => (isTrackingPage !== 'tracking' ? '0rem' : '3.5rem')}; */
+
+  /* ${({ isTrackingPage }) => {
+    return isTrackingPage ? `line-height: 0rem` : `line-height: 3.5rem`;
+  }} */
+  /* ${({ isTrackingPage }) => {
+    return isTrackingPage !== 'tracking' ? `line-height: 0rem` : `line-height: 3.5rem`;
+  }}
+
+  ${(isTrackingPage) =>
+    isTrackingPage !== 'tracking' &&
+    `
+    line-height: 0rem;
+    `} */
 
   // 유리
   box-sizing: border-box;
@@ -232,10 +254,15 @@ export const TrackingListTd = styled.td`
   /* border: 1px solid #444444; */
   padding: 10px;
   font-size: large;
+  /* line-height: 20px; */
+
+  ${({ isTrackingPage }) => {
+    // return isTrackingPage !== 'tracking' && 'line-height: 20px';
+  }}
 `;
 
 export const TrackingListTdAction = styled(TrackingListTd)`
-  text-align: center;
+  text-align: -webkit-center;
 `;
 
 export const TrackingListTdStart = styled(TrackingListTd)`
@@ -244,7 +271,7 @@ export const TrackingListTdStart = styled(TrackingListTd)`
 
 export const TrackingListTdEnd = styled(TrackingListTdAction)`
   padding-right: 30px;
-  text-align: right;
+  /* text-align: right; */
 `;
 
 export const TrackingListTdInput = styled(TrackingListTd)`
@@ -254,4 +281,14 @@ export const TrackingListTdInput = styled(TrackingListTd)`
 
 export const TrackingListTdInputText = styled.td`
   text-align: center;
+`;
+
+export const TrackingListIcon = styled.img`
+  cursor: pointer;
+  display: table-cell;
+  height: 25px;
+`;
+
+export const TrackingListNoTrackingText = styled.h2`
+  color: #9d9d9d;
 `;

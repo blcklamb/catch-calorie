@@ -7,13 +7,14 @@ import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
 
 import MainInput from './style/MainInput';
+import { AddButton } from '../styledCompo/MainMuiCustom';
 
 import {
   TrackingForm,
   TrackingAutoContainer,
   TrackingTextFieldContainer,
   TrackingSwitchContainer,
-  TrackingText, 
+  TrackingText,
 } from '../styledCompo/mainStyle';
 
 import { ValidationTextField } from '../styledCompo/muiCustom';
@@ -100,7 +101,7 @@ function MainExerciseForm({ idx }) {
     } else {
       setKcalPerHour([
         ...kcalPerHour.slice(0, idx),
-        (Number(time[idx]) / 60) * exerciseSelected[idx]?.kcal_per_kg * user.weight,
+        ((Number(time[idx]) / 60) * exerciseSelected[idx]?.kcal_per_kg * user.weight).toFixed(2),
         ...kcalPerHour.slice(idx + 1),
       ]);
     }
@@ -142,16 +143,15 @@ function MainExerciseForm({ idx }) {
             noOptionsText={
               <div>
                 <p>No options</p>
-                <Button
+                <AddButton
                   variant="contained"
-                  color="primary"
                   type="button"
                   onClick={() => {
                     navigate('/tracking/addExercise', { replace: false });
                   }}
                 >
                   Add exercise
-                </Button>
+                </AddButton>
               </div>
             }
           />

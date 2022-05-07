@@ -1,16 +1,16 @@
 import { styled } from '@mui/material/styles';
 
-import { ColorButton } from './muiCustom';
+import { ColorButton, ColorButtonB } from './muiCustom';
 
 export const TrackingPlusButton = styled(ColorButton)({
   width: '44px',
   height: '44px',
   borderRadius: '50%',
-  fontWeight: 800,
+  fontWeight: 600,
   fontSize: '22px',
   minWidth: '0px',
   fontStyle: 'normal',
-  marginRight: '30px', 
+  marginRight: '30px',
 });
 
 export const TrackingResetButton = styled(ColorButton)({
@@ -34,4 +34,46 @@ export const TrackingTrackingButton = styled(ColorButton)({
 
   borderRadius: '15px',
   color: 'white',
+});
+
+export const AddButton = styled(ColorButtonB)({
+  fontWeight: 800,
+  fontSize: '18px',
+  width: '100%',
+  height: '40px',
+  backgroundColor: '#FCFFF8',
+  border: 'solid',
+  borderColor: '#94D82D',
+  borderRadius: '15px',
+  color: '#F03E3E',
+});
+
+export const AddAddButton = styled(TrackingTrackingButton)({
+  fontWeight: 700,
+  fontSize: '20px',
+  width: '80%',
+  height: '50px',
+  margin: '0px 20px',
+
+});
+
+export const AddCancelButton = styled(ColorButtonB)({
+  fontWeight: 700,
+  fontSize: '20px',
+  width: '80%',
+  height: '50px',
+
+  backgroundColor: '#fff',
+
+  border: 'solid',
+  borderColor: '#F14444',
+  borderRadius: '15px',
+  color: '#F03E3E',
+
+  margin: '0px 20px',
+
+  '&:hover': {
+    backgroundColor: '#FCFFF8',
+    borderColor: '#BA0E0E',
+  },
 });

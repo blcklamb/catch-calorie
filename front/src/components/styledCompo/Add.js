@@ -21,4 +21,6 @@ export const AddFormTitle = styled.h1``;
 
 export const AddButtonContainer = styled.div`
   margin: 30px 0px;
+  display: inline-flex;
+  width: 65%;
 `;

@@ -17,10 +17,13 @@ import MainButton from './style/MainButton';
 import {
   BodyContainer,
   MainHelloSection,
+  MainHelloBadge,
   MainHello,
   MainHelloTitle,
   MainSection1,
 } from '../styledCompo/mainStyle';
+
+import {RegisterCircleRed1, RegisterCircleGreen2} from '../styledCompo/RegisterStyle'
 
 import { useRecoilState } from 'recoil';
 import { tokenState, userInfoState, userState, BadgesState } from '../../atoms';
@@ -41,8 +44,13 @@ const Main = () => {
   return (
     <>
       <Header />
+      <RegisterCircleRed1></RegisterCircleRed1>
+      <RegisterCircleGreen2></RegisterCircleGreen2>
       <BodyContainer>
         <MainHelloSection>
+          <MainHelloBadge onClick={() => navigate('/mypage', { replace: false })}>
+            <img src={userInfo?.icon} alt="badge" style={{ width: 80 }}></img>
+          </MainHelloBadge>
           <MainHello>
             <MainHelloTitle>Hello, {userInfo.name}</MainHelloTitle>
           </MainHello>
