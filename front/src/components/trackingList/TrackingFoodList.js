@@ -113,7 +113,7 @@ function TrackingFoodList({ food, isTrackingPage }) {
           <TrackingListTdStart>{food.name}</TrackingListTdStart>
           <TrackingListTdInput>
             <tr>
-              <td rowspan="2">
+              <td>
                 <ValidationTextField
                   id="outlined-name"
                   label="weight"
@@ -136,11 +136,9 @@ function TrackingFoodList({ food, isTrackingPage }) {
                 />
               </td>
             </tr>
-            <tr>
-              <TrackingListTdInputText>
+              <TrackingListTdInputText style={{ float: 'left', height: '20px' }}>
                 {unit === 'us' ? 'US standard' : 'metric'}
               </TrackingListTdInputText>
-            </tr>
           </TrackingListTdInput>
 
           <TrackingListTd>
