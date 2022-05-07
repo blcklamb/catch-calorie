@@ -206,6 +206,7 @@ export const TrackingListThContent = styled(TrackingListTh)`
 export const TrackingListThAction = styled(TrackingListTh)`
   width: 5%;
   text-align: center;
+  cursor: pointer;
 `;
 
 export const TrackingListThEnd = styled(TrackingListThAction)`
@@ -242,7 +243,7 @@ export const TrackingListTd = styled.td`
 `;
 
 export const TrackingListTdAction = styled(TrackingListTd)`
-  text-align: center;
+  text-align: -webkit-center;
 `;
 
 export const TrackingListTdStart = styled(TrackingListTd)`
@@ -251,7 +252,7 @@ export const TrackingListTdStart = styled(TrackingListTd)`
 
 export const TrackingListTdEnd = styled(TrackingListTdAction)`
   padding-right: 30px;
-  text-align: right;
+  /* text-align: right; */
 `;
 
 export const TrackingListTdInput = styled(TrackingListTd)`
@@ -261,4 +262,10 @@ export const TrackingListTdInput = styled(TrackingListTd)`
 
 export const TrackingListTdInputText = styled.td`
   text-align: center;
+`;
+
+export const TrackingListIcon = styled.img`
+  cursor: pointer;
+  display: table-cell;
+  height: 25px;
 `;
