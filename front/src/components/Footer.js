@@ -15,6 +15,8 @@ const Container = styled.footer`
   font-weight: bold;
   color: #a4a4a4;
   text-align: center;
+
+  z-index: 1000;
 `;
 
 function Footer() {

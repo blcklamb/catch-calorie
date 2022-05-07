@@ -222,7 +222,7 @@ const UserEditCard = ({ setCardState }) => {
             {buttons}
           </ButtonGroup>
           <div style={{ width: 290, marginTop: 14, marginBottom: 6 }}>
-            <Typography>
+            <Typography style={{ color: '#F03E3E' }}>
               If you modify the body information, it will be reflected from the next day.
             </Typography>
           </div>

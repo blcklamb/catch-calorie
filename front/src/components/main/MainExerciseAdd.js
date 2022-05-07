@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
+import { Button, ButtonGroup } from '@mui/material';
 
 import MainButton from './style/MainButton';
 import { AddAddButton, AddCancelButton } from '../styledCompo/MainMuiCustom';
@@ -73,6 +74,25 @@ function MainExerciseAdd({}) {
     }
   };
 
+  const buttons = [
+    <Button
+      key="cm/kg"
+      color="success"
+      variant={checked ? 'contained' : 'outlined'}
+      onClick={() => setChecked(true)}
+    >
+      Metric
+    </Button>,
+    <Button
+      key="ft/lb"
+      color="success"
+      variant={!checked ? 'contained' : 'outlined'}
+      onClick={() => setChecked(false)}
+    >
+      U.S.Standard
+    </Button>,
+  ];
+
   return (
     <>
       <Header />
@@ -98,12 +118,13 @@ function MainExerciseAdd({}) {
             <AddFormSection>
               <AddFormTitle>Please Enter a Kcal Per Unit Weight</AddFormTitle>
               <TrackingSwitchContainer>
-                {unit}
-                <Switch
-                  checked={checked}
-                  onChange={handleSwitch}
-                  inputProps={{ 'aria-label': 'controlled' }}
-                />
+                <ButtonGroup
+                  style={{ marginBottom: -10, marginTop: 10 }}
+                  size="small"
+                  aria-label="small button group"
+                >
+                  {buttons}
+                </ButtonGroup>
               </TrackingSwitchContainer>
               <ValidationTextField
                 id="outlined-basic"
@@ -118,7 +139,7 @@ function MainExerciseAdd({}) {
                     !isKcalNumber && <RedSpan>Please enter a number only</RedSpan>
                   )
                 }
-                style={{ width: '70%' }}
+                style={{ width: '50%' }}
               />{' '}
             </AddFormSection>{' '}
           </AddFormsContainer>

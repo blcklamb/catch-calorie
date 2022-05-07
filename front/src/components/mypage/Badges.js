@@ -8,8 +8,8 @@ import { userInfoState, BadgesState } from '../../atoms';
 import { useParams } from 'react-router-dom';
 
 const BadgesContainer = styled.div`
-  width: 1300px;
-  height: 700px;
+  width: 1205px;
+  height: 650px;
 
   display: flex;
   justify-content: center;
@@ -24,26 +24,11 @@ const BadgesContainer = styled.div`
   border-radius: 36.4393px;
 `;
 
-// const BadgesWrap = styled.div`
-//   width: 1100px;
-//   height: 600px;
-
-//   display: flex;
-//   gap: 20px 8%;
-//   flex-wrap: wrap;
-//   justify-content: center;
-//   align-items: center;
-
-//   /* background-color: white; */
-
-//   position: absolute;
-// `;
-
 const BadgesText = styled.div`
   font-family: 'Jost', sans-serif;
   font-weight: 800;
   font-style: italic;
-  width: 1203px;
+  width: 20px;
   height: 50px;
   font-size: 2.5rem;
   font-weight: bold;
@@ -101,7 +86,7 @@ const Badges = ({ currentUserInfo }) => {
   }, [params.user_id, user]);
 
   return (
-    <div>
+    <div style={{ zIndex: '55' }}>
       <BadgesText>Badges</BadgesText>
       <BadgesContainer>
         <Container title sx={{ marginTop: 2 }}>

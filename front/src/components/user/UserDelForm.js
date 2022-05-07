@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router';
 
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import { DelBox } from '../styledCompo/UserDelStyle';
 
 const style = {
   position: 'absolute',
@@ -73,7 +74,7 @@ export default function UserDelForm() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <DelBox sx={style}>
           <Typography id="modal-modal-title" variant="h5" component="h2">
             ⚠️&nbsp;&nbsp;&nbsp;Do you really want to delete your account?&nbsp;&nbsp;⚠️
           </Typography>
@@ -90,10 +91,10 @@ export default function UserDelForm() {
           <Button sx={{ mt: 2 }} color="error" variant="contained" onClick={handleDel}>
             Confirm
           </Button>
-          <Button sx={{ mt: 2, ml: 1 }} variant="outlined" onClick={handleClose}>
+          <Button sx={{ mt: 2, ml: 1 }} variant="outlined" color="success" onClick={handleClose}>
             Cancel
           </Button>
-        </Box>
+        </DelBox>
       </Modal>
     </div>
   );

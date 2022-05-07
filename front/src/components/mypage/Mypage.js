@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Header from '../Header.js';
-import Footer from '../Footer.js';
+
 import Jandi from './Jandi.js';
 import Badges from './Badges.js';
 import { useRecoilValue } from 'recoil';
@@ -9,6 +9,8 @@ import { useParams } from 'react-router-dom';
 import { userInfoState } from '../../atoms.js';
 import * as Api from '../../api';
 import UserInfo from './userInfo/userInfo.js';
+
+import * as MP from '../styledCompo/MypageStyle';
 
 const BadgesPage = styled.section`
   height: auto;
@@ -58,10 +60,13 @@ function Mypage() {
   return (
     <>
       <Header />
+      <MP.MypageCircleRed></MP.MypageCircleRed>
+      <MP.MypageCircleGreen></MP.MypageCircleGreen>
       <UserInfo currentUserInfo={currentUserInfo} />
       <BadgesPage>
         <Badges currentUserInfo={currentUserInfo} />
       </BadgesPage>
+      <MP.MypageCircleRed2></MP.MypageCircleRed2>
       <JandiPage>
         <Jandi />
       </JandiPage>

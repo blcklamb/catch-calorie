@@ -38,13 +38,13 @@ const Logo = styled.h3`
   z-index: 3500;
 `;
 
-const Avocadobox = styled.div`
-  width: auto;
-  height: auto;
+// const Avocadobox = styled.div`
+//   width: auto;
+//   height: auto;
 
-  margin-left: 1800px;
-  position: absolute;
-`;
+//   margin-left: 1800px;
+//   position: absolute;
+// `;
 
 function Header() {
   const user = useRecoilValue(userInfoState);
@@ -80,13 +80,12 @@ function Header() {
         </Logo>
 
         {user ? (
-          <>
-            <HeaderHamburger />
-          </>
+          <HeaderHamburger />
         ) : (
-          <Avocadobox>
-            <Lottie options={defaultOptions} height={100} width={100} />
-          </Avocadobox>
+          <></>
+          // <Avocadobox>
+          //   <Lottie options={defaultOptions} height={100} width={100} />
+          // </Avocadobox>
         )}
       </header>
     </>
