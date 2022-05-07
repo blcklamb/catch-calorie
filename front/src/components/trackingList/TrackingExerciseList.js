@@ -152,7 +152,7 @@ function TrackingExerciseList({ exercise, isTrackingPage }) {
           </TrackingListTdEnd>
         </TrackingListTr>
       ) : (
-        <TrackingListTr>
+        <TrackingListTr style={isTrackingPage !== 'tracking' ? { lineHeight: '20px' } : { lineHeight: '3.5rem' }}>
           <TrackingListTdStart>{exercise.name}</TrackingListTdStart>
           <TrackingListTd>
             {parseInt(exercise.minute / 60)}H {exercise.minute % 60}M
