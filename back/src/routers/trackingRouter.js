@@ -11,11 +11,11 @@ const trackingRouter = Router();
 trackingRouter.get("/tracking/:user_id", async (req, res, next) => {
     try {
         const { user_id } = req.params;
-        const date = dayjs().format("YYYY-MM-DD");
+        const date = dayjs().add(9, "hour").format("YYYY-MM-DD");
 
         const tracking = await trackingService.getTrackingByUserAndDate({ user_id, date });
         if (!tracking) return trackingService.addTracking({ user_id, date });
-        
+
         return res.status(200).send(tracking);
     } catch (error) {
         next(error);
@@ -27,9 +27,9 @@ trackingRouter.post("/tracking/food", login_required, async (req, res, next) => 
     try {
         const user_id = req.currentUserId;
         const { name, weight, unit } = req.body;
-        const date = dayjs().format("YYYY-MM-DD");
+        const date = dayjs().add(9, "hour").format("YYYY-MM-DD");
 
-        const converted_weight = unit === "us" ? convert(weight * 1).from("lb").to("g").toFixed(0) : weight;
+        const converted_weight = unit === "us" ? convert(Number(weight)).from("lb").to("g").toFixed(0) : Number(weight);
         const newTracking = await trackingService.addFoodTracking({ user_id, date, name, gram: converted_weight });
 
         return res.status(201).json(newTracking);
@@ -43,7 +43,7 @@ trackingRouter.post("/tracking/exer", login_required, async (req, res, next) => 
     try {
         const user_id = req.currentUserId;
         const { name, minute } = req.body;
-        const date = dayjs().format("YYYY-MM-DD");
+        const date = dayjs().add(9, "hour").format("YYYY-MM-DD");
 
         const newTracking = await trackingService.addExerTracking({ user_id, date, name, minute });
 

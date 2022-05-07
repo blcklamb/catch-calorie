@@ -7,7 +7,7 @@ const heatmap_scheduler = async () => {
         await Promise.all(
             users.map(async (user) => {
                 const user_id = user._id;
-                const day = dayjs().subtract(1, "day").format("YYYY-MM-DD");
+                const day = dayjs().add(9, "hour").subtract(1, "day").format("YYYY-MM-DD");
 
                 const data = await Heatmap.findByUser({ user_id });
                 if (!data) await Heatmap.create({ user_id });
