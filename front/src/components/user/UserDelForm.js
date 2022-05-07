@@ -67,7 +67,7 @@ export default function UserDelForm() {
         <ListItemText>Delete my account</ListItemText>
       </ListItem>
       <Modal
-        style={{ zIndex: 4000 }}
+        style={{ zIndex: 400000000 }}
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
