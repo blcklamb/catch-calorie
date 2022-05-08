@@ -2,8 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import * as Api from '../../api';
 import Tooltip from './Tooltip';
-import { Container, Grid, shadows } from '@mui/material';
-import { useRecoilValue, useRecoilState } from 'recoil';
+import { Container, Grid } from '@mui/material';
+import { useRecoilValue } from 'recoil';
 import { userInfoState, BadgesState } from '../../atoms';
 import { useParams } from 'react-router-dom';
 
@@ -45,8 +45,12 @@ const BadgesText = styled.div`
   color: #f03e3e;
   position: relative;
   left: 30px;
-
   padding-top: 10px;
+
+  @media screen and (max-width: 1440px) {
+    padding-bottom: 100px;
+    padding-top: 100px;
+  }
 `;
 
 const Badges = ({ currentUserInfo }) => {
@@ -54,7 +58,7 @@ const Badges = ({ currentUserInfo }) => {
 
   const user = useRecoilValue(userInfoState);
   const params = useParams();
-  const [badges, setBadges] = useRecoilState(BadgesState);
+  const badges = useRecoilValue(BadgesState);
   const [award, setAward] = useState([]);
 
   const isEditable = useMemo(() => currentUserInfo?._id === user?._id, [currentUserInfo, user]);

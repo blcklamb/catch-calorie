@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import DefaultCelenderChart from './jandi/DefaultCelenderChart.js';
-import jandiData from './jandi/data.json';
+// import jandiData from './jandi/data.json';
 import * as Api from '../../api';
 import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../../atoms';
@@ -19,8 +19,6 @@ const JandiContainer = styled.div`
   z-index: 55;
   border-radius: 36.4393px;
 
-  @media screen and (max-width: 1440px) {
-    direction: vertical;
   }
 `;
 
@@ -45,66 +43,38 @@ const Jandi = () => {
   const user = useRecoilValue(userInfoState);
   const params = useParams();
   const [data, setData] = useState([]);
-  const [emptyData, setEmptyData] = useState(false);
+  // const [emptyData, setEmptyData] = useState(false);
 
   useEffect(() => {
-    if (params.user_id) {
+    async function ParamsUser() {
       const userId = params.user_id;
+      const res = await Api.get('heatmap', userId);
+      setData(res.data[0].record);
+    }
+    async function FetchUser() {
+      const res = await Api.get('heatmap', user._id);
+      setData(res.data[0].record);
+      console.log('받아온 데이터', res.data);
+    }
 
-      console.log('userId', userId);
-      // params로 들어오는 경우 데이터가 빈배열이면 더미데이터
-      Api.get('heatmap', userId)
-        .then((res) => {
-          if (res?.data[0].record === []) {
-            setEmptyData(false);
-            // params로 들어오는 경우 데이터가 있으면 진짜 데이터 (res.data[0].record)
-          } else {
-            setData(res?.data[0].record);
-            setEmptyData(true);
-            console.log('잔디데이터 들어오는 값', res.data[0].record);
-          }
-        })
-        .catch(console.log);
+    if (params.user_id) {
+      ParamsUser();
     } else {
-      console.log(user._id);
-      // 본인 아이디로 들어오는 경우 데이터가 빈배열이면 더미데이터
-      Api.get('heatmap', user._id)
-        .then((res) => {
-          if (res?.data[0].record === []) {
-            setEmptyData(false);
-
-            // 본인 아이디로 들어오는 경우 데이터가 있으면 진짜 데이터 (res.data[0].record)
-          } else {
-            setData(res?.data[0].record);
-            setEmptyData(true);
-          }
-        })
-        .catch(console.log);
+      FetchUser();
     }
   }, [user, params]);
-
-  console.log('잔디데이터 받아서 넣은 값', data);
-
-  // Api.get('heatmap', user._id).then((res) => {
-  //   console.log(res.data.record);
-
-  //   if (res.data.record === undefined) {
-  //     setEmptyData(false);
-  //   } else {
-  //     setData(res.data.record);
-  //     setEmptyData(true);
-  //   }
-  // });
+  console.log('넣은 데이터', data);
 
   return (
     <div>
       <JandiText>HeatMap</JandiText>
       <JandiContainer>
-        {emptyData ? (
+        {/* {emptyData ? (
           <DefaultCelenderChart data={data} /> //진짜 데이터
         ) : (
           <DefaultCelenderChart data={jandiData} /> //더미 데이터
-        )}
+        )} */}
+        <DefaultCelenderChart data={data} />
       </JandiContainer>
     </div>
   );

@@ -28,6 +28,8 @@ export const UserContainer = styled.div`
   @media screen and (max-width: 1440px) {
     display: flex;
     flex-direction: column;
+
+    padding: 20px;
   }
 `;
 
