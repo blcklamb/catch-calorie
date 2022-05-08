@@ -37,6 +37,7 @@ function MainExerciseForm({ idx }) {
   const [minute, setMinute] = useRecoilState(minState);
   const [kcalPerHour, setKcalPerHour] = useRecoilState(kcalPerHourState);
 
+  const [value, setValue] = useState();
   const [inputValue, setInputValue] = useState(''); // 텍스트 상자에 표시되는 값
 
   const [exerciseList, setExerciseList] = useState('');
@@ -111,8 +112,9 @@ function MainExerciseForm({ idx }) {
         <TrackingAutoContainer>
           <AutoCompleteCustom
             id="controllable"
-            value={exerciseSelected[idx]}
+            value={value}
             onChange={(event, newValue) => {
+              setValue(newValue);
               onChangeExercise(event, newValue);
             }}
             onInputChange={(event, newInputValue) => {

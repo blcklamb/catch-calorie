@@ -15,11 +15,7 @@ import MainExerciseTab from './MainExerciseTab';
 import { Section, SectionTitle } from '../styledCompo/mainStyle';
 
 const StyledTabs = styled((props) => (
-  <Tabs
-    {...props}
-
-    TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
-  />
+  <Tabs {...props} TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }} />
 ))({
   width: '100%',
   '& .MuiTabs-indicator': {
@@ -33,7 +29,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
   textTransform: 'none',
   marginRight: 0,
   width: '47%',
-  height: '20px', 
+  height: '20px',
   maxWidth: '800px',
   '&.Mui-selected': {
     color: '#F03E3E',
@@ -57,7 +53,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
   fontSize: '22px',
   boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.25)',
   backgroundColor: '#FCFFF8',
-  border: 'solid', 
+  border: 'solid',
   borderColor: '#94D82D',
   borderRadius: '20px',
   color: '#F03E3E',
@@ -65,7 +61,6 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
 
 const MainTrackingSection = styled2.div`
 position: relative;
-  width: 900px;
   margin-right: 80px;
 `;
 
@@ -136,13 +131,11 @@ const MainTabs = ({}) => {
         <Section>
           <SectionTitle>Tracking</SectionTitle>
           <MainTabsSection>
-            <div>
-              <StyledTabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                {['Food', 'Exercise'].map((label, index) => (
-                  <StyledTab key={label} label={label} {...a11yProps(index)} />
-                ))}
-              </StyledTabs>
-            </div>
+            <StyledTabs value={value} onChange={handleChange} aria-label="basic tabs example">
+              {['Food', 'Exercise'].map((label, index) => (
+                <StyledTab key={label} label={label} {...a11yProps(index)} />
+              ))}
+            </StyledTabs>
             <TabPanel value={value} index={0}>
               <MainFoodTab clearForm={clearForm} />
             </TabPanel>

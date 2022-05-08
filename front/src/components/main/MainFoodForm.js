@@ -39,6 +39,7 @@ function MainFoodForm({ idx }) {
 
   const [checked, setChecked] = useState(true);
 
+  const [value, setValue] = useState();
   const [inputValue, setInputValue] = useState([]); // 텍스트 상자에 표시되는 값
 
   useEffect(() => {
@@ -104,8 +105,9 @@ function MainFoodForm({ idx }) {
         <TrackingAutoContainer>
           <AutoCompleteCustom
             id="controllable-states-demo"
-            value={foodSelected[idx]}
+            value={value}
             onChange={(event, newValue) => {
+              setValue(newValue);
               onChangeFood(event, newValue);
             }}
             onInputChange={(event, newInputValue) => {
@@ -143,7 +145,6 @@ function MainFoodForm({ idx }) {
             variant="outlined"
             value={weight[idx]}
             onChange={onChangeWeight}
-            style={{ width: '250px' }}
             helperText={
               !weight[idx] ? (
                 <RedSpan>Please enter a weight</RedSpan>
