@@ -132,9 +132,9 @@ function LoginForm() {
               justifyContent: 'center',
               flexFlow: 'column',
 
-              '@media screen(max-width: 526px)': {
-                marginTop: 0,
-              },
+              // '@media screen(max-width: 526px)': {
+              //   marginTop: 0,`
+              // },
             }}
           >
             {/* ///@ 타이틀 */}
@@ -142,6 +142,7 @@ function LoginForm() {
             <Box
               sx={{
                 width: '438px',
+
                 '@media (max-width: 526px)': {
                   width: 'auto',
                 },
