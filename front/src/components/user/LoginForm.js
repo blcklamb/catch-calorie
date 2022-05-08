@@ -71,13 +71,11 @@ function LoginForm() {
       // sessionStorage에 "userToken"이라는 키로 JWT 토큰을 저장함.
       sessionStorage.setItem('userToken', jwtToken);
 
-      console.log(user);
       setToken(user.token);
       setUser(user);
       // 기본 페이지로 이동함.
       navigate(`/tracking/${user.id}`, { replace: true });
     } catch (err) {
-      console.log(err.response.data.errorMessage);
       if (
         err.response.data.errorMessage === '비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
       ) {
@@ -88,9 +86,6 @@ function LoginForm() {
       ) {
         Alert.error('This email has no subscription history. Please check again.');
       }
-
-      // console.log('로그인에 실패하였습니다.\n', err);
-      // alert('Login failed');
       setCheckLogin(false);
     }
   };

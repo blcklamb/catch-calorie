@@ -13,7 +13,6 @@ function UserCard({ currentUserInfo, isNetworkPage }) {
   const user = useRecoilValue(userInfoState);
   const isEditable = useMemo(() => currentUserInfo?._id === user?._id, [currentUserInfo, user]);
   const [cardState, setCardState] = useState('userInfo');
-  // console.log(cardState);
 
   // 유저 카드에서 버튼 누를시 각 페이지 렌더링 하는 스위치 함수
   // userInfo, EditInfo, ChangePw

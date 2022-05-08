@@ -15,7 +15,6 @@ import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/m
 
 //Compo
 import Header from '../Header';
-import Footer from '../Footer';
 
 //import recoil
 import { useSetRecoilState } from 'recoil';

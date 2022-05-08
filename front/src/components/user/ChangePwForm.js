@@ -51,8 +51,6 @@ const ChangePwForm = ({ setCardState }) => {
         new_pw: newPw,
       });
 
-      const temp = res.data;
-      console.log(temp, '수정 요청이 잘 갔습니다요!');
       setCardState();
       alert('Your password has been changed successfully');
     } catch (err) {
