@@ -13,7 +13,6 @@ import {
 
 const Network = () => {
   const [userList, setUserList] = useState([]);
-  console.log(userList);
 
   useEffect(() => {
     async function getUserList() {
