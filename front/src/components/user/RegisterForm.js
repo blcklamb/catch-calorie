@@ -85,7 +85,7 @@ function RegisterForm() {
     }
   };
   ///@ 임시번호를 알고싶나요? 콘솔을 켜시면 됩니당.
-  console.log(resCode);
+  // console.log(resCode);
 
   ///@ 각 input 유효성 검사
   //위 validateEmail 함수를 통해 이메일 형태 적합 여부를 확인함.
@@ -194,11 +194,6 @@ function RegisterForm() {
     e.preventDefault();
 
     try {
-      // console.log(
-      //   `%c이메일: ${email}, 비번: ${password}, 닉넴: ${name}, 성별: ${gender}, 키: ${height}, 몸무게: ${weight} 아이콘 ${icon}`,
-      //   'color: #94D82D;',
-      // );
-      // "user/register" 엔드포인트로 post요청함.
       await Api.post('users/register', {
         email,
         password,

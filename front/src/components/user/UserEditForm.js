@@ -36,8 +36,6 @@ const UserEditForm = () => {
     e.preventDefault();
 
     try {
-      console.log('원래 uesr 정보', userInfo);
-      console.log('put 요청 보내기 전 수정한 user 정보', editUser);
       const res = await Api.put(`users/${userInfo._id}`, {
         email: editUser.email,
         password: editUser.password,
@@ -49,10 +47,8 @@ const UserEditForm = () => {
         status: editUser.status,
       });
 
-      console.log('회원 정보 수정 후 PUT 응답으로 수정된 회원 정보를 가져옵니다.', res.data);
       setUserInfo(res.data);
       navigate(-1);
-      console.log('req 요청 갔고 응답 받았습니다..');
     } catch (err) {
       console.log(`req 요청이 제대로 가지 않았군요 ${err}`);
     }

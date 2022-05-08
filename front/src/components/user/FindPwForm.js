@@ -35,16 +35,12 @@ function LoginForm() {
         email,
       });
 
-      const temp = res.data;
-      console.log(temp, '이메일이 정상적으로 전송되었습니다.');
-
       navigate('/login', { replace: true });
 
       setEmail('');
     } catch (err) {
       setSentEmail(false);
       Alert.success('The email was not sent normally.');
-      // alert('이메일이 정상적으로 전송되지 못했습니다.');
     }
   };
 
