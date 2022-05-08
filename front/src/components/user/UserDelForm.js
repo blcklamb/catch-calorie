@@ -38,7 +38,6 @@ export default function UserDelForm() {
   const navigate = useNavigate();
 
   const [delMessage, setDelMessage] = React.useState('');
-  // console.log(delMessage);
 
   const handleDel = async (e) => {
     e.preventDefault();
@@ -49,7 +48,6 @@ export default function UserDelForm() {
     }
     try {
       const res = await Api.delete('users', user.id);
-      console.log(res);
       setDelMessage('');
       setUser(null);
       setToken(null);

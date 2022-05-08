@@ -20,7 +20,6 @@ function Validation() {
       const res = await Api.get('users', ownerId);
       // 사용자 정보는 response의 data임.
       const ownerData = res.data;
-      console.log(ownerData);
       setUserInfo(ownerData);
       // fetchOwner 과정이 끝났으므로, isFetchCompleted를 true로 바꿈.
       setIsFetchCompleted(true);

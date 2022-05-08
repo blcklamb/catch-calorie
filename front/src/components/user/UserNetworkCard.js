@@ -8,7 +8,7 @@ import { ColorButton } from '../styledCompo/muiCustom';
 
 const UserNetworkCard = ({ currentUserInfo }) => {
   const navigate = useNavigate();
-  console.log(currentUserInfo.icon);
+
   return (
     <NetworkGlass>
       <div>

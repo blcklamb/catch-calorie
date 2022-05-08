@@ -54,7 +54,7 @@ const Jandi = () => {
     async function FetchUser() {
       const res = await Api.get('heatmap', user._id);
       setData(res.data[0].record);
-      console.log('받아온 데이터', res.data);
+      // console.log('받아온 데이터', res.data);
     }
 
     if (params.user_id) {
@@ -63,7 +63,7 @@ const Jandi = () => {
       FetchUser();
     }
   }, [user, params]);
-  console.log('넣은 데이터', data);
+  // console.log('넣은 데이터', data);
 
   return (
     <div>

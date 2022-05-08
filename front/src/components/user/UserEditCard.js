@@ -44,7 +44,7 @@ const UserEditCard = ({ setCardState }) => {
   });
 
   const { UsHeight, UsWeight, height, weight, name, open, unit, status, gender, icon } = editUser;
-  console.log('unit', unit);
+
   useEffect(() => {
     if (unit === 'us') {
       setEditUser((cur) => ({
@@ -65,10 +65,6 @@ const UserEditCard = ({ setCardState }) => {
       }));
     }
   }, [unit]);
-
-  useEffect(() => {
-    console.log('editUer', editUser);
-  }, [editUser]);
 
   // 이름이 2글자 이상인지 여부를 확인함.
   const isNameValid = name.length >= 2;
@@ -128,16 +124,10 @@ const UserEditCard = ({ setCardState }) => {
     </Button>,
   ];
 
-  // console.log(openChecked, checked);
-  // console.log(editUser);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      console.log('원래 uesr 정보', userInfo);
-      console.log('디스트럭팅', name, gender, height, weight, unit, open, status);
-      console.log('put 요청 보내기 전 수정한 user 정보', editUser);
       const res = await Api.put(`users/${userInfo._id}`, {
         // email: editUser.email,
         // password: editUser.password,
@@ -151,10 +141,8 @@ const UserEditCard = ({ setCardState }) => {
         status,
       });
 
-      console.log('회원 정보 수정 후 PUT 응답으로 수정된 회원 정보를 가져옵니다.', res.data);
       setUserInfo(res.data);
       setCardState();
-      console.log('req 요청 갔고 응답 받았습니다..');
     } catch (err) {
       console.log(`req 요청이 제대로 가지 않았군요 ${err}`);
     }
