@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Container, Grid } from '@mui/material';
-import Footer from '../Footer';
 import Header from '../Header';
 import UserCard from '../user/UserCard';
 import * as Api from '../../api';
