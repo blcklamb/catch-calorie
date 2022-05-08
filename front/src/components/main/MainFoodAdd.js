@@ -48,6 +48,7 @@ function MainFoodAdd() {
   const [isKcalEmpty, setIsKcalEmpty] = useState(false);
   const [isKcalNumber, setIsKcalNumber] = useState(true);
 
+  const [value, setValue] = useState();
   const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
@@ -117,8 +118,9 @@ function MainFoodAdd() {
                 <AddFormSection>
                   <AddFormTitle>Please Select a Category</AddFormTitle>
                   <AutoCompleteCustom
-                    value={category}
+                    value={value}
                     onChange={(event, newValue) => {
+                      setValue(newValue);
                       setCategory(newValue);
                     }}
                     inputValue={inputValue}
