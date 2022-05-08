@@ -70,7 +70,7 @@ function Mypage() {
       <BadgesPage>
         <Badges currentUserInfo={currentUserInfo} />
       </BadgesPage>
-      <MP.MypageCircleRed2></MP.MypageCircleRed2>
+      {/* <MP.MypageCircleRed2></MP.MypageCircleRed2> */}
       <JandiPage>
         <Jandi />
       </JandiPage>
