@@ -76,9 +76,9 @@ function Header(props) {
         <ListItem button key={'network'} onClick={() => navigate('/network', { replace: false })}>
           <ListItemText primary={'Network'} />
         </ListItem>
-        <ListItem button key={('manual', { replace: false })}>
+        {/* <ListItem button key={('manual', { replace: false })}>
           <ListItemText primary={'How to use'} />
-        </ListItem>
+        </ListItem> */}
       </List>
       <Divider />
       <List>

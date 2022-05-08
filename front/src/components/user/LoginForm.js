@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { Container, Col, Row, Form, Button } from "react-bootstrap";
+
 import { useAlert } from 'react-alert';
 
 // Mui
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+
 import Container from '@mui/material/Container';
 
 import * as Api from '../../api';
 import Header from '../Header';
-import Footer from '../Footer';
 import { validateEmail } from '../../utils';
 // import recoil
 import { useSetRecoilState } from 'recoil';
@@ -25,15 +24,11 @@ import {
   ForgetPw,
   SignPWContainer,
   SignBtn,
-  SignInBtn,
-  Btn,
   CatchBack,
   CaloriesBack,
   GitHubBtn,
   Separator,
 } from '../styledCompo/LoginStyle';
-import githubLogin from './GithubLogin';
-import { fontSize } from '@mui/system';
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -136,6 +131,10 @@ function LoginForm() {
               alignItems: 'center',
               justifyContent: 'center',
               flexFlow: 'column',
+
+              // '@media screen(max-width: 526px)': {
+              //   marginTop: 0,`
+              // },
             }}
           >
             {/* ///@ 타이틀 */}
@@ -143,13 +142,18 @@ function LoginForm() {
             <Box
               sx={{
                 width: '438px',
+
+                '@media (max-width: 526px)': {
+                  width: 'auto',
+                },
               }}
               noValidate
               autoComplete="off"
             >
               {/* ///@ 이메일 input */}
               <ValidationTextField
-                style={{ width: 438, marginBottom: 10 }}
+                style={{ marginBottom: 10 }}
+                sm={8}
                 autoFocus
                 // {!checkLogin && error}
                 error={!checkLogin}
@@ -170,7 +174,7 @@ function LoginForm() {
               <br></br>
               {/* ///@ 비밀번호 input */}
               <ValidationTextField
-                style={{ width: 438 }}
+                // style={{ width: 438 }}
                 error={!checkLogin}
                 id="outlined-password-input"
                 label="Password"

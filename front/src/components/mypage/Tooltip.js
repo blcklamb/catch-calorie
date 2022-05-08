@@ -1,10 +1,9 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Header, Button, Popup, Grid } from 'semantic-ui-react';
 import * as Api from '../../api';
 
-import { useParams } from 'react-router-dom';
-import { useRecoilValue, useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userInfoState } from '../../atoms';
 
 import Lock from '../../image/lock5.png';
@@ -40,8 +39,8 @@ const Tooltip = ({
   currentUserInfo,
   isEditable,
 }) => {
-  const user = useRecoilValue(userInfoState);
-  const params = useParams();
+  // const user = useRecoilValue(userInfoState);
+  // const params = useParams();
   const Alert = useAlert();
   // const userId = params.user_id;
 

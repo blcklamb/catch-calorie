@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import TextField from '@mui/material/TextField';
-import Switch from '@mui/material/Switch';
 import { Button, ButtonGroup } from '@mui/material';
 
-import MainButton from './style/MainButton';
 import { AddAddButton, AddCancelButton } from '../styledCompo/MainMuiCustom';
 
 import { BodyContainer, TrackingSwitchContainer } from '../styledCompo/mainStyle';
 import {
-  AddGlassBodyContainer,
   AddFormsContainer,
   AddTitle,
   AddFormSection,
   AddFormTitle,
   AddButtonContainer,
 } from '../styledCompo/Add';
-import { LoginGlass, TitleText, RedSpan } from '../styledCompo/LoginStyle';
+import { LoginGlass, RedSpan } from '../styledCompo/LoginStyle';
 import { ValidationTextField } from '../styledCompo/muiCustom';
 
+import { Grid } from '@mui/material';
+
 import Header from '../Header';
-import Footer from '../Footer';
 
 import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../../atoms';
@@ -50,10 +47,6 @@ function MainExerciseAdd({}) {
       setUnit('pound');
     }
   }, [checked]);
-
-  const handleSwitch = (event) => {
-    setChecked(event.target.checked);
-  };
 
   const handleSubmit = async () => {
     setIsNameEmpty(!name);
@@ -97,64 +90,68 @@ function MainExerciseAdd({}) {
     <>
       <Header />
       <BodyContainer>
-        <LoginGlass style={{ marginTop: '150px' }}>
-          <AddTitle>
-            Add <br />
-            Exercise
-          </AddTitle>
-          <AddFormsContainer>
-            <AddFormSection>
-              <AddFormTitle>Please Enter a Name</AddFormTitle>
-              <ValidationTextField
-                id="outlined-basic"
-                label="exercise name"
-                variant="outlined"
-                inputValue={name}
-                onBlur={(e) => setName(e.target.value)}
-                helperText={isNameEmpty && <RedSpan>Please enter a name</RedSpan>}
-                style={{ width: '100%' }}
-              />
-            </AddFormSection>
-            <AddFormSection>
-              <AddFormTitle>Please Enter a Kcal Per Unit Weight</AddFormTitle>
-              <TrackingSwitchContainer>
-                <ButtonGroup
-                  style={{ marginBottom: -10, marginTop: 10 }}
-                  size="small"
-                  aria-label="small button group"
+        <Grid container spacing={1}>
+          <LoginGlass style={{ marginTop: '150px' }}>
+            <AddTitle>
+              Add <br />
+              Exercise
+            </AddTitle>
+            <Grid item sm={12}>
+              <AddFormsContainer>
+                <AddFormSection>
+                  <AddFormTitle>Please Enter a Name</AddFormTitle>
+                  <ValidationTextField
+                    id="outlined-basic"
+                    label="exercise name"
+                    variant="outlined"
+                    inputvalue={name}
+                    onBlur={(e) => setName(e.target.value)}
+                    helperText={isNameEmpty && <RedSpan>Please enter a name</RedSpan>}
+                    style={{ width: '100%' }}
+                  />
+                </AddFormSection>
+                <AddFormSection>
+                  <AddFormTitle>Please Enter a Kcal Per Unit Weight</AddFormTitle>
+                  <TrackingSwitchContainer>
+                    <ButtonGroup
+                      style={{ marginBottom: -10, marginTop: 10 }}
+                      size="small"
+                      aria-label="small button group"
+                    >
+                      {buttons}
+                    </ButtonGroup>
+                  </TrackingSwitchContainer>
+                  <ValidationTextField
+                    id="outlined-basic"
+                    label="kcal"
+                    variant="outlined"
+                    inputvalue={kcal}
+                    onBlur={(e) => setKcal(e.target.value)}
+                    helperText={
+                      isKcalEmpty ? (
+                        <RedSpan>Please enter a kcal per unit weight</RedSpan>
+                      ) : (
+                        !isKcalNumber && <RedSpan>Please enter a number only</RedSpan>
+                      )
+                    }
+                    style={{ width: '50%' }}
+                  />{' '}
+                </AddFormSection>{' '}
+              </AddFormsContainer>
+              <AddButtonContainer>
+                <AddAddButton variant="contained" onClick={handleSubmit}>
+                  Add
+                </AddAddButton>
+                <AddCancelButton
+                  variant="contained"
+                  onClick={() => navigate(`/tracking/${user._id}`, { replace: false })}
                 >
-                  {buttons}
-                </ButtonGroup>
-              </TrackingSwitchContainer>
-              <ValidationTextField
-                id="outlined-basic"
-                label="kcal"
-                variant="outlined"
-                inputValue={kcal}
-                onBlur={(e) => setKcal(e.target.value)}
-                helperText={
-                  isKcalEmpty ? (
-                    <RedSpan>Please enter a kcal per unit weight</RedSpan>
-                  ) : (
-                    !isKcalNumber && <RedSpan>Please enter a number only</RedSpan>
-                  )
-                }
-                style={{ width: '50%' }}
-              />{' '}
-            </AddFormSection>{' '}
-          </AddFormsContainer>
-          <AddButtonContainer>
-            <AddAddButton variant="contained" onClick={handleSubmit}>
-              Add
-            </AddAddButton>
-            <AddCancelButton
-              variant="contained"
-              onClick={() => navigate(`/tracking/${user._id}`, { replace: false })}
-            >
-              Cancel
-            </AddCancelButton>
-          </AddButtonContainer>
-        </LoginGlass>
+                  Cancel
+                </AddCancelButton>
+              </AddButtonContainer>
+            </Grid>
+          </LoginGlass>
+        </Grid>
       </BodyContainer>
     </>
   );

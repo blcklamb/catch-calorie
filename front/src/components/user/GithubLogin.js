@@ -11,7 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 
 //styled Compo
-import { ValidationTextField, ColorButton } from '../styledCompo/muiCustom';
+import { ValidationTextField, ColorButton, ColorButtonB } from '../styledCompo/muiCustom';
 
 //Compo
 import Header from '../Header';
@@ -20,6 +20,18 @@ import Footer from '../Footer';
 //import recoil
 import { useSetRecoilState } from 'recoil';
 import { tokenState, userState } from '../../atoms';
+import {
+  GenderBtn,
+  RegisterCircleGreen1,
+  RegisterCircleGreen2,
+  RegisterCircleRed1,
+  RegisterCircleRed2,
+  RegisterGlass,
+  RegisterTitle,
+} from '../styledCompo/RegisterStyle';
+import { RedSpan } from '../styledCompo/LoginStyle';
+import { Button, ButtonGroup } from '@mui/material';
+import { Stack } from '@mui/material';
 
 function GithubLogin() {
   const setToken = useSetRecoilState(tokenState);
@@ -31,9 +43,66 @@ function GithubLogin() {
   const [isDone, setIsDone] = useState(false);
   const [data, setData] = useState({});
   const [gender, setGender] = useState('male');
-  const [height, setHeight] = useState(0);
-  const [weight, setWeight] = useState(0);
-  const [icon, setIcon] = useState('runner');
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const [icon, setIcon] = useState(
+    'https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_1.png',
+  );
+  const [unit, setUnit] = useState('us');
+
+  ///@ 버튼 그룹 gender
+  const buttons = [
+    <GenderBtn
+      key="male"
+      color="success"
+      variant={gender === 'male' ? 'contained' : 'outlined'}
+      onClick={() => setGender('male')}
+    >
+      male
+    </GenderBtn>,
+    <GenderBtn
+      key="female"
+      color="success"
+      variant={gender === 'female' ? 'contained' : 'outlined'}
+      onClick={() => setGender('female')}
+    >
+      female
+    </GenderBtn>,
+  ];
+  ///@ 버튼 그룹 unit
+  const unitButtons = [
+    <Button
+      key="cm/kg"
+      color="success"
+      variant={unit === 'non_us' ? 'contained' : 'outlined'}
+      onClick={() => setUnit('non_us')}
+    >
+      Metric
+    </Button>,
+    <Button
+      key="ft/lb"
+      color="success"
+      variant={unit === 'us' ? 'contained' : 'outlined'}
+      onClick={() => setUnit('us')}
+    >
+      U.S.Standard
+    </Button>,
+  ];
+
+  ///@ height, weight 조건부 헬퍼텍스트 렌더링
+  const unitChangeHeight = () => {
+    if (unit === 'us') {
+      return <RedSpan>Please enter a number only.(The unit is feet.)</RedSpan>;
+    }
+    return <RedSpan>Please enter a number only.(The unit is cm.)</RedSpan>;
+  };
+
+  const unitChangeWeight = () => {
+    if (unit === 'us') {
+      return <RedSpan>Please enter a number only.(The unit is lb.)</RedSpan>;
+    }
+    return <RedSpan>Please enter a number only.(The unit is kg.)</RedSpan>;
+  };
 
   useEffect(() => {
     const auth = async () => {
@@ -73,8 +142,9 @@ function GithubLogin() {
         email: data.email,
         name: data.name,
         gender,
-        height,
-        weight,
+        height: Number(height),
+        weight: Number(weight),
+        unit,
         icon,
       }).then((res) => res.data);
 
@@ -92,127 +162,158 @@ function GithubLogin() {
   return (
     <>
       <Header></Header>
+      <RegisterCircleRed1></RegisterCircleRed1>
+      <RegisterCircleRed2></RegisterCircleRed2>
+      <RegisterCircleGreen1></RegisterCircleGreen1>
+      <RegisterCircleGreen2></RegisterCircleGreen2>
       <Container
         style={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           flexFlow: 'column',
-          marginTop: 50,
+          marginTop: 313,
+          marginBottom: 313,
         }}
       >
-        {isDone && (
-          <form
-            onSubmit={handleSubmit}
-            style={{
-              marginTop: 100,
-              marginBottom: 100,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexFlow: 'column',
-            }}
-          >
-            <h1 style={{ margin: 10 }}>Register</h1>
-            <Box
-              sx={{
-                '& > :not(style)': { m: 1, width: '600px' },
+        {isDone || (
+          <RegisterGlass style={{ height: '1300px' }}>
+            <form
+              onSubmit={handleSubmit}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexFlow: 'column',
               }}
-              noValidate
-              autoComplete="off"
             >
-              <br />
-              <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
-              >
-                <FormControlLabel value="male" control={<Radio color="success" />} label="Male" />
-                <FormControlLabel
-                  value="female"
-                  control={<Radio color="success" />}
-                  label="Female"
-                />
-              </RadioGroup>
-              <ValidationTextField
-                required
-                label="Height"
-                type="number"
-                helperText={
-                  !isHeightValid && <span>Please enter a number only.(The unit is feet.)</span>
-                }
-                value={height}
-                onChange={(e) => {
-                  setHeight(e.target.value);
+              <RegisterTitle style={{ paddingTop: 100, paddingBottom: 0 }}>GitHub</RegisterTitle>
+              <RegisterTitle style={{ paddingTop: 0 }}>Register</RegisterTitle>
+              <Box
+                sx={{
+                  '& > :not(style)': { m: 1, width: '560px', display: 'flex' },
                 }}
-              />
-              <br />
-              <ValidationTextField
-                required
-                label="Weight"
-                type="number"
-                helperText={
-                  !isWeightValid && <span>Please enter a number only.(The unit is pounds.)</span>
-                }
-                value={weight}
-                onChange={(e) => {
-                  setWeight(e.target.value);
-                }}
-              />
-              <br />
-            </Box>
-            <Box
-              sx={{
-                '& > :not(style)': { m: 1, width: '600px' },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <FormLabel id="demo-row-radio-buttons-group-label">Badges</FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                value={icon}
-                onChange={(e) => setIcon(e.target.value)}
-                sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                autoComplete="off"
               >
-                <FormControlLabel
-                  value="all-rounder"
-                  labelPlacement="bottom"
-                  control={<Radio color="success" />}
-                  label={<img src="/all.png" alt="all" style={{ width: 100 }}></img>}
+                {/* ///@ 성별 */}
+                <ButtonGroup>{buttons}</ButtonGroup>
+                <br></br>
+
+                {/* ///@ 유닛 */}
+                <ButtonGroup size="small" style={{ justifyContent: 'flex-end' }}>
+                  <div>{unitButtons}</div>
+                </ButtonGroup>
+
+                <br />
+                {/* ///@ 키 */}
+                <ValidationTextField
+                  required
+                  // {!checkLogin && error}
+                  // error={!checkLogin}
+                  type="number"
+                  label="Height"
+                  // autoComplete="email"
+                  helperText={!isHeightValid && unitChangeHeight()}
+                  value={height}
+                  onChange={(e) => {
+                    setHeight(e.target.value);
+                    // setCheckLogin(true);
+                  }}
+                  // defaultValue="Hello World"
                 />
-                <FormControlLabel
-                  value="weight"
-                  labelPlacement="bottom"
-                  control={<Radio color="success" />}
-                  label={<img src="/weight.png" alt="all" style={{ width: 100 }}></img>}
+                <br></br>
+                {/* ///@ 체중 */}
+                <ValidationTextField
+                  required
+                  // {!checkLogin && error}
+                  // error={!checkLogin}
+                  type="number"
+                  label="Weight"
+                  // autoComplete="email"
+                  helperText={!isWeightValid && unitChangeWeight()}
+                  value={weight}
+                  onChange={(e) => {
+                    setWeight(e.target.value);
+                    // setCheckLogin(true);
+                  }}
+                  // defaultValue="Hello World"
                 />
-                <FormControlLabel
-                  value="yoga"
-                  labelPlacement="bottom"
-                  control={<Radio color="success" />}
-                  label={<img src="/yoga.png" alt="all" style={{ width: 100 }}></img>}
-                />
-                <FormControlLabel
-                  value="runner"
-                  labelPlacement="bottom"
-                  control={<Radio color="success" />}
-                  label={<img src="/runner.png" alt="all" style={{ width: 100 }}></img>}
-                />
-              </RadioGroup>
-              <ColorButton variant="contained" type="submit" disabled={!isFormValid}>
-                Login
-              </ColorButton>
-            </Box>
-          </form>
+                <br></br>
+              </Box>
+              <Box
+                sx={{
+                  '& > :not(style)': { m: 1, width: '560px' },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                {/* ///@ 뱃지 */}
+                <FormLabel id="demo-row-radio-buttons-group-label">Badges</FormLabel>
+                <RadioGroup
+                  row
+                  title="You can choose one of these badges."
+                  name="row-radio-buttons-group"
+                  value={icon}
+                  onChange={(e) => setIcon(e.target.value)}
+                  sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                >
+                  <FormControlLabel
+                    title="일반인"
+                    value="https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_1.png"
+                    labelPlacement="bottom"
+                    control={<Radio color="success" />}
+                    label={<img src="/first_badge_1.png" alt="all" style={{ width: 100 }}></img>}
+                  />
+                  <FormControlLabel
+                    title="인싸"
+                    value="https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_2.png"
+                    labelPlacement="bottom"
+                    control={<Radio color="success" />}
+                    label={<img src="/first_badge_2.png" alt="all" style={{ width: 100 }}></img>}
+                  />
+                  <FormControlLabel
+                    title="핵인싸"
+                    value="https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_3.png"
+                    labelPlacement="bottom"
+                    control={<Radio color="success" />}
+                    label={<img src="/first_badge_3.png" alt="all" style={{ width: 100 }}></img>}
+                  />
+                  <FormControlLabel
+                    title="찐"
+                    value="https://bucket-5ialfb.s3.ap-northeast-2.amazonaws.com/icon/first_badge_4.png"
+                    labelPlacement="bottom"
+                    control={<Radio color="success" />}
+                    label={<img src="/first_badge_4.png" alt="all" style={{ width: 100 }}></img>}
+                  />
+                </RadioGroup>
+                <Stack
+                  spacing={1}
+                  direction="row"
+                  sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                  style={{ marginTop: 40 }}
+                >
+                  {/* ///@ 버튼들 */}
+                  <ColorButton
+                    variant="contained"
+                    style={{ width: '35%' }}
+                    type="submit"
+                    disabled={!isFormValid}
+                  >
+                    Sign-up
+                  </ColorButton>
+                  <ColorButtonB
+                    variant="outlined"
+                    style={{ width: '35%' }}
+                    onClick={() => navigate('/login')}
+                  >
+                    Back
+                  </ColorButtonB>
+                </Stack>
+              </Box>
+            </form>
+          </RegisterGlass>
         )}
       </Container>
-      <Footer></Footer>
     </>
   );
 }
