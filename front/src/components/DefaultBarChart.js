@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { XAxis, YAxis, ResponsiveContainer, Cell, Bar, Tooltip, BarChart } from 'recharts';
+import { XAxis, ResponsiveContainer, Cell, Bar, Tooltip, BarChart } from 'recharts';
 
 export default function DefaultBarChart({ data, colors }) {
   return (

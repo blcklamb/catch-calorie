@@ -11,8 +11,18 @@ export const RegisterTitle = styled(TitleText)`
 
 // 회원가입 글래스
 export const RegisterGlass = styled(LoginGlass)`
-  height: 1400px;
+  height: 1550px;
   justify-content: flex-start;
+
+  @media screen and (max-width: 766px) {
+    width: 600px;
+    height: 1700px;
+  }
+
+  @media screen and (max-width: 526px) {
+    height: 1900px;
+    width: 70%;
+  }
 `;
 
 // 성별 버튼

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import MainButton from './style/MainButton';
 import MainFoodForm from './MainFoodForm';
 
 import {
@@ -8,8 +7,8 @@ import {
   TrackingButtonContainer,
   TrackingLeftButtonContainer,
   TrackingRightButtonContainer,
-  TrackingPlusButtonContainer,
 } from '../styledCompo/mainStyle';
+
 import {
   TrackingPlusButton,
   TrackingResetButton,
@@ -17,6 +16,7 @@ import {
 } from '../styledCompo/MainMuiCustom';
 
 import { useRecoilState } from 'recoil';
+
 import {
   foodSelectedState,
   weightState,
@@ -36,11 +36,6 @@ function MainFoodTab({ clearForm }) {
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
 
   const [foodForms, setFoodForms] = useRecoilState(foodFormsState);
-
-  const [isFoodEmpty, setIsFoodEmpty] = useState(false);
-  const [isWeightEmpty, setIsWeightEmpty] = useState(false);
-
-  const [isWeightNumber, setIsWeightNumber] = useState([true]);
 
   const handleAddFoodForm = () => {
     let countArr = [...foodForms];
@@ -67,10 +62,6 @@ function MainFoodTab({ clearForm }) {
       const numWeight = weight.map((weight) => {
         return Number(weight);
       });
-
-      // setIsFoodEmpty(foodSelected.includes(0));
-      // setIsWeightEmpty(weight.includes(''));
-      // setIsWeightNumber(!numWeight.includes(NaN)); // 숫자만 있거나 빈 값이면 true, 아니면 false
 
       try {
         if (!foodSelected.includes(0) && !weight.includes('') && !numWeight.includes(NaN)) {
@@ -106,7 +97,6 @@ function MainFoodTab({ clearForm }) {
     setKcalPerUnit([0]);
 
     setTrackingUpdate(!trackingUpdate);
-    // clearForm();
   };
 
   return (

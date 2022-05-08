@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Switch from '@mui/material/Switch';
 import { ButtonGroup } from '@mui/material';
 
 import {
@@ -12,8 +10,6 @@ import {
   TrackingListTdStart,
   TrackingListTdEnd,
   TrackingListTdInput,
-  TrackingListTdInputText,
-  TrackingListIconContainer,
   TrackingListIcon,
 } from '../styledCompo/mainStyle';
 
@@ -22,7 +18,7 @@ import { ValidationTextField } from '../styledCompo/muiCustom';
 import { RedSpan } from '../styledCompo/LoginStyle';
 
 import { useRecoilState } from 'recoil';
-import { trackingUpdateState, trackingFoodUnitState } from '../../atoms';
+import { trackingUpdateState } from '../../atoms';
 
 import * as Api from '../../api';
 
@@ -51,10 +47,6 @@ function TrackingFoodList({ food, isTrackingPage }) {
       setUnit('us');
     }
   }, [checked]);
-
-  const handleSwitch = (event) => {
-    setChecked(event.target.checked);
-  };
 
   const onChange = (e) => {
     setWeight(e.target.value);
@@ -178,7 +170,6 @@ function TrackingFoodList({ food, isTrackingPage }) {
         <TrackingListTr
           style={isTrackingPage !== 'tracking' ? { lineHeight: '20px' } : { lineHeight: '3.5rem' }}
         >
-          {/* <TrackingListTr isTrackingPage={isTrackingPage}> */}
           <TrackingListTdStart>{food.name}</TrackingListTdStart>
           <TrackingListTd>{food.gram}g</TrackingListTd>
           <TrackingListTd>{food.calorie}kcal</TrackingListTd>

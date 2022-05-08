@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import avocado from '../lottie/avocado.json';
-import Lottie from 'react-lottie';
+// import avocado from '../lottie/avocado.json';
+// import Lottie from 'react-lottie';
 // import { UserStateContext } from '../App';
 import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../atoms';
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+
 import { throttle } from 'lodash';
 
 import './HeaderStyle.css';
@@ -59,15 +59,6 @@ function Header() {
       window.removeEventListener('scroll', throttle(updateScroll, 300));
     };
   }, []);
-
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: avocado,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-  };
 
   // console.log('로그인 유저', user);
   return (

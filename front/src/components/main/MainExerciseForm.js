@@ -3,10 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../../atoms';
 
-import Button from '@mui/material/Button';
-import Autocomplete from '@mui/material/Autocomplete';
-
-import MainInput from './style/MainInput';
 import { AutoCompleteCustom, AddButton } from '../styledCompo/MainMuiCustom';
 
 import {
@@ -48,11 +44,6 @@ function MainExerciseForm({ idx }) {
 
   useEffect(() => {
     Api.get(`exercises`).then((res) => setExerciseList(res.data));
-
-    // + 클릭 시 추가된 폼의 인풋을 0으로 초기화
-    // setExerciseSelected([...exerciseSelected.slice(0, idx), 0, ...exerciseSelected.slice(idx + 1)]);
-    // setHour([...hour.slice(0, idx), 0, ...hour.slice(idx + 1)]);
-    // setMinute([...minute.slice(0, idx), 0, ...minute.slice(idx + 1)]);
   }, []);
 
   const onChangeExercise = (e, value) => {
@@ -121,11 +112,11 @@ function MainExerciseForm({ idx }) {
         <TrackingAutoContainer>
           <AutoCompleteCustom
             id="controllable"
-            value={exerciseSelected[idx]}
+            value={value}
             onChange={(event, newValue) => {
+              setValue(newValue);
               onChangeExercise(event, newValue);
             }}
-            inputValue={inputValue}
             onInputChange={(event, newInputValue) => {
               setInputValue(newInputValue);
             }}
@@ -183,17 +174,7 @@ function MainExerciseForm({ idx }) {
             onChange={onChangeMinute}
           />
         </TrackingTextFieldContainer>
-
         <TrackingSwitchContainer style={{ paddingTop: '15px' }}>
-          {/* 인풋밸류 {inputValue}
-        <br />
-        시간 당 {exerciseSelected[idx]?.kcal_per_kg}
-        <br />
-        {hour[idx]} 시간
-        <br /> */}
-          {/* {minute[idx]} 분
-        <br />총 {time[idx]} 분
-        <br /> */}
           <TrackingText style={{ float: 'right' }}>{kcalPerHour[idx]} kcal/min</TrackingText>
         </TrackingSwitchContainer>
       </TrackingForm>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 
 import Lottie from 'react-lottie';
 // import MainButton from '../main/style/MainButton.js';
@@ -186,7 +186,7 @@ function Home() {
               Catch Calories <br />
             </span>
           </span>
-          <span style={{ color: '#f03e3e', fontSize: '4rem' }}>
+          <span style={{ color: '#f03e3e', fontSize: 'inherit' }}>
             for your <span style={{ color: '#77b63e' }}>Eating & Workout routine!</span>
           </span>
           <Lottie options={defaultOptions} height={470} width={470} />

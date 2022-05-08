@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-
-import MainButton from './style/MainButton';
+import React from 'react';
 
 import MainExerciseForm from './MainExerciseForm';
 
@@ -9,8 +7,8 @@ import {
   TrackingButtonContainer,
   TrackingLeftButtonContainer,
   TrackingRightButtonContainer,
-  TrackingPlusButtonContainer,
 } from '../styledCompo/mainStyle';
+
 import {
   TrackingPlusButton,
   TrackingResetButton,
@@ -37,14 +35,6 @@ function MainExerciseTab({ clearForm }) {
   const [hour, setHour] = useRecoilState(hourState);
   const [minute, setMinute] = useRecoilState(minState);
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
-
-  // const [hour, setHour] = useState(['']);
-  // const [minute, setMinute] = useState(['']);
-
-  // useEffect(() => {
-  //   // 탭 변경하면 초기화
-  //   setExerciseSelected([]);
-  // }, []);
 
   const handleAddExerciseForm = () => {
     let countArr = [...exerciseForms];
@@ -113,16 +103,10 @@ function MainExerciseTab({ clearForm }) {
     setMinute(['']);
 
     setTrackingUpdate(!trackingUpdate);
-    // clearForm();
   };
 
   return (
     <div>
-      {/* {console.log(exerciseForms)}
-      {console.log(exerciseSelected)}
-      {console.log(hour)}
-      {console.log(minute)}
-      {console.log(time)} */}
       <TrackingForms id="tracking-exercise-forms">
         {exerciseForms && exerciseForms.map((item) => <MainExerciseForm key={item} idx={item} />)}
       </TrackingForms>

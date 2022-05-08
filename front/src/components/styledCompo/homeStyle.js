@@ -23,6 +23,7 @@ export const StartButton = styled.button`
   color: #94d82d;
   cursor: pointer;
 `;
+
 export const StartButton2 = styled.button`
   height: 80px;
   width: 304px;
@@ -52,6 +53,10 @@ export const FirstPage = styled.section`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  @media screen and (max-width: 1440px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const VideoContainer = styled.div`
@@ -108,6 +113,10 @@ export const FirstPageLogo = styled.div`
   font-style: bold;
   padding-bottom: 200px;
   padding-top: 20px;
+
+  @media screen and (max-width: 1440px) {
+    font-size: 3rem;
+  }
 `;
 
 export const MainButton = styled(Button)({
@@ -183,6 +192,11 @@ export const SecondPage = styled.section`
   position: relative;
 
   padding: 20px;
+
+  @media screen and (max-width: 1440px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const SecondPageLeft = styled.div`
@@ -225,6 +239,11 @@ export const ThirdPage = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-around;
+
+  @media screen and (max-width: 1440px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const ThirdPageLeft = styled.div`
@@ -270,6 +289,11 @@ export const FourthPage = styled.section`
   align-items: center;
   justify-content: space-around;
   position: relative;
+
+  @media screen and (max-width: 1440px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const FourthPageLeft = styled.div`
@@ -335,6 +359,10 @@ export const FifthPageCopy = styled.div`
   flex-direction: column;
   line-height: 100px;
   padding-top: 50px;
+
+  @media screen and (max-width: 1440px) {
+    font-size: 2rem;
+  }
 `;
 
 export const CircleRed1 = styled.div`
@@ -353,6 +381,10 @@ export const CircleRed1 = styled.div`
     )
     /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media screen and (max-width: 1440px) {
+    display: none;
+  }
 `;
 
 export const CircleGreen1 = styled.div`
@@ -372,6 +404,10 @@ export const CircleGreen1 = styled.div`
     #d6eeb1 69.13%
   );
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media screen and (max-width: 1440px) {
+    display: none;
+  }
 `;
 export const CircleRed2 = styled.div`
   z-index: 200;
@@ -390,6 +426,10 @@ export const CircleRed2 = styled.div`
     )
     /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media screen and (max-width: 1440px) {
+    display: none;
+  }
 `;
 export const CircleGreen2 = styled.div`
   position: absolute;
@@ -406,40 +446,8 @@ export const CircleGreen2 = styled.div`
     #d6eeb1 69.13%
   );
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-`;
 
-export const MypageCircleRed = styled.div`
-  z-index: 50;
-  position: absolute;
-  width: 700px;
-  height: 700px;
-  left: 60%;
-  top: 58%;
-
-  border-radius: 50%;
-  background: radial-gradient(
-      87.63% 87.63% at 30.82% 78.65%,
-      #c62e2e 0%,
-      #e44545 29.02%,
-      #f39999 69.13%
-    )
-    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-`;
-
-export const MypageCircleGreen = styled.div`
-  position: absolute;
-  z-index: 200;
-  width: 350px;
-  height: 350px;
-  left: 7%;
-  top: 49%;
-  border-radius: 50%;
-  background: radial-gradient(
-    87.63% 87.63% at 30.82% 78.65%,
-    rgba(105, 156, 29, 0.9) 0%,
-    #77bb41 29.02%,
-    #d6eeb1 69.13%
-  );
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  @media screen and (max-width: 1440px) {
+    display: none;
+  }
 `;

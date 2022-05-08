@@ -1,27 +1,23 @@
 import React, { useState, useEffect } from 'react';
 
-import TextField from '@mui/material/TextField';
-import Switch from '@mui/material/Switch';
-import Autocomplete from '@mui/material/Autocomplete';
 import { Button, ButtonGroup } from '@mui/material';
 
-import MainButton from './style/MainButton';
 import { AutoCompleteCustom, AddAddButton, AddCancelButton } from '../styledCompo/MainMuiCustom';
 
 import { BodyContainer, TrackingSwitchContainer } from '../styledCompo/mainStyle';
 import {
-  AddGlassBodyContainer,
   AddFormsContainer,
   AddTitle,
   AddFormSection,
   AddFormTitle,
   AddButtonContainer,
 } from '../styledCompo/Add';
-import { LoginGlass, TitleText, RedSpan } from '../styledCompo/LoginStyle';
+import { LoginGlass, RedSpan } from '../styledCompo/LoginStyle';
 import { ValidationTextField } from '../styledCompo/muiCustom';
 
+import { Grid } from '@mui/material';
+
 import Header from '../Header';
-import Footer from '../Footer';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -33,7 +29,7 @@ import { userInfoState } from '../../atoms';
 
 import * as Api from '../../api';
 
-function MainFoodAdd({}) {
+function MainFoodAdd() {
   const navigate = useNavigate();
 
   const user = useRecoilValue(userInfoState);
@@ -42,7 +38,7 @@ function MainFoodAdd({}) {
   const [checked, setChecked] = useState(true);
 
   const [categoryList, setCategoryList] = useState([]);
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState('');
   const [name, setName] = useState();
   const [kcal, setKcal] = useState();
   const [unit, setUnit] = useState('gram');
@@ -51,6 +47,9 @@ function MainFoodAdd({}) {
   const [isNameEmpty, setIsNameEmpty] = useState(false);
   const [isKcalEmpty, setIsKcalEmpty] = useState(false);
   const [isKcalNumber, setIsKcalNumber] = useState(true);
+
+  const [value, setValue] = useState();
+  const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
     const allFoodCategory = foodList.map((food) => food?.category);
@@ -66,10 +65,6 @@ function MainFoodAdd({}) {
       setUnit('pound');
     }
   }, [checked]);
-
-  const handleSwitch = (event) => {
-    setChecked(event.target.checked);
-  };
 
   const handleSubmit = async () => {
     setIsCategoryEmpty(!category);
@@ -115,83 +110,89 @@ function MainFoodAdd({}) {
     <>
       <Header />
       <BodyContainer>
-        <LoginGlass style={{ marginTop: '150px' }}>
-          {/* <AddGlassBodyContainer> */}
-          <AddTitle>Add Food</AddTitle>
-          <AddFormsContainer>
-            <AddFormSection>
-              <AddFormTitle>Please Select a Category</AddFormTitle>
-              <AutoCompleteCustom
-                value={category}
-                onChange={(event, newValue) => {
-                  setCategory(newValue);
-                }}
-                id="controllable-states-demo"
-                options={categoryList}
-                sx={{ width: 300 }}
-                renderInput={(params) => (
-                  <ValidationTextField
-                    {...params}
-                    label="category"
-                    helperText={isCategoryEmpty && <RedSpan>Please select a category</RedSpan>}
+        <Grid container spacing={1}>
+          <LoginGlass style={{ marginTop: '150px' }}>
+            <AddTitle>Add Food</AddTitle>
+            <Grid item sm={12}>
+              <AddFormsContainer>
+                <AddFormSection>
+                  <AddFormTitle>Please Select a Category</AddFormTitle>
+                  <AutoCompleteCustom
+                    value={value}
+                    onChange={(event, newValue) => {
+                      setValue(newValue);
+                      setCategory(newValue);
+                    }}
+                    inputValue={inputValue}
+                    onInputChange={(event, newInputValue) => {
+                      setInputValue(newInputValue);
+                    }}
+                    id="controllable-states-demo"
+                    options={categoryList}
+                    sx={{ width: 300 }}
+                    renderInput={(params) => (
+                      <ValidationTextField
+                        {...params}
+                        label="category"
+                        helperText={isCategoryEmpty && <RedSpan>Please select a category</RedSpan>}
+                      />
+                    )}
+                    style={{ width: '100%' }}
                   />
-                )}
-                style={{ width: '100%' }}
-              />
-            </AddFormSection>
-            <AddFormSection>
-              <AddFormTitle>Please Enter a Name</AddFormTitle>
-              <ValidationTextField
-                id="outlined-basic"
-                label="food name"
-                variant="outlined"
-                inputValue={name}
-                onBlur={(e) => setName(e.target.value)}
-                helperText={isNameEmpty && <RedSpan>Please enter a name</RedSpan>}
-                style={{ width: '100%' }}
-              />
-            </AddFormSection>
-            <AddFormSection>
-              <AddFormTitle>Please Enter a Kcal Per Unit Weight</AddFormTitle>
-              <ValidationTextField
-                id="outlined-basic"
-                label="kcal"
-                variant="outlined"
-                inputValue={kcal}
-                onBlur={(e) => setKcal(e.target.value)}
-                helperText={
-                  isKcalEmpty ? (
-                    <RedSpan>Please enter a kcal per unit weight</RedSpan>
-                  ) : (
-                    !isKcalNumber && <RedSpan>Please enter a number only</RedSpan>
-                  )
-                }
-                style={{ width: '50%' }}
-              />
-              <TrackingSwitchContainer>
-                <ButtonGroup
-                  style={{ marginBottom: -10, marginTop: 10 }}
-                  size="small"
-                  aria-label="small button group"
+                </AddFormSection>
+                <AddFormSection>
+                  <AddFormTitle>Please Enter a Name</AddFormTitle>
+                  <ValidationTextField
+                    label="food name"
+                    variant="outlined"
+                    inputvalue={name}
+                    onBlur={(e) => setName(e.target.value)}
+                    helperText={isNameEmpty && <RedSpan>Please enter a name</RedSpan>}
+                    style={{ width: '100%' }}
+                  />
+                </AddFormSection>
+                <AddFormSection>
+                  <AddFormTitle>Please Enter a Kcal Per Unit Weight</AddFormTitle>
+                  <ValidationTextField
+                    label="kcal"
+                    variant="outlined"
+                    inputvalue={kcal}
+                    onBlur={(e) => setKcal(e.target.value)}
+                    helperText={
+                      isKcalEmpty ? (
+                        <RedSpan>Please enter a kcal per unit weight</RedSpan>
+                      ) : (
+                        !isKcalNumber && <RedSpan>Please enter a number only</RedSpan>
+                      )
+                    }
+                    style={{ width: '50%' }}
+                  />
+                  <TrackingSwitchContainer>
+                    <ButtonGroup
+                      style={{ marginBottom: -10, marginTop: 10 }}
+                      size="small"
+                      aria-label="small button group"
+                    >
+                      {buttons}
+                    </ButtonGroup>
+                  </TrackingSwitchContainer>
+                </AddFormSection>
+              </AddFormsContainer>
+
+              <AddButtonContainer>
+                <AddAddButton variant="contained" onClick={handleSubmit}>
+                  Add
+                </AddAddButton>
+                <AddCancelButton
+                  variant="contained"
+                  onClick={() => navigate(`/tracking/${user._id}`, { replace: false })}
                 >
-                  {buttons}
-                </ButtonGroup>
-              </TrackingSwitchContainer>
-            </AddFormSection>
-          </AddFormsContainer>
-          <AddButtonContainer>
-            <AddAddButton variant="contained" onClick={handleSubmit}>
-              Add
-            </AddAddButton>
-            <AddCancelButton
-              variant="contained"
-              onClick={() => navigate(`/tracking/${user._id}`, { replace: false })}
-            >
-              Cancel
-            </AddCancelButton>
-          </AddButtonContainer>
-          {/* </AddGlassBodyContainer> */}
-        </LoginGlass>
+                  Cancel
+                </AddCancelButton>
+              </AddButtonContainer>
+            </Grid>
+          </LoginGlass>
+        </Grid>
       </BodyContainer>
     </>
   );
