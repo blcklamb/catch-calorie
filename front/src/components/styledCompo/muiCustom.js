@@ -6,18 +6,27 @@ import Switch from '@mui/material/Switch';
 
 //Mui 커스텀 스타일드 컴포넌트
 export const ValidationTextField = styled(TextField)({
+  width: '100%',
+
+  '@media (max-width: 526px)': {
+    width: '260px',
+  },
+
   '& input:valid + fieldset': {
     borderColor: '#94D82D',
     borderWidth: 2,
   },
+
   '& input:invalid + fieldset': {
     borderColor: '#699C1D',
     borderWidth: 2,
   },
+
   '& input:disabled + fieldset': {
     borderColor: '#699C1D',
     borderWidth: 2,
   },
+
   '& input ': {
     borderColor: '#699C1D',
     borderWidth: 2,
@@ -27,6 +36,7 @@ export const ValidationTextField = styled(TextField)({
   // 	borderLeftWidth: 6,
   // 	padding: '4px !important', // override inline-style
   // },
+
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
       // borderColor: 'red',
@@ -41,7 +51,7 @@ export const ValidationTextField = styled(TextField)({
 });
 
 export const ColorButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText('#94D82D'),
+  // color: theme.palette.getContrastText('#94D82D'),
   textTransform: 'none',
   width: '50%',
   height: '50px',
@@ -69,7 +79,7 @@ export const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 export const ColorButtonB = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText('#94D82D'),
+  // color: theme.palette.getContrastText('#94D82D'),
   textTransform: 'none',
   width: '50%',
   height: '50px',
@@ -89,7 +99,7 @@ export const ColorButtonB = styled(Button)(({ theme }) => ({
 }));
 
 export const SmallButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText('#94D82D'),
+  // color: theme.palette.getContrastText('#94D82D'),
   textTransform: 'none',
   width: '50%',
   fontFamily: ['Jost'],

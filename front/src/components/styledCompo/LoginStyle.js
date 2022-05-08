@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Button } from '@mui/material';
-import { ColorButton } from './muiCustom';
 
 // UserCard에서 사용하는 스타일드 컴포넌트
 
@@ -115,6 +114,15 @@ export const TitleText = styled.h1`
   font-size: 108px;
   margin-bottom: 150px;
   color: #f03e3e;
+
+  @media screen and (max-width: 766px) {
+    font-size: 78px;
+  }
+
+  @media screen and (max-width: 526px) {
+    font-size: 58px;
+    margin: 40px;
+  }
 `;
 
 //로그인 글라스 효과
@@ -132,6 +140,18 @@ export const LoginGlass = styled.div`
   backdrop-filter: blur(20.489px);
 
   border-radius: 27.3186px;
+
+  @media screen and (max-width: 766px) {
+    width: 500px;
+    height: 788px;
+    font-size: 18px;
+  }
+
+  @media screen and (max-width: 526px) {
+    width: 70%;
+    font-size: 18px;
+    height: 588px;
+  }
 `;
 
 //경고 글라스 효과
@@ -238,6 +258,9 @@ export const Separator = styled.div`
   border-top: 1px solid #203009;
   width: 98%;
   margin: 18px 0 24px 0;
+  @media screen and (max-width: 526px) {
+    width: 60%;
+  }
 `;
 
 // 깃헙 로그인 버튼
@@ -248,4 +271,7 @@ export const GitHubBtn = styled.button`
   background-color: #2b3137;
   border: none;
   border-radius: 10px;
+  @media screen and (max-width: 526px) {
+    width: 60%;
+  }
 `;
