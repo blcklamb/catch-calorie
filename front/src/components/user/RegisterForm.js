@@ -6,7 +6,7 @@ import { useAlert } from 'react-alert';
 import * as Api from '../../api';
 
 // Mui
-import { Box, Button, ButtonGroup, Typography } from '@mui/material';
+import { Box, Button, ButtonGroup } from '@mui/material';
 
 import Stack from '@mui/material/Stack';
 
@@ -20,7 +20,6 @@ import { validateEmail } from '../../utils';
 
 //Compo
 import Header from '../Header';
-import Footer from '../Footer';
 
 //styled Compo
 import { RedSpan } from '../styledCompo/LoginStyle';
@@ -29,7 +28,6 @@ import {
   ColorButton,
   ColorButtonB,
   SmallButton,
-  IOSSwitch,
 } from '../styledCompo/muiCustom';
 
 import {
@@ -71,8 +69,8 @@ function RegisterForm() {
   // unit
   const [unit, setUnit] = useState('us');
   // open
-  const [open, setOpen] = useState(false);
-  const [openChecked, setOpenChecked] = useState(open);
+  // const [open, setOpen] = useState(false);
+  // const [openChecked, setOpenChecked] = useState(open);
 
   const [code, setCode] = useState('유저가 임시번호를 치면 받아오는 곳이랍니다.');
   const [resCode, setResCode] = useState('임시번호가 할당되는 곳이랍니다.');
@@ -167,14 +165,14 @@ function RegisterForm() {
   ];
 
   ///@ open 상태변경 함수
-  const handleOpenSwitch = (e) => {
-    setOpenChecked(e.target.checked);
-    if (openChecked) {
-      setOpen(false);
-    } else {
-      setOpen(true);
-    }
-  };
+  // const handleOpenSwitch = (e) => {
+  //   setOpenChecked(e.target.checked);
+  //   if (openChecked) {
+  //     setOpen(false);
+  //   } else {
+  //     setOpen(true);
+  //   }
+  // };
 
   ///@ height, weight 조건부 헬퍼텍스트 렌더링
   const unitChangeHeight = () => {
@@ -209,7 +207,7 @@ function RegisterForm() {
         height: Number(height),
         weight: Number(weight),
         unit,
-        open,
+        // open,
         icon,
       });
 
@@ -259,62 +257,101 @@ function RegisterForm() {
             <RegisterTitle>Register</RegisterTitle>
             <Box
               sx={{
-                '& > :not(style)': { m: 1, width: '560px' },
+                // '@media (max-width: 766px)': {
+                //   width: 'auto',
+                // },
+
+                '& > :not(style)': {
+                  m: 1,
+                  width: '560px',
+                  '@media (max-width: 766px)': {
+                    width: '420px',
+                  },
+
+                  '@media (max-width: 526px)': {
+                    width: '260px',
+                  },
+                },
               }}
               autoComplete="off"
             >
               {/* ///@ 이메일 */}
-              <ValidationTextField
-                style={{ width: 437 }}
-                autoFocus
-                required
-                // error={!checkLogin}
-                id="outlined-required"
-                label="Email Address"
-                autoComplete="email"
-                helperText={!isEmailValid && <RedSpan>The email format is not valid.</RedSpan>}
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  setIsEmailAuthed(false);
+              <div
+                style={{
+                  '@media (max-width: 766px)': {
+                    width: 'auto',
+                  },
                 }}
-                // defaultValue="Hello World"
-              />
-              {/* ///@ 이메일 인증 버튼 */}
-              <ColorButton
-                style={{ width: 100, fontSize: 14 }}
-                disabled={!isEmailValid}
-                onClick={reqCode}
-                title="Click the button to receive the verification code by email."
               >
-                Email Auth
-              </ColorButton>
-              <br></br>
+                <ValidationTextField
+                  // style={{
+                  //   width: 437,
+                  //   '@media (max-width: 766px)': {
+                  //     width: 'auto',
+                  //   },
+                  // }}
+                  autoFocus
+                  required
+                  // error={!checkLogin}
+                  id="outlined-required"
+                  label="Email Address"
+                  autoComplete="email"
+                  helperText={!isEmailValid && <RedSpan>The email format is not valid.</RedSpan>}
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setIsEmailAuthed(false);
+                  }}
+                  // defaultValue="Hello World"
+                />
+                {/* ///@ 이메일 인증 버튼 */}
+                <ColorButton
+                  style={{
+                    marginTop: 10,
+                    marginBottom: 10,
+                    fontSize: 14,
+                    width: '100%',
+                    '@media (max-width: 766px)': {
+                      width: 'auto',
+                    },
+                  }}
+                  disabled={!isEmailValid}
+                  onClick={reqCode}
+                  title="Click the button to receive the verification code by email."
+                >
+                  Email Authentication
+                </ColorButton>
+              </div>
+
               {/* ///@ 인증번호 확인 input */}
-              <ValidationTextField
-                style={{ width: 437 }}
-                error={!checkNum}
-                size="small"
-                helperText={
-                  !isEmailAuthed && (
-                    <RedSpan> Please enter the temporary number and press the button. </RedSpan>
-                  )
-                }
-                placeholder="Please enter the authentication number after receiving the email verification."
-                onChange={(e) => {
-                  setCode(e.target.value);
-                  setCheckNum(true);
-                }}
-              />
-              {/* ///@ 인증번호 확인 버튼 */}
-              <SmallButton
-                style={{ width: 100 }}
-                size="small"
-                disabled={!code || code === '유저가 임시번호를 치면 받아오는 곳이랍니다.'}
-                onClick={checkTempNumValid}
-              >
-                Check
-              </SmallButton>
+              <div>
+                <ValidationTextField
+                  error={!checkNum}
+                  size="small"
+                  helperText={
+                    !isEmailAuthed && (
+                      <RedSpan> Please enter the temporary number and press the button. </RedSpan>
+                    )
+                  }
+                  placeholder="Please enter the authentication number after receiving the email verification."
+                  onChange={(e) => {
+                    setCode(e.target.value);
+                    setCheckNum(true);
+                  }}
+                />
+                {/* ///@ 인증번호 확인 버튼 */}
+                <SmallButton
+                  style={{
+                    marginTop: 10,
+                    width: '100%',
+                  }}
+                  size="small"
+                  disabled={!code || code === '유저가 임시번호를 치면 받아오는 곳이랍니다.'}
+                  onClick={checkTempNumValid}
+                >
+                  Check
+                </SmallButton>
+              </div>
               <br></br>
               {/* ///@ 비밀번호 */}
               <ValidationTextField
@@ -440,14 +477,30 @@ function RegisterForm() {
               autoComplete="off"
             >
               {/* ///@ 뱃지 */}
-              <FormLabel id="demo-row-radio-buttons-group-label">Badges</FormLabel>
+
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <FormLabel id="demo-row-radio-buttons-group-label">Badges</FormLabel>
+              </div>
+
               <RadioGroup
                 row
                 title="You can choose one of these badges."
                 name="row-radio-buttons-group"
                 value={icon}
                 onChange={(e) => setIcon(e.target.value)}
-                sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  '@media (max-width: 766px)': {
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(2, 1fr)',
+                  },
+
+                  '@media (max-width: 526px)': {
+                    gridTemplateColumns: 'repeat(1, 1fr)',
+                  },
+                }}
               >
                 <FormControlLabel
                   title="일반인"
