@@ -5,7 +5,6 @@ import { Chart as ChartJS } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 
 import {
-  Section,
   SectionTitle,
   CalorieGraphSection,
   GraphContainer,
@@ -15,7 +14,6 @@ import {
 
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
-  tokenState,
   trackingState,
   userInfoState,
   foodSelectedState,
@@ -31,7 +29,6 @@ function MainGraph({}) {
   const params = useParams();
 
   const user = useRecoilValue(userInfoState);
-  const token = useRecoilValue(tokenState);
 
   const [tracking, setTracking] = useRecoilState(trackingState);
   const [trackingUpdate, setTrackingUpdate] = useRecoilState(trackingUpdateState);
@@ -50,24 +47,20 @@ function MainGraph({}) {
   const [getUser, setGetUser] = useState('');
 
   useEffect(() => {
-    // console.log('여기다 11111111');
     if (params?.user_id === user?._id || isMypage === 'mypage') {
       setGetUser(user?._id);
     } else {
-      setGetUser(params.user_id);
+      setGetUser(params?.user_id);
     }
-  }, [params, user, token]);
+  }, [params, user]);
 
   useEffect(() => {
-    // console.log('여기다 22222222');
-    // console.log(getUser);
-
-    const getTracking = async () => {
+    if (getUser) {
       try {
-        await Api.get(`tracking/${getUser}`).then((res) => {
-          console.log(res.data);
+        Api.get(`tracking/${getUser}`).then((res) => {
           // 오늘의 트래킹 정보
           setTracking(res.data);
+
           // 오늘의 트래킹 정보 중 칼로리
           setTrackingKcal(res.data?.acc_cal);
           setTrackingRecKcal(res.data?.rec_cal);
@@ -75,31 +68,12 @@ function MainGraph({}) {
       } catch (err) {
         console.log(err);
       }
-    };
-
-    getTracking();
+    }
   }, [getUser, trackingUpdate]);
 
   const labels = [''];
 
   const options = {
-    // legend: {
-    // 	display: false, // label 보이기 여부
-    // },
-    // scales: {
-    // 	yAxes: [
-    // 		{
-    // 			ticks: {
-    // 				min: 0, // y축 스케일에 대한 최소값 설정
-    // 				stepSize: 1, // y축 그리드 한 칸당 수치
-    // 			},
-    // 		},
-    // 	],
-    // },
-
-    // // false : 사용자 정의 크기에 따라 그래프 크기가 결정됨.
-    // // true : 크기가 알아서 결정됨.
-    // maintainAspectRatio: false,
     plugins: {
       title: {
         display: false,
@@ -142,10 +116,6 @@ function MainGraph({}) {
   };
 
   const remainingKcal = () => {
-    // console.log(typeof trackingKcal, trackingKcal);
-    // console.log(typeof trackingRecKcal, trackingRecKcal);
-    // console.log(kcalPerGram);
-
     // 1)섭취 칼로리나 2)선택 칼로리나 3)섭취 + 선택 칼로리가 권장 칼로리를 넘는다면, 남는 칼로리 없음
     if (
       trackingKcal > trackingRecKcal ||
@@ -153,15 +123,6 @@ function MainGraph({}) {
       trackingKcal + kcalPerUnit.reduce((acc, cur) => acc + cur, 0) > trackingRecKcal
     ) {
       return [0];
-      // 권장 칼로리를 넘을 경우 최대치를 5000 단위로 늘림
-      //   let line = (parseInt(trackingKcal / 10000) * 10 + 5) * 1000;
-      //   // console.log(line);
-
-      //   if (trackingKcal > line) {
-      //     return [line + 5000 - trackingKcal];
-      //   } else {
-      //     return [line - trackingKcal];
-      //   }
     }
 
     // 소모 칼로리가 섭취 칼로리보다 많다면 최대치는 권장 칼로리
@@ -184,9 +145,7 @@ function MainGraph({}) {
         label: 'Current Kcal',
         data: handelTrackingKcal(),
         backgroundColor: handelTrackingKcalColor(),
-        // backgroundColor: ['rgba(240,62,62, 0.5)'],
         borderColor: handelTrackingKcalBorderColor(),
-        // borderColor: ['rgba(240,62,62)'],
         borderWidth: 1,
       },
       {
@@ -253,7 +212,6 @@ function MainGraph({}) {
   isMypage !== 'mypage' && addData();
 
   return (
-    // <Section>
     <>
       <SectionTitle>Calorie Graph</SectionTitle>
       <CalorieGraphSection>
@@ -267,7 +225,6 @@ function MainGraph({}) {
         </GraphOverContainer>
       </CalorieGraphSection>
     </>
-    // </Section>
   );
 }
 
