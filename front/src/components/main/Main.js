@@ -41,7 +41,7 @@ const Main = () => {
     <>
       <Header />
       <RegisterCircleRed1></RegisterCircleRed1>
-      <RegisterCircleGreen2></RegisterCircleGreen2>
+      {/* <RegisterCircleGreen2></RegisterCircleGreen2> */}
       <BodyContainer>
         <Grid container spacing={1}>
           <Grid item sm={12}>
