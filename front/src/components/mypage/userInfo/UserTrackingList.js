@@ -1,17 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
-import { userInfoState, trackingListState } from '../../../atoms';
+import React from 'react';
+
 
 import {
-  BadgesContainer,
-  UserAKAInfo,
-  UserContainer,
-  UserCardFrame,
-  UserBodyInfo,
-  UserBtnInfo,
-  UserBadgeImgInfo,
-  ColorButton,
-  CardText,
 } from '../../styledCompo/LoginStyle';
 
 import TrackingLists from '../../trackingList/TrackingLists';

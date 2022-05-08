@@ -64,10 +64,6 @@ position: relative;
   margin-right: 80px;
 `;
 
-const MainTabsSection = styled2.div`
-
-`;
-
 const MainTabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
@@ -130,7 +126,7 @@ const MainTabs = ({}) => {
       <MainTrackingSection>
         <Section>
           <SectionTitle>Tracking</SectionTitle>
-          <MainTabsSection>
+          <div> 
             <StyledTabs value={value} onChange={handleChange} aria-label="basic tabs example">
               {['Food', 'Exercise'].map((label, index) => (
                 <StyledTab key={label} label={label} {...a11yProps(index)} />
@@ -142,7 +138,7 @@ const MainTabs = ({}) => {
             <TabPanel value={value} index={1}>
               <MainExerciseTab clearForm={clearForm} />
             </TabPanel>
-          </MainTabsSection>
+          </div>
         </Section>
       </MainTrackingSection>
     )

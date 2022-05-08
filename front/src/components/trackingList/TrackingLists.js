@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 
 import TrackingFoodList from './TrackingFoodList';
 import TrackingExerciseList from './TrackingExerciseList';
@@ -16,14 +15,10 @@ import {
   TrackingListIcon,
 } from '../styledCompo/mainStyle';
 
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { userInfoState, trackingState, trackingUpdateState } from '../../atoms';
-
-import * as Api from '../../api';
+import { useRecoilValue } from 'recoil';
+import { trackingState } from '../../atoms';
 
 function TrackingLists() {
-  const user = useRecoilValue(userInfoState);
-  const params = useParams();
 
   const tracking = useRecoilValue(trackingState);
 

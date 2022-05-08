@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { LoginGlass, TitleText, RedSpan } from '../styledCompo/LoginStyle';
+import { TitleText } from '../styledCompo/LoginStyle';
 
 export const AddGlassBodyContainer = styled.div``;
 export const AddFormsContainer = styled.div`

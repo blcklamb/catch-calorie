@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as Api from '../../api';
@@ -21,10 +21,10 @@ import {
   Section,
 } from '../styledCompo/mainStyle';
 
-import { RegisterCircleRed1, RegisterCircleGreen2 } from '../styledCompo/RegisterStyle';
+import { RegisterCircleRed1 } from '../styledCompo/RegisterStyle';
 
 import { useRecoilState } from 'recoil';
-import { tokenState, userInfoState, userState, BadgesState } from '../../atoms';
+import { userInfoState, BadgesState } from '../../atoms';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -41,7 +41,6 @@ const Main = () => {
     <>
       <Header />
       <RegisterCircleRed1></RegisterCircleRed1>
-      {/* <RegisterCircleGreen2></RegisterCircleGreen2> */}
       <BodyContainer>
         <Grid container spacing={1}>
           <Grid item sm={12}>
