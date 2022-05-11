@@ -6,7 +6,7 @@
 
 ## 프로젝트 구성 안내
 
-## 1. 프로젝트 소개
+## 1. 프로젝트 소개 
 
 **사용하려는 데이터셋 (출처: Kaggle)**
   - [현대인의 비만률과 연관있는 요소](https://www.kaggle.com/datasets/mandysia/obesity-dataset-cleaned-and-data-sinthetic) 
